@@ -74,6 +74,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
+const APP_VERSION = '1.0.8';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -644,6 +645,7 @@ function App({data}){
           <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
         </div>
         <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Gesamt gelernte Wörter: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+        <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,marginTop:8}}>v{APP_VERSION}</p>
       </header>
       <div style={S.bookList}>{books.map((book,bi)=>{
         const ha=!!annotations[book.name];const hs=!!simplified[book.name];
