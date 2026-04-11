@@ -326,6 +326,8 @@ function App({data}){
   const autoTappedRef=useRef(false);
   const autoStoppedRef=useRef(false);
   const tts=useTTS();
+  const ttsRef=useRef(tts);
+  ttsRef.current=tts;
 
   const langData=data[lang]||data.fr;
   const bible=langData.bible;
@@ -524,10 +526,10 @@ function App({data}){
   },[verses,annotations,bookName,chapNum]);
 
   // Auto vocab drill orchestration — single pass
+  // Uses ttsRef to avoid re-triggering on every render (tts object is new each render)
   useEffect(()=>{
     if(phase!=='auto-vocab')return;
     if(autoWordIdx>=quizWords.length){
-      // Done — transition to auto-reading
       setTimeout(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('auto-reading')},800);
       return;
     }
@@ -537,9 +539,10 @@ function App({data}){
     autoTappedRef.current=false;
     setAutoShowDE(false);setAutoShowContext(false);
     let cancelled=false;
+    const speak=(text,l,r)=>ttsRef.current.speakText(text,l,r);
 
     // 1) Speak the English word
-    tts.speakText(word.form||word.lemma||word.word,lang).then(()=>{
+    speak(word.form||word.lemma||word.word,lang).then(()=>{
       if(cancelled||autoTappedRef.current)return;
       // 2) Wait 3s for tap
       autoTimerRef.current=setTimeout(async()=>{
@@ -548,7 +551,7 @@ function App({data}){
         setUnknownWords(p=>new Set([...p,key]));
         // 3) Show + speak German translation
         setAutoShowDE(true);
-        if(word.de)await tts.speakText(word.de,'de',0.8);
+        if(word.de)await speak(word.de,'de',0.8);
         if(cancelled)return;
         // 4) Show + speak context fragment
         const context=autoContextRef.current[key];
@@ -556,7 +559,7 @@ function App({data}){
           setAutoShowContext(true);
           await new Promise(r=>setTimeout(r,400));
           if(cancelled)return;
-          await tts.speakText(context,lang,0.7);
+          await speak(context,lang,0.7);
         }
         if(cancelled)return;
         // 5) Next word
@@ -564,7 +567,7 @@ function App({data}){
       },3000);
     });
     return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
-  },[phase,autoWordIdx,quizWords,lang,tts]);
+  },[phase,autoWordIdx,quizWords,lang]);
 
   const autoLastTapRef=useRef(0);
   const handleAutoVocabTap=useCallback(()=>{
@@ -598,10 +601,10 @@ function App({data}){
   useEffect(()=>{
     if(phase==='auto-reading'&&!autoReadingStartedRef.current){
       autoReadingStartedRef.current=true;
-      setTimeout(()=>tts.speakChapterAuto(verses),500);
+      setTimeout(()=>ttsRef.current.speakChapterAuto(verses),500);
     }
     if(phase!=='auto-reading')autoReadingStartedRef.current=false;
-  },[phase,verses,tts]);
+  },[phase,verses]);
 
   const autoReadLastTapRef=useRef(0);
   const handleAutoReadingTap=useCallback((e)=>{
