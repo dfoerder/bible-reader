@@ -220,23 +220,30 @@ function useTTS(){
   const [activeVerse,setActiveVerse]=useState(null);
   const [activeWordIdx,setActiveWordIdx]=useState(-1);
   const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.85);
-  const [voices,setVoices]=useState({fr:[],en:[]});
+  const [voices,setVoices]=useState({fr:[],en:[],de:[]});
   const langRef=useRef('fr');
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
+  const lastSentenceRef=useRef({text:'',lang:'en'});
   const setSpeed=useCallback(v=>{speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v)},[]);
   useEffect(()=>{
     const lv=()=>{
       const all=speechSynthesis.getVoices();
       const fr=all.filter(v=>v.lang.startsWith('fr'));
       const en=all.filter(v=>v.lang.startsWith('en'));
-      if(fr.length||en.length)setVoices({fr,en});
+      const de=all.filter(v=>v.lang.startsWith('de'));
+      if(fr.length||en.length||de.length)setVoices({fr,en,de});
     };
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
     return()=>{speechSynthesis.cancel()};
   },[]);
-  const getVoice=useCallback(()=>{
-    const lang=langRef.current;
+  const getVoice=useCallback((langOverride)=>{
+    const lang=langOverride||langRef.current;
+    if(lang==='de'){
+      const dv=voices.de;
+      for(const n of['Anna','Petra','Helena','Markus']){const v=dv.find(v=>v.name.includes(n));if(v)return v}
+      return dv[0]||null;
+    }
     if(lang==='en'){
       const ev=voices.en;
       for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
@@ -246,6 +253,16 @@ function useTTS(){
     for(const n of['Thomas','Amélie','Audrey','Aurélie']){const v=fv.find(v=>v.name.includes(n));if(v)return v}
     return fv[0]||null;
   },[voices]);
+  const speakText=useCallback((text,langOverride,rate)=>{
+    return new Promise(resolve=>{
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang=langOverride==='de'?'de-DE':(langOverride==='en'?'en-US':'fr-FR');
+      u.rate=rate??speedRef.current;
+      const v=getVoice(langOverride);if(v)u.voice=v;
+      u.onend=resolve;u.onerror=resolve;
+      speechSynthesis.speak(u);
+    });
+  },[getVoice]);
   const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
     const u=new SpeechSynthesisUtterance(text);u.lang=langRef.current==='en'?'en-US':'fr-FR';u.rate=speedRef.current;
@@ -262,16 +279,36 @@ function useTTS(){
       setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},2000)};
     const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
   },[speakVerse]);
+  const speakChapterAuto=useCallback((verses,onSentence)=>{
+    speechSynthesis.cancel();stoppedRef.current=false;setSpeaking(true);
+    const sents=[];
+    verses.forEach(v=>{
+      const parts=v.text.split(/(?<=[.!?…;:])\s+/);
+      parts.forEach(s=>sents.push({n:v.n,text:s}));
+    });
+    let idx=0;
+    const next=()=>{
+      if(stoppedRef.current||idx>=sents.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
+      const s=sents[idx++];
+      lastSentenceRef.current={text:s.text,lang:langRef.current};
+      if(onSentence)onSentence(s);
+      const el=document.getElementById(`verse-${s.n}`);
+      if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+      setActiveVerse(s.n);
+      speakText(s.text,langRef.current).then(()=>setTimeout(next,600));
+    };
+    next();
+  },[speakText]);
   const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
   const hasVoices=langRef.current==='en'?voices.en.length>0:voices.fr.length>0;
-  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,stop,hasVoices,setLang};
+  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakChapterAuto,speakText,lastSentenceRef,stop,hasVoices,setLang};
 }
 
 // ─── App ────────────────────────────────────────────────
 function App({data}){
   const saved=LS.get('nt-reader-state')||{};
   const [lang,setLangState]=useState(saved.lang||(data.en.available?'en':'fr'));
-  const [phase,setPhase]=useState(saved.phase||'nav');
+  const [phase,setPhase]=useState(()=>{const p=saved.phase||'nav';return(p==='auto-vocab'||p==='auto-reading')?'quiz':p});
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
@@ -281,6 +318,11 @@ function App({data}){
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
   const [translation,setTranslation]=useState(saved.translation||'original');
+  const [autoWordIdx,setAutoWordIdx]=useState(0);
+  const [autoShowDE,setAutoShowDE]=useState(false);
+  const autoTimerRef=useRef(null);
+  const autoTappedRef=useRef(false);
+  const autoStoppedRef=useRef(false);
   const tts=useTTS();
 
   const langData=data[lang]||data.fr;
@@ -332,7 +374,7 @@ function App({data}){
   const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
 
   // Save unknown words whenever they change
-  useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
+  useEffect(()=>{if(phase==='quiz'||phase==='reading'||phase==='auto-reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
 
   const openChapter=useCallback((bi,ci)=>{tts.stop();setBookIdx(bi);setChapIdx(ci);setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setPhase('quiz');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,loadChapterWords]);
   const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
@@ -453,6 +495,77 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
+  // ── AUTO MODE ──
+  const startAutoMode=useCallback(()=>{
+    setAutoWordIdx(0);setAutoShowDE(false);autoStoppedRef.current=false;
+    setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
+    setPhase('auto-vocab');
+  },[]);
+
+  // Auto vocab drill orchestration
+  useEffect(()=>{
+    if(phase!=='auto-vocab')return;
+    if(autoWordIdx>=quizWords.length){
+      // Drill done — transition to auto-reading
+      setTimeout(()=>{
+        setLearnedWords(new Set());setRevealedWords(new Set());
+        setPhase('auto-reading');
+      },800);
+      return;
+    }
+    if(autoStoppedRef.current)return;
+    const word=quizWords[autoWordIdx];
+    autoTappedRef.current=false;
+    setAutoShowDE(false);
+    let cancelled=false;
+    tts.speakText(word.form||word.lemma||word.word,lang).then(()=>{
+      if(cancelled||autoTappedRef.current)return;
+      autoTimerRef.current=setTimeout(async()=>{
+        if(cancelled||autoTappedRef.current)return;
+        const key=word.lemma||word.word;
+        setUnknownWords(p=>new Set([...p,key]));
+        setAutoShowDE(true);
+        if(word.de)await tts.speakText(word.de,'de',0.8);
+        if(cancelled)return;
+        setTimeout(()=>{if(!cancelled)setAutoWordIdx(i=>i+1)},600);
+      },3000);
+    });
+    return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
+  },[phase,autoWordIdx,quizWords,lang,tts]);
+
+  const handleAutoVocabTap=useCallback(()=>{
+    if(phase!=='auto-vocab')return;
+    autoTappedRef.current=true;
+    clearTimeout(autoTimerRef.current);
+    speechSynthesis.cancel();
+    setAutoWordIdx(i=>i+1);
+  },[phase]);
+
+  const stopAutoMode=useCallback(()=>{
+    autoStoppedRef.current=true;
+    clearTimeout(autoTimerRef.current);
+    tts.stop();
+    setPhase('quiz');
+  },[tts]);
+
+  // Auto reading: start TTS on phase enter
+  const autoReadingStartedRef=useRef(false);
+  useEffect(()=>{
+    if(phase==='auto-reading'&&!autoReadingStartedRef.current){
+      autoReadingStartedRef.current=true;
+      setTimeout(()=>tts.speakChapterAuto(verses),500);
+    }
+    if(phase!=='auto-reading')autoReadingStartedRef.current=false;
+  },[phase,verses,tts]);
+
+  const handleAutoReadingTap=useCallback((e)=>{
+    if(e.target.tagName==='BUTTON'||e.target.closest('button'))return;
+    if(phase!=='auto-reading'||!tts.speaking)return;
+    const last=tts.lastSentenceRef.current;
+    if(!last.text)return;
+    speechSynthesis.cancel();
+    tts.speakText(last.text,last.lang,0.3);
+  },[phase,tts]);
 
   const TranslationToggle=()=>{
     if(!hasSimplified||lang==='en')return null;
@@ -540,24 +653,50 @@ function App({data}){
       )}
       <div style={S.quizFooter}>
         <p style={S.quizSummary}>{unknownWords.size===0?'Keine Wörter markiert — reiner Lesefluss!':`${unknownWords.size} Wörter werden beim Lesen übersetzt.`}</p>
-        <button onClick={startReading} style={S.startBtn}>Lesen →</button>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={startReading} style={S.startBtn}>Lesen →</button>
+          {quizWords.length>0&&hasAnno&&<button onClick={startAutoMode} style={{...S.startBtn,background:'#2a6496'}} disabled={!tts.hasVoices}>▶ Auto-Modus</button>}
+        </div>
       </div>
     </div>);
   }
 
-  // ── READING ──
+  // ── AUTO VOCAB ──
+  if(phase==='auto-vocab'){
+    const word=quizWords[autoWordIdx]||{};
+    const done=autoWordIdx>=quizWords.length;
+    return(<div onClick={handleAutoVocabTap} style={S.autoOverlay}>
+      <div style={S.autoCard}>
+        {done?(<>
+          <p style={S.autoDoneText}>Vokabel-Check abgeschlossen</p>
+          <p style={S.autoHint}>{unknownWords.size} unbekannte Wörter — Kapitel wird vorgelesen...</p>
+        </>):(<>
+          <p style={S.autoCounter}>{autoWordIdx+1} / {quizWords.length}</p>
+          <p style={S.autoWord}>{word.form||word.lemma||word.word||''}</p>
+          {autoShowDE&&<p style={S.autoDe}>{word.de}</p>}
+          {!autoShowDE&&<p style={S.autoHint}>Tippe, wenn du das Wort kennst</p>}
+          {autoShowDE&&<p style={S.autoHintSmall}>...</p>}
+        </>)}
+        <button onClick={e=>{e.stopPropagation();stopAutoMode()}} style={S.autoStopBtn}>Abbrechen</button>
+      </div>
+    </div>);
+  }
+
+  // ── READING / AUTO-READING ──
   const active=unknownWords.size;
   const learned=[...unknownWords].filter(w=>learnedWords.has(w)).length;
   const remaining=active-learned;
   const progress=active>0?Math.round((learned/active)*100):100;
 
-  return(<div>
+  const isAutoReading=phase==='auto-reading';
+
+  return(<div onClick={isAutoReading?handleAutoReadingTap:undefined}>
     <header style={S.header}>
       <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum} {useSimplified&&<span style={S.a2badgeInline}>A2</span>}</h1>
       <TranslationToggle/>
       <div style={S.readingTopBar}>
         <div style={S.readingNavBtns}>
-          <button onClick={goToNav} style={S.navBtn}>≡ Bücher</button>
+          <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>≡ Bücher</button>
           <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Wortliste</button>
         </div>
         {active>0&&(<div style={S.statsRow}>
@@ -567,6 +706,8 @@ function App({data}){
         </div>)}
       </div>
     </header>
+
+    {isAutoReading&&<div style={S.autoReplayHint}>Tippe auf den Text, um den letzten Satz langsam zu wiederholen</div>}
 
     {/* TTS */}
     <div style={S.ttsBar}>
@@ -797,6 +938,17 @@ const S={
   practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'#b0a58e',cursor:'pointer',padding:4},
   practiceDoneText:{fontSize:20,fontWeight:600,color:'#5a7a3a',fontFamily:sans},
   practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  // Auto mode
+  autoOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'linear-gradient(180deg,#2c2416,#1a1510)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,cursor:'pointer',userSelect:'none'},
+  autoCard:{textAlign:'center',padding:40,maxWidth:500,width:'100%'},
+  autoCounter:{fontSize:14,color:'#8a7e6b',fontFamily:sans,marginBottom:40,letterSpacing:'0.1em'},
+  autoWord:{fontSize:44,fontWeight:600,color:'#faf6ee',fontFamily:"'Palatino Linotype',Georgia,serif",marginBottom:24,lineHeight:1.3},
+  autoDe:{fontSize:30,fontStyle:'italic',color:'#e8a060',fontFamily:sans,marginBottom:20},
+  autoHint:{fontSize:15,color:'#6b5e4a',fontFamily:sans,marginTop:40},
+  autoHintSmall:{fontSize:14,color:'#4a3e2e',fontFamily:sans,marginTop:20},
+  autoDoneText:{fontSize:22,fontWeight:600,color:'#5a7a3a',fontFamily:sans,marginBottom:12},
+  autoStopBtn:{marginTop:40,padding:'8px 20px',border:'1px solid #6b5e4a',borderRadius:6,background:'transparent',color:'#8a7e6b',fontSize:13,cursor:'pointer',fontFamily:sans},
+  autoReplayHint:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)',margin:'0 0 16px'},
 };
 
 loadData().then(data=>{
