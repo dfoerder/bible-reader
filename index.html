@@ -533,13 +533,25 @@ function App({data}){
     return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
   },[phase,autoWordIdx,quizWords,lang,tts]);
 
+  const autoLastTapRef=useRef(0);
   const handleAutoVocabTap=useCallback(()=>{
     if(phase!=='auto-vocab')return;
+    const now=Date.now();
+    if(now-autoLastTapRef.current<400){
+      // Double tap = stop
+      autoLastTapRef.current=0;
+      autoStoppedRef.current=true;
+      clearTimeout(autoTimerRef.current);
+      tts.stop();
+      setPhase('quiz');
+      return;
+    }
+    autoLastTapRef.current=now;
     autoTappedRef.current=true;
     clearTimeout(autoTimerRef.current);
     speechSynthesis.cancel();
     setAutoWordIdx(i=>i+1);
-  },[phase]);
+  },[phase,tts]);
 
   const stopAutoMode=useCallback(()=>{
     autoStoppedRef.current=true;
@@ -558,9 +570,20 @@ function App({data}){
     if(phase!=='auto-reading')autoReadingStartedRef.current=false;
   },[phase,verses,tts]);
 
+  const autoReadLastTapRef=useRef(0);
   const handleAutoReadingTap=useCallback((e)=>{
     if(e.target.tagName==='BUTTON'||e.target.closest('button'))return;
-    if(phase!=='auto-reading'||!tts.speaking)return;
+    if(phase!=='auto-reading')return;
+    const now=Date.now();
+    if(now-autoReadLastTapRef.current<400){
+      // Double tap = stop
+      autoReadLastTapRef.current=0;
+      tts.stop();
+      setPhase('reading');
+      return;
+    }
+    autoReadLastTapRef.current=now;
+    if(!tts.speaking)return;
     const last=tts.lastSentenceRef.current;
     if(!last.text)return;
     speechSynthesis.cancel();
@@ -669,15 +692,12 @@ function App({data}){
       <div style={S.autoCard}>
         {done?(<>
           <p style={S.autoDoneText}>Vokabel-Check abgeschlossen</p>
-          <p style={S.autoHint}>{unknownWords.size} unbekannte Wörter — Kapitel wird vorgelesen...</p>
+          <p style={S.autoHint}>{unknownWords.size} unbekannte Wörter</p>
         </>):(<>
           <p style={S.autoCounter}>{autoWordIdx+1} / {quizWords.length}</p>
           <p style={S.autoWord}>{word.form||word.lemma||word.word||''}</p>
           {autoShowDE&&<p style={S.autoDe}>{word.de}</p>}
-          {!autoShowDE&&<p style={S.autoHint}>Tippe, wenn du das Wort kennst</p>}
-          {autoShowDE&&<p style={S.autoHintSmall}>...</p>}
         </>)}
-        <button onClick={e=>{e.stopPropagation();stopAutoMode()}} style={S.autoStopBtn}>Abbrechen</button>
       </div>
     </div>);
   }
@@ -945,9 +965,7 @@ const S={
   autoWord:{fontSize:44,fontWeight:600,color:'#faf6ee',fontFamily:"'Palatino Linotype',Georgia,serif",marginBottom:24,lineHeight:1.3},
   autoDe:{fontSize:30,fontStyle:'italic',color:'#e8a060',fontFamily:sans,marginBottom:20},
   autoHint:{fontSize:15,color:'#6b5e4a',fontFamily:sans,marginTop:40},
-  autoHintSmall:{fontSize:14,color:'#4a3e2e',fontFamily:sans,marginTop:20},
   autoDoneText:{fontSize:22,fontWeight:600,color:'#5a7a3a',fontFamily:sans,marginBottom:12},
-  autoStopBtn:{marginTop:40,padding:'8px 20px',border:'1px solid #6b5e4a',borderRadius:6,background:'transparent',color:'#8a7e6b',fontSize:13,cursor:'pointer',fontFamily:sans},
   autoReplayHint:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)',margin:'0 0 16px'},
 };
 
