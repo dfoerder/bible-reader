@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Bibel NT"/>
+  <meta name="theme-color" content="#5a4a32"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <title>Neues Testament — Bibel-Lesehilfe</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{min-height:100vh;font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif}
+    /* --- Phone mode (default) --- */
+    body.mode-phone{background:#e8e8ed;display:flex;justify-content:center;align-items:flex-start;padding:24px 0}
+    body.mode-phone .phone-frame{width:375px;height:812px;border-radius:40px;border:6px solid #1a1a1a;background:#1a1a1a;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3),inset 0 0 0 2px #333;flex-shrink:0}
+    body.mode-phone .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:28px;background:#1a1a1a;border-radius:0 0 18px 18px;z-index:10}
+    body.mode-phone .phone-screen{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;background:linear-gradient(180deg,#faf6ee,#f5efe3);-webkit-overflow-scrolling:touch}
+    body.mode-phone #root{max-width:100%;margin:0 auto;padding:36px 16px 20px;color:#2c2416;min-height:100%;line-height:1.9}
+    /* --- Desktop mode --- */
+    body.mode-desktop{background:linear-gradient(180deg,#faf6ee,#f5efe3)}
+    body.mode-desktop .phone-frame{all:unset}
+    body.mode-desktop .phone-notch{display:none}
+    body.mode-desktop .phone-screen{all:unset}
+    body.mode-desktop #root{max-width:760px;margin:0 auto;padding:20px 24px;padding-top:calc(20px + env(safe-area-inset-top));padding-bottom:calc(20px + env(safe-area-inset-bottom));color:#2c2416;min-height:100vh;line-height:1.9}
+    /* --- View toggle button --- */
+    .view-toggle{position:fixed;top:12px;right:12px;z-index:9999;background:#5a4a32;color:#faf6ee;border:none;border-radius:8px;padding:6px 12px;font-size:13px;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);opacity:0.85;transition:opacity 0.2s}
+    .view-toggle:hover{opacity:1}
+    .loading{text-align:center;color:#8a7e6b;margin-top:80px;font-size:18px}
+    .loading .spinner{display:inline-block;width:24px;height:24px;border:3px solid #d4c9b4;border-top-color:#5a4a32;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:10px;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes wordPulse{0%{background:rgba(90,74,50,0.15)}50%{background:rgba(90,74,50,0.25)}100%{background:rgba(90,74,50,0.15)}}
+    .tts-highlight{background:rgba(90,74,50,0.2);border-radius:3px;padding:1px 2px;animation:wordPulse 0.8s ease-in-out infinite}
+    .verse-playing{background:rgba(212,201,180,0.2);border-radius:4px;padding:2px 4px;margin:-2px -4px}
+  </style>
+</head>
+<body class="mode-phone">
+<button class="view-toggle" onclick="toggleViewMode()">Desktop</button>
+<div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
+<div id="root"><div class="loading"><span class="spinner"></span> Daten werden geladen...</div></div>
+</div></div>
+<script>
+function toggleViewMode(){
+  var b=document.body, btn=document.querySelector('.view-toggle');
+  if(b.classList.contains('mode-phone')){
+    b.classList.replace('mode-phone','mode-desktop');
+    btn.textContent='Phone';
+    localStorage.setItem('nt-view-mode','desktop');
+  } else {
+    b.classList.replace('mode-desktop','mode-phone');
+    btn.textContent='Desktop';
+    localStorage.setItem('nt-view-mode','phone');
+  }
+}
+(function(){
+  var isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
+  if(isPWA){
+    // On real phone: desktop layout, no toggle needed
+    document.body.classList.replace('mode-phone','mode-desktop');
+    document.querySelector('.view-toggle').style.display='none';
+  } else {
+    var m=localStorage.getItem('nt-view-mode');
+    if(m==='desktop'){
+      document.body.classList.replace('mode-phone','mode-desktop');
+      document.querySelector('.view-toggle').textContent='Phone';
+    }
+  }
+})();
+</script>
+<script type="text/babel">
+const {useState,useEffect,useCallback,useMemo,useRef} = React;
+const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
+
+const LS = {
+  get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+
+// ─── Load all data ──────────────────────────────────────
+const isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
+const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline support)
+
+async function loadAnnotations(file){
+  const annotations = {};
+  try {
+    const r = await fetch(file+CB);
+    if (r.ok) {
+      const d = await r.json();
+      Object.values(d.books || {}).forEach(bk => {
+        if (bk.name && bk.chapters) {
+          annotations[bk.name] = bk.chapters;
+        }
+      });
+    }
+  } catch(e) {}
+  return annotations;
+}
+
+async function loadSimplified(){
+  let simplified = {};
+  try {
+    const r = await fetch('matthieu_simple.json'+CB);
+    if (r.ok) { const d = await r.json(); if(d.chapters) simplified[d.book||'Matthieu']=d.chapters; }
+  } catch(e) {}
+  try {
+    const r = await fetch('bible_nt_simple.json'+CB);
+    if (r.ok) { const d = await r.json(); if(d.books) d.books.forEach(b=>{simplified[b.name]=b.chapters}); }
+  } catch(e) {}
+  return simplified;
+}
+
+async function loadData(){
+  // Load French data
+  const fr = {};
+  try {
+    const [bResp,vResp] = await Promise.all([fetch('bible_nt.json'+CB),fetch('vocab.json'+CB)]);
+    fr.bible = await bResp.json();
+    fr.vocab = (await vResp.json()).words;
+    fr.annotations = await loadAnnotations('nt_annotations.json');
+    fr.simplified = await loadSimplified();
+    fr.available = true;
+  } catch(e) { fr.available = false; }
+
+  // Load English data
+  const en = {};
+  try {
+    const bResp = await fetch('bible_nt_en.json'+CB);
+    if (!bResp.ok) throw new Error('not found');
+    en.bible = await bResp.json();
+    en.vocab = {};
+    en.annotations = await loadAnnotations('nt_annotations_en.json');
+    en.simplified = {};
+    en.available = true;
+  } catch(e) { en.available = false; }
+
+  return {fr, en};
+}
+
+// Split trailing punctuation from a word token: "diffamer," → ["diffamer", ","]
+function splitPunct(token){
+  const m=token.match(/^(.+?)([,;:.!?…»"'\-)]+)$/);
+  return m?[m[1],m[2]]:[token,''];
+}
+
+const LEVELS=["A1","A2","B1","B2","C1","C2"];
+const lvlIdx=l=>LEVELS.indexOf(l);
+
+function normalizeFr(w){
+  return w.toLowerCase().replace(/^[''«"\-(]/,'').replace(/[''»"\-),;:.!?…]$/,'').replace(/^(l'|d'|s'|n'|j'|m'|t'|c'|qu')/,'');
+}
+function normalizeEn(w){
+  return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
+}
+function normalize(w,lang){
+  return lang==='en'?normalizeEn(w):normalizeFr(w);
+}
+
+// Get annotation for a specific word position in a verse
+// Returns {anno, role} where role is 'single', 'start', 'middle', or 'end'
+function getAnnotation(annotations, bookName, chapNum, verseNum, wordPos) {
+  const book = annotations[bookName];
+  if (!book) return null;
+  const chap = book[String(chapNum)];
+  if (!chap) return null;
+  const verse = chap[String(verseNum)];
+  if (!verse) return null;
+  // Check for exact single-word match
+  const exact = verse.find(a => a.pos === wordPos && !a.pos_end);
+  if (exact) return {anno: exact, role: 'single'};
+  // Check for multi-word annotation
+  const multi = verse.find(a => a.pos_end != null && wordPos >= a.pos && wordPos <= a.pos_end);
+  if (multi) {
+    if (wordPos === multi.pos) return {anno: multi, role: 'start'};
+    if (wordPos === multi.pos_end) return {anno: multi, role: 'end'};
+    return {anno: multi, role: 'middle'};
+  }
+  return null;
+}
+
+// Get all annotations for a chapter, filtered by level (+ tapped words)
+function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tappedWords) {
+  const book = annotations[bookName];
+  if (!book) return [];
+  const chap = book[String(chapNum)];
+  if (!chap) return [];
+
+  const seen = new Set();
+  const result = [];
+  Object.values(chap).forEach(verseAnns => {
+    (verseAnns||[]).forEach(a => {
+      if ((lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
+        seen.add(a.lemma);
+        result.push(a);
+      }
+    });
+  });
+  result.sort((a,b) => a.lemma.localeCompare(b.lemma));
+  return result;
+}
+
+// Fallback: old vocab.json based lookup
+function getChapterWordsOld(verses,vocab,userLevel,lang){
+  const seen=new Set(),result=[];
+  verses.forEach(v=>v.text.split(/\s+/).forEach(w=>{
+    const c=normalize(w,lang),e=vocab[c];
+    if(e&&lvlIdx(e.level)>lvlIdx(userLevel)&&!seen.has(c)){seen.add(c);result.push({word:c,...e})}
+  }));
+  result.sort((a,b)=>a.word.localeCompare(b.word));
+  return result;
+}
+
+// ─── TTS ────────────────────────────────────────────────
+function useTTS(){
+  const [speaking,setSpeaking]=useState(false);
+  const [activeVerse,setActiveVerse]=useState(null);
+  const [activeWordIdx,setActiveWordIdx]=useState(-1);
+  const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.85);
+  const [voices,setVoices]=useState({fr:[],en:[]});
+  const langRef=useRef('fr');
+  const setLang=useCallback(l=>{langRef.current=l},[]);
+  const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
+  const setSpeed=useCallback(v=>{speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v)},[]);
+  useEffect(()=>{
+    const lv=()=>{
+      const all=speechSynthesis.getVoices();
+      const fr=all.filter(v=>v.lang.startsWith('fr'));
+      const en=all.filter(v=>v.lang.startsWith('en'));
+      if(fr.length||en.length)setVoices({fr,en});
+    };
+    lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
+    return()=>{speechSynthesis.cancel()};
+  },[]);
+  const getVoice=useCallback(()=>{
+    const lang=langRef.current;
+    if(lang==='en'){
+      const ev=voices.en;
+      for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
+      return ev[0]||null;
+    }
+    const fv=voices.fr;
+    for(const n of['Thomas','Amélie','Audrey','Aurélie']){const v=fv.find(v=>v.name.includes(n));if(v)return v}
+    return fv[0]||null;
+  },[voices]);
+  const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
+    const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
+    const u=new SpeechSynthesisUtterance(text);u.lang=langRef.current==='en'?'en-US':'fr-FR';u.rate=speedRef.current;
+    const v=getVoice();if(v)u.voice=v;
+    setActiveVerse(vN);setActiveWordIdx(wordOffset);setSpeaking(true);
+    u.onboundary=e=>{if(e.name==='word'){let i=0;for(let j=ws.length-1;j>=0;j--){if(e.charIndex>=ws[j]){i=j;break}}setActiveWordIdx(i+wordOffset)}};
+    u.onend=()=>{setActiveWordIdx(-1);if(onDone)onDone()};u.onerror=()=>{setActiveWordIdx(-1);if(onDone)onDone()};
+    speechSynthesis.speak(u);
+  },[getVoice]);
+  const speakSingleVerse=useCallback((vN,text)=>{speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=[];speakVerse(vN,text,()=>{setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)})},[speakVerse]);
+  const speakChapter=useCallback(verses=>{
+    speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
+    const next=()=>{if(stoppedRef.current||!queueRef.current.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
+      setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},2000)};
+    const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
+  },[speakVerse]);
+  const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
+  const hasVoices=langRef.current==='en'?voices.en.length>0:voices.fr.length>0;
+  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,stop,hasVoices,setLang};
+}
+
+// ─── App ────────────────────────────────────────────────
+function App({data}){
+  const saved=LS.get('nt-reader-state')||{};
+  const [lang,setLangState]=useState(saved.lang||(data.en.available?'en':'fr'));
+  const [phase,setPhase]=useState(saved.phase||'nav');
+  const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
+  const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
+  const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
+  const [unknownWords,setUnknownWords]=useState(new Set(saved.unknownWords||[]));
+  const [learnedWords,setLearnedWords]=useState(new Set(saved.learnedWords||[]));
+  const [revealedWords,setRevealedWords]=useState(new Set());
+  const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
+  const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
+  const [translation,setTranslation]=useState(saved.translation||'original');
+  const tts=useTTS();
+
+  const langData=data[lang]||data.fr;
+  const bible=langData.bible;
+  const vocab=langData.vocab||{};
+  const annotations=langData.annotations||{};
+  const simplified=langData.simplified||{};
+
+  const hasSimplified=Object.keys(simplified).length>0;
+  const hasAnnotations=Object.keys(annotations).length>0;
+
+  const setLang=useCallback(l=>{
+    setLangState(l);tts.setLang(l);setPhase('nav');setBookIdx(0);setChapIdx(0);
+    setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
+  },[tts]);
+
+  // Sync TTS language
+  useEffect(()=>{tts.setLang(lang)},[lang,tts]);
+
+  useEffect(()=>{LS.set('nt-reader-state',{lang,phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords],translation})},[lang,phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords,translation]);
+
+  const books=bible.books;
+  const currentBook=books[bookIdx];
+  const bookName=currentBook?.name||'';
+  const hasSimplifiedBook=simplified[bookName]?.length>0;
+  const useSimplified=translation==='simple'&&hasSimplifiedBook;
+  const hasAnno=!!annotations[bookName];
+
+  const getChapter=useCallback(()=>{
+    if(useSimplified){const sc=simplified[bookName];const ch=sc.find(c=>c.number===(currentBook?.chapters?.[chapIdx]?.number));if(ch)return ch}
+    return currentBook?.chapters?.[chapIdx];
+  },[useSimplified,simplified,bookName,currentBook,chapIdx]);
+
+  const currentChapter=getChapter();
+  const chapNum=currentChapter?.number;
+  const verses=currentChapter?.verses||[];
+
+  // Get quiz words — use annotations if available, else fallback to vocab.json
+  const quizWords=useMemo(()=>{
+    if(!currentChapter)return[];
+    if(hasAnno&&!useSimplified){
+      return getChapterAnnotations(annotations,bookName,chapNum,userLevel,tappedWords);
+    }
+    return getChapterWordsOld(verses,vocab,userLevel,lang);
+  },[currentChapter,hasAnno,useSimplified,annotations,bookName,chapNum,userLevel,tappedWords,verses,vocab,lang]);
+
+  const chapterKey=useCallback((bi,ci)=>`unk-${lang}-${bi}-${ci}`,[lang]);
+  const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
+  const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
+
+  // Save unknown words whenever they change
+  useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
+
+  const openChapter=useCallback((bi,ci)=>{tts.stop();setBookIdx(bi);setChapIdx(ci);setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setPhase('quiz');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,loadChapterWords]);
+  const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
+  const goToNav=useCallback(()=>{tts.stop();setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
+  const nextChapter=useCallback(()=>{if(chapIdx<currentBook.chapters.length-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
+  const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].chapters.length-1)},[bookIdx,chapIdx,books,openChapter]);
+
+  const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
+  const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})},[]);
+
+  // Build practice fragments (short text pieces around unknown words)
+  const buildFragments=useCallback(()=>{
+    const useAnno=hasAnno&&!useSimplified;
+    const MAX_SHORT=10,WINDOW=4;
+    const fragments=[];
+    verses.forEach(v=>{
+      const allWords=v.text.split(/\s+/);
+      const unknownPositions=[];
+      if(useAnno){
+        const chap=annotations[bookName]?.[String(chapNum)];
+        const va=chap?.[String(v.n)];
+        if(va){
+          for(let p=0;p<allWords.length;p++){
+            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(lvlIdx(a.level)>lvlIdx(userLevel)||tappedWords.has(a.lemma))&&unknownWords.has(a.lemma)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
+          }
+        }
+      } else {
+        allWords.forEach((w,p)=>{const c=normalize(w,lang);if(unknownWords.has(c)&&!learnedWords.has(c))unknownPositions.push(p)});
+      }
+      if(!unknownPositions.length)return;
+      const parts=v.text.split(/(?<=[.!?…»;:])\s+/);
+      let wordPos=0;
+      parts.forEach(sent=>{
+        const sentWords=sent.split(/\s+/);
+        const startPos=wordPos;
+        const endPos=startPos+sentWords.length-1;
+        const inSent=unknownPositions.filter(p=>p>=startPos&&p<=endPos);
+        if(!inSent.length){wordPos+=sentWords.length;return}
+        // Finde Wort-Infos der unbekannten Wörter in diesem Fragment
+        const findWordInfos=(positions)=>{
+          if(useAnno){
+            const chap=annotations[bookName]?.[String(chapNum)];
+            const va=chap?.[String(v.n)];
+            if(!va)return[];
+            return positions.map(p=>{const a=va.find(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos));return a?{form:a.form,lemma:a.lemma,de:a.de}:null}).filter(Boolean);
+          }
+          return positions.map(p=>{const c=normalize(allWords[p],lang);const e=vocab[c];return e?{form:allWords[p],lemma:c,de:e.de}:{form:allWords[p],lemma:c,de:''}}).filter(w=>w.de);
+        };
+        if(sentWords.length<=MAX_SHORT){
+          fragments.push({n:v.n,text:sent,wordOffset:startPos,words:findWordInfos(inSent)});
+        } else {
+          const clauses=sent.split(/,\s*/);
+          let clauseStart=startPos;
+          let used=new Set();
+          clauses.forEach(clause=>{
+            const cWords=clause.split(/\s+/);
+            const cEnd=clauseStart+cWords.length-1;
+            const inClause=inSent.filter(p=>p>=clauseStart&&p<=cEnd);
+            if(inClause.length&&!used.has(clause)){
+              used.add(clause);
+              if(cWords.length<=MAX_SHORT+4){
+                fragments.push({n:v.n,text:clause,wordOffset:clauseStart,words:findWordInfos(inClause)});
+              } else {
+                inClause.forEach(p=>{
+                  const lo=Math.max(startPos,p-WINDOW);
+                  const hi=Math.min(startPos+allWords.length-1,p+WINDOW);
+                  const slice=allWords.slice(lo,hi+1).join(' ');
+                  fragments.push({n:v.n,text:slice,wordOffset:lo,words:findWordInfos([p])});
+                });
+              }
+            }
+            clauseStart+=cWords.length;
+          });
+        }
+        wordPos+=sentWords.length;
+      });
+    });
+    return fragments;
+  },[hasAnno,useSimplified,verses,annotations,bookName,chapNum,userLevel,unknownWords,learnedWords,tappedWords,lang]);
+
+  // Practice mode state
+  const [practiceFragments,setPracticeFragments]=useState([]);
+  const [practiceIdx,setPracticeIdx]=useState(0);
+  const [practiceActive,setPracticeActive]=useState(false);
+  const [practiceDone,setPracticeDone]=useState(false);
+
+  const startPractice=useCallback(()=>{
+    const frags=buildFragments();
+    if(!frags.length)return;
+    setPracticeFragments(frags);setPracticeIdx(0);setPracticeDone(false);setPracticeActive(true);
+    tts.speakSingleVerse(frags[0].n,frags[0].text);
+  },[buildFragments,tts]);
+
+  const practiceRepeat=useCallback(()=>{
+    const f=practiceFragments[practiceIdx];
+    if(f)tts.speakSingleVerse(f.n,f.text);
+  },[practiceFragments,practiceIdx,tts]);
+
+  const practiceNext=useCallback(()=>{
+    tts.stop();
+    const next=practiceIdx+1;
+    if(next>=practiceFragments.length){setPracticeDone(true);return}
+    setPracticeIdx(next);
+    const nf=practiceFragments[next];
+    setTimeout(()=>tts.speakSingleVerse(nf.n,nf.text),500);
+  },[practiceFragments,practiceIdx,tts]);
+
+  const practiceLearned=useCallback(()=>{
+    const f=practiceFragments[practiceIdx];
+    if(f&&f.words)f.words.forEach(w=>markLearned(w.lemma));
+    practiceNext();
+  },[practiceFragments,practiceIdx,markLearned,practiceNext]);
+
+  const closePractice=useCallback(()=>{tts.stop();setPracticeActive(false)},[tts]);
+  const reveal=useCallback(key=>setRevealedWords(p=>new Set([...p,key])),[]);
+  const hideReveal=useCallback(key=>setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n}),[]);
+  const tapWord=useCallback(lemma=>{
+    setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
+  },[]);
+
+
+  const TranslationToggle=()=>{
+    if(!hasSimplified||lang==='en')return null;
+    return(<div style={S.translationToggle}>
+      <button onClick={()=>setTranslation('original')} style={{...S.trBtn,...(translation==='original'?S.trBtnActive:{})}}>Louis Segond 1910</button>
+      <button onClick={()=>setTranslation('simple')} style={{...S.trBtn,...S.trBtnSimple,...(translation==='simple'?S.trBtnSimpleActive:{})}}>Segond A2</button>
+    </div>);
+  };
+
+  const LangSwitch=()=>{
+    if(!data.fr.available||!data.en.available)return null;
+    return(<div style={S.langSwitch}>
+      <button onClick={()=>setLang('en')} style={{...S.langBtn,...(lang==='en'?S.langBtnActive:{})}}>English (WEB)</button>
+      <button onClick={()=>setLang('fr')} style={{...S.langBtn,...(lang==='fr'?S.langBtnActive:{})}}>Français (Segond)</button>
+    </div>);
+  };
+
+  const langTitle=lang==='en'?'New Testament':'Nouveau Testament';
+  const langSubtitle=lang==='en'?'Lesehilfe EN→DE':'Lesehilfe FR→DE';
+  const langFooter=lang==='en'?'World English Bible · Public Domain':(useSimplified?'Segond A2 (vereinfacht)':'Louis Segond 1910');
+
+  // ── NAV ──
+  if(phase==='nav'){
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>{langTitle}</h1>
+        <p style={S.subtitle}>{langSubtitle}</p>
+        <LangSwitch/>
+        <TranslationToggle/>
+        <div style={S.levelBox}>
+          <span style={S.levelLabel}>Mein Niveau:</span>
+          <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+        </div>
+        <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Gesamt gelernte Wörter: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+      </header>
+      <div style={S.bookList}>{books.map((book,bi)=>{
+        const ha=!!annotations[book.name];const hs=!!simplified[book.name];
+        return(<div key={bi} style={S.bookItem}>
+          <h3 style={S.bookName}>{book.name}
+            {ha&&<span style={S.annoBadge} title="Wort-für-Wort Annotationen verfügbar">annotiert</span>}
+            {hs&&translation==='simple'&&<span style={S.a2badge}>A2</span>}
+          </h3>
+          <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
+        </div>);
+      })}</div>
+    </div>);
+  }
+
+  // ── QUIZ ──
+  if(phase==='quiz'){
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>{currentBook.name} {useSimplified&&<span style={S.a2badgeInline}>A2</span>}</h1>
+        <p style={S.subtitle}>Kapitel {chapNum} — Vokabel-Check</p>
+        <TranslationToggle/>
+      </header>
+      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Bücher</button></div>
+
+      {hasAnno&&!useSimplified&&<div style={S.annoNote}>Kontextspezifische Annotationen aktiv — jedes Wort hat seine genaue Übersetzung im Kontext.</div>}
+      {useSimplified&&<div style={S.a2note}>Segond A2: vereinfachter Wortschatz, passé composé.</div>}
+
+      {quizWords.length===0?(
+        <div style={S.quizInstr}><p style={S.quizInstrTitle}>Keine neuen Vokabeln über {userLevel}</p><p style={S.quizInstrSub}>Du kannst direkt lesen.</p></div>
+      ):(
+        <div>
+          <div style={S.quizInstr}>
+            <p style={S.quizInstrTitle}>Welche Wörter kennst du nicht?</p>
+            <p style={S.quizInstrSub}>{quizWords.length} Wörter über {userLevel}. Klicke auf unbekannte.</p>
+            <div style={S.quizActions}>
+              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>Alle markieren</button>
+              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>Keine markieren</button>
+            </div>
+          </div>
+          <div style={S.wordGrid}>{quizWords.map(item=>{
+            const key=item.lemma||item.word;
+            const sel=unknownWords.has(key);
+            return(<button key={key} onClick={()=>toggleUnknown(key)} style={{...S.wordCard,...(sel?S.wordCardSel:{})}}>
+              <span style={S.wcFr}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</span>
+              {sel&&<span style={S.wcDe}>{item.de}</span>}
+              {item.form&&item.form!==item.lemma&&<span style={S.wcForm}>({item.lemma||item.word})</span>}
+              {sel&&item.level&&<span style={S.wcLevel}>{item.level}</span>}
+            </button>);
+          })}</div>
+        </div>
+      )}
+      <div style={S.quizFooter}>
+        <p style={S.quizSummary}>{unknownWords.size===0?'Keine Wörter markiert — reiner Lesefluss!':`${unknownWords.size} Wörter werden beim Lesen übersetzt.`}</p>
+        <button onClick={startReading} style={S.startBtn}>Lesen →</button>
+      </div>
+    </div>);
+  }
+
+  // ── READING ──
+  const active=unknownWords.size;
+  const learned=[...unknownWords].filter(w=>learnedWords.has(w)).length;
+  const remaining=active-learned;
+  const progress=active>0?Math.round((learned/active)*100):100;
+
+  return(<div>
+    <header style={S.header}>
+      <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum} {useSimplified&&<span style={S.a2badgeInline}>A2</span>}</h1>
+      <TranslationToggle/>
+      <div style={S.readingTopBar}>
+        <div style={S.readingNavBtns}>
+          <button onClick={goToNav} style={S.navBtn}>≡ Bücher</button>
+          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Wortliste</button>
+        </div>
+        {active>0&&(<div style={S.statsRow}>
+          <div style={S.stat}><span style={S.statN}>{learned}</span><span style={S.statL}>gelernt</span></div>
+          <div style={S.progWrap}><div style={S.progTrack}><div style={{...S.progFill,width:`${progress}%`}}/></div><span style={S.progPct}>{progress}%</span></div>
+          <div style={S.stat}><span style={S.statN}>{remaining}</span><span style={S.statL}>übrig</span></div>
+        </div>)}
+      </div>
+    </header>
+
+    {/* TTS */}
+    <div style={S.ttsBar}>
+      {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stopp</button>
+      ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Kapitel vorlesen</button>
+      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'#6b4a2e'}} disabled={!tts.hasVoices}>▶ Unbekannte Wörter üben</button>)}
+      </>)}
+      <div style={S.speedControl}>
+        <span style={S.speedLabel}>Tempo:</span>
+        <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{l:'Langsam',v:0.5},{l:'Normal',v:0.85},{l:'Schnell',v:1.1}].map(p=>(
+          <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l}</button>
+        ))}</div>
+        <div style={S.speedSliderRow}>
+          <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+          <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
+        </div>
+      </div>
+    </div>
+
+    {active>0&&(<div style={S.legend}>
+      <span style={S.legItem}><span style={{...S.dot,background:'#b34a28'}}/> antippen = gelernt</span>
+      <span style={S.legItem}><span style={{...S.dot,background:'#5a7a3a'}}/> antippen = nochmal zeigen</span>
+    </div>)}
+
+    <div style={S.text}>{verses.map(verse=>{
+      const isVA=tts.activeVerse===verse.n;
+      let wordIdx=0;
+      const useAnno=hasAnno&&!useSimplified;
+
+      return(<span key={verse.n} id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
+        <sup style={S.vNum}>{verse.n}</sup>
+        {!tts.speaking&&(<button onClick={()=>tts.speakSingleVerse(verse.n,verse.text)} style={S.versePlayBtn} title="Vers vorlesen">🔊</button>)}
+        {verse.text.split(/(\s+)/).map((token,i)=>{
+          if(/^\s+$/.test(token))return <span key={i}> </span>;
+          const pos=wordIdx++;
+          const hl=isVA&&pos===tts.activeWordIdx?'tts-highlight':'';
+
+          if(useAnno){
+            // Position-based annotation lookup (supports multi-word)
+            const result=getAnnotation(annotations,bookName,chapNum,verse.n,pos);
+            if(result){
+              const anno=result.anno;
+              const role=result.role; // 'single','start','middle','end'
+              const key=anno.lemma;
+              const isAboveLevel=lvlIdx(anno.level)>lvlIdx(userLevel);
+              const isTapped=tappedWords.has(key);
+              if(isAboveLevel||isTapped){
+                const isUnknown=unknownWords.has(key);
+                if(!isUnknown)return <span key={i} className={hl}>{token}</span>;
+                const isL=learnedWords.has(key);
+                const isR=revealedWords.has(key);
+                const showTr=(role==='single'||role==='end'); // translation after last word
+                const [word,punct]=splitPunct(token);
+                if(!isL){
+                  if(showTr)return(<span key={i}><span style={S.wg}><span className={hl}>{word}</span><span style={S.tr} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>);
+                  return <span key={i} className={hl}>{token}</span>;
+                }
+                if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>reveal(key)}>{token}</span>;
+                if(showTr)return(<span key={i}><span style={S.wg}><span className={hl} style={S.known} onClick={()=>hideReveal(key)}>{word}</span><span style={S.trRev}>{anno.de}</span></span>{punct}</span>);
+                return <span key={i} className={hl} style={S.known} onClick={()=>hideReveal(key)}>{token}</span>;
+              }
+              // Below-level word with annotation: clickable to add as unknown
+              return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>tapWord(key)}>{token}</span>;
+            }
+            return <span key={i} className={hl}>{token}</span>;
+          } else {
+            // Fallback: vocab.json lookup
+            const clean=normalize(token,lang),entry=vocab[clean];
+            if(!entry||!unknownWords.has(clean))return <span key={i} className={hl}>{token}</span>;
+            const isL=learnedWords.has(clean),isR=revealedWords.has(clean);
+            const [vw,vp]=splitPunct(token);
+            if(!isL)return(<span key={i}><span style={S.wg}><span className={hl}>{vw}</span><span style={S.tr} onClick={()=>markLearned(clean)}>{entry.de}</span></span>{vp}</span>);
+            if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>reveal(clean)}>{token}</span>;
+            return(<span key={i}><span style={S.wg}><span className={hl} style={S.known} onClick={()=>hideReveal(clean)}>{vw}</span><span style={S.trRev}>{entry.de}</span></span>{vp}</span>);
+          }
+        })}{' '}
+      </span>);
+    })}</div>
+
+    <div style={S.chapNav}>
+      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>← Vorheriges</button>
+      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1}>Nächstes →</button>
+    </div>
+    <footer style={S.footer}>{langFooter} · Gemeinfrei</footer>
+
+    {/* Practice overlay */}
+    {practiceActive&&(<div style={S.practiceOverlay}>
+      <div style={S.practiceCard}>
+        {practiceDone?(
+          <div style={S.practiceContent}>
+            <p style={S.practiceDoneText}>Alle Wörter geübt!</p>
+            <div style={S.practiceBtns}>
+              <button onClick={startPractice} style={S.practiceRepeatBtn}>Nochmal üben</button>
+              <button onClick={closePractice} style={S.practiceCloseBtn}>Zurück zum Text</button>
+            </div>
+          </div>
+        ):(
+          <div style={S.practiceContent}>
+            <p style={S.practiceCounter}>{practiceIdx+1} / {practiceFragments.length}</p>
+            <p style={S.practiceText}>{(()=>{
+              const f=practiceFragments[practiceIdx];if(!f)return'';
+              const forms=new Set((f.words||[]).map(w=>w.form.toLowerCase()));
+              return f.text.split(/(\s+)/).map((t,i)=>{
+                if(/^\s+$/.test(t))return <span key={i}> </span>;
+                const clean=t.replace(/[.,;:!?…»"')\]]+$/,'').replace(/^[«"'(\[]+/,'');
+                if(forms.has(clean.toLowerCase()))return <span key={i} style={S.practiceHighlight}>{t}</span>;
+                return <span key={i}>{t}</span>;
+              });
+            })()}</p>
+            <div style={S.practiceWordInfo}>
+              {(practiceFragments[practiceIdx]?.words||[]).map((w,i)=>(
+                <div key={i} style={S.practiceWord}>
+                  <span style={S.practiceWordDe}>{w.de}</span>
+                  <span style={S.practiceWordLemma}>({w.lemma})</span>
+                </div>
+              ))}
+            </div>
+            <p style={S.practiceVerse}>Vers {practiceFragments[practiceIdx]?.n}</p>
+            <div style={S.practiceBtns}>
+              <button onClick={practiceRepeat} style={S.practiceRepeatBtn}>Wiederholen</button>
+              <button onClick={practiceNext} style={S.practiceNextBtn}>Weiter</button>
+              <button onClick={practiceLearned} style={S.practiceLearnedBtn}>Gelernt</button>
+            </div>
+            <button onClick={closePractice} style={S.practiceCancelBtn}>Abbrechen</button>
+          </div>
+        )}
+        <button onClick={closePractice} style={S.practiceX}>✕</button>
+      </div>
+    </div>)}
+  </div>);
+}
+
+// ─── Styles ─────────────────────────────────────────────
+const S={
+  header:{textAlign:'center',marginBottom:20,paddingBottom:16,borderBottom:'1px solid #d4c9b4'},
+  title:{fontSize:28,fontWeight:400,letterSpacing:'0.04em',margin:'0 0 4px',color:'#3a2f1f',fontVariant:'small-caps'},
+  subtitle:{fontSize:14,color:'#8a7e6b',margin:0,fontStyle:'italic'},
+  translationToggle:{display:'flex',justifyContent:'center',gap:0,margin:'12px auto 8px',background:'#e8e0d0',borderRadius:8,padding:3,maxWidth:320},
+  trBtn:{flex:1,padding:'7px 16px',border:'none',borderRadius:6,background:'transparent',color:'#6b5e4a',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
+  trBtnActive:{background:'#fff',color:'#3a2f1f',boxShadow:'0 1px 3px rgba(0,0,0,0.1)'},
+  trBtnSimple:{},trBtnSimpleActive:{background:'#5a7a3a',color:'#fff',boxShadow:'0 1px 3px rgba(90,122,58,0.3)'},
+  a2badge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'#5a7a3a',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
+  a2badgeInline:{display:'inline-block',marginLeft:6,padding:'1px 7px',background:'#5a7a3a',color:'#fff',borderRadius:8,fontSize:12,fontWeight:700,fontFamily:sans,verticalAlign:'middle',fontVariant:'normal'},
+  a2note:{textAlign:'center',fontSize:13,color:'#5a7a3a',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'rgba(90,122,58,0.06)',borderRadius:8,border:'1px solid rgba(90,122,58,0.12)'},
+  annoBadge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'#2a6496',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
+  annoNote:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)'},
+  levelBox:{display:'flex',flexDirection:'column',alignItems:'center',gap:6,margin:'8px 0',padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8},
+  levelLabel:{fontSize:13,fontWeight:600,color:'#5a4a32',letterSpacing:'0.04em',textTransform:'uppercase',fontFamily:sans},
+  levelBtns:{display:'flex',gap:6},
+  lvlBtn:{padding:'5px 14px',border:'1.5px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
+  lvlActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
+  bookList:{display:'flex',flexDirection:'column',gap:16},
+  bookItem:{padding:'12px 16px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
+  bookName:{fontSize:16,fontWeight:600,color:'#3a2f1f',marginBottom:8,fontFamily:sans},
+  chapGrid:{display:'flex',flexWrap:'wrap',gap:4},
+  chapBtn:{width:36,height:32,border:'1px solid #d4c9b4',borderRadius:4,background:'#fff',color:'#5a4a32',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
+  navRow:{display:'flex',justifyContent:'center',marginBottom:16},
+  navBtn:{background:'none',border:'1px solid #c4b9a4',borderRadius:5,padding:'4px 14px',fontSize:13,color:'#6b5e4a',cursor:'pointer',fontFamily:sans},
+  readingTopBar:{display:'flex',flexDirection:'column',alignItems:'center',gap:10,marginTop:10},
+  readingNavBtns:{display:'flex',gap:8},
+  ttsBar:{display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'center',gap:14,margin:'0 0 16px',padding:'14px 16px',background:'rgba(90,74,50,0.06)',borderRadius:10,border:'1px solid rgba(90,74,50,0.1)'},
+  ttsPlayAllBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'#5a4a32',color:'#faf6ee',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 1px 4px rgba(90,74,50,0.2)'},
+  ttsStopBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'#b34a28',color:'#fff',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  speedControl:{display:'flex',flexDirection:'column',alignItems:'center',gap:6},
+  speedLabel:{fontSize:12,color:'#6b5e4a',fontFamily:sans,fontWeight:600},
+  speedPresets:{display:'flex',gap:4},
+  speedPresetBtn:{padding:'4px 10px',border:'1.5px solid #c4b9a4',borderRadius:5,background:'transparent',color:'#5a4a32',fontSize:12,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
+  speedPresetActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
+  speedSliderRow:{display:'flex',alignItems:'center',gap:6,width:'100%'},
+  speedSlider:{width:120,height:6,cursor:'pointer',accentColor:'#5a4a32',borderRadius:3},
+  speedValue:{fontSize:13,color:'#5a4a32',fontFamily:sans,fontWeight:700,minWidth:42,textAlign:'center'},
+  versePlayBtn:{background:'none',border:'none',cursor:'pointer',fontSize:14,padding:'0 4px',opacity:0.4,transition:'opacity 0.2s',verticalAlign:'super',lineHeight:1},
+  quizInstr:{textAlign:'center',margin:'16px 0 20px',padding:'16px',background:'rgba(179,74,40,0.04)',borderRadius:10,border:'1px solid rgba(179,74,40,0.1)'},
+  quizInstrTitle:{fontSize:18,fontWeight:600,color:'#3a2f1f',margin:'0 0 6px',fontFamily:sans},
+  quizInstrSub:{fontSize:14,color:'#6b5e4a',margin:0,fontFamily:sans,lineHeight:1.5},
+  quizActions:{display:'flex',gap:8,justifyContent:'center',marginTop:12},
+  quizActBtn:{padding:'5px 14px',border:'1px solid #c4b9a4',borderRadius:5,background:'transparent',color:'#6b5e4a',fontSize:12,cursor:'pointer',fontFamily:sans},
+  wordGrid:{display:'flex',flexWrap:'wrap',gap:8,justifyContent:'center',margin:'0 0 24px'},
+  wordCard:{padding:'8px 16px',border:'1.5px solid #d4c9b4',borderRadius:8,background:'#fff',cursor:'pointer',fontFamily:sans,fontSize:15,display:'flex',flexDirection:'column',alignItems:'center',gap:2,transition:'all 0.2s',minWidth:100},
+  wordCardSel:{background:'#b34a28',borderColor:'#b34a28',color:'#fff',boxShadow:'0 2px 8px rgba(179,74,40,0.2)'},
+  wcFr:{fontWeight:600,fontFamily:"'Palatino Linotype',Georgia,serif"},
+  wcForm:{fontSize:11,opacity:0.7,fontStyle:'italic'},
+  wcDe:{fontSize:12,fontStyle:'italic',opacity:0.9},
+  wcLevel:{fontSize:10,opacity:0.6,fontFamily:sans},
+  quizFooter:{textAlign:'center',padding:'20px 0',borderTop:'1px solid #d4c9b4'},
+  quizSummary:{fontSize:14,color:'#6b5e4a',margin:'0 0 16px',fontFamily:sans},
+  startBtn:{padding:'12px 32px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px rgba(90,74,50,0.2)'},
+  statsRow:{display:'flex',alignItems:'center',justifyContent:'center',gap:20},
+  stat:{display:'flex',flexDirection:'column',alignItems:'center',minWidth:50},
+  statN:{fontSize:22,fontWeight:600,color:'#5a4a32'},
+  statL:{fontSize:11,color:'#8a7e6b',textTransform:'uppercase',letterSpacing:'0.08em',fontFamily:sans},
+  progWrap:{display:'flex',alignItems:'center',gap:8,flex:1,maxWidth:200},
+  progTrack:{flex:1,height:6,background:'#d4c9b4',borderRadius:3,overflow:'hidden'},
+  progFill:{height:'100%',background:'linear-gradient(90deg,#7a9a5a,#5a7a3a)',borderRadius:3,transition:'width 0.5s'},
+  progPct:{fontSize:12,color:'#8a7e6b',fontWeight:600,minWidth:30,fontFamily:sans},
+  legend:{display:'flex',flexWrap:'wrap',gap:12,alignItems:'center',justifyContent:'center',fontSize:12,color:'#8a7e6b',marginBottom:20,padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8,fontFamily:sans},
+  legItem:{display:'flex',alignItems:'center',gap:4},
+  dot:{display:'inline-block',width:8,height:8,borderRadius:'50%',marginRight:2,flexShrink:0},
+  text:{fontSize:18,lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
+  vNum:{fontSize:11,color:'#b0a58e',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
+  wg:{display:'inline',whiteSpace:'nowrap'},
+  tr:{fontStyle:'italic',fontSize:13,color:'#b34a28',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'rgba(179,74,40,0.07)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
+  trRev:{fontStyle:'italic',fontSize:13,color:'#7a9a5a',marginLeft:1,padding:'1px 4px',background:'rgba(122,154,90,0.08)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
+  known:{color:'#5a7a3a',cursor:'pointer',borderBottom:'1px dotted rgba(90,122,58,0.3)',transition:'all 0.2s'},
+  chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid #d4c9b4'},
+  chapNavBtn:{padding:'10px 24px',border:'1px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  footer:{marginTop:30,paddingTop:16,borderTop:'1px solid #d4c9b4',textAlign:'center',fontSize:12,color:'#b0a58e',fontStyle:'italic'},
+  langSwitch:{display:'flex',justifyContent:'center',gap:0,margin:'14px auto 8px',background:'#d4c9b4',borderRadius:8,padding:3,maxWidth:360},
+  langBtn:{flex:1,padding:'8px 16px',border:'none',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
+  langBtnActive:{background:'#5a4a32',color:'#faf6ee',boxShadow:'0 1px 3px rgba(0,0,0,0.15)'},
+  practiceOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(44,36,22,0.85)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,padding:20},
+  practiceCard:{position:'relative',background:'#faf6ee',borderRadius:16,padding:'40px 32px 32px',maxWidth:500,width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.3)',textAlign:'center'},
+  practiceContent:{display:'flex',flexDirection:'column',alignItems:'center',gap:20},
+  practiceCounter:{fontSize:13,color:'#8a7e6b',fontFamily:sans,fontWeight:600,letterSpacing:'0.05em'},
+  practiceText:{fontSize:22,lineHeight:1.7,color:'#2c2416',fontFamily:"'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif",padding:'8px 0'},
+  practiceVerse:{fontSize:12,color:'#b0a58e',fontFamily:sans,fontStyle:'italic'},
+  practiceWordInfo:{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center',padding:'12px 0',borderTop:'1px solid #e0d8c8',borderBottom:'1px solid #e0d8c8',width:'100%'},
+  practiceWord:{display:'flex',flexDirection:'column',alignItems:'center',gap:2,padding:'6px 14px',background:'rgba(179,74,40,0.06)',borderRadius:8},
+  practiceHighlight:{color:'#b34a28',fontWeight:700,fontSize:24,textDecoration:'underline',textDecorationColor:'rgba(179,74,40,0.3)',textUnderlineOffset:'4px'},
+  practiceWordForm:{fontSize:18,fontWeight:700,color:'#3a2f1f',fontFamily:"'Palatino Linotype',Georgia,serif"},
+  practiceWordDe:{fontSize:15,fontStyle:'italic',color:'#5a4a32',fontFamily:sans},
+  practiceWordLemma:{fontSize:12,color:'#8a7e6b',fontFamily:sans},
+  practiceBtns:{display:'flex',gap:10,marginTop:8},
+  practiceRepeatBtn:{padding:'12px 24px',border:'2px solid #5a4a32',borderRadius:8,background:'transparent',color:'#5a4a32',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  practiceNextBtn:{padding:'12px 24px',border:'2px solid #6b5e4a',borderRadius:8,background:'transparent',color:'#6b5e4a',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  practiceLearnedBtn:{padding:'12px 24px',border:'none',borderRadius:8,background:'#5a7a3a',color:'#fff',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px rgba(90,122,58,0.3)'},
+  practiceCancelBtn:{marginTop:4,padding:'8px 20px',border:'none',borderRadius:6,background:'transparent',color:'#b0a58e',fontSize:13,cursor:'pointer',fontFamily:sans},
+  practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'#b0a58e',cursor:'pointer',padding:4},
+  practiceDoneText:{fontSize:20,fontWeight:600,color:'#5a7a3a',fontFamily:sans},
+  practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+};
+
+loadData().then(data=>{
+  if(!data.fr.available&&!data.en.available)throw new Error('Keine Bibeldaten gefunden');
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <App data={data}/>
+  );
+}).catch(err=>{
+  document.getElementById('root').innerHTML=`<div style="text-align:center;margin-top:60px;color:#b34a28;font-family:sans-serif"><h2>Fehler beim Laden</h2><p>Hast du <code>start.command</code> ausgeführt?</p><p style="font-size:13px;color:#8a7e6b;margin-top:12px">${err.message}</p></div>`;
+});
+</script>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
