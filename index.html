@@ -322,9 +322,8 @@ function App({data}){
   const [autoShowDE,setAutoShowDE]=useState(false);
   const [autoShowContext,setAutoShowContext]=useState(false);
   const autoContextRef=useRef({});
-  const autoTimerRef=useRef(null);
-  const autoTappedRef=useRef(false);
-  const autoStoppedRef=useRef(false);
+  const autoRunningRef=useRef(false);
+  const autoResolveRef=useRef(null);
   const tts=useTTS();
   const ttsRef=useRef(tts);
   ttsRef.current=tts;
@@ -499,11 +498,54 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
-  // ── AUTO MODE ──
+  // ── AUTO MODE — fully imperative, no useEffect ──
+  const autoWait=useCallback((ms)=>new Promise(resolve=>{
+    const t=setTimeout(()=>{autoResolveRef.current=null;resolve(false)},ms);
+    autoResolveRef.current=()=>{clearTimeout(t);autoResolveRef.current=null;resolve(true)};
+  }),[]);
+
+  const runAutoDrill=useCallback(async(words,langCode)=>{
+    autoRunningRef.current=true;
+    const speak=(t,l,r)=>ttsRef.current.speakText(t,l,r);
+    for(let i=0;i<words.length;i++){
+      if(!autoRunningRef.current)break;
+      const word=words[i];
+      const key=word.lemma||word.word;
+      setAutoWordIdx(i);setAutoShowDE(false);setAutoShowContext(false);
+      // 1) Speak the word
+      await speak(word.form||key,langCode);
+      if(!autoRunningRef.current)break;
+      // 2) Wait 3s for tap
+      const tapped=await autoWait(3000);
+      if(!autoRunningRef.current)break;
+      if(tapped)continue; // known — next word
+      // 3) Unknown — show + speak German translation
+      setUnknownWords(p=>new Set([...p,key]));
+      setAutoShowDE(true);
+      if(word.de)await speak(word.de,'de',0.8);
+      if(!autoRunningRef.current)break;
+      // 4) Show + speak context
+      const context=autoContextRef.current[key];
+      if(context){
+        setAutoShowContext(true);
+        await autoWait(400);
+        if(!autoRunningRef.current)break;
+        await speak(context,langCode,0.7);
+        if(!autoRunningRef.current)break;
+      }
+      await autoWait(600);
+    }
+    if(autoRunningRef.current){
+      autoRunningRef.current=false;
+      setLearnedWords(new Set());setRevealedWords(new Set());
+      setPhase('auto-reading');
+      setTimeout(()=>ttsRef.current.speakChapterAuto(verses),500);
+    }
+  },[autoWait,verses]);
+
   const startAutoMode=useCallback(()=>{
     // Pre-build context fragments for all quiz words
-    const ctx={};
-    const WINDOW=5;
+    const ctx={};const WINDOW=5;
     verses.forEach(v=>{
       const allWords=v.text.split(/\s+/);
       const chap=annotations[bookName]?.[String(chapNum)];
@@ -520,91 +562,28 @@ function App({data}){
     });
     autoContextRef.current=ctx;
     setAutoWordIdx(0);setAutoShowDE(false);setAutoShowContext(false);
-    autoStoppedRef.current=false;
     setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
     setPhase('auto-vocab');
-  },[verses,annotations,bookName,chapNum]);
-
-  // Auto vocab drill orchestration — single pass
-  // Uses ttsRef to avoid re-triggering on every render (tts object is new each render)
-  useEffect(()=>{
-    if(phase!=='auto-vocab')return;
-    if(autoWordIdx>=quizWords.length){
-      setTimeout(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('auto-reading')},800);
-      return;
-    }
-    if(autoStoppedRef.current)return;
-    const word=quizWords[autoWordIdx];
-    const key=word.lemma||word.word;
-    autoTappedRef.current=false;
-    setAutoShowDE(false);setAutoShowContext(false);
-    let cancelled=false;
-    const speak=(text,l,r)=>ttsRef.current.speakText(text,l,r);
-
-    // 1) Speak the English word
-    speak(word.form||word.lemma||word.word,lang).then(()=>{
-      if(cancelled||autoTappedRef.current)return;
-      // 2) Wait 3s for tap
-      autoTimerRef.current=setTimeout(async()=>{
-        if(cancelled||autoTappedRef.current)return;
-        // Not tapped — word is unknown
-        setUnknownWords(p=>new Set([...p,key]));
-        // 3) Show + speak German translation
-        setAutoShowDE(true);
-        if(word.de)await speak(word.de,'de',0.8);
-        if(cancelled)return;
-        // 4) Show + speak context fragment
-        const context=autoContextRef.current[key];
-        if(context){
-          setAutoShowContext(true);
-          await new Promise(r=>setTimeout(r,400));
-          if(cancelled)return;
-          await speak(context,lang,0.7);
-        }
-        if(cancelled)return;
-        // 5) Next word
-        setTimeout(()=>{if(!cancelled)setAutoWordIdx(i=>i+1)},600);
-      },3000);
-    });
-    return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
-  },[phase,autoWordIdx,quizWords,lang]);
+    const words=[...quizWords];
+    setTimeout(()=>runAutoDrill(words,lang),100);
+  },[verses,annotations,bookName,chapNum,quizWords,lang,runAutoDrill]);
 
   const autoLastTapRef=useRef(0);
   const handleAutoVocabTap=useCallback(()=>{
-    if(phase!=='auto-vocab')return;
     const now=Date.now();
     if(now-autoLastTapRef.current<400){
       // Double tap = stop
       autoLastTapRef.current=0;
-      autoStoppedRef.current=true;
-      clearTimeout(autoTimerRef.current);
-      tts.stop();
+      autoRunningRef.current=false;
+      speechSynthesis.cancel();
+      if(autoResolveRef.current)autoResolveRef.current();
       setPhase('quiz');
       return;
     }
     autoLastTapRef.current=now;
-    autoTappedRef.current=true;
-    clearTimeout(autoTimerRef.current);
     speechSynthesis.cancel();
-    setAutoWordIdx(i=>i+1);
-  },[phase,tts]);
-
-  const stopAutoMode=useCallback(()=>{
-    autoStoppedRef.current=true;
-    clearTimeout(autoTimerRef.current);
-    tts.stop();
-    setPhase('quiz');
-  },[tts]);
-
-  // Auto reading: start TTS on phase enter
-  const autoReadingStartedRef=useRef(false);
-  useEffect(()=>{
-    if(phase==='auto-reading'&&!autoReadingStartedRef.current){
-      autoReadingStartedRef.current=true;
-      setTimeout(()=>ttsRef.current.speakChapterAuto(verses),500);
-    }
-    if(phase!=='auto-reading')autoReadingStartedRef.current=false;
-  },[phase,verses]);
+    if(autoResolveRef.current)autoResolveRef.current();
+  },[]);
 
   const autoReadLastTapRef=useRef(0);
   const handleAutoReadingTap=useCallback((e)=>{
