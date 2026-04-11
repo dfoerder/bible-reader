@@ -255,11 +255,17 @@ function useTTS(){
   },[voices]);
   const speakText=useCallback((text,langOverride,rate)=>{
     return new Promise(resolve=>{
+      speechSynthesis.cancel(); // iOS fix: prevent repeat bug
       const u=new SpeechSynthesisUtterance(text);
       u.lang=langOverride==='de'?'de-DE':(langOverride==='en'?'en-US':'fr-FR');
       u.rate=rate??speedRef.current;
       const v=getVoice(langOverride);if(v)u.voice=v;
-      u.onend=resolve;u.onerror=resolve;
+      let done=false;
+      const finish=()=>{if(!done){done=true;resolve()}};
+      u.onend=finish;u.onerror=finish;
+      // Safety timeout: resolve even if onend/onerror never fires
+      const maxMs=Math.max(Math.ceil(text.split(/\s+/).length/((rate??speedRef.current)||0.5))*1500,3000);
+      setTimeout(finish,maxMs);
       speechSynthesis.speak(u);
     });
   },[getVoice]);
