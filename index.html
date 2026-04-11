@@ -320,9 +320,8 @@ function App({data}){
   const [translation,setTranslation]=useState(saved.translation||'original');
   const [autoWordIdx,setAutoWordIdx]=useState(0);
   const [autoShowDE,setAutoShowDE]=useState(false);
-  const [autoRound,setAutoRound]=useState(1); // 1=words only, 2=context
-  const [autoFragments,setAutoFragments]=useState([]);
-  const [autoFragText,setAutoFragText]=useState('');
+  const [autoShowContext,setAutoShowContext]=useState(false);
+  const autoContextRef=useRef({});
   const autoTimerRef=useRef(null);
   const autoTappedRef=useRef(false);
   const autoStoppedRef=useRef(false);
@@ -500,77 +499,72 @@ function App({data}){
 
   // ── AUTO MODE ──
   const startAutoMode=useCallback(()=>{
-    setAutoWordIdx(0);setAutoShowDE(false);setAutoRound(1);setAutoFragments([]);setAutoFragText('');
+    // Pre-build context fragments for all quiz words
+    const ctx={};
+    const WINDOW=5;
+    verses.forEach(v=>{
+      const allWords=v.text.split(/\s+/);
+      const chap=annotations[bookName]?.[String(chapNum)];
+      const va=chap?.[String(v.n)];
+      if(!va)return;
+      for(let p=0;p<allWords.length;p++){
+        const a=va.find(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos));
+        if(a&&!ctx[a.lemma]){
+          const lo=Math.max(0,p-WINDOW);
+          const hi=Math.min(allWords.length-1,(a.pos_end??p)+WINDOW);
+          ctx[a.lemma]=allWords.slice(lo,hi+1).join(' ');
+        }
+      }
+    });
+    autoContextRef.current=ctx;
+    setAutoWordIdx(0);setAutoShowDE(false);setAutoShowContext(false);
     autoStoppedRef.current=false;
     setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
     setPhase('auto-vocab');
-  },[]);
+  },[verses,annotations,bookName,chapNum]);
 
-  // Auto vocab drill orchestration
+  // Auto vocab drill orchestration — single pass
   useEffect(()=>{
     if(phase!=='auto-vocab')return;
+    if(autoWordIdx>=quizWords.length){
+      // Done — transition to auto-reading
+      setTimeout(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('auto-reading')},800);
+      return;
+    }
     if(autoStoppedRef.current)return;
+    const word=quizWords[autoWordIdx];
+    const key=word.lemma||word.word;
+    autoTappedRef.current=false;
+    setAutoShowDE(false);setAutoShowContext(false);
     let cancelled=false;
 
-    // ── Round 1: words only ──
-    if(autoRound===1){
-      if(autoWordIdx>=quizWords.length){
-        // Round 1 done — build fragments for unknown words, start round 2
-        const frags=buildFragments();
-        if(frags.length===0){
-          // No unknown words — skip to reading
-          setTimeout(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('auto-reading')},800);
-          return;
+    // 1) Speak the English word
+    tts.speakText(word.form||word.lemma||word.word,lang).then(()=>{
+      if(cancelled||autoTappedRef.current)return;
+      // 2) Wait 3s for tap
+      autoTimerRef.current=setTimeout(async()=>{
+        if(cancelled||autoTappedRef.current)return;
+        // Not tapped — word is unknown
+        setUnknownWords(p=>new Set([...p,key]));
+        // 3) Show + speak German translation
+        setAutoShowDE(true);
+        if(word.de)await tts.speakText(word.de,'de',0.8);
+        if(cancelled)return;
+        // 4) Show + speak context fragment
+        const context=autoContextRef.current[key];
+        if(context){
+          setAutoShowContext(true);
+          await new Promise(r=>setTimeout(r,400));
+          if(cancelled)return;
+          await tts.speakText(context,lang,0.7);
         }
-        setAutoFragments(frags);setAutoWordIdx(0);setAutoRound(2);setAutoShowDE(false);setAutoFragText('');
-        return;
-      }
-      const word=quizWords[autoWordIdx];
-      autoTappedRef.current=false;
-      setAutoShowDE(false);setAutoFragText('');
-      tts.speakText(word.form||word.lemma||word.word,lang).then(()=>{
-        if(cancelled||autoTappedRef.current)return;
-        autoTimerRef.current=setTimeout(async()=>{
-          if(cancelled||autoTappedRef.current)return;
-          const key=word.lemma||word.word;
-          setUnknownWords(p=>new Set([...p,key]));
-          setAutoShowDE(true);
-          if(word.de)await tts.speakText(word.de,'de',0.8);
-          if(cancelled)return;
-          setTimeout(()=>{if(!cancelled)setAutoWordIdx(i=>i+1)},600);
-        },3000);
-      });
-      return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
-    }
-
-    // ── Round 2: context fragments ──
-    if(autoRound===2){
-      if(autoWordIdx>=autoFragments.length){
-        // Round 2 done — transition to auto-reading
-        setTimeout(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('auto-reading')},800);
-        return;
-      }
-      const frag=autoFragments[autoWordIdx];
-      autoTappedRef.current=false;
-      setAutoShowDE(false);
-      const wordInfo=frag.words&&frag.words[0];
-      const displayWord=wordInfo?wordInfo.form:'';
-      const displayDe=wordInfo?wordInfo.de:'';
-      setAutoFragText(frag.text);
-      // Speak the fragment
-      tts.speakText(frag.text,lang,0.7).then(()=>{
-        if(cancelled||autoTappedRef.current)return;
-        autoTimerRef.current=setTimeout(async()=>{
-          if(cancelled||autoTappedRef.current)return;
-          setAutoShowDE(true);
-          if(displayDe)await tts.speakText(displayDe,'de',0.8);
-          if(cancelled)return;
-          setTimeout(()=>{if(!cancelled)setAutoWordIdx(i=>i+1)},600);
-        },3000);
-      });
-      return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
-    }
-  },[phase,autoRound,autoWordIdx,quizWords,autoFragments,lang,tts,buildFragments]);
+        if(cancelled)return;
+        // 5) Next word
+        setTimeout(()=>{if(!cancelled)setAutoWordIdx(i=>i+1)},600);
+      },3000);
+    });
+    return()=>{cancelled=true;clearTimeout(autoTimerRef.current);speechSynthesis.cancel()};
+  },[phase,autoWordIdx,quizWords,lang,tts]);
 
   const autoLastTapRef=useRef(0);
   const handleAutoVocabTap=useCallback(()=>{
@@ -725,37 +719,20 @@ function App({data}){
 
   // ── AUTO VOCAB ──
   if(phase==='auto-vocab'){
-    if(autoRound===1){
-      const word=quizWords[autoWordIdx]||{};
-      const total=quizWords.length;
-      const done=autoWordIdx>=total;
-      return(<div onClick={handleAutoVocabTap} style={S.autoOverlay}>
-        <div style={S.autoCard}>
-          {done?(<>
-            <p style={S.autoDoneText}>{unknownWords.size} unbekannte Wörter</p>
-            <p style={S.autoHint}>Kontext-Runde...</p>
-          </>):(<>
-            <p style={S.autoCounter}>{autoWordIdx+1} / {total}</p>
-            <p style={S.autoWord}>{word.form||word.lemma||word.word||''}</p>
-            {autoShowDE&&<p style={S.autoDe}>{word.de}</p>}
-          </>)}
-        </div>
-      </div>);
-    }
-    // Round 2: context
-    const frag=autoFragments[autoWordIdx];
-    const total=autoFragments.length;
-    const done=autoWordIdx>=total;
-    const wordInfo=frag&&frag.words&&frag.words[0];
+    const word=quizWords[autoWordIdx]||{};
+    const key=word.lemma||word.word||'';
+    const context=autoContextRef.current[key];
+    const done=autoWordIdx>=quizWords.length;
     return(<div onClick={handleAutoVocabTap} style={S.autoOverlay}>
       <div style={S.autoCard}>
         {done?(<>
           <p style={S.autoDoneText}>Vokabel-Check abgeschlossen</p>
           <p style={S.autoHint}>Kapitel wird vorgelesen...</p>
         </>):(<>
-          <p style={S.autoCounter}>{autoWordIdx+1} / {total} — im Kontext</p>
-          <p style={S.autoContext}>{autoFragText}</p>
-          {autoShowDE&&wordInfo&&<p style={S.autoDe}>{wordInfo.form} — {wordInfo.de}</p>}
+          <p style={S.autoCounter}>{autoWordIdx+1} / {quizWords.length}</p>
+          <p style={S.autoWord}>{word.form||word.lemma||word.word||''}</p>
+          {autoShowDE&&<p style={S.autoDe}>{word.de}</p>}
+          {autoShowContext&&context&&<p style={S.autoContext}>{context}</p>}
         </>)}
       </div>
     </div>);
