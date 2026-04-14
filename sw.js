@@ -1,13 +1,9 @@
-const CACHE_NAME = 'bibel-nt-v1.0.8';
+const CACHE_NAME = 'bible-nt-dev';
 const ASSETS = [
   './',
   './index.html',
-  './bible_nt.json',
   './bible_nt_en.json',
-  './vocab.json',
-  './nt_annotations.json',
   './nt_annotations_en.json',
-  './matthieu_simple.json',
   'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'
