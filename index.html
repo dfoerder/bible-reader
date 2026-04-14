@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title" content="Bibel NT"/>
+  <meta name="apple-mobile-web-app-title" content="Bible NT"/>
   <meta name="theme-color" content="#5a4a32"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
-  <title>Neues Testament — Bibel-Lesehilfe</title>
+  <title>New Testament — Bible Reading Aid</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
@@ -42,7 +42,7 @@
 <body class="mode-phone">
 <button class="view-toggle" onclick="toggleViewMode()">Desktop</button>
 <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-<div id="root"><div class="loading"><span class="spinner"></span> Daten werden geladen...</div></div>
+<div id="root"><div class="loading"><span class="spinner"></span> Loading data...</div></div>
 </div></div>
 <script>
 function toggleViewMode(){
@@ -101,32 +101,7 @@ async function loadAnnotations(file){
   return annotations;
 }
 
-async function loadSimplified(){
-  let simplified = {};
-  try {
-    const r = await fetch('matthieu_simple.json'+CB);
-    if (r.ok) { const d = await r.json(); if(d.chapters) simplified[d.book||'Matthieu']=d.chapters; }
-  } catch(e) {}
-  try {
-    const r = await fetch('bible_nt_simple.json'+CB);
-    if (r.ok) { const d = await r.json(); if(d.books) d.books.forEach(b=>{simplified[b.name]=b.chapters}); }
-  } catch(e) {}
-  return simplified;
-}
-
 async function loadData(){
-  // Load French data
-  const fr = {};
-  try {
-    const [bResp,vResp] = await Promise.all([fetch('bible_nt.json'+CB),fetch('vocab.json'+CB)]);
-    fr.bible = await bResp.json();
-    fr.vocab = (await vResp.json()).words;
-    fr.annotations = await loadAnnotations('nt_annotations.json');
-    fr.simplified = await loadSimplified();
-    fr.available = true;
-  } catch(e) { fr.available = false; }
-
-  // Load English data
   const en = {};
   try {
     const bResp = await fetch('bible_nt_en.json'+CB);
@@ -138,7 +113,7 @@ async function loadData(){
     en.available = true;
   } catch(e) { en.available = false; }
 
-  return {fr, en};
+  return {en};
 }
 
 // Split trailing punctuation from a word token: "diffamer," → ["diffamer", ","]
@@ -150,14 +125,8 @@ function splitPunct(token){
 const LEVELS=["A1","A2","B1","B2","C1","C2"];
 const lvlIdx=l=>LEVELS.indexOf(l);
 
-function normalizeFr(w){
-  return w.toLowerCase().replace(/^[''«"\-(]/,'').replace(/[''»"\-),;:.!?…]$/,'').replace(/^(l'|d'|s'|n'|j'|m'|t'|c'|qu')/,'');
-}
-function normalizeEn(w){
+function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
-}
-function normalize(w,lang){
-  return lang==='en'?normalizeEn(w):normalizeFr(w);
 }
 
 // Get annotation for a specific word position in a verse
@@ -204,10 +173,10 @@ function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tapped
 }
 
 // Fallback: old vocab.json based lookup
-function getChapterWordsOld(verses,vocab,userLevel,lang){
+function getChapterWordsOld(verses,vocab,userLevel){
   const seen=new Set(),result=[];
   verses.forEach(v=>v.text.split(/\s+/).forEach(w=>{
-    const c=normalize(w,lang),e=vocab[c];
+    const c=normalize(w),e=vocab[c];
     if(e&&lvlIdx(e.level)>lvlIdx(userLevel)&&!seen.has(c)){seen.add(c);result.push({word:c,...e})}
   }));
   result.sort((a,b)=>a.word.localeCompare(b.word));
@@ -220,35 +189,28 @@ function useTTS(){
   const [activeVerse,setActiveVerse]=useState(null);
   const [activeWordIdx,setActiveWordIdx]=useState(-1);
   const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.85);
-  const [voices,setVoices]=useState({fr:[],en:[]});
-  const langRef=useRef('fr');
+  const [voices,setVoices]=useState({en:[]});
+  const langRef=useRef('en');
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
   const setSpeed=useCallback(v=>{speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v)},[]);
   useEffect(()=>{
     const lv=()=>{
       const all=speechSynthesis.getVoices();
-      const fr=all.filter(v=>v.lang.startsWith('fr'));
       const en=all.filter(v=>v.lang.startsWith('en'));
-      if(fr.length||en.length)setVoices({fr,en});
+      if(en.length)setVoices({en});
     };
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
     return()=>{speechSynthesis.cancel()};
   },[]);
   const getVoice=useCallback(()=>{
-    const lang=langRef.current;
-    if(lang==='en'){
-      const ev=voices.en;
-      for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
-      return ev[0]||null;
-    }
-    const fv=voices.fr;
-    for(const n of['Thomas','Amélie','Audrey','Aurélie']){const v=fv.find(v=>v.name.includes(n));if(v)return v}
-    return fv[0]||null;
+    const ev=voices.en;
+    for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
+    return ev[0]||null;
   },[voices]);
   const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
-    const u=new SpeechSynthesisUtterance(text);u.lang=langRef.current==='en'?'en-US':'fr-FR';u.rate=speedRef.current;
+    const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=speedRef.current;
     const v=getVoice();if(v)u.voice=v;
     setActiveVerse(vN);setActiveWordIdx(wordOffset);setSpeaking(true);
     u.onboundary=e=>{if(e.name==='word'){let i=0;for(let j=ws.length-1;j>=0;j--){if(e.charIndex>=ws[j]){i=j;break}}setActiveWordIdx(i+wordOffset)}};
@@ -263,14 +225,14 @@ function useTTS(){
     const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
   },[speakVerse]);
   const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
-  const hasVoices=langRef.current==='en'?voices.en.length>0:voices.fr.length>0;
+  const hasVoices=voices.en.length>0;
   return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,stop,hasVoices,setLang};
 }
 
 // ─── App ────────────────────────────────────────────────
 function App({data}){
   const saved=LS.get('nt-reader-state')||{};
-  const [lang,setLangState]=useState(saved.lang||(data.en.available?'en':'fr'));
+  const lang='en';
   const [phase,setPhase]=useState(saved.phase||'nav');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
@@ -280,39 +242,28 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
-  const [translation,setTranslation]=useState(saved.translation||'original');
   const tts=useTTS();
 
-  const langData=data[lang]||data.fr;
+  const langData=data.en;
   const bible=langData.bible;
   const vocab=langData.vocab||{};
   const annotations=langData.annotations||{};
-  const simplified=langData.simplified||{};
 
-  const hasSimplified=Object.keys(simplified).length>0;
   const hasAnnotations=Object.keys(annotations).length>0;
 
-  const setLang=useCallback(l=>{
-    setLangState(l);tts.setLang(l);setPhase('nav');setBookIdx(0);setChapIdx(0);
-    setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
-  },[tts]);
-
   // Sync TTS language
-  useEffect(()=>{tts.setLang(lang)},[lang,tts]);
+  useEffect(()=>{tts.setLang('en')},[tts]);
 
-  useEffect(()=>{LS.set('nt-reader-state',{lang,phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords],translation})},[lang,phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords,translation]);
+  useEffect(()=>{LS.set('nt-reader-state',{phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
   const bookName=currentBook?.name||'';
-  const hasSimplifiedBook=simplified[bookName]?.length>0;
-  const useSimplified=translation==='simple'&&hasSimplifiedBook;
   const hasAnno=!!annotations[bookName];
 
   const getChapter=useCallback(()=>{
-    if(useSimplified){const sc=simplified[bookName];const ch=sc.find(c=>c.number===(currentBook?.chapters?.[chapIdx]?.number));if(ch)return ch}
     return currentBook?.chapters?.[chapIdx];
-  },[useSimplified,simplified,bookName,currentBook,chapIdx]);
+  },[currentBook,chapIdx]);
 
   const currentChapter=getChapter();
   const chapNum=currentChapter?.number;
@@ -321,11 +272,11 @@ function App({data}){
   // Get quiz words — use annotations if available, else fallback to vocab.json
   const quizWords=useMemo(()=>{
     if(!currentChapter)return[];
-    if(hasAnno&&!useSimplified){
+    if(hasAnno){
       return getChapterAnnotations(annotations,bookName,chapNum,userLevel,tappedWords);
     }
-    return getChapterWordsOld(verses,vocab,userLevel,lang);
-  },[currentChapter,hasAnno,useSimplified,annotations,bookName,chapNum,userLevel,tappedWords,verses,vocab,lang]);
+    return getChapterWordsOld(verses,vocab,userLevel);
+  },[currentChapter,hasAnno,annotations,bookName,chapNum,userLevel,tappedWords,verses,vocab]);
 
   const chapterKey=useCallback((bi,ci)=>`unk-${lang}-${bi}-${ci}`,[lang]);
   const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
@@ -345,7 +296,7 @@ function App({data}){
 
   // Build practice fragments (short text pieces around unknown words)
   const buildFragments=useCallback(()=>{
-    const useAnno=hasAnno&&!useSimplified;
+    const useAnno=hasAnno;
     const MAX_SHORT=10,WINDOW=4;
     const fragments=[];
     verses.forEach(v=>{
@@ -360,7 +311,7 @@ function App({data}){
           }
         }
       } else {
-        allWords.forEach((w,p)=>{const c=normalize(w,lang);if(unknownWords.has(c)&&!learnedWords.has(c))unknownPositions.push(p)});
+        allWords.forEach((w,p)=>{const c=normalize(w);if(unknownWords.has(c)&&!learnedWords.has(c))unknownPositions.push(p)});
       }
       if(!unknownPositions.length)return;
       const parts=v.text.split(/(?<=[.!?…»;:])\s+/);
@@ -371,7 +322,7 @@ function App({data}){
         const endPos=startPos+sentWords.length-1;
         const inSent=unknownPositions.filter(p=>p>=startPos&&p<=endPos);
         if(!inSent.length){wordPos+=sentWords.length;return}
-        // Finde Wort-Infos der unbekannten Wörter in diesem Fragment
+        // Find word info for unknown words in this fragment
         const findWordInfos=(positions)=>{
           if(useAnno){
             const chap=annotations[bookName]?.[String(chapNum)];
@@ -379,7 +330,7 @@ function App({data}){
             if(!va)return[];
             return positions.map(p=>{const a=va.find(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos));return a?{form:a.form,lemma:a.lemma,de:a.de}:null}).filter(Boolean);
           }
-          return positions.map(p=>{const c=normalize(allWords[p],lang);const e=vocab[c];return e?{form:allWords[p],lemma:c,de:e.de}:{form:allWords[p],lemma:c,de:''}}).filter(w=>w.de);
+          return positions.map(p=>{const c=normalize(allWords[p]);const e=vocab[c];return e?{form:allWords[p],lemma:c,de:e.de}:{form:allWords[p],lemma:c,de:''}}).filter(w=>w.de);
         };
         if(sentWords.length<=MAX_SHORT){
           fragments.push({n:v.n,text:sent,wordOffset:startPos,words:findWordInfos(inSent)});
@@ -411,7 +362,7 @@ function App({data}){
       });
     });
     return fragments;
-  },[hasAnno,useSimplified,verses,annotations,bookName,chapNum,userLevel,unknownWords,learnedWords,tappedWords,lang]);
+  },[hasAnno,verses,annotations,bookName,chapNum,userLevel,unknownWords,learnedWords,tappedWords]);
 
   // Practice mode state
   const [practiceFragments,setPracticeFragments]=useState([]);
@@ -454,25 +405,9 @@ function App({data}){
   },[]);
 
 
-  const TranslationToggle=()=>{
-    if(!hasSimplified||lang==='en')return null;
-    return(<div style={S.translationToggle}>
-      <button onClick={()=>setTranslation('original')} style={{...S.trBtn,...(translation==='original'?S.trBtnActive:{})}}>Louis Segond 1910</button>
-      <button onClick={()=>setTranslation('simple')} style={{...S.trBtn,...S.trBtnSimple,...(translation==='simple'?S.trBtnSimpleActive:{})}}>Segond A2</button>
-    </div>);
-  };
-
-  const LangSwitch=()=>{
-    if(!data.fr.available||!data.en.available)return null;
-    return(<div style={S.langSwitch}>
-      <button onClick={()=>setLang('en')} style={{...S.langBtn,...(lang==='en'?S.langBtnActive:{})}}>English (WEB)</button>
-      <button onClick={()=>setLang('fr')} style={{...S.langBtn,...(lang==='fr'?S.langBtnActive:{})}}>Français (Segond)</button>
-    </div>);
-  };
-
-  const langTitle=lang==='en'?'New Testament':'Nouveau Testament';
-  const langSubtitle=lang==='en'?'Lesehilfe EN→DE':'Lesehilfe FR→DE';
-  const langFooter=lang==='en'?'World English Bible · Public Domain':(useSimplified?'Segond A2 (vereinfacht)':'Louis Segond 1910');
+  const langTitle='New Testament';
+  const langSubtitle='Reading Aid EN→DE';
+  const langFooter='World English Bible · Public Domain';
 
   // ── NAV ──
   if(phase==='nav'){
@@ -480,20 +415,17 @@ function App({data}){
       <header style={S.header}>
         <h1 style={S.title}>{langTitle}</h1>
         <p style={S.subtitle}>{langSubtitle}</p>
-        <LangSwitch/>
-        <TranslationToggle/>
         <div style={S.levelBox}>
-          <span style={S.levelLabel}>Mein Niveau:</span>
+          <span style={S.levelLabel}>My level:</span>
           <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
         </div>
-        <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Gesamt gelernte Wörter: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+        <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
       </header>
       <div style={S.bookList}>{books.map((book,bi)=>{
-        const ha=!!annotations[book.name];const hs=!!simplified[book.name];
+        const ha=!!annotations[book.name];
         return(<div key={bi} style={S.bookItem}>
           <h3 style={S.bookName}>{book.name}
-            {ha&&<span style={S.annoBadge} title="Wort-für-Wort Annotationen verfügbar">annotiert</span>}
-            {hs&&translation==='simple'&&<span style={S.a2badge}>A2</span>}
+            {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
           </h3>
           <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
         </div>);
@@ -505,25 +437,23 @@ function App({data}){
   if(phase==='quiz'){
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>{currentBook.name} {useSimplified&&<span style={S.a2badgeInline}>A2</span>}</h1>
-        <p style={S.subtitle}>Kapitel {chapNum} — Vokabel-Check</p>
-        <TranslationToggle/>
+        <h1 style={S.title}>{currentBook.name}</h1>
+        <p style={S.subtitle}>Chapter {chapNum} — Vocabulary Check</p>
       </header>
-      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Bücher</button></div>
+      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Books</button></div>
 
-      {hasAnno&&!useSimplified&&<div style={S.annoNote}>Kontextspezifische Annotationen aktiv — jedes Wort hat seine genaue Übersetzung im Kontext.</div>}
-      {useSimplified&&<div style={S.a2note}>Segond A2: vereinfachter Wortschatz, passé composé.</div>}
+      {hasAnno&&<div style={S.annoNote}>Context-specific annotations active — each word has its exact translation in context.</div>}
 
       {quizWords.length===0?(
-        <div style={S.quizInstr}><p style={S.quizInstrTitle}>Keine neuen Vokabeln über {userLevel}</p><p style={S.quizInstrSub}>Du kannst direkt lesen.</p></div>
+        <div style={S.quizInstr}><p style={S.quizInstrTitle}>No new vocabulary above {userLevel}</p><p style={S.quizInstrSub}>You can start reading directly.</p></div>
       ):(
         <div>
           <div style={S.quizInstr}>
-            <p style={S.quizInstrTitle}>Welche Wörter kennst du nicht?</p>
-            <p style={S.quizInstrSub}>{quizWords.length} Wörter über {userLevel}. Klicke auf unbekannte.</p>
+            <p style={S.quizInstrTitle}>Which words don't you know?</p>
+            <p style={S.quizInstrSub}>{quizWords.length} words above {userLevel}. Tap the unknown ones.</p>
             <div style={S.quizActions}>
-              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>Alle markieren</button>
-              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>Keine markieren</button>
+              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>Mark all</button>
+              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>Mark none</button>
             </div>
           </div>
           <div style={S.wordGrid}>{quizWords.map(item=>{
@@ -539,8 +469,8 @@ function App({data}){
         </div>
       )}
       <div style={S.quizFooter}>
-        <p style={S.quizSummary}>{unknownWords.size===0?'Keine Wörter markiert — reiner Lesefluss!':`${unknownWords.size} Wörter werden beim Lesen übersetzt.`}</p>
-        <button onClick={startReading} style={S.startBtn}>Lesen →</button>
+        <p style={S.quizSummary}>{unknownWords.size===0?'No words marked — pure reading flow!':`${unknownWords.size} words will be translated while reading.`}</p>
+        <button onClick={startReading} style={S.startBtn}>Read →</button>
       </div>
     </div>);
   }
@@ -553,29 +483,28 @@ function App({data}){
 
   return(<div>
     <header style={S.header}>
-      <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum} {useSimplified&&<span style={S.a2badgeInline}>A2</span>}</h1>
-      <TranslationToggle/>
+      <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum}</h1>
       <div style={S.readingTopBar}>
         <div style={S.readingNavBtns}>
-          <button onClick={goToNav} style={S.navBtn}>≡ Bücher</button>
-          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Wortliste</button>
+          <button onClick={goToNav} style={S.navBtn}>≡ Books</button>
+          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Word list</button>
         </div>
         {active>0&&(<div style={S.statsRow}>
-          <div style={S.stat}><span style={S.statN}>{learned}</span><span style={S.statL}>gelernt</span></div>
+          <div style={S.stat}><span style={S.statN}>{learned}</span><span style={S.statL}>learned</span></div>
           <div style={S.progWrap}><div style={S.progTrack}><div style={{...S.progFill,width:`${progress}%`}}/></div><span style={S.progPct}>{progress}%</span></div>
-          <div style={S.stat}><span style={S.statN}>{remaining}</span><span style={S.statL}>übrig</span></div>
+          <div style={S.stat}><span style={S.statN}>{remaining}</span><span style={S.statL}>remaining</span></div>
         </div>)}
       </div>
     </header>
 
     {/* TTS */}
     <div style={S.ttsBar}>
-      {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stopp</button>
-      ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Kapitel vorlesen</button>
-      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'#6b4a2e'}} disabled={!tts.hasVoices}>▶ Unbekannte Wörter üben</button>)}
+      {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stop</button>
+      ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Read chapter aloud</button>
+      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'#6b4a2e'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
       </>)}
       <div style={S.speedControl}>
-        <span style={S.speedLabel}>Tempo:</span>
+        <span style={S.speedLabel}>Speed:</span>
         <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{l:'Langsam',v:0.5},{l:'Normal',v:0.85},{l:'Schnell',v:1.1}].map(p=>(
           <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l}</button>
         ))}</div>
@@ -587,18 +516,18 @@ function App({data}){
     </div>
 
     {active>0&&(<div style={S.legend}>
-      <span style={S.legItem}><span style={{...S.dot,background:'#b34a28'}}/> antippen = gelernt</span>
-      <span style={S.legItem}><span style={{...S.dot,background:'#5a7a3a'}}/> antippen = nochmal zeigen</span>
+      <span style={S.legItem}><span style={{...S.dot,background:'#b34a28'}}/> tap = learned</span>
+      <span style={S.legItem}><span style={{...S.dot,background:'#5a7a3a'}}/> tap = show again</span>
     </div>)}
 
     <div style={S.text}>{verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
       let wordIdx=0;
-      const useAnno=hasAnno&&!useSimplified;
+      const useAnno=hasAnno;
 
       return(<span key={verse.n} id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
         <sup style={S.vNum}>{verse.n}</sup>
-        {!tts.speaking&&(<button onClick={()=>tts.speakSingleVerse(verse.n,verse.text)} style={S.versePlayBtn} title="Vers vorlesen">🔊</button>)}
+        {!tts.speaking&&(<button onClick={()=>tts.speakSingleVerse(verse.n,verse.text)} style={S.versePlayBtn} title="Read verse aloud">🔊</button>)}
         {verse.text.split(/(\s+)/).map((token,i)=>{
           if(/^\s+$/.test(token))return <span key={i}> </span>;
           const pos=wordIdx++;
@@ -634,7 +563,7 @@ function App({data}){
             return <span key={i} className={hl}>{token}</span>;
           } else {
             // Fallback: vocab.json lookup
-            const clean=normalize(token,lang),entry=vocab[clean];
+            const clean=normalize(token),entry=vocab[clean];
             if(!entry||!unknownWords.has(clean))return <span key={i} className={hl}>{token}</span>;
             const isL=learnedWords.has(clean),isR=revealedWords.has(clean);
             const [vw,vp]=splitPunct(token);
@@ -647,20 +576,20 @@ function App({data}){
     })}</div>
 
     <div style={S.chapNav}>
-      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>← Vorheriges</button>
-      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1}>Nächstes →</button>
+      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>← Previous</button>
+      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1}>Next →</button>
     </div>
-    <footer style={S.footer}>{langFooter} · Gemeinfrei</footer>
+    <footer style={S.footer}>{langFooter} · Public Domain</footer>
 
     {/* Practice overlay */}
     {practiceActive&&(<div style={S.practiceOverlay}>
       <div style={S.practiceCard}>
         {practiceDone?(
           <div style={S.practiceContent}>
-            <p style={S.practiceDoneText}>Alle Wörter geübt!</p>
+            <p style={S.practiceDoneText}>All words practiced!</p>
             <div style={S.practiceBtns}>
-              <button onClick={startPractice} style={S.practiceRepeatBtn}>Nochmal üben</button>
-              <button onClick={closePractice} style={S.practiceCloseBtn}>Zurück zum Text</button>
+              <button onClick={startPractice} style={S.practiceRepeatBtn}>Practice again</button>
+              <button onClick={closePractice} style={S.practiceCloseBtn}>Back to text</button>
             </div>
           </div>
         ):(
@@ -686,11 +615,11 @@ function App({data}){
             </div>
             <p style={S.practiceVerse}>Vers {practiceFragments[practiceIdx]?.n}</p>
             <div style={S.practiceBtns}>
-              <button onClick={practiceRepeat} style={S.practiceRepeatBtn}>Wiederholen</button>
-              <button onClick={practiceNext} style={S.practiceNextBtn}>Weiter</button>
-              <button onClick={practiceLearned} style={S.practiceLearnedBtn}>Gelernt</button>
+              <button onClick={practiceRepeat} style={S.practiceRepeatBtn}>Repeat</button>
+              <button onClick={practiceNext} style={S.practiceNextBtn}>Next</button>
+              <button onClick={practiceLearned} style={S.practiceLearnedBtn}>Learned</button>
             </div>
-            <button onClick={closePractice} style={S.practiceCancelBtn}>Abbrechen</button>
+            <button onClick={closePractice} style={S.practiceCancelBtn}>Cancel</button>
           </div>
         )}
         <button onClick={closePractice} style={S.practiceX}>✕</button>
@@ -704,13 +633,6 @@ const S={
   header:{textAlign:'center',marginBottom:20,paddingBottom:16,borderBottom:'1px solid #d4c9b4'},
   title:{fontSize:28,fontWeight:400,letterSpacing:'0.04em',margin:'0 0 4px',color:'#3a2f1f',fontVariant:'small-caps'},
   subtitle:{fontSize:14,color:'#8a7e6b',margin:0,fontStyle:'italic'},
-  translationToggle:{display:'flex',justifyContent:'center',gap:0,margin:'12px auto 8px',background:'#e8e0d0',borderRadius:8,padding:3,maxWidth:320},
-  trBtn:{flex:1,padding:'7px 16px',border:'none',borderRadius:6,background:'transparent',color:'#6b5e4a',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
-  trBtnActive:{background:'#fff',color:'#3a2f1f',boxShadow:'0 1px 3px rgba(0,0,0,0.1)'},
-  trBtnSimple:{},trBtnSimpleActive:{background:'#5a7a3a',color:'#fff',boxShadow:'0 1px 3px rgba(90,122,58,0.3)'},
-  a2badge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'#5a7a3a',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
-  a2badgeInline:{display:'inline-block',marginLeft:6,padding:'1px 7px',background:'#5a7a3a',color:'#fff',borderRadius:8,fontSize:12,fontWeight:700,fontFamily:sans,verticalAlign:'middle',fontVariant:'normal'},
-  a2note:{textAlign:'center',fontSize:13,color:'#5a7a3a',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'rgba(90,122,58,0.06)',borderRadius:8,border:'1px solid rgba(90,122,58,0.12)'},
   annoBadge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'#2a6496',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
   annoNote:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)'},
   levelBox:{display:'flex',flexDirection:'column',alignItems:'center',gap:6,margin:'8px 0',padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8},
@@ -774,9 +696,6 @@ const S={
   chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid #d4c9b4'},
   chapNavBtn:{padding:'10px 24px',border:'1px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
   footer:{marginTop:30,paddingTop:16,borderTop:'1px solid #d4c9b4',textAlign:'center',fontSize:12,color:'#b0a58e',fontStyle:'italic'},
-  langSwitch:{display:'flex',justifyContent:'center',gap:0,margin:'14px auto 8px',background:'#d4c9b4',borderRadius:8,padding:3,maxWidth:360},
-  langBtn:{flex:1,padding:'8px 16px',border:'none',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
-  langBtnActive:{background:'#5a4a32',color:'#faf6ee',boxShadow:'0 1px 3px rgba(0,0,0,0.15)'},
   practiceOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(44,36,22,0.85)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,padding:20},
   practiceCard:{position:'relative',background:'#faf6ee',borderRadius:16,padding:'40px 32px 32px',maxWidth:500,width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.3)',textAlign:'center'},
   practiceContent:{display:'flex',flexDirection:'column',alignItems:'center',gap:20},
@@ -800,12 +719,12 @@ const S={
 };
 
 loadData().then(data=>{
-  if(!data.fr.available&&!data.en.available)throw new Error('Keine Bibeldaten gefunden');
+  if(!data.en.available)throw new Error('No bible data found');
   ReactDOM.createRoot(document.getElementById('root')).render(
     <App data={data}/>
   );
 }).catch(err=>{
-  document.getElementById('root').innerHTML=`<div style="text-align:center;margin-top:60px;color:#b34a28;font-family:sans-serif"><h2>Fehler beim Laden</h2><p>Hast du <code>start.command</code> ausgeführt?</p><p style="font-size:13px;color:#8a7e6b;margin-top:12px">${err.message}</p></div>`;
+  document.getElementById('root').innerHTML=`<div style="text-align:center;margin-top:60px;color:#b34a28;font-family:sans-serif"><h2>Error loading data</h2><p>Did you run <code>start.command</code>?</p><p style="font-size:13px;color:#8a7e6b;margin-top:12px">${err.message}</p></div>`;
 });
 </script>
 <script>
