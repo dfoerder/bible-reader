@@ -261,6 +261,9 @@ function App({data}){
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
   const [fontSize,setFontSize]=useState(parseInt(LS.get('nt-font-size'))||18);
+  const defaultStatsVisible={text:true,vocabulary:true,progress:true};
+  const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('nt-stats-visible')||{})}));
+  const toggleStatSection=useCallback(key=>{setStatsVisible(prev=>{const next={...prev,[key]:!prev[key]};LS.set('nt-stats-visible',next);return next})},[]);
   const tts=useTTS();
   const ttsRef=useRef(tts);
   ttsRef.current=tts;
@@ -275,7 +278,7 @@ function App({data}){
   // Sync TTS language
   useEffect(()=>{tts.setLang('en')},[tts]);
 
-  useEffect(()=>{LS.set('nt-reader-state',{phase:phase==='settings'?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('nt-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
@@ -431,6 +434,101 @@ function App({data}){
   const langSubtitle='Reading Aid EN→DE';
   const langFooter='World English Bible · Public Domain';
 
+  const stats=useMemo(()=>{
+    const totalChapters=books.reduce((s,b)=>s+b.chapters.length,0);
+    const totalVerses=books.reduce((s,b)=>s+b.chapters.reduce((s2,c)=>s2+c.verses.length,0),0);
+    const totalWords=books.reduce((s,b)=>s+b.chapters.reduce((s2,c)=>s2+c.verses.reduce((s3,v)=>s3+v.text.split(/\s+/).length,0),0),0);
+    const annotatedBooks=books.filter(b=>!!annotations[b.name]).length;
+    const lemmasByLevel={};const allLemmas=new Set();
+    Object.values(annotations).forEach(bk=>{
+      Object.values(bk).forEach(ch=>{
+        Object.values(ch).forEach(vs=>{
+          vs.forEach(a=>{
+            if(a.lemma){
+              allLemmas.add(a.lemma);
+              const lvl=a.level||'?';
+              if(!lemmasByLevel[lvl])lemmasByLevel[lvl]=new Set();
+              lemmasByLevel[lvl].add(a.lemma);
+            }
+          });
+        });
+      });
+    });
+    const perBook=books.filter(b=>!!annotations[b.name]).map(b=>{
+      const bkLemmas=new Set();const bkByLevel={};
+      Object.values(annotations[b.name]).forEach(ch=>{
+        Object.values(ch).forEach(vs=>{
+          vs.forEach(a=>{
+            if(a.lemma){
+              bkLemmas.add(a.lemma);
+              const lvl=a.level||'?';
+              if(!bkByLevel[lvl])bkByLevel[lvl]=new Set();
+              bkByLevel[lvl].add(a.lemma);
+            }
+          });
+        });
+      });
+      const byLevel=Object.fromEntries(Object.entries(bkByLevel).map(([k,v])=>[k,v.size]));
+      const lvlW={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
+      const total=bkLemmas.size;
+      const score=total>0?Object.entries(byLevel).reduce((s,[l,n])=>s+((n/total)*100)*(lvlW[l]||0),0)/100:0;
+      const diffLabel=score<2?'A1/A2':score<3?'A2/B1':score<3.9?'B1/B2':score<5?'B2/C1':'C1/C2';
+      return{name:b.name,total,byLevel,score:Math.round(score*10)/10,diffLabel};
+    });
+    return{totalChapters,totalVerses,totalWords,annotatedBooks,allLemmas:allLemmas.size,lemmasByLevel:Object.fromEntries(Object.entries(lemmasByLevel).map(([k,v])=>[k,v.size])),perBook};
+  },[books,annotations]);
+
+  // ── STATISTICS ──
+  if(phase==='stats'){
+    const levelOrder=["A1","A2","B1","B2","C1","C2"];
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>Statistics</h1>
+      </header>
+      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
+      <div style={S.settingsSection}>
+        {statsVisible.text&&<div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Text</span>
+          <div style={S.statGrid}>
+            <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+          </div>
+          <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+        </div>}
+        {statsVisible.vocabulary&&<>
+          <div style={S.settingsGroup}>
+            <span style={S.settingsLabel}>Vocabulary — Total</span>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+            <div style={{...S.statGrid,marginTop:12}}>
+              {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+            </div>
+          </div>
+          {stats.perBook.map(bk=>(
+            <div key={bk.name} style={S.settingsGroup}>
+              <span style={S.settingsLabel}>{bk.name}</span>
+              <div style={S.statGrid}>
+                <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+                <div style={S.statCell}><span style={{...S.statCellN,color:'#2a6496'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
+              </div>
+              <div style={{...S.statGrid,marginTop:8}}>
+                {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+              </div>
+            </div>
+          ))}
+        </>}
+        {statsVisible.progress&&<div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Your progress</span>
+          <div style={S.statGrid}>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'#5a7a3a'}}>{globalLearned.size}</span><span style={S.statCellL}>Words learned</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas>0?Math.round((globalLearned.size/stats.allLemmas)*100):0}%</span><span style={S.statCellL}>of all lemmas</span></div>
+          </div>
+        </div>}
+      </div>
+    </div>);
+  }
+
   // ── SETTINGS ──
   if(phase==='settings'){
     return(<div>
@@ -468,6 +566,15 @@ function App({data}){
           <p style={{fontSize:14,color:'#5a4a32',fontFamily:sans,margin:'4px 0'}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
           <button onClick={()=>{if(confirm('Reset all learned words and progress?')){setGlobalLearned(new Set());setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>Reset all progress</button>
         </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Statistics page</span>
+          {[{key:'text',label:'Text (books, chapters, verses, words)'},{key:'vocabulary',label:'Vocabulary (lemmas by level)'},{key:'progress',label:'Your progress'}].map(s=>(
+            <label key={s.key} style={S.toggleRow}>
+              <input type="checkbox" checked={statsVisible[s.key]} onChange={()=>toggleStatSection(s.key)}/>
+              <span style={S.toggleLabel}>{s.label}</span>
+            </label>
+          ))}
+        </div>
         <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,textAlign:'center',marginTop:24}}>v{APP_VERSION}</p>
       </div>
     </div>);
@@ -484,6 +591,7 @@ function App({data}){
             <span style={S.levelLabel}>My level:</span>
             <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           </div>
+          <button onClick={()=>setPhase('stats')} style={S.gearBtn} title="Statistics">📊</button>
           <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
         </div>
         <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
@@ -795,6 +903,12 @@ const S={
   fontSizeBtn:{width:44,height:44,border:'1.5px solid #c4b9a4',borderRadius:8,background:'transparent',color:'#5a4a32',fontSize:18,fontWeight:700,cursor:'pointer',fontFamily:sans},
   fontSizePreview:{fontSize:16,fontWeight:600,color:'#5a4a32',fontFamily:sans,minWidth:50,textAlign:'center'},
   resetBtn:{padding:'10px 20px',border:'1.5px solid #b34a28',borderRadius:8,background:'transparent',color:'#b34a28',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,marginTop:8},
+  statGrid:{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center'},
+  statCell:{display:'flex',flexDirection:'column',alignItems:'center',minWidth:70,padding:'8px 12px'},
+  statCellN:{fontSize:24,fontWeight:700,color:'#5a4a32',fontFamily:sans},
+  statCellL:{fontSize:11,color:'#8a7e6b',textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans,marginTop:2,textAlign:'center'},
+  toggleRow:{display:'flex',alignItems:'center',gap:10,padding:'6px 0',cursor:'pointer'},
+  toggleLabel:{fontSize:14,color:'#5a4a32',fontFamily:sans},
 };
 
 loadData().then(data=>{

@@ -37,7 +37,7 @@ BIBLE_FILE  = "bible_nt_en.json"
 # Which books to annotate (book numbers, None = all NT books)
 # Gospels: 40=Matthew, 41=Mark, 42=Luke, 43=John
 # Gospels + Acts: 40=Matthew, 41=Mark, 42=Luke, 43=John, 44=Acts
-ONLY_BOOKS = [40, 41, 42, 43, 44]
+ONLY_BOOKS = None
 
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 if not API_KEY:
