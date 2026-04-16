@@ -74,6 +74,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
+const APP_VERSION = '1.0.9b';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -193,6 +194,7 @@ function useTTS(){
   const langRef=useRef('en');
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
+  const lastSentenceRef=useRef({text:'',lang:'en'});
   const setSpeed=useCallback(v=>{speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v)},[]);
   useEffect(()=>{
     const lv=()=>{
@@ -203,11 +205,27 @@ function useTTS(){
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
     return()=>{speechSynthesis.cancel()};
   },[]);
-  const getVoice=useCallback(()=>{
+  const getVoice=useCallback((langOverride)=>{
     const ev=voices.en;
     for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
     return ev[0]||null;
   },[voices]);
+  const speakText=useCallback((text,langOverride,rate)=>{
+    return new Promise(resolve=>{
+      speechSynthesis.cancel(); // iOS fix: prevent repeat bug
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang='en-US';
+      u.rate=rate??speedRef.current;
+      const v=getVoice(langOverride);if(v)u.voice=v;
+      let done=false;
+      const finish=()=>{if(!done){done=true;resolve()}};
+      u.onend=finish;u.onerror=finish;
+      // Safety timeout: resolve even if onend/onerror never fires
+      const maxMs=Math.max(Math.ceil(text.split(/\s+/).length/((rate??speedRef.current)||0.5))*1500,3000);
+      setTimeout(finish,maxMs);
+      speechSynthesis.speak(u);
+    });
+  },[getVoice]);
   const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
     const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=speedRef.current;
@@ -226,7 +244,7 @@ function useTTS(){
   },[speakVerse]);
   const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
   const hasVoices=voices.en.length>0;
-  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,stop,hasVoices,setLang};
+  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang};
 }
 
 // ─── App ────────────────────────────────────────────────
@@ -242,7 +260,10 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
+  const [fontSize,setFontSize]=useState(parseInt(LS.get('nt-font-size'))||18);
   const tts=useTTS();
+  const ttsRef=useRef(tts);
+  ttsRef.current=tts;
 
   const langData=data.en;
   const bible=langData.bible;
@@ -254,7 +275,7 @@ function App({data}){
   // Sync TTS language
   useEffect(()=>{tts.setLang('en')},[tts]);
 
-  useEffect(()=>{LS.set('nt-reader-state',{phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('nt-reader-state',{phase:phase==='settings'?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
@@ -404,10 +425,53 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
+  const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('nt-font-size',v)},[]);
 
   const langTitle='New Testament';
   const langSubtitle='Reading Aid EN→DE';
   const langFooter='World English Bible · Public Domain';
+
+  // ── SETTINGS ──
+  if(phase==='settings'){
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>Settings</h1>
+      </header>
+      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
+      <div style={S.settingsSection}>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Vocabulary level</span>
+          <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+          <p style={S.settingsHint}>Words above this level are shown in the vocabulary check.</p>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Reading speed (TTS)</span>
+          <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{l:'Slow',v:0.5},{l:'Normal',v:0.85},{l:'Fast',v:1.1}].map(p=>(
+            <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l}</button>
+          ))}</div>
+          <div style={S.speedSliderRow}>
+            <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+            <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
+          </div>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Font size</span>
+          <div style={S.fontSizeRow}>
+            <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
+            <span style={S.fontSizePreview}>{fontSize}px</span>
+            <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+          </div>
+          <p style={{fontFamily:"'Palatino Linotype',Georgia,serif",fontSize,lineHeight:1.8,color:'#3a2f1f',marginTop:8}}>In the beginning was the Word, and the Word was with God.</p>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Progress</span>
+          <p style={{fontSize:14,color:'#5a4a32',fontFamily:sans,margin:'4px 0'}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+          <button onClick={()=>{if(confirm('Reset all learned words and progress?')){setGlobalLearned(new Set());setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>Reset all progress</button>
+        </div>
+        <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,textAlign:'center',marginTop:24}}>v{APP_VERSION}</p>
+      </div>
+    </div>);
+  }
 
   // ── NAV ──
   if(phase==='nav'){
@@ -415,11 +479,15 @@ function App({data}){
       <header style={S.header}>
         <h1 style={S.title}>{langTitle}</h1>
         <p style={S.subtitle}>{langSubtitle}</p>
-        <div style={S.levelBox}>
-          <span style={S.levelLabel}>My level:</span>
-          <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,margin:'8px 0'}}>
+          <div style={S.levelBox}>
+            <span style={S.levelLabel}>My level:</span>
+            <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+          </div>
+          <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
         </div>
         <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+        <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,marginTop:8}}>v{APP_VERSION}</p>
       </header>
       <div style={S.bookList}>{books.map((book,bi)=>{
         const ha=!!annotations[book.name];
@@ -470,7 +538,9 @@ function App({data}){
       )}
       <div style={S.quizFooter}>
         <p style={S.quizSummary}>{unknownWords.size===0?'No words marked — pure reading flow!':`${unknownWords.size} words will be translated while reading.`}</p>
-        <button onClick={startReading} style={S.startBtn}>Read →</button>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={startReading} style={S.startBtn}>Read →</button>
+        </div>
       </div>
     </div>);
   }
@@ -486,7 +556,7 @@ function App({data}){
       <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum}</h1>
       <div style={S.readingTopBar}>
         <div style={S.readingNavBtns}>
-          <button onClick={goToNav} style={S.navBtn}>≡ Books</button>
+          <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>≡ Books</button>
           <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Word list</button>
         </div>
         {active>0&&(<div style={S.statsRow}>
@@ -520,7 +590,7 @@ function App({data}){
       <span style={S.legItem}><span style={{...S.dot,background:'#5a7a3a'}}/> tap = show again</span>
     </div>)}
 
-    <div style={S.text}>{verses.map(verse=>{
+    <div style={{...S.text,fontSize}}>{verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
       let wordIdx=0;
       const useAnno=hasAnno;
@@ -687,7 +757,7 @@ const S={
   legend:{display:'flex',flexWrap:'wrap',gap:12,alignItems:'center',justifyContent:'center',fontSize:12,color:'#8a7e6b',marginBottom:20,padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8,fontFamily:sans},
   legItem:{display:'flex',alignItems:'center',gap:4},
   dot:{display:'inline-block',width:8,height:8,borderRadius:'50%',marginRight:2,flexShrink:0},
-  text:{fontSize:18,lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
+  text:{lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
   vNum:{fontSize:11,color:'#b0a58e',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
   wg:{display:'inline',whiteSpace:'nowrap'},
   tr:{fontStyle:'italic',fontSize:13,color:'#b34a28',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'rgba(179,74,40,0.07)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
@@ -716,6 +786,15 @@ const S={
   practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'#b0a58e',cursor:'pointer',padding:4},
   practiceDoneText:{fontSize:20,fontWeight:600,color:'#5a7a3a',fontFamily:sans},
   practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  gearBtn:{width:36,height:36,border:'1px solid #c4b9a4',borderRadius:'50%',background:'transparent',color:'#8a7e6b',fontSize:18,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0},
+  settingsSection:{maxWidth:440,margin:'0 auto',display:'flex',flexDirection:'column',gap:20},
+  settingsGroup:{padding:'16px 20px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
+  settingsLabel:{fontSize:14,fontWeight:600,color:'#5a4a32',fontFamily:sans,textTransform:'uppercase',letterSpacing:'0.04em',display:'block',marginBottom:8},
+  settingsHint:{fontSize:12,color:'#8a7e6b',fontFamily:sans,margin:'8px 0 0'},
+  fontSizeRow:{display:'flex',alignItems:'center',gap:16,justifyContent:'center'},
+  fontSizeBtn:{width:44,height:44,border:'1.5px solid #c4b9a4',borderRadius:8,background:'transparent',color:'#5a4a32',fontSize:18,fontWeight:700,cursor:'pointer',fontFamily:sans},
+  fontSizePreview:{fontSize:16,fontWeight:600,color:'#5a4a32',fontFamily:sans,minWidth:50,textAlign:'center'},
+  resetBtn:{padding:'10px 20px',border:'1.5px solid #b34a28',borderRadius:8,background:'transparent',color:'#b34a28',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,marginTop:8},
 };
 
 loadData().then(data=>{
