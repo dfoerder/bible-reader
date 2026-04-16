@@ -242,36 +242,16 @@ function useTTS(){
       setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},2000)};
     const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
   },[speakVerse]);
-  const speakChapterAuto=useCallback((verses,onSentence)=>{
-    speechSynthesis.cancel();stoppedRef.current=false;setSpeaking(true);
-    const sents=[];
-    verses.forEach(v=>{
-      const parts=v.text.split(/(?<=[.!?…;:])\s+/);
-      parts.forEach(s=>sents.push({n:v.n,text:s}));
-    });
-    let idx=0;
-    const next=()=>{
-      if(stoppedRef.current||idx>=sents.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
-      const s=sents[idx++];
-      lastSentenceRef.current={text:s.text,lang:langRef.current};
-      if(onSentence)onSentence(s);
-      const el=document.getElementById(`verse-${s.n}`);
-      if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
-      setActiveVerse(s.n);
-      speakText(s.text,langRef.current).then(()=>setTimeout(next,600));
-    };
-    next();
-  },[speakText]);
   const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
   const hasVoices=voices.en.length>0;
-  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakChapterAuto,speakText,lastSentenceRef,stop,hasVoices,setLang};
+  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang};
 }
 
 // ─── App ────────────────────────────────────────────────
 function App({data}){
   const saved=LS.get('nt-reader-state')||{};
   const lang='en';
-  const [phase,setPhase]=useState(()=>{const p=saved.phase||'nav';return(p==='auto-vocab'||p==='auto-reading')?'quiz':p});
+  const [phase,setPhase]=useState(saved.phase||'nav');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
@@ -280,12 +260,6 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
-  const [autoWordIdx,setAutoWordIdx]=useState(0);
-  const [autoShowDE,setAutoShowDE]=useState(false);
-  const [autoShowContext,setAutoShowContext]=useState(false);
-  const autoContextRef=useRef({});
-  const autoRunningRef=useRef(false);
-  const autoResolveRef=useRef(null);
   const tts=useTTS();
   const ttsRef=useRef(tts);
   ttsRef.current=tts;
@@ -329,7 +303,7 @@ function App({data}){
   const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
 
   // Save unknown words whenever they change
-  useEffect(()=>{if(phase==='quiz'||phase==='reading'||phase==='auto-reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
+  useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
 
   const openChapter=useCallback((bi,ci)=>{tts.stop();setBookIdx(bi);setChapIdx(ci);setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setPhase('quiz');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,loadChapterWords]);
   const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
@@ -450,113 +424,6 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
-  // ── AUTO MODE — fully imperative, no useEffect ──
-  const autoWait=useCallback((ms)=>new Promise(resolve=>{
-    const t=setTimeout(()=>{autoResolveRef.current=null;resolve(false)},ms);
-    autoResolveRef.current=()=>{clearTimeout(t);autoResolveRef.current=null;resolve(true)};
-  }),[]);
-
-  const runAutoDrill=useCallback(async(words,langCode)=>{
-    autoRunningRef.current=true;
-    const speak=(t,l,r)=>ttsRef.current.speakText(t,l,r);
-    for(let i=0;i<words.length;i++){
-      if(!autoRunningRef.current)break;
-      const word=words[i];
-      const key=word.lemma||word.word;
-      setAutoWordIdx(i);setAutoShowDE(false);setAutoShowContext(false);
-      // 1) Speak the word
-      await speak(word.form||key,langCode);
-      if(!autoRunningRef.current)break;
-      // 2) Wait 3s for tap
-      const tapped=await autoWait(3000);
-      if(!autoRunningRef.current)break;
-      if(tapped)continue; // known — next word
-      // 3) Unknown — show + speak German translation
-      setUnknownWords(p=>new Set([...p,key]));
-      setAutoShowDE(true);
-      if(word.de)await speak(word.de,'de',0.8);
-      if(!autoRunningRef.current)break;
-      // 4) Show + speak context
-      const context=autoContextRef.current[key];
-      if(context){
-        setAutoShowContext(true);
-        await autoWait(400);
-        if(!autoRunningRef.current)break;
-        await speak(context,langCode,0.7);
-        if(!autoRunningRef.current)break;
-      }
-      await autoWait(600);
-    }
-    if(autoRunningRef.current){
-      autoRunningRef.current=false;
-      setLearnedWords(new Set());setRevealedWords(new Set());
-      setPhase('auto-reading');
-      setTimeout(()=>ttsRef.current.speakChapterAuto(verses),500);
-    }
-  },[autoWait,verses]);
-
-  const startAutoMode=useCallback(()=>{
-    // Pre-build context fragments for all quiz words
-    const ctx={};const WINDOW=5;
-    verses.forEach(v=>{
-      const allWords=v.text.split(/\s+/);
-      const chap=annotations[bookName]?.[String(chapNum)];
-      const va=chap?.[String(v.n)];
-      if(!va)return;
-      for(let p=0;p<allWords.length;p++){
-        const a=va.find(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos));
-        if(a&&!ctx[a.lemma]){
-          const lo=Math.max(0,p-WINDOW);
-          const hi=Math.min(allWords.length-1,(a.pos_end??p)+WINDOW);
-          ctx[a.lemma]=allWords.slice(lo,hi+1).join(' ');
-        }
-      }
-    });
-    autoContextRef.current=ctx;
-    setAutoWordIdx(0);setAutoShowDE(false);setAutoShowContext(false);
-    setUnknownWords(new Set());setLearnedWords(new Set());setRevealedWords(new Set());
-    setPhase('auto-vocab');
-    const words=[...quizWords];
-    setTimeout(()=>runAutoDrill(words,lang),100);
-  },[verses,annotations,bookName,chapNum,quizWords,lang,runAutoDrill]);
-
-  const autoLastTapRef=useRef(0);
-  const handleAutoVocabTap=useCallback(()=>{
-    const now=Date.now();
-    if(now-autoLastTapRef.current<400){
-      // Double tap = stop
-      autoLastTapRef.current=0;
-      autoRunningRef.current=false;
-      speechSynthesis.cancel();
-      if(autoResolveRef.current)autoResolveRef.current();
-      setPhase('quiz');
-      return;
-    }
-    autoLastTapRef.current=now;
-    speechSynthesis.cancel();
-    if(autoResolveRef.current)autoResolveRef.current();
-  },[]);
-
-  const autoReadLastTapRef=useRef(0);
-  const handleAutoReadingTap=useCallback((e)=>{
-    if(e.target.tagName==='BUTTON'||e.target.closest('button'))return;
-    if(phase!=='auto-reading')return;
-    const now=Date.now();
-    if(now-autoReadLastTapRef.current<400){
-      // Double tap = stop
-      autoReadLastTapRef.current=0;
-      tts.stop();
-      setPhase('reading');
-      return;
-    }
-    autoReadLastTapRef.current=now;
-    if(!tts.speaking)return;
-    const last=tts.lastSentenceRef.current;
-    if(!last.text)return;
-    speechSynthesis.cancel();
-    tts.speakText(last.text,last.lang,0.3);
-  },[phase,tts]);
-
   const langTitle='New Testament';
   const langSubtitle='Reading Aid EN→DE';
   const langFooter='World English Bible · Public Domain';
@@ -625,42 +492,18 @@ function App({data}){
         <p style={S.quizSummary}>{unknownWords.size===0?'No words marked — pure reading flow!':`${unknownWords.size} words will be translated while reading.`}</p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
           <button onClick={startReading} style={S.startBtn}>Read →</button>
-          {quizWords.length>0&&hasAnno&&<button onClick={startAutoMode} style={{...S.startBtn,background:'#2a6496'}} disabled={!tts.hasVoices}>▶ Auto Mode</button>}
         </div>
       </div>
     </div>);
   }
 
-  // ── AUTO VOCAB ──
-  if(phase==='auto-vocab'){
-    const word=quizWords[autoWordIdx]||{};
-    const key=word.lemma||word.word||'';
-    const context=autoContextRef.current[key];
-    const done=autoWordIdx>=quizWords.length;
-    return(<div onClick={handleAutoVocabTap} style={S.autoOverlay}>
-      <div style={S.autoCard}>
-        {done?(<>
-          <p style={S.autoDoneText}>Vocabulary check complete</p>
-          <p style={S.autoHint}>Reading chapter aloud...</p>
-        </>):(<>
-          <p style={S.autoCounter}>{autoWordIdx+1} / {quizWords.length}</p>
-          <p style={S.autoWord}>{word.form||word.lemma||word.word||''}</p>
-          {autoShowDE&&<p style={S.autoDe}>{word.de}</p>}
-          {autoShowContext&&context&&<p style={S.autoContext}>{context}</p>}
-        </>)}
-      </div>
-    </div>);
-  }
-
-  // ── READING / AUTO-READING ──
+  // ── READING ──
   const active=unknownWords.size;
   const learned=[...unknownWords].filter(w=>learnedWords.has(w)).length;
   const remaining=active-learned;
   const progress=active>0?Math.round((learned/active)*100):100;
 
-  const isAutoReading=phase==='auto-reading';
-
-  return(<div onClick={isAutoReading?handleAutoReadingTap:undefined}>
+  return(<div>
     <header style={S.header}>
       <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum}</h1>
       <div style={S.readingTopBar}>
@@ -675,8 +518,6 @@ function App({data}){
         </div>)}
       </div>
     </header>
-
-    {isAutoReading&&<div style={S.autoReplayHint}>Tap on the text to slowly repeat the last sentence</div>}
 
     {/* TTS */}
     <div style={S.ttsBar}>
@@ -897,16 +738,6 @@ const S={
   practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'#b0a58e',cursor:'pointer',padding:4},
   practiceDoneText:{fontSize:20,fontWeight:600,color:'#5a7a3a',fontFamily:sans},
   practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  // Auto mode
-  autoOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'linear-gradient(180deg,#2c2416,#1a1510)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,cursor:'pointer',userSelect:'none'},
-  autoCard:{textAlign:'center',padding:40,maxWidth:500,width:'100%'},
-  autoCounter:{fontSize:14,color:'#8a7e6b',fontFamily:sans,marginBottom:40,letterSpacing:'0.1em'},
-  autoWord:{fontSize:44,fontWeight:600,color:'#faf6ee',fontFamily:"'Palatino Linotype',Georgia,serif",marginBottom:24,lineHeight:1.3},
-  autoDe:{fontSize:30,fontStyle:'italic',color:'#e8a060',fontFamily:sans,marginBottom:20},
-  autoContext:{fontSize:24,color:'#d4c9b4',fontFamily:"'Palatino Linotype',Georgia,serif",lineHeight:1.6,marginBottom:24},
-  autoHint:{fontSize:15,color:'#6b5e4a',fontFamily:sans,marginTop:40},
-  autoDoneText:{fontSize:22,fontWeight:600,color:'#5a7a3a',fontFamily:sans,marginBottom:12},
-  autoReplayHint:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)',margin:'0 0 16px'},
 };
 
 loadData().then(data=>{
