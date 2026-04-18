@@ -121,7 +121,11 @@ async function loadData(){
     };
     en.ntStartIndex = ot ? ot.books.length : 0;
     en.vocab = {};
-    en.annotations = await loadAnnotations('nt_annotations_en.json');
+    const [ntAnno, otAnno] = await Promise.all([
+      loadAnnotations('nt_annotations_en.json'),
+      loadAnnotations('ot_annotations_en.json')
+    ]);
+    en.annotations = {...otAnno, ...ntAnno};
     en.simplified = {};
     en.available = true;
   } catch(e) { en.available = false; }
@@ -273,6 +277,7 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
+  const [expandedBook,setExpandedBook]=useState(null);
   const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
   const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
@@ -617,11 +622,15 @@ function App({data}){
         {otBooks.map((book,i)=>{
           const bi=i;
           const ha=!!annotations[book.name];
+          const isOpen=expandedBook===bi;
           return(<div key={bi} style={S.bookItem}>
-            <h3 style={S.bookName}>{book.name}
+            <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
+              <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+              <h3 style={S.bookName}>{book.name}</h3>
               {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
-            </h3>
-            <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
+              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+            </div>
+            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
           </div>);
         })}
       </div>}
@@ -630,11 +639,15 @@ function App({data}){
         {ntBooks.map((book,i)=>{
           const bi=ntStartIndex+i;
           const ha=!!annotations[book.name];
+          const isOpen=expandedBook===bi;
           return(<div key={bi} style={S.bookItem}>
-            <h3 style={S.bookName}>{book.name}
+            <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
+              <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+              <h3 style={S.bookName}>{book.name}</h3>
               {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
-            </h3>
-            <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
+              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+            </div>
+            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
           </div>);
         })}
       </div>
@@ -852,9 +865,12 @@ const S={
   lvlActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
   testamentHeader:{fontSize:18,fontWeight:600,color:'#5a4a32',fontFamily:sans,letterSpacing:'0.04em',textTransform:'uppercase',padding:'8px 0 4px',borderBottom:'2px solid #d4c9b4',marginBottom:4},
   bookList:{display:'flex',flexDirection:'column',gap:16},
-  bookItem:{padding:'12px 16px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
-  bookName:{fontSize:16,fontWeight:600,color:'#3a2f1f',marginBottom:8,fontFamily:sans},
-  chapGrid:{display:'flex',flexWrap:'wrap',gap:4},
+  bookItem:{padding:'10px 16px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
+  bookRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none'},
+  bookArrow:{fontSize:14,color:'#8a7e6b',width:16,textAlign:'center',flexShrink:0},
+  bookName:{fontSize:16,fontWeight:600,color:'#3a2f1f',margin:0,fontFamily:sans},
+  bookChapCount:{fontSize:12,color:'#b0a58e',fontFamily:sans,marginLeft:'auto',flexShrink:0},
+  chapGrid:{display:'flex',flexWrap:'wrap',gap:4,marginTop:10},
   chapBtn:{width:36,height:32,border:'1px solid #d4c9b4',borderRadius:4,background:'#fff',color:'#5a4a32',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
   navRow:{display:'flex',justifyContent:'center',marginBottom:16},
   navBtn:{background:'none',border:'1px solid #c4b9a4',borderRadius:5,padding:'4px 14px',fontSize:13,color:'#6b5e4a',cursor:'pointer',fontFamily:sans},
