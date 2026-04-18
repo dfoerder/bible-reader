@@ -278,6 +278,8 @@ function App({data}){
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
   const [expandedBook,setExpandedBook]=useState(null);
+  const [expandedStatBook,setExpandedStatBook]=useState(null);
+  const [expandedStatSection,setExpandedStatSection]=useState(null);
   const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
   const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
@@ -508,35 +510,57 @@ function App({data}){
       <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
       <div style={S.settingsSection}>
         {statsVisible.text&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Text</span>
-          <div style={S.statGrid}>
-            <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+          <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='text'?null:'text')}>
+            <span style={S.bookArrow}>{expandedStatSection==='text'?'▾':'▸'}</span>
+            <span style={{...S.settingsLabel,marginBottom:0}}>Text</span>
+            <span style={S.statBookWords}>{books.length} books · {stats.totalWords.toLocaleString()} words</span>
           </div>
-          <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+          {expandedStatSection==='text'&&<div style={S.statBookDetail}>
+            <div style={S.statGrid}>
+              <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+            </div>
+            <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+          </div>}
         </div>}
         {statsVisible.vocabulary&&<>
           <div style={S.settingsGroup}>
-            <span style={S.settingsLabel}>Vocabulary — Total</span>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
-            <div style={{...S.statGrid,marginTop:12}}>
-              {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+            <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
+              <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
+              <span style={{...S.settingsLabel,marginBottom:0}}>Vocabulary — Total</span>
+              <span style={S.statBookWords}>{stats.allLemmas.toLocaleString()} unique words</span>
             </div>
+            {expandedStatSection==='vocab'&&<div style={S.statBookDetail}>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+              <div style={{...S.statGrid,marginTop:12}}>
+                {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+              </div>
+            </div>}
           </div>
-          {stats.perBook.map(bk=>(
-            <div key={bk.name} style={S.settingsGroup}>
-              <span style={S.settingsLabel}>{bk.name}</span>
-              <div style={S.statGrid}>
-                <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
-                <div style={S.statCell}><span style={{...S.statCellN,color:'#2a6496'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
-              </div>
-              <div style={{...S.statGrid,marginTop:8}}>
-                {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
-              </div>
-            </div>
-          ))}
+          <div style={S.settingsGroup}>
+            <span style={S.settingsLabel}>Vocabulary per book</span>
+            <div style={S.statBookList}>{stats.perBook.map(bk=>{
+              const isOpen=expandedStatBook===bk.name;
+              return(<div key={bk.name}>
+                <div style={S.statBookRow} onClick={()=>setExpandedStatBook(isOpen?null:bk.name)}>
+                  <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+                  <span style={S.statBookName}>{bk.name}</span>
+                  <span style={S.statBookWords}>{bk.total.toLocaleString()}</span>
+                </div>
+                {isOpen&&<div style={S.statBookDetail}>
+                  <div style={S.statGrid}>
+                    <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+                    <div style={S.statCell}><span style={{...S.statCellN,color:'#2a6496'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
+                  </div>
+                  <div style={{...S.statGrid,marginTop:8}}>
+                    {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+                  </div>
+                </div>}
+              </div>);
+            })}</div>
+          </div>
         </>}
         {statsVisible.progress&&<div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Your progress</span>
@@ -956,6 +980,12 @@ const S={
   statCell:{display:'flex',flexDirection:'column',alignItems:'center',minWidth:70,padding:'8px 12px'},
   statCellN:{fontSize:24,fontWeight:700,color:'#5a4a32',fontFamily:sans},
   statCellL:{fontSize:11,color:'#8a7e6b',textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans,marginTop:2,textAlign:'center'},
+  statBookList:{display:'flex',flexDirection:'column',gap:2},
+  statBookRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none',padding:'6px 0',borderBottom:'1px solid rgba(224,216,200,0.5)'},
+  statBookName:{fontSize:14,fontWeight:500,color:'#3a2f1f',fontFamily:sans},
+  statBookWords:{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginLeft:'auto'},
+  statBookDetail:{padding:'12px 8px 8px',background:'rgba(255,255,255,0.4)',borderRadius:8,margin:'4px 0 8px'},
+  statSectionRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none'},
   toggleRow:{display:'flex',alignItems:'center',gap:10,padding:'6px 0',cursor:'pointer'},
   toggleLabel:{fontSize:14,color:'#5a4a32',fontFamily:sans},
 };
