@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title" content="Bible NT"/>
+  <meta name="apple-mobile-web-app-title" content="Bible"/>
   <meta name="theme-color" content="#5a4a32"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
-  <title>New Testament — Bible Reading Aid</title>
+  <title>Bible — Reading Aid</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
@@ -50,11 +50,11 @@ function toggleViewMode(){
   if(b.classList.contains('mode-phone')){
     b.classList.replace('mode-phone','mode-desktop');
     btn.textContent='Phone';
-    localStorage.setItem('nt-view-mode','desktop');
+    localStorage.setItem('bible-view-mode','desktop');
   } else {
     b.classList.replace('mode-desktop','mode-phone');
     btn.textContent='Desktop';
-    localStorage.setItem('nt-view-mode','phone');
+    localStorage.setItem('bible-view-mode','phone');
   }
 }
 (function(){
@@ -64,7 +64,7 @@ function toggleViewMode(){
     document.body.classList.replace('mode-phone','mode-desktop');
     document.querySelector('.view-toggle').style.display='none';
   } else {
-    var m=localStorage.getItem('nt-view-mode');
+    var m=localStorage.getItem('bible-view-mode');
     if(m==='desktop'){
       document.body.classList.replace('mode-phone','mode-desktop');
       document.querySelector('.view-toggle').textContent='Phone';
@@ -74,7 +74,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.0.9b';
+const APP_VERSION = '1.1.0';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -105,9 +105,21 @@ async function loadAnnotations(file){
 async function loadData(){
   const en = {};
   try {
-    const bResp = await fetch('bible_nt_en.json'+CB);
-    if (!bResp.ok) throw new Error('not found');
-    en.bible = await bResp.json();
+    const [ntResp, otResp] = await Promise.all([
+      fetch('bible_nt_en.json'+CB),
+      fetch('bible_ot_en.json'+CB).catch(()=>null)
+    ]);
+    if (!ntResp.ok) throw new Error('not found');
+    const nt = await ntResp.json();
+    let ot = null;
+    if (otResp && otResp.ok) ot = await otResp.json();
+
+    en.bible = {
+      translation: nt.translation,
+      language: nt.language,
+      books: [...(ot ? ot.books : []), ...nt.books]
+    };
+    en.ntStartIndex = ot ? ot.books.length : 0;
     en.vocab = {};
     en.annotations = await loadAnnotations('nt_annotations_en.json');
     en.simplified = {};
@@ -249,7 +261,8 @@ function useTTS(){
 
 // ─── App ────────────────────────────────────────────────
 function App({data}){
-  const saved=LS.get('nt-reader-state')||{};
+  const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
+  const ntStartIndex=data.en.ntStartIndex||0;
   const lang='en';
   const [phase,setPhase]=useState(saved.phase||'nav');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
@@ -260,10 +273,10 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
-  const [fontSize,setFontSize]=useState(parseInt(LS.get('nt-font-size'))||18);
+  const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
-  const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('nt-stats-visible')||{})}));
-  const toggleStatSection=useCallback(key=>{setStatsVisible(prev=>{const next={...prev,[key]:!prev[key]};LS.set('nt-stats-visible',next);return next})},[]);
+  const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
+  const toggleStatSection=useCallback(key=>{setStatsVisible(prev=>{const next={...prev,[key]:!prev[key]};LS.set('bible-stats-visible',next);return next})},[]);
   const tts=useTTS();
   const ttsRef=useRef(tts);
   ttsRef.current=tts;
@@ -278,7 +291,7 @@ function App({data}){
   // Sync TTS language
   useEffect(()=>{tts.setLang('en')},[tts]);
 
-  useEffect(()=>{LS.set('nt-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
@@ -428,11 +441,13 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
-  const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('nt-font-size',v)},[]);
+  const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
 
-  const langTitle='New Testament';
-  const langSubtitle='Reading Aid EN→DE';
+  const langTitle='Bible';
+  const langSubtitle='Reading Aid EN\u2009→\u2009DE';
   const langFooter='World English Bible · Public Domain';
+  const otBooks=books.slice(0,ntStartIndex);
+  const ntBooks=books.slice(ntStartIndex);
 
   const stats=useMemo(()=>{
     const totalChapters=books.reduce((s,b)=>s+b.chapters.length,0);
@@ -597,15 +612,32 @@ function App({data}){
         <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
         <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,marginTop:8}}>v{APP_VERSION}</p>
       </header>
-      <div style={S.bookList}>{books.map((book,bi)=>{
-        const ha=!!annotations[book.name];
-        return(<div key={bi} style={S.bookItem}>
-          <h3 style={S.bookName}>{book.name}
-            {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
-          </h3>
-          <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
-        </div>);
-      })}</div>
+      {otBooks.length>0&&<div style={S.bookList}>
+        <h2 style={S.testamentHeader}>Old Testament</h2>
+        {otBooks.map((book,i)=>{
+          const bi=i;
+          const ha=!!annotations[book.name];
+          return(<div key={bi} style={S.bookItem}>
+            <h3 style={S.bookName}>{book.name}
+              {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
+            </h3>
+            <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
+          </div>);
+        })}
+      </div>}
+      <div style={S.bookList}>
+        {otBooks.length>0&&<h2 style={S.testamentHeader}>New Testament</h2>}
+        {ntBooks.map((book,i)=>{
+          const bi=ntStartIndex+i;
+          const ha=!!annotations[book.name];
+          return(<div key={bi} style={S.bookItem}>
+            <h3 style={S.bookName}>{book.name}
+              {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
+            </h3>
+            <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
+          </div>);
+        })}
+      </div>
     </div>);
   }
 
@@ -818,6 +850,7 @@ const S={
   levelBtns:{display:'flex',gap:6},
   lvlBtn:{padding:'5px 14px',border:'1.5px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
   lvlActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
+  testamentHeader:{fontSize:18,fontWeight:600,color:'#5a4a32',fontFamily:sans,letterSpacing:'0.04em',textTransform:'uppercase',padding:'8px 0 4px',borderBottom:'2px solid #d4c9b4',marginBottom:4},
   bookList:{display:'flex',flexDirection:'column',gap:16},
   bookItem:{padding:'12px 16px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
   bookName:{fontSize:16,fontWeight:600,color:'#3a2f1f',marginBottom:8,fontFamily:sans},
