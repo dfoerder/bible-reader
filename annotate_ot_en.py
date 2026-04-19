@@ -25,7 +25,7 @@ BIBLE_FILE  = "bible_ot_en.json"
 
 # Which books to annotate (book numbers, None = all OT books)
 # Pentateuch: 1=Genesis, 2=Exodus, 3=Leviticus, 4=Numbers, 5=Deuteronomy
-ONLY_BOOKS = [1, 2, 3, 4, 5]
+ONLY_BOOKS = list(range(1, 13))
 
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 if not API_KEY:
