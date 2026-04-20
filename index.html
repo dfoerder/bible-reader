@@ -583,7 +583,7 @@ function App({data}){
       <div style={S.settingsSection}>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Vocabulary level</span>
-          <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+          <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           <p style={S.settingsHint}>Words above this level are shown in the vocabulary check.</p>
         </div>
         <div style={S.settingsGroup}>
@@ -633,7 +633,7 @@ function App({data}){
         <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,margin:'8px 0'}}>
           <div style={S.levelBox}>
             <span style={S.levelLabel}>My level:</span>
-            <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+            <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           </div>
           <button onClick={()=>setPhase('stats')} style={S.gearBtn} title="Statistics">📊</button>
           <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
