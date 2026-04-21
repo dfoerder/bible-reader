@@ -5,38 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title" content="Bible NT"/>
+  <meta name="apple-mobile-web-app-title" content="Bible"/>
   <meta name="theme-color" content="#5a4a32"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
-  <title>New Testament — Bible Reading Aid</title>
+  <title>Bible — Reading Aid</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{min-height:100vh;font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif}
+    :root{
+      --t-bg1:#faf6ee;--t-bg2:#f5efe3;--t-bg-outer:#e8e8ed;
+      --t-text:#2c2416;--t-title:#3a2f1f;--t-text2:#5a4a32;--t-med:#6b5e4a;--t-muted:#8a7e6b;--t-muted2:#b0a58e;
+      --t-border:#d4c9b4;--t-border2:#c4b9a4;--t-border3:#e0d8c8;
+      --t-card:rgba(255,255,255,0.5);--t-card-solid:#fff;
+      --t-accent:#b34a28;--t-accent-bg:rgba(179,74,40,0.07);--t-accent-bg2:rgba(179,74,40,0.04);--t-accent-border:rgba(179,74,40,0.1);
+      --t-primary:#5a4a32;--t-primary-text:#faf6ee;
+      --t-green:#5a7a3a;--t-green2:#7a9a5a;--t-green-bg:rgba(122,154,90,0.08);
+      --t-blue:#2a6496;--t-blue-bg:rgba(42,100,150,0.06);--t-blue-border:rgba(42,100,150,0.12);
+      --t-overlay:rgba(44,36,22,0.85);--t-tts-bg:rgba(90,74,50,0.06);--t-tts-border:rgba(90,74,50,0.1);
+      --t-level-bg:rgba(212,201,180,0.15);
+      --t-shadow:rgba(0,0,0,0.2);--t-card-shadow:rgba(90,74,50,0.2);
+      --t-highlight-bg:rgba(90,74,50,0.2);--t-highlight-pulse1:rgba(90,74,50,0.15);--t-highlight-pulse2:rgba(90,74,50,0.25);
+      --t-verse-bg:rgba(212,201,180,0.2);
+      --t-serif:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+      --t-font:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+    }
+    .theme-icf{
+      --t-bg1:#0f0f0f;--t-bg2:#0a0a0a;--t-bg-outer:#000;
+      --t-text:#e8e8e8;--t-title:#fff;--t-text2:#ccc;--t-med:#aaa;--t-muted:#777;--t-muted2:#555;
+      --t-border:#2a2a2a;--t-border2:#333;--t-border3:#222;
+      --t-card:rgba(255,255,255,0.05);--t-card-solid:#1a1a1a;
+      --t-accent:#e0e0e0;--t-accent-bg:rgba(255,255,255,0.06);--t-accent-bg2:rgba(255,255,255,0.03);--t-accent-border:rgba(255,255,255,0.08);
+      --t-primary:#fff;--t-primary-text:#111;
+      --t-green:#4ade80;--t-green2:#22c55e;--t-green-bg:rgba(74,222,128,0.1);
+      --t-blue:#60a5fa;--t-blue-bg:rgba(96,165,250,0.08);--t-blue-border:rgba(96,165,250,0.15);
+      --t-overlay:rgba(0,0,0,0.9);--t-tts-bg:rgba(255,255,255,0.04);--t-tts-border:rgba(255,255,255,0.08);
+      --t-level-bg:rgba(255,255,255,0.05);
+      --t-shadow:rgba(0,0,0,0.5);--t-card-shadow:rgba(0,0,0,0.4);
+      --t-highlight-bg:rgba(255,255,255,0.12);--t-highlight-pulse1:rgba(255,255,255,0.08);--t-highlight-pulse2:rgba(255,255,255,0.18);
+      --t-verse-bg:rgba(255,255,255,0.06);
+      --t-font:Georgia,'Times New Roman',serif;
+      --t-serif:Georgia,'Times New Roman',serif;
+    }
+    .theme-icf-light{
+      --t-bg1:#f5f5f5;--t-bg2:#ebebeb;--t-bg-outer:#e0e0e0;
+      --t-text:#1a1a1a;--t-title:#111;--t-text2:#333;--t-med:#555;--t-muted:#888;--t-muted2:#aaa;
+      --t-border:#ddd;--t-border2:#ccc;--t-border3:#e5e5e5;
+      --t-card:rgba(255,255,255,0.7);--t-card-solid:#fff;
+      --t-accent:#64748b;--t-accent-bg:rgba(0,0,0,0.04);--t-accent-bg2:rgba(0,0,0,0.02);--t-accent-border:rgba(0,0,0,0.08);
+      --t-primary:#64748b;--t-primary-text:#fff;
+      --t-green:#16a34a;--t-green2:#22c55e;--t-green-bg:rgba(22,163,74,0.08);
+      --t-blue:#2563eb;--t-blue-bg:rgba(37,99,235,0.06);--t-blue-border:rgba(37,99,235,0.12);
+      --t-overlay:rgba(0,0,0,0.7);--t-tts-bg:rgba(0,0,0,0.03);--t-tts-border:rgba(0,0,0,0.08);
+      --t-level-bg:rgba(0,0,0,0.04);
+      --t-shadow:rgba(0,0,0,0.12);--t-card-shadow:rgba(0,0,0,0.1);
+      --t-highlight-bg:rgba(0,0,0,0.08);--t-highlight-pulse1:rgba(0,0,0,0.05);--t-highlight-pulse2:rgba(0,0,0,0.12);
+      --t-verse-bg:rgba(0,0,0,0.04);
+      --t-font:Georgia,'Times New Roman',serif;
+      --t-serif:Georgia,'Times New Roman',serif;
+    }
+    body{min-height:100vh;font-family:var(--t-font)}
     /* --- Phone mode (default) --- */
-    body.mode-phone{background:#e8e8ed;display:flex;justify-content:center;align-items:flex-start;padding:24px 0}
+    body.mode-phone{background:var(--t-bg-outer);display:flex;justify-content:center;align-items:flex-start;padding:24px 0}
     body.mode-phone .phone-frame{width:375px;height:812px;border-radius:40px;border:6px solid #1a1a1a;background:#1a1a1a;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3),inset 0 0 0 2px #333;flex-shrink:0}
     body.mode-phone .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:28px;background:#1a1a1a;border-radius:0 0 18px 18px;z-index:10}
-    body.mode-phone .phone-screen{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;background:linear-gradient(180deg,#faf6ee,#f5efe3);-webkit-overflow-scrolling:touch}
-    body.mode-phone #root{max-width:100%;margin:0 auto;padding:36px 16px 20px;color:#2c2416;min-height:100%;line-height:1.9}
+    body.mode-phone .phone-screen{width:100%;height:100%;overflow-y:auto;overflow-x:hidden;background:linear-gradient(180deg,var(--t-bg1),var(--t-bg2));-webkit-overflow-scrolling:touch}
+    body.mode-phone #root{max-width:100%;margin:0 auto;padding:36px 16px 20px;color:var(--t-text);min-height:100%;line-height:1.9}
     /* --- Desktop mode --- */
-    body.mode-desktop{background:linear-gradient(180deg,#faf6ee,#f5efe3)}
+    body.mode-desktop{background:linear-gradient(180deg,var(--t-bg1),var(--t-bg2))}
     body.mode-desktop .phone-frame{all:unset}
     body.mode-desktop .phone-notch{display:none}
     body.mode-desktop .phone-screen{all:unset}
-    body.mode-desktop #root{max-width:760px;margin:0 auto;padding:20px 24px;padding-top:calc(20px + env(safe-area-inset-top));padding-bottom:calc(20px + env(safe-area-inset-bottom));color:#2c2416;min-height:100vh;line-height:1.9}
+    body.mode-desktop #root{max-width:760px;margin:0 auto;padding:20px 24px;padding-top:calc(20px + env(safe-area-inset-top));padding-bottom:calc(20px + env(safe-area-inset-bottom));color:var(--t-text);min-height:100vh;line-height:1.9}
     /* --- View toggle button --- */
-    .view-toggle{position:fixed;top:12px;right:12px;z-index:9999;background:#5a4a32;color:#faf6ee;border:none;border-radius:8px;padding:6px 12px;font-size:13px;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);opacity:0.85;transition:opacity 0.2s}
+    .view-toggle{position:fixed;top:12px;right:12px;z-index:9999;background:var(--t-primary);color:var(--t-primary-text);border:none;border-radius:8px;padding:6px 12px;font-size:13px;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;box-shadow:0 2px 8px var(--t-shadow);opacity:0.85;transition:opacity 0.2s}
     .view-toggle:hover{opacity:1}
-    .loading{text-align:center;color:#8a7e6b;margin-top:80px;font-size:18px}
-    .loading .spinner{display:inline-block;width:24px;height:24px;border:3px solid #d4c9b4;border-top-color:#5a4a32;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:10px;vertical-align:middle}
+    .loading{text-align:center;color:var(--t-muted);margin-top:80px;font-size:18px}
+    .loading .spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--t-border);border-top-color:var(--t-primary);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:10px;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes wordPulse{0%{background:rgba(90,74,50,0.15)}50%{background:rgba(90,74,50,0.25)}100%{background:rgba(90,74,50,0.15)}}
-    .tts-highlight{background:rgba(90,74,50,0.2);border-radius:3px;padding:1px 2px;animation:wordPulse 0.8s ease-in-out infinite}
-    .verse-playing{background:rgba(212,201,180,0.2);border-radius:4px;padding:2px 4px;margin:-2px -4px}
+    @keyframes wordPulse{0%{background:var(--t-highlight-pulse1)}50%{background:var(--t-highlight-pulse2)}100%{background:var(--t-highlight-pulse1)}}
+    .tts-highlight{background:var(--t-highlight-bg);border-radius:3px;padding:1px 2px;animation:wordPulse 0.8s ease-in-out infinite}
+    .verse-playing{background:var(--t-verse-bg);border-radius:4px;padding:2px 4px;margin:-2px -4px}
+    .theme-icf .phone-frame{border-color:#000;background:#000;box-shadow:0 20px 60px rgba(0,0,0,0.6),inset 0 0 0 2px #222}
+    .theme-icf .phone-notch{background:#000}
   </style>
 </head>
 <body class="mode-phone">
@@ -50,11 +103,11 @@ function toggleViewMode(){
   if(b.classList.contains('mode-phone')){
     b.classList.replace('mode-phone','mode-desktop');
     btn.textContent='Phone';
-    localStorage.setItem('nt-view-mode','desktop');
+    localStorage.setItem('bible-view-mode','desktop');
   } else {
     b.classList.replace('mode-desktop','mode-phone');
     btn.textContent='Desktop';
-    localStorage.setItem('nt-view-mode','phone');
+    localStorage.setItem('bible-view-mode','phone');
   }
 }
 (function(){
@@ -64,7 +117,7 @@ function toggleViewMode(){
     document.body.classList.replace('mode-phone','mode-desktop');
     document.querySelector('.view-toggle').style.display='none';
   } else {
-    var m=localStorage.getItem('nt-view-mode');
+    var m=localStorage.getItem('bible-view-mode');
     if(m==='desktop'){
       document.body.classList.replace('mode-phone','mode-desktop');
       document.querySelector('.view-toggle').textContent='Phone';
@@ -74,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.0.9b';
+const APP_VERSION = '1.1.0';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -105,11 +158,27 @@ async function loadAnnotations(file){
 async function loadData(){
   const en = {};
   try {
-    const bResp = await fetch('bible_nt_en.json'+CB);
-    if (!bResp.ok) throw new Error('not found');
-    en.bible = await bResp.json();
+    const [ntResp, otResp] = await Promise.all([
+      fetch('bible_nt_en.json'+CB),
+      fetch('bible_ot_en.json'+CB).catch(()=>null)
+    ]);
+    if (!ntResp.ok) throw new Error('not found');
+    const nt = await ntResp.json();
+    let ot = null;
+    if (otResp && otResp.ok) ot = await otResp.json();
+
+    en.bible = {
+      translation: nt.translation,
+      language: nt.language,
+      books: [...(ot ? ot.books : []), ...nt.books]
+    };
+    en.ntStartIndex = ot ? ot.books.length : 0;
     en.vocab = {};
-    en.annotations = await loadAnnotations('nt_annotations_en.json');
+    const [ntAnno, otAnno] = await Promise.all([
+      loadAnnotations('nt_annotations_en.json'),
+      loadAnnotations('ot_annotations_en.json')
+    ]);
+    en.annotations = {...otAnno, ...ntAnno};
     en.simplified = {};
     en.available = true;
   } catch(e) { en.available = false; }
@@ -249,7 +318,8 @@ function useTTS(){
 
 // ─── App ────────────────────────────────────────────────
 function App({data}){
-  const saved=LS.get('nt-reader-state')||{};
+  const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
+  const ntStartIndex=data.en.ntStartIndex||0;
   const lang='en';
   const [phase,setPhase]=useState(saved.phase||'nav');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
@@ -260,10 +330,17 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [globalLearned,setGlobalLearned]=useState(new Set(saved.globalLearned||[]));
-  const [fontSize,setFontSize]=useState(parseInt(LS.get('nt-font-size'))||18);
+  const [expandedTestament,setExpandedTestament]=useState(null);
+  const [expandedBook,setExpandedBook]=useState(null);
+  const [expandedStatBook,setExpandedStatBook]=useState(null);
+  const [expandedStatSection,setExpandedStatSection]=useState(null);
+  const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
+  const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
+  const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
+  useEffect(()=>{const b=document.body;b.classList.toggle('theme-icf',layout==='icf');b.classList.toggle('theme-icf-light',layout==='icf-light');const tc=layout==='icf'?'#0f0f0f':layout==='icf-light'?'#f5f5f5':'#5a4a32';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',tc)},[layout]);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
-  const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('nt-stats-visible')||{})}));
-  const toggleStatSection=useCallback(key=>{setStatsVisible(prev=>{const next={...prev,[key]:!prev[key]};LS.set('nt-stats-visible',next);return next})},[]);
+  const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
+  const toggleStatSection=useCallback(key=>{setStatsVisible(prev=>{const next={...prev,[key]:!prev[key]};LS.set('bible-stats-visible',next);return next})},[]);
   const tts=useTTS();
   const ttsRef=useRef(tts);
   ttsRef.current=tts;
@@ -278,7 +355,7 @@ function App({data}){
   // Sync TTS language
   useEffect(()=>{tts.setLang('en')},[tts]);
 
-  useEffect(()=>{LS.set('nt-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
@@ -317,6 +394,7 @@ function App({data}){
 
   const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
   const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})},[]);
+  const unlearn=useCallback(key=>{setLearnedWords(p=>{const n=new Set(p);n.delete(key);return n});setGlobalLearned(p=>{const n=new Set(p);n.delete(key);return n})},[]);
 
   // Build practice fragments (short text pieces around unknown words)
   const buildFragments=useCallback(()=>{
@@ -428,11 +506,13 @@ function App({data}){
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
 
-  const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('nt-font-size',v)},[]);
+  const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
 
-  const langTitle='New Testament';
-  const langSubtitle='Reading Aid EN→DE';
+  const langTitle='Bible';
+  const langSubtitle='Reading Aid EN\u2009→\u2009DE';
   const langFooter='World English Bible · Public Domain';
+  const otBooks=books.slice(0,ntStartIndex);
+  const ntBooks=books.slice(ntStartIndex);
 
   const stats=useMemo(()=>{
     const totalChapters=books.reduce((s,b)=>s+b.chapters.length,0);
@@ -488,40 +568,62 @@ function App({data}){
       <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
       <div style={S.settingsSection}>
         {statsVisible.text&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Text</span>
-          <div style={S.statGrid}>
-            <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+          <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='text'?null:'text')}>
+            <span style={S.bookArrow}>{expandedStatSection==='text'?'▾':'▸'}</span>
+            <span style={{...S.settingsLabel,marginBottom:0}}>Text</span>
+            <span style={S.statBookWords}>{books.length} books · {stats.totalWords.toLocaleString()} words</span>
           </div>
-          <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+          {expandedStatSection==='text'&&<div style={S.statBookDetail}>
+            <div style={S.statGrid}>
+              <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+            </div>
+            <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+          </div>}
         </div>}
         {statsVisible.vocabulary&&<>
           <div style={S.settingsGroup}>
-            <span style={S.settingsLabel}>Vocabulary — Total</span>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
-            <div style={{...S.statGrid,marginTop:12}}>
-              {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+            <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
+              <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
+              <span style={{...S.settingsLabel,marginBottom:0}}>Vocabulary — Total</span>
+              <span style={S.statBookWords}>{stats.allLemmas.toLocaleString()} unique words</span>
             </div>
+            {expandedStatSection==='vocab'&&<div style={S.statBookDetail}>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+              <div style={{...S.statGrid,marginTop:12}}>
+                {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+              </div>
+            </div>}
           </div>
-          {stats.perBook.map(bk=>(
-            <div key={bk.name} style={S.settingsGroup}>
-              <span style={S.settingsLabel}>{bk.name}</span>
-              <div style={S.statGrid}>
-                <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
-                <div style={S.statCell}><span style={{...S.statCellN,color:'#2a6496'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
-              </div>
-              <div style={{...S.statGrid,marginTop:8}}>
-                {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
-              </div>
-            </div>
-          ))}
+          <div style={S.settingsGroup}>
+            <span style={S.settingsLabel}>Vocabulary per book</span>
+            <div style={S.statBookList}>{stats.perBook.map(bk=>{
+              const isOpen=expandedStatBook===bk.name;
+              return(<div key={bk.name}>
+                <div style={S.statBookRow} onClick={()=>setExpandedStatBook(isOpen?null:bk.name)}>
+                  <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+                  <span style={S.statBookName}>{bk.name}</span>
+                  <span style={S.statBookWords}>{bk.total.toLocaleString()}</span>
+                </div>
+                {isOpen&&<div style={S.statBookDetail}>
+                  <div style={S.statGrid}>
+                    <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+                    <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-blue)'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
+                  </div>
+                  <div style={{...S.statGrid,marginTop:8}}>
+                    {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
+                  </div>
+                </div>}
+              </div>);
+            })}</div>
+          </div>
         </>}
         {statsVisible.progress&&<div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Your progress</span>
           <div style={S.statGrid}>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'#5a7a3a'}}>{globalLearned.size}</span><span style={S.statCellL}>Words learned</span></div>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{globalLearned.size}</span><span style={S.statCellL}>Words learned</span></div>
             <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas>0?Math.round((globalLearned.size/stats.allLemmas)*100):0}%</span><span style={S.statCellL}>of all lemmas</span></div>
           </div>
         </div>}
@@ -539,7 +641,7 @@ function App({data}){
       <div style={S.settingsSection}>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Vocabulary level</span>
-          <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+          <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           <p style={S.settingsHint}>Words above this level are shown in the vocabulary check.</p>
         </div>
         <div style={S.settingsGroup}>
@@ -559,11 +661,15 @@ function App({data}){
             <span style={S.fontSizePreview}>{fontSize}px</span>
             <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
           </div>
-          <p style={{fontFamily:"'Palatino Linotype',Georgia,serif",fontSize,lineHeight:1.8,color:'#3a2f1f',marginTop:8}}>In the beginning was the Word, and the Word was with God.</p>
+          <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>In the beginning was the Word, and the Word was with God.</p>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Layout</span>
+          <div style={S.levelBtns}>{[{k:'classic',l:'Klassisch'},{k:'icf-light',l:'Modern Hell'},{k:'icf',l:'Modern Dunkel'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{o.l}</button>))}</div>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Progress</span>
-          <p style={{fontSize:14,color:'#5a4a32',fontFamily:sans,margin:'4px 0'}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
+          <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>Total words learned: <strong style={{color:'var(--t-green)'}}>{globalLearned.size}</strong></p>
           <button onClick={()=>{if(confirm('Reset all learned words and progress?')){setGlobalLearned(new Set());setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>Reset all progress</button>
         </div>
         <div style={S.settingsGroup}>
@@ -575,7 +681,7 @@ function App({data}){
             </label>
           ))}
         </div>
-        <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,textAlign:'center',marginTop:24}}>v{APP_VERSION}</p>
+        <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',marginTop:24}}>v{APP_VERSION}</p>
       </div>
     </div>);
   }
@@ -589,23 +695,52 @@ function App({data}){
         <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,margin:'8px 0'}}>
           <div style={S.levelBox}>
             <span style={S.levelLabel}>My level:</span>
-            <div style={S.levelBtns}>{["A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+            <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           </div>
+        </div>
+        <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           <button onClick={()=>setPhase('stats')} style={S.gearBtn} title="Statistics">📊</button>
           <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
         </div>
-        <p style={{fontSize:13,color:'#8a7e6b',fontFamily:sans,marginTop:4}}>Total words learned: <strong style={{color:'#5a7a3a'}}>{globalLearned.size}</strong></p>
-        <p style={{fontSize:11,color:'#b0a58e',fontFamily:sans,marginTop:8}}>v{APP_VERSION}</p>
       </header>
-      <div style={S.bookList}>{books.map((book,bi)=>{
-        const ha=!!annotations[book.name];
-        return(<div key={bi} style={S.bookItem}>
-          <h3 style={S.bookName}>{book.name}
-            {ha&&<span style={S.annoBadge} title="Word-by-word annotations available">annotated</span>}
-          </h3>
-          <div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>
-        </div>);
-      })}</div>
+      {otBooks.length>0&&<div style={S.bookList}>
+        <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='ot'?null:'ot');setExpandedBook(null)}}>
+          <span style={S.bookArrow}>{expandedTestament==='ot'?'▾':'▸'}</span>
+          Old Testament
+          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{otBooks.length} books</span>
+        </h2>
+        {expandedTestament==='ot'&&otBooks.map((book,i)=>{
+          const bi=i;
+          const isOpen=expandedBook===bi;
+          return(<div key={bi} style={S.bookItem}>
+            <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
+              <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+              <h3 style={S.bookName}>{book.name}</h3>
+              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+            </div>
+            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
+          </div>);
+        })}
+      </div>}
+      <div style={S.bookList}>
+        <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='nt'?null:'nt');setExpandedBook(null)}}>
+          <span style={S.bookArrow}>{expandedTestament==='nt'?'▾':'▸'}</span>
+          New Testament
+          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{ntBooks.length} books</span>
+        </h2>
+        {expandedTestament==='nt'&&ntBooks.map((book,i)=>{
+          const bi=ntStartIndex+i;
+          const isOpen=expandedBook===bi;
+          return(<div key={bi} style={S.bookItem}>
+            <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
+              <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
+              <h3 style={S.bookName}>{book.name}</h3>
+              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+            </div>
+            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
+          </div>);
+        })}
+      </div>
     </div>);
   }
 
@@ -679,7 +814,7 @@ function App({data}){
     <div style={S.ttsBar}>
       {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stop</button>
       ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Read chapter aloud</button>
-      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'#6b4a2e'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
+      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
       </>)}
       <div style={S.speedControl}>
         <span style={S.speedLabel}>Speed:</span>
@@ -694,8 +829,8 @@ function App({data}){
     </div>
 
     {active>0&&(<div style={S.legend}>
-      <span style={S.legItem}><span style={{...S.dot,background:'#b34a28'}}/> tap = learned</span>
-      <span style={S.legItem}><span style={{...S.dot,background:'#5a7a3a'}}/> tap = show again</span>
+      <span style={S.legItem}><span style={{...S.dot,background:'var(--t-accent)'}}/> tap = learned</span>
+      <span style={S.legItem}><span style={{...S.dot,background:'var(--t-green)'}}/> tap = show again</span>
     </div>)}
 
     <div style={{...S.text,fontSize}}>{verses.map(verse=>{
@@ -731,9 +866,7 @@ function App({data}){
                   if(showTr)return(<span key={i}><span style={S.wg}><span className={hl}>{word}</span><span style={S.tr} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>);
                   return <span key={i} className={hl}>{token}</span>;
                 }
-                if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>reveal(key)}>{token}</span>;
-                if(showTr)return(<span key={i}><span style={S.wg}><span className={hl} style={S.known} onClick={()=>hideReveal(key)}>{word}</span><span style={S.trRev}>{anno.de}</span></span>{punct}</span>);
-                return <span key={i} className={hl} style={S.known} onClick={()=>hideReveal(key)}>{token}</span>;
+                if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(key)}>{token}</span>;
               }
               // Below-level word with annotation: clickable to add as unknown
               return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>tapWord(key)}>{token}</span>;
@@ -746,8 +879,7 @@ function App({data}){
             const isL=learnedWords.has(clean),isR=revealedWords.has(clean);
             const [vw,vp]=splitPunct(token);
             if(!isL)return(<span key={i}><span style={S.wg}><span className={hl}>{vw}</span><span style={S.tr} onClick={()=>markLearned(clean)}>{entry.de}</span></span>{vp}</span>);
-            if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>reveal(clean)}>{token}</span>;
-            return(<span key={i}><span style={S.wg}><span className={hl} style={S.known} onClick={()=>hideReveal(clean)}>{vw}</span><span style={S.trRev}>{entry.de}</span></span>{vp}</span>);
+            if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(clean)}>{token}</span>;
           }
         })}{' '}
       </span>);
@@ -808,107 +940,117 @@ function App({data}){
 
 // ─── Styles ─────────────────────────────────────────────
 const S={
-  header:{textAlign:'center',marginBottom:20,paddingBottom:16,borderBottom:'1px solid #d4c9b4'},
-  title:{fontSize:28,fontWeight:400,letterSpacing:'0.04em',margin:'0 0 4px',color:'#3a2f1f',fontVariant:'small-caps'},
-  subtitle:{fontSize:14,color:'#8a7e6b',margin:0,fontStyle:'italic'},
-  annoBadge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'#2a6496',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
-  annoNote:{textAlign:'center',fontSize:13,color:'#2a6496',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'rgba(42,100,150,0.06)',borderRadius:8,border:'1px solid rgba(42,100,150,0.12)'},
-  levelBox:{display:'flex',flexDirection:'column',alignItems:'center',gap:6,margin:'8px 0',padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8},
-  levelLabel:{fontSize:13,fontWeight:600,color:'#5a4a32',letterSpacing:'0.04em',textTransform:'uppercase',fontFamily:sans},
+  header:{textAlign:'center',marginBottom:20,paddingBottom:16,borderBottom:'1px solid var(--t-border)'},
+  title:{fontSize:28,fontWeight:400,letterSpacing:'0.04em',margin:'0 0 4px',color:'var(--t-title)',fontVariant:'small-caps',fontFamily:sans},
+  subtitle:{fontSize:14,color:'var(--t-muted)',margin:0,fontStyle:'italic'},
+  annoBadge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'var(--t-blue)',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
+  annoNote:{textAlign:'center',fontSize:13,color:'var(--t-blue)',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'var(--t-blue-bg)',borderRadius:8,border:'1px solid var(--t-blue-border)'},
+  levelBox:{display:'flex',flexDirection:'column',alignItems:'center',gap:6,margin:'8px 0',padding:'10px 16px',background:'var(--t-level-bg)',borderRadius:8},
+  levelLabel:{fontSize:13,fontWeight:600,color:'var(--t-text2)',letterSpacing:'0.04em',textTransform:'uppercase',fontFamily:sans},
   levelBtns:{display:'flex',gap:6},
-  lvlBtn:{padding:'5px 14px',border:'1.5px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
-  lvlActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
+  lvlBtn:{padding:'5px 14px',border:'1.5px solid var(--t-border2)',borderRadius:6,background:'transparent',color:'var(--t-text2)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.2s'},
+  lvlActive:{background:'var(--t-primary)',color:'var(--t-primary-text)',borderColor:'var(--t-primary)'},
+  testamentHeader:{fontSize:18,fontWeight:600,color:'var(--t-text2)',fontFamily:sans,letterSpacing:'0.04em',textTransform:'uppercase',padding:'8px 0 4px',borderBottom:'2px solid var(--t-border)',marginBottom:4},
   bookList:{display:'flex',flexDirection:'column',gap:16},
-  bookItem:{padding:'12px 16px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
-  bookName:{fontSize:16,fontWeight:600,color:'#3a2f1f',marginBottom:8,fontFamily:sans},
-  chapGrid:{display:'flex',flexWrap:'wrap',gap:4},
-  chapBtn:{width:36,height:32,border:'1px solid #d4c9b4',borderRadius:4,background:'#fff',color:'#5a4a32',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
+  bookItem:{padding:'10px 16px',background:'var(--t-card)',borderRadius:10,border:'1px solid var(--t-border3)'},
+  bookRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none'},
+  bookArrow:{fontSize:14,color:'var(--t-muted)',width:16,textAlign:'center',flexShrink:0},
+  bookName:{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:0,fontFamily:sans},
+  bookChapCount:{fontSize:12,color:'var(--t-muted2)',fontFamily:sans,marginLeft:'auto',flexShrink:0},
+  chapGrid:{display:'flex',flexWrap:'wrap',gap:4,marginTop:10},
+  chapBtn:{width:36,height:32,border:'1px solid var(--t-border)',borderRadius:4,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
   navRow:{display:'flex',justifyContent:'center',marginBottom:16},
-  navBtn:{background:'none',border:'1px solid #c4b9a4',borderRadius:5,padding:'4px 14px',fontSize:13,color:'#6b5e4a',cursor:'pointer',fontFamily:sans},
+  navBtn:{background:'none',border:'1px solid var(--t-border2)',borderRadius:5,padding:'4px 14px',fontSize:13,color:'var(--t-med)',cursor:'pointer',fontFamily:sans},
   readingTopBar:{display:'flex',flexDirection:'column',alignItems:'center',gap:10,marginTop:10},
   readingNavBtns:{display:'flex',gap:8},
-  ttsBar:{display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'center',gap:14,margin:'0 0 16px',padding:'14px 16px',background:'rgba(90,74,50,0.06)',borderRadius:10,border:'1px solid rgba(90,74,50,0.1)'},
-  ttsPlayAllBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'#5a4a32',color:'#faf6ee',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 1px 4px rgba(90,74,50,0.2)'},
-  ttsStopBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'#b34a28',color:'#fff',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  ttsBar:{display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'center',gap:14,margin:'0 0 16px',padding:'14px 16px',background:'var(--t-tts-bg)',borderRadius:10,border:'1px solid var(--t-tts-border)'},
+  ttsPlayAllBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 1px 4px var(--t-card-shadow)'},
+  ttsStopBtn:{padding:'8px 20px',border:'none',borderRadius:6,background:'var(--t-accent)',color:'var(--t-primary-text)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
   speedControl:{display:'flex',flexDirection:'column',alignItems:'center',gap:6},
-  speedLabel:{fontSize:12,color:'#6b5e4a',fontFamily:sans,fontWeight:600},
+  speedLabel:{fontSize:12,color:'var(--t-med)',fontFamily:sans,fontWeight:600},
   speedPresets:{display:'flex',gap:4},
-  speedPresetBtn:{padding:'4px 10px',border:'1.5px solid #c4b9a4',borderRadius:5,background:'transparent',color:'#5a4a32',fontSize:12,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
-  speedPresetActive:{background:'#5a4a32',color:'#faf6ee',borderColor:'#5a4a32'},
+  speedPresetBtn:{padding:'4px 10px',border:'1.5px solid var(--t-border2)',borderRadius:5,background:'transparent',color:'var(--t-text2)',fontSize:12,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
+  speedPresetActive:{background:'var(--t-primary)',color:'var(--t-primary-text)',borderColor:'var(--t-primary)'},
   speedSliderRow:{display:'flex',alignItems:'center',gap:6,width:'100%'},
-  speedSlider:{width:120,height:6,cursor:'pointer',accentColor:'#5a4a32',borderRadius:3},
-  speedValue:{fontSize:13,color:'#5a4a32',fontFamily:sans,fontWeight:700,minWidth:42,textAlign:'center'},
+  speedSlider:{width:120,height:6,cursor:'pointer',accentColor:'var(--t-primary)',borderRadius:3},
+  speedValue:{fontSize:13,color:'var(--t-text2)',fontFamily:sans,fontWeight:700,minWidth:42,textAlign:'center'},
   versePlayBtn:{background:'none',border:'none',cursor:'pointer',fontSize:14,padding:'0 4px',opacity:0.4,transition:'opacity 0.2s',verticalAlign:'super',lineHeight:1},
-  quizInstr:{textAlign:'center',margin:'16px 0 20px',padding:'16px',background:'rgba(179,74,40,0.04)',borderRadius:10,border:'1px solid rgba(179,74,40,0.1)'},
-  quizInstrTitle:{fontSize:18,fontWeight:600,color:'#3a2f1f',margin:'0 0 6px',fontFamily:sans},
-  quizInstrSub:{fontSize:14,color:'#6b5e4a',margin:0,fontFamily:sans,lineHeight:1.5},
+  quizInstr:{textAlign:'center',margin:'16px 0 20px',padding:'16px',background:'var(--t-accent-bg2)',borderRadius:10,border:'1px solid var(--t-accent-border)'},
+  quizInstrTitle:{fontSize:18,fontWeight:600,color:'var(--t-title)',margin:'0 0 6px',fontFamily:sans},
+  quizInstrSub:{fontSize:14,color:'var(--t-med)',margin:0,fontFamily:sans,lineHeight:1.5},
   quizActions:{display:'flex',gap:8,justifyContent:'center',marginTop:12},
-  quizActBtn:{padding:'5px 14px',border:'1px solid #c4b9a4',borderRadius:5,background:'transparent',color:'#6b5e4a',fontSize:12,cursor:'pointer',fontFamily:sans},
+  quizActBtn:{padding:'5px 14px',border:'1px solid var(--t-border2)',borderRadius:5,background:'transparent',color:'var(--t-med)',fontSize:12,cursor:'pointer',fontFamily:sans},
   wordGrid:{display:'flex',flexWrap:'wrap',gap:8,justifyContent:'center',margin:'0 0 24px'},
-  wordCard:{padding:'8px 16px',border:'1.5px solid #d4c9b4',borderRadius:8,background:'#fff',cursor:'pointer',fontFamily:sans,fontSize:15,display:'flex',flexDirection:'column',alignItems:'center',gap:2,transition:'all 0.2s',minWidth:100},
-  wordCardSel:{background:'#b34a28',borderColor:'#b34a28',color:'#fff',boxShadow:'0 2px 8px rgba(179,74,40,0.2)'},
-  wcFr:{fontWeight:600,fontFamily:"'Palatino Linotype',Georgia,serif"},
+  wordCard:{padding:'8px 16px',border:'1.5px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',cursor:'pointer',fontFamily:sans,fontSize:15,display:'flex',flexDirection:'column',alignItems:'center',gap:2,transition:'all 0.2s',minWidth:100},
+  wordCardSel:{background:'var(--t-accent)',borderColor:'var(--t-accent)',color:'var(--t-primary-text)',boxShadow:'0 2px 8px var(--t-card-shadow)'},
+  wcFr:{fontWeight:600,fontFamily:'var(--t-serif)'},
   wcForm:{fontSize:11,opacity:0.7,fontStyle:'italic'},
   wcDe:{fontSize:12,fontStyle:'italic',opacity:0.9},
   wcLevel:{fontSize:10,opacity:0.6,fontFamily:sans},
-  quizFooter:{textAlign:'center',padding:'20px 0',borderTop:'1px solid #d4c9b4'},
-  quizSummary:{fontSize:14,color:'#6b5e4a',margin:'0 0 16px',fontFamily:sans},
-  startBtn:{padding:'12px 32px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px rgba(90,74,50,0.2)'},
+  quizFooter:{textAlign:'center',padding:'20px 0',borderTop:'1px solid var(--t-border)'},
+  quizSummary:{fontSize:14,color:'var(--t-med)',margin:'0 0 16px',fontFamily:sans},
+  startBtn:{padding:'12px 32px',border:'none',borderRadius:8,background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:16,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px var(--t-card-shadow)'},
   statsRow:{display:'flex',alignItems:'center',justifyContent:'center',gap:20},
   stat:{display:'flex',flexDirection:'column',alignItems:'center',minWidth:50},
-  statN:{fontSize:22,fontWeight:600,color:'#5a4a32'},
-  statL:{fontSize:11,color:'#8a7e6b',textTransform:'uppercase',letterSpacing:'0.08em',fontFamily:sans},
+  statN:{fontSize:22,fontWeight:600,color:'var(--t-text2)'},
+  statL:{fontSize:11,color:'var(--t-muted)',textTransform:'uppercase',letterSpacing:'0.08em',fontFamily:sans},
   progWrap:{display:'flex',alignItems:'center',gap:8,flex:1,maxWidth:200},
-  progTrack:{flex:1,height:6,background:'#d4c9b4',borderRadius:3,overflow:'hidden'},
-  progFill:{height:'100%',background:'linear-gradient(90deg,#7a9a5a,#5a7a3a)',borderRadius:3,transition:'width 0.5s'},
-  progPct:{fontSize:12,color:'#8a7e6b',fontWeight:600,minWidth:30,fontFamily:sans},
-  legend:{display:'flex',flexWrap:'wrap',gap:12,alignItems:'center',justifyContent:'center',fontSize:12,color:'#8a7e6b',marginBottom:20,padding:'10px 16px',background:'rgba(212,201,180,0.15)',borderRadius:8,fontFamily:sans},
+  progTrack:{flex:1,height:6,background:'var(--t-border)',borderRadius:3,overflow:'hidden'},
+  progFill:{height:'100%',background:'linear-gradient(90deg,var(--t-green2),var(--t-green))',borderRadius:3,transition:'width 0.5s'},
+  progPct:{fontSize:12,color:'var(--t-muted)',fontWeight:600,minWidth:30,fontFamily:sans},
+  legend:{display:'flex',flexWrap:'wrap',gap:12,alignItems:'center',justifyContent:'center',fontSize:12,color:'var(--t-muted)',marginBottom:20,padding:'10px 16px',background:'var(--t-level-bg)',borderRadius:8,fontFamily:sans},
   legItem:{display:'flex',alignItems:'center',gap:4},
   dot:{display:'inline-block',width:8,height:8,borderRadius:'50%',marginRight:2,flexShrink:0},
   text:{lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
-  vNum:{fontSize:11,color:'#b0a58e',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
+  vNum:{fontSize:11,color:'var(--t-muted2)',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
   wg:{display:'inline',whiteSpace:'nowrap'},
-  tr:{fontStyle:'italic',fontSize:13,color:'#b34a28',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'rgba(179,74,40,0.07)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
-  trRev:{fontStyle:'italic',fontSize:13,color:'#7a9a5a',marginLeft:1,padding:'1px 4px',background:'rgba(122,154,90,0.08)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
-  known:{color:'#5a7a3a',cursor:'pointer',borderBottom:'1px dotted rgba(90,122,58,0.3)',transition:'all 0.2s'},
-  chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid #d4c9b4'},
-  chapNavBtn:{padding:'10px 24px',border:'1px solid #c4b9a4',borderRadius:6,background:'transparent',color:'#5a4a32',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  footer:{marginTop:30,paddingTop:16,borderTop:'1px solid #d4c9b4',textAlign:'center',fontSize:12,color:'#b0a58e',fontStyle:'italic'},
-  practiceOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(44,36,22,0.85)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,padding:20},
-  practiceCard:{position:'relative',background:'#faf6ee',borderRadius:16,padding:'40px 32px 32px',maxWidth:500,width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.3)',textAlign:'center'},
+  tr:{fontStyle:'italic',fontSize:13,color:'var(--t-accent)',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'var(--t-accent-bg)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
+  trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
+  known:{color:'var(--t-green)',cursor:'pointer',borderBottom:'1px dotted var(--t-green-bg)',transition:'all 0.2s'},
+  chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid var(--t-border)'},
+  chapNavBtn:{padding:'10px 24px',border:'1px solid var(--t-border2)',borderRadius:6,background:'transparent',color:'var(--t-text2)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  footer:{marginTop:30,paddingTop:16,borderTop:'1px solid var(--t-border)',textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontStyle:'italic'},
+  practiceOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'var(--t-overlay)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,padding:20},
+  practiceCard:{position:'relative',background:'var(--t-bg1)',borderRadius:16,padding:'40px 32px 32px',maxWidth:500,width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.3)',textAlign:'center'},
   practiceContent:{display:'flex',flexDirection:'column',alignItems:'center',gap:20},
-  practiceCounter:{fontSize:13,color:'#8a7e6b',fontFamily:sans,fontWeight:600,letterSpacing:'0.05em'},
-  practiceText:{fontSize:22,lineHeight:1.7,color:'#2c2416',fontFamily:"'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif",padding:'8px 0'},
-  practiceVerse:{fontSize:12,color:'#b0a58e',fontFamily:sans,fontStyle:'italic'},
-  practiceWordInfo:{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center',padding:'12px 0',borderTop:'1px solid #e0d8c8',borderBottom:'1px solid #e0d8c8',width:'100%'},
-  practiceWord:{display:'flex',flexDirection:'column',alignItems:'center',gap:2,padding:'6px 14px',background:'rgba(179,74,40,0.06)',borderRadius:8},
-  practiceHighlight:{color:'#b34a28',fontWeight:700,fontSize:24,textDecoration:'underline',textDecorationColor:'rgba(179,74,40,0.3)',textUnderlineOffset:'4px'},
-  practiceWordForm:{fontSize:18,fontWeight:700,color:'#3a2f1f',fontFamily:"'Palatino Linotype',Georgia,serif"},
-  practiceWordDe:{fontSize:15,fontStyle:'italic',color:'#5a4a32',fontFamily:sans},
-  practiceWordLemma:{fontSize:12,color:'#8a7e6b',fontFamily:sans},
+  practiceCounter:{fontSize:13,color:'var(--t-muted)',fontFamily:sans,fontWeight:600,letterSpacing:'0.05em'},
+  practiceText:{fontSize:22,lineHeight:1.7,color:'var(--t-text)',fontFamily:'var(--t-serif)',padding:'8px 0'},
+  practiceVerse:{fontSize:12,color:'var(--t-muted2)',fontFamily:sans,fontStyle:'italic'},
+  practiceWordInfo:{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center',padding:'12px 0',borderTop:'1px solid var(--t-border3)',borderBottom:'1px solid var(--t-border3)',width:'100%'},
+  practiceWord:{display:'flex',flexDirection:'column',alignItems:'center',gap:2,padding:'6px 14px',background:'var(--t-accent-bg)',borderRadius:8},
+  practiceHighlight:{color:'var(--t-accent)',fontWeight:700,fontSize:24,textDecoration:'underline',textDecorationColor:'var(--t-accent-bg)',textUnderlineOffset:'4px'},
+  practiceWordForm:{fontSize:18,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)'},
+  practiceWordDe:{fontSize:15,fontStyle:'italic',color:'var(--t-text2)',fontFamily:sans},
+  practiceWordLemma:{fontSize:12,color:'var(--t-muted)',fontFamily:sans},
   practiceBtns:{display:'flex',gap:10,marginTop:8},
-  practiceRepeatBtn:{padding:'12px 24px',border:'2px solid #5a4a32',borderRadius:8,background:'transparent',color:'#5a4a32',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  practiceNextBtn:{padding:'12px 24px',border:'2px solid #6b5e4a',borderRadius:8,background:'transparent',color:'#6b5e4a',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  practiceLearnedBtn:{padding:'12px 24px',border:'none',borderRadius:8,background:'#5a7a3a',color:'#fff',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px rgba(90,122,58,0.3)'},
-  practiceCancelBtn:{marginTop:4,padding:'8px 20px',border:'none',borderRadius:6,background:'transparent',color:'#b0a58e',fontSize:13,cursor:'pointer',fontFamily:sans},
-  practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'#b0a58e',cursor:'pointer',padding:4},
-  practiceDoneText:{fontSize:20,fontWeight:600,color:'#5a7a3a',fontFamily:sans},
-  practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'#5a4a32',color:'#faf6ee',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  gearBtn:{width:36,height:36,border:'1px solid #c4b9a4',borderRadius:'50%',background:'transparent',color:'#8a7e6b',fontSize:18,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0},
+  practiceRepeatBtn:{padding:'12px 24px',border:'2px solid var(--t-primary)',borderRadius:8,background:'transparent',color:'var(--t-primary)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  practiceNextBtn:{padding:'12px 24px',border:'2px solid var(--t-med)',borderRadius:8,background:'transparent',color:'var(--t-med)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  practiceLearnedBtn:{padding:'12px 24px',border:'none',borderRadius:8,background:'var(--t-green)',color:'#fff',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans,boxShadow:'0 2px 8px var(--t-card-shadow)'},
+  practiceCancelBtn:{marginTop:4,padding:'8px 20px',border:'none',borderRadius:6,background:'transparent',color:'var(--t-muted2)',fontSize:13,cursor:'pointer',fontFamily:sans},
+  practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'var(--t-muted2)',cursor:'pointer',padding:4},
+  practiceDoneText:{fontSize:20,fontWeight:600,color:'var(--t-green)',fontFamily:sans},
+  practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
+  gearBtn:{width:36,height:36,border:'1px solid var(--t-border2)',borderRadius:'50%',background:'transparent',color:'var(--t-muted)',fontSize:18,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0},
   settingsSection:{maxWidth:440,margin:'0 auto',display:'flex',flexDirection:'column',gap:20},
-  settingsGroup:{padding:'16px 20px',background:'rgba(255,255,255,0.5)',borderRadius:10,border:'1px solid #e0d8c8'},
-  settingsLabel:{fontSize:14,fontWeight:600,color:'#5a4a32',fontFamily:sans,textTransform:'uppercase',letterSpacing:'0.04em',display:'block',marginBottom:8},
-  settingsHint:{fontSize:12,color:'#8a7e6b',fontFamily:sans,margin:'8px 0 0'},
+  settingsGroup:{padding:'16px 20px',background:'var(--t-card)',borderRadius:10,border:'1px solid var(--t-border3)'},
+  settingsLabel:{fontSize:14,fontWeight:600,color:'var(--t-text2)',fontFamily:sans,textTransform:'uppercase',letterSpacing:'0.04em',display:'block',marginBottom:8},
+  settingsHint:{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0'},
   fontSizeRow:{display:'flex',alignItems:'center',gap:16,justifyContent:'center'},
-  fontSizeBtn:{width:44,height:44,border:'1.5px solid #c4b9a4',borderRadius:8,background:'transparent',color:'#5a4a32',fontSize:18,fontWeight:700,cursor:'pointer',fontFamily:sans},
-  fontSizePreview:{fontSize:16,fontWeight:600,color:'#5a4a32',fontFamily:sans,minWidth:50,textAlign:'center'},
-  resetBtn:{padding:'10px 20px',border:'1.5px solid #b34a28',borderRadius:8,background:'transparent',color:'#b34a28',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,marginTop:8},
+  fontSizeBtn:{width:44,height:44,border:'1.5px solid var(--t-border2)',borderRadius:8,background:'transparent',color:'var(--t-text2)',fontSize:18,fontWeight:700,cursor:'pointer',fontFamily:sans},
+  fontSizePreview:{fontSize:16,fontWeight:600,color:'var(--t-text2)',fontFamily:sans,minWidth:50,textAlign:'center'},
+  resetBtn:{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'transparent',color:'var(--t-accent)',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,marginTop:8},
   statGrid:{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center'},
   statCell:{display:'flex',flexDirection:'column',alignItems:'center',minWidth:70,padding:'8px 12px'},
-  statCellN:{fontSize:24,fontWeight:700,color:'#5a4a32',fontFamily:sans},
-  statCellL:{fontSize:11,color:'#8a7e6b',textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans,marginTop:2,textAlign:'center'},
+  statCellN:{fontSize:24,fontWeight:700,color:'var(--t-text2)',fontFamily:sans},
+  statCellL:{fontSize:11,color:'var(--t-muted)',textTransform:'uppercase',letterSpacing:'0.06em',fontFamily:sans,marginTop:2,textAlign:'center'},
+  statBookList:{display:'flex',flexDirection:'column',gap:2},
+  statBookRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none',padding:'6px 0',borderBottom:'1px solid var(--t-border3)'},
+  statBookName:{fontSize:14,fontWeight:500,color:'var(--t-title)',fontFamily:sans},
+  statBookWords:{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginLeft:'auto'},
+  statBookDetail:{padding:'12px 8px 8px',background:'var(--t-card)',borderRadius:8,margin:'4px 0 8px'},
+  statSectionRow:{display:'flex',alignItems:'center',gap:8,cursor:'pointer',userSelect:'none'},
   toggleRow:{display:'flex',alignItems:'center',gap:10,padding:'6px 0',cursor:'pointer'},
-  toggleLabel:{fontSize:14,color:'#5a4a32',fontFamily:sans},
+  toggleLabel:{fontSize:14,color:'var(--t-text2)',fontFamily:sans},
 };
 
 loadData().then(data=>{

@@ -1,7 +1,7 @@
 {
-  "name": "Bible Reading Aid — New Testament",
-  "short_name": "Bible NT",
-  "description": "New Testament with word-by-word translations",
+  "name": "Bible Reading Aid",
+  "short_name": "Bible",
+  "description": "Bible with word-by-word translations",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#faf6ee",
