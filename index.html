@@ -356,9 +356,23 @@ function App({data}){
   const [bookAnnotations,setBookAnnotations]=useState(null);
   const [deBook,setDeBook]=useState(null);
   const [expandedVerses,setExpandedVerses]=useState(new Set());
+  const [showAllDe,setShowAllDe]=useState(false);
+  const [dePrompt,setDePrompt]=useState(null);
   const [loading,setLoading]=useState(false);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
+
+  useEffect(()=>{
+    if((phase==='quiz'||phase==='reading')&&!loadedBook){
+      const nr=bible.books[bookIdx]?.nr;
+      if(nr){
+        setLoading(true);
+        Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr)]).then(([bk,an,de])=>{
+          setLoadedBook(bk);setBookAnnotations(an);setDeBook(de);
+        }).catch(()=>{}).finally(()=>setLoading(false));
+      }
+    }
+  },[]);
 
   useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
@@ -390,7 +404,7 @@ function App({data}){
 
   const openChapter=useCallback(async(bi,ci)=>{
     tts.stop();setBookIdx(bi);setChapIdx(ci);
-    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);
     const nr=books[bi].nr;
     setLoading(true);
     try{
@@ -734,11 +748,10 @@ function App({data}){
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{currentBook.name}</h1>
-        <p style={S.subtitle}>Chapter {chapNum} — Vocabulary Check</p>
       </header>
       <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Books</button></div>
+      <p style={S.subtitle}>Chapter {chapNum} — Vocabulary Check</p>
 
-      {hasAnno&&<div style={S.annoNote}>Context-specific annotations active — each word has its exact translation in context.</div>}
 
       {quizWords.length===0?(
         <div style={S.quizInstr}><p style={S.quizInstrTitle}>No new vocabulary above {userLevel}</p><p style={S.quizInstrSub}>You can start reading directly.</p></div>
@@ -787,11 +800,6 @@ function App({data}){
           <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>≡ Books</button>
           <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Word list</button>
         </div>
-        {active>0&&(<div style={S.statsRow}>
-          <div style={S.stat}><span style={S.statN}>{learned}</span><span style={S.statL}>learned</span></div>
-          <div style={S.progWrap}><div style={S.progTrack}><div style={{...S.progFill,width:`${progress}%`}}/></div><span style={S.progPct}>{progress}%</span></div>
-          <div style={S.stat}><span style={S.statN}>{remaining}</span><span style={S.statL}>remaining</span></div>
-        </div>)}
       </div>
     </header>
 
@@ -823,7 +831,7 @@ function App({data}){
       let wordIdx=0;
       const useAnno=hasAnno;
       const deText=deBook?.chapters?.[String(chapNum)]?.[String(verse.n)];
-      const showDe=expandedVerses.has(verse.n);
+      const showDe=showAllDe||expandedVerses.has(verse.n);
 
       return(<div key={verse.n} style={{display:'inline'}}>
         <span id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
@@ -871,7 +879,7 @@ function App({data}){
           }
         })}{' '}
       </span>
-      {showDe&&deText&&<div style={S.deVerse}>{deText}</div>}
+      {showDe&&deText&&<div style={{...S.deVerse,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
       </div>);
     })}</div>
 
@@ -880,6 +888,16 @@ function App({data}){
       <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}>Next →</button>
     </div>
     <footer style={S.footer}>{langFooter} · Public Domain</footer>
+
+    {dePrompt&&<div style={S.deOverlay} onClick={()=>setDePrompt(null)}>
+      <div style={S.deDialog} onClick={e=>e.stopPropagation()}>
+        <p style={S.deDialogText}>{dePrompt==='show'?'Alle Verse zweisprachig anzeigen?':'Alle deutschen Verse ausblenden?'}</p>
+        <div style={S.deDialogBtns}>
+          <button style={S.deDialogBtn} onClick={()=>{if(dePrompt==='show')setShowAllDe(true);else{setShowAllDe(false);setExpandedVerses(new Set())}setDePrompt(null)}}>Ja</button>
+          <button style={{...S.deDialogBtn,...S.deDialogBtnCancel}} onClick={()=>setDePrompt(null)}>Nein</button>
+        </div>
+      </div>
+    </div>}
 
     {/* Practice overlay */}
     {practiceActive&&(<div style={S.practiceOverlay}>
@@ -932,7 +950,7 @@ function App({data}){
 const S={
   header:{textAlign:'center',marginBottom:20,paddingBottom:16,borderBottom:'1px solid var(--t-border)'},
   title:{fontSize:28,fontWeight:400,letterSpacing:'0.04em',margin:'0 0 4px',color:'var(--t-title)',fontVariant:'small-caps',fontFamily:sans},
-  subtitle:{fontSize:14,color:'var(--t-muted)',margin:0,fontStyle:'italic'},
+  subtitle:{fontSize:18,fontWeight:600,color:'var(--t-title)',margin:'12px 0 4px',textAlign:'center',fontFamily:sans},
   annoBadge:{display:'inline-block',marginLeft:8,padding:'2px 8px',background:'var(--t-blue)',color:'#fff',borderRadius:10,fontSize:11,fontWeight:700,fontFamily:sans,verticalAlign:'middle'},
   annoNote:{textAlign:'center',fontSize:13,color:'var(--t-blue)',fontFamily:sans,margin:'0 0 16px',padding:'8px 16px',background:'var(--t-blue-bg)',borderRadius:8,border:'1px solid var(--t-blue-border)'},
   levelBox:{display:'flex',flexDirection:'column',alignItems:'center',gap:6,margin:'8px 0',padding:'10px 16px',background:'var(--t-level-bg)',borderRadius:8},
@@ -966,7 +984,7 @@ const S={
   speedValue:{fontSize:13,color:'var(--t-text2)',fontFamily:sans,fontWeight:700,minWidth:42,textAlign:'center'},
   versePlayBtn:{background:'none',border:'none',cursor:'pointer',fontSize:14,padding:'0 4px',opacity:0.4,transition:'opacity 0.2s',verticalAlign:'super',lineHeight:1},
   quizInstr:{textAlign:'center',margin:'16px 0 20px',padding:'16px',background:'var(--t-accent-bg2)',borderRadius:10,border:'1px solid var(--t-accent-border)'},
-  quizInstrTitle:{fontSize:18,fontWeight:600,color:'var(--t-title)',margin:'0 0 6px',fontFamily:sans},
+  quizInstrTitle:{fontSize:14,fontWeight:700,color:'var(--t-med)',margin:'0 0 6px',fontFamily:sans},
   quizInstrSub:{fontSize:14,color:'var(--t-med)',margin:0,fontFamily:sans,lineHeight:1.5},
   quizActions:{display:'flex',gap:8,justifyContent:'center',marginTop:12},
   quizActBtn:{padding:'5px 14px',border:'1px solid var(--t-border2)',borderRadius:5,background:'transparent',color:'var(--t-med)',fontSize:12,cursor:'pointer',fontFamily:sans},
@@ -992,8 +1010,14 @@ const S={
   legItem:{display:'flex',alignItems:'center',gap:4},
   dot:{display:'inline-block',width:8,height:8,borderRadius:'50%',marginRight:2,flexShrink:0},
   text:{lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
-  vNum:{fontSize:11,color:'var(--t-muted2)',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
+  vNum:{fontSize:11,color:'var(--t-muted2)',fontWeight:700,marginRight:6,verticalAlign:'super',fontFamily:sans,padding:'2px 2px'},
   deVerse:{display:'block',fontSize:14,color:'var(--t-muted)',fontStyle:'italic',margin:'2px 0 6px 18px',padding:'4px 10px',borderLeft:'3px solid var(--t-border2)',lineHeight:1.6,fontFamily:sans},
+  deOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000},
+  deDialog:{background:'var(--t-card,#fff)',borderRadius:12,padding:'24px 28px',maxWidth:300,textAlign:'center',boxShadow:'0 8px 30px rgba(0,0,0,0.3)'},
+  deDialogText:{fontSize:16,color:'var(--t-text)',margin:'0 0 20px',fontFamily:sans},
+  deDialogBtns:{display:'flex',gap:12,justifyContent:'center'},
+  deDialogBtn:{padding:'8px 24px',borderRadius:8,border:'none',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans,background:'var(--t-accent,#5a4a32)',color:'#fff'},
+  deDialogBtnCancel:{background:'transparent',color:'var(--t-muted)',border:'1px solid var(--t-border2)'},
   wg:{display:'inline',whiteSpace:'nowrap'},
   tr:{fontStyle:'italic',fontSize:13,color:'var(--t-accent)',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'var(--t-accent-bg)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
