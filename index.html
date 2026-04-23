@@ -376,6 +376,15 @@ function App({data}){
 
   useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
+  const scrollTop=useCallback(()=>{
+    const el=document.querySelector('.phone-screen');
+    if(el)el.scrollTop=0;
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
+  },[]);
+  useEffect(scrollTop,[bookIdx,chapIdx,phase,loading]);
+
   const books=bible.books;
   const currentBook=books[bookIdx];
   const bookName=currentBook?.name||'';
@@ -415,7 +424,6 @@ function App({data}){
     }catch(e){setLoadedBook(null);setBookAnnotations(null);setDeBook(null);}
     setLoading(false);
     setPhase('quiz');
-    (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
   },[tts,loadChapterWords,books]);
   const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
   const goToNav=useCallback(()=>{tts.stop();setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
@@ -787,11 +795,6 @@ function App({data}){
   }
 
   // ── READING ──
-  const active=unknownWords.size;
-  const learned=[...unknownWords].filter(w=>learnedWords.has(w)).length;
-  const remaining=active-learned;
-  const progress=active>0?Math.round((learned/active)*100):100;
-
   return(<div>
     <header style={S.header}>
       <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum}</h1>
@@ -807,7 +810,7 @@ function App({data}){
     <div style={S.ttsBar}>
       {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stop</button>
       ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Read chapter aloud</button>
-      {active>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
+      {unknownWords.size>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
       </>)}
       <div style={S.speedControl}>
         <span style={S.speedLabel}>Speed:</span>
@@ -821,7 +824,7 @@ function App({data}){
       </div>
     </div>
 
-    {active>0&&(<div style={S.legend}>
+    {unknownWords.size>0&&(<div style={S.legend}>
       <span style={S.legItem}><span style={{...S.dot,background:'var(--t-accent)'}}/> tap = learned</span>
       <span style={S.legItem}><span style={{...S.dot,background:'var(--t-green)'}}/> tap = show again</span>
     </div>)}
