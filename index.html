@@ -139,51 +139,53 @@ const LS = {
 const isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
 const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline support)
 
-async function loadAnnotations(file){
-  const annotations = {};
-  try {
-    const r = await fetch(file+CB);
-    if (r.ok) {
-      const d = await r.json();
-      Object.values(d.books || {}).forEach(bk => {
-        if (bk.name && bk.chapters) {
-          annotations[bk.name] = bk.chapters;
-        }
-      });
-    }
-  } catch(e) {}
-  return annotations;
+const _bookCache={};
+const _annoCache={};
+
+async function fetchBook(nr){
+  if(_bookCache[nr])return _bookCache[nr];
+  const r=await fetch('books/book_'+nr+'.json'+CB);
+  if(!r.ok)throw new Error('book not found');
+  const d=await r.json();
+  _bookCache[nr]=d;
+  return d;
+}
+
+async function fetchAnno(nr){
+  if(_annoCache[nr])return _annoCache[nr];
+  try{
+    const r=await fetch('books/anno_'+nr+'.json'+CB);
+    if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
+  }catch(e){}
+  return null;
+}
+
+const _deCache={};
+async function fetchDe(nr){
+  if(_deCache[nr])return _deCache[nr];
+  try{
+    const r=await fetch('books/de_'+nr+'.json'+CB);
+    if(r.ok){const d=await r.json();_deCache[nr]=d;return d;}
+  }catch(e){}
+  return null;
 }
 
 async function loadData(){
-  const en = {};
-  try {
-    const [ntResp, otResp] = await Promise.all([
-      fetch('bible_nt_en.json'+CB),
-      fetch('bible_ot_en.json'+CB).catch(()=>null)
-    ]);
-    if (!ntResp.ok) throw new Error('not found');
-    const nt = await ntResp.json();
-    let ot = null;
-    if (otResp && otResp.ok) ot = await otResp.json();
-
-    en.bible = {
-      translation: nt.translation,
-      language: nt.language,
-      books: [...(ot ? ot.books : []), ...nt.books]
-    };
-    en.ntStartIndex = ot ? ot.books.length : 0;
-    en.vocab = {};
-    const [ntAnno, otAnno] = await Promise.all([
-      loadAnnotations('nt_annotations_en.json'),
-      loadAnnotations('ot_annotations_en.json')
-    ]);
-    en.annotations = {...otAnno, ...ntAnno};
-    en.simplified = {};
-    en.available = true;
-  } catch(e) { en.available = false; }
-
-  return {en};
+  const en={};
+  try{
+    const r=await fetch('books/index.json'+CB);
+    if(!r.ok)throw new Error('not found');
+    const idx=await r.json();
+    const otBooks=idx.books.filter(b=>b.testament==='ot');
+    const ntBooks=idx.books.filter(b=>b.testament==='nt');
+    en.bible={books:[...otBooks,...ntBooks]};
+    en.ntStartIndex=otBooks.length;
+    en.stats=idx.stats;
+    en.vocab={};
+    en.annotations={};
+    en.available=true;
+  }catch(e){en.available=false;}
+  return{en};
 }
 
 // Split trailing punctuation from a word token: "diffamer," → ["diffamer", ","]
@@ -347,12 +349,15 @@ function App({data}){
 
   const langData=data.en;
   const bible=langData.bible;
+  const preStats=langData.stats;
   const vocab=langData.vocab||{};
-  const annotations=langData.annotations||{};
 
-  const hasAnnotations=Object.keys(annotations).length>0;
+  const [loadedBook,setLoadedBook]=useState(null);
+  const [bookAnnotations,setBookAnnotations]=useState(null);
+  const [deBook,setDeBook]=useState(null);
+  const [expandedVerses,setExpandedVerses]=useState(new Set());
+  const [loading,setLoading]=useState(false);
 
-  // Sync TTS language
   useEffect(()=>{tts.setLang('en')},[tts]);
 
   useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
@@ -360,17 +365,15 @@ function App({data}){
   const books=bible.books;
   const currentBook=books[bookIdx];
   const bookName=currentBook?.name||'';
-  const hasAnno=!!annotations[bookName];
+  const bookNr=currentBook?.nr;
+  const hasAnno=!!bookAnnotations;
+  const annotations=useMemo(()=>bookAnnotations?{[bookName]:bookAnnotations.chapters}:{},[bookAnnotations,bookName]);
+  const hasAnnotations=hasAnno;
 
-  const getChapter=useCallback(()=>{
-    return currentBook?.chapters?.[chapIdx];
-  },[currentBook,chapIdx]);
-
-  const currentChapter=getChapter();
+  const currentChapter=loadedBook?.chapters?.[chapIdx]||null;
   const chapNum=currentChapter?.number;
   const verses=currentChapter?.verses||[];
 
-  // Get quiz words — use annotations if available, else fallback to vocab.json
   const quizWords=useMemo(()=>{
     if(!currentChapter)return[];
     if(hasAnno){
@@ -383,14 +386,27 @@ function App({data}){
   const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
   const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
 
-  // Save unknown words whenever they change
   useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
 
-  const openChapter=useCallback((bi,ci)=>{tts.stop();setBookIdx(bi);setChapIdx(ci);setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setPhase('quiz');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,loadChapterWords]);
+  const openChapter=useCallback(async(bi,ci)=>{
+    tts.stop();setBookIdx(bi);setChapIdx(ci);
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());
+    const nr=books[bi].nr;
+    setLoading(true);
+    try{
+      const[bk,an,de]=await Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr)]);
+      setLoadedBook(bk);
+      setBookAnnotations(an);
+      setDeBook(de);
+    }catch(e){setLoadedBook(null);setBookAnnotations(null);setDeBook(null);}
+    setLoading(false);
+    setPhase('quiz');
+    (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
+  },[tts,loadChapterWords,books]);
   const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
-  const goToNav=useCallback(()=>{tts.stop();setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
-  const nextChapter=useCallback(()=>{if(chapIdx<currentBook.chapters.length-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
-  const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].chapters.length-1)},[bookIdx,chapIdx,books,openChapter]);
+  const goToNav=useCallback(()=>{tts.stop();setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
+  const nextChapter=useCallback(()=>{if(chapIdx<(currentBook.numChapters||0)-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
+  const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].numChapters-1)},[bookIdx,chapIdx,books,openChapter]);
 
   const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
   const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})},[]);
@@ -514,49 +530,7 @@ function App({data}){
   const otBooks=books.slice(0,ntStartIndex);
   const ntBooks=books.slice(ntStartIndex);
 
-  const stats=useMemo(()=>{
-    const totalChapters=books.reduce((s,b)=>s+b.chapters.length,0);
-    const totalVerses=books.reduce((s,b)=>s+b.chapters.reduce((s2,c)=>s2+c.verses.length,0),0);
-    const totalWords=books.reduce((s,b)=>s+b.chapters.reduce((s2,c)=>s2+c.verses.reduce((s3,v)=>s3+v.text.split(/\s+/).length,0),0),0);
-    const annotatedBooks=books.filter(b=>!!annotations[b.name]).length;
-    const lemmasByLevel={};const allLemmas=new Set();
-    Object.values(annotations).forEach(bk=>{
-      Object.values(bk).forEach(ch=>{
-        Object.values(ch).forEach(vs=>{
-          vs.forEach(a=>{
-            if(a.lemma){
-              allLemmas.add(a.lemma);
-              const lvl=a.level||'?';
-              if(!lemmasByLevel[lvl])lemmasByLevel[lvl]=new Set();
-              lemmasByLevel[lvl].add(a.lemma);
-            }
-          });
-        });
-      });
-    });
-    const perBook=books.filter(b=>!!annotations[b.name]).map(b=>{
-      const bkLemmas=new Set();const bkByLevel={};
-      Object.values(annotations[b.name]).forEach(ch=>{
-        Object.values(ch).forEach(vs=>{
-          vs.forEach(a=>{
-            if(a.lemma){
-              bkLemmas.add(a.lemma);
-              const lvl=a.level||'?';
-              if(!bkByLevel[lvl])bkByLevel[lvl]=new Set();
-              bkByLevel[lvl].add(a.lemma);
-            }
-          });
-        });
-      });
-      const byLevel=Object.fromEntries(Object.entries(bkByLevel).map(([k,v])=>[k,v.size]));
-      const lvlW={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
-      const total=bkLemmas.size;
-      const score=total>0?Object.entries(byLevel).reduce((s,[l,n])=>s+((n/total)*100)*(lvlW[l]||0),0)/100:0;
-      const diffLabel=score<2?'A1/A2':score<3?'A2/B1':score<3.9?'B1/B2':score<5?'B2/C1':'C1/C2';
-      return{name:b.name,total,byLevel,score:Math.round(score*10)/10,diffLabel};
-    });
-    return{totalChapters,totalVerses,totalWords,annotatedBooks,allLemmas:allLemmas.size,lemmasByLevel:Object.fromEntries(Object.entries(lemmasByLevel).map(([k,v])=>[k,v.size])),perBook};
-  },[books,annotations]);
+  const stats=preStats||{totalChapters:0,totalVerses:0,totalWords:0,annotatedBooks:0,allLemmas:0,lemmasByLevel:{},perBook:[]};
 
   // ── STATISTICS ──
   if(phase==='stats'){
@@ -716,9 +690,9 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+              <span style={S.bookChapCount}>{book.numChapters} ch.</span>
             </div>
-            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>}
@@ -735,12 +709,23 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{book.chapters.length} ch.</span>
+              <span style={S.bookChapCount}>{book.numChapters} ch.</span>
             </div>
-            {isOpen&&<div style={S.chapGrid}>{book.chapters.map((ch,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ch.number}</button>))}</div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>
+    </div>);
+  }
+
+  // ── LOADING ──
+  if(loading){
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>{currentBook?.name||''}</h1>
+        <p style={S.subtitle}>Loading…</p>
+      </header>
+      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Books</button></div>
     </div>);
   }
 
@@ -837,10 +822,13 @@ function App({data}){
       const isVA=tts.activeVerse===verse.n;
       let wordIdx=0;
       const useAnno=hasAnno;
+      const deText=deBook?.chapters?.[String(chapNum)]?.[String(verse.n)];
+      const showDe=expandedVerses.has(verse.n);
 
-      return(<span key={verse.n} id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
-        <sup style={S.vNum}>{verse.n}</sup>
-        {!tts.speaking&&(<button onClick={()=>tts.speakSingleVerse(verse.n,verse.text)} style={S.versePlayBtn} title="Read verse aloud">🔊</button>)}
+      return(<div key={verse.n} style={{display:'inline'}}>
+        <span id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
+        <sup style={{...S.vNum,...(deText?{cursor:'pointer',textDecoration:'underline'}:{})}} onClick={deText?()=>setExpandedVerses(p=>{const n=new Set(p);n.has(verse.n)?n.delete(verse.n):n.add(verse.n);return n}):undefined}>{verse.n}</sup>
+
         {verse.text.split(/(\s+)/).map((token,i)=>{
           if(/^\s+$/.test(token))return <span key={i}> </span>;
           const pos=wordIdx++;
@@ -882,12 +870,14 @@ function App({data}){
             if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(clean)}>{token}</span>;
           }
         })}{' '}
-      </span>);
+      </span>
+      {showDe&&deText&&<div style={S.deVerse}>{deText}</div>}
+      </div>);
     })}</div>
 
     <div style={S.chapNav}>
       <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>← Previous</button>
-      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===currentBook.chapters.length-1}>Next →</button>
+      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}>Next →</button>
     </div>
     <footer style={S.footer}>{langFooter} · Public Domain</footer>
 
@@ -1003,6 +993,7 @@ const S={
   dot:{display:'inline-block',width:8,height:8,borderRadius:'50%',marginRight:2,flexShrink:0},
   text:{lineHeight:2.4,textAlign:'justify',hyphens:'auto'},
   vNum:{fontSize:11,color:'var(--t-muted2)',fontWeight:700,marginRight:3,verticalAlign:'super',fontFamily:sans},
+  deVerse:{display:'block',fontSize:14,color:'var(--t-muted)',fontStyle:'italic',margin:'2px 0 6px 18px',padding:'4px 10px',borderLeft:'3px solid var(--t-border2)',lineHeight:1.6,fontFamily:sans},
   wg:{display:'inline',whiteSpace:'nowrap'},
   tr:{fontStyle:'italic',fontSize:13,color:'var(--t-accent)',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'var(--t-accent-bg)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},

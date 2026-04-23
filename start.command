@@ -2,7 +2,7 @@
 cd "$(dirname "$0")"
 
 # Check if English Bible data exists
-if [ ! -f "bible_nt_en.json" ]; then
+if [ ! -f "books/index.json" ]; then
     echo ""
     echo "╔══════════════════════════════════════════════╗"
     echo "║  Downloading English Bible text...           ║"

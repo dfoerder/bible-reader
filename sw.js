@@ -1,11 +1,8 @@
-const CACHE_NAME = 'bible-full-v3';
+const CACHE_NAME = 'bible-full-v4';
 const ASSETS = [
   './',
   './index.html',
-  './bible_nt_en.json',
-  './bible_ot_en.json',
-  './nt_annotations_en.json',
-  './ot_annotations_en.json',
+  './books/index.json',
   'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'
