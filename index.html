@@ -112,8 +112,8 @@ function toggleViewMode(){
 }
 (function(){
   var isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
-  if(isPWA){
-    // On real phone: desktop layout, no toggle needed
+  var isMobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||('ontouchstart' in window&&window.innerWidth<600);
+  if(isPWA||isMobile){
     document.body.classList.replace('mode-phone','mode-desktop');
     document.querySelector('.view-toggle').style.display='none';
   } else {
