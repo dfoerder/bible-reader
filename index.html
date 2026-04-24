@@ -144,7 +144,7 @@ const _annoCache={};
 
 async function fetchBook(nr){
   if(_bookCache[nr])return _bookCache[nr];
-  const r=await fetch('books/book_'+nr+'.json'+CB);
+  const r=await fetch('bibles/eng/web/'+nr+'_web.json'+CB);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
   _bookCache[nr]=d;
@@ -154,7 +154,7 @@ async function fetchBook(nr){
 async function fetchAnno(nr){
   if(_annoCache[nr])return _annoCache[nr];
   try{
-    const r=await fetch('books/anno_'+nr+'.json'+CB);
+    const r=await fetch('bibles/eng/web/anno/'+nr+'_web_deu.json'+CB);
     if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
   }catch(e){}
   return null;
@@ -164,7 +164,7 @@ const _deCache={};
 async function fetchDe(nr){
   if(_deCache[nr])return _deCache[nr];
   try{
-    const r=await fetch('books/de_'+nr+'.json'+CB);
+    const r=await fetch('bibles/deu/sch1951/'+nr+'_sch1951.json'+CB);
     if(r.ok){const d=await r.json();_deCache[nr]=d;return d;}
   }catch(e){}
   return null;
@@ -173,7 +173,7 @@ async function fetchDe(nr){
 async function loadData(){
   const en={};
   try{
-    const r=await fetch('books/index.json'+CB);
+    const r=await fetch('bibles/index.json'+CB);
     if(!r.ok)throw new Error('not found');
     const idx=await r.json();
     const otBooks=idx.books.filter(b=>b.testament==='ot');
