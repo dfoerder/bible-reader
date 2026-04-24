@@ -2,10 +2,11 @@
 """Modernize the German Schlachter 1951 Bible.
 
 Only safe 1:1 replacements: adverbs/conjunctions (no articles),
-pronouns with same declension, nouns with same gender.
+pronouns with same declension, nouns with same gender,
+archaic verb forms (sehet→seht, höret→hört, etc.).
 
 Dropped: Weib (n→f), Jüngling (→compound), Dirne (f→n),
-Kebsweib (n→f), Trübsal (ambiguous gender).
+Kebsweib (n→f).
 """
 
 import json, glob, os, re
@@ -141,6 +142,113 @@ def modernize(text):
     # Oheim (m) → Onkel (m)  [m→m, vowel→vowel]
     text = re.sub(r'\bOheims\b', 'Onkels', text)
     text = re.sub(r'\bOheim\b', 'Onkel', text)
+
+    # ================================================================
+    # 5. ARCHAIC VERB FORMS (drop the -e- before -t)
+    # ================================================================
+    # "sehet, höret, gehet" → "seht, hört, geht"
+    # Applies to imperatives, 2nd pl., 3rd sg., and past participles.
+
+    _VERBS = {
+        # Simple verbs
+        'lasset': 'lasst', 'sehet': 'seht', 'höret': 'hört',
+        'wisset': 'wisst', 'gehet': 'geht', 'saget': 'sagt',
+        'nehmet': 'nehmt', 'bringet': 'bringt', 'esset': 'esst',
+        'lobet': 'lobt', 'ziehet': 'zieht', 'machet': 'macht',
+        'glaubet': 'glaubt', 'suchet': 'sucht', 'sprechet': 'sprecht',
+        'dienet': 'dient', 'bleibet': 'bleibt', 'merket': 'merkt',
+        'kehret': 'kehrt', 'grüßet': 'grüßt', 'waret': 'wart',
+        'stehet': 'steht', 'liebet': 'liebt', 'singet': 'singt',
+        'gedenket': 'gedenkt', 'erkennet': 'erkennt', 'kommet': 'kommt',
+        'freuet': 'freut', 'trinket': 'trinkt', 'führet': 'führt',
+        'erhebet': 'erhebt', 'danket': 'dankt', 'leget': 'legt',
+        'lebet': 'lebt', 'weichet': 'weicht', 'habet': 'habt',
+        'traget': 'tragt', 'heiliget': 'heiligt',
+        'fliehet': 'flieht', 'folget': 'folgt', 'bauet': 'baut',
+        'weinet': 'weint', 'schauet': 'schaut', 'preiset': 'preist',
+        'fallet': 'fallt', 'sorget': 'sorgt', 'stärket': 'stärkt',
+        'rufet': 'ruft', 'stellet': 'stellt', 'rühret': 'rührt',
+        'säet': 'sät', 'schlaget': 'schlagt', 'spielet': 'spielt',
+        'reiniget': 'reinigt', 'leset': 'lest', 'prüfet': 'prüft',
+        'lehret': 'lehrt', 'laufet': 'lauft', 'teilet': 'teilt',
+        'tuet': 'tut', 'treibet': 'treibt', 'herrschet': 'herrscht',
+        'heilet': 'heilt', 'schlafet': 'schlaft', 'kämpfet': 'kämpft',
+        'rühmet': 'rühmt', 'schwöret': 'schwört', 'empfanget': 'empfangt',
+        'schicket': 'schickt', 'löset': 'löst', 'schreibet': 'schreibt',
+        'rücket': 'rückt', 'eilet': 'eilt', 'schmecket': 'schmeckt',
+        'klaget': 'klagt', 'lieget': 'liegt', 'schmücket': 'schmückt',
+        'wirket': 'wirkt', 'wünschet': 'wünscht',
+        'gehorchet': 'gehorcht', 'gelobet': 'gelobt',
+        'wachet': 'wacht', 'heulet': 'heult', 'denket': 'denkt',
+        'setzet': 'setzt', 'hebet': 'hebt', 'meinet': 'meint',
+        'werfet': 'werft', 'sündiget': 'sündigt', 'übet': 'übt',
+        'fanget': 'fangt', 'lobsinget': 'lobsingt',
+        'frohlocket': 'frohlockt', 'jauchzet': 'jauchzt',
+        'fraget': 'fragt', 'blaset': 'blast', 'sterbet': 'sterbt',
+        'lernet': 'lernt', 'pflanzet': 'pflanzt', 'füllet': 'füllt',
+        'möget': 'mögt', 'schaffet': 'schafft', 'kaufet': 'kauft',
+        'brechet': 'brecht', 'zoget': 'zogt', 'wehret': 'wehrt',
+        'stoßet': 'stoßt', 'jaget': 'jagt', 'hasset': 'hasst',
+        'mehret': 'mehrt', 'zeiget': 'zeigt', 'sahet': 'saht',
+        'irret': 'irrt', 'sprachet': 'spracht', 'forschet': 'forscht',
+        'zählet': 'zählt', 'fahret': 'fahrt', 'prediget': 'predigt',
+        'fasset': 'fasst', 'schreiet': 'schreit', 'murret': 'murrt',
+        'heißet': 'heißt', 'kamet': 'kamt', 'sitzet': 'sitzt',
+        'klopfet': 'klopft',
+        # Compound verbs with prefixes
+        'verkündiget': 'verkündigt', 'verlasset': 'verlasst',
+        'erschrecket': 'erschreckt', 'erfahret': 'erfahrt',
+        'vertrauet': 'vertraut', 'befolget': 'befolgt',
+        'vergesset': 'vergesst', 'befleißiget': 'befleißigt',
+        'vermöget': 'vermögt', 'befraget': 'befragt',
+        'umkommet': 'umkommt', 'verehret': 'verehrt',
+        'hineinkommet': 'hineinkommt', 'ertraget': 'ertragt',
+        'erzählet': 'erzählt', 'verstocket': 'verstockt',
+        'begehret': 'begehrt', 'erforschet': 'erforscht',
+        'ergreifet': 'ergreift', 'besitzet': 'besitzt',
+        'einnehmet': 'einnehmt', 'hingehet': 'hingeht',
+        'erfüllet': 'erfüllt', 'erstarket': 'erstarkt',
+        'ansehet': 'anseht', 'zerstreuet': 'zerstreut',
+        'verstehet': 'versteht', 'bedenket': 'bedenkt',
+        'erkundiget': 'erkundigt', 'bezeuget': 'bezeugt',
+        'verunreiniget': 'verunreinigt', 'angehöret': 'angehört',
+        'bedürfet': 'bedürft', 'erlanget': 'erlangt',
+        'besehet': 'beseht', 'ermahnet': 'ermahnt',
+        'vergebet': 'vergebt', 'verberget': 'verbergt',
+        'bewahret': 'bewahrt', 'zerstöret': 'zerstört',
+        'verzehret': 'verzehrt', 'darbringet': 'darbringt',
+        'umkehret': 'umkehrt', 'bestellet': 'bestellt',
+        'erlöset': 'erlöst', 'beschauet': 'beschaut',
+        'bekehret': 'bekehrt', 'erbauet': 'erbaut',
+        'zuhöret': 'zuhört', 'versuchet': 'versucht',
+        'anrufet': 'anruft', 'abkehret': 'abkehrt',
+        'abweichet': 'abweicht',
+        # Remaining forms found in second pass
+        'weiset': 'weist', 'ehret': 'ehrt', 'neiget': 'neigt',
+        'brauchet': 'braucht', 'müsset': 'müsst', 'nahet': 'naht',
+        'leihet': 'leiht', 'reizet': 'reizt', 'wälzet': 'wälzt',
+        'reißet': 'reißt', 'ruhet': 'ruht', 'strebet': 'strebt',
+        'zerreißet': 'zerreißt', 'erwählet': 'erwählt',
+        'gießet': 'gießt', 'speiset': 'speist', 'begrabet': 'begrabt',
+        'währet': 'währt', 'reichet': 'reicht', 'holet': 'holt',
+        'reget': 'regt', 'waschet': 'wascht', 'vergießet': 'vergießt',
+        'abweiset': 'abweist', 'verwerfet': 'verwerft',
+    }
+
+    def _fix_verb(m):
+        word = m.group(0)
+        modern = _VERBS[word.lower()]
+        if word[0].isupper():
+            return modern[0].upper() + modern[1:]
+        return modern
+
+    _verb_pat = r'\b(' + '|'.join(
+        sorted(_VERBS, key=len, reverse=True)
+    ) + r')\b'
+    text = re.sub(_verb_pat, _fix_verb, text, flags=re.IGNORECASE)
+
+    # "gebet" (lowercase only) → "gebt" — skip "Gebet" (noun = prayer)
+    text = re.sub(r'\bgebet\b', 'gebt', text)
 
     return text
 
