@@ -135,6 +135,457 @@ const LS = {
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 };
 
+// ─── Level Test ─────────────────────────────────────────
+const LEVEL_TEST=[
+  {en:'water',de:'Wasser',wrong:['Feuer','Stein'],level:'A1'},
+  {en:'bread',de:'Brot',wrong:['Milch','Fleisch'],level:'A1'},
+  {en:'house',de:'Haus',wrong:['Stadt','Straße'],level:'A1'},
+  {en:'night',de:'Nacht',wrong:['Morgen','Abend'],level:'A1'},
+  {en:'brother',de:'Bruder',wrong:['Schwester','Vater'],level:'A1'},
+  {en:'king',de:'König',wrong:['Krieger','Richter'],level:'A1'},
+  {en:'voice',de:'Stimme',wrong:['Klang','Schrei'],level:'A2'},
+  {en:'sheep',de:'Schaf',wrong:['Ziege','Esel'],level:'A2'},
+  {en:'wrong',de:'Unrecht',wrong:['Recht','Gericht'],level:'A2'},
+  {en:'clothes',de:'Kleider',wrong:['Schuhe','Stoffe'],level:'A2'},
+  {en:'field',de:'Feld',wrong:['Garten','Hügel'],level:'A2'},
+  {en:'promise',de:'Versprechen',wrong:['Geschenk','Geheimnis'],level:'A2'},
+  {en:'earth',de:'Erde',wrong:['Himmel','Meer'],level:'B1'},
+  {en:'battle',de:'Schlacht',wrong:['Frieden','Reise'],level:'B1'},
+  {en:'escape',de:'entkommen',wrong:['ankommen','verstecken'],level:'B1'},
+  {en:'praise',de:'loben',wrong:['bitten','flüstern'],level:'B1'},
+  {en:'gather',de:'sammeln',wrong:['streuen','trennen'],level:'B1'},
+  {en:'strength',de:'Stärke',wrong:['Schwäche','Müdigkeit'],level:'B1'},
+  {en:'flee',de:'fliehen',wrong:['kämpfen','verfolgen'],level:'B2'},
+  {en:'mourn',de:'trauern',wrong:['feiern','schweigen'],level:'B2'},
+  {en:'likewise',de:'ebenso',wrong:['trotzdem','niemals'],level:'B2'},
+  {en:'stretch',de:'strecken',wrong:['biegen','drehen'],level:'B2'},
+  {en:'wilderness',de:'Wildnis',wrong:['Festung','Siedlung'],level:'B2'},
+  {en:'wrath',de:'Zorn',wrong:['Gnade','Stolz'],level:'B2'},
+  {en:'slaughter',de:'Gemetzel',wrong:['Ernte','Festmahl'],level:'C1'},
+  {en:'anointed',de:'Gesalbter',wrong:['Verbannter','Gelehrter'],level:'C1'},
+  {en:'distressed',de:'betrübt',wrong:['erfreut','gleichgültig'],level:'C1'},
+  {en:'valiant',de:'tapfer',wrong:['feige','listig'],level:'C1'},
+  {en:'lament',de:'klagen',wrong:['jubeln','flüstern'],level:'C1'},
+  {en:'anguish',de:'Qual',wrong:['Trost','Ruhe'],level:'C1'},
+];
+
+function scoreLevelTest(answers){
+  const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0};
+  const maxByLevel={A1:0,A2:0,B1:0,B2:0,C1:0};
+  LEVEL_TEST.forEach((q,i)=>{
+    maxByLevel[q.level]++;
+    if(answers[i]===q.de)byLevel[q.level]++;
+  });
+  const pct=lvl=>maxByLevel[lvl]?byLevel[lvl]/maxByLevel[lvl]:0;
+  if(pct('A1')<0.5)return 'A1';
+  if(pct('A2')<0.5)return 'A1';
+  if(pct('B1')<0.5)return 'A2';
+  if(pct('B2')<0.5)return 'B1';
+  if(pct('C1')<0.5)return 'B2';
+  return 'C1';
+}
+
+function LevelTest({onComplete}){
+  const [current,setCurrent]=useState(0);
+  const [answers,setAnswers]=useState([]);
+  const [shuffled]=useState(()=>LEVEL_TEST.map(q=>{
+    const opts=[q.de,...q.wrong];
+    for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}
+    return opts;
+  }));
+  const [selected,setSelected]=useState(null);
+  const [correct,setCorrect]=useState(null);
+  const [done,setDone]=useState(false);
+  const [result,setResult]=useState(null);
+
+  const q=LEVEL_TEST[current];
+  const opts=shuffled[current];
+
+  const pick=useCallback(ans=>{
+    if(selected!==null)return;
+    setSelected(ans);
+    setCorrect(ans===q.de);
+    const newAnswers=[...answers,ans];
+    setAnswers(newAnswers);
+    setTimeout(()=>{
+      if(current<LEVEL_TEST.length-1){
+        setCurrent(current+1);setSelected(null);setCorrect(null);
+      } else {
+        const level=scoreLevelTest(newAnswers);
+        setResult(level);setDone(true);
+      }
+    },800);
+  },[current,answers,q,selected]);
+
+  if(done){
+    const total=answers.filter((a,i)=>a===LEVEL_TEST[i].de).length;
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>Ergebnis</h1>
+      </header>
+      <div style={{textAlign:'center',padding:'20px 0'}}>
+        <div style={{fontSize:48,fontWeight:700,color:'var(--t-primary)',fontFamily:sans,margin:'16px 0'}}>{result}</div>
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{total} von {LEVEL_TEST.length} richtig</p>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 24px',lineHeight:1.6}}>
+          Dein Sprachniveau wurde auf <strong>{result}</strong> gesetzt.<br/>
+          Du kannst es jederzeit in den Einstellungen ändern.
+        </p>
+        <button onClick={()=>onComplete(result)} style={S.startBtn}>Weiter</button>
+      </div>
+    </div>);
+  }
+
+  return(<div>
+    <header style={S.header}>
+      <h1 style={S.title}>Sprachtest</h1>
+      <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>Frage {current+1} von {LEVEL_TEST.length}</p>
+    </header>
+    <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 24px',overflow:'hidden'}}>
+      <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((current)/LEVEL_TEST.length)*100}%`}}/>
+    </div>
+    <div style={{textAlign:'center',margin:'20px 0 32px'}}>
+      <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>Was bedeutet:</p>
+      <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{q.en}</p>
+    </div>
+    <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:320,margin:'0 auto'}}>
+      {opts.map((opt,i)=>{
+        const isSelected=selected===opt;
+        const isCorrectOpt=opt===q.de;
+        let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)';
+        if(selected!==null){
+          if(isCorrectOpt){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
+          else if(isSelected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)'}
+        }
+        return(<button key={i} onClick={()=>pick(opt)} style={{padding:'14px 20px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s'}}>{opt}</button>);
+      })}
+    </div>
+  </div>);
+}
+
+// ─── Cloze Exercises ────────────────────────────────────
+const CLOZE_EXERCISES={
+  A1:[
+    {text:'In the beginning, God created the heavens and the ___.',answer:'earth',wrong:['water','light'],de:'Erde',ref:'Genesis 1:1',book:1},
+    {text:'God set them in the expanse of sky to give ___ to the earth.',answer:'light',wrong:['water','food'],de:'Licht',ref:'Genesis 1:17',book:1},
+    {text:'The man and his ___ were both naked, and they were not ashamed.',answer:'wife',wrong:['son','brother'],de:'Frau',ref:'Genesis 2:25',book:1},
+    {text:'The man called his wife Eve because she would be the ___ of all the living.',answer:'mother',wrong:['sister','daughter'],de:'Mutter',ref:'Genesis 3:20',book:1},
+    {text:'Cain ___ Yahweh\'s presence, and lived in the land of Nod, east of Eden.',answer:'left',wrong:['saw','told'],de:'verließ',ref:'Genesis 4:16',book:1},
+    {text:'Now let a little water be fetched, wash your ___ and rest yourselves under the tree.',answer:'feet',wrong:['hands','eyes'],de:'Füße',ref:'Genesis 18:4',book:1},
+    {text:'God ___, "Let there be light," and there was light.',answer:'said',wrong:['came','went'],de:'sagte',ref:'Genesis 1:3',book:1},
+    {text:'The serpent said to the woman, "You won\'t surely ___."',answer:'die',wrong:['see','eat'],de:'sterben',ref:'Genesis 3:4',book:1},
+    {text:'Then I will tell them, "I ___ knew you. Depart from me."',answer:'never',wrong:['always','often'],de:'niemals',ref:'Matthew 7:23',book:40},
+    {text:'They stoned Stephen as he called out, saying, "Lord Jesus, receive my ___!"',answer:'spirit',wrong:['body','name'],de:'Geist',ref:'Acts 7:59',book:44},
+    {text:'Better is a ___ of herbs, where love is, than a fattened calf with hatred.',answer:'dinner',wrong:['house','field'],de:'Mahl',ref:'Proverbs 15:17',book:20},
+    {text:'As ___ passed, Cain brought an offering to Yahweh from the fruit of the ground.',answer:'time',wrong:['rain','night'],de:'Zeit',ref:'Genesis 4:3',book:1},
+  ],
+  A2:[
+    {text:'It rained on the earth forty days and forty ___.',answer:'nights',wrong:['years','hours'],de:'Nächte',ref:'Genesis 7:12',book:1},
+    {text:'Out of that land he went into Assyria, and ___ Nineveh.',answer:'built',wrong:['found','sold'],de:'baute',ref:'Genesis 10:11',book:1},
+    {text:'The ___ had risen on the earth when Lot came to Zoar.',answer:'sun',wrong:['moon','rain'],de:'Sonne',ref:'Genesis 19:23',book:1},
+    {text:'But his wife ___ back from behind him, and she became a pillar of salt.',answer:'looked',wrong:['walked','turned'],de:'blickte',ref:'Genesis 19:26',book:1},
+    {text:'Abraham drew ___ and said, "Will you consume the righteous with the wicked?"',answer:'near',wrong:['back','away'],de:'nahe',ref:'Genesis 18:23',book:1},
+    {text:'He said, "Please, my ___, don\'t act so wickedly."',answer:'brothers',wrong:['friends','children'],de:'Brüder',ref:'Genesis 19:7',book:1},
+    {text:'For everyone who asks receives. He who seeks finds. To him who ___ it will be opened.',answer:'knocks',wrong:['waits','prays'],de:'klopft',ref:'Matthew 7:8',book:40},
+    {text:'My days are past, my ___ are broken off, as are the thoughts of my heart.',answer:'plans',wrong:['songs','rules'],de:'Pläne',ref:'Job 17:11',book:18},
+    {text:'"Let\'s break their bonds apart, and cast away their cords from ___."',answer:'us',wrong:['you','him'],de:'uns',ref:'Psalms 2:3',book:19},
+    {text:'Jacob was left ___, and wrestled with a man there until the breaking of the day.',answer:'alone',wrong:['behind','above'],de:'allein',ref:'Genesis 32:24',book:1},
+    {text:'The ___ of his kingdom was Babel, Erech, Accad, and Calneh.',answer:'beginning',wrong:['middle','border'],de:'Anfang',ref:'Genesis 10:10',book:1},
+    {text:'The men ___ from there, and went toward Sodom.',answer:'turned',wrong:['jumped','slept'],de:'wandten',ref:'Genesis 18:22',book:1},
+  ],
+  B1:[
+    {text:'In the ___, God created the heavens and the earth.',answer:'beginning',wrong:['morning','darkness'],de:'Anfang',ref:'Genesis 1:1',book:1},
+    {text:'There was ___ and there was morning, a fifth day.',answer:'evening',wrong:['silence','thunder'],de:'Abend',ref:'Genesis 1:23',book:1},
+    {text:'The man and his wife were both ___, and they were not ashamed.',answer:'naked',wrong:['silent','hidden'],de:'nackt',ref:'Genesis 2:25',book:1},
+    {text:'Yahweh God ___ the man to eat freely of every tree of the garden.',answer:'commanded',wrong:['punished','promised'],de:'gebot',ref:'Genesis 2:16',book:1},
+    {text:'The woman said to the serpent, "We may eat ___ from the trees of the garden."',answer:'fruit',wrong:['bread','grain'],de:'Frucht',ref:'Genesis 3:2',book:1},
+    {text:'Cain said to Yahweh, "My punishment is ___ than I can bear."',answer:'greater',wrong:['smaller','deeper'],de:'größer',ref:'Genesis 4:13',book:1},
+    {text:'Yahweh said to Cain, "Why are you ___? Why has the expression of your face fallen?"',answer:'angry',wrong:['tired','afraid'],de:'zornig',ref:'Genesis 4:6',book:1},
+    {text:'The heavens, the earth, and all their vast array were ___.',answer:'finished',wrong:['destroyed','forgotten'],de:'vollendet',ref:'Genesis 2:1',book:1},
+    {text:'A mist went up from the earth, and ___ the whole surface of the ground.',answer:'watered',wrong:['darkened','covered'],de:'bewässerte',ref:'Genesis 2:6',book:2},
+    {text:'Open the gates, that the righteous nation may enter: the one which keeps ___.',answer:'faith',wrong:['silence','distance'],de:'Treue',ref:'Isaiah 26:2',book:23},
+    {text:'He waited yet another seven days; and again he sent the ___ out of the ship.',answer:'dove',wrong:['raven','eagle'],de:'Taube',ref:'Genesis 8:10',book:1},
+    {text:'Immediately his ears were opened, and he spoke ___.',answer:'clearly',wrong:['quietly','slowly'],de:'deutlich',ref:'Mark 7:35',book:41},
+  ],
+  B2:[
+    {text:'Cain said to Yahweh, "My ___ is greater than I can bear."',answer:'punishment',wrong:['offering','journey'],de:'Strafe',ref:'Genesis 4:13',book:1},
+    {text:'Cain left Yahweh\'s ___, and lived in the land of Nod.',answer:'presence',wrong:['kingdom','temple'],de:'Angesicht',ref:'Genesis 4:16',book:1},
+    {text:'As time passed, Cain brought an ___ to Yahweh from the fruit of the ground.',answer:'offering',wrong:['weapon','shelter'],de:'Opfer',ref:'Genesis 4:3',book:1},
+    {text:'The earth was corrupt before God, and the earth was filled with ___.',answer:'violence',wrong:['silence','beauty'],de:'Gewalt',ref:'Genesis 6:11',book:1},
+    {text:'But Noah found ___ in Yahweh\'s eyes.',answer:'favor',wrong:['shelter','wisdom'],de:'Gnade',ref:'Genesis 6:8',book:1},
+    {text:'Noah began to be a farmer, and planted a ___.',answer:'vineyard',wrong:['fortress','monument'],de:'Weinberg',ref:'Genesis 9:20',book:1},
+    {text:'He said, "Canaan is ___. He will be a servant of servants to his brothers."',answer:'cursed',wrong:['blessed','chosen'],de:'verflucht',ref:'Genesis 9:25',book:1},
+    {text:'Be ___ and multiply. Increase abundantly in the earth.',answer:'fruitful',wrong:['grateful','fearful'],de:'fruchtbar',ref:'Genesis 9:7',book:1},
+    {text:'He drank of the wine and got ___. He was uncovered within his tent.',answer:'drunk',wrong:['tired','angry'],de:'betrunken',ref:'Genesis 9:21',book:1},
+    {text:'"I will ___ my covenant with you, and with your offspring after you."',answer:'establish',wrong:['abandon','conceal'],de:'errichten',ref:'Genesis 9:9',book:1},
+    {text:'They ___ Yahweh, and served Baal and the Ashtaroth.',answer:'abandoned',wrong:['worshiped','summoned'],de:'verließen',ref:'Judges 2:13',book:7},
+    {text:'Then Jesus came from Galilee to the Jordan to John, to be ___ by him.',answer:'baptized',wrong:['received','rejected'],de:'getauft',ref:'Matthew 3:13',book:40},
+  ],
+  C1:[
+    {text:'The woman said to the ___, "We may eat fruit from the trees of the garden."',answer:'serpent',wrong:['prophet','stranger'],de:'Schlange',ref:'Genesis 3:2',book:1},
+    {text:'The earth was ___ before God, and the earth was filled with violence.',answer:'corrupt',wrong:['fertile','ancient'],de:'verderbt',ref:'Genesis 6:11',book:1},
+    {text:'After the seven days, the ___ came on the earth.',answer:'floodwaters',wrong:['earthquakes','lightning'],de:'Flutgewässer',ref:'Genesis 7:10',book:1},
+    {text:'Sarai was ___. She had no child.',answer:'barren',wrong:['wealthy','anxious'],de:'unfruchtbar',ref:'Genesis 11:30',book:1},
+    {text:'Yahweh ___ Pharaoh and his house with great plagues.',answer:'plagued',wrong:['visited','rewarded'],de:'plagte',ref:'Genesis 12:17',book:1},
+    {text:'He believed in Yahweh, and he reckoned it to him for ___.',answer:'righteousness',wrong:['forgiveness','obedience'],de:'Gerechtigkeit',ref:'Genesis 15:6',book:1},
+    {text:'"I will make my ___ between me and you, and will multiply you exceedingly."',answer:'covenant',wrong:['dwelling','judgment'],de:'Bund',ref:'Genesis 17:2',book:1},
+    {text:'Your brother came with ___, and has taken away your blessing.',answer:'deceit',wrong:['courage','silence'],de:'List',ref:'Genesis 27:35',book:1},
+    {text:'Stay with him a few days, until your brother\'s ___ turns away.',answer:'fury',wrong:['mercy','hunger'],de:'Wut',ref:'Genesis 27:44',book:1},
+    {text:'God set them in the ___ of sky to give light to the earth.',answer:'expanse',wrong:['silence','surface'],de:'Gewölbe',ref:'Genesis 1:17',book:1},
+    {text:'Not only this, but we also rejoice in our sufferings, knowing that suffering works ___.',answer:'perseverance',wrong:['forgetfulness','indifference'],de:'Ausdauer',ref:'Romans 5:3',book:45},
+    {text:'Abraham complained to Abimelech because of a well, which his servants had ___ taken away.',answer:'violently',wrong:['peacefully','reluctantly'],de:'gewaltsam',ref:'Genesis 21:25',book:1},
+  ],
+};
+
+let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[]};
+
+function Training({userLevel,onBack,books,openChapter}){
+  const [mode,setMode]=useState(null);
+  const [exType,setExType]=useState(null);
+  const [selectedLevel,setSelectedLevel]=useState(userLevel);
+  const [exercises,setExercises]=useState([]);
+  const [current,setCurrent]=useState(0);
+  const [selected,setSelected]=useState(null);
+  const [score,setScore]=useState(0);
+  const [done,setDone]=useState(false);
+  const [shuffledOpts,setShuffledOpts]=useState([]);
+  const [lastStart,setLastStart]=useState(null);
+  const wrongRef=useRef([]);
+  const totalRef=useRef(0);
+
+  const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+  const startCloze=useCallback(lvl=>{
+    const pool=CLOZE_EXERCISES[lvl]||[];
+    const picked=shuffle(pool).slice(0,10);
+    setExercises(picked);
+    setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
+    wrongRef.current=[];totalRef.current=picked.length;
+    setSelectedLevel(lvl);setLastStart(()=>()=>startCloze(lvl));
+  },[]);
+
+  const COOLDOWN=7*24*3600*1000;
+  const getVocabLog=()=>LS.get('bible-vocab-log')||{};
+  const saveVocabLog=log=>LS.set('bible-vocab-log',log);
+
+  const startVocab=useCallback(lvl=>{
+    const pool=VOCAB_POOL[lvl]||[];
+    const log=getVocabLog();
+    const now=Date.now();
+    const fresh=pool.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN);
+    const src=fresh.length>=15?fresh:pool;
+    const picked=shuffle(src).slice(0,15);
+    const allDe=pool.map(w=>w.de);
+    setExercises(picked);
+    setShuffledOpts(picked.map(q=>{
+      const wrong=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
+      return shuffle([q.de,...wrong]);
+    }));
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');
+    wrongRef.current=[];totalRef.current=picked.length;
+    setSelectedLevel(lvl);setLastStart(()=>()=>startVocab(lvl));
+  },[]);
+
+  const startBookCloze=useCallback(bi=>{
+    const bookNr=books[bi].nr;
+    const allEx=Object.values(CLOZE_EXERCISES).flat().filter(e=>e.book===bookNr);
+    if(allEx.length===0){setMode('noexercises');return}
+    const picked=shuffle(allEx).slice(0,10);
+    setExercises(picked);
+    setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
+    wrongRef.current=[];totalRef.current=picked.length;
+    setLastStart(()=>()=>startBookCloze(bi));
+  },[books]);
+
+  const pick=useCallback(ans=>{
+    if(selected!==null)return;
+    const ex=exercises[current];
+    const correct=exType==='vocab'?ans===ex.de:ans===ex.answer;
+    setSelected(ans);
+    if(correct){
+      setScore(s=>s+1);
+      if(exType==='vocab'){
+        const log=getVocabLog();
+        log[selectedLevel+':'+ex.en]=Date.now();
+        saveVocabLog(log);
+      }
+      setTimeout(()=>{
+        if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
+        else if(wrongRef.current.length>0) startRetry();
+        else setDone(true);
+      },900);
+    } else {
+      wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
+    }
+  },[current,exercises,selected,exType,selectedLevel,startRetry]);
+
+  const startRetry=useCallback(()=>{
+    const wrong=wrongRef.current;
+    wrongRef.current=[];
+    const retryEx=wrong.map(w=>w.ex);
+    setExercises(retryEx);
+    if(exType==='vocab'){
+      const pool=VOCAB_POOL[selectedLevel]||[];
+      const allDe=pool.map(w=>w.de);
+      setShuffledOpts(retryEx.map(q=>{
+        const wr=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
+        return shuffle([q.de,...wr]);
+      }));
+    } else {
+      setShuffledOpts(retryEx.map(ex=>shuffle([ex.answer,...ex.wrong])));
+    }
+    setCurrent(0);setSelected(null);
+  },[exType,selectedLevel]);
+
+  const advance=useCallback(()=>{
+    if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
+    else if(wrongRef.current.length>0) startRetry();
+    else setDone(true);
+  },[current,exercises,startRetry]);
+
+  if(done){
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>Ergebnis</h1></header>
+      <div style={{textAlign:'center',padding:'20px 0'}}>
+        <div style={{fontSize:48,fontWeight:700,color:score>=totalRef.current*0.7?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{score}/{totalRef.current}</div>
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.7?'Gut gemacht!':'Weiter üben!'}</p>
+        <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+          <button onClick={()=>setMode(null)} style={S.navBtn}>Beenden</button>
+          {lastStart&&<button onClick={()=>{setDone(false);lastStart()}} style={S.startBtn}>Weiter</button>}
+        </div>
+      </div>
+    </div>);
+  }
+
+  if(mode==='exercise'&&exType==='cloze'){
+    const ex=exercises[current];const opts=shuffledOpts[current];const parts=ex.text.split('___');
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>Lückentext</h1>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}</p>
+      </header>
+      <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
+        <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
+      </div>
+      <div style={{fontFamily:'var(--t-serif)',fontSize:18,lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
+        {parts[0]}<span style={{display:'inline-block',minWidth:80,borderBottom:'2px dashed var(--t-accent)',padding:'0 4px',color:selected!==null?(selected===ex.answer?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontWeight:600}}>{selected||'...'}</span>{parts[1]}
+      </div>
+      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
+      <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
+        {opts.map((opt,i)=>{
+          let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)';
+          if(selected!==null){
+            if(opt===ex.answer){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
+            else if(opt===selected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)'}
+          }
+          return(<button key={i} onClick={()=>pick(opt)} style={{padding:'12px 20px',border,borderRadius:10,background:bg,color,fontSize:16,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:selected!==null&&opt===selected&&opt!==ex.answer?'line-through':'none'}}>{opt}</button>);
+        })}
+      </div>
+      {selected!==null&&selected===ex.answer&&<p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 0'}}>{ex.answer} = {ex.de}</p>}
+      {selected!==null&&selected!==ex.answer&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>
+        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>Falsch!</p>
+        <button onClick={advance} style={S.startBtn}>Weiter</button>
+      </div>}
+    </div>);
+  }
+
+  if(mode==='exercise'&&exType==='vocab'){
+    const ex=exercises[current];const opts=shuffledOpts[current];
+    return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>Vokabeln</h1>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}</p>
+      </header>
+      <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
+        <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
+      </div>
+      <div style={{textAlign:'center',margin:'24px 0 32px'}}>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>Was bedeutet:</p>
+        <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.en}</p>
+      </div>
+      <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
+        {opts.map((opt,i)=>{
+          let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)',textDeco='none';
+          if(selected!==null){
+            if(opt===ex.de){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
+            else if(opt===selected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)';textDeco='line-through'}
+          }
+          return(<button key={i} onClick={()=>pick(opt)} style={{padding:'14px 20px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:textDeco}}>{opt}</button>);
+        })}
+      </div>
+      {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
+        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>Falsch!</p>
+        <button onClick={advance} style={S.startBtn}>Weiter</button>
+      </div>}
+    </div>);
+  }
+
+  if(mode==='noexercises'){
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>Training</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>← Zurück</button></div>
+      <p style={{textAlign:'center',color:'var(--t-muted)',fontFamily:sans,margin:'40px 0'}}>Für dieses Buch gibt es noch keine Übungen.</p>
+    </div>);
+  }
+
+  if(mode==='book'){
+    const ntStart=books.findIndex(b=>b.nr>=40);
+    const otBooks=books.slice(0,ntStart>0?ntStart:books.length);
+    const ntBooks=ntStart>0?books.slice(ntStart):[];
+    const bookHasEx=bi=>{const nr=books[bi].nr;return Object.values(CLOZE_EXERCISES).flat().some(e=>e.book===nr)};
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>Lückentext nach Buch</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>← Zurück</button></div>
+      <div style={S.settingsSection}>
+        {otBooks.length>0&&<div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Altes Testament</span>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+            {otBooks.map((b,i)=>{const has=bookHasEx(i);return(
+              <button key={i} onClick={()=>has&&startBookCloze(i)} style={{padding:'6px 12px',border:'1px solid var(--t-border)',borderRadius:6,background:has?'var(--t-card-solid)':'var(--t-bg2)',color:has?'var(--t-text2)':'var(--t-muted2)',fontSize:13,fontFamily:sans,cursor:has?'pointer':'default',opacity:has?1:0.5}}>{b.name}</button>
+            )})}
+          </div>
+        </div>}
+        {ntBooks.length>0&&<div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>Neues Testament</span>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+            {ntBooks.map((b,i)=>{const bi=ntStart+i;const has=bookHasEx(bi);return(
+              <button key={bi} onClick={()=>has&&startBookCloze(bi)} style={{padding:'6px 12px',border:'1px solid var(--t-border)',borderRadius:6,background:has?'var(--t-card-solid)':'var(--t-bg2)',color:has?'var(--t-text2)':'var(--t-muted2)',fontSize:13,fontFamily:sans,cursor:has?'pointer':'default',opacity:has?1:0.5}}>{b.name}</button>
+            )})}
+          </div>
+        </div>}
+      </div>
+    </div>);
+  }
+
+  return(<div>
+    <header style={S.header}><h1 style={S.title}>Training</h1></header>
+    <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>← Zurück</button></div>
+    <div style={S.settingsSection}>
+      <div style={S.settingsGroup}>
+        <span style={S.settingsLabel}>Vokabeln</span>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 12px'}}>Englisches Wort — welche deutsche Übersetzung ist richtig? 15 Fragen pro Runde.</p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
+          {['A1','A2','B1','B2','C1'].map(lvl=>{const pool=VOCAB_POOL[lvl]||[];const log=getVocabLog();const now=Date.now();const fresh=pool.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN).length;return(
+            <button key={lvl} onClick={()=>startVocab(lvl)} style={{...S.lvlBtn,padding:'10px 20px',fontSize:16,...(lvl===userLevel?{borderColor:'var(--t-accent)',color:'var(--t-accent)'}:{})}}>
+              <span>{lvl}{lvl===userLevel?' ★':''}</span>
+              <span style={{display:'block',fontSize:11,color:'var(--t-muted)',marginTop:2}}>{fresh}/{pool.length}</span>
+            </button>);})}
+        </div>
+      </div>
+      <div style={S.settingsGroup}>
+        <span style={S.settingsLabel}>Lückentext</span>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 12px'}}>Finde das fehlende Wort im Bibelvers.</p>
+        <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:12}}>
+          {['A1','A2','B1','B2','C1'].map(lvl=>(<button key={lvl} onClick={()=>startCloze(lvl)} style={{...S.lvlBtn,padding:'10px 20px',fontSize:16,...(lvl===userLevel?{borderColor:'var(--t-accent)',color:'var(--t-accent)'}:{})}}>{lvl}</button>))}
+        </div>
+        <button onClick={()=>setMode('book')} style={{...S.navBtn,fontSize:13}}>Nach Buch wählen</button>
+      </div>
+    </div>
+  </div>);
+}
+
 // ─── Load all data ──────────────────────────────────────
 const isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
 const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline support)
@@ -185,6 +636,10 @@ async function loadData(){
     en.annotations={};
     en.available=true;
   }catch(e){en.available=false;}
+  try{
+    const vr=await fetch('data/vocab_pool.json'+CB);
+    if(vr.ok) VOCAB_POOL=await vr.json();
+  }catch(e){}
   return{en};
 }
 
@@ -323,7 +778,8 @@ function App({data}){
   const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
   const ntStartIndex=data.en.ntStartIndex||0;
   const lang='en';
-  const [phase,setPhase]=useState(saved.phase||'nav');
+  const levelTested=LS.get('bible-level-tested');
+  const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
@@ -374,7 +830,11 @@ function App({data}){
     }
   },[]);
 
-  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+
+  const onLevelTestComplete=useCallback(level=>{
+    setUserLevel(level);LS.set('bible-level-tested',true);setPhase('nav');
+  },[]);
 
   const scrollTop=useCallback(()=>{
     const el=document.querySelector('.phone-screen');
@@ -554,6 +1014,16 @@ function App({data}){
 
   const stats=preStats||{totalChapters:0,totalVerses:0,totalWords:0,annotatedBooks:0,allLemmas:0,lemmasByLevel:{},perBook:[]};
 
+  // ── LEVEL TEST ──
+  if(phase==='leveltest'){
+    return <LevelTest onComplete={onLevelTestComplete}/>;
+  }
+
+  // ── TRAINING ──
+  if(phase==='training'){
+    return <Training userLevel={userLevel} onBack={()=>setPhase('nav')} books={books} openChapter={openChapter}/>;
+  }
+
   // ── STATISTICS ──
   if(phase==='stats'){
     const levelOrder=["A1","A2","B1","B2","C1","C2"];
@@ -639,6 +1109,7 @@ function App({data}){
           <span style={S.settingsLabel}>Vocabulary level</span>
           <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
           <p style={S.settingsHint}>Words above this level are shown in the vocabulary check.</p>
+          <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>Sprachtest wiederholen</button>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>Reading speed (TTS)</span>
@@ -696,6 +1167,7 @@ function App({data}){
         </div>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           <button onClick={()=>setPhase('stats')} style={S.gearBtn} title="Statistics">📊</button>
+          <button onClick={()=>setPhase('training')} style={S.gearBtn} title="Training">🎓</button>
           <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
         </div>
       </header>
