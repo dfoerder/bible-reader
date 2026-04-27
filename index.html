@@ -261,6 +261,14 @@ const I18N={
   tooEasy:{de:'zu\neinfach',en:'too\neasy'},
   iGuess:{de:'ich\nrate',en:'just\nguessing'},
 
+  // Search
+  search:{de:'Suche',en:'Search'},
+  searchPlaceholder:{de:'Bibeltext durchsuchen…',en:'Search Bible text…'},
+  searching:{de:'Suche läuft…',en:'Searching…'},
+  noResults:{de:'Keine Treffer',en:'No results'},
+  nResults:{de:'{n} Treffer',en:'{n} results'},
+  home:{de:'Start',en:'Home'},
+
   // Footer
   publicDomain:{de:'Public Domain',en:'Public Domain'},
 };
@@ -1000,6 +1008,10 @@ function App({data}){
   const [dePrompt,setDePrompt]=useState(null);
   const [loading,setLoading]=useState(false);
   const [readingMenu,setReadingMenu]=useState(false);
+  const [searchOpen,setSearchOpen]=useState(false);
+  const [searchQuery,setSearchQuery]=useState('');
+  const [searchResults,setSearchResults]=useState(null);
+  const [searchLoading,setSearchLoading]=useState(false);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
 
@@ -1074,6 +1086,28 @@ function App({data}){
   const goToNav=useCallback(()=>{tts.stop();setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
   const nextChapter=useCallback(()=>{if(chapIdx<(currentBook.numChapters||0)-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
   const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].numChapters-1)},[bookIdx,chapIdx,books,openChapter]);
+
+  const doSearch=useCallback(async(q)=>{
+    if(!q||q.length<2)return;
+    setSearchLoading(true);setSearchResults(null);
+    const ql=q.toLowerCase();const results=[];
+    for(let bi=0;bi<books.length&&results.length<100;bi++){
+      const nr=books[bi].nr;
+      try{
+        const bk=_bookCache[nr]||(await fetchBook(nr));
+        for(const ch of bk.chapters){
+          for(const v of ch.verses){
+            if(v.text.toLowerCase().includes(ql)){
+              results.push({bookIdx:bi,bookName:books[bi].name,chapIdx:bk.chapters.indexOf(ch),chapNum:ch.number,verse:v.n,text:v.text});
+              if(results.length>=100)break;
+            }
+          }
+          if(results.length>=100)break;
+        }
+      }catch(e){}
+    }
+    setSearchResults(results);setSearchLoading(false);
+  },[books]);
 
   const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
   const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})},[]);
@@ -1449,27 +1483,47 @@ function App({data}){
 
   // ── READING ──
   const isPhoneSim=document.body.classList.contains('mode-phone');
-  const barStyle={position:'sticky',top:0,zIndex:100,background:'var(--t-card-solid)',borderBottom:'1px solid var(--t-border)',textAlign:'center',cursor:'pointer',fontSize:14,color:'var(--t-muted)',userSelect:'none',letterSpacing:2,
+  const barBase={position:'sticky',top:0,zIndex:100,background:'var(--t-card-solid)',borderBottom:'1px solid var(--t-border)',
     margin:isPhoneSim?'-36px -16px 0':'calc(-20px - env(safe-area-inset-top, 0px)) -24px 0',
-    padding:isPhoneSim?'28px 16px 2px':'env(safe-area-inset-top, 0px) 24px 2px'};
+    padding:isPhoneSim?'28px 16px 0':'env(safe-area-inset-top, 0px) 24px 0'};
+  const barBtn={background:'none',border:'none',cursor:'pointer',padding:'4px 8px',fontSize:16,color:'var(--t-muted)'};
   return(<div style={{position:'relative'}}>
-    {!readingMenu&&<div onClick={()=>setReadingMenu(true)} style={barStyle}>≡</div>}
-    {readingMenu&&<div style={{position:'sticky',top:0,zIndex:100}}>
-      <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderBottom:'2px solid var(--t-border)',padding:'16px 16px 12px',boxShadow:'0 2px 12px rgba(0,0,0,0.15)'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
-          <h2 style={{...S.title,fontSize:18,margin:0}}>{currentBook.name} {chapNum}</h2>
-          <button onClick={()=>setReadingMenu(false)} style={{background:'none',border:'none',fontSize:22,color:'var(--t-muted)',cursor:'pointer',padding:'4px 8px'}}>✕</button>
-        </div>
-        <div style={{display:'flex',justifyContent:'center',gap:10,marginBottom:12}}>
-          <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>{t('booksNav')}</button>
+    <div style={barBase}>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'4px 0'}}>
+        <button onClick={()=>{tts.stop();goToNav()}} style={barBtn} title={t('home')}>⌂</button>
+        <span style={{fontSize:13,color:'var(--t-title)',fontFamily:sans,fontWeight:500,flex:1,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{currentBook.name} {chapNum}</span>
+        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false)}} style={barBtn} title={t('search')}>⌕</button>
+        <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false)}} style={barBtn} title={t('settings')}>≡</button>
+      </div>
+      {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
+        <form onSubmit={e=>{e.preventDefault();doSearch(searchQuery)}} style={{display:'flex',gap:6}}>
+          <input value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} placeholder={t('searchPlaceholder')} style={{flex:1,padding:'6px 10px',border:'1px solid var(--t-border)',borderRadius:6,fontSize:14,fontFamily:sans,background:'var(--t-bg)',color:'var(--t-text)'}} autoFocus/>
+          <button type="submit" style={{...S.navBtn,padding:'6px 12px',margin:0}}>{t('search')}</button>
+        </form>
+        {searchLoading&&<p style={{fontSize:13,color:'var(--t-muted)',textAlign:'center',margin:'8px 0 0'}}>{t('searching')}</p>}
+        {searchResults&&!searchLoading&&<div style={{maxHeight:300,overflowY:'auto',marginTop:8}}>
+          {searchResults.length===0&&<p style={{fontSize:13,color:'var(--t-muted)',textAlign:'center',margin:0}}>{t('noResults')}</p>}
+          {searchResults.length>0&&<p style={{fontSize:11,color:'var(--t-muted)',margin:'0 0 6px'}}>{t('nResults').replace('{n}',searchResults.length)}{searchResults.length>=100?' (max)':''}</p>}
+          {searchResults.map((r,i)=>{
+            const ql=searchQuery.toLowerCase();const idx=r.text.toLowerCase().indexOf(ql);
+            const before=r.text.slice(Math.max(0,idx-30),idx);const match=r.text.slice(idx,idx+searchQuery.length);const after=r.text.slice(idx+searchQuery.length,idx+searchQuery.length+30);
+            return(<div key={i} onClick={()=>{openChapter(r.bookIdx,r.chapIdx);setSearchOpen(false);setSearchResults(null);setTimeout(()=>{const el=document.getElementById('verse-'+r.verse);if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},500)}} style={{padding:'6px 0',borderBottom:'1px solid var(--t-border)',cursor:'pointer',fontSize:13}}>
+              <span style={{fontWeight:600,color:'var(--t-title)'}}>{r.bookName} {r.chapNum}:{r.verse}</span>
+              <span style={{color:'var(--t-text)',marginLeft:6}}>…{before}<mark style={{background:'var(--t-accent)',color:'#fff',borderRadius:2,padding:'0 2px'}}>{match}</mark>{after}…</span>
+            </div>);
+          })}
+        </div>}
+      </div>}
+      {readingMenu&&<div style={{padding:'8px 0 10px'}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',justifyContent:'center',gap:10,marginBottom:10}}>
           <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>{t('wordList')}</button>
         </div>
-        <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:12}}>
+        <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
           <button onClick={()=>{setReadingMenu(false);setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
           <button onClick={()=>{setReadingMenu(false);setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
           <button onClick={()=>{setReadingMenu(false);setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
         </div>
-        <div style={{borderTop:'1px solid var(--t-border)',paddingTop:12}}>
+        <div style={{borderTop:'1px solid var(--t-border)',paddingTop:10}}>
           {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>{t('stopTTS')}</button>
           ):(<div style={{display:'flex',flexDirection:'column',gap:8}}>
             <button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>{t('readAloud')}</button>
@@ -1486,8 +1540,8 @@ function App({data}){
             </div>
           </div>
         </div>
-      </div>
-    </div>}
+      </div>}
+    </div>
 
 
     <div style={{...S.text,fontSize}}>{verses.map(verse=>{
