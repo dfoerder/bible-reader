@@ -947,7 +947,7 @@ function useTTS(){
   const speakChapter=useCallback(verses=>{
     speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
     const next=()=>{if(stoppedRef.current||!queueRef.current.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
-      setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},2000)};
+      setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},300)};
     const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
   },[speakVerse]);
   const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
