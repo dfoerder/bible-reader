@@ -1008,7 +1008,8 @@ function App({data}){
       if(readingMenuRef.current)return;
       const container=document.querySelector('.phone-screen');
       const topEdge=container?container.getBoundingClientRect().top:0;
-      if(e.clientY-topEdge<40)setReadingMenu(true);
+      const threshold=container?40:100;
+      if(e.clientY-topEdge<threshold)setReadingMenu(true);
     };
     const target=document.querySelector('.phone-screen')||document;
     target.addEventListener('click',handler);
