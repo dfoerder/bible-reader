@@ -1000,6 +1000,20 @@ function App({data}){
   const [dePrompt,setDePrompt]=useState(null);
   const [loading,setLoading]=useState(false);
   const [readingMenu,setReadingMenu]=useState(false);
+  const readingMenuRef=useRef(readingMenu);readingMenuRef.current=readingMenu;
+  const isReading=phase!=='leveltest'&&phase!=='training'&&phase!=='stats'&&phase!=='settings'&&phase!=='nav'&&phase!=='quiz'&&!loading;
+  useEffect(()=>{
+    if(!isReading)return;
+    const handler=e=>{
+      if(readingMenuRef.current)return;
+      const container=document.querySelector('.phone-screen');
+      const topEdge=container?container.getBoundingClientRect().top:0;
+      if(e.clientY-topEdge<40)setReadingMenu(true);
+    };
+    const target=document.querySelector('.phone-screen')||document;
+    target.addEventListener('click',handler);
+    return()=>target.removeEventListener('click',handler);
+  },[isReading]);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
 
@@ -1449,9 +1463,8 @@ function App({data}){
 
   // ── READING ──
   return(<div style={{position:'relative'}}>
-    <div style={{position:'sticky',top:0,zIndex:100,marginBottom:readingMenu?0:-44}}>
-      {!readingMenu&&<div onClick={()=>setReadingMenu(true)} style={{height:44,cursor:'pointer',userSelect:'none',WebkitTapHighlightColor:'transparent'}}/>}
-      {readingMenu&&<div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderBottom:'2px solid var(--t-border)',padding:'16px 16px 12px',boxShadow:'0 2px 12px rgba(0,0,0,0.15)'}}>
+    {readingMenu&&<div style={{position:'sticky',top:0,zIndex:100}}>
+      <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderBottom:'2px solid var(--t-border)',padding:'16px 16px 12px',boxShadow:'0 2px 12px rgba(0,0,0,0.15)'}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
           <h2 style={{...S.title,fontSize:18,margin:0}}>{currentBook.name} {chapNum}</h2>
           <button onClick={()=>setReadingMenu(false)} style={{background:'none',border:'none',fontSize:22,color:'var(--t-muted)',cursor:'pointer',padding:'4px 8px'}}>✕</button>
@@ -1482,8 +1495,8 @@ function App({data}){
             </div>
           </div>
         </div>
-      </div>}
-    </div>
+      </div>
+    </div>}
 
 
     <div style={{...S.text,fontSize}}>{verses.map(verse=>{
