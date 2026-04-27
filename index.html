@@ -1449,7 +1449,7 @@ function App({data}){
 
   // ── READING ──
   return(<div style={{position:'relative'}}>
-    {!readingMenu&&<button onClick={()=>setReadingMenu(true)} style={{position:'sticky',top:8,zIndex:100,display:'block',marginLeft:'auto',marginRight:8,marginBottom:-36,background:'var(--t-card-solid)',border:'1px solid var(--t-border)',borderRadius:8,padding:'4px 10px',fontSize:16,color:'var(--t-muted)',cursor:'pointer',boxShadow:'0 1px 4px rgba(0,0,0,0.1)',opacity:0.7}}>≡</button>}
+    {!readingMenu&&<button onClick={()=>setReadingMenu(true)} style={{position:'sticky',top:8,zIndex:100,display:'block',marginLeft:'auto',marginRight:8,marginBottom:-28,width:28,height:28,background:'var(--t-card-solid)',border:'1px solid var(--t-border)',borderRadius:'50%',cursor:'pointer',opacity:0.45}}/>}
     {readingMenu&&<div style={{position:'sticky',top:0,zIndex:100}}>
       <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderBottom:'2px solid var(--t-border)',padding:'16px 16px 12px',boxShadow:'0 2px 12px rgba(0,0,0,0.15)'}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
