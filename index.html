@@ -127,13 +127,148 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.2.0';
+const APP_VERSION = '1.3.0';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
   get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 };
+
+// ─── i18n ───────────────────────────────────────────────
+const I18N={
+  // General
+  back:{de:'← Zurück',en:'← Back'},
+  books:{de:'Bücher',en:'Books'},
+  booksNav:{de:'≡ Bücher',en:'≡ Books'},
+  next:{de:'Weiter',en:'Next'},
+  cancel:{de:'Abbrechen',en:'Cancel'},
+  yes:{de:'Ja',en:'Yes'},
+  no:{de:'Nein',en:'No'},
+  loading:{de:'Lädt…',en:'Loading…'},
+  loadingData:{de:'Daten werden geladen...',en:'Loading data...'},
+  errorLoading:{de:'Fehler beim Laden',en:'Error loading data'},
+  errorHint:{de:'Wurde start.command ausgeführt?',en:'Did you run start.command?'},
+
+  // Nav
+  navTitle:{de:'Englisch mit der Bibel',en:"English Learner's Bible"},
+  navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Englisch.',en:"Deepen your faith and master English through God's Word."},
+  navSubtitle2:{de:'Die komplette Bibel mit Vokabelhilfe, Audio und Lernwerkzeugen.',en:'The complete Bible with vocabulary assistance, audio, and learning tools.'},
+  myLevel:{de:'Mein Level:',en:'My level:'},
+  oldTestament:{de:'Altes Testament',en:'Old Testament'},
+  newTestament:{de:'Neues Testament',en:'New Testament'},
+  nBooks:{de:'{n} Bücher',en:'{n} books'},
+  nCh:{de:'{n} Kap.',en:'{n} ch.'},
+
+  // Settings
+  settings:{de:'Einstellungen',en:'Settings'},
+  vocabLevel:{de:'Vokabel-Level',en:'Vocabulary level'},
+  vocabLevelHint:{de:'Wörter über diesem Level werden in der Vokabelprüfung angezeigt.',en:'Words above this level are shown in the vocabulary check.'},
+  retakeTest:{de:'Sprachtest wiederholen',en:'Retake language test'},
+  readingSpeed:{de:'Lesegeschwindigkeit (Vorlesen)',en:'Reading speed (TTS)'},
+  slow:{de:'Langsam',en:'Slow'},
+  normal:{de:'Normal',en:'Normal'},
+  fast:{de:'Schnell',en:'Fast'},
+  fontSize:{de:'Schriftgröße',en:'Font size'},
+  fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
+  layout:{de:'Layout',en:'Layout'},
+  layoutClassic:{de:'Klassisch',en:'Classic'},
+  layoutModernLight:{de:'Modern Hell',en:'Modern Light'},
+  layoutModernDark:{de:'Modern Dunkel',en:'Modern Dark'},
+  progress:{de:'Fortschritt',en:'Progress'},
+  totalLearned:{de:'Gelernte Wörter gesamt:',en:'Total words learned:'},
+  resetProgress:{de:'Fortschritt zurücksetzen',en:'Reset all progress'},
+  resetConfirm:{de:'Alle gelernten Wörter und den Fortschritt zurücksetzen?',en:'Reset all learned words and progress?'},
+  statsPage:{de:'Statistik-Seite',en:'Statistics page'},
+  statsText:{de:'Text (Bücher, Kapitel, Verse, Wörter)',en:'Text (books, chapters, verses, words)'},
+  statsVocab:{de:'Vokabular (Lemmata nach Level)',en:'Vocabulary (lemmas by level)'},
+  statsProgress:{de:'Dein Fortschritt',en:'Your progress'},
+  appLanguage:{de:'App-Sprache',en:'App language'},
+
+  // Stats
+  statistics:{de:'Statistik',en:'Statistics'},
+  text:{de:'Text',en:'Text'},
+  nBooksWords:{de:'{b} Bücher · {w} Wörter',en:'{b} books · {w} words'},
+  statBooks:{de:'Bücher',en:'Books'},
+  statChapters:{de:'Kapitel',en:'Chapters'},
+  statVerses:{de:'Verse',en:'Verses'},
+  statWords:{de:'Wörter',en:'Words'},
+  annotatedHint:{de:'{n} von {t} Büchern haben Wort-für-Wort-Annotationen.',en:'{n} of {t} books have word-by-word annotations.'},
+  vocabTotal:{de:'Vokabular — Gesamt',en:'Vocabulary — Total'},
+  nUnique:{de:'{n} einzigartige Wörter',en:'{n} unique words'},
+  uniqueWords:{de:'Einzigartige Wörter',en:'Unique words'},
+  vocabPerBook:{de:'Vokabular pro Buch',en:'Vocabulary per book'},
+  difficulty:{de:'Schwierigkeit ({l})',en:'Difficulty ({l})'},
+  wordsLearned:{de:'Gelernte Wörter',en:'Words learned'},
+  ofAllLemmas:{de:'aller Lemmata',en:'of all lemmas'},
+
+  // Quiz (vocab check before reading)
+  vocabCheck:{de:'Kapitel {n} — Vokabelprüfung',en:'Chapter {n} — Vocabulary Check'},
+  noNewVocab:{de:'Keine neuen Vokabeln über {l}',en:'No new vocabulary above {l}'},
+  startReading:{de:'Du kannst direkt lesen.',en:'You can start reading directly.'},
+  whichWords:{de:'Welche Wörter kennst du nicht?',en:"Which words don't you know?"},
+  nWordsAbove:{de:'{n} Wörter über {l}. Tippe die unbekannten an.',en:'{n} words above {l}. Tap the unknown ones.'},
+  markAll:{de:'Alle markieren',en:'Mark all'},
+  markNone:{de:'Keine markieren',en:'Mark none'},
+  noMarked:{de:'Keine Wörter markiert — reiner Lesefluss!',en:'No words marked — pure reading flow!'},
+  nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
+  readBtn:{de:'Lesen →',en:'Read →'},
+
+  // Reading
+  wordList:{de:'← Wortliste',en:'← Word list'},
+  stopTTS:{de:'⏹ Stopp',en:'⏹ Stop'},
+  readAloud:{de:'▶ Kapitel vorlesen',en:'▶ Read chapter aloud'},
+  practiceWords:{de:'▶ Unbekannte Wörter üben',en:'▶ Practice unknown words'},
+  speed:{de:'Tempo:',en:'Speed:'},
+  tapLearned:{de:' antippen = gelernt',en:' tap = learned'},
+  tapShowAgain:{de:' antippen = nochmal zeigen',en:' tap = show again'},
+  prevChapter:{de:'← Zurück',en:'← Previous'},
+  nextChapter:{de:'Weiter →',en:'Next →'},
+  showAllBilingual:{de:'Alle Verse zweisprachig anzeigen?',en:'Show all verses bilingual?'},
+  hideAllGerman:{de:'Alle deutschen Verse ausblenden?',en:'Hide all German verses?'},
+  verseN:{de:'Vers {n}',en:'Verse {n}'},
+  repeat:{de:'Wiederholen',en:'Repeat'},
+  learned:{de:'Gelernt',en:'Learned'},
+  allPracticed:{de:'Alle Wörter geübt!',en:'All words practiced!'},
+  practiceAgain:{de:'Nochmal üben',en:'Practice again'},
+  backToText:{de:'Zurück zum Text',en:'Back to text'},
+
+  // Level Test
+  levelTest:{de:'Sprachtest',en:'Language Test'},
+  questionN:{de:'Frage {n} von {t}',en:'Question {n} of {t}'},
+  whatMeans:{de:'Was bedeutet:',en:'What does this mean:'},
+  result:{de:'Ergebnis',en:'Result'},
+  nOfTotal:{de:'{n} von {t} richtig',en:'{n} of {t} correct'},
+  levelSet:{de:'Dein Sprachniveau wurde auf {l} gesetzt.',en:'Your language level has been set to {l}.'},
+  levelChangeHint:{de:'Du kannst es jederzeit in den Einstellungen ändern.',en:'You can change it anytime in the settings.'},
+
+  // Training
+  training:{de:'Training',en:'Training'},
+  yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
+  vocabPractice:{de:'Vokabeln üben',en:'Practice vocabulary'},
+  nOfMAvailable:{de:'{n} von {m} Wörtern verfügbar',en:'{n} of {m} words available'},
+  clozePractice:{de:'Lückentext üben',en:'Practice cloze texts'},
+  clozeByBook:{de:'Lückentext nach Buch',en:'Cloze by book'},
+  clozeByBookTitle:{de:'Lückentext nach Buch',en:'Cloze by book'},
+  noExercises:{de:'Für dieses Buch gibt es noch keine Übungen.',en:'No exercises available for this book yet.'},
+  wellDone:{de:'Gut gemacht!',en:'Well done!'},
+  keepPracticing:{de:'Weiter üben!',en:'Keep practicing!'},
+  levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
+  finish:{de:'Beenden',en:'Finish'},
+  cloze:{de:'Lückentext',en:'Cloze'},
+  vocab:{de:'Vokabeln',en:'Vocabulary'},
+  wrong:{de:'Falsch!',en:'Wrong!'},
+  tooEasy:{de:'zu\neinfach',en:'too\neasy'},
+  iGuess:{de:'ich\nrate',en:'just\nguessing'},
+
+  // Footer
+  publicDomain:{de:'Public Domain',en:'Public Domain'},
+};
+
+let _lang=LS.get('bible-ui-lang')||'de';
+function t(key){const e=I18N[key];if(!e)return key;return e[_lang]||e.de||key;}
+function setLang(l){_lang=l;LS.set('bible-ui-lang',l);}
+function getLang(){return _lang;}
 
 // ─── Level Test ─────────────────────────────────────────
 const LEVEL_TEST=[
@@ -221,30 +356,30 @@ function LevelTest({onComplete}){
     const total=answers.filter((a,i)=>a===LEVEL_TEST[i].de).length;
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>Ergebnis</h1>
+        <h1 style={S.title}>{t('result')}</h1>
       </header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
         <div style={{fontSize:48,fontWeight:700,color:'var(--t-primary)',fontFamily:sans,margin:'16px 0'}}>{result}</div>
-        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{total} von {LEVEL_TEST.length} richtig</p>
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{t('nOfTotal').replace('{n}',total).replace('{t}',LEVEL_TEST.length)}</p>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 24px',lineHeight:1.6}}>
-          Dein Sprachniveau wurde auf <strong>{result}</strong> gesetzt.<br/>
-          Du kannst es jederzeit in den Einstellungen ändern.
+          {t('levelSet').replace('{l}',result)}<br/>
+          {t('levelChangeHint')}
         </p>
-        <button onClick={()=>onComplete(result)} style={S.startBtn}>Weiter</button>
+        <button onClick={()=>onComplete(result)} style={S.startBtn}>{t('next')}</button>
       </div>
     </div>);
   }
 
   return(<div>
     <header style={S.header}>
-      <h1 style={S.title}>Sprachtest</h1>
-      <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>Frage {current+1} von {LEVEL_TEST.length}</p>
+      <h1 style={S.title}>{t('levelTest')}</h1>
+      <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('questionN').replace('{n}',current+1).replace('{t}',LEVEL_TEST.length)}</p>
     </header>
     <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 24px',overflow:'hidden'}}>
       <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((current)/LEVEL_TEST.length)*100}%`}}/>
     </div>
     <div style={{textAlign:'center',margin:'20px 0 32px'}}>
-      <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>Was bedeutet:</p>
+      <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
       <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{q.en}</p>
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:320,margin:'0 auto'}}>
@@ -491,14 +626,14 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
 
   if(done){
     return(<div>
-      <header style={S.header}><h1 style={S.title}>Ergebnis</h1></header>
+      <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
         <div style={{fontSize:48,fontWeight:700,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{score}/{totalRef.current}</div>
-        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.85?'Gut gemacht!':'Weiter üben!'}</p>
-        {stepChangeRef.current&&<p style={{fontSize:14,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>Dein Level ist jetzt {stepChangeRef.current}.</p>}
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>
+        {stepChangeRef.current&&<p style={{fontSize:14,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>{setMode(null);setDone(false)}} style={S.navBtn}>Beenden</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>Weiter</button>}
+          <button onClick={()=>{setMode(null);setDone(false)}} style={S.navBtn}>{t('finish')}</button>
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);
@@ -508,7 +643,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     const ex=exercises[current];const opts=shuffledOpts[current];const parts=ex.text.split('___');
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>Lückentext</h1>
+        <h1 style={S.title}>{t('cloze')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}</p>
       </header>
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
@@ -531,8 +666,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       {selected!==null&&selected===ex.answer&&<p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 0'}}>{ex.answer} = {ex.de}</p>}
       {selected!==null&&selected!==ex.answer&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>
-        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>Falsch!</p>
-        <button onClick={advance} style={S.startBtn}>Weiter</button>
+        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
+        <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
     </div>);
   }
@@ -541,14 +676,14 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     const ex=exercises[current];const opts=shuffledOpts[current];
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>Vokabeln</h1>
+        <h1 style={S.title}>{t('vocab')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}</p>
       </header>
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
       </div>
       <div style={{textAlign:'center',margin:'24px 0 32px'}}>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>Was bedeutet:</p>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
         <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.en}</p>
       </div>
       <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:400,margin:'0 auto'}}>
@@ -560,24 +695,24 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
           }
           const sideBtn={padding:'8px 6px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-bg2)',color:'var(--t-muted)',fontSize:10,fontFamily:sans,cursor:selected===null?'pointer':'default',lineHeight:1.2,width:54,textAlign:'center',flexShrink:0};
           return(<div key={i} style={{display:'flex',gap:6,alignItems:'stretch'}}>
-            <button onClick={()=>pick(opt,'easy')} style={{...sideBtn,opacity:selected===null?1:0.3}}>zu{'\n'}einfach</button>
+            <button onClick={()=>pick(opt,'easy')} style={{...sideBtn,opacity:selected===null?1:0.3}}>{t('tooEasy')}</button>
             <button onClick={()=>pick(opt,'normal')} style={{flex:1,padding:'14px 12px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:textDeco}}>{opt}</button>
-            <button onClick={()=>pick(opt,'guess')} style={{...sideBtn,opacity:selected===null?1:0.3}}>ich{'\n'}rate</button>
+            <button onClick={()=>pick(opt,'guess')} style={{...sideBtn,opacity:selected===null?1:0.3}}>{t('iGuess')}</button>
           </div>);
         })}
       </div>
       {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
-        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>Falsch!</p>
-        <button onClick={advance} style={S.startBtn}>Weiter</button>
+        <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
+        <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
     </div>);
   }
 
   if(mode==='noexercises'){
     return(<div>
-      <header style={S.header}><h1 style={S.title}>Training</h1></header>
-      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>← Zurück</button></div>
-      <p style={{textAlign:'center',color:'var(--t-muted)',fontFamily:sans,margin:'40px 0'}}>Für dieses Buch gibt es noch keine Übungen.</p>
+      <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('back')}</button></div>
+      <p style={{textAlign:'center',color:'var(--t-muted)',fontFamily:sans,margin:'40px 0'}}>{t('noExercises')}</p>
     </div>);
   }
 
@@ -587,11 +722,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     const ntBooks=ntStart>0?books.slice(ntStart):[];
     const bookHasEx=bi=>{const nr=books[bi].nr;return Object.values(CLOZE_EXERCISES).flat().some(e=>e.book===nr)};
     return(<div>
-      <header style={S.header}><h1 style={S.title}>Lückentext nach Buch</h1></header>
-      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>← Zurück</button></div>
+      <header style={S.header}><h1 style={S.title}>{t('clozeByBookTitle')}</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
         {otBooks.length>0&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Altes Testament</span>
+          <span style={S.settingsLabel}>{t('oldTestament')}</span>
           <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
             {otBooks.map((b,i)=>{const has=bookHasEx(i);return(
               <button key={i} onClick={()=>has&&startBookCloze(i)} style={{padding:'6px 12px',border:'1px solid var(--t-border)',borderRadius:6,background:has?'var(--t-card-solid)':'var(--t-bg2)',color:has?'var(--t-text2)':'var(--t-muted2)',fontSize:13,fontFamily:sans,cursor:has?'pointer':'default',opacity:has?1:0.5}}>{b.name}</button>
@@ -599,7 +734,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
           </div>
         </div>}
         {ntBooks.length>0&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Neues Testament</span>
+          <span style={S.settingsLabel}>{t('newTestament')}</span>
           <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
             {ntBooks.map((b,i)=>{const bi=ntStart+i;const has=bookHasEx(bi);return(
               <button key={bi} onClick={()=>has&&startBookCloze(bi)} style={{padding:'6px 12px',border:'1px solid var(--t-border)',borderRadius:6,background:has?'var(--t-card-solid)':'var(--t-bg2)',color:has?'var(--t-text2)':'var(--t-muted2)',fontSize:13,fontFamily:sans,cursor:has?'pointer':'default',opacity:has?1:0.5}}>{b.name}</button>
@@ -615,19 +750,19 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
   const fresh=stepWords.filter(w=>!log[lvlForStep+':'+w.en]||now-log[lvlForStep+':'+w.en]>=COOLDOWN).length;
 
   return(<div>
-    <header style={S.header}><h1 style={S.title}>Training</h1></header>
-    <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>← Zurück</button></div>
-    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>Dein Level: {stepLabel(trainStep)}</p>
+    <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
+    <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>{t('back')}</button></div>
+    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{t('yourLevel').replace('{l}',stepLabel(trainStep))}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startVocab(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>Vokabeln üben</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{fresh} von {stepWords.length} Wörtern verfügbar</p>
+        <button onClick={()=>startVocab(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',fresh).replace('{m}',stepWords.length)}</p>
       </div>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>Lückentext üben</button>
+        <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
       </div>
       <div style={S.settingsGroup}>
-        <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>Lückentext nach Buch</button>
+        <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
       </div>
     </div>
   </div>);
@@ -825,6 +960,8 @@ function App({data}){
   const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
   const ntStartIndex=data.en.ntStartIndex||0;
   const lang='en';
+  const [uiLang,setUiLang]=useState(getLang);
+  const changeUiLang=useCallback(l=>{setLang(l);setUiLang(l);},[]);
   const levelTested=LS.get('bible-level-tested');
   const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
@@ -862,6 +999,7 @@ function App({data}){
   const [showAllDe,setShowAllDe]=useState(false);
   const [dePrompt,setDePrompt]=useState(null);
   const [loading,setLoading]=useState(false);
+  const [readingMenu,setReadingMenu]=useState(false);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
 
@@ -1053,9 +1191,7 @@ function App({data}){
 
   const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
 
-  const langTitle='Bible';
-  const langSubtitle='Reading Aid EN\u2009→\u2009DE';
-  const langFooter='World English Bible · Public Domain';
+  const langFooter='World English Bible';
   const otBooks=books.slice(0,ntStartIndex);
   const ntBooks=books.slice(ntStartIndex);
 
@@ -1076,42 +1212,42 @@ function App({data}){
     const levelOrder=["A1","A2","B1","B2","C1","C2"];
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>Statistics</h1>
+        <h1 style={S.title}>{t('statistics')}</h1>
       </header>
-      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
+      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
         {statsVisible.text&&<div style={S.settingsGroup}>
           <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='text'?null:'text')}>
             <span style={S.bookArrow}>{expandedStatSection==='text'?'▾':'▸'}</span>
-            <span style={{...S.settingsLabel,marginBottom:0}}>Text</span>
-            <span style={S.statBookWords}>{books.length} books · {stats.totalWords.toLocaleString()} words</span>
+            <span style={{...S.settingsLabel,marginBottom:0}}>{t('text')}</span>
+            <span style={S.statBookWords}>{t('nBooksWords').replace('{b}',books.length).replace('{w}',stats.totalWords.toLocaleString())}</span>
           </div>
           {expandedStatSection==='text'&&<div style={S.statBookDetail}>
             <div style={S.statGrid}>
-              <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>Books</span></div>
-              <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>Chapters</span></div>
-              <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>Verses</span></div>
-              <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>Words</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{books.length}</span><span style={S.statCellL}>{t('statBooks')}</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalChapters}</span><span style={S.statCellL}>{t('statChapters')}</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>{t('statVerses')}</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>{t('statWords')}</span></div>
             </div>
-            <p style={S.settingsHint}>{stats.annotatedBooks} of {books.length} books have word-by-word annotations.</p>
+            <p style={S.settingsHint}>{t('annotatedHint').replace('{n}',stats.annotatedBooks).replace('{t}',books.length)}</p>
           </div>}
         </div>}
         {statsVisible.vocabulary&&<>
           <div style={S.settingsGroup}>
             <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
               <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
-              <span style={{...S.settingsLabel,marginBottom:0}}>Vocabulary — Total</span>
-              <span style={S.statBookWords}>{stats.allLemmas.toLocaleString()} unique words</span>
+              <span style={{...S.settingsLabel,marginBottom:0}}>{t('vocabTotal')}</span>
+              <span style={S.statBookWords}>{t('nUnique').replace('{n}',stats.allLemmas.toLocaleString())}</span>
             </div>
             {expandedStatSection==='vocab'&&<div style={S.statBookDetail}>
-              <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
+              <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas.toLocaleString()}</span><span style={S.statCellL}>{t('uniqueWords')}</span></div>
               <div style={{...S.statGrid,marginTop:12}}>
                 {levelOrder.map(lvl=>stats.lemmasByLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{stats.lemmasByLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
               </div>
             </div>}
           </div>
           <div style={S.settingsGroup}>
-            <span style={S.settingsLabel}>Vocabulary per book</span>
+            <span style={S.settingsLabel}>{t('vocabPerBook')}</span>
             <div style={S.statBookList}>{stats.perBook.map(bk=>{
               const isOpen=expandedStatBook===bk.name;
               return(<div key={bk.name}>
@@ -1122,8 +1258,8 @@ function App({data}){
                 </div>
                 {isOpen&&<div style={S.statBookDetail}>
                   <div style={S.statGrid}>
-                    <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>Unique words</span></div>
-                    <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-blue)'}}>{bk.score}</span><span style={S.statCellL}>Difficulty ({bk.diffLabel})</span></div>
+                    <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>{t('uniqueWords')}</span></div>
+                    <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-blue)'}}>{bk.score}</span><span style={S.statCellL}>{t('difficulty').replace('{l}',bk.diffLabel)}</span></div>
                   </div>
                   <div style={{...S.statGrid,marginTop:8}}>
                     {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
@@ -1134,10 +1270,10 @@ function App({data}){
           </div>
         </>}
         {statsVisible.progress&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Your progress</span>
+          <span style={S.settingsLabel}>{t('statsProgress')}</span>
           <div style={S.statGrid}>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{globalLearned.size}</span><span style={S.statCellL}>Words learned</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas>0?Math.round((globalLearned.size/stats.allLemmas)*100):0}%</span><span style={S.statCellL}>of all lemmas</span></div>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{globalLearned.size}</span><span style={S.statCellL}>{t('wordsLearned')}</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas>0?Math.round((globalLearned.size/stats.allLemmas)*100):0}%</span><span style={S.statCellL}>{t('ofAllLemmas')}</span></div>
           </div>
         </div>}
       </div>
@@ -1148,20 +1284,24 @@ function App({data}){
   if(phase==='settings'){
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>Settings</h1>
+        <h1 style={S.title}>{t('settings')}</h1>
       </header>
-      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>← Back</button></div>
+      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Vocabulary level</span>
-          <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
-          <p style={S.settingsHint}>Words above this level are shown in the vocabulary check.</p>
-          <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>Sprachtest wiederholen</button>
+          <span style={S.settingsLabel}>{t('appLanguage')}</span>
+          <div style={S.levelBtns}>{[{k:'de',l:'Deutsch'},{k:'en',l:'English'}].map(o=>(<button key={o.k} onClick={()=>changeUiLang(o.k)} style={{...S.lvlBtn,...(uiLang===o.k?S.lvlActive:{})}}>{o.l}</button>))}</div>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Reading speed (TTS)</span>
-          <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{l:'Slow',v:0.5},{l:'Normal',v:0.85},{l:'Fast',v:1.1}].map(p=>(
-            <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l}</button>
+          <span style={S.settingsLabel}>{t('vocabLevel')}</span>
+          <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
+          <p style={S.settingsHint}>{t('vocabLevelHint')}</p>
+          <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('readingSpeed')}</span>
+          <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{k:'slow',v:0.5},{k:'normal',v:0.85},{k:'fast',v:1.1}].map(p=>(
+            <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
           ))}</div>
           <div style={S.speedSliderRow}>
             <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
@@ -1169,29 +1309,29 @@ function App({data}){
           </div>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Font size</span>
+          <span style={S.settingsLabel}>{t('fontSize')}</span>
           <div style={S.fontSizeRow}>
             <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
             <span style={S.fontSizePreview}>{fontSize}px</span>
             <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
           </div>
-          <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>In the beginning was the Word, and the Word was with God.</p>
+          <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Layout</span>
-          <div style={S.levelBtns}>{[{k:'classic',l:'Klassisch'},{k:'icf-light',l:'Modern Hell'},{k:'icf',l:'Modern Dunkel'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{o.l}</button>))}</div>
+          <span style={S.settingsLabel}>{t('layout')}</span>
+          <div style={S.levelBtns}>{[{k:'classic',i:'layoutClassic'},{k:'icf-light',i:'layoutModernLight'},{k:'icf',i:'layoutModernDark'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Progress</span>
-          <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>Total words learned: <strong style={{color:'var(--t-green)'}}>{globalLearned.size}</strong></p>
-          <button onClick={()=>{if(confirm('Reset all learned words and progress?')){setGlobalLearned(new Set());setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>Reset all progress</button>
+          <span style={S.settingsLabel}>{t('progress')}</span>
+          <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>{t('totalLearned')} <strong style={{color:'var(--t-green)'}}>{globalLearned.size}</strong></p>
+          <button onClick={()=>{if(confirm(t('resetConfirm'))){setGlobalLearned(new Set());setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>{t('resetProgress')}</button>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>Statistics page</span>
-          {[{key:'text',label:'Text (books, chapters, verses, words)'},{key:'vocabulary',label:'Vocabulary (lemmas by level)'},{key:'progress',label:'Your progress'}].map(s=>(
+          <span style={S.settingsLabel}>{t('statsPage')}</span>
+          {[{key:'text',i:'statsText'},{key:'vocabulary',i:'statsVocab'},{key:'progress',i:'statsProgress'}].map(s=>(
             <label key={s.key} style={S.toggleRow}>
               <input type="checkbox" checked={statsVisible[s.key]} onChange={()=>toggleStatSection(s.key)}/>
-              <span style={S.toggleLabel}>{s.label}</span>
+              <span style={S.toggleLabel}>{t(s.i)}</span>
             </label>
           ))}
         </div>
@@ -1204,25 +1344,19 @@ function App({data}){
   if(phase==='nav'){
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>{langTitle}</h1>
-        <p style={S.subtitle}>{langSubtitle}</p>
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,margin:'8px 0'}}>
-          <div style={S.levelBox}>
-            <span style={S.levelLabel}>My level:</span>
-            <div style={S.levelBtns}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
-          </div>
-        </div>
+        <h1 style={S.title}>{t('navTitle')}</h1>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
-          <button onClick={()=>setPhase('stats')} style={S.gearBtn} title="Statistics">📊</button>
-          <button onClick={()=>setPhase('training')} style={S.gearBtn} title="Training">🎓</button>
-          <button onClick={()=>setPhase('settings')} style={S.gearBtn} title="Settings">⚙</button>
+          <button onClick={()=>setPhase('stats')} style={S.gearBtn} title={t('statistics')}>📊</button>
+          <button onClick={()=>setPhase('training')} style={S.gearBtn} title={t('training')}>🎓</button>
+          <button onClick={()=>setPhase('settings')} style={S.gearBtn} title={t('settings')}>⚙</button>
         </div>
       </header>
       {otBooks.length>0&&<div style={S.bookList}>
         <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='ot'?null:'ot');setExpandedBook(null)}}>
           <span style={S.bookArrow}>{expandedTestament==='ot'?'▾':'▸'}</span>
-          Old Testament
-          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{otBooks.length} books</span>
+          {t('oldTestament')}
+          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{t('nBooks').replace('{n}',otBooks.length)}</span>
         </h2>
         {expandedTestament==='ot'&&otBooks.map((book,i)=>{
           const bi=i;
@@ -1231,7 +1365,7 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{book.numChapters} ch.</span>
+              <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
             </div>
             {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
           </div>);
@@ -1240,8 +1374,8 @@ function App({data}){
       <div style={S.bookList}>
         <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='nt'?null:'nt');setExpandedBook(null)}}>
           <span style={S.bookArrow}>{expandedTestament==='nt'?'▾':'▸'}</span>
-          New Testament
-          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{ntBooks.length} books</span>
+          {t('newTestament')}
+          <span style={{fontSize:13,fontWeight:400,color:'var(--t-muted)',marginLeft:'auto'}}>{t('nBooks').replace('{n}',ntBooks.length)}</span>
         </h2>
         {expandedTestament==='nt'&&ntBooks.map((book,i)=>{
           const bi=ntStartIndex+i;
@@ -1250,7 +1384,7 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{book.numChapters} ch.</span>
+              <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
             </div>
             {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
           </div>);
@@ -1264,9 +1398,9 @@ function App({data}){
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{currentBook?.name||''}</h1>
-        <p style={S.subtitle}>Loading…</p>
+        <p style={S.subtitle}>{t('loading')}</p>
       </header>
-      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Books</button></div>
+      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>{t('back')}</button></div>
     </div>);
   }
 
@@ -1276,20 +1410,20 @@ function App({data}){
       <header style={S.header}>
         <h1 style={S.title}>{currentBook.name}</h1>
       </header>
-      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>← Books</button></div>
-      <p style={S.subtitle}>Chapter {chapNum} — Vocabulary Check</p>
+      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>{t('back')}</button></div>
+      <p style={S.subtitle}>{t('vocabCheck').replace('{n}',chapNum)}</p>
 
 
       {quizWords.length===0?(
-        <div style={S.quizInstr}><p style={S.quizInstrTitle}>No new vocabulary above {userLevel}</p><p style={S.quizInstrSub}>You can start reading directly.</p></div>
+        <div style={S.quizInstr}><p style={S.quizInstrTitle}>{t('noNewVocab').replace('{l}',userLevel)}</p><p style={S.quizInstrSub}>{t('startReading')}</p></div>
       ):(
         <div>
           <div style={S.quizInstr}>
-            <p style={S.quizInstrTitle}>Which words don't you know?</p>
-            <p style={S.quizInstrSub}>{quizWords.length} words above {userLevel}. Tap the unknown ones.</p>
+            <p style={S.quizInstrTitle}>{t('whichWords')}</p>
+            <p style={S.quizInstrSub}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</p>
             <div style={S.quizActions}>
-              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>Mark all</button>
-              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>Mark none</button>
+              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>{t('markAll')}</button>
+              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>{t('markNone')}</button>
             </div>
           </div>
           <div style={S.wordGrid}>{quizWords.map(item=>{
@@ -1305,48 +1439,52 @@ function App({data}){
         </div>
       )}
       <div style={S.quizFooter}>
-        <p style={S.quizSummary}>{unknownWords.size===0?'No words marked — pure reading flow!':`${unknownWords.size} words will be translated while reading.`}</p>
+        <p style={S.quizSummary}>{unknownWords.size===0?t('noMarked'):t('nTranslated').replace('{n}',unknownWords.size)}</p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
-          <button onClick={startReading} style={S.startBtn}>Read →</button>
+          <button onClick={startReading} style={S.startBtn}>{t('readBtn')}</button>
         </div>
       </div>
     </div>);
   }
 
   // ── READING ──
-  return(<div>
-    <header style={S.header}>
-      <h1 style={{...S.title,fontSize:22}}>{currentBook.name} {chapNum}</h1>
-      <div style={S.readingTopBar}>
-        <div style={S.readingNavBtns}>
-          <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>≡ Books</button>
-          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>← Word list</button>
+  return(<div style={{position:'relative'}}>
+    <div style={{position:'sticky',top:0,zIndex:100,marginBottom:readingMenu?0:-44}}>
+      {!readingMenu&&<div onClick={()=>setReadingMenu(true)} style={{height:44,cursor:'pointer',userSelect:'none',WebkitTapHighlightColor:'transparent'}}/>}
+      {readingMenu&&<div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderBottom:'2px solid var(--t-border)',padding:'16px 16px 12px',boxShadow:'0 2px 12px rgba(0,0,0,0.15)'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+          <h2 style={{...S.title,fontSize:18,margin:0}}>{currentBook.name} {chapNum}</h2>
+          <button onClick={()=>setReadingMenu(false)} style={{background:'none',border:'none',fontSize:22,color:'var(--t-muted)',cursor:'pointer',padding:'4px 8px'}}>✕</button>
         </div>
-      </div>
-    </header>
-
-    {/* TTS */}
-    <div style={S.ttsBar}>
-      {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>⏹ Stop</button>
-      ):(<><button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>▶ Read chapter aloud</button>
-      {unknownWords.size>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>▶ Practice unknown words</button>)}
-      </>)}
-      <div style={S.speedControl}>
-        <span style={S.speedLabel}>Speed:</span>
-        <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{l:'Langsam',v:0.5},{l:'Normal',v:0.85},{l:'Schnell',v:1.1}].map(p=>(
-          <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l}</button>
-        ))}</div>
-        <div style={S.speedSliderRow}>
-          <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
-          <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
+        <div style={{display:'flex',justifyContent:'center',gap:10,marginBottom:12}}>
+          <button onClick={()=>{tts.stop();goToNav()}} style={S.navBtn}>{t('booksNav')}</button>
+          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>{t('wordList')}</button>
         </div>
-      </div>
+        <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:12}}>
+          <button onClick={()=>{setReadingMenu(false);setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
+          <button onClick={()=>{setReadingMenu(false);setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
+          <button onClick={()=>{setReadingMenu(false);setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
+        </div>
+        <div style={{borderTop:'1px solid var(--t-border)',paddingTop:12}}>
+          {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>{t('stopTTS')}</button>
+          ):(<div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>{t('readAloud')}</button>
+            {unknownWords.size>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>{t('practiceWords')}</button>)}
+          </div>)}
+          <div style={S.speedControl}>
+            <span style={S.speedLabel}>{t('speed')}</span>
+            <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{k:'slow',v:0.5},{k:'normal',v:0.85},{k:'fast',v:1.1}].map(p=>(
+              <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
+            ))}</div>
+            <div style={S.speedSliderRow}>
+              <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+              <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
+            </div>
+          </div>
+        </div>
+      </div>}
     </div>
 
-    {unknownWords.size>0&&(<div style={S.legend}>
-      <span style={S.legItem}><span style={{...S.dot,background:'var(--t-accent)'}}/> tap = learned</span>
-      <span style={S.legItem}><span style={{...S.dot,background:'var(--t-green)'}}/> tap = show again</span>
-    </div>)}
 
     <div style={{...S.text,fontSize}}>{verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
@@ -1406,17 +1544,17 @@ function App({data}){
     })}</div>
 
     <div style={S.chapNav}>
-      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>← Previous</button>
-      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}>Next →</button>
+      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>{t('prevChapter')}</button>
+      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}>{t('nextChapter')}</button>
     </div>
-    <footer style={S.footer}>{langFooter} · Public Domain</footer>
+    <footer style={S.footer}>{langFooter} · {t('publicDomain')}</footer>
 
     {dePrompt&&<div style={S.deOverlay} onClick={()=>setDePrompt(null)}>
       <div style={S.deDialog} onClick={e=>e.stopPropagation()}>
-        <p style={S.deDialogText}>{dePrompt==='show'?'Alle Verse zweisprachig anzeigen?':'Alle deutschen Verse ausblenden?'}</p>
+        <p style={S.deDialogText}>{dePrompt==='show'?t('showAllBilingual'):t('hideAllGerman')}</p>
         <div style={S.deDialogBtns}>
-          <button style={S.deDialogBtn} onClick={()=>{if(dePrompt==='show')setShowAllDe(true);else{setShowAllDe(false);setExpandedVerses(new Set())}setDePrompt(null)}}>Ja</button>
-          <button style={{...S.deDialogBtn,...S.deDialogBtnCancel}} onClick={()=>setDePrompt(null)}>Nein</button>
+          <button style={S.deDialogBtn} onClick={()=>{if(dePrompt==='show')setShowAllDe(true);else{setShowAllDe(false);setExpandedVerses(new Set())}setDePrompt(null)}}>{t('yes')}</button>
+          <button style={{...S.deDialogBtn,...S.deDialogBtnCancel}} onClick={()=>setDePrompt(null)}>{t('no')}</button>
         </div>
       </div>
     </div>}
@@ -1426,10 +1564,10 @@ function App({data}){
       <div style={S.practiceCard}>
         {practiceDone?(
           <div style={S.practiceContent}>
-            <p style={S.practiceDoneText}>All words practiced!</p>
+            <p style={S.practiceDoneText}>{t('allPracticed')}</p>
             <div style={S.practiceBtns}>
-              <button onClick={startPractice} style={S.practiceRepeatBtn}>Practice again</button>
-              <button onClick={closePractice} style={S.practiceCloseBtn}>Back to text</button>
+              <button onClick={startPractice} style={S.practiceRepeatBtn}>{t('practiceAgain')}</button>
+              <button onClick={closePractice} style={S.practiceCloseBtn}>{t('backToText')}</button>
             </div>
           </div>
         ):(
@@ -1453,13 +1591,13 @@ function App({data}){
                 </div>
               ))}
             </div>
-            <p style={S.practiceVerse}>Vers {practiceFragments[practiceIdx]?.n}</p>
+            <p style={S.practiceVerse}>{t('verseN').replace('{n}',practiceFragments[practiceIdx]?.n)}</p>
             <div style={S.practiceBtns}>
-              <button onClick={practiceRepeat} style={S.practiceRepeatBtn}>Repeat</button>
-              <button onClick={practiceNext} style={S.practiceNextBtn}>Next</button>
-              <button onClick={practiceLearned} style={S.practiceLearnedBtn}>Learned</button>
+              <button onClick={practiceRepeat} style={S.practiceRepeatBtn}>{t('repeat')}</button>
+              <button onClick={practiceNext} style={S.practiceNextBtn}>{t('next')}</button>
+              <button onClick={practiceLearned} style={S.practiceLearnedBtn}>{t('learned')}</button>
             </div>
-            <button onClick={closePractice} style={S.practiceCancelBtn}>Cancel</button>
+            <button onClick={closePractice} style={S.practiceCancelBtn}>{t('cancel')}</button>
           </div>
         )}
         <button onClick={closePractice} style={S.practiceX}>✕</button>
@@ -1596,7 +1734,7 @@ loadData().then(data=>{
     <App data={data}/>
   );
 }).catch(err=>{
-  document.getElementById('root').innerHTML=`<div style="text-align:center;margin-top:60px;color:#b34a28;font-family:sans-serif"><h2>Error loading data</h2><p>Did you run <code>start.command</code>?</p><p style="font-size:13px;color:#8a7e6b;margin-top:12px">${err.message}</p></div>`;
+  document.getElementById('root').innerHTML=`<div style="text-align:center;margin-top:60px;color:#b34a28;font-family:sans-serif"><h2>${t('errorLoading')}</h2><p>${t('errorHint')}</p><p style="font-size:13px;color:#8a7e6b;margin-top:12px">${err.message}</p></div>`;
 });
 </script>
 <script>
