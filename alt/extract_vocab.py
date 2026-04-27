@@ -116,8 +116,13 @@ for lvl in by_level:
 out = {}
 for lvl in ['A1', 'A2', 'B1', 'B2', 'C1']:
     words = by_level.get(lvl, [])
-    out[lvl] = [{'en': w['en'], 'de': w['de']} for w in words]
-    print(f"{lvl}: {len(words)} words")
+    n = len(words)
+    t1 = n // 3
+    t2 = 2 * n // 3
+    for i, w in enumerate(words):
+        w['sub'] = 1 if i < t1 else (2 if i < t2 else 3)
+    out[lvl] = [{'en': w['en'], 'de': w['de'], 'sub': w['sub']} for w in words]
+    print(f"{lvl}: {n} words  ({t1} / {t2-t1} / {n-t2})")
 
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 with open(OUT_PATH, 'w', encoding='utf-8') as f:

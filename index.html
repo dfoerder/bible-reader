@@ -338,10 +338,18 @@ const CLOZE_EXERCISES={
 
 let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[]};
 
-function Training({userLevel,onBack,books,openChapter}){
+const SUBSTEPS=['A1.1','A1.2','A1.3','A2.1','A2.2','A2.3','B1.1','B1.2','B1.3','B2.1','B2.2','B2.3','C1.1','C1.2','C1.3'];
+function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));return i>=0?i:6;}
+function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
+function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
+function vocabForStep(step){const lvl=stepToLevel(step);const sub=1+(step%3);const pool=VOCAB_POOL[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};}
+
+function Training({userLevel,setUserLevel,onBack,books,openChapter}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
+  const [trainStep,setTrainStep]=useState(()=>{const s=LS.get('bible-train-step');return s!=null?s:levelToStep(userLevel)+2;});
+  const saveStep=s=>{setTrainStep(s);LS.set('bible-train-step',s);};
   const [exercises,setExercises]=useState([]);
   const [current,setCurrent]=useState(0);
   const [selected,setSelected]=useState(null);
@@ -361,21 +369,21 @@ function Training({userLevel,onBack,books,openChapter}){
     setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;
-    setSelectedLevel(lvl);setLastStart(()=>()=>startCloze(lvl));
+    setSelectedLevel(lvl);setLastStart('cloze');
   },[]);
 
   const COOLDOWN=7*24*3600*1000;
   const getVocabLog=()=>LS.get('bible-vocab-log')||{};
   const saveVocabLog=log=>LS.set('bible-vocab-log',log);
 
-  const startVocab=useCallback(lvl=>{
-    const pool=VOCAB_POOL[lvl]||[];
+  const startVocab=useCallback(step=>{
+    const {words,allDe}=vocabForStep(step);
+    const lvl=stepToLevel(step);
     const log=getVocabLog();
     const now=Date.now();
-    const fresh=pool.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN);
-    const src=fresh.length>=15?fresh:pool;
+    const fresh=words.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN);
+    const src=fresh.length>=15?fresh:words;
     const picked=shuffle(src).slice(0,15);
-    const allDe=pool.map(w=>w.de);
     setExercises(picked);
     setShuffledOpts(picked.map(q=>{
       const wrong=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
@@ -383,7 +391,7 @@ function Training({userLevel,onBack,books,openChapter}){
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;
-    setSelectedLevel(lvl);setLastStart(()=>()=>startVocab(lvl));
+    setSelectedLevel(lvl);setLastStart('vocab');
   },[]);
 
   const startBookCloze=useCallback(bi=>{
@@ -395,22 +403,31 @@ function Training({userLevel,onBack,books,openChapter}){
     setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;
-    setLastStart(()=>()=>startBookCloze(bi));
+    setLastStart({type:'book',bi});
   },[books]);
 
-  const pick=useCallback(ans=>{
+  const EASY_COOLDOWN=100*24*3600*1000;
+  const guessRef=useRef(false);
+
+  const pick=useCallback((ans,mode)=>{
     if(selected!==null)return;
     const ex=exercises[current];
     const correct=exType==='vocab'?ans===ex.de:ans===ex.answer;
     setSelected(ans);
+    if(mode==='guess') guessRef.current=true;
     if(correct){
       setScore(s=>s+1);
       if(exType==='vocab'){
-        const log=getVocabLog();
-        log[selectedLevel+':'+ex.en]=Date.now();
-        saveVocabLog(log);
+        if(mode==='guess'){
+          wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
+        } else {
+          const log=getVocabLog();
+          log[selectedLevel+':'+ex.en]=Date.now()+(mode==='easy'?EASY_COOLDOWN-COOLDOWN:0);
+          saveVocabLog(log);
+        }
       }
       setTimeout(()=>{
+        guessRef.current=false;
         if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
         else if(wrongRef.current.length>0) startRetry();
         else setDone(true);
@@ -444,15 +461,44 @@ function Training({userLevel,onBack,books,openChapter}){
     else setDone(true);
   },[current,exercises,startRetry]);
 
+  const stepChangeRef=useRef(null);
+
+  useEffect(()=>{
+    if(!done)return;
+    const pct=score/totalRef.current;
+    const hist=LS.get('bible-training-history')||[];
+    hist.push({date:Date.now(),type:exType,level:selectedLevel,step:trainStep,score,total:totalRef.current,pct:Math.round(pct*100)});
+    if(hist.length>200) hist.splice(0,hist.length-200);
+    LS.set('bible-training-history',hist);
+    if(exType==='vocab'){
+      if(pct<0.85&&trainStep>0){
+        const ns=trainStep-1;
+        saveStep(ns);
+        setUserLevel(stepToLevel(ns));
+        stepChangeRef.current=stepLabel(ns);
+      } else if(pct>=0.85&&trainStep<14){
+        const ns=trainStep+1;
+        saveStep(ns);
+        setUserLevel(stepToLevel(ns));
+        stepChangeRef.current=stepLabel(ns);
+      } else {
+        stepChangeRef.current=null;
+      }
+    } else {
+      stepChangeRef.current=null;
+    }
+  },[done]);
+
   if(done){
     return(<div>
       <header style={S.header}><h1 style={S.title}>Ergebnis</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
-        <div style={{fontSize:48,fontWeight:700,color:score>=totalRef.current*0.7?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{score}/{totalRef.current}</div>
-        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.7?'Gut gemacht!':'Weiter üben!'}</p>
+        <div style={{fontSize:48,fontWeight:700,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{score}/{totalRef.current}</div>
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.85?'Gut gemacht!':'Weiter üben!'}</p>
+        {stepChangeRef.current&&<p style={{fontSize:14,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>Dein Level ist jetzt {stepChangeRef.current}.</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>setMode(null)} style={S.navBtn}>Beenden</button>
-          {lastStart&&<button onClick={()=>{setDone(false);lastStart()}} style={S.startBtn}>Weiter</button>}
+          <button onClick={()=>{setMode(null);setDone(false)}} style={S.navBtn}>Beenden</button>
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>Weiter</button>}
         </div>
       </div>
     </div>);
@@ -505,14 +551,19 @@ function Training({userLevel,onBack,books,openChapter}){
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>Was bedeutet:</p>
         <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.en}</p>
       </div>
-      <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
+      <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:400,margin:'0 auto'}}>
         {opts.map((opt,i)=>{
           let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)',textDeco='none';
           if(selected!==null){
             if(opt===ex.de){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
             else if(opt===selected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)';textDeco='line-through'}
           }
-          return(<button key={i} onClick={()=>pick(opt)} style={{padding:'14px 20px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:textDeco}}>{opt}</button>);
+          const sideBtn={padding:'8px 6px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-bg2)',color:'var(--t-muted)',fontSize:10,fontFamily:sans,cursor:selected===null?'pointer':'default',lineHeight:1.2,width:54,textAlign:'center',flexShrink:0};
+          return(<div key={i} style={{display:'flex',gap:6,alignItems:'stretch'}}>
+            <button onClick={()=>pick(opt,'easy')} style={{...sideBtn,opacity:selected===null?1:0.3}}>zu{'\n'}einfach</button>
+            <button onClick={()=>pick(opt,'normal')} style={{flex:1,padding:'14px 12px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:textDeco}}>{opt}</button>
+            <button onClick={()=>pick(opt,'guess')} style={{...sideBtn,opacity:selected===null?1:0.3}}>ich{'\n'}rate</button>
+          </div>);
         })}
       </div>
       {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
@@ -559,28 +610,24 @@ function Training({userLevel,onBack,books,openChapter}){
     </div>);
   }
 
+  const {words:stepWords}=vocabForStep(trainStep);const lvlForStep=stepToLevel(trainStep);
+  const log=getVocabLog();const now=Date.now();
+  const fresh=stepWords.filter(w=>!log[lvlForStep+':'+w.en]||now-log[lvlForStep+':'+w.en]>=COOLDOWN).length;
+
   return(<div>
     <header style={S.header}><h1 style={S.title}>Training</h1></header>
     <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>← Zurück</button></div>
+    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>Dein Level: {stepLabel(trainStep)}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
-        <span style={S.settingsLabel}>Vokabeln</span>
-        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 12px'}}>Englisches Wort — welche deutsche Übersetzung ist richtig? 15 Fragen pro Runde.</p>
-        <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-          {['A1','A2','B1','B2','C1'].map(lvl=>{const pool=VOCAB_POOL[lvl]||[];const log=getVocabLog();const now=Date.now();const fresh=pool.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN).length;return(
-            <button key={lvl} onClick={()=>startVocab(lvl)} style={{...S.lvlBtn,padding:'10px 20px',fontSize:16,...(lvl===userLevel?{borderColor:'var(--t-accent)',color:'var(--t-accent)'}:{})}}>
-              <span>{lvl}{lvl===userLevel?' ★':''}</span>
-              <span style={{display:'block',fontSize:11,color:'var(--t-muted)',marginTop:2}}>{fresh}/{pool.length}</span>
-            </button>);})}
-        </div>
+        <button onClick={()=>startVocab(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>Vokabeln üben</button>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{fresh} von {stepWords.length} Wörtern verfügbar</p>
       </div>
       <div style={S.settingsGroup}>
-        <span style={S.settingsLabel}>Lückentext</span>
-        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 12px'}}>Finde das fehlende Wort im Bibelvers.</p>
-        <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:12}}>
-          {['A1','A2','B1','B2','C1'].map(lvl=>(<button key={lvl} onClick={()=>startCloze(lvl)} style={{...S.lvlBtn,padding:'10px 20px',fontSize:16,...(lvl===userLevel?{borderColor:'var(--t-accent)',color:'var(--t-accent)'}:{})}}>{lvl}</button>))}
-        </div>
-        <button onClick={()=>setMode('book')} style={{...S.navBtn,fontSize:13}}>Nach Buch wählen</button>
+        <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>Lückentext üben</button>
+      </div>
+      <div style={S.settingsGroup}>
+        <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>Lückentext nach Buch</button>
       </div>
     </div>
   </div>);
@@ -1021,7 +1068,7 @@ function App({data}){
 
   // ── TRAINING ──
   if(phase==='training'){
-    return <Training userLevel={userLevel} onBack={()=>setPhase('nav')} books={books} openChapter={openChapter}/>;
+    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase('nav')} books={books} openChapter={openChapter}/>;
   }
 
   // ── STATISTICS ──
