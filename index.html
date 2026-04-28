@@ -169,6 +169,7 @@ const I18N={
   slow:{de:'Langsam',en:'Slow'},
   normal:{de:'Normal',en:'Normal'},
   fast:{de:'Schnell',en:'Fast'},
+  veryFast:{de:'Sehr schnell',en:'Very fast'},
   fontSize:{de:'Schriftgröße',en:'Font size'},
   fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
   layout:{de:'Layout',en:'Layout'},
@@ -268,6 +269,7 @@ const I18N={
   noResults:{de:'Keine Treffer',en:'No results'},
   nResults:{de:'{n} Treffer',en:'{n} results'},
   home:{de:'Start',en:'Home'},
+  continueReading:{de:'Kap. {c}:{v}',en:'Ch. {c}:{v}'},
 
   // Footer
   publicDomain:{de:'Public Domain',en:'Public Domain'},
@@ -905,13 +907,25 @@ function useTTS(){
   const [speaking,setSpeaking]=useState(false);
   const [activeVerse,setActiveVerse]=useState(null);
   const [activeWordIdx,setActiveWordIdx]=useState(-1);
-  const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.85);
+  const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.65);
   const [voices,setVoices]=useState({en:[]});
   const langRef=useRef('en');
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
   const lastSentenceRef=useRef({text:'',lang:'en'});
-  const setSpeed=useCallback(v=>{speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v)},[]);
+  const currentVerseRef=useRef(null);const currentCallbackRef=useRef(null);const currentCharIdx=useRef(0);const currentWordIdx=useRef(0);const speedChangeRef=useRef(false);
+  const setSpeed=useCallback(v=>{
+    speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v);
+    if(currentVerseRef.current){
+      const {vN,text}=currentVerseRef.current;const cb=currentCallbackRef.current;
+      const ci=currentCharIdx.current;const wi=currentWordIdx.current;
+      const remaining=text.slice(ci);
+      speedChangeRef.current=true;
+      speechSynthesis.cancel();
+      if(remaining.trim())setTimeout(()=>{speedChangeRef.current=false;speakVerseRef.current(vN,remaining,cb,wi)},50);
+      else speedChangeRef.current=false;
+    }
+  },[]);
   useEffect(()=>{
     const lv=()=>{
       const all=speechSynthesis.getVoices();
@@ -942,15 +956,19 @@ function useTTS(){
       speechSynthesis.speak(u);
     });
   },[getVoice]);
+  const speakVerseRef=useRef(null);
   const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
     const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=speedRef.current;
     const v=getVoice();if(v)u.voice=v;
+    currentVerseRef.current={vN,text};currentCallbackRef.current=onDone;currentCharIdx.current=0;currentWordIdx.current=wordOffset;
     setActiveVerse(vN);setActiveWordIdx(wordOffset);setSpeaking(true);
-    u.onboundary=e=>{if(e.name==='word'){let i=0;for(let j=ws.length-1;j>=0;j--){if(e.charIndex>=ws[j]){i=j;break}}setActiveWordIdx(i+wordOffset)}};
-    u.onend=()=>{setActiveWordIdx(-1);if(onDone)onDone()};u.onerror=()=>{setActiveWordIdx(-1);if(onDone)onDone()};
+    u.onboundary=e=>{if(e.name==='word'){currentCharIdx.current=e.charIndex;let i=0;for(let j=ws.length-1;j>=0;j--){if(e.charIndex>=ws[j]){i=j;break}}currentWordIdx.current=i+wordOffset;setActiveWordIdx(i+wordOffset)}};
+    u.onend=()=>{if(speedChangeRef.current)return;currentVerseRef.current=null;setActiveWordIdx(-1);if(onDone)onDone()};
+    u.onerror=()=>{if(speedChangeRef.current)return;currentVerseRef.current=null;setActiveWordIdx(-1);if(onDone)onDone()};
     speechSynthesis.speak(u);
   },[getVoice]);
+  speakVerseRef.current=speakVerse;
   const speakSingleVerse=useCallback((vN,text)=>{speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=[];speakVerse(vN,text,()=>{setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)})},[speakVerse]);
   const speakChapter=useCallback(verses=>{
     speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
@@ -972,6 +990,7 @@ function App({data}){
   const changeUiLang=useCallback(l=>{setLang(l);setUiLang(l);},[]);
   const levelTested=LS.get('bible-level-tested');
   const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
+  const prevPhaseRef=useRef('nav');
   const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
@@ -984,6 +1003,9 @@ function App({data}){
   const [expandedBook,setExpandedBook]=useState(null);
   const [expandedStatBook,setExpandedStatBook]=useState(null);
   const [expandedStatSection,setExpandedStatSection]=useState(null);
+  const [bookmarks,setBookmarks]=useState(()=>LS.get('bible-bookmarks')||{});
+  const visibleVerseRef=useRef(1);
+  const saveBookmark=useCallback((bi,ci,verse)=>{setBookmarks(prev=>{const next={...prev,[bi]:{ch:ci,v:verse||1}};LS.set('bible-bookmarks',next);return next})},[]);
   const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
@@ -1016,6 +1038,19 @@ function App({data}){
   useEffect(()=>{tts.setLang('en')},[tts]);
 
   useEffect(()=>{
+    if(phase!=='reading')return;
+    const els=document.querySelectorAll('[id^="verse-"]');
+    if(!els.length)return;
+    const obs=new IntersectionObserver(entries=>{
+      let topV=null,topY=Infinity;
+      entries.forEach(e=>{if(e.isIntersecting&&e.boundingClientRect.top<topY){topY=e.boundingClientRect.top;topV=parseInt(e.target.id.replace('verse-',''))}});
+      if(topV)visibleVerseRef.current=topV;
+    },{threshold:0.1});
+    els.forEach(el=>obs.observe(el));
+    return()=>obs.disconnect();
+  },[phase,chapIdx]);
+
+  useEffect(()=>{
     if((phase==='quiz'||phase==='reading')&&!loadedBook){
       const nr=bible.books[bookIdx]?.nr;
       if(nr){
@@ -1027,12 +1062,13 @@ function App({data}){
     }
   },[]);
 
-  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training')?'nav':phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const onLevelTestComplete=useCallback(level=>{
     setUserLevel(level);LS.set('bible-level-tested',true);setPhase('nav');
   },[]);
 
+  const savedScrollRef=useRef(null);
   const scrollTop=useCallback(()=>{
     const el=document.querySelector('.phone-screen');
     if(el)el.scrollTop=0;
@@ -1040,7 +1076,21 @@ function App({data}){
     document.documentElement.scrollTop=0;
     document.body.scrollTop=0;
   },[]);
-  useEffect(scrollTop,[bookIdx,chapIdx,phase,loading]);
+  const prevPhaseForScroll=useRef(phase);
+  useEffect(()=>{
+    const overlay=phase==='settings'||phase==='stats'||phase==='training';
+    const wasOverlay=prevPhaseForScroll.current==='settings'||prevPhaseForScroll.current==='stats'||prevPhaseForScroll.current==='training';
+    if(wasOverlay&&!overlay&&savedScrollRef.current!=null){
+      const pos=savedScrollRef.current;savedScrollRef.current=null;
+      requestAnimationFrame(()=>{
+        const el=document.querySelector('.phone-screen');
+        if(el)el.scrollTop=pos;else window.scrollTo(0,pos);
+      });
+    }else if(!overlay&&!wasOverlay){
+      scrollTop();
+    }
+    prevPhaseForScroll.current=phase;
+  },[bookIdx,chapIdx,phase,loading,scrollTop]);
 
   const books=bible.books;
   const currentBook=books[bookIdx];
@@ -1069,7 +1119,9 @@ function App({data}){
   useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
 
   const openChapter=useCallback(async(bi,ci)=>{
-    tts.stop();setBookIdx(bi);setChapIdx(ci);
+    tts.stop();
+    saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
+    setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
     setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);
     const nr=books[bi].nr;
     setLoading(true);
@@ -1081,9 +1133,18 @@ function App({data}){
     }catch(e){setLoadedBook(null);setBookAnnotations(null);setDeBook(null);}
     setLoading(false);
     setPhase('quiz');
-  },[tts,loadChapterWords,books]);
-  const startReading=useCallback(()=>{setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[]);
-  const goToNav=useCallback(()=>{tts.stop();setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts]);
+  },[tts,loadChapterWords,books,saveBookmark]);
+  const startReading=useCallback(()=>{
+    setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');
+    const bm=bookmarks[bookIdx];
+    const targetVerse=bm&&bm.ch===chapIdx&&bm.v>1?bm.v:null;
+    if(targetVerse){
+      setTimeout(()=>{const el=document.getElementById('verse-'+targetVerse);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},300);
+    } else {
+      (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
+    }
+  },[bookmarks,bookIdx,chapIdx]);
+  const goToNav=useCallback(()=>{tts.stop();saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,bookIdx,chapIdx,saveBookmark]);
   const nextChapter=useCallback(()=>{if(chapIdx<(currentBook.numChapters||0)-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
   const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].numChapters-1)},[bookIdx,chapIdx,books,openChapter]);
 
@@ -1238,7 +1299,7 @@ function App({data}){
 
   // ── TRAINING ──
   if(phase==='training'){
-    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase('nav')} books={books} openChapter={openChapter}/>;
+    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter}/>;
   }
 
   // ── STATISTICS ──
@@ -1248,7 +1309,7 @@ function App({data}){
       <header style={S.header}>
         <h1 style={S.title}>{t('statistics')}</h1>
       </header>
-      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>{t('back')}</button></div>
+      <div style={S.navRow}><button onClick={()=>setPhase(prevPhaseRef.current||'nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
         {statsVisible.text&&<div style={S.settingsGroup}>
           <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='text'?null:'text')}>
@@ -1320,7 +1381,7 @@ function App({data}){
       <header style={S.header}>
         <h1 style={S.title}>{t('settings')}</h1>
       </header>
-      <div style={S.navRow}><button onClick={()=>setPhase('nav')} style={S.navBtn}>{t('back')}</button></div>
+      <div style={S.navRow}><button onClick={()=>setPhase(prevPhaseRef.current||'nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('appLanguage')}</span>
@@ -1334,11 +1395,11 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('readingSpeed')}</span>
-          <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{k:'slow',v:0.5},{k:'normal',v:0.85},{k:'fast',v:1.1}].map(p=>(
+          <div style={S.speedPresets}>{[{l:'🐌',v:0.2},{k:'slow',v:0.4},{k:'normal',v:0.65},{k:'fast',v:0.85},{k:'veryFast',v:1.0}].map(p=>(
             <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
           ))}</div>
           <div style={S.speedSliderRow}>
-            <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+            <input type="range" min="0.2" max="1.0" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
             <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
           </div>
         </div>
@@ -1381,9 +1442,9 @@ function App({data}){
         <h1 style={S.title}>{t('navTitle')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
-          <button onClick={()=>setPhase('stats')} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>setPhase('training')} style={S.gearBtn} title={t('training')}>🎓</button>
-          <button onClick={()=>setPhase('settings')} style={S.gearBtn} title={t('settings')}>⚙</button>
+          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
+          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
+          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
         </div>
       </header>
       {otBooks.length>0&&<div style={S.bookList}>
@@ -1395,13 +1456,15 @@ function App({data}){
         {expandedTestament==='ot'&&otBooks.map((book,i)=>{
           const bi=i;
           const isOpen=expandedBook===bi;
+          const bm=bookmarks[bi];
           return(<div key={bi} style={S.bookItem}>
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
               <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
+              {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>}
@@ -1414,13 +1477,15 @@ function App({data}){
         {expandedTestament==='nt'&&ntBooks.map((book,i)=>{
           const bi=ntStartIndex+i;
           const isOpen=expandedBook===bi;
+          const bm=bookmarks[bi];
           return(<div key={bi} style={S.bookItem}>
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
               <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
+              {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={S.chapBtn}>{ci+1}</button>))}</div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>
@@ -1492,6 +1557,9 @@ function App({data}){
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'4px 0'}}>
         <button onClick={()=>{tts.stop();goToNav()}} style={barBtn} title={t('home')}>⌂</button>
         <span style={{fontSize:13,color:'var(--t-title)',fontFamily:sans,fontWeight:500,flex:1,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{currentBook.name} {chapNum}</span>
+        {tts.speaking
+          ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}>⏹</button>
+          :<button onClick={()=>tts.speakChapter(verses)} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}>▶</button>}
         <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false)}} style={barBtn} title={t('search')}>⌕</button>
         <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false)}} style={barBtn} title={t('settings')}>≡</button>
       </div>
@@ -1519,23 +1587,21 @@ function App({data}){
           <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>{t('wordList')}</button>
         </div>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
-          <button onClick={()=>{setReadingMenu(false);setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
-          <button onClick={()=>{setReadingMenu(false);setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>{setReadingMenu(false);setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
+          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
+          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
+          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
         </div>
         <div style={{borderTop:'1px solid var(--t-border)',paddingTop:10}}>
-          {tts.speaking?(<button onClick={tts.stop} style={S.ttsStopBtn}>{t('stopTTS')}</button>
-          ):(<div style={{display:'flex',flexDirection:'column',gap:8}}>
-            <button onClick={()=>tts.speakChapter(verses)} style={S.ttsPlayAllBtn} disabled={!tts.hasVoices}>{t('readAloud')}</button>
-            {unknownWords.size>0&&(<button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>{t('practiceWords')}</button>)}
-          </div>)}
+          {!tts.speaking&&unknownWords.size>0&&<div style={{marginBottom:8}}>
+            <button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>{t('practiceWords')}</button>
+          </div>}
           <div style={S.speedControl}>
             <span style={S.speedLabel}>{t('speed')}</span>
-            <div style={S.speedPresets}>{[{l:'🐌',v:0.25},{k:'slow',v:0.5},{k:'normal',v:0.85},{k:'fast',v:1.1}].map(p=>(
+            <div style={S.speedPresets}>{[{l:'🐌',v:0.2},{k:'slow',v:0.4},{k:'normal',v:0.65},{k:'fast',v:0.85},{k:'veryFast',v:1.0}].map(p=>(
               <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
             ))}</div>
             <div style={S.speedSliderRow}>
-              <input type="range" min="0.2" max="1.5" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+              <input type="range" min="0.2" max="1.0" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
               <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
             </div>
           </div>
@@ -1684,6 +1750,7 @@ const S={
   bookName:{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:0,fontFamily:sans},
   bookChapCount:{fontSize:12,color:'var(--t-muted2)',fontFamily:sans,marginLeft:'auto',flexShrink:0},
   chapGrid:{display:'flex',flexWrap:'wrap',gap:4,marginTop:10},
+  bmBtn:{fontSize:11,fontFamily:sans,color:'var(--t-accent)',background:'none',border:'1px solid var(--t-accent)',borderRadius:4,padding:'2px 8px',cursor:'pointer',marginLeft:8,flexShrink:0,whiteSpace:'nowrap'},
   chapBtn:{width:36,height:32,border:'1px solid var(--t-border)',borderRadius:4,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans,transition:'all 0.15s'},
   navRow:{display:'flex',justifyContent:'center',marginBottom:16},
   navBtn:{background:'none',border:'1px solid var(--t-border2)',borderRadius:5,padding:'4px 14px',fontSize:13,color:'var(--t-med)',cursor:'pointer',fontFamily:sans},
