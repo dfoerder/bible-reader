@@ -1551,12 +1551,12 @@ function App({data}){
   const barBase={position:'sticky',top:0,zIndex:100,background:'var(--t-card-solid)',borderBottom:'1px solid var(--t-border)',
     margin:isPhoneSim?'-36px -16px 0':'calc(-20px - env(safe-area-inset-top, 0px)) -24px 0',
     padding:isPhoneSim?'28px 16px 0':'env(safe-area-inset-top, 0px) 24px 0'};
-  const barBtn={background:'none',border:'none',cursor:'pointer',padding:'4px 8px',fontSize:16,color:'var(--t-muted)'};
+  const barBtn={background:'none',border:'none',cursor:'pointer',padding:'4px 8px',fontSize:24,color:'var(--t-muted)'};
   return(<div style={{position:'relative'}}>
     <div style={barBase}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'4px 0'}}>
         <button onClick={()=>{tts.stop();goToNav()}} style={barBtn} title={t('home')}>⌂</button>
-        <span style={{fontSize:13,color:'var(--t-title)',fontFamily:sans,fontWeight:500,flex:1,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{currentBook.name} {chapNum}</span>
+        <span style={{fontSize:16,color:'var(--t-title)',fontFamily:sans,fontWeight:600,flex:1,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{currentBook.name} {chapNum}</span>
         {tts.speaking
           ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}>⏹</button>
           :<button onClick={()=>tts.speakChapter(verses)} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}>▶</button>}
