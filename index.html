@@ -1560,7 +1560,7 @@ function App({data}){
         {tts.speaking
           ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}>⏹</button>
           :<button onClick={()=>tts.speakChapter(verses)} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}>▶</button>}
-        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false)}} style={barBtn} title={t('search')}>⌕</button>
+        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false)}} style={{...barBtn,display:'inline-flex',alignItems:'center'}} title={t('search')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{display:'block'}}><circle cx="11" cy="11" r="6" strokeWidth="2.5" /><line x1="16" y1="16" x2="21" y2="21" strokeWidth="2.5" strokeLinecap="round" /></svg></button>
         <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false)}} style={barBtn} title={t('settings')}>≡</button>
       </div>
       {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
