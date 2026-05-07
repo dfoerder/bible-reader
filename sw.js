@@ -1,9 +1,10 @@
-const CACHE_NAME = 'bible-full-v10';
+const CACHE_NAME = 'bible-full-v11';
 const ASSETS = [
   './',
   './index.html',
   './bibles/index.json',
   './data/vocab_pool.json',
+  './data/context_exercises.json',
   'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'

@@ -153,7 +153,7 @@ const I18N={
   // Nav
   navTitle:{de:'Englisch mit der Bibel',en:"English Learner's Bible"},
   navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Englisch.',en:"Deepen your faith and master English through God's Word."},
-  navSubtitle2:{de:'Die komplette Bibel mit Vokabelhilfe, Audio und Lernwerkzeugen.',en:'The complete Bible with vocabulary assistance, audio, and learning tools.'},
+  navSubtitle2:{de:'Die komplette Bibel mit Wörterhilfe, Audio und Lernwerkzeugen.',en:'The complete Bible with vocabulary assistance, audio, and learning tools.'},
   myLevel:{de:'Mein Level:',en:'My level:'},
   oldTestament:{de:'Altes Testament',en:'Old Testament'},
   newTestament:{de:'Neues Testament',en:'New Testament'},
@@ -162,8 +162,8 @@ const I18N={
 
   // Settings
   settings:{de:'Einstellungen',en:'Settings'},
-  vocabLevel:{de:'Vokabel-Level',en:'Vocabulary level'},
-  vocabLevelHint:{de:'Wörter über diesem Level werden in der Vokabelprüfung angezeigt.',en:'Words above this level are shown in the vocabulary check.'},
+  vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
+  vocabLevelHint:{de:'Wörter über diesem Level werden unter „Schwierige Wörter" angezeigt.',en:'Words above this level are shown under "Difficult Words".'},
   retakeTest:{de:'Sprachtest wiederholen',en:'Retake language test'},
   readingSpeed:{de:'Lesegeschwindigkeit (Vorlesen)',en:'Reading speed (TTS)'},
   slow:{de:'Langsam',en:'Slow'},
@@ -182,7 +182,7 @@ const I18N={
   resetConfirm:{de:'Alle gelernten Wörter und den Fortschritt zurücksetzen?',en:'Reset all learned words and progress?'},
   statsPage:{de:'Statistik-Seite',en:'Statistics page'},
   statsText:{de:'Text (Bücher, Kapitel, Verse, Wörter)',en:'Text (books, chapters, verses, words)'},
-  statsVocab:{de:'Vokabular (Lemmata nach Level)',en:'Vocabulary (lemmas by level)'},
+  statsVocab:{de:'Wörter (Lemmata nach Level)',en:'Vocabulary (lemmas by level)'},
   statsProgress:{de:'Dein Fortschritt',en:'Your progress'},
   appLanguage:{de:'App-Sprache',en:'App language'},
 
@@ -195,25 +195,29 @@ const I18N={
   statVerses:{de:'Verse',en:'Verses'},
   statWords:{de:'Wörter',en:'Words'},
   annotatedHint:{de:'{n} von {t} Büchern haben Wort-für-Wort-Annotationen.',en:'{n} of {t} books have word-by-word annotations.'},
-  vocabTotal:{de:'Vokabular — Gesamt',en:'Vocabulary — Total'},
+  vocabTotal:{de:'Wörter — Gesamt',en:'Vocabulary — Total'},
   nUnique:{de:'{n} einzigartige Wörter',en:'{n} unique words'},
   uniqueWords:{de:'Einzigartige Wörter',en:'Unique words'},
-  vocabPerBook:{de:'Vokabular pro Buch',en:'Vocabulary per book'},
+  vocabPerBook:{de:'Wörter pro Buch',en:'Vocabulary per book'},
   difficulty:{de:'Schwierigkeit ({l})',en:'Difficulty ({l})'},
   wordsLearned:{de:'Gelernte Wörter',en:'Words learned'},
   ofAllLemmas:{de:'aller Lemmata',en:'of all lemmas'},
 
   // Quiz (vocab check before reading)
-  vocabCheck:{de:'Kapitel {n} — Vokabelprüfung',en:'Chapter {n} — Vocabulary Check'},
-  noNewVocab:{de:'Keine neuen Vokabeln über {l}',en:'No new vocabulary above {l}'},
+  vocabCheck:{de:'Kapitel {n} — Schwierige Wörter',en:'Chapter {n} — Difficult Words'},
+  noNewVocab:{de:'Keine neuen Wörter über {l}',en:'No new vocabulary above {l}'},
   startReading:{de:'Du kannst direkt lesen.',en:'You can start reading directly.'},
-  whichWords:{de:'Welche Wörter kennst du nicht?',en:"Which words don't you know?"},
+  whichWords:{de:'Schwierige Wörter markieren',en:'Mark difficult words'},
   nWordsAbove:{de:'{n} Wörter über {l}. Tippe die unbekannten an.',en:'{n} words above {l}. Tap the unknown ones.'},
   markAll:{de:'Alle markieren',en:'Mark all'},
   markNone:{de:'Keine markieren',en:'Mark none'},
   noMarked:{de:'Keine Wörter markiert — reiner Lesefluss!',en:'No words marked — pure reading flow!'},
   nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
   readBtn:{de:'Lesen →',en:'Read →'},
+  trainDifficult:{de:'Schwierige Wörter trainieren',en:'Train difficult words'},
+  trainDifficultHint:{de:'Multiple-Choice-Übungen zu den schwierigen Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s difficult words.'},
+  startTraining:{de:'Training starten',en:'Start training'},
+  noWordsToTrain:{de:'Keine schwierigen Wörter zum Trainieren.',en:'No difficult words to train.'},
 
   // Reading
   wordList:{de:'← Wortliste',en:'← Word list'},
@@ -242,22 +246,24 @@ const I18N={
   nOfTotal:{de:'{n} von {t} richtig',en:'{n} of {t} correct'},
   levelSet:{de:'Dein Sprachniveau wurde auf {l} gesetzt.',en:'Your language level has been set to {l}.'},
   levelChangeHint:{de:'Du kannst es jederzeit in den Einstellungen ändern.',en:'You can change it anytime in the settings.'},
+  skipTest:{de:'Überspringen',en:'Skip test'},
+  skipTestHint:{de:'Dein Level wird auf B1 gesetzt. Du kannst den Test jederzeit in den Einstellungen nachholen.',en:'Your level will be set to B1. You can take the test anytime in settings.'},
 
   // Training
   training:{de:'Training',en:'Training'},
   yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
-  vocabPractice:{de:'Vokabeln üben',en:'Practice vocabulary'},
+  vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
   nOfMAvailable:{de:'{n} von {m} Wörtern verfügbar',en:'{n} of {m} words available'},
-  clozePractice:{de:'Lückentext üben',en:'Practice cloze texts'},
-  clozeByBook:{de:'Lückentext nach Buch',en:'Cloze by book'},
-  clozeByBookTitle:{de:'Lückentext nach Buch',en:'Cloze by book'},
+  clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
+  clozeByBook:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
+  clozeByBookTitle:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
   noExercises:{de:'Für dieses Buch gibt es noch keine Übungen.',en:'No exercises available for this book yet.'},
   wellDone:{de:'Gut gemacht!',en:'Well done!'},
   keepPracticing:{de:'Weiter üben!',en:'Keep practicing!'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   finish:{de:'Beenden',en:'Finish'},
-  cloze:{de:'Lückentext',en:'Cloze'},
-  vocab:{de:'Vokabeln',en:'Vocabulary'},
+  cloze:{de:'Wörter im Kontext',en:'Vocabulary in context'},
+  vocab:{de:'Wörter',en:'Vocabulary'},
   wrong:{de:'Falsch!',en:'Wrong!'},
   tooEasy:{de:'zu\neinfach',en:'too\neasy'},
   iGuess:{de:'ich\nrate',en:'just\nguessing'},
@@ -382,7 +388,10 @@ function LevelTest({onComplete}){
 
   return(<div>
     <header style={S.header}>
-      <h1 style={S.title}>{t('levelTest')}</h1>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <h1 style={{...S.title,margin:0}}>{t('levelTest')}</h1>
+        <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{current>0?t('cancel'):t('skipTest')} →</button>
+      </div>
       <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('questionN').replace('{n}',current+1).replace('{t}',LEVEL_TEST.length)}</p>
     </header>
     <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 24px',overflow:'hidden'}}>
@@ -407,79 +416,7 @@ function LevelTest({onComplete}){
   </div>);
 }
 
-// ─── Cloze Exercises ────────────────────────────────────
-const CLOZE_EXERCISES={
-  A1:[
-    {text:'In the beginning, God created the heavens and the ___.',answer:'earth',wrong:['water','light'],de:'Erde',ref:'Genesis 1:1',book:1},
-    {text:'God set them in the expanse of sky to give ___ to the earth.',answer:'light',wrong:['water','food'],de:'Licht',ref:'Genesis 1:17',book:1},
-    {text:'The man and his ___ were both naked, and they were not ashamed.',answer:'wife',wrong:['son','brother'],de:'Frau',ref:'Genesis 2:25',book:1},
-    {text:'The man called his wife Eve because she would be the ___ of all the living.',answer:'mother',wrong:['sister','daughter'],de:'Mutter',ref:'Genesis 3:20',book:1},
-    {text:'Cain ___ Yahweh\'s presence, and lived in the land of Nod, east of Eden.',answer:'left',wrong:['saw','told'],de:'verließ',ref:'Genesis 4:16',book:1},
-    {text:'Now let a little water be fetched, wash your ___ and rest yourselves under the tree.',answer:'feet',wrong:['hands','eyes'],de:'Füße',ref:'Genesis 18:4',book:1},
-    {text:'God ___, "Let there be light," and there was light.',answer:'said',wrong:['came','went'],de:'sagte',ref:'Genesis 1:3',book:1},
-    {text:'The serpent said to the woman, "You won\'t surely ___."',answer:'die',wrong:['see','eat'],de:'sterben',ref:'Genesis 3:4',book:1},
-    {text:'Then I will tell them, "I ___ knew you. Depart from me."',answer:'never',wrong:['always','often'],de:'niemals',ref:'Matthew 7:23',book:40},
-    {text:'They stoned Stephen as he called out, saying, "Lord Jesus, receive my ___!"',answer:'spirit',wrong:['body','name'],de:'Geist',ref:'Acts 7:59',book:44},
-    {text:'Better is a ___ of herbs, where love is, than a fattened calf with hatred.',answer:'dinner',wrong:['house','field'],de:'Mahl',ref:'Proverbs 15:17',book:20},
-    {text:'As ___ passed, Cain brought an offering to Yahweh from the fruit of the ground.',answer:'time',wrong:['rain','night'],de:'Zeit',ref:'Genesis 4:3',book:1},
-  ],
-  A2:[
-    {text:'It rained on the earth forty days and forty ___.',answer:'nights',wrong:['years','hours'],de:'Nächte',ref:'Genesis 7:12',book:1},
-    {text:'Out of that land he went into Assyria, and ___ Nineveh.',answer:'built',wrong:['found','sold'],de:'baute',ref:'Genesis 10:11',book:1},
-    {text:'The ___ had risen on the earth when Lot came to Zoar.',answer:'sun',wrong:['moon','rain'],de:'Sonne',ref:'Genesis 19:23',book:1},
-    {text:'But his wife ___ back from behind him, and she became a pillar of salt.',answer:'looked',wrong:['walked','turned'],de:'blickte',ref:'Genesis 19:26',book:1},
-    {text:'Abraham drew ___ and said, "Will you consume the righteous with the wicked?"',answer:'near',wrong:['back','away'],de:'nahe',ref:'Genesis 18:23',book:1},
-    {text:'He said, "Please, my ___, don\'t act so wickedly."',answer:'brothers',wrong:['friends','children'],de:'Brüder',ref:'Genesis 19:7',book:1},
-    {text:'For everyone who asks receives. He who seeks finds. To him who ___ it will be opened.',answer:'knocks',wrong:['waits','prays'],de:'klopft',ref:'Matthew 7:8',book:40},
-    {text:'My days are past, my ___ are broken off, as are the thoughts of my heart.',answer:'plans',wrong:['songs','rules'],de:'Pläne',ref:'Job 17:11',book:18},
-    {text:'"Let\'s break their bonds apart, and cast away their cords from ___."',answer:'us',wrong:['you','him'],de:'uns',ref:'Psalms 2:3',book:19},
-    {text:'Jacob was left ___, and wrestled with a man there until the breaking of the day.',answer:'alone',wrong:['behind','above'],de:'allein',ref:'Genesis 32:24',book:1},
-    {text:'The ___ of his kingdom was Babel, Erech, Accad, and Calneh.',answer:'beginning',wrong:['middle','border'],de:'Anfang',ref:'Genesis 10:10',book:1},
-    {text:'The men ___ from there, and went toward Sodom.',answer:'turned',wrong:['jumped','slept'],de:'wandten',ref:'Genesis 18:22',book:1},
-  ],
-  B1:[
-    {text:'In the ___, God created the heavens and the earth.',answer:'beginning',wrong:['morning','darkness'],de:'Anfang',ref:'Genesis 1:1',book:1},
-    {text:'There was ___ and there was morning, a fifth day.',answer:'evening',wrong:['silence','thunder'],de:'Abend',ref:'Genesis 1:23',book:1},
-    {text:'The man and his wife were both ___, and they were not ashamed.',answer:'naked',wrong:['silent','hidden'],de:'nackt',ref:'Genesis 2:25',book:1},
-    {text:'Yahweh God ___ the man to eat freely of every tree of the garden.',answer:'commanded',wrong:['punished','promised'],de:'gebot',ref:'Genesis 2:16',book:1},
-    {text:'The woman said to the serpent, "We may eat ___ from the trees of the garden."',answer:'fruit',wrong:['bread','grain'],de:'Frucht',ref:'Genesis 3:2',book:1},
-    {text:'Cain said to Yahweh, "My punishment is ___ than I can bear."',answer:'greater',wrong:['smaller','deeper'],de:'größer',ref:'Genesis 4:13',book:1},
-    {text:'Yahweh said to Cain, "Why are you ___? Why has the expression of your face fallen?"',answer:'angry',wrong:['tired','afraid'],de:'zornig',ref:'Genesis 4:6',book:1},
-    {text:'The heavens, the earth, and all their vast array were ___.',answer:'finished',wrong:['destroyed','forgotten'],de:'vollendet',ref:'Genesis 2:1',book:1},
-    {text:'A mist went up from the earth, and ___ the whole surface of the ground.',answer:'watered',wrong:['darkened','covered'],de:'bewässerte',ref:'Genesis 2:6',book:2},
-    {text:'Open the gates, that the righteous nation may enter: the one which keeps ___.',answer:'faith',wrong:['silence','distance'],de:'Treue',ref:'Isaiah 26:2',book:23},
-    {text:'He waited yet another seven days; and again he sent the ___ out of the ship.',answer:'dove',wrong:['raven','eagle'],de:'Taube',ref:'Genesis 8:10',book:1},
-    {text:'Immediately his ears were opened, and he spoke ___.',answer:'clearly',wrong:['quietly','slowly'],de:'deutlich',ref:'Mark 7:35',book:41},
-  ],
-  B2:[
-    {text:'Cain said to Yahweh, "My ___ is greater than I can bear."',answer:'punishment',wrong:['offering','journey'],de:'Strafe',ref:'Genesis 4:13',book:1},
-    {text:'Cain left Yahweh\'s ___, and lived in the land of Nod.',answer:'presence',wrong:['kingdom','temple'],de:'Angesicht',ref:'Genesis 4:16',book:1},
-    {text:'As time passed, Cain brought an ___ to Yahweh from the fruit of the ground.',answer:'offering',wrong:['weapon','shelter'],de:'Opfer',ref:'Genesis 4:3',book:1},
-    {text:'The earth was corrupt before God, and the earth was filled with ___.',answer:'violence',wrong:['silence','beauty'],de:'Gewalt',ref:'Genesis 6:11',book:1},
-    {text:'But Noah found ___ in Yahweh\'s eyes.',answer:'favor',wrong:['shelter','wisdom'],de:'Gnade',ref:'Genesis 6:8',book:1},
-    {text:'Noah began to be a farmer, and planted a ___.',answer:'vineyard',wrong:['fortress','monument'],de:'Weinberg',ref:'Genesis 9:20',book:1},
-    {text:'He said, "Canaan is ___. He will be a servant of servants to his brothers."',answer:'cursed',wrong:['blessed','chosen'],de:'verflucht',ref:'Genesis 9:25',book:1},
-    {text:'Be ___ and multiply. Increase abundantly in the earth.',answer:'fruitful',wrong:['grateful','fearful'],de:'fruchtbar',ref:'Genesis 9:7',book:1},
-    {text:'He drank of the wine and got ___. He was uncovered within his tent.',answer:'drunk',wrong:['tired','angry'],de:'betrunken',ref:'Genesis 9:21',book:1},
-    {text:'"I will ___ my covenant with you, and with your offspring after you."',answer:'establish',wrong:['abandon','conceal'],de:'errichten',ref:'Genesis 9:9',book:1},
-    {text:'They ___ Yahweh, and served Baal and the Ashtaroth.',answer:'abandoned',wrong:['worshiped','summoned'],de:'verließen',ref:'Judges 2:13',book:7},
-    {text:'Then Jesus came from Galilee to the Jordan to John, to be ___ by him.',answer:'baptized',wrong:['received','rejected'],de:'getauft',ref:'Matthew 3:13',book:40},
-  ],
-  C1:[
-    {text:'The woman said to the ___, "We may eat fruit from the trees of the garden."',answer:'serpent',wrong:['prophet','stranger'],de:'Schlange',ref:'Genesis 3:2',book:1},
-    {text:'The earth was ___ before God, and the earth was filled with violence.',answer:'corrupt',wrong:['fertile','ancient'],de:'verderbt',ref:'Genesis 6:11',book:1},
-    {text:'After the seven days, the ___ came on the earth.',answer:'floodwaters',wrong:['earthquakes','lightning'],de:'Flutgewässer',ref:'Genesis 7:10',book:1},
-    {text:'Sarai was ___. She had no child.',answer:'barren',wrong:['wealthy','anxious'],de:'unfruchtbar',ref:'Genesis 11:30',book:1},
-    {text:'Yahweh ___ Pharaoh and his house with great plagues.',answer:'plagued',wrong:['visited','rewarded'],de:'plagte',ref:'Genesis 12:17',book:1},
-    {text:'He believed in Yahweh, and he reckoned it to him for ___.',answer:'righteousness',wrong:['forgiveness','obedience'],de:'Gerechtigkeit',ref:'Genesis 15:6',book:1},
-    {text:'"I will make my ___ between me and you, and will multiply you exceedingly."',answer:'covenant',wrong:['dwelling','judgment'],de:'Bund',ref:'Genesis 17:2',book:1},
-    {text:'Your brother came with ___, and has taken away your blessing.',answer:'deceit',wrong:['courage','silence'],de:'List',ref:'Genesis 27:35',book:1},
-    {text:'Stay with him a few days, until your brother\'s ___ turns away.',answer:'fury',wrong:['mercy','hunger'],de:'Wut',ref:'Genesis 27:44',book:1},
-    {text:'God set them in the ___ of sky to give light to the earth.',answer:'expanse',wrong:['silence','surface'],de:'Gewölbe',ref:'Genesis 1:17',book:1},
-    {text:'Not only this, but we also rejoice in our sufferings, knowing that suffering works ___.',answer:'perseverance',wrong:['forgetfulness','indifference'],de:'Ausdauer',ref:'Romans 5:3',book:45},
-    {text:'Abraham complained to Abimelech because of a well, which his servants had ___ taken away.',answer:'violently',wrong:['peacefully','reluctantly'],de:'gewaltsam',ref:'Genesis 21:25',book:1},
-  ],
-};
+let CLOZE_EXERCISES={A2:[],B1:[],B2:[],C1:[],C2:[]};
 
 let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[]};
 
@@ -508,10 +445,14 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
   const startCloze=useCallback(lvl=>{
-    const pool=CLOZE_EXERCISES[lvl]||[];
+    const pool=CLOZE_EXERCISES[lvl]||CLOZE_EXERCISES['A2']||[];
     const picked=shuffle(pool).slice(0,10);
+    const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
     setExercises(picked);
-    setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
+    setShuffledOpts(picked.map(ex=>{
+      const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+      return shuffle([ex.de,...wrong]);
+    }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;
     setSelectedLevel(lvl);setLastStart('cloze');
@@ -544,8 +485,12 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     const allEx=Object.values(CLOZE_EXERCISES).flat().filter(e=>e.book===bookNr);
     if(allEx.length===0){setMode('noexercises');return}
     const picked=shuffle(allEx).slice(0,10);
+    const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
     setExercises(picked);
-    setShuffledOpts(picked.map(ex=>shuffle([ex.answer,...ex.wrong])));
+    setShuffledOpts(picked.map(ex=>{
+      const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+      return shuffle([ex.de,...wrong]);
+    }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;
     setLastStart({type:'book',bi});
@@ -557,7 +502,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
   const pick=useCallback((ans,mode)=>{
     if(selected!==null)return;
     const ex=exercises[current];
-    const correct=exType==='vocab'?ans===ex.de:ans===ex.answer;
+    const correct=ans===ex.de;
     setSelected(ans);
     if(mode==='guess') guessRef.current=true;
     if(correct){
@@ -595,7 +540,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
         return shuffle([q.de,...wr]);
       }));
     } else {
-      setShuffledOpts(retryEx.map(ex=>shuffle([ex.answer,...ex.wrong])));
+      const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+      setShuffledOpts(retryEx.map(ex=>{
+        const wr=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+        return shuffle([ex.de,...wr]);
+      }));
     }
     setCurrent(0);setSelected(null);
   },[exType,selectedLevel]);
@@ -660,25 +609,27 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
       </div>
       <div style={{fontFamily:'var(--t-serif)',fontSize:18,lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
-        {parts[0]}<span style={{display:'inline-block',minWidth:80,borderBottom:'2px dashed var(--t-accent)',padding:'0 4px',color:selected!==null?(selected===ex.answer?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontWeight:600}}>{selected||'...'}</span>{parts[1]}
+        {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
       </div>
-      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
+      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 8px'}}>{ex.ref}</p>
+      <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{t('whatMeans')}</p>
       <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
         {opts.map((opt,i)=>{
           let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)';
           if(selected!==null){
-            if(opt===ex.answer){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
+            if(opt===ex.de){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
             else if(opt===selected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)'}
           }
-          return(<button key={i} onClick={()=>pick(opt)} style={{padding:'12px 20px',border,borderRadius:10,background:bg,color,fontSize:16,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:selected!==null&&opt===selected&&opt!==ex.answer?'line-through':'none'}}>{opt}</button>);
+          return(<button key={i} onClick={()=>pick(opt)} style={{padding:'12px 20px',border,borderRadius:10,background:bg,color,fontSize:16,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:selected!==null&&opt===selected&&opt!==ex.de?'line-through':'none'}}>{opt}</button>);
         })}
       </div>
-      {selected!==null&&selected===ex.answer&&<p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 0'}}>{ex.answer} = {ex.de}</p>}
-      {selected!==null&&selected!==ex.answer&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
+      {selected!==null&&selected===ex.de&&<p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 0'}}>{ex.answer} = {ex.de}</p>}
+      {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>
         <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
         <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
+      <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
     </div>);
   }
 
@@ -715,6 +666,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
         <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
         <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
+      <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
     </div>);
   }
 
@@ -832,6 +784,10 @@ async function loadData(){
     const vr=await fetch('data/vocab_pool.json'+CB);
     if(vr.ok) VOCAB_POOL=await vr.json();
   }catch(e){}
+  try{
+    const cr=await fetch('data/context_exercises.json'+CB);
+    if(cr.ok) CLOZE_EXERCISES=await cr.json();
+  }catch(e){}
   return{en};
 }
 
@@ -843,6 +799,7 @@ function splitPunct(token){
 
 const LEVELS=["A1","A2","B1","B2","C1","C2"];
 const lvlIdx=l=>LEVELS.indexOf(l);
+const shuffleArr=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
 function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
@@ -881,7 +838,8 @@ function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tapped
   const result = [];
   Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
-      if ((lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
+      const isPhrase = a.pos_end != null;
+      if ((isPhrase || lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
         seen.add(a.lemma);
         result.push(a);
       }
@@ -1035,6 +993,10 @@ function App({data}){
   const [searchResults,setSearchResults]=useState(null);
   const [searchLoading,setSearchLoading]=useState(false);
 
+  const [chapTrain,setChapTrain]=useState(null);
+  const [quizExpanded,setQuizExpanded]=useState(false);
+  const [trainExpanded,setTrainExpanded]=useState(false);
+
   useEffect(()=>{tts.setLang('en')},[tts]);
 
   useEffect(()=>{
@@ -1122,7 +1084,7 @@ function App({data}){
     tts.stop();
     saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
     setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
-    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);
     const nr=books[bi].nr;
     setLoading(true);
     try{
@@ -1132,6 +1094,8 @@ function App({data}){
       setDeBook(de);
     }catch(e){setLoadedBook(null);setBookAnnotations(null);setDeBook(null);}
     setLoading(false);
+    setQuizExpanded(false);
+    setTrainExpanded(false);
     setPhase('quiz');
   },[tts,loadChapterWords,books,saveBookmark]);
   const startReading=useCallback(()=>{
@@ -1144,6 +1108,51 @@ function App({data}){
       (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
     }
   },[bookmarks,bookIdx,chapIdx]);
+  const chapTrainRetry=useCallback((wrongItems)=>{
+    const retryWords=wrongItems.map(w=>w.ex);
+    const allDe=quizWords.map(w=>w.de);
+    const opts=retryWords.map(w=>{
+      const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
+      return shuffleArr([w.de,...wrong]);
+    });
+    setChapTrain(s=>({...s,words:retryWords,opts,current:0,selected:null,wrong:[]}));
+  },[quizWords]);
+
+  const startChapTrain=useCallback(()=>{
+    if(quizWords.length===0)return;
+    const words=shuffleArr(quizWords).slice(0,15);
+    const allDe=quizWords.map(w=>w.de);
+    const opts=words.map(w=>{
+      const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
+      return shuffleArr([w.de,...wrong]);
+    });
+    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[]});
+  },[quizWords]);
+
+  const chapTrainPick=useCallback((ans)=>{
+    if(!chapTrain||chapTrain.selected!==null)return;
+    const ex=chapTrain.words[chapTrain.current];
+    const correct=ans===ex.de;
+    const updated={...chapTrain,selected:ans};
+    if(correct)updated.score=chapTrain.score+1;
+    else updated.wrong=[...chapTrain.wrong,{ex,optsIdx:chapTrain.current}];
+    setChapTrain(updated);
+    setTimeout(()=>{
+      if(correct){
+        if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
+        else if(updated.wrong.length>0) chapTrainRetry(updated.wrong);
+        else setChapTrain(s=>({...s,done:true}));
+      }
+    },900);
+  },[chapTrain,chapTrainRetry]);
+
+  const chapTrainAdvance=useCallback(()=>{
+    if(!chapTrain)return;
+    if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
+    else if(chapTrain.wrong.length>0) chapTrainRetry(chapTrain.wrong);
+    else setChapTrain(s=>({...s,done:true}));
+  },[chapTrain,chapTrainRetry]);
+
   const goToNav=useCallback(()=>{tts.stop();saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,bookIdx,chapIdx,saveBookmark]);
   const nextChapter=useCallback(()=>{if(chapIdx<(currentBook.numChapters||0)-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
   const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].numChapters-1)},[bookIdx,chapIdx,books,openChapter]);
@@ -1171,7 +1180,7 @@ function App({data}){
   },[books]);
 
   const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
-  const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})},[]);
+  const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setGlobalLearned(p=>new Set([...p,key]));setRevealedWords(p=>new Set([...p,key]))},[]);
   const unlearn=useCallback(key=>{setLearnedWords(p=>{const n=new Set(p);n.delete(key);return n});setGlobalLearned(p=>{const n=new Set(p);n.delete(key);return n})},[]);
 
   // Build practice fragments (short text pieces around unknown words)
@@ -1187,7 +1196,7 @@ function App({data}){
         const va=chap?.[String(v.n)];
         if(va){
           for(let p=0;p<allWords.length;p++){
-            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(lvlIdx(a.level)>lvlIdx(userLevel)||tappedWords.has(a.lemma))&&unknownWords.has(a.lemma)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
+            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(a.pos_end!=null||lvlIdx(a.level)>lvlIdx(userLevel)||tappedWords.has(a.lemma))&&(unknownWords.has(a.lemma)||a.pos_end!=null)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
           }
         }
       } else {
@@ -1505,6 +1514,51 @@ function App({data}){
 
   // ── QUIZ ──
   if(phase==='quiz'){
+    if(chapTrain&&chapTrain.done){
+      return(<div>
+        <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
+        <div style={{textAlign:'center',padding:'20px 0'}}>
+          <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
+          <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
+          <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+            <button onClick={()=>setChapTrain(null)} style={S.navBtn}>{t('finish')}</button>
+            <button onClick={startChapTrain} style={S.startBtn}>{t('next')}</button>
+          </div>
+        </div>
+      </div>);
+    }
+    if(chapTrain){
+      const ex=chapTrain.words[chapTrain.current];const opts=chapTrain.opts[chapTrain.current];
+      return(<div>
+        <header style={S.header}>
+          <h1 style={S.title}>{t('trainDifficult')}</h1>
+          <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
+        </header>
+        <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
+          <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(chapTrain.current/chapTrain.words.length)*100}%`}}/>
+        </div>
+        <div style={{textAlign:'center',margin:'24px 0 32px'}}>
+          <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
+          <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.form&&ex.form!==ex.lemma?ex.form:(ex.lemma||ex.word)}</p>
+          {ex.form&&ex.form!==ex.lemma&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>({ex.lemma||ex.word})</p>}
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:400,margin:'0 auto'}}>
+          {opts.map((opt,i)=>{
+            let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)',textDeco='none';
+            if(chapTrain.selected!==null){
+              if(opt===ex.de){bg='var(--t-green-bg)';border='1.5px solid var(--t-green)';color='var(--t-green)'}
+              else if(opt===chapTrain.selected){bg='var(--t-accent-bg)';border='1.5px solid var(--t-accent)';color='var(--t-accent)';textDeco='line-through'}
+            }
+            return(<button key={i} onClick={()=>chapTrainPick(opt)} style={{padding:'14px 12px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:chapTrain.selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s',textDecoration:textDeco}}>{opt}</button>);
+          })}
+        </div>
+        {chapTrain.selected!==null&&chapTrain.selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
+          <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
+          <button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button>
+        </div>}
+        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setChapTrain(null)} style={S.navBtn}>{t('cancel')}</button></div>
+      </div>);
+    }
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{currentBook.name}</h1>
@@ -1517,26 +1571,41 @@ function App({data}){
         <div style={S.quizInstr}><p style={S.quizInstrTitle}>{t('noNewVocab').replace('{l}',userLevel)}</p><p style={S.quizInstrSub}>{t('startReading')}</p></div>
       ):(
         <div>
-          <div style={S.quizInstr}>
-            <p style={S.quizInstrTitle}>{t('whichWords')}</p>
+          <div style={S.quizInstr} onClick={()=>setQuizExpanded(e=>!e)}>
+            <p style={{...S.quizInstrTitle,cursor:'pointer'}}>{quizExpanded?'▾':'▸'} {t('whichWords')}</p>
             <p style={S.quizInstrSub}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</p>
-            <div style={S.quizActions}>
-              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>{t('markAll')}</button>
-              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>{t('markNone')}</button>
-            </div>
           </div>
-          <div style={S.wordGrid}>{quizWords.map(item=>{
-            const key=item.lemma||item.word;
-            const sel=unknownWords.has(key);
-            return(<button key={key} onClick={()=>toggleUnknown(key)} style={{...S.wordCard,...(sel?S.wordCardSel:{})}}>
-              <span style={S.wcFr}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</span>
-              {sel&&<span style={S.wcDe}>{item.de}</span>}
-              {item.form&&item.form!==item.lemma&&<span style={S.wcForm}>({item.lemma||item.word})</span>}
-              {sel&&item.level&&<span style={S.wcLevel}>{item.level}</span>}
-            </button>);
-          })}</div>
+          {quizExpanded&&<div>
+            <div style={{...S.quizInstr,marginTop:0,borderTop:'none'}}>
+              <div style={S.quizActions}>
+                <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>{t('markAll')}</button>
+                <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>{t('markNone')}</button>
+              </div>
+            </div>
+            <div style={S.wordGrid}>{quizWords.map(item=>{
+              const key=item.lemma||item.word;
+              const sel=unknownWords.has(key);
+              return(<button key={key} onClick={()=>toggleUnknown(key)} style={{...S.wordCard,...(sel?S.wordCardSel:{})}}>
+                <span style={S.wcFr}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</span>
+                {sel&&<span style={S.wcDe}>{item.de}</span>}
+                {item.form&&item.form!==item.lemma&&<span style={S.wcForm}>({item.lemma||item.word})</span>}
+                {sel&&item.level&&<span style={S.wcLevel}>{item.level}</span>}
+              </button>);
+            })}</div>
+          </div>}
         </div>
       )}
+
+      {quizWords.length>0&&<div>
+        <div style={S.quizInstr} onClick={()=>setTrainExpanded(e=>!e)}>
+          <p style={{...S.quizInstrTitle,cursor:'pointer'}}>{trainExpanded?'▾':'▸'} {t('trainDifficult')}</p>
+          <p style={S.quizInstrSub}>{t('trainDifficultHint')}</p>
+        </div>
+        {trainExpanded&&<div style={{textAlign:'center',margin:'-8px 0 20px'}}>
+          <button onClick={startChapTrain} style={S.navBtn}>{t('startTraining')}</button>
+        </div>}
+      </div>}
+
       <div style={S.quizFooter}>
         <p style={S.quizSummary}>{unknownWords.size===0?t('noMarked'):t('nTranslated').replace('{n}',unknownWords.size)}</p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
@@ -1633,20 +1702,23 @@ function App({data}){
               const anno=result.anno;
               const role=result.role; // 'single','start','middle','end'
               const key=anno.lemma;
+              const isPhrase=anno.pos_end!=null;
               const isAboveLevel=lvlIdx(anno.level)>lvlIdx(userLevel);
               const isTapped=tappedWords.has(key);
-              if(isAboveLevel||isTapped){
-                const isUnknown=unknownWords.has(key);
+              if(isPhrase||isAboveLevel||isTapped){
+                const isUnknown=unknownWords.has(key)||isPhrase;
                 if(!isUnknown)return <span key={i} className={hl}>{token}</span>;
                 const isL=learnedWords.has(key);
                 const isR=revealedWords.has(key);
                 const showTr=(role==='single'||role==='end'); // translation after last word
                 const [word,punct]=splitPunct(token);
                 if(!isL){
-                  if(showTr)return(<span key={i}><span style={S.wg}><span className={hl}>{word}</span><span style={S.tr} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>);
-                  return <span key={i} className={hl}>{token}</span>;
+                  const phr=isPhrase&&!showTr?S.phraseWord:null;
+                  if(showTr){const phE=isPhrase?S.phraseWord:null;return(<span key={i}><span style={S.wg}><span className={hl} style={phE}>{word}</span><span style={S.tr} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>)}
+                  return(<span key={i}><span style={S.wg}><span className={hl} style={phr}>{word}</span></span>{punct}</span>);
                 }
                 if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(key)}>{token}</span>;
+                return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>{setLearnedWords(p=>{const n=new Set(p);n.delete(key);return n});setRevealedWords(p=>{const n=new Set(p);n.delete(key);return n})}}>{token}</span>;
               }
               // Below-level word with annotation: clickable to add as unknown
               return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>tapWord(key)}>{token}</span>;
@@ -1660,6 +1732,7 @@ function App({data}){
             const [vw,vp]=splitPunct(token);
             if(!isL)return(<span key={i}><span style={S.wg}><span className={hl}>{vw}</span><span style={S.tr} onClick={()=>markLearned(clean)}>{entry.de}</span></span>{vp}</span>);
             if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(clean)}>{token}</span>;
+            return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>{setLearnedWords(p=>{const n=new Set(p);n.delete(clean);return n});setRevealedWords(p=>{const n=new Set(p);n.delete(clean);return n})}}>{token}</span>;
           }
         })}{' '}
       </span>
@@ -1806,6 +1879,7 @@ const S={
   wg:{display:'inline',whiteSpace:'nowrap'},
   tr:{fontStyle:'italic',fontSize:13,color:'var(--t-accent)',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'var(--t-accent-bg)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
+  phraseWord:{borderBottom:'1.5px dotted var(--t-accent)',paddingBottom:1},
   known:{color:'var(--t-green)',cursor:'pointer',borderBottom:'1px dotted var(--t-green-bg)',transition:'all 0.2s'},
   chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid var(--t-border)'},
   chapNavBtn:{padding:'10px 24px',border:'1px solid var(--t-border2)',borderRadius:6,background:'transparent',color:'var(--t-text2)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
