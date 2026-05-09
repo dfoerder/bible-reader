@@ -141,6 +141,8 @@ const I18N={
   back:{de:'← Zurück',en:'← Back'},
   books:{de:'Bücher',en:'Books'},
   booksNav:{de:'≡ Bücher',en:'≡ Books'},
+  allBooks:{de:'Alle Bücher anzeigen',en:'Show all books'},
+  difficultWords:{de:'Schwierige Wörter',en:'Difficult Words'},
   next:{de:'Weiter',en:'Next'},
   cancel:{de:'Abbrechen',en:'Cancel'},
   yes:{de:'Ja',en:'Yes'},
@@ -988,6 +990,7 @@ function App({data}){
   const [dePrompt,setDePrompt]=useState(null);
   const [loading,setLoading]=useState(false);
   const [readingMenu,setReadingMenu]=useState(false);
+  const [chapPickerOpen,setChapPickerOpen]=useState(false);
   const [searchOpen,setSearchOpen]=useState(false);
   const [searchQuery,setSearchQuery]=useState('');
   const [searchResults,setSearchResults]=useState(null);
@@ -996,6 +999,7 @@ function App({data}){
   const [chapTrain,setChapTrain]=useState(null);
   const [quizExpanded,setQuizExpanded]=useState(false);
   const [trainExpanded,setTrainExpanded]=useState(false);
+  const [vocabPanelOpen,setVocabPanelOpen]=useState(false);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
 
@@ -1024,7 +1028,7 @@ function App({data}){
     }
   },[]);
 
-  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training'||phase==='quiz')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],globalLearned:[...globalLearned],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,globalLearned,tappedWords]);
 
   const onLevelTestComplete=useCallback(level=>{
     setUserLevel(level);LS.set('bible-level-tested',true);setPhase('nav');
@@ -1040,8 +1044,8 @@ function App({data}){
   },[]);
   const prevPhaseForScroll=useRef(phase);
   useEffect(()=>{
-    const overlay=phase==='settings'||phase==='stats'||phase==='training';
-    const wasOverlay=prevPhaseForScroll.current==='settings'||prevPhaseForScroll.current==='stats'||prevPhaseForScroll.current==='training';
+    const overlay=phase==='settings'||phase==='stats'||phase==='training'||phase==='nav';
+    const wasOverlay=prevPhaseForScroll.current==='settings'||prevPhaseForScroll.current==='stats'||prevPhaseForScroll.current==='training'||prevPhaseForScroll.current==='nav';
     if(wasOverlay&&!overlay&&savedScrollRef.current!=null){
       const pos=savedScrollRef.current;savedScrollRef.current=null;
       requestAnimationFrame(()=>{
@@ -1084,7 +1088,7 @@ function App({data}){
     tts.stop();
     saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
     setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
-    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setVocabPanelOpen(false);
     const nr=books[bi].nr;
     setLoading(true);
     try{
@@ -1096,7 +1100,7 @@ function App({data}){
     setLoading(false);
     setQuizExpanded(false);
     setTrainExpanded(false);
-    setPhase('quiz');
+    setPhase('reading');
   },[tts,loadChapterWords,books,saveBookmark]);
   const startReading=useCallback(()=>{
     setLearnedWords(new Set());setRevealedWords(new Set());setPhase('reading');
@@ -1451,6 +1455,7 @@ function App({data}){
         <h1 style={S.title}>{t('navTitle')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
+          {(prevPhaseRef.current==='reading'||prevPhaseRef.current==='quiz')&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
           <button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
           <button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
           <button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
@@ -1512,7 +1517,7 @@ function App({data}){
     </div>);
   }
 
-  // ── QUIZ ──
+  // ── QUIZ (training only) ──
   if(phase==='quiz'){
     if(chapTrain&&chapTrain.done){
       return(<div>
@@ -1521,7 +1526,7 @@ function App({data}){
           <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
           <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>setChapTrain(null)} style={S.navBtn}>{t('finish')}</button>
+            <button onClick={()=>{setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('finish')}</button>
             <button onClick={startChapTrain} style={S.startBtn}>{t('next')}</button>
           </div>
         </div>
@@ -1556,63 +1561,11 @@ function App({data}){
           <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
           <button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button>
         </div>}
-        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setChapTrain(null)} style={S.navBtn}>{t('cancel')}</button></div>
+        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('cancel')}</button></div>
       </div>);
     }
-    return(<div>
-      <header style={S.header}>
-        <h1 style={S.title}>{currentBook.name}</h1>
-      </header>
-      <div style={S.navRow}><button onClick={goToNav} style={S.navBtn}>{t('back')}</button></div>
-      <p style={S.subtitle}>{t('vocabCheck').replace('{n}',chapNum)}</p>
-
-
-      {quizWords.length===0?(
-        <div style={S.quizInstr}><p style={S.quizInstrTitle}>{t('noNewVocab').replace('{l}',userLevel)}</p><p style={S.quizInstrSub}>{t('startReading')}</p></div>
-      ):(
-        <div>
-          <div style={S.quizInstr} onClick={()=>setQuizExpanded(e=>!e)}>
-            <p style={{...S.quizInstrTitle,cursor:'pointer'}}>{quizExpanded?'▾':'▸'} {t('whichWords')}</p>
-            <p style={S.quizInstrSub}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</p>
-          </div>
-          {quizExpanded&&<div>
-            <div style={{...S.quizInstr,marginTop:0,borderTop:'none'}}>
-              <div style={S.quizActions}>
-                <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>{t('markAll')}</button>
-                <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>{t('markNone')}</button>
-              </div>
-            </div>
-            <div style={S.wordGrid}>{quizWords.map(item=>{
-              const key=item.lemma||item.word;
-              const sel=unknownWords.has(key);
-              return(<button key={key} onClick={()=>toggleUnknown(key)} style={{...S.wordCard,...(sel?S.wordCardSel:{})}}>
-                <span style={S.wcFr}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</span>
-                {sel&&<span style={S.wcDe}>{item.de}</span>}
-                {item.form&&item.form!==item.lemma&&<span style={S.wcForm}>({item.lemma||item.word})</span>}
-                {sel&&item.level&&<span style={S.wcLevel}>{item.level}</span>}
-              </button>);
-            })}</div>
-          </div>}
-        </div>
-      )}
-
-      {quizWords.length>0&&<div>
-        <div style={S.quizInstr} onClick={()=>setTrainExpanded(e=>!e)}>
-          <p style={{...S.quizInstrTitle,cursor:'pointer'}}>{trainExpanded?'▾':'▸'} {t('trainDifficult')}</p>
-          <p style={S.quizInstrSub}>{t('trainDifficultHint')}</p>
-        </div>
-        {trainExpanded&&<div style={{textAlign:'center',margin:'-8px 0 20px'}}>
-          <button onClick={startChapTrain} style={S.navBtn}>{t('startTraining')}</button>
-        </div>}
-      </div>}
-
-      <div style={S.quizFooter}>
-        <p style={S.quizSummary}>{unknownWords.size===0?t('noMarked'):t('nTranslated').replace('{n}',unknownWords.size)}</p>
-        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
-          <button onClick={startReading} style={S.startBtn}>{t('readBtn')}</button>
-        </div>
-      </div>
-    </div>);
+    setPhase('reading');
+    return null;
   }
 
   // ── READING ──
@@ -1625,12 +1578,16 @@ function App({data}){
     <div style={barBase}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'4px 0'}}>
         <button onClick={()=>{tts.stop();goToNav()}} style={barBtn} title={t('home')}>⌂</button>
-        <span style={{fontSize:16,color:'var(--t-title)',fontFamily:sans,fontWeight:600,flex:1,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>{currentBook.name} {chapNum}</span>
+        <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',gap:0,overflow:'hidden'}}>
+          <button onClick={prevChapter} style={{...barBtn,fontSize:18,padding:'4px 2px',...(bookIdx===0&&chapIdx===0?{opacity:0.25}:{})}} disabled={bookIdx===0&&chapIdx===0} title={t('prevChapter')}>‹</button>
+          <button onClick={()=>{setChapPickerOpen(p=>!p);setSearchOpen(false);setReadingMenu(false)}} style={{fontSize:16,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis',background:'none',border:'none',cursor:'pointer',padding:'4px 0'}}>{currentBook.name} {chapNum} <span style={{fontSize:11,color:'var(--t-muted)'}}>▾</span></button>
+          <button onClick={nextChapter} style={{...barBtn,fontSize:18,padding:'4px 2px',...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.25}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1} title={t('nextChapter')}>›</button>
+        </div>
         {tts.speaking
           ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}>⏹</button>
           :<button onClick={()=>tts.speakChapter(verses)} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}>▶</button>}
-        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false)}} style={{...barBtn,display:'inline-flex',alignItems:'center'}} title={t('search')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{display:'block'}}><circle cx="11" cy="11" r="6" strokeWidth="2.5" /><line x1="16" y1="16" x2="21" y2="21" strokeWidth="2.5" strokeLinecap="round" /></svg></button>
-        <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false)}} style={barBtn} title={t('settings')}>≡</button>
+        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false);setChapPickerOpen(false)}} style={{...barBtn,display:'inline-flex',alignItems:'center'}} title={t('search')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{display:'block'}}><circle cx="11" cy="11" r="6" strokeWidth="2.5" /><line x1="16" y1="16" x2="21" y2="21" strokeWidth="2.5" strokeLinecap="round" /></svg></button>
+        <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false);setChapPickerOpen(false)}} style={barBtn} title={t('settings')}>≡</button>
       </div>
       {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
         <form onSubmit={e=>{e.preventDefault();doSearch(searchQuery)}} style={{display:'flex',gap:6}}>
@@ -1651,9 +1608,15 @@ function App({data}){
           })}
         </div>}
       </div>}
+      {chapPickerOpen&&<div style={{padding:'8px 0 10px',maxHeight:'60vh',overflowY:'auto'}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',flexWrap:'wrap',gap:4,marginBottom:10}}>{Array.from({length:currentBook.numChapters},(_,ci)=>(<button key={ci} onClick={()=>{setChapPickerOpen(false);if(ci!==chapIdx)openChapter(bookIdx,ci)}} style={{...S.chapBtn,minWidth:36,...(ci===chapIdx?{border:'2px solid var(--t-accent)',fontWeight:700}:{})}}>{ci+1}</button>))}</div>
+        <div style={{borderTop:'1px solid var(--t-border)',paddingTop:8}}>
+          <button onClick={()=>{setChapPickerOpen(false);tts.stop();const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;prevPhaseRef.current=phase;setPhase('nav')}} style={{...S.navBtn,width:'100%'}}>{t('allBooks')}</button>
+        </div>
+      </div>}
       {readingMenu&&<div style={{padding:'8px 0 10px'}} onClick={e=>e.stopPropagation()}>
         <div style={{display:'flex',justifyContent:'center',gap:10,marginBottom:10}}>
-          <button onClick={()=>{tts.stop();setPhase('quiz')}} style={S.navBtn}>{t('wordList')}</button>
+          <button onClick={()=>{setReadingMenu(false);setVocabPanelOpen(p=>!p);(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo({top:0,behavior:'smooth'})}} style={S.navBtn}>{t('wordList')}</button>
         </div>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
@@ -1678,6 +1641,46 @@ function App({data}){
       </div>}
     </div>
 
+
+    {quizWords.length>0&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
+      <div onClick={()=>setVocabPanelOpen(p=>!p)} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 12px',cursor:'pointer'}}>
+        <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{vocabPanelOpen?'▾':'▸'} {t('difficultWords')}</span>
+        <span style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans}}>{unknownWords.size}/{quizWords.length}</span>
+      </div>
+      {vocabPanelOpen&&<div style={{padding:'0 12px 12px'}}>
+        <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
+          <div onClick={()=>setQuizExpanded(e=>!e)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{quizExpanded?'▾':'▸'} {t('whichWords')}</span>
+            <span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,marginLeft:'auto'}}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</span>
+          </div>
+          {quizExpanded&&<div style={{padding:'8px 10px'}}>
+            <div style={{display:'flex',gap:6,marginBottom:8}}>
+              <button onClick={()=>setUnknownWords(new Set(quizWords.map(w=>w.lemma||w.word)))} style={S.quizActBtn}>{t('markAll')}</button>
+              <button onClick={()=>setUnknownWords(new Set())} style={S.quizActBtn}>{t('markNone')}</button>
+            </div>
+            <div style={S.wordGrid}>{quizWords.map(item=>{
+              const key=item.lemma||item.word;
+              const sel=unknownWords.has(key);
+              return(<button key={key} onClick={()=>toggleUnknown(key)} style={{...S.wordCard,...(sel?S.wordCardSel:{})}}>
+                <span style={S.wcFr}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</span>
+                {sel&&<span style={S.wcDe}>{item.de}</span>}
+                {item.form&&item.form!==item.lemma&&<span style={S.wcForm}>({item.lemma||item.word})</span>}
+                {sel&&item.level&&<span style={S.wcLevel}>{item.level}</span>}
+              </button>);
+            })}</div>
+          </div>}
+        </div>
+        <div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden'}}>
+          <div onClick={()=>setTrainExpanded(e=>!e)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{trainExpanded?'▾':'▸'} {t('trainDifficult')}</span>
+          </div>
+          {trainExpanded&&<div style={{padding:'8px 10px'}}>
+            <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('trainDifficultHint')}</p>
+            <button onClick={()=>{prevPhaseRef.current='reading';startChapTrain();setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
+          </div>}
+        </div>
+      </div>}
+    </div>}
 
     <div style={{...S.text,fontSize}}>{verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
