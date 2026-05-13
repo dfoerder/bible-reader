@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.3.0';
+const APP_VERSION = '1.4.0';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -164,6 +164,7 @@ const I18N={
 
   // Settings
   settings:{de:'Einstellungen',en:'Settings'},
+  menu:{de:'Menü',en:'Menu'},
   vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
   vocabLevelHint:{de:'Wörter über diesem Level werden unter „Schwierige Wörter" angezeigt.',en:'Words above this level are shown under "Difficult Words".'},
   retakeTest:{de:'Sprachtest wiederholen',en:'Retake language test'},
@@ -217,6 +218,7 @@ const I18N={
   nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
   readBtn:{de:'Lesen →',en:'Read →'},
   trainDifficult:{de:'Schwierige Wörter trainieren',en:'Train difficult words'},
+  trainDifficultAgain:{de:'Schwierige Wörter nochmals trainieren',en:'Train difficult words again'},
   trainDifficultHint:{de:'Multiple-Choice-Übungen zu den schwierigen Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s difficult words.'},
   startTraining:{de:'Training starten',en:'Start training'},
   noWordsToTrain:{de:'Keine schwierigen Wörter zum Trainieren.',en:'No difficult words to train.'},
@@ -803,6 +805,26 @@ const LEVELS=["A1","A2","B1","B2","C1","C2"];
 const lvlIdx=l=>LEVELS.indexOf(l);
 const shuffleArr=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
+const BOOK_ABBR={
+  'Genesis':'Gen','Exodus':'Ex','Leviticus':'Lev','Numbers':'Num','Deuteronomy':'Deut',
+  'Joshua':'Josh','Judges':'Judg','Ruth':'Ruth','1 Samuel':'1 Sam','2 Samuel':'2 Sam',
+  '1 Kings':'1 Kgs','2 Kings':'2 Kgs','1 Chronicles':'1 Chr','2 Chronicles':'2 Chr',
+  'Ezra':'Ezra','Nehemiah':'Neh','Esther':'Esth','Job':'Job','Psalms':'Ps',
+  'Proverbs':'Prov','Ecclesiastes':'Eccl','Song of Songs':'Song','Isaiah':'Isa',
+  'Jeremiah':'Jer','Lamentations':'Lam','Ezekiel':'Ezek','Daniel':'Dan',
+  'Hosea':'Hos','Joel':'Joel','Amos':'Amos','Obadiah':'Obad','Jonah':'Jonah',
+  'Micah':'Mic','Nahum':'Nah','Habakkuk':'Hab','Zephaniah':'Zeph','Haggai':'Hag',
+  'Zechariah':'Zech','Malachi':'Mal',
+  'Matthew':'Matt','Mark':'Mark','Luke':'Luke','John':'John','Acts':'Acts',
+  'Romans':'Rom','1 Corinthians':'1 Cor','2 Corinthians':'2 Cor','Galatians':'Gal',
+  'Ephesians':'Eph','Philippians':'Phil','Colossians':'Col',
+  '1 Thessalonians':'1 Thess','2 Thessalonians':'2 Thess',
+  '1 Timothy':'1 Tim','2 Timothy':'2 Tim','Titus':'Titus','Philemon':'Phlm',
+  'Hebrews':'Heb','James':'Jas','1 Peter':'1 Pet','2 Peter':'2 Pet',
+  '1 John':'1 John','2 John':'2 John','3 John':'3 John','Jude':'Jude','Revelation':'Rev'
+};
+const bookAbbr=name=>BOOK_ABBR[name]||name;
+
 function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
 }
@@ -930,15 +952,33 @@ function useTTS(){
   },[getVoice]);
   speakVerseRef.current=speakVerse;
   const speakSingleVerse=useCallback((vN,text)=>{speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=[];speakVerse(vN,text,()=>{setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)})},[speakVerse]);
+  const allVersesRef=useRef([]);
+  const nextCbRef=useRef(null);
   const speakChapter=useCallback(verses=>{
-    speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
+    allVersesRef.current=verses;
+    stoppedRef.current=true;speechSynthesis.cancel();
+    stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
     const next=()=>{if(stoppedRef.current||!queueRef.current.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
       setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},300)};
+    nextCbRef.current=next;
     const f=verses[0];const el=document.getElementById(`verse-${f.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(f.n,f.text,next,f.wordOffset||0);
   },[speakVerse]);
-  const stop=useCallback(()=>{stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[]);
+  const skipVerse=useCallback((dir)=>{
+    const all=allVersesRef.current;if(!all.length)return;
+    const curIdx=all.findIndex(v=>v.n===activeVerse);
+    const newIdx=curIdx+dir;
+    if(newIdx<0||newIdx>=all.length)return;
+    stoppedRef.current=true;speechSynthesis.cancel();stoppedRef.current=false;
+    queueRef.current=all.slice(newIdx+1);
+    const next=()=>{if(stoppedRef.current||!queueRef.current.length){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
+      setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();const el=document.getElementById(`verse-${n.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(n.n,n.text,next,n.wordOffset||0)},300)};
+    nextCbRef.current=next;
+    const v=all[newIdx];const el=document.getElementById(`verse-${v.n}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});speakVerse(v.n,v.text,next,0);
+  },[speakVerse,activeVerse]);
+  const lastStoppedVerse=useRef(null);
+  const stop=useCallback(()=>{lastStoppedVerse.current=activeVerse;stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[activeVerse]);
   const hasVoices=voices.en.length>0;
-  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang};
+  return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang,lastStoppedVerse,skipVerse};
 }
 
 // ─── App ────────────────────────────────────────────────
@@ -996,10 +1036,12 @@ function App({data}){
   const [searchResults,setSearchResults]=useState(null);
   const [searchLoading,setSearchLoading]=useState(false);
 
+  const autoPlayRef=useRef(false);
   const [chapTrain,setChapTrain]=useState(null);
   const [quizExpanded,setQuizExpanded]=useState(false);
   const [trainExpanded,setTrainExpanded]=useState(false);
   const [vocabPanelOpen,setVocabPanelOpen]=useState(false);
+  const skipBackTapRef=useRef(0);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
 
@@ -1070,6 +1112,8 @@ function App({data}){
   const chapNum=currentChapter?.number;
   const verses=currentChapter?.verses||[];
 
+  useEffect(()=>{if(autoPlayRef.current&&verses.length>0){autoPlayRef.current=false;setTimeout(()=>tts.speakChapter(verses),600)}},[verses]);
+
   const quizWords=useMemo(()=>{
     if(!currentChapter)return[];
     if(hasAnno){
@@ -1085,7 +1129,7 @@ function App({data}){
   useEffect(()=>{if(phase==='quiz'||phase==='reading')saveChapterWords(bookIdx,chapIdx,unknownWords)},[unknownWords,bookIdx,chapIdx,phase,saveChapterWords]);
 
   const openChapter=useCallback(async(bi,ci)=>{
-    tts.stop();
+    tts.stop();tts.lastStoppedVerse.current=null;
     saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
     setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
     setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setVocabPanelOpen(false);
@@ -1457,7 +1501,7 @@ function App({data}){
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           {(prevPhaseRef.current==='reading'||prevPhaseRef.current==='quiz')&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
           <button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
+          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🧠</button>
           <button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
         </div>
       </header>
@@ -1561,7 +1605,7 @@ function App({data}){
           <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
           <button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button>
         </div>}
-        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('cancel')}</button></div>
+        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{setChapTrain(null);setPhase('reading');setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('cancel')}</button></div>
       </div>);
     }
     setPhase('reading');
@@ -1577,17 +1621,21 @@ function App({data}){
   return(<div style={{position:'relative'}}>
     <div style={barBase}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',height:40,padding:'0 2px'}}>
+        {chapPickerOpen
+          ?<button onClick={()=>setChapPickerOpen(false)} style={{flex:1,fontSize:18,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',background:'none',border:'none',cursor:'pointer',padding:0,display:'inline-flex',alignItems:'center',justifyContent:'center',height:35}}>{currentBook.name} {chapNum} <span style={{fontSize:11,color:'var(--t-muted)',marginLeft:2}}>▴</span></button>
+          :<>
         <button onClick={()=>{tts.stop();goToNav()}} style={{...barBtn,marginLeft:-8}} title={t('home')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg></button>
+        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false);setChapPickerOpen(false)}} style={barBtn} title={t('search')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{display:'block'}}><circle cx="11" cy="11" r="6"/><line x1="16" y1="16" x2="21" y2="21"/></svg></button>
         <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',gap:0,overflow:'hidden'}}>
           <button onClick={prevChapter} style={{...barBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.25}:{})}} disabled={bookIdx===0&&chapIdx===0} title={t('prevChapter')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
-          <button onClick={()=>{setChapPickerOpen(p=>!p);setSearchOpen(false);setReadingMenu(false)}} style={{fontSize:18,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis',background:'none',border:'none',cursor:'pointer',padding:0,display:'inline-flex',alignItems:'center',justifyContent:'center',height:35}}>{currentBook.name} {chapNum} <span style={{fontSize:11,color:'var(--t-muted)',marginLeft:2}}>▾</span></button>
+          <button onClick={()=>{setChapPickerOpen(true);setSearchOpen(false);setReadingMenu(false)}} style={{fontSize:18,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis',background:'none',border:'none',cursor:'pointer',padding:0,display:'inline-flex',alignItems:'center',justifyContent:'center',height:35}}>{bookAbbr(currentBook.name)} {chapNum} <span style={{fontSize:11,color:'var(--t-muted)',marginLeft:2}}>▾</span></button>
           <button onClick={nextChapter} style={{...barBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.25}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1} title={t('nextChapter')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
         {tts.speaking
           ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
-          :<button onClick={()=>tts.speakChapter(verses)} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><polygon points="6 4 20 12 6 20"/></svg></button>}
-        <button onClick={()=>{setSearchOpen(s=>!s);setReadingMenu(false);setChapPickerOpen(false)}} style={barBtn} title={t('search')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{display:'block'}}><circle cx="11" cy="11" r="6"/><line x1="16" y1="16" x2="21" y2="21"/></svg></button>
-        <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false);setChapPickerOpen(false)}} style={{...barBtn,marginRight:-8}} title={t('settings')}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" style={{display:'block'}}><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+          :<button onClick={()=>{const lv=tts.lastStoppedVerse.current;const startIdx=lv?verses.findIndex(v=>v.n===lv):0;tts.speakChapter(verses.slice(startIdx>=0?startIdx:0))}} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><polygon points="6 4 20 12 6 20"/></svg></button>}
+        <button onClick={()=>{setReadingMenu(m=>!m);setSearchOpen(false);setChapPickerOpen(false)}} style={{...barBtn,marginRight:-8}} title={t('menu')}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" style={{display:'block'}}><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+          </>}
       </div>
       {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
         <form onSubmit={e=>{e.preventDefault();doSearch(searchQuery)}} style={{display:'flex',gap:6}}>
@@ -1615,43 +1663,44 @@ function App({data}){
         </div>
       </div>}
       {readingMenu&&<div style={{padding:'8px 0 10px'}} onClick={e=>e.stopPropagation()}>
-        <div style={{display:'flex',justifyContent:'center',gap:10,marginBottom:10}}>
-          <button onClick={()=>{setReadingMenu(false);setVocabPanelOpen(p=>!p);(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo({top:0,behavior:'smooth'})}} style={S.navBtn}>{t('wordList')}</button>
-        </div>
         <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
-          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
+          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={{...S.gearBtn,fontSize:28}} title={t('settings')}>⚙</button>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}>🎓</button>
+          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}>🧠</button>
         </div>
-        <div style={{borderTop:'1px solid var(--t-border)',paddingTop:10}}>
-          {!tts.speaking&&unknownWords.size>0&&<div style={{marginBottom:8}}>
-            <button onClick={startPractice} style={{...S.ttsPlayAllBtn,background:'var(--t-accent)'}} disabled={!tts.hasVoices}>{t('practiceWords')}</button>
-          </div>}
-          <div style={S.speedControl}>
-            <span style={S.speedLabel}>{t('speed')}</span>
-            <div style={S.speedPresets}>{[{l:'🐌',v:0.2},{k:'slow',v:0.4},{k:'normal',v:0.65},{k:'fast',v:0.85},{k:'veryFast',v:1.0}].map(p=>(
-              <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
-            ))}</div>
-            <div style={S.speedSliderRow}>
-              <input type="range" min="0.2" max="1.0" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
-              <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
-            </div>
+      </div>}
+      {tts.speaking&&<div style={{padding:'6px 0 8px',borderTop:'1px solid var(--t-border)'}} onClick={e=>e.stopPropagation()}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:12,marginBottom:6}}>
+          <button onClick={()=>{const now=Date.now();if(now-skipBackTapRef.current<400){skipBackTapRef.current=0;autoPlayRef.current=true;prevChapter()}else{skipBackTapRef.current=now;tts.speakChapter(verses)}}} style={barBtn} title="Restart chapter"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><line x1="5" y1="6" x2="5" y2="18"/><polyline points="17 18 9 12 17 6"/></svg></button>
+          <button onClick={()=>tts.skipVerse(-1)} style={barBtn} title="Previous verse"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
+          <span style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,minWidth:24,textAlign:'center'}}>{tts.activeVerse||''}</span>
+          <button onClick={()=>tts.skipVerse(1)} style={barBtn} title="Next verse"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
+          <button onClick={()=>{autoPlayRef.current=true;nextChapter()}} style={{...barBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.25}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1} title="Next chapter"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="7 6 15 12 7 18"/><line x1="19" y1="6" x2="19" y2="18"/></svg></button>
+        </div>
+        <div style={S.speedControl}>
+          <span style={S.speedLabel}>{t('speed')}</span>
+          <div style={S.speedPresets}>{[{l:'🐌',v:0.2},{k:'slow',v:0.4},{k:'normal',v:0.65},{k:'fast',v:0.85},{k:'veryFast',v:1.0}].map(p=>(
+            <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
+          ))}</div>
+          <div style={S.speedSliderRow}>
+            <input type="range" min="0.2" max="1.0" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+            <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
           </div>
         </div>
       </div>}
     </div>
 
 
-    {quizWords.length>0&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
+    {quizWords.length>0&&!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
       <div onClick={()=>setVocabPanelOpen(p=>!p)} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 12px',cursor:'pointer'}}>
         <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{vocabPanelOpen?'▾':'▸'} {t('difficultWords')}</span>
         <span style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans}}>{unknownWords.size}/{quizWords.length}</span>
       </div>
       {vocabPanelOpen&&<div style={{padding:'0 12px 12px'}}>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
-          <div onClick={()=>setQuizExpanded(e=>!e)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+          <div onClick={()=>setQuizExpanded(e=>!e)} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
             <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{quizExpanded?'▾':'▸'} {t('whichWords')}</span>
-            <span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,marginLeft:'auto'}}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</span>
+            <div style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,marginTop:4}}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)}</div>
           </div>
           {quizExpanded&&<div style={{padding:'8px 10px'}}>
             <div style={{display:'flex',gap:6,marginBottom:8}}>
@@ -1743,9 +1792,12 @@ function App({data}){
       </div>);
     })}</div>
 
+    {quizWords.length>0&&<div style={{textAlign:'center',marginTop:24,paddingBottom:12,borderBottom:'1px solid var(--t-border)'}}>
+      <button onClick={()=>{prevPhaseRef.current='reading';startChapTrain();setPhase('quiz')}} style={{background:'none',border:'none',cursor:'pointer',fontSize:14,fontFamily:sans,color:'var(--t-accent)',fontWeight:600,padding:'8px 0'}}>{t('trainDifficultAgain')}</button>
+    </div>}
     <div style={S.chapNav}>
-      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}>{t('prevChapter')}</button>
-      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}>{t('nextChapter')}</button>
+      <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
     <footer style={S.footer}>{langFooter} · {t('publicDomain')}</footer>
 
@@ -1884,9 +1936,9 @@ const S={
   trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   phraseWord:{borderBottom:'1.5px dotted var(--t-accent)',paddingBottom:1},
   known:{color:'var(--t-green)',cursor:'pointer',borderBottom:'1px dotted var(--t-green-bg)',transition:'all 0.2s'},
-  chapNav:{display:'flex',justifyContent:'space-between',marginTop:30,paddingTop:20,borderTop:'1px solid var(--t-border)'},
-  chapNavBtn:{padding:'10px 24px',border:'1px solid var(--t-border2)',borderRadius:6,background:'transparent',color:'var(--t-text2)',fontSize:14,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  footer:{marginTop:30,paddingTop:16,borderTop:'1px solid var(--t-border)',textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontStyle:'italic'},
+  chapNav:{display:'flex',justifyContent:'space-between',marginTop:4,paddingTop:0},
+  chapNavBtn:{padding:0,border:'none',background:'transparent',color:'var(--t-muted)',cursor:'pointer',display:'inline-flex',alignItems:'center',justifyContent:'center',width:35,height:35},
+  footer:{marginTop:8,paddingTop:8,borderTop:'1px solid var(--t-border)',textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontStyle:'italic'},
   practiceOverlay:{position:'fixed',top:0,left:0,right:0,bottom:0,background:'var(--t-overlay)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000,padding:20},
   practiceCard:{position:'relative',background:'var(--t-bg1)',borderRadius:16,padding:'40px 32px 32px',maxWidth:500,width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.3)',textAlign:'center'},
   practiceContent:{display:'flex',flexDirection:'column',alignItems:'center',gap:20},
@@ -1907,7 +1959,7 @@ const S={
   practiceX:{position:'absolute',top:12,right:16,background:'none',border:'none',fontSize:20,color:'var(--t-muted2)',cursor:'pointer',padding:4},
   practiceDoneText:{fontSize:20,fontWeight:600,color:'var(--t-green)',fontFamily:sans},
   practiceCloseBtn:{padding:'12px 28px',border:'none',borderRadius:8,background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans},
-  gearBtn:{width:36,height:36,border:'1px solid var(--t-border2)',borderRadius:'50%',background:'transparent',color:'var(--t-muted)',fontSize:18,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0},
+  gearBtn:{width:44,height:44,border:'1px solid var(--t-border2)',borderRadius:'50%',background:'transparent',color:'var(--t-muted)',fontSize:24,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0},
   settingsSection:{maxWidth:440,margin:'0 auto',display:'flex',flexDirection:'column',gap:20},
   settingsGroup:{padding:'16px 20px',background:'var(--t-card)',borderRadius:10,border:'1px solid var(--t-border3)'},
   settingsLabel:{fontSize:14,fontWeight:600,color:'var(--t-text2)',fontFamily:sans,textTransform:'uppercase',letterSpacing:'0.04em',display:'block',marginBottom:8},
