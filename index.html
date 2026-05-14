@@ -1494,15 +1494,16 @@ function App({data}){
 
   // ── NAV ──
   if(phase==='nav'){
+    const fromReading=prevPhaseRef.current==='reading'||prevPhaseRef.current==='quiz';
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>{t('navTitle')}</h1>
-        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>
+        {!fromReading&&<h1 style={S.title}>{t('navTitle')}</h1>}
+        {!fromReading&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>}
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
-          {(prevPhaseRef.current==='reading'||prevPhaseRef.current==='quiz')&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
-          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🧠</button>
-          <button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>
+          {fromReading&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
+          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>}
+          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}>🧠</button>}
+          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={S.gearBtn} title={t('settings')}>⚙</button>}
         </div>
       </header>
       {otBooks.length>0&&<div style={S.bookList}>
@@ -1659,7 +1660,7 @@ function App({data}){
       {chapPickerOpen&&<div style={{padding:'8px 0 10px',maxHeight:'60vh',overflowY:'auto'}} onClick={e=>e.stopPropagation()}>
         <div style={{display:'flex',flexWrap:'wrap',gap:4,marginBottom:10}}>{Array.from({length:currentBook.numChapters},(_,ci)=>(<button key={ci} onClick={()=>{setChapPickerOpen(false);if(ci!==chapIdx)openChapter(bookIdx,ci)}} style={{...S.chapBtn,minWidth:36,...(ci===chapIdx?{border:'2px solid var(--t-accent)',fontWeight:700}:{})}}>{ci+1}</button>))}</div>
         <div style={{borderTop:'1px solid var(--t-border)',paddingTop:8}}>
-          <button onClick={()=>{setChapPickerOpen(false);tts.stop();const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;prevPhaseRef.current=phase;setPhase('nav')}} style={{...S.navBtn,width:'100%'}}>{t('allBooks')}</button>
+          <button onClick={()=>{setChapPickerOpen(false);tts.stop();const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;prevPhaseRef.current=phase;setExpandedTestament(null);setExpandedBook(null);setPhase('nav')}} style={{...S.navBtn,width:'100%'}}>{t('allBooks')}</button>
         </div>
       </div>}
       {readingMenu&&<div style={{padding:'8px 0 10px'}} onClick={e=>e.stopPropagation()}>
