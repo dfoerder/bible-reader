@@ -1759,7 +1759,7 @@ function App({data}){
               const isTapped=tappedWords.has(key);
               if(isPhrase||isAboveLevel||isTapped){
                 const isUnknown=unknownWords.has(key)||isPhrase;
-                if(!isUnknown)return <span key={i} className={hl}>{token}</span>;
+                if(!isUnknown)return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>setUnknownWords(u=>new Set([...u,key]))}>{token}</span>;
                 const isL=learnedWords.has(key);
                 const isR=revealedWords.has(key);
                 const showTr=(role==='single'||role==='end'); // translation after last word
