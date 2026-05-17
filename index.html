@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.5.0b';
+const APP_VERSION = '1.5.1b';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -221,6 +221,9 @@ const I18N={
   vocabKnown:{de:'Bekannt',en:'Known'},
   vocabUnknown:{de:'Unbekannt',en:'Unknown'},
   vocabDone:{de:'Alle {n} Wörter angeschaut.',en:'All {n} words reviewed.'},
+  levelUpSuggest:{de:'Du kennst die meisten Wörter! Möchtest du dein Level auf {l} anheben?',en:'You know most of the words! Would you like to raise your level to {l}?'},
+  levelUpYes:{de:'Ja, auf {l} anheben',en:'Yes, raise to {l}'},
+  levelUpNo:{de:'Nein, bei {l} bleiben',en:'No, stay at {l}'},
   noMarked:{de:'Keine Wörter markiert — reiner Lesefluss!',en:'No words marked — pure reading flow!'},
   nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
   readBtn:{de:'Lesen →',en:'Read →'},
@@ -870,7 +873,7 @@ function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tapped
   Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
       const isPhrase = a.pos_end != null;
-      if ((isPhrase || lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
+      if ((lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
         seen.add(a.lemma);
         result.push(a);
       }
@@ -1057,6 +1060,9 @@ function App({data}){
   const [vocabSettingsOpen,setVocabSettingsOpen]=useState(false);
   const reviewKey=useCallback((bi,ci)=>`rev-${lang}-${bi}-${ci}`,[lang]);
   const [reviewDone,setReviewDone]=useState(()=>!!LS.get(reviewKey(0,0)));
+  const [reviewKnownCount,setReviewKnownCount]=useState(0);
+  const [reviewCheckBase,setReviewCheckBase]=useState(0);
+  const [levelSuggestion,setLevelSuggestion]=useState(null);
   const skipBackTapRef=useRef(0);
 
   useEffect(()=>{tts.setLang('en')},[tts]);
@@ -1149,7 +1155,7 @@ function App({data}){
     tts.stop();tts.lastStoppedVerse.current=null;
     saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
     setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
-    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setVocabPanelOpen(false);setReviewDone(!!LS.get(reviewKey(bi,ci)));
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setVocabPanelOpen(false);setReviewDone(!!LS.get(reviewKey(bi,ci)));setReviewKnownCount(0);setReviewCheckBase(0);setLevelSuggestion(null);
     const nr=books[bi].nr;
     setLoading(true);
     try{
@@ -1773,9 +1779,16 @@ function App({data}){
                   {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
                 </div>
                 <div style={{display:'flex',gap:10,justifyContent:'center'}}>
-                  <button onClick={()=>{setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(i=>i+1);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
-                  <button onClick={()=>{setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(i=>i+1);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
+                  <button onClick={()=>{const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
+                  <button onClick={()=>{const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
                 </div>
+                {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
+                  <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',levelSuggestion)}</p>
+                  <div style={{display:'flex',gap:8,justifyContent:'center'}}>
+                    <button onClick={()=>{setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(0);setVocabReviewIdx(0);setQuizExpanded(false)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
+                    <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',userLevel)}</button>
+                  </div>
+                </div>}
                 <div style={{textAlign:'center',marginTop:12}}>
                   <button onClick={()=>setQuizExpanded(false)} style={{background:'none',border:'none',cursor:'pointer',fontSize:13,color:'var(--t-muted)',fontFamily:sans}}>{t('cancel')}</button>
                 </div>
@@ -1821,8 +1834,8 @@ function App({data}){
               const isPhrase=anno.pos_end!=null;
               const isAboveLevel=lvlIdx(anno.level)>lvlIdx(userLevel);
               const isTapped=tappedWords.has(key);
-              if(isPhrase||isAboveLevel||isTapped){
-                const isUnknown=unknownWords.has(key)||isPhrase||(!reviewDone&&isAboveLevel);
+              if(isAboveLevel||isTapped){
+                const isUnknown=unknownWords.has(key)||(!reviewDone&&isAboveLevel);
                 if(!isUnknown)return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>setUnknownWords(u=>new Set([...u,key]))}>{token}</span>;
                 const isL=learnedWords.has(key);
                 const isR=revealedWords.has(key);
