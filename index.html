@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.5.1b';
+const APP_VERSION = '1.5.2b';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -455,6 +455,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
   const [lastStart,setLastStart]=useState(null);
   const wrongRef=useRef([]);
   const totalRef=useRef(0);
+  const retryRef=useRef(false);
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
@@ -468,7 +469,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
-    wrongRef.current=[];totalRef.current=picked.length;
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     setSelectedLevel(lvl);setLastStart('cloze');
   },[]);
 
@@ -490,7 +491,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       return shuffle([q.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');
-    wrongRef.current=[];totalRef.current=picked.length;
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     setSelectedLevel(lvl);setLastStart('vocab');
   },[]);
 
@@ -506,7 +507,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
-    wrongRef.current=[];totalRef.current=picked.length;
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     setLastStart({type:'book',bi});
   },[books]);
 
@@ -520,7 +521,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     setSelected(ans);
     if(mode==='guess') guessRef.current=true;
     if(correct){
-      setScore(s=>s+1);
+      if(!retryRef.current)setScore(s=>s+1);
       if(exType==='vocab'){
         if(mode==='guess'){
           wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
@@ -560,7 +561,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
         return shuffle([ex.de,...wr]);
       }));
     }
-    setCurrent(0);setSelected(null);
+    setCurrent(0);setSelected(null);retryRef.current=true;
   },[exType,selectedLevel]);
 
   const advance=useCallback(()=>{
@@ -1785,7 +1786,7 @@ function App({data}){
                 {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
                   <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',levelSuggestion)}</p>
                   <div style={{display:'flex',gap:8,justifyContent:'center'}}>
-                    <button onClick={()=>{setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(0);setVocabReviewIdx(0);setQuizExpanded(false)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
+                    <button onClick={()=>{setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(0);setVocabReviewIdx(0)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
                     <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',userLevel)}</button>
                   </div>
                 </div>}
