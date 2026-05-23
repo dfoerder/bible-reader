@@ -2,115 +2,41 @@
   "name": "Haggai",
   "chapters": {
     "1": {
-      "1": [
-        {
-          "pos": 10,
-          "form": "sixth",
-          "lemma": "sixth",
-          "level": "B1",
-          "de": "sechsten"
-        },
-        {
-          "pos": 25,
-          "form": "prophet",
-          "lemma": "prophet",
-          "level": "B1",
-          "de": "Prophet"
-        },
-        {
-          "pos": 32,
-          "form": "governor",
-          "lemma": "governor",
-          "level": "B1",
-          "de": "Statthalter"
-        },
-        {
-          "pos": 43,
-          "pos_end": 44,
-          "form": "high priest",
-          "lemma": "high priest",
-          "level": "B1",
-          "de": "Hohepriester"
-        }
-      ],
-      "2": [
-        {
-          "pos": 5,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
-        },
-        {
-          "pos": 15,
-          "form": "built",
-          "lemma": "build",
-          "level": "B1",
-          "de": "gebaut"
-        }
-      ],
-      "3": [
-        {
-          "pos": 7,
-          "form": "prophet",
-          "lemma": "prophet",
-          "level": "B1",
-          "de": "Prophet"
-        }
-      ],
-      "4": [
-        {
-          "pos": 8,
-          "form": "dwell",
-          "lemma": "dwell",
-          "level": "B2",
-          "de": "wohnen"
-        },
-        {
-          "pos": 11,
-          "form": "paneled",
-          "lemma": "panel",
-          "level": "C1",
-          "de": "getäfelten"
-        },
-        {
-          "pos": 16,
-          "form": "lies",
-          "lemma": "lie",
-          "level": "B1",
-          "de": "liegt"
-        },
-        {
-          "pos": 17,
-          "form": "waste",
-          "lemma": "waste",
-          "level": "B1",
-          "de": "wüst"
-        }
-      ],
-      "5": [
-        {
-          "pos": 7,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
-        },
-        {
-          "pos": 9,
-          "form": "Consider",
-          "lemma": "consider",
-          "level": "B1",
-          "de": "Bedenkt"
-        }
-      ],
       "6": [
+        {
+          "pos": 0,
+          "form": "You",
+          "lemma": "you",
+          "level": "A1",
+          "de": "Ihr"
+        },
+        {
+          "pos": 1,
+          "form": "have",
+          "lemma": "have",
+          "level": "A1",
+          "de": "habt"
+        },
         {
           "pos": 2,
           "form": "sown",
           "lemma": "sow",
           "level": "B2",
           "de": "gesät"
+        },
+        {
+          "pos": 3,
+          "form": "much,",
+          "lemma": "much",
+          "level": "A1",
+          "de": "viel"
+        },
+        {
+          "pos": 4,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
         },
         {
           "pos": 5,
@@ -120,11 +46,130 @@
           "de": "bringt"
         },
         {
+          "pos": 6,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "ein"
+        },
+        {
+          "pos": 7,
+          "form": "little.",
+          "lemma": "little",
+          "level": "A1",
+          "de": "wenig"
+        },
+        {
+          "pos": 8,
+          "form": "You",
+          "lemma": "you",
+          "level": "A1",
+          "de": "Ihr"
+        },
+        {
+          "pos": 9,
+          "form": "eat,",
+          "lemma": "eat",
+          "level": "A1",
+          "de": "esst"
+        },
+        {
+          "pos": 10,
+          "form": "but",
+          "lemma": "but",
+          "level": "A1",
+          "de": "aber"
+        },
+        {
+          "pos": 11,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 12,
+          "form": "don’t",
+          "lemma": "do not",
+          "level": "A1",
+          "de": "nicht"
+        },
+        {
+          "pos": 13,
+          "form": "have",
+          "lemma": "have",
+          "level": "A1",
+          "de": "habt"
+        },
+        {
+          "pos": 14,
+          "form": "enough.",
+          "lemma": "enough",
+          "level": "A2",
+          "de": "genug"
+        },
+        {
+          "pos": 15,
+          "form": "You",
+          "lemma": "you",
+          "level": "A1",
+          "de": "Ihr"
+        },
+        {
+          "pos": 16,
+          "form": "drink,",
+          "lemma": "drink",
+          "level": "A1",
+          "de": "trinkt"
+        },
+        {
+          "pos": 17,
+          "form": "but",
+          "lemma": "but",
+          "level": "A1",
+          "de": "aber"
+        },
+        {
+          "pos": 18,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 19,
+          "form": "aren’t",
+          "lemma": "be not",
+          "level": "A1",
+          "de": "werdet nicht"
+        },
+        {
           "pos": 20,
           "form": "filled",
           "lemma": "fill",
           "level": "B1",
           "de": "satt"
+        },
+        {
+          "pos": 21,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "vom"
+        },
+        {
+          "pos": 22,
+          "form": "drink.",
+          "lemma": "drink",
+          "level": "A1",
+          "de": "Trinken"
+        },
+        {
+          "pos": 23,
+          "form": "You",
+          "lemma": "you",
+          "level": "A1",
+          "de": "Ihr"
         },
         {
           "pos": 24,
@@ -134,13 +179,69 @@
           "de": "kleidet"
         },
         {
+          "pos": 25,
+          "form": "yourselves,",
+          "lemma": "yourself",
+          "level": "B1",
+          "de": "euch"
+        },
+        {
+          "pos": 26,
+          "form": "but",
+          "lemma": "but",
+          "level": "A1",
+          "de": "aber"
+        },
+        {
+          "pos": 27,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "de": "kein"
+        },
+        {
+          "pos": 28,
+          "form": "one",
+          "lemma": "one",
+          "level": "A1",
+          "de": "einer"
+        },
+        {
+          "pos": 29,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
           "pos": 30,
-          "form": "warm",
+          "form": "warm,",
           "lemma": "warm",
           "level": "A2",
           "de": "warm"
         },
         {
+          "pos": 31,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 32,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "er"
+        },
+        {
+          "pos": 33,
+          "form": "who",
+          "lemma": "who",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 34,
           "form": "earns",
           "lemma": "earn",
@@ -155,18 +256,67 @@
           "de": "Lohn"
         },
         {
-          "pos": 34,
+          "pos": 36,
           "form": "earns",
           "lemma": "earn",
           "level": "B1",
           "de": "verdient"
         },
         {
-          "pos": 35,
+          "pos": 37,
           "form": "wages",
           "lemma": "wage",
           "level": "B1",
           "de": "Lohn"
+        },
+        {
+          "pos": 38,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "um"
+        },
+        {
+          "pos": 39,
+          "form": "put",
+          "lemma": "put",
+          "level": "A1",
+          "de": "zu legen"
+        },
+        {
+          "pos": 40,
+          "form": "them",
+          "lemma": "they",
+          "level": "A1",
+          "de": "ihn"
+        },
+        {
+          "pos": 41,
+          "form": "into",
+          "lemma": "into",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 42,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "einen"
+        },
+        {
+          "pos": 43,
+          "form": "bag",
+          "lemma": "bag",
+          "level": "A2",
+          "de": "Beutel"
+        },
+        {
+          "pos": 44,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
         },
         {
           "pos": 45,
@@ -174,9 +324,51 @@
           "lemma": "hole",
           "level": "B1",
           "de": "Löchern"
+        },
+        {
+          "pos": 46,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 47,
+          "form": "it.”",
+          "lemma": "it",
+          "level": "A1",
+          "de": "ihm"
         }
       ],
       "7": [
+        {
+          "pos": 0,
+          "form": "This",
+          "lemma": "this",
+          "level": "A1",
+          "de": "Dies"
+        },
+        {
+          "pos": 1,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 2,
+          "form": "what",
+          "lemma": "what",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
         {
           "pos": 5,
           "form": "Armies",
@@ -185,27 +377,90 @@
           "de": "Heerscharen"
         },
         {
+          "pos": 6,
+          "form": "says:",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
           "pos": 7,
           "form": "Consider",
           "lemma": "consider",
           "level": "B1",
           "de": "Bedenkt"
+        },
+        {
+          "pos": 8,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "eure"
+        },
+        {
+          "pos": 9,
+          "form": "ways.",
+          "lemma": "way",
+          "level": "A1",
+          "de": "Wege"
         }
       ],
       "8": [
         {
+          "pos": 0,
+          "form": "Go",
+          "lemma": "go",
+          "level": "A1",
+          "de": "Geht"
+        },
+        {
+          "pos": 1,
+          "form": "up",
+          "lemma": "up",
+          "level": "A1",
+          "de": "hinauf"
+        },
+        {
+          "pos": 2,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 3,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
           "pos": 4,
-          "form": "mountain",
+          "form": "mountain,",
           "lemma": "mountain",
           "level": "A2",
           "de": "Berg"
         },
         {
+          "pos": 5,
+          "form": "bring",
+          "lemma": "bring",
+          "level": "A2",
+          "de": "bringt"
+        },
+        {
           "pos": 6,
-          "form": "wood",
+          "form": "wood,",
           "lemma": "wood",
           "level": "A2",
           "de": "Holz"
+        },
+        {
+          "pos": 7,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
         },
         {
           "pos": 8,
@@ -215,6 +470,41 @@
           "de": "baut"
         },
         {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 10,
+          "form": "house.",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 11,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 12,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 13,
+          "form": "take",
+          "lemma": "take",
+          "level": "A1",
+          "de": "haben"
+        },
+        {
           "pos": 14,
           "form": "pleasure",
           "lemma": "pleasure",
@@ -222,20 +512,161 @@
           "de": "Wohlgefallen"
         },
         {
+          "pos": 15,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "an"
+        },
+        {
+          "pos": 16,
+          "form": "it,",
+          "lemma": "it",
+          "level": "A1",
+          "de": "ihm"
+        },
+        {
           "pos": 17,
-          "form": "glorified",
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 18,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 19,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 20,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "werden"
+        },
+        {
+          "pos": 21,
+          "form": "glorified,”",
           "lemma": "glorify",
           "level": "C1",
           "de": "verherrlicht"
+        },
+        {
+          "pos": 22,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
         }
       ],
       "9": [
         {
+          "pos": 12,
+          "form": "You",
+          "lemma": "you",
+          "level": "A1",
+          "de": "Ihr"
+        },
+        {
+          "pos": 1,
+          "pos_end": 2,
+          "form": "looked for",
+          "lemma": "look for",
+          "level": "A2",
+          "de": "suchtet"
+        },
+        {
+          "pos": 1,
+          "form": "looked",
+          "lemma": "look",
+          "level": "A1",
+          "de": "schautet"
+        },
+        {
+          "pos": 2,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "nach"
+        },
+        {
+          "pos": 3,
+          "form": "much,",
+          "lemma": "much",
+          "level": "A1",
+          "de": "viel"
+        },
+        {
+          "pos": 4,
+          "form": "and,",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
           "pos": 5,
-          "form": "behold",
+          "form": "behold,",
           "lemma": "behold",
           "level": "C1",
           "de": "siehe"
+        },
+        {
+          "pos": 6,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 7,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
+        },
+        {
+          "pos": 8,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 9,
+          "form": "little;",
+          "lemma": "little",
+          "level": "A1",
+          "de": "wenig"
+        },
+        {
+          "pos": 10,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 11,
+          "form": "when",
+          "lemma": "when",
+          "level": "A1",
+          "de": "als"
+        },
+        {
+          "pos": 12,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
         },
         {
           "pos": 13,
@@ -245,6 +676,27 @@
           "de": "brachtet"
         },
         {
+          "pos": 14,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 15,
+          "form": "home,",
+          "lemma": "home",
+          "level": "A1",
+          "de": "heim"
+        },
+        {
+          "pos": 16,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
           "pos": 17,
           "form": "blew",
           "lemma": "blow",
@@ -252,11 +704,81 @@
           "de": "blies"
         },
         {
+          "pos": 18,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 19,
+          "form": "away.",
+          "lemma": "away",
+          "level": "A2",
+          "de": "weg"
+        },
+        {
+          "pos": 20,
+          "form": "Why?”",
+          "lemma": "why",
+          "level": "A1",
+          "de": "Warum?"
+        },
+        {
+          "pos": 21,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 23,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 24,
-          "form": "Armies",
+          "form": "Armies,",
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen"
+        },
+        {
+          "pos": 25,
+          "form": "Because",
+          "lemma": "because",
+          "level": "A2",
+          "de": "Weil"
+        },
+        {
+          "pos": 26,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "wegen"
+        },
+        {
+          "pos": 27,
+          "form": "my",
+          "lemma": "my",
+          "level": "A1",
+          "de": "meines"
+        },
+        {
+          "pos": 28,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Hauses"
+        },
+        {
+          "pos": 29,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "das"
         },
         {
           "pos": 30,
@@ -267,28 +789,118 @@
         },
         {
           "pos": 31,
-          "form": "waste",
+          "form": "waste,",
           "lemma": "waste",
           "level": "B1",
           "de": "wüst"
+        },
+        {
+          "pos": 32,
+          "form": "while",
+          "lemma": "while",
+          "level": "A2",
+          "de": "während"
+        },
+        {
+          "pos": 33,
+          "form": "each",
+          "lemma": "each",
+          "level": "A2",
+          "de": "jeder"
+        },
+        {
+          "pos": 34,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 35,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        },
+        {
+          "pos": 36,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
         },
         {
           "pos": 37,
           "form": "busy",
           "lemma": "busy",
           "level": "B1",
-          "de": "eifrig"
+          "de": "beschäftigt"
         },
         {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "looked for",
-          "lemma": "looked for",
+          "pos": 38,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 39,
+          "form": "his",
+          "lemma": "his",
+          "level": "A1",
+          "de": "seinem"
+        },
+        {
+          "pos": 40,
+          "form": "own",
+          "lemma": "own",
           "level": "A2",
-          "de": "suchte"
+          "de": "eigenen"
+        },
+        {
+          "pos": 41,
+          "form": "house.",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
         }
       ],
       "10": [
+        {
+          "pos": 0,
+          "form": "Therefore",
+          "lemma": "therefore",
+          "level": "B1",
+          "de": "Darum"
+        },
+        {
+          "pos": 1,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "um"
+        },
+        {
+          "pos": 2,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "euret"
+        },
+        {
+          "pos": 3,
+          "form": "sake",
+          "lemma": "sake",
+          "level": "B2",
+          "de": "willen"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
         {
           "pos": 5,
           "form": "heavens",
@@ -301,37 +913,811 @@
           "form": "withhold",
           "lemma": "withhold",
           "level": "C1",
-          "de": "zurückhält"
+          "de": "halten zurück"
+        },
+        {
+          "pos": 7,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
         },
         {
           "pos": 8,
-          "form": "dew",
+          "form": "dew,",
           "lemma": "dew",
           "level": "B2",
           "de": "Tau"
+        },
+        {
+          "pos": 9,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 11,
+          "form": "earth",
+          "lemma": "earth",
+          "level": "A2",
+          "de": "Erde"
         },
         {
           "pos": 12,
           "form": "withholds",
           "lemma": "withhold",
           "level": "C1",
-          "de": "zurückhält"
+          "de": "hält zurück"
+        },
+        {
+          "pos": 13,
+          "form": "its",
+          "lemma": "its",
+          "level": "A1",
+          "de": "ihren"
         },
         {
           "pos": 14,
-          "form": "fruit",
+          "form": "fruit.",
           "lemma": "fruit",
           "level": "A2",
           "de": "Ertrag"
         }
       ],
+      "1": [
+        {
+          "pos": 0,
+          "form": "In",
+          "lemma": "in",
+          "level": "A1",
+          "de": "Im"
+        },
+        {
+          "pos": 1,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 2,
+          "form": "second",
+          "lemma": "second",
+          "level": "A1",
+          "de": "zweiten"
+        },
+        {
+          "pos": 3,
+          "form": "year",
+          "lemma": "year",
+          "level": "A1",
+          "de": "Jahr"
+        },
+        {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 6,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 7,
+          "form": "king,",
+          "lemma": "king",
+          "level": "A1",
+          "de": "Königs,"
+        },
+        {
+          "pos": 8,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "im"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 10,
+          "form": "sixth",
+          "lemma": "sixth",
+          "level": "B1",
+          "de": "sechsten"
+        },
+        {
+          "pos": 11,
+          "form": "month,",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monat,"
+        },
+        {
+          "pos": 12,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "an"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 14,
+          "form": "first",
+          "lemma": "first",
+          "level": "A1",
+          "de": "ersten"
+        },
+        {
+          "pos": 15,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 16,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 17,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 18,
+          "form": "month,",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monats,"
+        },
+        {
+          "pos": 19,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 20,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 21,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
+        },
+        {
+          "pos": 22,
+          "form": "by",
+          "lemma": "by",
+          "level": "A1",
+          "de": "durch"
+        },
+        {
+          "pos": 24,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 25,
+          "form": "prophet,",
+          "lemma": "prophet",
+          "level": "B1",
+          "de": "Propheten,"
+        },
+        {
+          "pos": 26,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 28,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 29,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 30,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 32,
+          "form": "governor",
+          "lemma": "governor",
+          "level": "B1",
+          "de": "Statthalter"
+        },
+        {
+          "pos": 33,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 35,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 36,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 38,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 39,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 40,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 42,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 43,
+          "pos_end": 44,
+          "form": "high priest",
+          "lemma": "high priest",
+          "level": "B1",
+          "de": "Hohepriester"
+        },
+        {
+          "pos": 43,
+          "form": "high",
+          "lemma": "high",
+          "level": "A1",
+          "de": "hoch"
+        },
+        {
+          "pos": 44,
+          "form": "priest,",
+          "lemma": "priest",
+          "level": "B1",
+          "de": "Priester,"
+        },
+        {
+          "pos": 45,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sprechend:"
+        }
+      ],
+      "2": [
+        {
+          "pos": 0,
+          "form": "“This",
+          "lemma": "this",
+          "level": "A1",
+          "de": "„Dies"
+        },
+        {
+          "pos": 1,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 2,
+          "form": "what",
+          "lemma": "what",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 3,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 5,
+          "form": "Armies",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen"
+        },
+        {
+          "pos": 6,
+          "form": "says:",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagt:"
+        },
+        {
+          "pos": 7,
+          "form": "These",
+          "lemma": "this",
+          "level": "A1",
+          "de": "Diese"
+        },
+        {
+          "pos": 8,
+          "form": "people",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Leute"
+        },
+        {
+          "pos": 9,
+          "form": "say,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagen:"
+        },
+        {
+          "pos": 10,
+          "form": "‘The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "‚Die"
+        },
+        {
+          "pos": 11,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "Zeit"
+        },
+        {
+          "pos": 12,
+          "form": "hasn’t",
+          "lemma": "have not",
+          "level": "A1",
+          "de": "ist nicht"
+        },
+        {
+          "pos": 13,
+          "form": "yet",
+          "lemma": "yet",
+          "level": "A2",
+          "de": "noch"
+        },
+        {
+          "pos": 14,
+          "form": "come,",
+          "lemma": "come",
+          "level": "A1",
+          "de": "gekommen,"
+        },
+        {
+          "pos": 15,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 16,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "Zeit"
+        },
+        {
+          "pos": 17,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "für"
+        },
+        {
+          "pos": 18,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 19,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 20,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 21,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "werden"
+        },
+        {
+          "pos": 22,
+          "form": "built.’”",
+          "lemma": "build",
+          "level": "B1",
+          "de": "gebaut.‘“"
+        }
+      ],
+      "3": [
+        {
+          "pos": 0,
+          "form": "Then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Dann"
+        },
+        {
+          "pos": 1,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 2,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 3,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
+        },
+        {
+          "pos": 4,
+          "form": "by",
+          "lemma": "by",
+          "level": "A1",
+          "de": "durch"
+        },
+        {
+          "pos": 6,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 7,
+          "form": "prophet,",
+          "lemma": "prophet",
+          "level": "B1",
+          "de": "Propheten,"
+        },
+        {
+          "pos": 8,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sprechend:"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "“Is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "„Ist"
+        },
+        {
+          "pos": 1,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 2,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "eine"
+        },
+        {
+          "pos": 3,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "Zeit"
+        },
+        {
+          "pos": 4,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "für"
+        },
+        {
+          "pos": 5,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        },
+        {
+          "pos": 6,
+          "form": "yourselves",
+          "lemma": "yourself",
+          "level": "A2",
+          "de": "selbst"
+        },
+        {
+          "pos": 7,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 8,
+          "form": "dwell",
+          "lemma": "dwell",
+          "level": "B2",
+          "de": "wohnen"
+        },
+        {
+          "pos": 9,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 10,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "euren"
+        },
+        {
+          "pos": 11,
+          "form": "paneled",
+          "lemma": "panel",
+          "level": "C1",
+          "de": "getäfelten"
+        },
+        {
+          "pos": 12,
+          "form": "houses,",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Häusern,"
+        },
+        {
+          "pos": 13,
+          "form": "while",
+          "lemma": "while",
+          "level": "A2",
+          "de": "während"
+        },
+        {
+          "pos": 14,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dieses"
+        },
+        {
+          "pos": 15,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 16,
+          "form": "lies",
+          "lemma": "lie",
+          "level": "B1",
+          "de": "liegt"
+        },
+        {
+          "pos": 17,
+          "form": "waste?",
+          "lemma": "waste",
+          "level": "B1",
+          "de": "wüst?"
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "Now",
+          "lemma": "now",
+          "level": "A1",
+          "de": "Nun"
+        },
+        {
+          "pos": 1,
+          "form": "therefore",
+          "lemma": "therefore",
+          "level": "B1",
+          "de": "deshalb"
+        },
+        {
+          "pos": 2,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dies"
+        },
+        {
+          "pos": 3,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 4,
+          "form": "what",
+          "lemma": "what",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 5,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 7,
+          "form": "Armies",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen"
+        },
+        {
+          "pos": 8,
+          "form": "says:",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagt:"
+        },
+        {
+          "pos": 9,
+          "form": "Consider",
+          "lemma": "consider",
+          "level": "B1",
+          "de": "Bedenkt"
+        },
+        {
+          "pos": 10,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "eure"
+        },
+        {
+          "pos": 11,
+          "form": "ways.",
+          "lemma": "way",
+          "level": "A1",
+          "de": "Wege."
+        }
+      ],
       "11": [
+        {
+          "pos": 0,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
         {
           "pos": 1,
           "form": "called",
           "lemma": "call",
           "level": "A2",
           "de": "rief"
+        },
+        {
+          "pos": 2,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "nach"
+        },
+        {
+          "pos": 3,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "eine"
         },
         {
           "pos": 4,
@@ -341,32 +1727,144 @@
           "de": "Dürre"
         },
         {
+          "pos": 5,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 6,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 7,
+          "form": "land,",
+          "lemma": "land",
+          "level": "A1",
+          "de": "Land,"
+        },
+        {
+          "pos": 8,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
           "pos": 10,
-          "form": "mountains",
+          "form": "mountains,",
           "lemma": "mountain",
           "level": "A2",
-          "de": "Berge"
+          "de": "Berge,"
+        },
+        {
+          "pos": 11,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 12,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
         },
         {
           "pos": 13,
-          "form": "grain",
+          "form": "grain,",
           "lemma": "grain",
           "level": "B1",
-          "de": "Getreide"
+          "de": "Getreide,"
+        },
+        {
+          "pos": 14,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 15,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 16,
+          "form": "new",
+          "lemma": "new",
+          "level": "A1",
+          "de": "neuen"
         },
         {
           "pos": 17,
-          "form": "wine",
+          "form": "wine,",
           "lemma": "wine",
           "level": "A2",
-          "de": "Wein"
+          "de": "Wein,"
+        },
+        {
+          "pos": 18,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 19,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
         },
         {
           "pos": 20,
-          "form": "oil",
+          "form": "oil,",
           "lemma": "oil",
           "level": "A2",
-          "de": "Öl"
+          "de": "Öl,"
+        },
+        {
+          "pos": 21,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 22,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 23,
+          "form": "which",
+          "lemma": "which",
+          "level": "A2",
+          "de": "was"
+        },
+        {
+          "pos": 24,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
         },
         {
           "pos": 25,
@@ -377,17 +1875,66 @@
         },
         {
           "pos": 26,
-          "form": "produces",
+          "form": "produces,",
           "lemma": "produce",
           "level": "B1",
-          "de": "hervorbringt"
+          "de": "hervorbringt,"
+        },
+        {
+          "pos": 27,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 28,
+          "form": "men,",
+          "lemma": "man",
+          "level": "A1",
+          "de": "Menschen,"
+        },
+        {
+          "pos": 29,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
         },
         {
           "pos": 30,
-          "form": "livestock",
+          "form": "livestock,",
           "lemma": "livestock",
           "level": "B2",
-          "de": "Vieh"
+          "de": "Vieh,"
+        },
+        {
+          "pos": 31,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 32,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "über"
+        },
+        {
+          "pos": 33,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "alle"
+        },
+        {
+          "pos": 34,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
         },
         {
           "pos": 35,
@@ -395,15 +1942,163 @@
           "lemma": "labor",
           "level": "B1",
           "de": "Arbeit"
+        },
+        {
+          "pos": 36,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 37,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 38,
+          "form": "hands.”",
+          "lemma": "hand",
+          "level": "A1",
+          "de": "Hände.“"
         }
       ],
       "12": [
+        {
+          "pos": 0,
+          "form": "Then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Da"
+        },
+        {
+          "pos": 2,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 3,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 6,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 9,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 12,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 13,
+          "pos_end": 14,
+          "form": "high priest,",
+          "lemma": "high priest",
+          "level": "B1",
+          "de": "Hohepriester,"
+        },
+        {
+          "pos": 13,
+          "form": "high",
+          "lemma": "high",
+          "level": "A2",
+          "de": "hohe"
+        },
+        {
+          "pos": 14,
+          "form": "priest,",
+          "lemma": "priest",
+          "level": "B1",
+          "de": "Priester,"
+        },
+        {
+          "pos": 15,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 16,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "dem ganzen"
+        },
+        {
+          "pos": 17,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
         {
           "pos": 18,
           "form": "remnant",
           "lemma": "remnant",
           "level": "C1",
           "de": "Überrest"
+        },
+        {
+          "pos": 19,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 20,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 21,
+          "form": "people,",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volkes,"
         },
         {
           "pos": 22,
@@ -413,6 +2108,13 @@
           "de": "gehorchten"
         },
         {
+          "pos": 23,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 24,
           "form": "voice",
           "lemma": "voice",
@@ -420,35 +2122,160 @@
           "de": "Stimme"
         },
         {
+          "pos": 25,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 27,
+          "form": "their",
+          "lemma": "their",
+          "level": "A1",
+          "de": "ihres"
+        },
+        {
+          "pos": 28,
+          "form": "God,",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gottes,"
+        },
+        {
+          "pos": 29,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 30,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 31,
+          "form": "words",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Worten"
+        },
+        {
+          "pos": 32,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 34,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
           "pos": 35,
-          "form": "prophet",
+          "form": "prophet,",
           "lemma": "prophet",
           "level": "B1",
-          "de": "Prophet"
+          "de": "Propheten,"
+        },
+        {
+          "pos": 36,
+          "form": "as",
+          "lemma": "as",
+          "level": "A2",
+          "de": "wie"
+        },
+        {
+          "pos": 38,
+          "form": "their",
+          "lemma": "their",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 39,
+          "form": "God,",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott,"
+        },
+        {
+          "pos": 40,
+          "form": "had",
+          "lemma": "have",
+          "level": "A1",
+          "de": "hatte"
+        },
+        {
+          "pos": 41,
+          "form": "sent",
+          "lemma": "send",
+          "level": "A2",
+          "de": "gesandt"
+        },
+        {
+          "pos": 42,
+          "form": "him;",
+          "lemma": "he",
+          "level": "A1",
+          "de": "ihn;"
+        },
+        {
+          "pos": 43,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 44,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 45,
+          "form": "people",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volk"
         },
         {
           "pos": 46,
           "form": "feared",
           "lemma": "fear",
           "level": "B1",
-          "de": "fürchteten"
-        },
-        {
-          "pos": 13,
-          "pos_end": 14,
-          "form": "high priest",
-          "lemma": "high priest",
-          "level": "B1",
-          "de": "Hohepriester"
+          "de": "fürchtete"
         }
       ],
       "13": [
         {
+          "pos": 0,
+          "form": "Then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Da"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
+        },
+        {
           "pos": 3,
-          "form": "messenger",
+          "form": "messenger,",
           "lemma": "messenger",
           "level": "B1",
-          "de": "Bote"
+          "de": "Bote,"
         },
         {
           "pos": 4,
@@ -458,20 +2285,154 @@
           "de": "sprach"
         },
         {
+          "pos": 5,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
+        },
+        {
           "pos": 6,
           "form": "message",
           "lemma": "message",
           "level": "B1",
           "de": "Botschaft"
+        },
+        {
+          "pos": 7,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 9,
+          "form": "people,",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volk,"
+        },
+        {
+          "pos": 10,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagend,"
+        },
+        {
+          "pos": 11,
+          "form": "“I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "„Ich"
+        },
+        {
+          "pos": 12,
+          "form": "am",
+          "lemma": "be",
+          "level": "A1",
+          "de": "bin"
+        },
+        {
+          "pos": 13,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 14,
+          "form": "you,”",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch,“"
+        },
+        {
+          "pos": 15,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
         }
       ],
       "14": [
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 1,
+          "pos_end": 2,
+          "form": "stirred up",
+          "lemma": "stir up",
+          "level": "B2",
+          "de": "erweckte"
+        },
+        {
+          "pos": 1,
+          "form": "stirred",
+          "lemma": "stir",
+          "level": "B2",
+          "de": "rührte"
+        },
+        {
+          "pos": 2,
+          "form": "up",
+          "lemma": "up",
+          "level": "A1",
+          "de": "auf"
+        },
+        {
+          "pos": 3,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
         {
           "pos": 4,
           "form": "spirit",
           "lemma": "spirit",
           "level": "B1",
           "de": "Geist"
+        },
+        {
+          "pos": 5,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 7,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 8,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohnes"
+        },
+        {
+          "pos": 9,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
         },
         {
           "pos": 11,
@@ -481,25 +2442,187 @@
           "de": "Statthalter"
         },
         {
-          "pos": 4,
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 15,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 16,
           "form": "spirit",
           "lemma": "spirit",
           "level": "B1",
           "de": "Geist"
         },
         {
-          "pos": 4,
+          "pos": 17,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 19,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 20,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohnes"
+        },
+        {
+          "pos": 21,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 23,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 24,
+          "pos_end": 25,
+          "form": "high priest,",
+          "lemma": "high priest",
+          "level": "B1",
+          "de": "Hohepriesters,"
+        },
+        {
+          "pos": 24,
+          "form": "high",
+          "lemma": "high",
+          "level": "A2",
+          "de": "hohen"
+        },
+        {
+          "pos": 25,
+          "form": "priest,",
+          "lemma": "priest",
+          "level": "B1",
+          "de": "Priesters,"
+        },
+        {
+          "pos": 26,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 27,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 28,
           "form": "spirit",
           "lemma": "spirit",
           "level": "B1",
           "de": "Geist"
+        },
+        {
+          "pos": 29,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 30,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "ganzen"
+        },
+        {
+          "pos": 31,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
         },
         {
           "pos": 32,
           "form": "remnant",
           "lemma": "remnant",
           "level": "C1",
-          "de": "Überrest"
+          "de": "Überrests"
+        },
+        {
+          "pos": 33,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 34,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 35,
+          "form": "people;",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volkes;"
+        },
+        {
+          "pos": 36,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 37,
+          "form": "they",
+          "lemma": "they",
+          "level": "A1",
+          "de": "sie"
+        },
+        {
+          "pos": 38,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kamen"
+        },
+        {
+          "pos": 39,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
         },
         {
           "pos": 40,
@@ -509,27 +2632,67 @@
           "de": "arbeiteten"
         },
         {
+          "pos": 41,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "an"
+        },
+        {
+          "pos": 42,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 43,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 44,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 45,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 46,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 47,
-          "form": "Armies",
+          "form": "Armies,",
           "lemma": "army",
           "level": "B1",
-          "de": "Heerscharen"
+          "de": "Heerscharen,"
         },
         {
-          "pos": 24,
-          "pos_end": 25,
-          "form": "high priest",
-          "lemma": "high priest",
-          "level": "B1",
-          "de": "Hohepriester"
+          "pos": 48,
+          "form": "their",
+          "lemma": "their",
+          "level": "A1",
+          "de": "ihrem"
         },
         {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "stirred up",
-          "lemma": "stirred up",
-          "level": "B2",
-          "de": "aufgewiegelt"
+          "pos": 49,
+          "form": "God,",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott,"
         }
       ],
       "15": [
@@ -577,20 +2740,20 @@
         },
         {
           "pos": 6,
-          "form": "month",
+          "form": "month,",
           "lemma": "month",
           "level": "A1",
-          "de": "Monats"
+          "de": "Monats,"
         },
         {
-          "pos": 0,
+          "pos": 7,
           "form": "in",
           "lemma": "in",
           "level": "A1",
           "de": "im"
         },
         {
-          "pos": 1,
+          "pos": 8,
           "form": "the",
           "lemma": "the",
           "level": "A1",
@@ -604,21 +2767,21 @@
           "de": "sechsten"
         },
         {
-          "pos": 6,
-          "form": "month",
+          "pos": 10,
+          "form": "month,",
           "lemma": "month",
           "level": "A1",
-          "de": "Monat"
+          "de": "Monat,"
         },
         {
-          "pos": 0,
+          "pos": 11,
           "form": "in",
           "lemma": "in",
           "level": "A1",
           "de": "im"
         },
         {
-          "pos": 1,
+          "pos": 12,
           "form": "the",
           "lemma": "the",
           "level": "A1",
@@ -639,14 +2802,14 @@
           "de": "Jahr"
         },
         {
-          "pos": 4,
+          "pos": 15,
           "form": "of",
           "lemma": "of",
           "level": "A1",
           "de": "von"
         },
         {
-          "pos": 1,
+          "pos": 17,
           "form": "the",
           "lemma": "the",
           "level": "A1",
@@ -654,327 +2817,969 @@
         },
         {
           "pos": 18,
-          "form": "king",
+          "form": "king.",
           "lemma": "king",
           "level": "A2",
-          "de": "König"
+          "de": "König."
         }
       ]
     },
     "2": {
-      "1": [
+      "16": [
         {
-          "pos": 6,
-          "form": "twenty-first",
-          "lemma": "twenty-first",
-          "level": "B1",
-          "de": "einundzwanzigsten"
+          "pos": 0,
+          "form": "Through",
+          "lemma": "through",
+          "level": "A2",
+          "de": "während"
         },
         {
-          "pos": 13,
+          "pos": 1,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "all"
+        },
+        {
+          "pos": 2,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "jener"
+        },
+        {
+          "pos": 3,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "Zeit"
+        },
+        {
+          "pos": 4,
+          "form": "when",
+          "lemma": "when",
+          "level": "A1",
+          "de": "wenn"
+        },
+        {
+          "pos": 5,
+          "form": "one",
+          "lemma": "one",
+          "level": "A1",
+          "de": "jemand"
+        },
+        {
+          "pos": 6,
           "form": "came",
           "lemma": "come",
-          "level": "B1",
+          "level": "A1",
           "de": "kam"
         },
         {
-          "pos": 17,
-          "form": "prophet",
-          "lemma": "prophet",
-          "level": "B1",
-          "de": "Prophet"
-        }
-      ],
-      "2": [
-        {
-          "pos": 1,
-          "form": "Speak",
-          "lemma": "speak",
-          "level": "B1",
-          "de": "Sprich"
+          "pos": 7,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
         },
         {
           "pos": 8,
-          "form": "governor",
-          "lemma": "governor",
-          "level": "B1",
-          "de": "Statthalter"
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "einem"
         },
         {
-          "pos": 24,
-          "form": "remnant",
-          "lemma": "remnant",
-          "level": "B2",
-          "de": "Überrest"
+          "pos": 9,
+          "form": "heap",
+          "lemma": "heap",
+          "level": "B1",
+          "de": "Haufen"
         },
         {
-          "pos": 19,
-          "pos_end": 20,
-          "form": "high priest",
-          "lemma": "high priest",
-          "level": "B1",
-          "de": "Hohepriester"
-        }
-      ],
-      "3": [
-        {
-          "pos": 2,
-          "form": "left",
-          "lemma": "leave",
-          "level": "B1",
-          "de": "übrig"
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
         },
         {
           "pos": 11,
-          "form": "former",
-          "lemma": "former",
-          "level": "B1",
-          "de": "früheren"
+          "form": "twenty",
+          "lemma": "twenty",
+          "level": "A1",
+          "de": "zwanzig"
         },
         {
           "pos": 12,
-          "form": "glory",
-          "lemma": "glory",
+          "form": "measures",
+          "lemma": "measure",
           "level": "B1",
-          "de": "Herrlichkeit"
+          "de": "Maß"
         },
         {
-          "pos": 23,
-          "form": "eyes",
-          "lemma": "eye",
-          "level": "B1",
-          "de": "Augen"
-        }
-      ],
-      "4": [
-        {
-          "pos": 3,
-          "form": "strong",
-          "lemma": "strong",
-          "level": "B1",
-          "de": "stark"
-        },
-        {
-          "pos": 8,
-          "form": "strong",
-          "lemma": "strong",
-          "level": "B1",
-          "de": "stark"
-        },
-        {
-          "pos": 3,
-          "form": "strong",
-          "lemma": "strong",
-          "level": "B1",
-          "de": "stark"
-        },
-        {
-          "pos": 36,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
+          "pos": 13,
+          "form": "there",
+          "lemma": "there",
+          "level": "A1",
+          "de": "da"
         },
         {
           "pos": 14,
-          "pos_end": 15,
-          "form": "high priest",
-          "lemma": "high priest",
-          "level": "B1",
-          "de": "Hohepriester"
-        }
-      ],
-      "5": [
+          "form": "were",
+          "lemma": "be",
+          "level": "A1",
+          "de": "waren"
+        },
         {
-          "pos": 6,
-          "form": "covenanted",
-          "lemma": "covenant",
-          "level": "B2",
-          "de": "einen Bund schloss"
+          "pos": 15,
+          "form": "only",
+          "lemma": "only",
+          "level": "A2",
+          "de": "nur"
+        },
+        {
+          "pos": 16,
+          "form": "ten",
+          "lemma": "ten",
+          "level": "A1",
+          "de": "zehn"
         },
         {
           "pos": 17,
-          "form": "Spirit",
-          "lemma": "spirit",
-          "level": "B1",
-          "de": "Geist"
+          "form": "When",
+          "lemma": "when",
+          "level": "A1",
+          "de": "wenn"
         },
         {
           "pos": 18,
-          "form": "lived",
-          "lemma": "live",
-          "level": "B1",
-          "de": "wohnte"
-        }
-      ],
-      "6": [
-        {
-          "pos": 6,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
+          "form": "one",
+          "lemma": "one",
+          "level": "A1",
+          "de": "jemand"
         },
         {
-          "pos": 18,
-          "form": "shake",
-          "lemma": "shake",
-          "level": "B1",
-          "de": "erschüttern"
+          "pos": 19,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
         },
         {
           "pos": 20,
-          "form": "heavens",
-          "lemma": "heaven",
-          "level": "B1",
-          "de": "Himmel"
-        }
-      ],
-      "7": [
-        {
-          "pos": 3,
-          "form": "shake",
-          "lemma": "shake",
-          "level": "B1",
-          "de": "erschüttern"
-        },
-        {
-          "pos": 5,
-          "form": "nations",
-          "lemma": "nation",
-          "level": "B1",
-          "de": "Völker"
-        },
-        {
-          "pos": 7,
-          "form": "precious",
-          "lemma": "precious",
-          "level": "B1",
-          "de": "kostbaren"
-        },
-        {
-          "pos": 5,
-          "form": "nations",
-          "lemma": "nation",
-          "level": "B1",
-          "de": "Völker"
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
         },
         {
           "pos": 21,
-          "form": "glory",
-          "lemma": "glory",
-          "level": "B1",
-          "de": "Herrlichkeit"
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
         },
         {
-          "pos": 25,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
-        }
-      ],
-      "8": [
-        {
-          "pos": 1,
-          "form": "silver",
-          "lemma": "silver",
-          "level": "B1",
-          "de": "Silber"
-        },
-        {
-          "pos": 6,
-          "form": "gold",
-          "lemma": "gold",
-          "level": "B1",
-          "de": "Gold"
-        },
-        {
-          "pos": 12,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
-        }
-      ],
-      "9": [
-        {
-          "pos": 1,
-          "form": "latter",
-          "lemma": "latter",
-          "level": "B2",
-          "de": "spätere"
-        },
-        {
-          "pos": 2,
-          "form": "glory",
-          "lemma": "glory",
-          "level": "B1",
-          "de": "Herrlichkeit"
-        },
-        {
-          "pos": 11,
-          "form": "former",
-          "lemma": "former",
-          "level": "B1",
-          "de": "früheren"
-        },
-        {
-          "pos": 15,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
+          "pos": 22,
+          "form": "wine",
+          "lemma": "wine",
+          "level": "A2",
+          "de": "Wein"
         },
         {
           "pos": 23,
-          "form": "peace",
-          "lemma": "peace",
+          "form": "vat",
+          "lemma": "vat",
+          "level": "B2",
+          "de": "Kelter"
+        },
+        {
+          "pos": 24,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "um zu"
+        },
+        {
+          "pos": 25,
+          "pos_end": 26,
+          "form": "draw out",
+          "lemma": "draw out",
           "level": "B1",
-          "de": "Frieden"
+          "de": "schöpfen"
+        },
+        {
+          "pos": 25,
+          "form": "draw",
+          "lemma": "draw",
+          "level": "B1",
+          "de": "schöpfen"
+        },
+        {
+          "pos": 26,
+          "form": "out",
+          "lemma": "out",
+          "level": "A1",
+          "de": "heraus"
+        },
+        {
+          "pos": 27,
+          "form": "fifty",
+          "lemma": "fifty",
+          "level": "A1",
+          "de": "fünfzig"
+        },
+        {
+          "pos": 28,
+          "form": "there",
+          "lemma": "there",
+          "level": "A1",
+          "de": "da"
+        },
+        {
+          "pos": 29,
+          "form": "were",
+          "lemma": "be",
+          "level": "A1",
+          "de": "waren"
+        },
+        {
+          "pos": 30,
+          "form": "only",
+          "lemma": "only",
+          "level": "A2",
+          "de": "nur"
+        },
+        {
+          "pos": 31,
+          "form": "twenty",
+          "lemma": "twenty",
+          "level": "A1",
+          "de": "zwanzig"
+        }
+      ],
+      "17": [
+        {
+          "pos": 0,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 1,
+          "form": "struck",
+          "lemma": "strike",
+          "level": "B1",
+          "de": "schlug"
+        },
+        {
+          "pos": 2,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        },
+        {
+          "pos": 3,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 4,
+          "form": "blight",
+          "lemma": "blight",
+          "level": "C1",
+          "de": "Getreidebrand"
+        },
+        {
+          "pos": 5,
+          "form": "mildew",
+          "lemma": "mildew",
+          "level": "C1",
+          "de": "Mehltau"
+        },
+        {
+          "pos": 6,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 7,
+          "form": "hail",
+          "lemma": "hail",
+          "level": "B2",
+          "de": "Hagel"
+        },
+        {
+          "pos": 8,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 9,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "all"
+        },
+        {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 11,
+          "form": "work",
+          "lemma": "work",
+          "level": "A1",
+          "de": "Arbeit"
+        },
+        {
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 13,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "eurer"
+        },
+        {
+          "pos": 14,
+          "form": "hands",
+          "lemma": "hand",
+          "level": "A1",
+          "de": "Hände"
         },
         {
           "pos": 15,
-          "form": "Armies",
-          "lemma": "army",
-          "level": "B1",
-          "de": "Heerscharen"
+          "form": "yet",
+          "lemma": "yet",
+          "level": "A2",
+          "de": "doch"
+        },
+        {
+          "pos": 16,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 17,
+          "form": "didn't",
+          "lemma": "do not",
+          "level": "A1",
+          "de": "habt nicht"
+        },
+        {
+          "pos": 18,
+          "form": "turn",
+          "lemma": "turn",
+          "level": "A2",
+          "de": "gekehrt"
+        },
+        {
+          "pos": 19,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 20,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "mir"
+        },
+        {
+          "pos": 21,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 22,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
-      "10": [
+      "18": [
+        {
+          "pos": 26,
+          "form": "Consider",
+          "lemma": "consider",
+          "level": "B1",
+          "de": "Bedenkt"
+        },
+        {
+          "pos": 1,
+          "form": "please",
+          "lemma": "please",
+          "level": "A1",
+          "de": "bitte"
+        },
         {
           "pos": 2,
+          "form": "from",
+          "lemma": "from",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diesem"
+        },
+        {
+          "pos": 4,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 5,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 6,
+          "form": "backward",
+          "lemma": "backward",
+          "level": "B1",
+          "de": "rückwärts"
+        },
+        {
+          "pos": 7,
+          "form": "from",
+          "lemma": "from",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 9,
           "form": "twenty-fourth",
           "lemma": "twenty-fourth",
           "level": "B1",
           "de": "vierundzwanzigsten"
         },
         {
-          "pos": 6,
+          "pos": 10,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 11,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 12,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 13,
           "form": "ninth",
           "lemma": "ninth",
           "level": "B1",
           "de": "neunten"
         },
         {
+          "pos": 14,
+          "form": "month",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monats"
+        },
+        {
+          "pos": 15,
+          "form": "since",
+          "lemma": "since",
+          "level": "A2",
+          "de": "seit"
+        },
+        {
           "pos": 16,
-          "form": "came",
-          "lemma": "come",
-          "level": "B1",
-          "de": "kam"
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 17,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 18,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "an dem"
+        },
+        {
+          "pos": 19,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
         },
         {
           "pos": 20,
-          "form": "prophet",
-          "lemma": "prophet",
+          "form": "foundation",
+          "lemma": "foundation",
           "level": "B1",
-          "de": "Prophet"
+          "de": "Grundstein"
+        },
+        {
+          "pos": 21,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 22,
+          "form": "Yahweh's",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 23,
+          "form": "temple",
+          "lemma": "temple",
+          "level": "B1",
+          "de": "Tempel"
+        },
+        {
+          "pos": 24,
+          "form": "was",
+          "lemma": "be",
+          "level": "A1",
+          "de": "wurde"
+        },
+        {
+          "pos": 25,
+          "form": "laid",
+          "lemma": "lay",
+          "level": "B1",
+          "de": "gelegt"
+        },
+        {
+          "pos": 26,
+          "form": "consider",
+          "lemma": "consider",
+          "level": "B1",
+          "de": "bedenkt"
+        },
+        {
+          "pos": 27,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        }
+      ],
+      "19": [
+        {
+          "pos": 0,
+          "form": "Is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 1,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 2,
+          "form": "seed",
+          "lemma": "seed",
+          "level": "B1",
+          "de": "Samen"
+        },
+        {
+          "pos": 3,
+          "form": "yet",
+          "lemma": "yet",
+          "level": "A2",
+          "de": "noch"
+        },
+        {
+          "pos": 4,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 5,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 6,
+          "form": "barn",
+          "lemma": "barn",
+          "level": "B1",
+          "de": "Scheune"
+        },
+        {
+          "pos": 7,
+          "form": "Yes",
+          "lemma": "yes",
+          "level": "A1",
+          "de": "Ja"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 9,
+          "form": "vine",
+          "lemma": "vine",
+          "level": "B1",
+          "de": "Weinstock"
+        },
+        {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 11,
+          "pos_end": 12,
+          "form": "fig tree",
+          "lemma": "fig tree",
+          "level": "A2",
+          "de": "Feigenbaum"
+        },
+        {
+          "pos": 11,
+          "form": "fig",
+          "lemma": "fig",
+          "level": "B1",
+          "de": "Feige"
+        },
+        {
+          "pos": 12,
+          "form": "tree",
+          "lemma": "tree",
+          "level": "A1",
+          "de": "Baum"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 14,
+          "form": "pomegranate",
+          "lemma": "pomegranate",
+          "level": "C1",
+          "de": "Granatapfel"
+        },
+        {
+          "pos": 15,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 16,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 17,
+          "pos_end": 18,
+          "form": "olive tree",
+          "lemma": "olive tree",
+          "level": "A2",
+          "de": "Olivenbaum"
+        },
+        {
+          "pos": 17,
+          "form": "olive",
+          "lemma": "olive",
+          "level": "A2",
+          "de": "Olive"
+        },
+        {
+          "pos": 18,
+          "form": "tree",
+          "lemma": "tree",
+          "level": "A1",
+          "de": "Baum"
+        },
+        {
+          "pos": 19,
+          "form": "haven't",
+          "lemma": "have not",
+          "level": "A1",
+          "de": "haben nicht"
+        },
+        {
+          "pos": 20,
+          "form": "produced",
+          "lemma": "produce",
+          "level": "B1",
+          "de": "getragen"
+        },
+        {
+          "pos": 21,
+          "form": "From",
+          "lemma": "from",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 22,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diesem"
+        },
+        {
+          "pos": 23,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 24,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 25,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 26,
+          "form": "bless",
+          "lemma": "bless",
+          "level": "B1",
+          "de": "segnen"
+        },
+        {
+          "pos": 27,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        }
+      ],
+      "20": [
+        {
+          "pos": 0,
+          "form": "Yahweh's",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 1,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 2,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
+        },
+        {
+          "pos": 3,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 4,
+          "form": "second",
+          "lemma": "second",
+          "level": "A1",
+          "de": "zweite"
+        },
+        {
+          "pos": 5,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "Mal"
+        },
+        {
+          "pos": 6,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 7,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 8,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "am"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 10,
+          "form": "twenty-fourth",
+          "lemma": "twenty-fourth",
+          "level": "B1",
+          "de": "vierundzwanzigsten"
+        },
+        {
+          "pos": 11,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 14,
+          "form": "month",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monats"
+        },
+        {
+          "pos": 15,
+          "form": "saying",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sprach"
         }
       ],
       "11": [
         {
+          "pos": 0,
+          "form": "“Thus",
+          "lemma": "thus",
+          "level": "B1",
+          "de": "So"
+        },
+        {
+          "pos": 1,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 3,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 4,
-          "form": "Armies",
+          "form": "Armies:",
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen"
@@ -983,8 +3788,22 @@
           "pos": 5,
           "form": "Ask",
           "lemma": "ask",
-          "level": "B1",
+          "level": "A1",
           "de": "Frage"
+        },
+        {
+          "pos": 6,
+          "form": "now",
+          "lemma": "now",
+          "level": "A1",
+          "de": "nun"
+        },
+        {
+          "pos": 7,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
         },
         {
           "pos": 8,
@@ -996,19 +3815,47 @@
         {
           "pos": 9,
           "form": "concerning",
-          "lemma": "concern",
+          "lemma": "concerning",
           "level": "B1",
           "de": "bezüglich"
         },
         {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
           "pos": 11,
-          "form": "law",
+          "form": "law,",
           "lemma": "law",
           "level": "B1",
-          "de": "Gesetz"
+          "de": "Gesetzes"
+        },
+        {
+          "pos": 12,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "und sprich:"
         }
       ],
       "12": [
+        {
+          "pos": 0,
+          "form": "‘If",
+          "lemma": "if",
+          "level": "A1",
+          "de": "Wenn"
+        },
+        {
+          "pos": 1,
+          "form": "someone",
+          "lemma": "someone",
+          "level": "A2",
+          "de": "jemand"
+        },
         {
           "pos": 2,
           "form": "carries",
@@ -1031,24 +3878,73 @@
           "de": "Fleisch"
         },
         {
+          "pos": 5,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 6,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
           "pos": 7,
           "form": "fold",
           "lemma": "fold",
-          "level": "B1",
+          "level": "B2",
           "de": "Zipfel"
         },
         {
+          "pos": 8,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 9,
+          "form": "his",
+          "lemma": "his",
+          "level": "A1",
+          "de": "seines"
+        },
+        {
           "pos": 10,
-          "form": "garment",
+          "form": "garment,",
           "lemma": "garment",
           "level": "B2",
-          "de": "Gewand"
+          "de": "Gewandes"
+        },
+        {
+          "pos": 11,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 12,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 13,
+          "form": "his",
+          "lemma": "his",
+          "level": "A1",
+          "de": "seinem"
         },
         {
           "pos": 14,
           "form": "fold",
           "lemma": "fold",
-          "level": "B1",
+          "level": "B2",
           "de": "Zipfel"
         },
         {
@@ -1059,25 +3955,88 @@
           "de": "berührt"
         },
         {
+          "pos": 16,
+          "form": "bread,",
+          "lemma": "bread",
+          "level": "A1",
+          "de": "Brot"
+        },
+        {
           "pos": 17,
-          "form": "stew",
+          "form": "stew,",
           "lemma": "stew",
           "level": "B1",
           "de": "Eintopf"
         },
         {
+          "pos": 18,
+          "form": "wine,",
+          "lemma": "wine",
+          "level": "A2",
+          "de": "Wein"
+        },
+        {
           "pos": 19,
-          "form": "oil",
+          "form": "oil,",
           "lemma": "oil",
           "level": "B1",
           "de": "Öl"
         },
         {
-          "pos": 3,
-          "form": "holy",
+          "pos": 20,
+          "form": "or",
+          "lemma": "or",
+          "level": "A1",
+          "de": "oder"
+        },
+        {
+          "pos": 21,
+          "form": "any",
+          "lemma": "any",
+          "level": "A1",
+          "de": "irgendeine"
+        },
+        {
+          "pos": 22,
+          "form": "food,",
+          "lemma": "food",
+          "level": "A1",
+          "de": "Speise"
+        },
+        {
+          "pos": 23,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "wird"
+        },
+        {
+          "pos": 24,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 25,
+          "form": "become",
+          "lemma": "become",
+          "level": "A2",
+          "de": "werden"
+        },
+        {
+          "pos": 26,
+          "form": "holy?’”",
           "lemma": "holy",
           "level": "B1",
-          "de": "heilig"
+          "de": "heilig?"
+        },
+        {
+          "pos": 27,
+          "form": "The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Die"
         },
         {
           "pos": 28,
@@ -1088,13 +4047,69 @@
         },
         {
           "pos": 29,
-          "form": "answered",
+          "form": "answered,",
           "lemma": "answer",
           "level": "B1",
           "de": "antworteten"
+        },
+        {
+          "pos": 30,
+          "form": "“No.”",
+          "lemma": "no",
+          "level": "A1",
+          "de": "Nein."
         }
       ],
       "13": [
+        {
+          "pos": 0,
+          "form": "Then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Dann"
+        },
+        {
+          "pos": 1,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 2,
+          "form": "said,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagte"
+        },
+        {
+          "pos": 3,
+          "form": "“If",
+          "lemma": "if",
+          "level": "A1",
+          "de": "Wenn"
+        },
+        {
+          "pos": 4,
+          "form": "one",
+          "lemma": "one",
+          "level": "A1",
+          "de": "jemand"
+        },
+        {
+          "pos": 5,
+          "form": "who",
+          "lemma": "who",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 6,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
         {
           "pos": 7,
           "form": "unclean",
@@ -1103,11 +4118,46 @@
           "de": "unrein"
         },
         {
+          "pos": 8,
+          "form": "by",
+          "lemma": "by",
+          "level": "A1",
+          "de": "durch"
+        },
+        {
           "pos": 9,
           "form": "reason",
           "lemma": "reason",
           "level": "B1",
+          "de": "Grund"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
           "de": "wegen"
+        },
+        {
+          "pos": 11,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "eines"
+        },
+        {
+          "pos": 12,
+          "form": "dead",
+          "lemma": "dead",
+          "level": "A2",
+          "de": "toten"
+        },
+        {
+          "pos": 13,
+          "form": "body",
+          "lemma": "body",
+          "level": "A2",
+          "de": "Körpers"
         },
         {
           "pos": 14,
@@ -1117,11 +4167,60 @@
           "de": "berührt"
         },
         {
-          "pos": 7,
-          "form": "unclean",
+          "pos": 15,
+          "form": "any",
+          "lemma": "any",
+          "level": "A1",
+          "de": "irgendetwas"
+        },
+        {
+          "pos": 16,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 17,
+          "form": "these,",
+          "lemma": "these",
+          "level": "A1",
+          "de": "diesen"
+        },
+        {
+          "pos": 18,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "wird"
+        },
+        {
+          "pos": 19,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 20,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "sein"
+        },
+        {
+          "pos": 21,
+          "form": "unclean?”",
           "lemma": "unclean",
           "level": "B1",
-          "de": "unrein"
+          "de": "unrein?"
+        },
+        {
+          "pos": 22,
+          "form": "The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Die"
         },
         {
           "pos": 23,
@@ -1132,40 +4231,229 @@
         },
         {
           "pos": 24,
-          "form": "answered",
+          "form": "answered,",
           "lemma": "answer",
           "level": "B1",
           "de": "antworteten"
         },
         {
-          "pos": 7,
-          "form": "unclean",
+          "pos": 25,
+          "form": "“It",
+          "lemma": "it",
+          "level": "A1",
+          "de": "Es"
+        },
+        {
+          "pos": 26,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "wird"
+        },
+        {
+          "pos": 27,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "sein"
+        },
+        {
+          "pos": 28,
+          "form": "unclean.”",
           "lemma": "unclean",
           "level": "B1",
-          "de": "unrein"
+          "de": "unrein."
         }
       ],
       "14": [
         {
+          "pos": 0,
+          "form": "Then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Dann"
+        },
+        {
+          "pos": 1,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
           "pos": 2,
-          "form": "answered",
+          "form": "answered,",
           "lemma": "answer",
           "level": "B1",
           "de": "antwortete"
+        },
+        {
+          "pos": 3,
+          "form": "“‘So",
+          "lemma": "so",
+          "level": "A1",
+          "de": "So"
+        },
+        {
+          "pos": 4,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 5,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dieses"
+        },
+        {
+          "pos": 6,
+          "form": "people,",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volk"
+        },
+        {
+          "pos": 7,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 8,
+          "form": "so",
+          "lemma": "so",
+          "level": "A1",
+          "de": "so"
+        },
+        {
+          "pos": 9,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 10,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diese"
         },
         {
           "pos": 11,
           "form": "nation",
           "lemma": "nation",
           "level": "B1",
-          "de": "Volk"
+          "de": "Nation"
+        },
+        {
+          "pos": 12,
+          "form": "before",
+          "lemma": "before",
+          "level": "A2",
+          "de": "vor"
+        },
+        {
+          "pos": 13,
+          "form": "me,’",
+          "lemma": "me",
+          "level": "A1",
+          "de": "mir"
+        },
+        {
+          "pos": 14,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 15,
+          "form": "Yahweh;",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 16,
+          "form": "‘and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 17,
+          "form": "so",
+          "lemma": "so",
+          "level": "A1",
+          "de": "so"
+        },
+        {
+          "pos": 18,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 19,
+          "form": "every",
+          "lemma": "every",
+          "level": "A1",
+          "de": "jedes"
+        },
+        {
+          "pos": 20,
+          "form": "work",
+          "lemma": "work",
+          "level": "A1",
+          "de": "Werk"
+        },
+        {
+          "pos": 21,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 22,
+          "form": "their",
+          "lemma": "their",
+          "level": "A1",
+          "de": "ihren"
         },
         {
           "pos": 23,
-          "form": "hands",
+          "form": "hands.",
           "lemma": "hand",
-          "level": "B1",
-          "de": "Hände"
+          "level": "A1",
+          "de": "Händen"
+        },
+        {
+          "pos": 24,
+          "form": "That",
+          "lemma": "that",
+          "level": "A1",
+          "de": "Das"
+        },
+        {
+          "pos": 25,
+          "form": "which",
+          "lemma": "which",
+          "level": "A2",
+          "de": "was"
+        },
+        {
+          "pos": 26,
+          "form": "they",
+          "lemma": "they",
+          "level": "A1",
+          "de": "sie"
         },
         {
           "pos": 27,
@@ -1175,8 +4463,22 @@
           "de": "darbringen"
         },
         {
+          "pos": 28,
+          "form": "there",
+          "lemma": "there",
+          "level": "A1",
+          "de": "dort"
+        },
+        {
+          "pos": 29,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
           "pos": 30,
-          "form": "unclean",
+          "form": "unclean.",
           "lemma": "unclean",
           "level": "B1",
           "de": "unrein"
@@ -1184,10 +4486,17 @@
       ],
       "15": [
         {
+          "pos": 0,
+          "form": "Now,",
+          "lemma": "now",
+          "level": "A1",
+          "de": "Nun,"
+        },
+        {
           "pos": 1,
           "form": "please",
           "lemma": "please",
-          "level": "B1",
+          "level": "A1",
           "de": "bitte"
         },
         {
@@ -1198,18 +4507,67 @@
           "de": "bedenkt"
         },
         {
+          "pos": 3,
+          "form": "from",
+          "lemma": "from",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diesem"
+        },
+        {
+          "pos": 5,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 6,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
           "pos": 7,
-          "form": "backward",
+          "form": "backward,",
           "lemma": "backward",
           "level": "B1",
           "de": "rückwärts"
         },
         {
+          "pos": 8,
+          "form": "before",
+          "lemma": "before",
+          "level": "A2",
+          "de": "bevor"
+        },
+        {
+          "pos": 9,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "ein"
+        },
+        {
           "pos": 10,
           "form": "stone",
           "lemma": "stone",
-          "level": "B1",
+          "level": "A2",
           "de": "Stein"
+        },
+        {
+          "pos": 11,
+          "form": "was",
+          "lemma": "be",
+          "level": "A1",
+          "de": "wurde"
         },
         {
           "pos": 12,
@@ -1217,286 +4575,64 @@
           "lemma": "lay",
           "level": "B1",
           "de": "gelegt"
+        },
+        {
+          "pos": 13,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "auf"
+        },
+        {
+          "pos": 14,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "einen"
         },
         {
           "pos": 15,
           "form": "stone",
           "lemma": "stone",
-          "level": "B1",
+          "level": "A2",
           "de": "Stein"
         },
         {
-          "pos": 18,
-          "form": "temple",
-          "lemma": "temple",
-          "level": "B1",
-          "de": "Tempel"
-        }
-      ],
-      "16": [
-        {
-          "pos": 6,
-          "form": "came",
-          "lemma": "come",
-          "level": "B1",
-          "de": "kam"
-        },
-        {
-          "pos": 9,
-          "form": "heap",
-          "lemma": "heap",
-          "level": "B1",
-          "de": "Haufen"
-        },
-        {
-          "pos": 11,
-          "form": "twenty",
-          "lemma": "twenty",
-          "level": "B1",
-          "de": "zwanzig"
-        },
-        {
-          "pos": 12,
-          "form": "measures",
-          "lemma": "measure",
-          "level": "B1",
-          "de": "Maß"
-        },
-        {
-          "pos": 19,
-          "form": "came",
-          "lemma": "come",
-          "level": "B1",
-          "de": "kam"
-        },
-        {
-          "pos": 22,
-          "form": "wine",
-          "lemma": "wine",
-          "level": "B1",
-          "de": "Wein"
-        },
-        {
-          "pos": 23,
-          "form": "vat",
-          "lemma": "vat",
-          "level": "B2",
-          "de": "Kelter"
-        },
-        {
-          "pos": 25,
-          "form": "draw",
-          "lemma": "draw",
-          "level": "B1",
-          "de": "schöpfen"
-        },
-        {
-          "pos": 27,
-          "form": "fifty",
-          "lemma": "fifty",
-          "level": "B1",
-          "de": "fünfzig"
-        },
-        {
-          "pos": 31,
-          "form": "twenty",
-          "lemma": "twenty",
-          "level": "B1",
-          "de": "zwanzig"
-        }
-      ],
-      "17": [
-        {
-          "pos": 1,
-          "form": "struck",
-          "lemma": "strike",
-          "level": "B1",
-          "de": "schlug"
-        },
-        {
-          "pos": 4,
-          "form": "blight",
-          "lemma": "blight",
-          "level": "C1",
-          "de": "Getreidebrand"
-        },
-        {
-          "pos": 5,
-          "form": "mildew",
-          "lemma": "mildew",
-          "level": "C1",
-          "de": "Mehltau"
-        },
-        {
-          "pos": 7,
-          "form": "hail",
-          "lemma": "hail",
-          "level": "B2",
-          "de": "Hagel"
-        },
-        {
-          "pos": 14,
-          "form": "hands",
-          "lemma": "hand",
-          "level": "B1",
-          "de": "Hände"
-        },
-        {
-          "pos": 18,
-          "form": "turn",
-          "lemma": "turn",
-          "level": "B1",
-          "de": "kehrt"
-        }
-      ],
-      "18": [
-        {
-          "pos": 0,
-          "form": "Consider",
-          "lemma": "consider",
-          "level": "B1",
-          "de": "Bedenkt"
-        },
-        {
-          "pos": 1,
-          "form": "please",
-          "lemma": "please",
-          "level": "B1",
-          "de": "bitte"
-        },
-        {
-          "pos": 6,
-          "form": "backward",
-          "lemma": "backward",
-          "level": "B1",
-          "de": "rückwärts"
-        },
-        {
-          "pos": 9,
-          "form": "twenty-fourth",
-          "lemma": "twenty-fourth",
-          "level": "B1",
-          "de": "vierundzwanzigsten"
-        },
-        {
-          "pos": 13,
-          "form": "ninth",
-          "lemma": "ninth",
-          "level": "B1",
-          "de": "neunten"
-        },
-        {
-          "pos": 20,
-          "form": "foundation",
-          "lemma": "foundation",
-          "level": "B1",
-          "de": "Grundstein"
-        },
-        {
-          "pos": 23,
-          "form": "temple",
-          "lemma": "temple",
-          "level": "B1",
-          "de": "Tempel"
-        },
-        {
-          "pos": 25,
-          "form": "laid",
-          "lemma": "lay",
-          "level": "B1",
-          "de": "gelegt"
-        },
-        {
-          "pos": 26,
-          "form": "consider",
-          "lemma": "consider",
-          "level": "B1",
-          "de": "bedenkt"
-        }
-      ],
-      "19": [
-        {
-          "pos": 2,
-          "form": "seed",
-          "lemma": "seed",
-          "level": "B1",
-          "de": "Samen"
-        },
-        {
-          "pos": 6,
-          "form": "barn",
-          "lemma": "barn",
-          "level": "B1",
-          "de": "Scheune"
-        },
-        {
-          "pos": 9,
-          "form": "vine",
-          "lemma": "vine",
-          "level": "B1",
-          "de": "Weinstock"
-        },
-        {
-          "pos": 14,
-          "form": "pomegranate",
-          "lemma": "pomegranate",
-          "level": "C1",
-          "de": "Granatapfel"
-        },
-        {
-          "pos": 20,
-          "form": "produced",
-          "lemma": "produce",
-          "level": "B1",
-          "de": "getragen"
-        },
-        {
-          "pos": 26,
-          "form": "bless",
-          "lemma": "bless",
-          "level": "B1",
-          "de": "segnen"
+          "pos": 16,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
         },
         {
           "pos": 17,
-          "pos_end": 18,
-          "form": "olive tree",
-          "lemma": "olive tree",
-          "level": "A2",
-          "de": "Olivenbaum"
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
         },
         {
-          "pos": 11,
-          "pos_end": 12,
-          "form": "fig tree",
-          "lemma": "fig tree",
-          "level": "A2",
-          "de": "Feigenbaum"
-        }
-      ],
-      "20": [
-        {
-          "pos": 2,
-          "form": "came",
-          "lemma": "come",
+          "pos": 18,
+          "form": "temple.",
+          "lemma": "temple",
           "level": "B1",
-          "de": "kam"
-        },
-        {
-          "pos": 10,
-          "form": "twenty-fourth",
-          "lemma": "twenty-fourth",
-          "level": "B1",
-          "de": "vierundzwanzigsten"
+          "de": "Tempel"
         }
       ],
       "21": [
         {
-          "pos": 1,
-          "form": "Speak",
+          "pos": 0,
+          "form": "“Speak",
           "lemma": "speak",
-          "level": "B1",
+          "level": "A2",
           "de": "Sprich"
+        },
+        {
+          "pos": 1,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
         },
         {
           "pos": 3,
@@ -1506,6 +4642,34 @@
           "de": "Statthalter"
         },
         {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 6,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "sagend"
+        },
+        {
+          "pos": 7,
+          "form": "‘I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 8,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
           "pos": 9,
           "form": "shake",
           "lemma": "shake",
@@ -1513,20 +4677,69 @@
           "de": "erschüttern"
         },
         {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
           "pos": 11,
           "form": "heavens",
           "lemma": "heaven",
           "level": "B1",
           "de": "Himmel"
+        },
+        {
+          "pos": 12,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 14,
+          "form": "earth.",
+          "lemma": "earth",
+          "level": "A1",
+          "de": "Erde"
         }
       ],
       "22": [
+        {
+          "pos": 0,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 1,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
         {
           "pos": 2,
           "form": "overthrow",
           "lemma": "overthrow",
           "level": "C1",
           "de": "stürzen"
+        },
+        {
+          "pos": 3,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
         },
         {
           "pos": 4,
@@ -1536,11 +4749,32 @@
           "de": "Thron"
         },
         {
+          "pos": 5,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 6,
-          "form": "kingdoms",
+          "form": "kingdoms.",
           "lemma": "kingdom",
           "level": "B1",
           "de": "Königreiche"
+        },
+        {
+          "pos": 7,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 8,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
         },
         {
           "pos": 9,
@@ -1550,11 +4784,32 @@
           "de": "vernichten"
         },
         {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
           "pos": 11,
           "form": "strength",
           "lemma": "strength",
           "level": "B1",
           "de": "Macht"
+        },
+        {
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
         },
         {
           "pos": 14,
@@ -1564,11 +4819,39 @@
           "de": "Königreiche"
         },
         {
+          "pos": 15,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 16,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 17,
-          "form": "nations",
+          "form": "nations.",
           "lemma": "nation",
           "level": "B1",
           "de": "Völker"
+        },
+        {
+          "pos": 18,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 19,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
         },
         {
           "pos": 20,
@@ -1578,11 +4861,39 @@
           "de": "stürzen"
         },
         {
+          "pos": 21,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
           "pos": 22,
-          "form": "chariots",
+          "form": "chariots,",
           "lemma": "chariot",
           "level": "B2",
           "de": "Streitwagen"
+        },
+        {
+          "pos": 23,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 24,
+          "form": "those",
+          "lemma": "those",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 25,
+          "form": "who",
+          "lemma": "who",
+          "level": "A1",
+          "de": "welche"
         },
         {
           "pos": 26,
@@ -1592,11 +4903,46 @@
           "de": "fahren"
         },
         {
+          "pos": 27,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 28,
+          "form": "them.",
+          "lemma": "them",
+          "level": "A1",
+          "de": "ihnen"
+        },
+        {
+          "pos": 29,
+          "form": "The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Die"
+        },
+        {
           "pos": 30,
           "form": "horses",
           "lemma": "horse",
           "level": "B1",
           "de": "Pferde"
+        },
+        {
+          "pos": 31,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 32,
+          "form": "their",
+          "lemma": "their",
+          "level": "A1",
+          "de": "ihre"
         },
         {
           "pos": 33,
@@ -1606,11 +4952,54 @@
           "de": "Reiter"
         },
         {
+          "pos": 34,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werden"
+        },
+        {
+          "pos": 35,
+          "pos_end": 36,
+          "form": "come down",
+          "lemma": "come down",
+          "level": "B1",
+          "de": "niederstürzen"
+        },
+        {
           "pos": 35,
           "form": "come",
           "lemma": "come",
-          "level": "B1",
-          "de": "fallen"
+          "level": "A1",
+          "de": "kommen"
+        },
+        {
+          "pos": 36,
+          "form": "down,",
+          "lemma": "down",
+          "level": "A1",
+          "de": "nieder"
+        },
+        {
+          "pos": 37,
+          "form": "everyone",
+          "lemma": "everyone",
+          "level": "A2",
+          "de": "jeder"
+        },
+        {
+          "pos": 38,
+          "form": "by",
+          "lemma": "by",
+          "level": "A1",
+          "de": "durch"
+        },
+        {
+          "pos": 39,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
         },
         {
           "pos": 40,
@@ -1620,34 +5009,209 @@
           "de": "Schwert"
         },
         {
+          "pos": 41,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 42,
+          "form": "his",
+          "lemma": "his",
+          "level": "A1",
+          "de": "seinem"
+        },
+        {
           "pos": 43,
-          "form": "brother",
+          "form": "brother.",
           "lemma": "brother",
-          "level": "B1",
+          "level": "A1",
           "de": "Bruder"
         }
       ],
       "23": [
         {
+          "pos": 0,
+          "form": "In",
+          "lemma": "in",
+          "level": "A1",
+          "de": "An"
+        },
+        {
+          "pos": 1,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "jenem"
+        },
+        {
+          "pos": 2,
+          "form": "day,",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 3,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 5,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 6,
-          "form": "Armies",
+          "form": "Armies,",
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen"
         },
         {
+          "pos": 7,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 8,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 9,
+          "form": "take",
+          "lemma": "take",
+          "level": "A1",
+          "de": "nehmen"
+        },
+        {
+          "pos": 10,
+          "form": "you,",
+          "lemma": "you",
+          "level": "A1",
+          "de": "dich"
+        },
+        {
+          "pos": 12,
+          "form": "my",
+          "lemma": "my",
+          "level": "A1",
+          "de": "meinen"
+        },
+        {
           "pos": 13,
-          "form": "servant",
+          "form": "servant,",
           "lemma": "servant",
           "level": "B1",
           "de": "Knecht"
         },
         {
+          "pos": 14,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 15,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 16,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 18,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 20,
+          "form": "‘and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 21,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 22,
+          "form": "make",
+          "lemma": "make",
+          "level": "A1",
+          "de": "machen"
+        },
+        {
+          "pos": 23,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "dich"
+        },
+        {
+          "pos": 24,
+          "form": "as",
+          "lemma": "as",
+          "level": "A1",
+          "de": "wie"
+        },
+        {
+          "pos": 25,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "einen"
+        },
+        {
           "pos": 26,
-          "form": "signet",
+          "form": "signet,",
           "lemma": "signet",
           "level": "C2",
           "de": "Siegelring"
+        },
+        {
+          "pos": 27,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "denn"
+        },
+        {
+          "pos": 28,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 29,
+          "form": "have",
+          "lemma": "have",
+          "level": "A1",
+          "de": "habe"
         },
         {
           "pos": 30,
@@ -1657,11 +5221,1763 @@
           "de": "erwählt"
         },
         {
+          "pos": 31,
+          "form": "you,’",
+          "lemma": "you",
+          "level": "A1",
+          "de": "dich"
+        },
+        {
+          "pos": 32,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 34,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 35,
+          "form": "Armies.”",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen"
+        }
+      ],
+      "6": [
+        {
+          "pos": 0,
+          "form": "For",
+          "lemma": "for",
+          "level": "A1",
+          "de": "Denn"
+        },
+        {
+          "pos": 1,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dies"
+        },
+        {
+          "pos": 2,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 3,
+          "form": "what",
+          "lemma": "what",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 5,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
           "pos": 6,
           "form": "Armies",
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen"
+        },
+        {
+          "pos": 7,
+          "form": "says:",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht:"
+        },
+        {
+          "pos": 8,
+          "form": "‘Yet",
+          "lemma": "yet",
+          "level": "A2",
+          "de": "‚Noch"
+        },
+        {
+          "pos": 9,
+          "form": "once,",
+          "lemma": "once",
+          "level": "A2",
+          "de": "einmal,"
+        },
+        {
+          "pos": 10,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 11,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 12,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "eine"
+        },
+        {
+          "pos": 13,
+          "form": "little",
+          "lemma": "little",
+          "level": "A1",
+          "de": "kleine"
+        },
+        {
+          "pos": 14,
+          "form": "while,",
+          "lemma": "while",
+          "level": "A2",
+          "de": "Weile,"
+        },
+        {
+          "pos": 15,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 16,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 17,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 18,
+          "form": "shake",
+          "lemma": "shake",
+          "level": "B1",
+          "de": "erschüttern"
+        },
+        {
+          "pos": 19,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 20,
+          "form": "heavens,",
+          "lemma": "heaven",
+          "level": "B1",
+          "de": "Himmel,"
+        },
+        {
+          "pos": 21,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 22,
+          "form": "earth,",
+          "lemma": "earth",
+          "level": "A2",
+          "de": "Erde,"
+        },
+        {
+          "pos": 23,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 24,
+          "form": "sea,",
+          "lemma": "sea",
+          "level": "A1",
+          "de": "Meer,"
+        },
+        {
+          "pos": 25,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 26,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 27,
+          "form": "dry",
+          "lemma": "dry",
+          "level": "A2",
+          "de": "trockene"
+        },
+        {
+          "pos": 28,
+          "form": "land;",
+          "lemma": "land",
+          "level": "A2",
+          "de": "Land;"
+        }
+      ],
+      "7": [
+        {
+          "pos": 0,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 2,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 3,
+          "form": "shake",
+          "lemma": "shake",
+          "level": "B1",
+          "de": "erschüttern"
+        },
+        {
+          "pos": 4,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "alle"
+        },
+        {
+          "pos": 5,
+          "form": "nations.",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Völker."
+        },
+        {
+          "pos": 6,
+          "form": "The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Die"
+        },
+        {
+          "pos": 7,
+          "form": "precious",
+          "lemma": "precious",
+          "level": "B1",
+          "de": "kostbaren"
+        },
+        {
+          "pos": 8,
+          "form": "things",
+          "lemma": "thing",
+          "level": "A1",
+          "de": "Dinge"
+        },
+        {
+          "pos": 9,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 10,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "allen"
+        },
+        {
+          "pos": 11,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Völkern"
+        },
+        {
+          "pos": 12,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werden"
+        },
+        {
+          "pos": 13,
+          "form": "come,",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kommen,"
+        },
+        {
+          "pos": 14,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 15,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 16,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 17,
+          "form": "fill",
+          "lemma": "fill",
+          "level": "A2",
+          "de": "füllen"
+        },
+        {
+          "pos": 18,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dieses"
+        },
+        {
+          "pos": 19,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 20,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 21,
+          "form": "glory,",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Herrlichkeit,"
+        },
+        {
+          "pos": 22,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 23,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 24,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 25,
+          "form": "Armies.",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen."
+        }
+      ],
+      "8": [
+        {
+          "pos": 0,
+          "form": "The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Das"
+        },
+        {
+          "pos": 1,
+          "form": "silver",
+          "lemma": "silver",
+          "level": "B1",
+          "de": "Silber"
+        },
+        {
+          "pos": 2,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 3,
+          "form": "mine,",
+          "lemma": "mine",
+          "level": "A2",
+          "de": "mein,"
+        },
+        {
+          "pos": 4,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 5,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 6,
+          "form": "gold",
+          "lemma": "gold",
+          "level": "B1",
+          "de": "Gold"
+        },
+        {
+          "pos": 7,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 8,
+          "form": "mine,’",
+          "lemma": "mine",
+          "level": "A2",
+          "de": "mein,‘"
+        },
+        {
+          "pos": 9,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 10,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 11,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 12,
+          "form": "Armies.",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen."
+        }
+      ],
+      "9": [
+        {
+          "pos": 0,
+          "form": "‘The",
+          "lemma": "the",
+          "level": "A1",
+          "de": "‚Die"
+        },
+        {
+          "pos": 1,
+          "form": "latter",
+          "lemma": "latter",
+          "level": "B2",
+          "de": "spätere"
+        },
+        {
+          "pos": 2,
+          "form": "glory",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Herrlichkeit"
+        },
+        {
+          "pos": 3,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diesem"
+        },
+        {
+          "pos": 5,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 6,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "wird"
+        },
+        {
+          "pos": 7,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "sein"
+        },
+        {
+          "pos": 8,
+          "form": "greater",
+          "lemma": "great",
+          "level": "A2",
+          "de": "größer"
+        },
+        {
+          "pos": 9,
+          "form": "than",
+          "lemma": "than",
+          "level": "A1",
+          "de": "als"
+        },
+        {
+          "pos": 10,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "die"
+        },
+        {
+          "pos": 11,
+          "form": "former,’",
+          "lemma": "former",
+          "level": "B1",
+          "de": "frühere,‘"
+        },
+        {
+          "pos": 12,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 13,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 14,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 15,
+          "form": "Armies;",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen;"
+        },
+        {
+          "pos": 16,
+          "form": "‘and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "‚und"
+        },
+        {
+          "pos": 17,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "an"
+        },
+        {
+          "pos": 18,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "diesem"
+        },
+        {
+          "pos": 19,
+          "form": "place",
+          "lemma": "place",
+          "level": "A1",
+          "de": "Ort"
+        },
+        {
+          "pos": 20,
+          "form": "will",
+          "lemma": "will",
+          "level": "A1",
+          "de": "werde"
+        },
+        {
+          "pos": 21,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 22,
+          "form": "give",
+          "lemma": "give",
+          "level": "A1",
+          "de": "geben"
+        },
+        {
+          "pos": 23,
+          "form": "peace,’",
+          "lemma": "peace",
+          "level": "B1",
+          "de": "Frieden,‘"
+        },
+        {
+          "pos": 24,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 26,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 27,
+          "form": "Armies.”",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen.“"
+        }
+      ],
+      "10": [
+        {
+          "pos": 0,
+          "form": "In",
+          "lemma": "in",
+          "level": "A1",
+          "de": "Am"
+        },
+        {
+          "pos": 1,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 2,
+          "form": "twenty-fourth",
+          "lemma": "twenty-fourth",
+          "level": "B1",
+          "de": "vierundzwanzigsten"
+        },
+        {
+          "pos": 3,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 4,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 5,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 6,
+          "form": "ninth",
+          "lemma": "ninth",
+          "level": "B1",
+          "de": "neunten"
+        },
+        {
+          "pos": 7,
+          "form": "month,",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monats,"
+        },
+        {
+          "pos": 8,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "im"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 10,
+          "form": "second",
+          "lemma": "second",
+          "level": "A1",
+          "de": "zweiten"
+        },
+        {
+          "pos": 11,
+          "form": "year",
+          "lemma": "year",
+          "level": "A1",
+          "de": "Jahr"
+        },
+        {
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 13,
+          "form": "Darius,",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius,"
+        },
+        {
+          "pos": 14,
+          "form": "Yahweh’s",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 15,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 16,
+          "form": "came",
+          "lemma": "come",
+          "level": "B1",
+          "de": "kam"
+        },
+        {
+          "pos": 17,
+          "form": "by",
+          "lemma": "by",
+          "level": "A1",
+          "de": "durch"
+        },
+        {
+          "pos": 18,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 19,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 20,
+          "form": "prophet,",
+          "lemma": "prophet",
+          "level": "B1",
+          "de": "Propheten,"
+        },
+        {
+          "pos": 21,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "und sprach,"
+        }
+      ],
+      "1": [
+        {
+          "pos": 0,
+          "form": "In",
+          "lemma": "in",
+          "level": "A1",
+          "de": "In"
+        },
+        {
+          "pos": 1,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 2,
+          "form": "seventh",
+          "lemma": "seventh",
+          "level": "A2",
+          "de": "siebten"
+        },
+        {
+          "pos": 3,
+          "form": "month,",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monat,"
+        },
+        {
+          "pos": 4,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "am"
+        },
+        {
+          "pos": 5,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 6,
+          "form": "twenty-first",
+          "lemma": "twenty-first",
+          "level": "B1",
+          "de": "einundzwanzigsten"
+        },
+        {
+          "pos": 7,
+          "form": "day",
+          "lemma": "day",
+          "level": "A1",
+          "de": "Tag"
+        },
+        {
+          "pos": 8,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "des"
+        },
+        {
+          "pos": 10,
+          "form": "month,",
+          "lemma": "month",
+          "level": "A1",
+          "de": "Monats,"
+        },
+        {
+          "pos": 11,
+          "form": "Yahweh's",
+          "lemma": "Yahweh",
+          "level": "A2",
+          "de": "Jahwes"
+        },
+        {
+          "pos": 12,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 13,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kam"
+        },
+        {
+          "pos": 14,
+          "form": "by",
+          "lemma": "by",
+          "level": "A2",
+          "de": "durch"
+        },
+        {
+          "pos": 16,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "den"
+        },
+        {
+          "pos": 17,
+          "form": "prophet,",
+          "lemma": "prophet",
+          "level": "B1",
+          "de": "Propheten,"
+        },
+        {
+          "pos": 18,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "und sprach:"
+        }
+      ],
+      "2": [
+        {
+          "pos": 0,
+          "form": "“Speak",
+          "lemma": "speak",
+          "level": "B1",
+          "de": "„Sprich"
+        },
+        {
+          "pos": 1,
+          "form": "now",
+          "lemma": "now",
+          "level": "A1",
+          "de": "nun"
+        },
+        {
+          "pos": 2,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 5,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 8,
+          "form": "governor",
+          "lemma": "governor",
+          "level": "B1",
+          "de": "Statthalter"
+        },
+        {
+          "pos": 9,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 11,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 12,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 14,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 15,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 16,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 18,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 19,
+          "pos_end": 20,
+          "form": "high priest",
+          "lemma": "high priest",
+          "level": "B1",
+          "de": "Hohepriester"
+        },
+        {
+          "pos": 19,
+          "form": "high",
+          "lemma": "high",
+          "level": "A1",
+          "de": "hohen"
+        },
+        {
+          "pos": 20,
+          "form": "priest,",
+          "lemma": "priest",
+          "level": "B1",
+          "de": "Priester,"
+        },
+        {
+          "pos": 21,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 22,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "zu"
+        },
+        {
+          "pos": 23,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 24,
+          "form": "remnant",
+          "lemma": "remnant",
+          "level": "B2",
+          "de": "Überrest"
+        },
+        {
+          "pos": 25,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 26,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 27,
+          "form": "people,",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volk,"
+        },
+        {
+          "pos": 28,
+          "form": "saying,",
+          "lemma": "say",
+          "level": "A1",
+          "de": "und sprich:"
+        }
+      ],
+      "3": [
+        {
+          "pos": 5,
+          "form": "'Who",
+          "lemma": "who",
+          "level": "A1",
+          "de": "‚Wer"
+        },
+        {
+          "pos": 1,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 2,
+          "form": "left",
+          "lemma": "leave",
+          "level": "B1",
+          "de": "übrig"
+        },
+        {
+          "pos": 3,
+          "form": "among",
+          "lemma": "among",
+          "level": "B1",
+          "de": "unter"
+        },
+        {
+          "pos": 4,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        },
+        {
+          "pos": 5,
+          "form": "who",
+          "lemma": "who",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 6,
+          "form": "saw",
+          "lemma": "see",
+          "level": "A1",
+          "de": "sah"
+        },
+        {
+          "pos": 7,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "dieses"
+        },
+        {
+          "pos": 8,
+          "form": "house",
+          "lemma": "house",
+          "level": "A1",
+          "de": "Haus"
+        },
+        {
+          "pos": 9,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 10,
+          "form": "its",
+          "lemma": "its",
+          "level": "A1",
+          "de": "seiner"
+        },
+        {
+          "pos": 11,
+          "form": "former",
+          "lemma": "former",
+          "level": "B1",
+          "de": "früheren"
+        },
+        {
+          "pos": 12,
+          "form": "glory?",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Herrlichkeit?"
+        },
+        {
+          "pos": 13,
+          "form": "How",
+          "lemma": "how",
+          "level": "A1",
+          "de": "Wie"
+        },
+        {
+          "pos": 14,
+          "form": "do",
+          "lemma": "do",
+          "level": "A1",
+          "de": "(Hilfsverb)"
+        },
+        {
+          "pos": 15,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 16,
+          "form": "see",
+          "lemma": "see",
+          "level": "A1",
+          "de": "seht"
+        },
+        {
+          "pos": 17,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 18,
+          "form": "now?",
+          "lemma": "now",
+          "level": "A1",
+          "de": "jetzt?"
+        },
+        {
+          "pos": 19,
+          "form": "Isn't",
+          "lemma": "be",
+          "level": "A1",
+          "de": "Ist es nicht"
+        },
+        {
+          "pos": 20,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 21,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 22,
+          "form": "your",
+          "lemma": "your",
+          "level": "A1",
+          "de": "euren"
+        },
+        {
+          "pos": 23,
+          "form": "eyes",
+          "lemma": "eye",
+          "level": "A1",
+          "de": "Augen"
+        },
+        {
+          "pos": 24,
+          "form": "as",
+          "lemma": "as",
+          "level": "A2",
+          "de": "wie"
+        },
+        {
+          "pos": 25,
+          "form": "nothing?",
+          "lemma": "nothing",
+          "level": "A1",
+          "de": "nichts?"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "Yet",
+          "lemma": "yet",
+          "level": "B1",
+          "de": "Doch"
+        },
+        {
+          "pos": 1,
+          "form": "now",
+          "lemma": "now",
+          "level": "A1",
+          "de": "nun"
+        },
+        {
+          "pos": 2,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "sei"
+        },
+        {
+          "pos": 3,
+          "form": "strong,",
+          "lemma": "strong",
+          "level": "A2",
+          "de": "stark,"
+        },
+        {
+          "pos": 5,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 2,
+          "form": "'Be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "‚Sei"
+        },
+        {
+          "pos": 8,
+          "form": "strong,",
+          "lemma": "strong",
+          "level": "A2",
+          "de": "stark,"
+        },
+        {
+          "pos": 10,
+          "form": "son",
+          "lemma": "son",
+          "level": "A1",
+          "de": "Sohn"
+        },
+        {
+          "pos": 11,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 13,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 14,
+          "pos_end": 15,
+          "form": "high priest",
+          "lemma": "high priest",
+          "level": "B1",
+          "de": "Hohepriester"
+        },
+        {
+          "pos": 14,
+          "form": "high",
+          "lemma": "high",
+          "level": "A1",
+          "de": "hohen"
+        },
+        {
+          "pos": 15,
+          "form": "priest.",
+          "lemma": "priest",
+          "level": "B1",
+          "de": "Priester."
+        },
+        {
+          "pos": 16,
+          "form": "Be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "Seid"
+        },
+        {
+          "pos": 17,
+          "form": "strong,",
+          "lemma": "strong",
+          "level": "A2",
+          "de": "stark,"
+        },
+        {
+          "pos": 18,
+          "form": "all",
+          "lemma": "all",
+          "level": "A1",
+          "de": "all"
+        },
+        {
+          "pos": 19,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 20,
+          "form": "people",
+          "lemma": "people",
+          "level": "A1",
+          "de": "Volk"
+        },
+        {
+          "pos": 21,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "von"
+        },
+        {
+          "pos": 22,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "dem"
+        },
+        {
+          "pos": 23,
+          "form": "land,'",
+          "lemma": "land",
+          "level": "A2",
+          "de": "Land,'"
+        },
+        {
+          "pos": 24,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 26,
+          "form": "'and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "‚und"
+        },
+        {
+          "pos": 27,
+          "form": "work,",
+          "lemma": "work",
+          "level": "A1",
+          "de": "arbeitet,"
+        },
+        {
+          "pos": 28,
+          "form": "for",
+          "lemma": "for",
+          "level": "A2",
+          "de": "denn"
+        },
+        {
+          "pos": 29,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 30,
+          "form": "am",
+          "lemma": "be",
+          "level": "A1",
+          "de": "bin"
+        },
+        {
+          "pos": 31,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 19,
+          "form": "you,'",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch,'"
+        },
+        {
+          "pos": 33,
+          "form": "says",
+          "lemma": "say",
+          "level": "A1",
+          "de": "spricht"
+        },
+        {
+          "pos": 35,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "der"
+        },
+        {
+          "pos": 36,
+          "form": "Armies.",
+          "lemma": "army",
+          "level": "B1",
+          "de": "Heerscharen."
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "This",
+          "lemma": "this",
+          "level": "A1",
+          "de": "Dies"
+        },
+        {
+          "pos": 1,
+          "form": "is",
+          "lemma": "be",
+          "level": "A1",
+          "de": "ist"
+        },
+        {
+          "pos": 2,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 3,
+          "form": "word",
+          "lemma": "word",
+          "level": "A1",
+          "de": "Wort"
+        },
+        {
+          "pos": 4,
+          "form": "that",
+          "lemma": "that",
+          "level": "A1",
+          "de": "das"
+        },
+        {
+          "pos": 5,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "ich"
+        },
+        {
+          "pos": 6,
+          "form": "covenanted",
+          "lemma": "covenant",
+          "level": "B2",
+          "de": "einen Bund schloss"
+        },
+        {
+          "pos": 7,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "mit"
+        },
+        {
+          "pos": 8,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch"
+        },
+        {
+          "pos": 9,
+          "form": "when",
+          "lemma": "when",
+          "level": "A1",
+          "de": "als"
+        },
+        {
+          "pos": 10,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "ihr"
+        },
+        {
+          "pos": 11,
+          "form": "came",
+          "lemma": "come",
+          "level": "A1",
+          "de": "kamt"
+        },
+        {
+          "pos": 12,
+          "form": "out",
+          "lemma": "out",
+          "level": "A1",
+          "de": "heraus"
+        },
+        {
+          "pos": 13,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "aus"
+        },
+        {
+          "pos": 14,
+          "form": "Egypt,",
+          "lemma": "Egypt",
+          "level": "A2",
+          "de": "Ägypten,"
+        },
+        {
+          "pos": 15,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "und"
+        },
+        {
+          "pos": 16,
+          "form": "my",
+          "lemma": "my",
+          "level": "A1",
+          "de": "mein"
+        },
+        {
+          "pos": 17,
+          "form": "Spirit",
+          "lemma": "spirit",
+          "level": "B1",
+          "de": "Geist"
+        },
+        {
+          "pos": 18,
+          "form": "lived",
+          "lemma": "live",
+          "level": "A1",
+          "de": "wohnte"
+        },
+        {
+          "pos": 19,
+          "form": "among",
+          "lemma": "among",
+          "level": "B1",
+          "de": "unter"
+        },
+        {
+          "pos": 20,
+          "form": "you.",
+          "lemma": "you",
+          "level": "A1",
+          "de": "euch."
+        },
+        {
+          "pos": 21,
+          "form": "'Don't",
+          "lemma": "do not",
+          "level": "A1",
+          "de": "‚Habt nicht"
+        },
+        {
+          "pos": 22,
+          "pos_end": 23,
+          "form": "be afraid",
+          "lemma": "be afraid",
+          "level": "A2",
+          "de": "sich fürchten"
+        },
+        {
+          "pos": 22,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "sei"
+        },
+        {
+          "pos": 23,
+          "form": "afraid.'",
+          "lemma": "afraid",
+          "level": "A2",
+          "de": "Angst.'"
         }
       ]
     }
