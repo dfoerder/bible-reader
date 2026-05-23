@@ -3072,14 +3072,6 @@
         },
         {
           "pos": 1,
-          "pos_end": 2,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
-        },
-        {
-          "pos": 1,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -9016,14 +9008,6 @@
         },
         {
           "pos": 7,
-          "pos_end": 8,
-          "form": "laid down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingab"
-        },
-        {
-          "pos": 7,
           "form": "laid",
           "lemma": "lay",
           "level": "B1",
@@ -9091,14 +9075,6 @@
           "lemma": "to",
           "level": "A1",
           "de": "zu"
-        },
-        {
-          "pos": 17,
-          "pos_end": 18,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingeben"
         },
         {
           "pos": 17,

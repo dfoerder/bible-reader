@@ -190,14 +190,6 @@
         },
         {
           "pos": 3,
-          "pos_end": 4,
-          "form": "go up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "hinaufgehen"
-        },
-        {
-          "pos": 3,
           "form": "go",
           "lemma": "go",
           "level": "A1",
@@ -279,14 +271,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 16,
-          "pos_end": 17,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
         },
         {
           "pos": 16,
@@ -373,14 +357,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 5,
-          "pos_end": 6,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
         },
         {
           "pos": 5,
@@ -6541,14 +6517,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
-        },
-        {
-          "pos": 8,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -6618,14 +6586,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
         },
         {
           "pos": 1,
@@ -13106,14 +13066,6 @@
         },
         {
           "pos": 9,
-          "pos_end": 10,
-          "form": "sent out",
-          "lemma": "send out",
-          "level": "B1",
-          "de": "aussandte"
-        },
-        {
-          "pos": 9,
           "form": "sent",
           "lemma": "send",
           "level": "A2",
@@ -13969,14 +13921,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "Throw out",
-          "lemma": "throw out",
-          "level": "B1",
-          "de": "hinauswerfen"
-        },
-        {
-          "pos": 6,
           "form": "Throw",
           "lemma": "throw",
           "level": "A2",
@@ -14801,14 +14745,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "sent out",
-          "lemma": "send out",
-          "level": "B1",
-          "de": "sandte aus"
-        },
-        {
-          "pos": 6,
           "form": "sent",
           "lemma": "send",
           "level": "A2",
@@ -15310,14 +15246,6 @@
           "lemma": "you",
           "level": "A1",
           "de": "ihr"
-        },
-        {
-          "pos": 19,
-          "pos_end": 20,
-          "form": "turn back",
-          "lemma": "turn back",
-          "level": "B1",
-          "de": "umkehren"
         },
         {
           "pos": 19,

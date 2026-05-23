@@ -353,14 +353,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "go out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "hinausgehen"
-        },
-        {
-          "pos": 8,
           "form": "go",
           "lemma": "go",
           "level": "A1",
@@ -5792,14 +5784,6 @@
         },
         {
           "pos": 5,
-          "pos_end": 6,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "rief aus"
-        },
-        {
-          "pos": 5,
           "form": "cried",
           "lemma": "cry",
           "level": "A2",
@@ -8241,14 +8225,6 @@
         },
         {
           "pos": 3,
-          "pos_end": 4,
-          "form": "went down",
-          "lemma": "go down",
-          "level": "A2",
-          "de": "ging hinunter"
-        },
-        {
-          "pos": 3,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -8452,14 +8428,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 10,
-          "pos_end": 11,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
         },
         {
           "pos": 10,
@@ -15449,14 +15417,6 @@
         },
         {
           "pos": 11,
-          "pos_end": 12,
-          "form": "sat down",
-          "lemma": "sit down",
-          "level": "A2",
-          "de": "setzte sich"
-        },
-        {
-          "pos": 11,
           "form": "sat",
           "lemma": "sit",
           "level": "A2",
@@ -16507,14 +16467,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "er"
-        },
-        {
-          "pos": 5,
-          "pos_end": 6,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
         },
         {
           "pos": 5,
@@ -19044,14 +18996,6 @@
         },
         {
           "pos": 4,
-          "pos_end": 5,
-          "form": "going down",
-          "lemma": "go down",
-          "level": "A2",
-          "de": "hinabging"
-        },
-        {
-          "pos": 4,
           "form": "going",
           "lemma": "go",
           "level": "A1",
@@ -19574,14 +19518,6 @@
           "lemma": "have",
           "level": "A1",
           "de": "nachdem"
-        },
-        {
-          "pos": 10,
-          "pos_end": 11,
-          "form": "come out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "herausgekommen"
         },
         {
           "pos": 10,
@@ -21053,14 +20989,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
-        },
-        {
-          "pos": 8,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -21251,14 +21179,6 @@
           "lemma": "they",
           "level": "A1",
           "de": "Sie"
-        },
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
         },
         {
           "pos": 1,
@@ -22277,14 +22197,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "come out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "herausgekommen"
-        },
-        {
-          "pos": 6,
           "form": "come",
           "lemma": "come",
           "level": "A1",
@@ -22380,14 +22292,6 @@
           "lemma": "will",
           "level": "A1",
           "de": "würde"
-        },
-        {
-          "pos": 22,
-          "pos_end": 23,
-          "form": "come down",
-          "lemma": "come down",
-          "level": "A2",
-          "de": "herabkommen"
         },
         {
           "pos": 22,
@@ -22660,14 +22564,6 @@
           "lemma": "sir",
           "level": "A2",
           "de": "Herr"
-        },
-        {
-          "pos": 6,
-          "pos_end": 7,
-          "form": "come down",
-          "lemma": "come down",
-          "level": "A2",
-          "de": "komm herab"
         },
         {
           "pos": 6,
@@ -23714,14 +23610,6 @@
         },
         {
           "pos": 12,
-          "pos_end": 13,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
-        },
-        {
-          "pos": 12,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -24047,14 +23935,6 @@
           "lemma": "angel",
           "level": "B1",
           "de": "Engel"
-        },
-        {
-          "pos": 3,
-          "pos_end": 4,
-          "form": "went down",
-          "lemma": "go down",
-          "level": "A2",
-          "de": "stieg hinab"
         },
         {
           "pos": 3,
@@ -26682,14 +26562,6 @@
         },
         {
           "pos": 2,
-          "pos_end": 3,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
-        },
-        {
-          "pos": 2,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -27842,14 +27714,6 @@
           "lemma": "will",
           "level": "A1",
           "de": "werden"
-        },
-        {
-          "pos": 2,
-          "pos_end": 3,
-          "form": "come out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "herauskommen"
         },
         {
           "pos": 2,
@@ -33405,14 +33269,6 @@
         },
         {
           "pos": 20,
-          "pos_end": 21,
-          "form": "sitting down",
-          "lemma": "sit down",
-          "level": "A2",
-          "de": "sich gesetzt"
-        },
-        {
-          "pos": 20,
           "form": "sitting",
           "lemma": "sit",
           "level": "A1",
@@ -35207,14 +35063,6 @@
           "lemma": "way",
           "level": "A1",
           "de": "Weise"
-        },
-        {
-          "pos": 21,
-          "pos_end": 22,
-          "form": "throw out",
-          "lemma": "throw out",
-          "level": "B1",
-          "de": "hinauswerfen"
         },
         {
           "pos": 21,
@@ -37303,14 +37151,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "comes down",
-          "lemma": "come down",
-          "level": "A2",
-          "de": "herabkommt"
-        },
-        {
-          "pos": 8,
           "form": "comes",
           "lemma": "come",
           "level": "A1",
@@ -37707,14 +37547,6 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jünger"
-        },
-        {
-          "pos": 5,
-          "pos_end": 6,
-          "form": "went down",
-          "lemma": "go down",
-          "level": "A2",
-          "de": "gingen hinunter"
         },
         {
           "pos": 5,
@@ -38665,14 +38497,6 @@
         },
         {
           "pos": 5,
-          "pos_end": 6,
-          "form": "comes down",
-          "lemma": "come down",
-          "level": "A2",
-          "de": "herabkommt"
-        },
-        {
-          "pos": 5,
           "form": "comes",
           "lemma": "come",
           "level": "A1",
@@ -39550,14 +39374,6 @@
           "de": "weg"
         },
         {
-          "pos": 4,
-          "pos_end": 5,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
-        },
-        {
           "pos": 6,
           "form": "to",
           "lemma": "to",
@@ -40208,14 +40024,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "went back",
-          "lemma": "go back",
-          "level": "A2",
-          "de": "gingen zurück"
-        },
-        {
-          "pos": 6,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -40341,14 +40149,6 @@
           "lemma": "to",
           "level": "A1",
           "de": "zu"
-        },
-        {
-          "pos": 11,
-          "pos_end": 12,
-          "form": "go away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "weggehen"
         },
         {
           "pos": 11,
@@ -40815,14 +40615,6 @@
           "lemma": "Christ",
           "level": "B1",
           "de": "Christus"
-        },
-        {
-          "pos": 13,
-          "pos_end": 14,
-          "form": "come out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "herauskommen"
         },
         {
           "pos": 13,
@@ -42944,14 +42736,6 @@
         },
         {
           "pos": 1,
-          "pos_end": 2,
-          "form": "go up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "hinaufgehen"
-        },
-        {
-          "pos": 1,
           "form": "go",
           "lemma": "go",
           "level": "A1",
@@ -43012,14 +42796,6 @@
           "lemma": "yet",
           "level": "A1",
           "de": "noch"
-        },
-        {
-          "pos": 10,
-          "pos_end": 11,
-          "form": "going up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "hinaufgehend"
         },
         {
           "pos": 10,
@@ -43270,14 +43046,6 @@
           "lemma": "also",
           "level": "A1",
           "de": "auch"
-        },
-        {
-          "pos": 13,
-          "pos_end": 14,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
         },
         {
           "pos": 13,
@@ -44105,14 +43873,6 @@
         },
         {
           "pos": 2,
-          "pos_end": 3,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "rief aus"
-        },
-        {
-          "pos": 2,
           "form": "cried",
           "lemma": "cry",
           "level": "B1",
@@ -44840,14 +44600,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 13,
-          "pos_end": 14,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "rief aus"
         },
         {
           "pos": 13,
@@ -46131,14 +45883,6 @@
           "lemma": "feast",
           "level": "B1",
           "de": "Festes"
-        },
-        {
-          "pos": 11,
-          "pos_end": 12,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
         },
         {
           "pos": 11,
@@ -50143,14 +49887,6 @@
         },
         {
           "pos": 7,
-          "pos_end": 8,
-          "form": "looked up",
-          "lemma": "look up",
-          "level": "B1",
-          "de": "blickte auf"
-        },
-        {
-          "pos": 7,
           "form": "looked",
           "lemma": "look",
           "level": "A1",
@@ -50472,14 +50208,6 @@
         },
         {
           "pos": 10,
-          "pos_end": 11,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
-        },
-        {
-          "pos": 10,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -50663,14 +50391,6 @@
         }
       ],
       "10": [
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "standing up",
-          "lemma": "stand up",
-          "level": "B1",
-          "de": "aufstehend"
-        },
         {
           "pos": 1,
           "form": "standing",
@@ -51216,14 +50936,6 @@
         },
         {
           "pos": 14,
-          "pos_end": 15,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 14,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -51305,14 +51017,6 @@
           "lemma": "so",
           "level": "A1",
           "de": "so"
-        },
-        {
-          "pos": 26,
-          "pos_end": 27,
-          "form": "passed by",
-          "lemma": "pass by",
-          "level": "B1",
-          "de": "ging vorüber"
         },
         {
           "pos": 26,
@@ -52218,14 +51922,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 16,
-          "pos_end": 17,
-          "form": "came out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "ging hervor"
         },
         {
           "pos": 16,
@@ -55474,14 +55170,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "Er"
-        },
-        {
-          "pos": 20,
-          "pos_end": 21,
-          "form": "sat down",
-          "lemma": "sit down",
-          "level": "A2",
-          "de": "setzte sich"
         },
         {
           "pos": 20,
@@ -58883,14 +58571,6 @@
         },
         {
           "pos": 25,
-          "pos_end": 26,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
-        },
-        {
-          "pos": 25,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -60089,14 +59769,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "er"
-        },
-        {
-          "pos": 2,
-          "pos_end": 3,
-          "form": "passed by",
-          "lemma": "pass by",
-          "level": "B1",
-          "de": "ging vorüber"
         },
         {
           "pos": 2,
@@ -62260,14 +61932,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 20,
-          "pos_end": 21,
-          "form": "came back",
-          "lemma": "come back",
-          "level": "A2",
-          "de": "kam zurück"
         },
         {
           "pos": 20,
@@ -65159,14 +64823,6 @@
         },
         {
           "pos": 16,
-          "pos_end": 17,
-          "form": "go in",
-          "lemma": "go in",
-          "level": "A2",
-          "de": "hineingehen"
-        },
-        {
-          "pos": 16,
           "form": "go",
           "lemma": "go",
           "level": "A1",
@@ -65185,14 +64841,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 19,
-          "pos_end": 20,
-          "form": "go out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "hinausgehen"
         },
         {
           "pos": 19,
@@ -65920,14 +65568,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "entkam"
-        },
-        {
-          "pos": 8,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -65969,14 +65609,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "Er"
-        },
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
         },
         {
           "pos": 1,
@@ -67163,14 +66795,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 7,
-          "pos_end": 8,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingeben"
         },
         {
           "pos": 7,
@@ -68423,14 +68047,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "Ich"
-        },
-        {
-          "pos": 12,
-          "pos_end": 13,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "gebe hin"
         },
         {
           "pos": 12,
@@ -71787,14 +71403,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "ging weg"
-        },
-        {
-          "pos": 6,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -72271,14 +71879,6 @@
         },
         {
           "pos": 24,
-          "pos_end": 25,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 24,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -72446,14 +72046,6 @@
           "lemma": "she",
           "level": "A1",
           "de": "sie"
-        },
-        {
-          "pos": 12,
-          "pos_end": 13,
-          "form": "fell down",
-          "lemma": "fall down",
-          "level": "B1",
-          "de": "fiel nieder"
         },
         {
           "pos": 12,
@@ -74130,14 +73722,6 @@
         },
         {
           "pos": 4,
-          "pos_end": 5,
-          "form": "came out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "kam heraus"
-        },
-        {
-          "pos": 4,
           "form": "came",
           "lemma": "come",
           "level": "A1",
@@ -74454,14 +74038,6 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
-        },
-        {
-          "pos": 4,
-          "pos_end": 5,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "gingen weg"
         },
         {
           "pos": 4,
@@ -75977,14 +75553,6 @@
         },
         {
           "pos": 10,
-          "pos_end": 11,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "zogen hinauf"
-        },
-        {
-          "pos": 10,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -77202,14 +76770,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "hinaufgingen"
-        },
-        {
-          "pos": 8,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -77632,14 +77192,6 @@
         }
       ],
       "44": [
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "rief aus"
-        },
         {
           "pos": 1,
           "form": "cried",
@@ -82468,14 +82020,6 @@
         },
         {
           "pos": 9,
-          "pos_end": 10,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "gingen weg"
-        },
-        {
-          "pos": 9,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -82719,14 +82263,6 @@
         },
         {
           "pos": 9,
-          "pos_end": 10,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
-        },
-        {
-          "pos": 9,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -82766,14 +82302,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 15,
-          "pos_end": 16,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "riefen aus"
         },
         {
           "pos": 15,
@@ -84905,14 +84433,6 @@
         },
         {
           "pos": 13,
-          "pos_end": 14,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingeben"
-        },
-        {
-          "pos": 13,
           "form": "lay",
           "lemma": "lay",
           "level": "B1",
@@ -84982,14 +84502,6 @@
           "lemma": "you",
           "level": "A1",
           "de": "du"
-        },
-        {
-          "pos": 5,
-          "pos_end": 6,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingeben"
         },
         {
           "pos": 5,
@@ -87689,14 +87201,6 @@
         },
         {
           "pos": 14,
-          "pos_end": 15,
-          "form": "sat down",
-          "lemma": "sit down",
-          "level": "A2",
-          "de": "setzte sich"
-        },
-        {
-          "pos": 14,
           "form": "sat",
           "lemma": "sit",
           "level": "A1",
@@ -88901,14 +88405,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "er"
-        },
-        {
-          "pos": 6,
-          "pos_end": 7,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
         },
         {
           "pos": 6,
@@ -91819,14 +91315,6 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
-        },
-        {
-          "pos": 7,
-          "pos_end": 8,
-          "form": "go away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "weggehen"
         },
         {
           "pos": 7,
@@ -95753,14 +95241,6 @@
         },
         {
           "pos": 9,
-          "pos_end": 10,
-          "form": "thrown out",
-          "lemma": "throw out",
-          "level": "B1",
-          "de": "hinausgeworfen"
-        },
-        {
-          "pos": 9,
           "form": "thrown",
           "lemma": "throw",
           "level": "B1",
@@ -98910,14 +98390,6 @@
         },
         {
           "pos": 9,
-          "pos_end": 10,
-          "form": "lay down",
-          "lemma": "lay down",
-          "level": "B1",
-          "de": "hingeben"
-        },
-        {
-          "pos": 9,
           "form": "lay",
           "lemma": "lay",
           "level": "B1",
@@ -100620,14 +100092,6 @@
         },
         {
           "pos": 13,
-          "pos_end": 14,
-          "form": "go away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "weggehe"
-        },
-        {
-          "pos": 13,
           "form": "go",
           "lemma": "go",
           "level": "A1",
@@ -100667,14 +100131,6 @@
           "lemma": "do",
           "level": "A1",
           "de": "nicht"
-        },
-        {
-          "pos": 19,
-          "pos_end": 20,
-          "form": "go away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "weggehe"
         },
         {
           "pos": 19,
@@ -112450,14 +111906,6 @@
         },
         {
           "pos": 19,
-          "pos_end": 20,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 19,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -112532,14 +111980,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 30,
-          "pos_end": 31,
-          "form": "brought in",
-          "lemma": "bring in",
-          "level": "B1",
-          "de": "brachte herein"
         },
         {
           "pos": 30,
@@ -113254,14 +112694,6 @@
         },
         {
           "pos": 7,
-          "pos_end": 8,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 7,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -113742,14 +113174,6 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
-        },
-        {
-          "pos": 11,
-          "pos_end": 12,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
         },
         {
           "pos": 11,
@@ -114662,14 +114086,6 @@
           "lemma": "he",
           "level": "A1",
           "de": "er"
-        },
-        {
-          "pos": 13,
-          "pos_end": 14,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
         },
         {
           "pos": 13,
@@ -115590,14 +115006,6 @@
         },
         {
           "pos": 2,
-          "pos_end": 3,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 2,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -116131,14 +115539,6 @@
         },
         {
           "pos": 2,
-          "pos_end": 3,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
-        },
-        {
-          "pos": 2,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -116341,14 +115741,6 @@
           "lemma": "therefore",
           "level": "A2",
           "de": "daher"
-        },
-        {
-          "pos": 2,
-          "pos_end": 3,
-          "form": "came out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "kam heraus"
         },
         {
           "pos": 2,
@@ -120822,14 +120214,6 @@
         },
         {
           "pos": 16,
-          "pos_end": 17,
-          "form": "came out",
-          "lemma": "come out",
-          "level": "A2",
-          "de": "kam heraus"
-        },
-        {
-          "pos": 16,
           "form": "came",
           "lemma": "come",
           "level": "A1",
@@ -121278,14 +120662,6 @@
         },
         {
           "pos": 11,
-          "pos_end": 12,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "riefen aus"
-        },
-        {
-          "pos": 11,
           "form": "cried",
           "lemma": "cry",
           "level": "B1",
@@ -121495,14 +120871,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 11,
-          "pos_end": 12,
-          "form": "sat down",
-          "lemma": "sit down",
-          "level": "A2",
-          "de": "setzte sich"
         },
         {
           "pos": 11,
@@ -121781,14 +121149,6 @@
           "lemma": "they",
           "level": "A1",
           "de": "Sie"
-        },
-        {
-          "pos": 1,
-          "pos_end": 2,
-          "form": "cried out",
-          "lemma": "cry out",
-          "level": "B1",
-          "de": "riefen aus"
         },
         {
           "pos": 1,
@@ -122501,14 +121861,6 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jünger"
-        },
-        {
-          "pos": 6,
-          "pos_end": 7,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
         },
         {
           "pos": 6,
@@ -123347,14 +122699,6 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jünger"
-        },
-        {
-          "pos": 3,
-          "pos_end": 4,
-          "form": "went away",
-          "lemma": "go away",
-          "level": "A2",
-          "de": "gingen weg"
         },
         {
           "pos": 3,
@@ -125698,14 +125042,6 @@
         },
         {
           "pos": 6,
-          "pos_end": 7,
-          "form": "turned around",
-          "lemma": "turn around",
-          "level": "B1",
-          "de": "drehte sich um"
-        },
-        {
-          "pos": 6,
           "form": "turned",
           "lemma": "turn",
           "level": "A2",
@@ -127219,14 +126555,6 @@
           "lemma": "therefore",
           "level": "B2",
           "de": "deshalb"
-        },
-        {
-          "pos": 3,
-          "pos_end": 4,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "ging hinaus"
         },
         {
           "pos": 3,
@@ -128946,14 +128274,6 @@
         },
         {
           "pos": 2,
-          "pos_end": 3,
-          "form": "turning around",
-          "lemma": "turn around",
-          "level": "A2",
-          "de": "umdrehend"
-        },
-        {
-          "pos": 2,
           "form": "turning",
           "lemma": "turn",
           "level": "A2",
@@ -129554,14 +128874,6 @@
           "lemma": "immediately",
           "level": "B2",
           "de": "sofort"
-        },
-        {
-          "pos": 19,
-          "pos_end": 20,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
         },
         {
           "pos": 19,
@@ -130848,14 +130160,6 @@
         }
       ],
       "11": [
-        {
-          "pos": 2,
-          "pos_end": 3,
-          "form": "went up",
-          "lemma": "go up",
-          "level": "A2",
-          "de": "ging hinauf"
-        },
         {
           "pos": 2,
           "form": "went",

@@ -19,9 +19,11 @@ The goal is to help German-speaking learners (A2+) understand the English Bible 
 2. **Multi-word phrases** are ONLY used when word-by-word translation would be \
    incomprehensible or seriously misleading. Examples:
    - Idioms: "be with child" → "schwanger sein" (word-by-word "sein mit Kind" is nonsensical)
-   - Phrasal verbs: "put away" → "entlassen/verlassen" ("put" + "away" separately misleads)
+   - Phrasal verbs where meaning shifts: "put away" → "entlassen" ("put" + "away" separately misleads)
    - Fixed expressions: "give birth to" → "gebären"
    - BUT: "became the father of" works fine word-by-word ("wurde der Vater von") → keep as single words
+   - BUT: transparent phrasal verbs like "came out" (kam heraus), "went up" (ging hinauf), \
+     "put down" (legte nieder) work fine word-by-word → keep as single words, NOT as phrases
 
 3. **Every word** in the verse must be annotated — A1 through C2.
 
