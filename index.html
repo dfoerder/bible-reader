@@ -194,6 +194,11 @@ const I18N={
   statsVocab:{de:'Wörter (Grundformen nach Level)',en:'Vocabulary (base forms by level)'},
   statsProgress:{de:'Dein Fortschritt',en:'Your progress'},
   appLanguage:{de:'App-Sprache',en:'App language'},
+  germanTranslation:{de:'Deutsche Übersetzung',en:'German translation'},
+  germanTranslationHint:{de:'Wird beim Aufklappen der Verse angezeigt.',en:'Shown when expanding verses.'},
+  deSch1951:{de:'Schlachter 1951',en:'Schlachter 1951'},
+  deL1912mod:{de:'Luther 1912 (mod.)',en:'Luther 1912 (mod.)'},
+  deWebDeu:{de:'Wörtlich (WEB→DE)',en:'Literal (WEB→DE)'},
 
   // Stats
   statistics:{de:'Statistik',en:'Statistics'},
@@ -771,11 +776,34 @@ async function fetchAnno(nr){
 }
 
 const _deCache={};
-async function fetchDe(nr){
-  if(_deCache[nr])return _deCache[nr];
+const DE_TRANS_PATHS={
+  sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
+  l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
+  web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
+};
+async function fetchDe(nr,trans){
+  const key=nr+'_'+trans;
+  if(_deCache[key])return _deCache[key];
+  const cfg=DE_TRANS_PATHS[trans]||DE_TRANS_PATHS.sch1951;
   try{
-    const r=await fetch('bibles/deu/sch1951/'+nr+'_sch1951.json'+CB);
-    if(r.ok){const d=await r.json();_deCache[nr]=d;return d;}
+    const r=await fetch(cfg.dir+nr+cfg.suffix+CB);
+    if(r.ok){
+      const d=await r.json();
+      let chapters;
+      if(cfg.format==='array'){
+        chapters={};
+        for(const ch of d.chapters){
+          const vs={};
+          for(const v of ch.verses) vs[String(v.n)]=v.text;
+          chapters[String(ch.number)]=vs;
+        }
+      } else {
+        chapters=d.chapters;
+      }
+      const result={name:d.name,chapters};
+      _deCache[key]=result;
+      return result;
+    }
   }catch(e){}
   return null;
 }
@@ -1023,6 +1051,8 @@ function App({data}){
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
+  const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||'sch1951');
+  const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
   useEffect(()=>{const b=document.body;b.classList.toggle('theme-icf',layout==='icf');b.classList.toggle('theme-icf-light',layout==='icf-light');const tc=layout==='icf'?'#0f0f0f':layout==='icf-light'?'#f5f5f5':'#5a4a32';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',tc)},[layout]);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
   const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
@@ -1084,12 +1114,17 @@ function App({data}){
       const nr=bible.books[bookIdx]?.nr;
       if(nr){
         setLoading(true);
-        Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr)]).then(([bk,an,de])=>{
+        Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr,deTrans)]).then(([bk,an,de])=>{
           setLoadedBook(bk);setBookAnnotations(an);setDeBook(de);
         }).catch(()=>{}).finally(()=>setLoading(false));
       }
     }
   },[]);
+
+  useEffect(()=>{
+    const nr=bible.books[bookIdx]?.nr;
+    if(nr&&loadedBook) fetchDe(nr,deTrans).then(de=>setDeBook(de));
+  },[deTrans]);
 
   useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training'||phase==='quiz')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,tappedWords]);
 
@@ -1158,7 +1193,7 @@ function App({data}){
     const nr=books[bi].nr;
     setLoading(true);
     try{
-      const[bk,an,de]=await Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr)]);
+      const[bk,an,de]=await Promise.all([fetchBook(nr),fetchAnno(nr),fetchDe(nr,deTrans)]);
       setLoadedBook(bk);
       setBookAnnotations(an);
       setDeBook(de);
@@ -1522,6 +1557,11 @@ function App({data}){
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('layout')}</span>
           <div style={S.levelBtns}>{[{k:'classic',i:'layoutClassic'},{k:'icf-light',i:'layoutModernLight'},{k:'icf',i:'layoutModernDark'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('germanTranslation')}</span>
+          <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('progress')}</span>
