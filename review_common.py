@@ -27,7 +27,10 @@ The goal is to help German-speaking learners (A2+) understand the English Bible 
 
 3. **Every word** in the verse must be annotated — A1 through C2.
 
-4. **Proper nouns** (Jesus, Abraham, David, Babylon, etc.) are NOT annotated.
+4. **Proper nouns** (Jesus, Abraham, David, Babylon, etc.) MUST be annotated with their \
+   German equivalent. Examples: Christ → Christus, Moses → Mose, Egypt → Ägypten, \
+   Isaiah → Jesaja, Pharaoh → Pharao. Names that stay the same (Jesus, Abraham, Jerusalem) \
+   still get an annotation with the same word as "de". Level is always A1.
 
 5. **Positions** must be exact: pos = 0-based index of the word in the verse (split by spaces). \
    Each occurrence of a word gets its OWN annotation at its OWN position. \
@@ -112,19 +115,9 @@ def analyze_verse_problems(vnum, text, annotations):
                 f"likely different occurrences mapped to same position"
             )
 
-    proper_nouns = {
-        "jesus", "christ", "abraham", "isaac", "jacob", "judah", "perez",
-        "zerah", "tamar", "hezron", "ram", "amminadab", "nahshon", "salmon",
-        "boaz", "rahab", "obed", "ruth", "jesse", "david", "solomon",
-        "uriah", "rehoboam", "abijah", "asa", "jehoshaphat", "joram",
-        "uzziah", "jotham", "ahaz", "hezekiah", "manasseh", "amon",
-        "josiah", "jechoniah", "babylon", "shealtiel", "zerubbabel",
-        "abiud", "eliakim", "azor", "zadok", "achim", "eliud", "eleazar",
-        "matthan", "joseph", "mary", "immanuel", "god",
-    }
     for i, w in enumerate(words):
         clean = re.sub(r'[.,;:!?"""''()\[\]]', '', w).lower()
-        if i not in annotated_positions and clean and clean not in proper_nouns:
+        if i not in annotated_positions and clean:
             problems.append(f"  ⚠ pos {i} ({w}): not annotated")
 
     return problems
