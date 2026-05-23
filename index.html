@@ -1261,7 +1261,7 @@ function App({data}){
     else setChapTrain(s=>({...s,done:true}));
   },[chapTrain,chapTrainRetry]);
 
-  const goToNav=useCallback(()=>{tts.stop();saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);setLoadedBook(null);setBookAnnotations(null);setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,bookIdx,chapIdx,saveBookmark]);
+  const goToNav=useCallback(()=>{tts.stop();saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);setLoadedBook(null);setBookAnnotations(null);prevPhaseRef.current='nav';setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,bookIdx,chapIdx,saveBookmark]);
   const nextChapter=useCallback(()=>{if(chapIdx<(currentBook.numChapters||0)-1)openChapter(bookIdx,chapIdx+1);else if(bookIdx<books.length-1)openChapter(bookIdx+1,0)},[bookIdx,chapIdx,currentBook,books,openChapter]);
   const prevChapter=useCallback(()=>{if(chapIdx>0)openChapter(bookIdx,chapIdx-1);else if(bookIdx>0)openChapter(bookIdx-1,books[bookIdx-1].numChapters-1)},[bookIdx,chapIdx,books,openChapter]);
 
