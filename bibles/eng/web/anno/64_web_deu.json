@@ -254,14 +254,6 @@
         },
         {
           "pos": 8,
-          "pos_end": 9,
-          "form": "went out",
-          "lemma": "go out",
-          "level": "A2",
-          "de": "gingen hinaus"
-        },
-        {
-          "pos": 8,
           "form": "went",
           "lemma": "go",
           "level": "A1",
@@ -827,14 +819,6 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
-        },
-        {
-          "pos": 38,
-          "pos_end": 39,
-          "form": "throws out",
-          "lemma": "throw out",
-          "level": "B2",
-          "de": "wirft hinaus"
         },
         {
           "pos": 38,
