@@ -849,16 +849,13 @@ function getAnnotation(annotations, bookName, chapNum, verseNum, wordPos) {
   if (!chap) return null;
   const verse = chap[String(verseNum)];
   if (!verse) return null;
-  // Check for exact single-word match
   const exact = verse.find(a => a.pos === wordPos && !a.pos_end);
-  if (exact) return {anno: exact, role: 'single'};
-  // Check for multi-word annotation
   const multi = verse.find(a => a.pos_end != null && wordPos >= a.pos && wordPos <= a.pos_end);
   if (multi) {
-    if (wordPos === multi.pos) return {anno: multi, role: 'start'};
-    if (wordPos === multi.pos_end) return {anno: multi, role: 'end'};
-    return {anno: multi, role: 'middle'};
+    const role = wordPos === multi.pos ? 'start' : wordPos === multi.pos_end ? 'end' : 'middle';
+    return {anno: multi, single: exact || null, role};
   }
+  if (exact) return {anno: exact, single: null, role: 'single'};
   return null;
 }
 
@@ -1008,6 +1005,7 @@ function App({data}){
   const [unknownWords,setUnknownWords]=useState(new Set(saved.unknownWords||[]));
   const [learnedWords,setLearnedWords]=useState(new Set(saved.learnedWords||[]));
   const [revealedWords,setRevealedWords]=useState(new Set());
+  const [expandedPhraseWords,setExpandedPhraseWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
   const [wordData,setWordData]=useState(()=>{const wd=LS.get('bible-word-data');if(wd)return wd;const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={learnstatus:'known',lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m});
   const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.learnstatus==='known').length,[wordData]);
@@ -1367,6 +1365,7 @@ function App({data}){
   const tapWord=useCallback(lemma=>{
     setTappedWords(p=>{const n=new Set(p);if(n.has(lemma)){n.delete(lemma);setUnknownWords(u=>{const nu=new Set(u);nu.delete(lemma);return nu})}else{n.add(lemma);setUnknownWords(u=>new Set([...u,lemma]))}return n});
   },[]);
+  const togglePhraseWord=useCallback((vn,pos)=>{setExpandedPhraseWords(p=>{const k=`${vn}_${pos}`;const n=new Set(p);if(n.has(k))n.delete(k);else n.add(k);return n})},[]);
 
   const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
   const changeFontSizeTr=useCallback(v=>{setFontSizeTr(v);LS.set('bible-font-size-tr',v)},[]);
@@ -1844,7 +1843,10 @@ function App({data}){
                 const [word,punct]=splitPunct(token);
                 if(!isL){
                   const phr=isPhrase&&!showTr?S.phraseWord:null;
-                  if(showTr){const phE=isPhrase?S.phraseWord:null;return(<span key={i}><span style={S.wg}><span className={hl} style={phE}>{word}</span><span style={{...S.tr,fontSize:trSize}} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>)}
+                  const sgl=isPhrase?result.single:null;
+                  const pwExp=sgl&&expandedPhraseWords.has(`${verse.n}_${pos}`);
+                  if(showTr){const phE=isPhrase?S.phraseWord:null;return(<span key={i}><span style={S.wg}><span className={hl} style={{...phE,...(sgl?{cursor:'pointer'}:{})}} onClick={sgl?()=>togglePhraseWord(verse.n,pos):undefined}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize}} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}<span style={{...S.tr,fontSize:trSize}} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>)}
+                  if(sgl){return(<span key={i}><span style={S.wg}><span className={hl} style={{...phr,cursor:'pointer'}} onClick={()=>togglePhraseWord(verse.n,pos)}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize}} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}</span>{punct}</span>)}
                   return(<span key={i}><span style={S.wg}><span className={hl} style={phr}>{word}</span></span>{punct}</span>);
                 }
                 if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(key)}>{token}</span>;
