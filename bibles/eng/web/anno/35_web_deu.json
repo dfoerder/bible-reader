@@ -1,1 +1,2989 @@
-{"name": "Habakkuk", "chapters": {"1": {"1": [{"pos": 1, "form": "oracle", "lemma": "oracle", "level": "C1", "de": "Orakel"}, {"pos": 5, "form": "prophet", "lemma": "prophet", "level": "B1", "de": "Prophet"}, {"pos": 6, "form": "saw", "lemma": "see", "level": "B1", "de": "sah"}], "2": [{"pos": 5, "form": "cry", "lemma": "cry", "level": "B1", "de": "schreie"}, {"pos": 10, "form": "hear", "lemma": "hear", "level": "B1", "de": "hörst"}, {"pos": 5, "form": "cry", "lemma": "cry", "level": "B1", "de": "schreie"}, {"pos": 15, "form": "Violence", "lemma": "violence", "level": "B2", "de": "Gewalt"}, {"pos": 21, "form": "save", "lemma": "save", "level": "B1", "de": "rettest"}], "3": [{"pos": 5, "form": "iniquity", "lemma": "iniquity", "level": "C2", "de": "Ungerechtigkeit"}, {"pos": 9, "form": "perversity", "lemma": "perversity", "level": "C2", "de": "Verkehrtheit"}, {"pos": 11, "form": "destruction", "lemma": "destruction", "level": "B2", "de": "Zerstörung"}, {"pos": 13, "form": "violence", "lemma": "violence", "level": "B2", "de": "Gewalt"}, {"pos": 19, "form": "strife", "lemma": "strife", "level": "C1", "de": "Streit"}, {"pos": 21, "form": "contention", "lemma": "contention", "level": "C2", "de": "Zwietracht"}, {"pos": 22, "pos_end": 23, "form": "rises up", "lemma": "rises up", "level": "B1", "de": "erhebt sich"}], "4": [{"pos": 2, "form": "law", "lemma": "law", "level": "B1", "de": "Gesetz"}, {"pos": 4, "form": "paralyzed", "lemma": "paralyze", "level": "C1", "de": "gelähmt"}, {"pos": 6, "form": "justice", "lemma": "justice", "level": "B2", "de": "Gerechtigkeit"}, {"pos": 8, "form": "prevails", "lemma": "prevail", "level": "B2", "de": "siegt"}, {"pos": 11, "form": "wicked", "lemma": "wicked", "level": "B2", "de": "Gottlosen"}, {"pos": 12, "form": "surround", "lemma": "surround", "level": "B1", "de": "umzingeln"}, {"pos": 14, "form": "righteous", "lemma": "righteous", "level": "B2", "de": "Gerechten"}, {"pos": 6, "form": "justice", "lemma": "justice", "level": "B2", "de": "Gerechtigkeit"}, {"pos": 19, "form": "perverted", "lemma": "perverted", "level": "C1", "de": "pervertiert"}], "5": [{"pos": 3, "form": "nations", "lemma": "nation", "level": "B1", "de": "Völkern"}, {"pos": 6, "form": "wonder", "lemma": "wonder", "level": "B1", "de": "staunt"}, {"pos": 7, "form": "marvelously", "lemma": "marvelously", "level": "C1", "de": "erstaunlich"}, {"pos": 11, "form": "working", "lemma": "work", "level": "B1", "de": "wirke"}, {"pos": 21, "form": "believe", "lemma": "believe", "level": "B1", "de": "glauben"}, {"pos": 25, "form": "told", "lemma": "tell", "level": "B1", "de": "erzählt"}], "6": [{"pos": 1, "form": "behold", "lemma": "behold", "level": "C1", "de": "siehe"}, {"pos": 8, "form": "bitter", "lemma": "bitter", "level": "B2", "de": "grimmige"}, {"pos": 10, "form": "hasty", "lemma": "hasty", "level": "B2", "de": "schnelle"}, {"pos": 11, "form": "nation", "lemma": "nation", "level": "B1", "de": "Volk"}, {"pos": 13, "form": "march", "lemma": "march", "level": "B1", "de": "ziehen"}, {"pos": 16, "form": "breadth", "lemma": "breadth", "level": "C1", "de": "Breite"}, {"pos": 21, "form": "possess", "lemma": "possess", "level": "B2", "de": "erobern"}, {"pos": 22, "form": "dwelling", "lemma": "dwelling", "level": "B2", "de": "Wohnstätten"}, {"pos": 3, "pos_end": 4, "form": "raise up", "lemma": "raise up", "level": "B1", "de": "aufrichten"}], "7": [{"pos": 2, "form": "feared", "lemma": "fear", "level": "B1", "de": "gefürchtet"}, {"pos": 4, "form": "dreaded", "lemma": "dread", "level": "C1", "de": "geschreckt"}, {"pos": 6, "form": "judgment", "lemma": "judgment", "level": "B2", "de": "Recht"}, {"pos": 9, "form": "dignity", "lemma": "dignity", "level": "B2", "de": "Hoheit"}, {"pos": 10, "form": "proceed", "lemma": "proceed", "level": "B2", "de": "gehen"}], "8": [{"pos": 1, "form": "horses", "lemma": "horse", "level": "B1", "de": "Rosse"}, {"pos": 4, "form": "swifter", "lemma": "swift", "level": "C1", "de": "schneller"}, {"pos": 6, "form": "leopards", "lemma": "leopard", "level": "B2", "de": "Pardeln"}, {"pos": 10, "form": "fierce", "lemma": "fierce", "level": "B2", "de": "grimmiger"}, {"pos": 14, "form": "wolves", "lemma": "wolf", "level": "B1", "de": "Wölfe"}, {"pos": 16, "form": "horsemen", "lemma": "horseman", "level": "B2", "de": "Reiter"}, {"pos": 17, "form": "press", "lemma": "press", "level": "B1", "de": "sprengen"}, {"pos": 18, "form": "proudly", "lemma": "proudly", "level": "B2", "de": "stolz"}, {"pos": 16, "form": "horsemen", "lemma": "horseman", "level": "B2", "de": "Reiter"}, {"pos": 27, "form": "fly", "lemma": "fly", "level": "B1", "de": "fliegen"}, {"pos": 30, "form": "eagle", "lemma": "eagle", "level": "B2", "de": "Adler"}, {"pos": 32, "form": "hurries", "lemma": "hurry", "level": "B1", "de": "eilt"}, {"pos": 34, "form": "devour", "lemma": "devour", "level": "C1", "de": "fressen"}], "9": [{"pos": 5, "form": "violence", "lemma": "violence", "level": "B2", "de": "Gewalt"}, {"pos": 7, "form": "hordes", "lemma": "horde", "level": "C1", "de": "Scharen"}, {"pos": 10, "form": "desert", "lemma": "desert", "level": "B1", "de": "Osten"}, {"pos": 12, "form": "gathers", "lemma": "gather", "level": "B1", "de": "sammelt"}, {"pos": 13, "form": "prisoners", "lemma": "prisoner", "level": "B1", "de": "Gefangene"}], "10": [{"pos": 2, "form": "scoffs", "lemma": "scoff", "level": "C1", "de": "spottet"}, {"pos": 6, "form": "princes", "lemma": "prince", "level": "B1", "de": "Fürsten"}, {"pos": 9, "form": "derision", "lemma": "derision", "level": "C2", "de": "Gespött"}, {"pos": 13, "form": "laughs", "lemma": "laugh", "level": "B1", "de": "lacht"}, {"pos": 16, "form": "stronghold", "lemma": "stronghold", "level": "C1", "de": "Festung"}, {"pos": 19, "form": "builds", "lemma": "build", "level": "B1", "de": "schüttet"}, {"pos": 22, "form": "earthen", "lemma": "earthen", "level": "C1", "de": "erdenen"}, {"pos": 23, "form": "ramp", "lemma": "ramp", "level": "B2", "de": "Wall"}], "11": [{"pos": 2, "form": "sweeps", "lemma": "sweep", "level": "B2", "de": "fährt"}, {"pos": 12, "form": "indeed", "lemma": "indeed", "level": "B1", "de": "wirklich"}, {"pos": 13, "form": "guilty", "lemma": "guilty", "level": "B1", "de": "schuldig"}, {"pos": 15, "form": "strength", "lemma": "strength", "level": "B1", "de": "Kraft"}], "12": [{"pos": 3, "form": "everlasting", "lemma": "everlasting", "level": "C1", "de": "Ewigkeit"}, {"pos": 17, "form": "appointed", "lemma": "appoint", "level": "B2", "de": "bestimmt"}, {"pos": 20, "form": "judgment", "lemma": "judgment", "level": "B2", "de": "Gericht"}, {"pos": 24, "form": "established", "lemma": "establish", "level": "B2", "de": "gesetzt"}, {"pos": 27, "form": "punish", "lemma": "punish", "level": "B1", "de": "strafen"}], "13": [{"pos": 3, "form": "purer", "lemma": "pure", "level": "B2", "de": "reineren"}, {"pos": 8, "form": "evil", "lemma": "evil", "level": "B1", "de": "Böses"}, {"pos": 14, "form": "perversity", "lemma": "perversity", "level": "C2", "de": "Unrecht"}, {"pos": 18, "form": "tolerate", "lemma": "tolerate", "level": "B2", "de": "duldest"}, {"pos": 22, "form": "treacherously", "lemma": "treacherous", "level": "C2", "de": "treulos"}, {"pos": 28, "form": "wicked", "lemma": "wicked", "level": "B2", "de": "Gottlose"}, {"pos": 29, "form": "swallows", "lemma": "swallow", "level": "B1", "de": "verschlingt"}, {"pos": 36, "form": "righteous", "lemma": "righteous", "level": "B2", "de": "gerechter"}], "14": [{"pos": 11, "form": "creeping", "lemma": "creep", "level": "B2", "de": "kriechenden"}, {"pos": 16, "form": "ruler", "lemma": "ruler", "level": "B1", "de": "Herrscher"}], "15": [{"pos": 8, "form": "hook", "lemma": "hook", "level": "B1", "de": "Angel"}, {"pos": 10, "form": "catches", "lemma": "catch", "level": "B1", "de": "fängt"}, {"pos": 16, "form": "gathers", "lemma": "gather", "level": "B1", "de": "sammelt"}, {"pos": 20, "form": "dragnet", "lemma": "dragnet", "level": "C2", "de": "Garn"}, {"pos": 23, "form": "rejoices", "lemma": "rejoice", "level": "B2", "de": "freut"}], "16": [{"pos": 2, "form": "sacrifices", "lemma": "sacrifice", "level": "B2", "de": "opfert"}, {"pos": 7, "form": "burns", "lemma": "burn", "level": "B1", "de": "räuchert"}, {"pos": 8, "form": "incense", "lemma": "incense", "level": "C1", "de": "Weihrauch"}, {"pos": 11, "form": "dragnet", "lemma": "dragnet", "level": "C2", "de": "Garn"}, {"pos": 18, "form": "luxurious", "lemma": "luxurious", "level": "B2", "de": "üppig"}], "17": [{"pos": 3, "form": "continually", "lemma": "continually", "level": "B2", "de": "immerfort"}, {"pos": 4, "form": "empty", "lemma": "empty", "level": "B1", "de": "leeren"}, {"pos": 10, "form": "nations", "lemma": "nation", "level": "B1", "de": "Völker"}, {"pos": 12, "form": "mercy", "lemma": "mercy", "level": "B1", "de": "Erbarmen"}]}, "2": {"1": [{"pos": 2, "form": "stand", "lemma": "stand", "level": "B1", "de": "stehen"}, {"pos": 5, "form": "watch", "lemma": "watch", "level": "B1", "de": "Wache"}, {"pos": 11, "form": "ramparts", "lemma": "rampart", "level": "C2", "de": "Bollwerk"}, {"pos": 28, "form": "answer", "lemma": "answer", "level": "B1", "de": "antworten"}, {"pos": 31, "form": "complaint", "lemma": "complaint", "level": "B1", "de": "Klage"}], "2": [{"pos": 1, "form": "answered", "lemma": "answer", "level": "B1", "de": "antwortete"}, {"pos": 4, "form": "Write", "lemma": "write", "level": "B1", "de": "Schreibe"}, {"pos": 5, "form": "vision", "lemma": "vision", "level": "B2", "de": "Vision"}, {"pos": 7, "form": "make", "lemma": "make", "level": "A2", "de": "mache"}, {"pos": 9, "form": "plain", "lemma": "plain", "level": "B1", "de": "deutlich"}, {"pos": 11, "form": "tablets", "lemma": "tablet", "level": "B2", "de": "Tafeln"}, {"pos": 15, "form": "runs", "lemma": "run", "level": "B1", "de": "läuft"}, {"pos": 17, "form": "read", "lemma": "read", "level": "A2", "de": "lesen"}], "3": [{"pos": 2, "form": "vision", "lemma": "vision", "level": "B2", "de": "Vision"}, {"pos": 7, "form": "appointed", "lemma": "appoint", "level": "B2", "de": "bestimmte"}, {"pos": 11, "form": "hurries", "lemma": "hurry", "level": "B1", "de": "eilt"}, {"pos": 17, "form": "prove", "lemma": "prove", "level": "B1", "de": "erweisen"}, {"pos": 18, "form": "false", "lemma": "false", "level": "B1", "de": "falsch"}, {"pos": 21, "form": "takes", "lemma": "take", "level": "A2", "de": "dauert"}, {"pos": 23, "form": "wait", "lemma": "wait", "level": "B1", "de": "warte"}, {"pos": 29, "form": "surely", "lemma": "surely", "level": "B2", "de": "sicherlich"}, {"pos": 33, "form": "delay", "lemma": "delay", "level": "B1", "de": "zögern"}], "4": [{"pos": 0, "form": "Behold", "lemma": "behold", "level": "C1", "de": "Siehe"}, {"pos": 2, "form": "soul", "lemma": "soul", "level": "B1", "de": "Seele"}, {"pos": 4, "form": "puffed", "lemma": "puff", "level": "B2", "de": "aufgebläht"}, {"pos": 9, "form": "upright", "lemma": "upright", "level": "B2", "de": "aufrichtig"}, {"pos": 14, "form": "righteous", "lemma": "righteous", "level": "B2", "de": "Gerechte"}, {"pos": 16, "form": "live", "lemma": "live", "level": "A2", "de": "leben"}, {"pos": 19, "form": "faith", "lemma": "faith", "level": "B1", "de": "Glauben"}], "5": [{"pos": 1, "form": "moreover", "lemma": "moreover", "level": "B2", "de": "außerdem"}, {"pos": 2, "form": "wine", "lemma": "wine", "level": "B1", "de": "Wein"}, {"pos": 4, "form": "treacherous", "lemma": "treacherous", "level": "C1", "de": "verräterisch"}, {"pos": 6, "form": "haughty", "lemma": "haughty", "level": "C1", "de": "hochmütiger"}, {"pos": 10, "form": "stay", "lemma": "stay", "level": "B1", "de": "bleibt"}, {"pos": 14, "form": "enlarges", "lemma": "enlarge", "level": "B2", "de": "erweitert"}, {"pos": 16, "form": "desire", "lemma": "desire", "level": "B1", "de": "Begierde"}, {"pos": 18, "form": "Sheol", "lemma": "Sheol", "level": "C2", "de": "Scheol"}, {"pos": 22, "form": "like", "lemma": "like", "level": "A2", "de": "wie"}, {"pos": 23, "form": "death", "lemma": "death", "level": "A2", "de": "Tod"}, {"pos": 27, "form": "satisfied", "lemma": "satisfy", "level": "B1", "de": "zufrieden"}, {"pos": 29, "form": "gathers", "lemma": "gather", "level": "B1", "de": "sammelt"}, {"pos": 33, "form": "nations", "lemma": "nation", "level": "B1", "de": "Nationen"}, {"pos": 35, "form": "heaps", "lemma": "heap", "level": "B2", "de": "häuft"}, {"pos": 39, "form": "peoples", "lemma": "people", "level": "B1", "de": "Völker"}], "6": [{"pos": 6, "form": "parable", "lemma": "parable", "level": "C1", "de": "Gleichnis"}, {"pos": 11, "form": "taunting", "lemma": "taunt", "level": "C1", "de": "spöttisches"}, {"pos": 12, "form": "proverb", "lemma": "proverb", "level": "B2", "de": "Sprichwort"}, {"pos": 16, "form": "say", "lemma": "say", "level": "A2", "de": "sagen"}, {"pos": 17, "form": "Woe", "lemma": "woe", "level": "C1", "de": "Wehe"}, {"pos": 21, "form": "increases", "lemma": "increase", "level": "B1", "de": "vermehrt"}, {"pos": 29, "form": "enriches", "lemma": "enrich", "level": "B2", "de": "bereichert"}, {"pos": 32, "form": "extortion", "lemma": "extortion", "level": "C2", "de": "Erpressung"}, {"pos": 3, "pos_end": 4, "form": "take up", "lemma": "take up", "level": "B1", "de": "aufheben"}], "7": [{"pos": 2, "form": "debtors", "lemma": "debtor", "level": "B2", "de": "Schuldner"}, {"pos": 3, "form": "rise up", "lemma": "rise up", "level": "B1", "de": "aufstehen", "pos_end": 4}, {"pos": 5, "form": "suddenly", "lemma": "suddenly", "level": "B1", "de": "plötzlich"}, {"pos": 13, "form": "tremble", "lemma": "tremble", "level": "B2", "de": "erzittern"}, {"pos": 19, "form": "victim", "lemma": "victim", "level": "B1", "de": "Beute"}, {"pos": 7, "pos_end": 8, "form": "wake up", "lemma": "wake up", "level": "A2", "de": "aufwachen"}], "8": [{"pos": 3, "form": "plundered", "lemma": "plunder", "level": "C1", "de": "geplündert"}, {"pos": 5, "form": "nations", "lemma": "nation", "level": "B1", "de": "Nationen"}, {"pos": 8, "form": "remnant", "lemma": "remnant", "level": "C1", "de": "Überrest"}, {"pos": 11, "form": "peoples", "lemma": "people", "level": "B1", "de": "Völker"}, {"pos": 13, "form": "plunder", "lemma": "plunder", "level": "C1", "de": "plündern"}, {"pos": 18, "form": "blood", "lemma": "blood", "level": "B1", "de": "Blut"}, {"pos": 22, "form": "violence", "lemma": "violence", "level": "B1", "de": "Gewalt"}, {"pos": 26, "form": "land", "lemma": "land", "level": "B1", "de": "Land"}, {"pos": 29, "form": "city", "lemma": "city", "level": "A2", "de": "Stadt"}, {"pos": 34, "form": "dwell", "lemma": "dwell", "level": "B2", "de": "wohnen"}], "9": [{"pos": 0, "form": "Woe", "lemma": "woe", "level": "C1", "de": "Wehe"}, {"pos": 4, "form": "gets", "lemma": "get", "level": "A2", "de": "erwirbt"}, {"pos": 6, "form": "evil", "lemma": "evil", "level": "B1", "de": "unrechten"}, {"pos": 7, "form": "gain", "lemma": "gain", "level": "B1", "de": "Gewinn"}, {"pos": 10, "form": "house", "lemma": "house", "level": "A2", "de": "Haus"}, {"pos": 14, "form": "set", "lemma": "set", "level": "B1", "de": "setzen"}, {"pos": 16, "form": "nest", "lemma": "nest", "level": "B1", "de": "Nest"}, {"pos": 23, "form": "delivered", "lemma": "deliver", "level": "B1", "de": "befreit"}, {"pos": 26, "form": "hand", "lemma": "hand", "level": "A2", "de": "Hand"}, {"pos": 6, "form": "evil", "lemma": "evil", "level": "B1", "de": "Bösen"}], "10": [{"pos": 2, "form": "devised", "lemma": "devise", "level": "C1", "de": "ersonnen"}, {"pos": 3, "form": "shame", "lemma": "shame", "level": "B1", "de": "Schande"}, {"pos": 6, "form": "house", "lemma": "house", "level": "A2", "de": "Haus"}, {"pos": 8, "form": "cutting off", "lemma": "cut off", "level": "B1", "de": "Ausrottung", "pos_end": 9}, {"pos": 10, "form": "many", "lemma": "many", "level": "A2", "de": "viele"}, {"pos": 11, "form": "peoples", "lemma": "people", "level": "B1", "de": "Völker"}, {"pos": 14, "form": "sinned", "lemma": "sin", "level": "B1", "de": "gesündigt"}, {"pos": 17, "form": "soul", "lemma": "soul", "level": "B1", "de": "Seele"}], "11": [{"pos": 2, "form": "stone", "lemma": "stone", "level": "B1", "de": "Stein"}, {"pos": 8, "form": "wall", "lemma": "wall", "level": "B1", "de": "Mauer"}, {"pos": 11, "form": "beam", "lemma": "beam", "level": "B2", "de": "Balken"}, {"pos": 15, "form": "woodwork", "lemma": "woodwork", "level": "C1", "de": "Gebälk"}, {"pos": 17, "form": "answer", "lemma": "answer", "level": "B1", "de": "antworten"}, {"pos": 4, "pos_end": 5, "form": "cry out", "lemma": "cry out", "level": "B1", "de": "ausrufen"}], "12": [{"pos": 0, "form": "Woe", "lemma": "woe", "level": "C1", "de": "Wehe"}, {"pos": 4, "form": "builds", "lemma": "build", "level": "B1", "de": "baut"}, {"pos": 6, "form": "town", "lemma": "town", "level": "B1", "de": "Stadt"}, {"pos": 8, "form": "blood", "lemma": "blood", "level": "B1", "de": "Blut"}, {"pos": 10, "form": "establishes", "lemma": "establish", "level": "B1", "de": "gründet"}, {"pos": 12, "form": "city", "lemma": "city", "level": "A2", "de": "Stadt"}, {"pos": 14, "form": "iniquity", "lemma": "iniquity", "level": "C2", "de": "Ungerechtigkeit"}], "13": [{"pos": 0, "form": "Behold", "lemma": "behold", "level": "C1", "de": "Siehe"}, {"pos": 9, "form": "peoples", "lemma": "people", "level": "B1", "de": "Völker"}, {"pos": 10, "form": "labor", "lemma": "labor", "level": "B1", "de": "arbeiten"}, {"pos": 13, "form": "fire", "lemma": "fire", "level": "B1", "de": "Feuer"}, {"pos": 16, "form": "nations", "lemma": "nation", "level": "B1", "de": "Nationen"}, {"pos": 17, "form": "weary", "lemma": "weary", "level": "B2", "de": "mühen"}, {"pos": 20, "form": "vanity", "lemma": "vanity", "level": "C1", "de": "Vergeblichkeit"}], "14": [{"pos": 2, "form": "earth", "lemma": "earth", "level": "A2", "de": "Erde"}, {"pos": 5, "form": "filled", "lemma": "fill", "level": "B1", "de": "erfüllt"}, {"pos": 8, "form": "knowledge", "lemma": "knowledge", "level": "B1", "de": "Erkenntnis"}, {"pos": 11, "form": "glory", "lemma": "glory", "level": "B1", "de": "Herrlichkeit"}, {"pos": 14, "form": "waters", "lemma": "water", "level": "A2", "de": "Wasser"}, {"pos": 15, "form": "cover", "lemma": "cover", "level": "B1", "de": "bedecken"}, {"pos": 17, "form": "sea", "lemma": "sea", "level": "B1", "de": "Meer"}], "15": [{"pos": 0, "form": "Woe", "lemma": "woe", "level": "C1", "de": "Wehe"}, {"pos": 4, "form": "gives", "lemma": "give", "level": "A2", "de": "gibt"}, {"pos": 6, "form": "neighbor", "lemma": "neighbor", "level": "B1", "de": "Nächsten"}, {"pos": 7, "form": "drink", "lemma": "drink", "level": "B1", "de": "trinken"}, {"pos": 8, "form": "pouring", "lemma": "pour", "level": "B1", "de": "eingießt"}, {"pos": 10, "form": "inflaming", "lemma": "inflame", "level": "C2", "de": "berauschenden"}, {"pos": 11, "form": "wine", "lemma": "wine", "level": "B1", "de": "Wein"}, {"pos": 15, "form": "drunk", "lemma": "drunk", "level": "B1", "de": "betrunken"}, {"pos": 20, "form": "gaze", "lemma": "gaze", "level": "B2", "de": "schauen"}, {"pos": 23, "form": "naked", "lemma": "naked", "level": "B1", "de": "nackten"}, {"pos": 24, "form": "bodies", "lemma": "body", "level": "B1", "de": "Körper"}], "16": [{"pos": 2, "form": "filled", "lemma": "fill", "level": "B1", "de": "erfüllt"}, {"pos": 4, "form": "shame", "lemma": "shame", "level": "B1", "de": "Schande"}, {"pos": 7, "form": "glory", "lemma": "glory", "level": "B1", "de": "Ehre"}, {"pos": 11, "form": "drink", "lemma": "drink", "level": "B1", "de": "trinken"}, {"pos": 14, "form": "exposed", "lemma": "expose", "level": "B2", "de": "entblößt"}, {"pos": 16, "form": "cup", "lemma": "cup", "level": "B1", "de": "Becher"}, {"pos": 23, "form": "around", "lemma": "around", "level": "B1", "de": "herum"}, {"pos": 27, "form": "disgrace", "lemma": "disgrace", "level": "C1", "de": "Schande"}, {"pos": 29, "form": "cover", "lemma": "cover", "level": "B1", "de": "bedecken"}, {"pos": 7, "form": "glory", "lemma": "glory", "level": "B1", "de": "Herrlichkeit"}, {"pos": 19, "pos_end": 20, "form": "right hand", "lemma": "right hand", "level": "A2", "de": "rechte Hand"}], "17": [{"pos": 2, "form": "violence", "lemma": "violence", "level": "B1", "de": "Gewalt"}, {"pos": 7, "form": "overwhelm", "lemma": "overwhelm", "level": "B2", "de": "überwältigen"}, {"pos": 11, "form": "destruction", "lemma": "destruction", "level": "B2", "de": "Vernichtung"}, {"pos": 14, "form": "animals", "lemma": "animal", "level": "B1", "de": "Tiere"}, {"pos": 18, "form": "afraid", "lemma": "afraid", "level": "B1", "de": "erschrecken"}, {"pos": 22, "form": "blood", "lemma": "blood", "level": "B1", "de": "Blut"}, {"pos": 2, "form": "violence", "lemma": "violence", "level": "B1", "de": "Gewalt"}, {"pos": 30, "form": "land", "lemma": "land", "level": "B1", "de": "Land"}, {"pos": 33, "form": "city", "lemma": "city", "level": "A2", "de": "Stadt"}, {"pos": 38, "form": "dwell", "lemma": "dwell", "level": "B2", "de": "wohnen"}], "18": [{"pos": 1, "form": "value", "lemma": "value", "level": "B1", "de": "nützt"}, {"pos": 4, "form": "engraved", "lemma": "engrave", "level": "C1", "de": "geschnitzte"}, {"pos": 5, "form": "image", "lemma": "image", "level": "B1", "de": "Bild"}, {"pos": 9, "form": "maker", "lemma": "maker", "level": "B1", "de": "Schöpfer"}, {"pos": 4, "form": "engraved", "lemma": "engrave", "level": "C1", "de": "geschnitzt"}, {"pos": 14, "form": "molten", "lemma": "molten", "level": "C2", "de": "gegossene"}, {"pos": 5, "form": "image", "lemma": "image", "level": "B1", "de": "Bild"}, {"pos": 18, "form": "teacher", "lemma": "teacher", "level": "B1", "de": "Lehrer"}, {"pos": 20, "form": "lies", "lemma": "lie", "level": "B1", "de": "Lügen"}, {"pos": 24, "form": "fashions", "lemma": "fashion", "level": "B2", "de": "formt"}, {"pos": 26, "form": "form", "lemma": "form", "level": "B1", "de": "Gestalt"}, {"pos": 27, "form": "trusts", "lemma": "trust", "level": "B1", "de": "vertraut"}, {"pos": 31, "form": "make", "lemma": "make", "level": "A2", "de": "machen"}, {"pos": 32, "form": "mute", "lemma": "mute", "level": "C1", "de": "stumme"}, {"pos": 33, "form": "idols", "lemma": "idol", "level": "B2", "de": "Götzen"}], "19": [{"pos": 0, "form": "Woe", "lemma": "woe", "level": "C1", "de": "Wehe"}, {"pos": 4, "form": "says", "lemma": "say", "level": "A2", "de": "spricht"}, {"pos": 7, "form": "wood", "lemma": "wood", "level": "B1", "de": "Holz"}, {"pos": 8, "form": "Awake", "lemma": "awake", "level": "B1", "de": "Erwache"}, {"pos": 12, "form": "mute", "lemma": "mute", "level": "C1", "de": "stummen"}, {"pos": 13, "form": "stone", "lemma": "stone", "level": "B1", "de": "Stein"}, {"pos": 14, "form": "Arise", "lemma": "arise", "level": "B2", "de": "Stehe auf"}, {"pos": 17, "form": "teach", "lemma": "teach", "level": "B1", "de": "lehren"}, {"pos": 18, "form": "Behold", "lemma": "behold", "level": "C1", "de": "Siehe"}, {"pos": 21, "form": "overlaid", "lemma": "overlay", "level": "C2", "de": "überzogen"}, {"pos": 23, "form": "gold", "lemma": "gold", "level": "B1", "de": "Gold"}, {"pos": 25, "form": "silver", "lemma": "silver", "level": "B1", "de": "Silber"}, {"pos": 30, "form": "breath", "lemma": "breath", "level": "B1", "de": "Atem"}, {"pos": 35, "form": "midst", "lemma": "midst", "level": "B2", "de": "Inneren"}], "20": [{"pos": 5, "form": "holy", "lemma": "holy", "level": "B1", "de": "heiligen"}, {"pos": 6, "form": "temple", "lemma": "temple", "level": "B1", "de": "Tempel"}, {"pos": 10, "form": "earth", "lemma": "earth", "level": "A2", "de": "Erde"}, {"pos": 12, "form": "silent", "lemma": "silent", "level": "B1", "de": "still"}]}, "3": {"1": [{"pos": 1, "form": "prayer", "lemma": "prayer", "level": "B1", "de": "Gebet"}, {"pos": 5, "form": "prophet", "lemma": "prophet", "level": "B2", "de": "Prophet"}, {"pos": 8, "form": "victorious", "lemma": "victorious", "level": "B2", "de": "siegreichen"}], "2": [{"pos": 3, "form": "heard", "lemma": "hear", "level": "A2", "de": "gehört"}, {"pos": 6, "form": "fame", "lemma": "fame", "level": "B2", "de": "Ruf"}, {"pos": 10, "form": "awe", "lemma": "awe", "level": "C1", "de": "Ehrfurcht"}, {"pos": 13, "form": "deeds", "lemma": "deed", "level": "B2", "de": "Taten"}, {"pos": 15, "form": "Renew", "lemma": "renew", "level": "B2", "de": "erneuere"}, {"pos": 34, "form": "wrath", "lemma": "wrath", "level": "C1", "de": "Zorn"}, {"pos": 36, "form": "remember", "lemma": "remember", "level": "A2", "de": "gedenkst"}, {"pos": 37, "form": "mercy", "lemma": "mercy", "level": "B2", "de": "Barmherzigkeit"}, {"pos": 18, "pos_end": 21, "form": "in the midst of", "lemma": "in the midst of", "level": "C1", "de": "inmitten"}], "3": [{"pos": 12, "form": "glory", "lemma": "glory", "level": "B2", "de": "Herrlichkeit"}, {"pos": 13, "form": "covered", "lemma": "cover", "level": "A2", "de": "bedeckte"}, {"pos": 15, "form": "heavens", "lemma": "heaven", "level": "A2", "de": "Himmel"}, {"pos": 18, "form": "praise", "lemma": "praise", "level": "B1", "de": "Lob"}, {"pos": 19, "form": "filled", "lemma": "fill", "level": "A2", "de": "erfüllte"}], "4": [{"pos": 1, "form": "splendor", "lemma": "splendor", "level": "C1", "de": "Glanz"}, {"pos": 5, "form": "sunrise", "lemma": "sunrise", "level": "B1", "de": "Sonnenaufgang"}, {"pos": 6, "form": "Rays", "lemma": "ray", "level": "B2", "de": "Strahlen"}, {"pos": 7, "form": "shine", "lemma": "shine", "level": "B1", "de": "strahlen"}, {"pos": 15, "form": "hidden", "lemma": "hide", "level": "A2", "de": "verborgen"}], "5": [{"pos": 0, "form": "Plague", "lemma": "plague", "level": "B2", "de": "Seuche"}, {"pos": 5, "form": "pestilence", "lemma": "pestilence", "level": "C2", "de": "Pest"}, {"pos": 6, "form": "followed", "lemma": "follow", "level": "A2", "de": "folgte"}], "6": [{"pos": 3, "form": "shook", "lemma": "shake", "level": "B1", "de": "erschütterte"}, {"pos": 7, "form": "looked", "lemma": "look", "level": "A1", "de": "blickte"}, {"pos": 11, "form": "nations", "lemma": "nation", "level": "B1", "de": "Nationen"}, {"pos": 12, "form": "tremble", "lemma": "tremble", "level": "B2", "de": "erzittern"}, {"pos": 14, "form": "ancient", "lemma": "ancient", "level": "B2", "de": "uralten"}, {"pos": 15, "form": "mountains", "lemma": "mountain", "level": "A2", "de": "Berge"}, {"pos": 17, "form": "crumbled", "lemma": "crumble", "level": "B2", "de": "zerfielen"}, {"pos": 19, "form": "age-old", "lemma": "age-old", "level": "B2", "de": "uralten"}, {"pos": 20, "form": "hills", "lemma": "hill", "level": "A2", "de": "Hügel"}, {"pos": 21, "form": "collapsed", "lemma": "collapse", "level": "B2", "de": "stürzten ein"}, {"pos": 25, "form": "eternal", "lemma": "eternal", "level": "B2", "de": "ewig"}], "7": [{"pos": 3, "form": "tents", "lemma": "tent", "level": "B1", "de": "Zelte"}, {"pos": 7, "form": "affliction", "lemma": "affliction", "level": "C1", "de": "Bedrängnis"}, {"pos": 9, "form": "dwellings", "lemma": "dwelling", "level": "B2", "de": "Wohnstätten"}, {"pos": 15, "form": "trembled", "lemma": "tremble", "level": "B2", "de": "zitterten"}], "8": [{"pos": 2, "form": "displeased", "lemma": "displease", "level": "B2", "de": "unzufrieden"}, {"pos": 5, "form": "rivers", "lemma": "river", "level": "A2", "de": "Flüsse"}, {"pos": 8, "form": "anger", "lemma": "anger", "level": "B1", "de": "Zorn"}, {"pos": 11, "form": "rivers", "lemma": "river", "level": "A2", "de": "Flüsse"}, {"pos": 14, "form": "wrath", "lemma": "wrath", "level": "C1", "de": "Grimm"}, {"pos": 20, "form": "rode", "lemma": "ride", "level": "B1", "de": "rittest"}, {"pos": 23, "form": "horses", "lemma": "horse", "level": "A2", "de": "Rossen"}, {"pos": 26, "form": "chariots", "lemma": "chariot", "level": "B2", "de": "Wagen"}, {"pos": 28, "form": "salvation", "lemma": "salvation", "level": "B2", "de": "Rettung"}], "9": [{"pos": 1, "form": "uncovered", "lemma": "uncover", "level": "B2", "de": "entblößtest"}, {"pos": 3, "form": "bow", "lemma": "bow", "level": "B1", "de": "Bogen"}, {"pos": 5, "form": "called", "lemma": "call", "level": "A1", "de": "riefst"}, {"pos": 8, "form": "sworn", "lemma": "swear", "level": "B1", "de": "geschworenen"}, {"pos": 9, "form": "arrows", "lemma": "arrow", "level": "B1", "de": "Pfeile"}, {"pos": 12, "form": "split", "lemma": "split", "level": "B1", "de": "spaltetest"}, {"pos": 16, "form": "rivers", "lemma": "river", "level": "A2", "de": "Ströme"}], "10": [{"pos": 1, "form": "mountains", "lemma": "mountain", "level": "A2", "de": "Berge"}, {"pos": 6, "form": "afraid", "lemma": "afraid", "level": "A2", "de": "fürchteten"}, {"pos": 8, "form": "storm", "lemma": "storm", "level": "B1", "de": "Sturzregen"}, {"pos": 14, "form": "deep", "lemma": "deep", "level": "A2", "de": "Tiefe"}, {"pos": 15, "form": "roared", "lemma": "roar", "level": "B2", "de": "brüllte"}, {"pos": 11, "pos_end": 12, "form": "passed by", "lemma": "passed by", "level": "B1", "de": "ging vorüber"}, {"pos": 17, "pos_end": 18, "form": "lifted up", "lemma": "lifted up", "level": "B1", "de": "erhob"}], "11": [{"pos": 4, "form": "stood", "lemma": "stand", "level": "A1", "de": "standen"}, {"pos": 5, "form": "still", "lemma": "still", "level": "A2", "de": "still"}, {"pos": 14, "form": "arrows", "lemma": "arrow", "level": "B1", "de": "Pfeile"}, {"pos": 20, "form": "shining", "lemma": "shine", "level": "B1", "de": "Glanz"}, {"pos": 23, "form": "glittering", "lemma": "glitter", "level": "B2", "de": "blitzenden"}, {"pos": 24, "form": "spear", "lemma": "spear", "level": "B2", "de": "Speer"}], "12": [{"pos": 1, "form": "marched", "lemma": "march", "level": "B1", "de": "schrittest"}, {"pos": 6, "form": "wrath", "lemma": "wrath", "level": "C1", "de": "Grimm"}, {"pos": 8, "form": "threshed", "lemma": "thresh", "level": "C1", "de": "draschst"}, {"pos": 10, "form": "nations", "lemma": "nation", "level": "B1", "de": "Nationen"}, {"pos": 12, "form": "anger", "lemma": "anger", "level": "B1", "de": "Zorn"}], "13": [{"pos": 5, "form": "salvation", "lemma": "salvation", "level": "B2", "de": "Rettung"}, {"pos": 5, "form": "salvation", "lemma": "salvation", "level": "B2", "de": "Rettung"}, {"pos": 14, "form": "anointed", "lemma": "anoint", "level": "C1", "de": "Gesalbten"}, {"pos": 16, "form": "crushed", "lemma": "crush", "level": "B2", "de": "zerschlugst"}, {"pos": 23, "form": "wickedness", "lemma": "wickedness", "level": "B2", "de": "Gottlosigkeit"}, {"pos": 25, "form": "stripped", "lemma": "strip", "level": "B2", "de": "entblößtest"}], "14": [{"pos": 1, "form": "pierced", "lemma": "pierce", "level": "B2", "de": "durchbohrtest"}, {"pos": 6, "form": "warriors", "lemma": "warrior", "level": "B2", "de": "Krieger"}, {"pos": 10, "form": "spears", "lemma": "spear", "level": "B2", "de": "Speere"}, {"pos": 15, "form": "whirlwind", "lemma": "whirlwind", "level": "B2", "de": "Sturm"}, {"pos": 17, "form": "scatter", "lemma": "scatter", "level": "B2", "de": "zerstreuen"}, {"pos": 19, "form": "gloating", "lemma": "gloat", "level": "C1", "de": "frohlockend"}, {"pos": 23, "form": "devour", "lemma": "devour", "level": "B2", "de": "verschlingen"}, {"pos": 25, "form": "wretched", "lemma": "wretched", "level": "C1", "de": "Elenden"}, {"pos": 27, "form": "secret", "lemma": "secret", "level": "B1", "de": "Verborgenheit"}], "15": [{"pos": 1, "form": "trampled", "lemma": "trample", "level": "B2", "de": "zertratst"}, {"pos": 6, "form": "horses", "lemma": "horse", "level": "A2", "de": "Rossen"}, {"pos": 7, "form": "churning", "lemma": "churn", "level": "B2", "de": "aufwühlend"}, {"pos": 8, "form": "mighty", "lemma": "mighty", "level": "B2", "de": "gewaltigen"}], "16": [{"pos": 1, "form": "heard", "lemma": "hear", "level": "A2", "de": "hörte"}, {"pos": 5, "form": "trembled", "lemma": "tremble", "level": "B2", "de": "erbebte"}, {"pos": 7, "form": "lips", "lemma": "lip", "level": "B1", "de": "Lippen"}, {"pos": 8, "form": "quivered", "lemma": "quiver", "level": "C1", "de": "zitterten"}, {"pos": 11, "form": "voice", "lemma": "voice", "level": "A2", "de": "Stimme"}, {"pos": 12, "form": "Rottenness", "lemma": "rottenness", "level": "C2", "de": "Fäulnis"}, {"pos": 13, "form": "enters", "lemma": "enter", "level": "A2", "de": "dringt ein"}, {"pos": 16, "form": "bones", "lemma": "bone", "level": "B1", "de": "Gebeine"}, {"pos": 19, "form": "tremble", "lemma": "tremble", "level": "B2", "de": "zittere"}, {"pos": 26, "form": "wait", "lemma": "wait", "level": "A2", "de": "warten"}, {"pos": 27, "form": "quietly", "lemma": "quietly", "level": "B1", "de": "ruhig"}, {"pos": 32, "form": "trouble", "lemma": "trouble", "level": "B1", "de": "Drangsal"}, {"pos": 41, "form": "invade", "lemma": "invade", "level": "B2", "de": "überfallen"}], "17": [{"pos": 6, "form": "flourish", "lemma": "flourish", "level": "B2", "de": "blüht"}, {"pos": 8, "form": "fruit", "lemma": "fruit", "level": "A2", "de": "Frucht"}, {"pos": 12, "form": "vines", "lemma": "vine", "level": "B1", "de": "Weinstöcken"}, {"pos": 14, "form": "labor", "lemma": "labor", "level": "B1", "de": "Ertrag"}, {"pos": 17, "form": "olive", "lemma": "olive", "level": "B1", "de": "Ölbaums"}, {"pos": 18, "form": "fails", "lemma": "fail", "level": "B1", "de": "fehlschlägt"}, {"pos": 20, "form": "fields", "lemma": "field", "level": "A2", "de": "Felder"}, {"pos": 21, "form": "yield", "lemma": "yield", "level": "B2", "de": "bringen"}, {"pos": 25, "form": "flocks", "lemma": "flock", "level": "B1", "de": "Herden"}, {"pos": 31, "form": "fold", "lemma": "fold", "level": "B2", "de": "Pferch"}, {"pos": 36, "form": "herd", "lemma": "herd", "level": "B1", "de": "Vieh"}, {"pos": 39, "form": "stalls", "lemma": "stall", "level": "B2", "de": "Ställen"}, {"pos": 3, "pos_end": 4, "form": "fig tree", "lemma": "fig tree", "level": "A2", "de": "Feigenbaum"}], "18": [{"pos": 3, "form": "rejoice", "lemma": "rejoice", "level": "B2", "de": "freuen"}, {"pos": 9, "form": "joyful", "lemma": "joyful", "level": "B1", "de": "frohlocken"}, {"pos": 15, "form": "salvation", "lemma": "salvation", "level": "B2", "de": "Rettung"}], "19": [{"pos": 5, "form": "strength", "lemma": "strength", "level": "B1", "de": "Kraft"}, {"pos": 9, "form": "deer's", "lemma": "deer", "level": "B1", "de": "Hirschkuh"}, {"pos": 14, "form": "enables", "lemma": "enable", "level": "B2", "de": "lässt"}, {"pos": 24, "form": "director", "lemma": "director", "level": "B1", "de": "Dirigent"}, {"pos": 27, "form": "stringed", "lemma": "string", "level": "B1", "de": "Saiten"}, {"pos": 28, "form": "instruments", "lemma": "instrument", "level": "B1", "de": "Instrumenten"}]}}}
+{
+  "name": "Habakkuk",
+  "chapters": {
+    "1": {
+      "1": [
+        {
+          "pos": 1,
+          "form": "oracle",
+          "lemma": "oracle",
+          "level": "C1",
+          "de": "Orakel"
+        },
+        {
+          "pos": 5,
+          "form": "prophet",
+          "lemma": "prophet",
+          "level": "B1",
+          "de": "Prophet"
+        },
+        {
+          "pos": 6,
+          "form": "saw",
+          "lemma": "see",
+          "level": "B1",
+          "de": "sah"
+        }
+      ],
+      "2": [
+        {
+          "pos": 5,
+          "form": "cry",
+          "lemma": "cry",
+          "level": "B1",
+          "de": "schreie"
+        },
+        {
+          "pos": 10,
+          "form": "hear",
+          "lemma": "hear",
+          "level": "B1",
+          "de": "hörst"
+        },
+        {
+          "pos": 5,
+          "form": "cry",
+          "lemma": "cry",
+          "level": "B1",
+          "de": "schreie"
+        },
+        {
+          "pos": 15,
+          "form": "Violence",
+          "lemma": "violence",
+          "level": "B2",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 21,
+          "form": "save",
+          "lemma": "save",
+          "level": "B1",
+          "de": "rettest"
+        }
+      ],
+      "3": [
+        {
+          "pos": 5,
+          "form": "iniquity",
+          "lemma": "iniquity",
+          "level": "C2",
+          "de": "Ungerechtigkeit"
+        },
+        {
+          "pos": 9,
+          "form": "perversity",
+          "lemma": "perversity",
+          "level": "C2",
+          "de": "Verkehrtheit"
+        },
+        {
+          "pos": 11,
+          "form": "destruction",
+          "lemma": "destruction",
+          "level": "B2",
+          "de": "Zerstörung"
+        },
+        {
+          "pos": 13,
+          "form": "violence",
+          "lemma": "violence",
+          "level": "B2",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 19,
+          "form": "strife",
+          "lemma": "strife",
+          "level": "C1",
+          "de": "Streit"
+        },
+        {
+          "pos": 21,
+          "form": "contention",
+          "lemma": "contention",
+          "level": "C2",
+          "de": "Zwietracht"
+        },
+        {
+          "pos": 22,
+          "pos_end": 23,
+          "form": "rises up",
+          "lemma": "rises up",
+          "level": "B1",
+          "de": "erhebt sich"
+        }
+      ],
+      "4": [
+        {
+          "pos": 2,
+          "form": "law",
+          "lemma": "law",
+          "level": "B1",
+          "de": "Gesetz"
+        },
+        {
+          "pos": 4,
+          "form": "paralyzed",
+          "lemma": "paralyze",
+          "level": "C1",
+          "de": "gelähmt"
+        },
+        {
+          "pos": 6,
+          "form": "justice",
+          "lemma": "justice",
+          "level": "B2",
+          "de": "Gerechtigkeit"
+        },
+        {
+          "pos": 8,
+          "form": "prevails",
+          "lemma": "prevail",
+          "level": "B2",
+          "de": "siegt"
+        },
+        {
+          "pos": 11,
+          "form": "wicked",
+          "lemma": "wicked",
+          "level": "B2",
+          "de": "Gottlosen"
+        },
+        {
+          "pos": 12,
+          "form": "surround",
+          "lemma": "surround",
+          "level": "B1",
+          "de": "umzingeln"
+        },
+        {
+          "pos": 14,
+          "form": "righteous",
+          "lemma": "righteous",
+          "level": "B2",
+          "de": "Gerechten"
+        },
+        {
+          "pos": 6,
+          "form": "justice",
+          "lemma": "justice",
+          "level": "B2",
+          "de": "Gerechtigkeit"
+        },
+        {
+          "pos": 19,
+          "form": "perverted",
+          "lemma": "perverted",
+          "level": "C1",
+          "de": "pervertiert"
+        }
+      ],
+      "5": [
+        {
+          "pos": 3,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Völkern"
+        },
+        {
+          "pos": 6,
+          "form": "wonder",
+          "lemma": "wonder",
+          "level": "B1",
+          "de": "staunt"
+        },
+        {
+          "pos": 7,
+          "form": "marvelously",
+          "lemma": "marvelously",
+          "level": "C1",
+          "de": "erstaunlich"
+        },
+        {
+          "pos": 11,
+          "form": "working",
+          "lemma": "work",
+          "level": "B1",
+          "de": "wirke"
+        },
+        {
+          "pos": 21,
+          "form": "believe",
+          "lemma": "believe",
+          "level": "B1",
+          "de": "glauben"
+        },
+        {
+          "pos": 25,
+          "form": "told",
+          "lemma": "tell",
+          "level": "B1",
+          "de": "erzählt"
+        }
+      ],
+      "6": [
+        {
+          "pos": 1,
+          "form": "behold",
+          "lemma": "behold",
+          "level": "C1",
+          "de": "siehe"
+        },
+        {
+          "pos": 8,
+          "form": "bitter",
+          "lemma": "bitter",
+          "level": "B2",
+          "de": "grimmige"
+        },
+        {
+          "pos": 10,
+          "form": "hasty",
+          "lemma": "hasty",
+          "level": "B2",
+          "de": "schnelle"
+        },
+        {
+          "pos": 11,
+          "form": "nation",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Volk"
+        },
+        {
+          "pos": 13,
+          "form": "march",
+          "lemma": "march",
+          "level": "B1",
+          "de": "ziehen"
+        },
+        {
+          "pos": 16,
+          "form": "breadth",
+          "lemma": "breadth",
+          "level": "C1",
+          "de": "Breite"
+        },
+        {
+          "pos": 21,
+          "form": "possess",
+          "lemma": "possess",
+          "level": "B2",
+          "de": "erobern"
+        },
+        {
+          "pos": 22,
+          "form": "dwelling",
+          "lemma": "dwelling",
+          "level": "B2",
+          "de": "Wohnstätten"
+        },
+        {
+          "pos": 3,
+          "pos_end": 4,
+          "form": "raise up",
+          "lemma": "raise up",
+          "level": "B1",
+          "de": "aufrichten"
+        }
+      ],
+      "7": [
+        {
+          "pos": 2,
+          "form": "feared",
+          "lemma": "fear",
+          "level": "B1",
+          "de": "gefürchtet"
+        },
+        {
+          "pos": 4,
+          "form": "dreaded",
+          "lemma": "dread",
+          "level": "C1",
+          "de": "geschreckt"
+        },
+        {
+          "pos": 6,
+          "form": "judgment",
+          "lemma": "judgment",
+          "level": "B2",
+          "de": "Recht"
+        },
+        {
+          "pos": 9,
+          "form": "dignity",
+          "lemma": "dignity",
+          "level": "B2",
+          "de": "Hoheit"
+        },
+        {
+          "pos": 10,
+          "form": "proceed",
+          "lemma": "proceed",
+          "level": "B2",
+          "de": "gehen"
+        }
+      ],
+      "8": [
+        {
+          "pos": 1,
+          "form": "horses",
+          "lemma": "horse",
+          "level": "B1",
+          "de": "Rosse"
+        },
+        {
+          "pos": 4,
+          "form": "swifter",
+          "lemma": "swift",
+          "level": "C1",
+          "de": "schneller"
+        },
+        {
+          "pos": 6,
+          "form": "leopards",
+          "lemma": "leopard",
+          "level": "B2",
+          "de": "Pardeln"
+        },
+        {
+          "pos": 10,
+          "form": "fierce",
+          "lemma": "fierce",
+          "level": "B2",
+          "de": "grimmiger"
+        },
+        {
+          "pos": 14,
+          "form": "wolves",
+          "lemma": "wolf",
+          "level": "B1",
+          "de": "Wölfe"
+        },
+        {
+          "pos": 16,
+          "form": "horsemen",
+          "lemma": "horseman",
+          "level": "B2",
+          "de": "Reiter"
+        },
+        {
+          "pos": 17,
+          "form": "press",
+          "lemma": "press",
+          "level": "B1",
+          "de": "sprengen"
+        },
+        {
+          "pos": 18,
+          "form": "proudly",
+          "lemma": "proudly",
+          "level": "B2",
+          "de": "stolz"
+        },
+        {
+          "pos": 16,
+          "form": "horsemen",
+          "lemma": "horseman",
+          "level": "B2",
+          "de": "Reiter"
+        },
+        {
+          "pos": 27,
+          "form": "fly",
+          "lemma": "fly",
+          "level": "B1",
+          "de": "fliegen"
+        },
+        {
+          "pos": 30,
+          "form": "eagle",
+          "lemma": "eagle",
+          "level": "B2",
+          "de": "Adler"
+        },
+        {
+          "pos": 32,
+          "form": "hurries",
+          "lemma": "hurry",
+          "level": "B1",
+          "de": "eilt"
+        },
+        {
+          "pos": 34,
+          "form": "devour",
+          "lemma": "devour",
+          "level": "C1",
+          "de": "fressen"
+        }
+      ],
+      "9": [
+        {
+          "pos": 5,
+          "form": "violence",
+          "lemma": "violence",
+          "level": "B2",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 7,
+          "form": "hordes",
+          "lemma": "horde",
+          "level": "C1",
+          "de": "Scharen"
+        },
+        {
+          "pos": 10,
+          "form": "desert",
+          "lemma": "desert",
+          "level": "B1",
+          "de": "Osten"
+        },
+        {
+          "pos": 12,
+          "form": "gathers",
+          "lemma": "gather",
+          "level": "B1",
+          "de": "sammelt"
+        },
+        {
+          "pos": 13,
+          "form": "prisoners",
+          "lemma": "prisoner",
+          "level": "B1",
+          "de": "Gefangene"
+        }
+      ],
+      "10": [
+        {
+          "pos": 2,
+          "form": "scoffs",
+          "lemma": "scoff",
+          "level": "C1",
+          "de": "spottet"
+        },
+        {
+          "pos": 6,
+          "form": "princes",
+          "lemma": "prince",
+          "level": "B1",
+          "de": "Fürsten"
+        },
+        {
+          "pos": 9,
+          "form": "derision",
+          "lemma": "derision",
+          "level": "C2",
+          "de": "Gespött"
+        },
+        {
+          "pos": 13,
+          "form": "laughs",
+          "lemma": "laugh",
+          "level": "B1",
+          "de": "lacht"
+        },
+        {
+          "pos": 16,
+          "form": "stronghold",
+          "lemma": "stronghold",
+          "level": "C1",
+          "de": "Festung"
+        },
+        {
+          "pos": 19,
+          "form": "builds",
+          "lemma": "build",
+          "level": "B1",
+          "de": "schüttet"
+        },
+        {
+          "pos": 22,
+          "form": "earthen",
+          "lemma": "earthen",
+          "level": "C1",
+          "de": "erdenen"
+        },
+        {
+          "pos": 23,
+          "form": "ramp",
+          "lemma": "ramp",
+          "level": "B2",
+          "de": "Wall"
+        }
+      ],
+      "11": [
+        {
+          "pos": 2,
+          "form": "sweeps",
+          "lemma": "sweep",
+          "level": "B2",
+          "de": "fährt"
+        },
+        {
+          "pos": 12,
+          "form": "indeed",
+          "lemma": "indeed",
+          "level": "B1",
+          "de": "wirklich"
+        },
+        {
+          "pos": 13,
+          "form": "guilty",
+          "lemma": "guilty",
+          "level": "B1",
+          "de": "schuldig"
+        },
+        {
+          "pos": 15,
+          "form": "strength",
+          "lemma": "strength",
+          "level": "B1",
+          "de": "Kraft"
+        }
+      ],
+      "12": [
+        {
+          "pos": 3,
+          "form": "everlasting",
+          "lemma": "everlasting",
+          "level": "C1",
+          "de": "Ewigkeit"
+        },
+        {
+          "pos": 17,
+          "form": "appointed",
+          "lemma": "appoint",
+          "level": "B2",
+          "de": "bestimmt"
+        },
+        {
+          "pos": 20,
+          "form": "judgment",
+          "lemma": "judgment",
+          "level": "B2",
+          "de": "Gericht"
+        },
+        {
+          "pos": 24,
+          "form": "established",
+          "lemma": "establish",
+          "level": "B2",
+          "de": "gesetzt"
+        },
+        {
+          "pos": 27,
+          "form": "punish",
+          "lemma": "punish",
+          "level": "B1",
+          "de": "strafen"
+        }
+      ],
+      "13": [
+        {
+          "pos": 3,
+          "form": "purer",
+          "lemma": "pure",
+          "level": "B2",
+          "de": "reineren"
+        },
+        {
+          "pos": 8,
+          "form": "evil",
+          "lemma": "evil",
+          "level": "B1",
+          "de": "Böses"
+        },
+        {
+          "pos": 14,
+          "form": "perversity",
+          "lemma": "perversity",
+          "level": "C2",
+          "de": "Unrecht"
+        },
+        {
+          "pos": 18,
+          "form": "tolerate",
+          "lemma": "tolerate",
+          "level": "B2",
+          "de": "duldest"
+        },
+        {
+          "pos": 22,
+          "form": "treacherously",
+          "lemma": "treacherous",
+          "level": "C2",
+          "de": "treulos"
+        },
+        {
+          "pos": 28,
+          "form": "wicked",
+          "lemma": "wicked",
+          "level": "B2",
+          "de": "Gottlose"
+        },
+        {
+          "pos": 29,
+          "form": "swallows",
+          "lemma": "swallow",
+          "level": "B1",
+          "de": "verschlingt"
+        },
+        {
+          "pos": 36,
+          "form": "righteous",
+          "lemma": "righteous",
+          "level": "B2",
+          "de": "gerechter"
+        }
+      ],
+      "14": [
+        {
+          "pos": 11,
+          "form": "creeping",
+          "lemma": "creep",
+          "level": "B2",
+          "de": "kriechenden"
+        },
+        {
+          "pos": 16,
+          "form": "ruler",
+          "lemma": "ruler",
+          "level": "B1",
+          "de": "Herrscher"
+        }
+      ],
+      "15": [
+        {
+          "pos": 8,
+          "form": "hook",
+          "lemma": "hook",
+          "level": "B1",
+          "de": "Angel"
+        },
+        {
+          "pos": 10,
+          "form": "catches",
+          "lemma": "catch",
+          "level": "B1",
+          "de": "fängt"
+        },
+        {
+          "pos": 16,
+          "form": "gathers",
+          "lemma": "gather",
+          "level": "B1",
+          "de": "sammelt"
+        },
+        {
+          "pos": 20,
+          "form": "dragnet",
+          "lemma": "dragnet",
+          "level": "C2",
+          "de": "Garn"
+        },
+        {
+          "pos": 23,
+          "form": "rejoices",
+          "lemma": "rejoice",
+          "level": "B2",
+          "de": "freut"
+        }
+      ],
+      "16": [
+        {
+          "pos": 2,
+          "form": "sacrifices",
+          "lemma": "sacrifice",
+          "level": "B2",
+          "de": "opfert"
+        },
+        {
+          "pos": 7,
+          "form": "burns",
+          "lemma": "burn",
+          "level": "B1",
+          "de": "räuchert"
+        },
+        {
+          "pos": 8,
+          "form": "incense",
+          "lemma": "incense",
+          "level": "C1",
+          "de": "Weihrauch"
+        },
+        {
+          "pos": 11,
+          "form": "dragnet",
+          "lemma": "dragnet",
+          "level": "C2",
+          "de": "Garn"
+        },
+        {
+          "pos": 18,
+          "form": "luxurious",
+          "lemma": "luxurious",
+          "level": "B2",
+          "de": "üppig"
+        }
+      ],
+      "17": [
+        {
+          "pos": 3,
+          "form": "continually",
+          "lemma": "continually",
+          "level": "B2",
+          "de": "immerfort"
+        },
+        {
+          "pos": 4,
+          "form": "empty",
+          "lemma": "empty",
+          "level": "B1",
+          "de": "leeren"
+        },
+        {
+          "pos": 10,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Völker"
+        },
+        {
+          "pos": 12,
+          "form": "mercy",
+          "lemma": "mercy",
+          "level": "B1",
+          "de": "Erbarmen"
+        }
+      ]
+    },
+    "2": {
+      "1": [
+        {
+          "pos": 2,
+          "form": "stand",
+          "lemma": "stand",
+          "level": "B1",
+          "de": "stehen"
+        },
+        {
+          "pos": 5,
+          "form": "watch",
+          "lemma": "watch",
+          "level": "B1",
+          "de": "Wache"
+        },
+        {
+          "pos": 11,
+          "form": "ramparts",
+          "lemma": "rampart",
+          "level": "C2",
+          "de": "Bollwerk"
+        },
+        {
+          "pos": 28,
+          "form": "answer",
+          "lemma": "answer",
+          "level": "B1",
+          "de": "antworten"
+        },
+        {
+          "pos": 31,
+          "form": "complaint",
+          "lemma": "complaint",
+          "level": "B1",
+          "de": "Klage"
+        }
+      ],
+      "2": [
+        {
+          "pos": 1,
+          "form": "answered",
+          "lemma": "answer",
+          "level": "B1",
+          "de": "antwortete"
+        },
+        {
+          "pos": 4,
+          "form": "Write",
+          "lemma": "write",
+          "level": "B1",
+          "de": "Schreibe"
+        },
+        {
+          "pos": 5,
+          "form": "vision",
+          "lemma": "vision",
+          "level": "B2",
+          "de": "Vision"
+        },
+        {
+          "pos": 7,
+          "form": "make",
+          "lemma": "make",
+          "level": "A2",
+          "de": "mache"
+        },
+        {
+          "pos": 9,
+          "form": "plain",
+          "lemma": "plain",
+          "level": "B1",
+          "de": "deutlich"
+        },
+        {
+          "pos": 11,
+          "form": "tablets",
+          "lemma": "tablet",
+          "level": "B2",
+          "de": "Tafeln"
+        },
+        {
+          "pos": 15,
+          "form": "runs",
+          "lemma": "run",
+          "level": "B1",
+          "de": "läuft"
+        },
+        {
+          "pos": 17,
+          "form": "read",
+          "lemma": "read",
+          "level": "A2",
+          "de": "lesen"
+        }
+      ],
+      "3": [
+        {
+          "pos": 2,
+          "form": "vision",
+          "lemma": "vision",
+          "level": "B2",
+          "de": "Vision"
+        },
+        {
+          "pos": 7,
+          "form": "appointed",
+          "lemma": "appoint",
+          "level": "B2",
+          "de": "bestimmte"
+        },
+        {
+          "pos": 11,
+          "form": "hurries",
+          "lemma": "hurry",
+          "level": "B1",
+          "de": "eilt"
+        },
+        {
+          "pos": 17,
+          "form": "prove",
+          "lemma": "prove",
+          "level": "B1",
+          "de": "erweisen"
+        },
+        {
+          "pos": 18,
+          "form": "false",
+          "lemma": "false",
+          "level": "B1",
+          "de": "falsch"
+        },
+        {
+          "pos": 21,
+          "form": "takes",
+          "lemma": "take",
+          "level": "A2",
+          "de": "dauert"
+        },
+        {
+          "pos": 23,
+          "form": "wait",
+          "lemma": "wait",
+          "level": "B1",
+          "de": "warte"
+        },
+        {
+          "pos": 29,
+          "form": "surely",
+          "lemma": "surely",
+          "level": "B2",
+          "de": "sicherlich"
+        },
+        {
+          "pos": 33,
+          "form": "delay",
+          "lemma": "delay",
+          "level": "B1",
+          "de": "zögern"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "Behold",
+          "lemma": "behold",
+          "level": "C1",
+          "de": "Siehe"
+        },
+        {
+          "pos": 2,
+          "form": "soul",
+          "lemma": "soul",
+          "level": "B1",
+          "de": "Seele"
+        },
+        {
+          "pos": 4,
+          "form": "puffed",
+          "lemma": "puff",
+          "level": "B2",
+          "de": "aufgebläht"
+        },
+        {
+          "pos": 9,
+          "form": "upright",
+          "lemma": "upright",
+          "level": "B2",
+          "de": "aufrichtig"
+        },
+        {
+          "pos": 14,
+          "form": "righteous",
+          "lemma": "righteous",
+          "level": "B2",
+          "de": "Gerechte"
+        },
+        {
+          "pos": 16,
+          "form": "live",
+          "lemma": "live",
+          "level": "A2",
+          "de": "leben"
+        },
+        {
+          "pos": 19,
+          "form": "faith",
+          "lemma": "faith",
+          "level": "B1",
+          "de": "Glauben"
+        }
+      ],
+      "5": [
+        {
+          "pos": 1,
+          "form": "moreover",
+          "lemma": "moreover",
+          "level": "B2",
+          "de": "außerdem"
+        },
+        {
+          "pos": 2,
+          "form": "wine",
+          "lemma": "wine",
+          "level": "B1",
+          "de": "Wein"
+        },
+        {
+          "pos": 4,
+          "form": "treacherous",
+          "lemma": "treacherous",
+          "level": "C1",
+          "de": "verräterisch"
+        },
+        {
+          "pos": 6,
+          "form": "haughty",
+          "lemma": "haughty",
+          "level": "C1",
+          "de": "hochmütiger"
+        },
+        {
+          "pos": 10,
+          "form": "stay",
+          "lemma": "stay",
+          "level": "B1",
+          "de": "bleibt"
+        },
+        {
+          "pos": 14,
+          "form": "enlarges",
+          "lemma": "enlarge",
+          "level": "B2",
+          "de": "erweitert"
+        },
+        {
+          "pos": 16,
+          "form": "desire",
+          "lemma": "desire",
+          "level": "B1",
+          "de": "Begierde"
+        },
+        {
+          "pos": 18,
+          "form": "Sheol",
+          "lemma": "Sheol",
+          "level": "C2",
+          "de": "Scheol"
+        },
+        {
+          "pos": 22,
+          "form": "like",
+          "lemma": "like",
+          "level": "A2",
+          "de": "wie"
+        },
+        {
+          "pos": 23,
+          "form": "death",
+          "lemma": "death",
+          "level": "A2",
+          "de": "Tod"
+        },
+        {
+          "pos": 27,
+          "form": "satisfied",
+          "lemma": "satisfy",
+          "level": "B1",
+          "de": "zufrieden"
+        },
+        {
+          "pos": 29,
+          "form": "gathers",
+          "lemma": "gather",
+          "level": "B1",
+          "de": "sammelt"
+        },
+        {
+          "pos": 33,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Nationen"
+        },
+        {
+          "pos": 35,
+          "form": "heaps",
+          "lemma": "heap",
+          "level": "B2",
+          "de": "häuft"
+        },
+        {
+          "pos": 39,
+          "form": "peoples",
+          "lemma": "people",
+          "level": "B1",
+          "de": "Völker"
+        }
+      ],
+      "6": [
+        {
+          "pos": 6,
+          "form": "parable",
+          "lemma": "parable",
+          "level": "C1",
+          "de": "Gleichnis"
+        },
+        {
+          "pos": 11,
+          "form": "taunting",
+          "lemma": "taunt",
+          "level": "C1",
+          "de": "spöttisches"
+        },
+        {
+          "pos": 12,
+          "form": "proverb",
+          "lemma": "proverb",
+          "level": "B2",
+          "de": "Sprichwort"
+        },
+        {
+          "pos": 16,
+          "form": "say",
+          "lemma": "say",
+          "level": "A2",
+          "de": "sagen"
+        },
+        {
+          "pos": 17,
+          "form": "Woe",
+          "lemma": "woe",
+          "level": "C1",
+          "de": "Wehe"
+        },
+        {
+          "pos": 21,
+          "form": "increases",
+          "lemma": "increase",
+          "level": "B1",
+          "de": "vermehrt"
+        },
+        {
+          "pos": 29,
+          "form": "enriches",
+          "lemma": "enrich",
+          "level": "B2",
+          "de": "bereichert"
+        },
+        {
+          "pos": 32,
+          "form": "extortion",
+          "lemma": "extortion",
+          "level": "C2",
+          "de": "Erpressung"
+        },
+        {
+          "pos": 3,
+          "pos_end": 4,
+          "form": "take up",
+          "lemma": "take up",
+          "level": "B1",
+          "de": "aufheben"
+        }
+      ],
+      "7": [
+        {
+          "pos": 2,
+          "form": "debtors",
+          "lemma": "debtor",
+          "level": "B2",
+          "de": "Schuldner"
+        },
+        {
+          "pos": 3,
+          "form": "rise up",
+          "lemma": "rise up",
+          "level": "B1",
+          "de": "aufstehen",
+          "pos_end": 4
+        },
+        {
+          "pos": 5,
+          "form": "suddenly",
+          "lemma": "suddenly",
+          "level": "B1",
+          "de": "plötzlich"
+        },
+        {
+          "pos": 13,
+          "form": "tremble",
+          "lemma": "tremble",
+          "level": "B2",
+          "de": "erzittern"
+        },
+        {
+          "pos": 19,
+          "form": "victim",
+          "lemma": "victim",
+          "level": "B1",
+          "de": "Beute"
+        },
+        {
+          "pos": 7,
+          "pos_end": 8,
+          "form": "wake up",
+          "lemma": "wake up",
+          "level": "A2",
+          "de": "aufwachen"
+        }
+      ],
+      "8": [
+        {
+          "pos": 3,
+          "form": "plundered",
+          "lemma": "plunder",
+          "level": "C1",
+          "de": "geplündert"
+        },
+        {
+          "pos": 5,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Nationen"
+        },
+        {
+          "pos": 8,
+          "form": "remnant",
+          "lemma": "remnant",
+          "level": "C1",
+          "de": "Überrest"
+        },
+        {
+          "pos": 11,
+          "form": "peoples",
+          "lemma": "people",
+          "level": "B1",
+          "de": "Völker"
+        },
+        {
+          "pos": 13,
+          "form": "plunder",
+          "lemma": "plunder",
+          "level": "C1",
+          "de": "plündern"
+        },
+        {
+          "pos": 18,
+          "form": "blood",
+          "lemma": "blood",
+          "level": "B1",
+          "de": "Blut"
+        },
+        {
+          "pos": 22,
+          "form": "violence",
+          "lemma": "violence",
+          "level": "B1",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 26,
+          "form": "land",
+          "lemma": "land",
+          "level": "B1",
+          "de": "Land"
+        },
+        {
+          "pos": 29,
+          "form": "city",
+          "lemma": "city",
+          "level": "A2",
+          "de": "Stadt"
+        },
+        {
+          "pos": 34,
+          "form": "dwell",
+          "lemma": "dwell",
+          "level": "B2",
+          "de": "wohnen"
+        }
+      ],
+      "9": [
+        {
+          "pos": 0,
+          "form": "Woe",
+          "lemma": "woe",
+          "level": "C1",
+          "de": "Wehe"
+        },
+        {
+          "pos": 4,
+          "form": "gets",
+          "lemma": "get",
+          "level": "A2",
+          "de": "erwirbt"
+        },
+        {
+          "pos": 6,
+          "form": "evil",
+          "lemma": "evil",
+          "level": "B1",
+          "de": "unrechten"
+        },
+        {
+          "pos": 7,
+          "form": "gain",
+          "lemma": "gain",
+          "level": "B1",
+          "de": "Gewinn"
+        },
+        {
+          "pos": 10,
+          "form": "house",
+          "lemma": "house",
+          "level": "A2",
+          "de": "Haus"
+        },
+        {
+          "pos": 14,
+          "form": "set",
+          "lemma": "set",
+          "level": "B1",
+          "de": "setzen"
+        },
+        {
+          "pos": 16,
+          "form": "nest",
+          "lemma": "nest",
+          "level": "B1",
+          "de": "Nest"
+        },
+        {
+          "pos": 23,
+          "form": "delivered",
+          "lemma": "deliver",
+          "level": "B1",
+          "de": "befreit"
+        },
+        {
+          "pos": 26,
+          "form": "hand",
+          "lemma": "hand",
+          "level": "A2",
+          "de": "Hand"
+        },
+        {
+          "pos": 6,
+          "form": "evil",
+          "lemma": "evil",
+          "level": "B1",
+          "de": "Bösen"
+        }
+      ],
+      "10": [
+        {
+          "pos": 2,
+          "form": "devised",
+          "lemma": "devise",
+          "level": "C1",
+          "de": "ersonnen"
+        },
+        {
+          "pos": 3,
+          "form": "shame",
+          "lemma": "shame",
+          "level": "B1",
+          "de": "Schande"
+        },
+        {
+          "pos": 6,
+          "form": "house",
+          "lemma": "house",
+          "level": "A2",
+          "de": "Haus"
+        },
+        {
+          "pos": 8,
+          "form": "cutting off",
+          "lemma": "cut off",
+          "level": "B1",
+          "de": "Ausrottung",
+          "pos_end": 9
+        },
+        {
+          "pos": 10,
+          "form": "many",
+          "lemma": "many",
+          "level": "A2",
+          "de": "viele"
+        },
+        {
+          "pos": 11,
+          "form": "peoples",
+          "lemma": "people",
+          "level": "B1",
+          "de": "Völker"
+        },
+        {
+          "pos": 14,
+          "form": "sinned",
+          "lemma": "sin",
+          "level": "B1",
+          "de": "gesündigt"
+        },
+        {
+          "pos": 17,
+          "form": "soul",
+          "lemma": "soul",
+          "level": "B1",
+          "de": "Seele"
+        }
+      ],
+      "11": [
+        {
+          "pos": 2,
+          "form": "stone",
+          "lemma": "stone",
+          "level": "B1",
+          "de": "Stein"
+        },
+        {
+          "pos": 8,
+          "form": "wall",
+          "lemma": "wall",
+          "level": "B1",
+          "de": "Mauer"
+        },
+        {
+          "pos": 11,
+          "form": "beam",
+          "lemma": "beam",
+          "level": "B2",
+          "de": "Balken"
+        },
+        {
+          "pos": 15,
+          "form": "woodwork",
+          "lemma": "woodwork",
+          "level": "C1",
+          "de": "Gebälk"
+        },
+        {
+          "pos": 17,
+          "form": "answer",
+          "lemma": "answer",
+          "level": "B1",
+          "de": "antworten"
+        }
+      ],
+      "12": [
+        {
+          "pos": 0,
+          "form": "Woe",
+          "lemma": "woe",
+          "level": "C1",
+          "de": "Wehe"
+        },
+        {
+          "pos": 4,
+          "form": "builds",
+          "lemma": "build",
+          "level": "B1",
+          "de": "baut"
+        },
+        {
+          "pos": 6,
+          "form": "town",
+          "lemma": "town",
+          "level": "B1",
+          "de": "Stadt"
+        },
+        {
+          "pos": 8,
+          "form": "blood",
+          "lemma": "blood",
+          "level": "B1",
+          "de": "Blut"
+        },
+        {
+          "pos": 10,
+          "form": "establishes",
+          "lemma": "establish",
+          "level": "B1",
+          "de": "gründet"
+        },
+        {
+          "pos": 12,
+          "form": "city",
+          "lemma": "city",
+          "level": "A2",
+          "de": "Stadt"
+        },
+        {
+          "pos": 14,
+          "form": "iniquity",
+          "lemma": "iniquity",
+          "level": "C2",
+          "de": "Ungerechtigkeit"
+        }
+      ],
+      "13": [
+        {
+          "pos": 0,
+          "form": "Behold",
+          "lemma": "behold",
+          "level": "C1",
+          "de": "Siehe"
+        },
+        {
+          "pos": 9,
+          "form": "peoples",
+          "lemma": "people",
+          "level": "B1",
+          "de": "Völker"
+        },
+        {
+          "pos": 10,
+          "form": "labor",
+          "lemma": "labor",
+          "level": "B1",
+          "de": "arbeiten"
+        },
+        {
+          "pos": 13,
+          "form": "fire",
+          "lemma": "fire",
+          "level": "B1",
+          "de": "Feuer"
+        },
+        {
+          "pos": 16,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Nationen"
+        },
+        {
+          "pos": 17,
+          "form": "weary",
+          "lemma": "weary",
+          "level": "B2",
+          "de": "mühen"
+        },
+        {
+          "pos": 20,
+          "form": "vanity",
+          "lemma": "vanity",
+          "level": "C1",
+          "de": "Vergeblichkeit"
+        }
+      ],
+      "14": [
+        {
+          "pos": 2,
+          "form": "earth",
+          "lemma": "earth",
+          "level": "A2",
+          "de": "Erde"
+        },
+        {
+          "pos": 5,
+          "form": "filled",
+          "lemma": "fill",
+          "level": "B1",
+          "de": "erfüllt"
+        },
+        {
+          "pos": 8,
+          "form": "knowledge",
+          "lemma": "knowledge",
+          "level": "B1",
+          "de": "Erkenntnis"
+        },
+        {
+          "pos": 11,
+          "form": "glory",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Herrlichkeit"
+        },
+        {
+          "pos": 14,
+          "form": "waters",
+          "lemma": "water",
+          "level": "A2",
+          "de": "Wasser"
+        },
+        {
+          "pos": 15,
+          "form": "cover",
+          "lemma": "cover",
+          "level": "B1",
+          "de": "bedecken"
+        },
+        {
+          "pos": 17,
+          "form": "sea",
+          "lemma": "sea",
+          "level": "B1",
+          "de": "Meer"
+        }
+      ],
+      "15": [
+        {
+          "pos": 0,
+          "form": "Woe",
+          "lemma": "woe",
+          "level": "C1",
+          "de": "Wehe"
+        },
+        {
+          "pos": 4,
+          "form": "gives",
+          "lemma": "give",
+          "level": "A2",
+          "de": "gibt"
+        },
+        {
+          "pos": 6,
+          "form": "neighbor",
+          "lemma": "neighbor",
+          "level": "B1",
+          "de": "Nächsten"
+        },
+        {
+          "pos": 7,
+          "form": "drink",
+          "lemma": "drink",
+          "level": "B1",
+          "de": "trinken"
+        },
+        {
+          "pos": 8,
+          "form": "pouring",
+          "lemma": "pour",
+          "level": "B1",
+          "de": "eingießt"
+        },
+        {
+          "pos": 10,
+          "form": "inflaming",
+          "lemma": "inflame",
+          "level": "C2",
+          "de": "berauschenden"
+        },
+        {
+          "pos": 11,
+          "form": "wine",
+          "lemma": "wine",
+          "level": "B1",
+          "de": "Wein"
+        },
+        {
+          "pos": 15,
+          "form": "drunk",
+          "lemma": "drunk",
+          "level": "B1",
+          "de": "betrunken"
+        },
+        {
+          "pos": 20,
+          "form": "gaze",
+          "lemma": "gaze",
+          "level": "B2",
+          "de": "schauen"
+        },
+        {
+          "pos": 23,
+          "form": "naked",
+          "lemma": "naked",
+          "level": "B1",
+          "de": "nackten"
+        },
+        {
+          "pos": 24,
+          "form": "bodies",
+          "lemma": "body",
+          "level": "B1",
+          "de": "Körper"
+        }
+      ],
+      "16": [
+        {
+          "pos": 2,
+          "form": "filled",
+          "lemma": "fill",
+          "level": "B1",
+          "de": "erfüllt"
+        },
+        {
+          "pos": 4,
+          "form": "shame",
+          "lemma": "shame",
+          "level": "B1",
+          "de": "Schande"
+        },
+        {
+          "pos": 7,
+          "form": "glory",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Ehre"
+        },
+        {
+          "pos": 11,
+          "form": "drink",
+          "lemma": "drink",
+          "level": "B1",
+          "de": "trinken"
+        },
+        {
+          "pos": 14,
+          "form": "exposed",
+          "lemma": "expose",
+          "level": "B2",
+          "de": "entblößt"
+        },
+        {
+          "pos": 16,
+          "form": "cup",
+          "lemma": "cup",
+          "level": "B1",
+          "de": "Becher"
+        },
+        {
+          "pos": 23,
+          "form": "around",
+          "lemma": "around",
+          "level": "B1",
+          "de": "herum"
+        },
+        {
+          "pos": 27,
+          "form": "disgrace",
+          "lemma": "disgrace",
+          "level": "C1",
+          "de": "Schande"
+        },
+        {
+          "pos": 29,
+          "form": "cover",
+          "lemma": "cover",
+          "level": "B1",
+          "de": "bedecken"
+        },
+        {
+          "pos": 7,
+          "form": "glory",
+          "lemma": "glory",
+          "level": "B1",
+          "de": "Herrlichkeit"
+        },
+        {
+          "pos": 19,
+          "pos_end": 20,
+          "form": "right hand",
+          "lemma": "right hand",
+          "level": "A2",
+          "de": "rechte Hand"
+        }
+      ],
+      "17": [
+        {
+          "pos": 2,
+          "form": "violence",
+          "lemma": "violence",
+          "level": "B1",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 7,
+          "form": "overwhelm",
+          "lemma": "overwhelm",
+          "level": "B2",
+          "de": "überwältigen"
+        },
+        {
+          "pos": 11,
+          "form": "destruction",
+          "lemma": "destruction",
+          "level": "B2",
+          "de": "Vernichtung"
+        },
+        {
+          "pos": 14,
+          "form": "animals",
+          "lemma": "animal",
+          "level": "B1",
+          "de": "Tiere"
+        },
+        {
+          "pos": 18,
+          "form": "afraid",
+          "lemma": "afraid",
+          "level": "B1",
+          "de": "erschrecken"
+        },
+        {
+          "pos": 22,
+          "form": "blood",
+          "lemma": "blood",
+          "level": "B1",
+          "de": "Blut"
+        },
+        {
+          "pos": 2,
+          "form": "violence",
+          "lemma": "violence",
+          "level": "B1",
+          "de": "Gewalt"
+        },
+        {
+          "pos": 30,
+          "form": "land",
+          "lemma": "land",
+          "level": "B1",
+          "de": "Land"
+        },
+        {
+          "pos": 33,
+          "form": "city",
+          "lemma": "city",
+          "level": "A2",
+          "de": "Stadt"
+        },
+        {
+          "pos": 38,
+          "form": "dwell",
+          "lemma": "dwell",
+          "level": "B2",
+          "de": "wohnen"
+        }
+      ],
+      "18": [
+        {
+          "pos": 1,
+          "form": "value",
+          "lemma": "value",
+          "level": "B1",
+          "de": "nützt"
+        },
+        {
+          "pos": 4,
+          "form": "engraved",
+          "lemma": "engrave",
+          "level": "C1",
+          "de": "geschnitzte"
+        },
+        {
+          "pos": 5,
+          "form": "image",
+          "lemma": "image",
+          "level": "B1",
+          "de": "Bild"
+        },
+        {
+          "pos": 9,
+          "form": "maker",
+          "lemma": "maker",
+          "level": "B1",
+          "de": "Schöpfer"
+        },
+        {
+          "pos": 4,
+          "form": "engraved",
+          "lemma": "engrave",
+          "level": "C1",
+          "de": "geschnitzt"
+        },
+        {
+          "pos": 14,
+          "form": "molten",
+          "lemma": "molten",
+          "level": "C2",
+          "de": "gegossene"
+        },
+        {
+          "pos": 5,
+          "form": "image",
+          "lemma": "image",
+          "level": "B1",
+          "de": "Bild"
+        },
+        {
+          "pos": 18,
+          "form": "teacher",
+          "lemma": "teacher",
+          "level": "B1",
+          "de": "Lehrer"
+        },
+        {
+          "pos": 20,
+          "form": "lies",
+          "lemma": "lie",
+          "level": "B1",
+          "de": "Lügen"
+        },
+        {
+          "pos": 24,
+          "form": "fashions",
+          "lemma": "fashion",
+          "level": "B2",
+          "de": "formt"
+        },
+        {
+          "pos": 26,
+          "form": "form",
+          "lemma": "form",
+          "level": "B1",
+          "de": "Gestalt"
+        },
+        {
+          "pos": 27,
+          "form": "trusts",
+          "lemma": "trust",
+          "level": "B1",
+          "de": "vertraut"
+        },
+        {
+          "pos": 31,
+          "form": "make",
+          "lemma": "make",
+          "level": "A2",
+          "de": "machen"
+        },
+        {
+          "pos": 32,
+          "form": "mute",
+          "lemma": "mute",
+          "level": "C1",
+          "de": "stumme"
+        },
+        {
+          "pos": 33,
+          "form": "idols",
+          "lemma": "idol",
+          "level": "B2",
+          "de": "Götzen"
+        }
+      ],
+      "19": [
+        {
+          "pos": 0,
+          "form": "Woe",
+          "lemma": "woe",
+          "level": "C1",
+          "de": "Wehe"
+        },
+        {
+          "pos": 4,
+          "form": "says",
+          "lemma": "say",
+          "level": "A2",
+          "de": "spricht"
+        },
+        {
+          "pos": 7,
+          "form": "wood",
+          "lemma": "wood",
+          "level": "B1",
+          "de": "Holz"
+        },
+        {
+          "pos": 8,
+          "form": "Awake",
+          "lemma": "awake",
+          "level": "B1",
+          "de": "Erwache"
+        },
+        {
+          "pos": 12,
+          "form": "mute",
+          "lemma": "mute",
+          "level": "C1",
+          "de": "stummen"
+        },
+        {
+          "pos": 13,
+          "form": "stone",
+          "lemma": "stone",
+          "level": "B1",
+          "de": "Stein"
+        },
+        {
+          "pos": 14,
+          "form": "Arise",
+          "lemma": "arise",
+          "level": "B2",
+          "de": "Stehe auf"
+        },
+        {
+          "pos": 17,
+          "form": "teach",
+          "lemma": "teach",
+          "level": "B1",
+          "de": "lehren"
+        },
+        {
+          "pos": 18,
+          "form": "Behold",
+          "lemma": "behold",
+          "level": "C1",
+          "de": "Siehe"
+        },
+        {
+          "pos": 21,
+          "form": "overlaid",
+          "lemma": "overlay",
+          "level": "C2",
+          "de": "überzogen"
+        },
+        {
+          "pos": 23,
+          "form": "gold",
+          "lemma": "gold",
+          "level": "B1",
+          "de": "Gold"
+        },
+        {
+          "pos": 25,
+          "form": "silver",
+          "lemma": "silver",
+          "level": "B1",
+          "de": "Silber"
+        },
+        {
+          "pos": 30,
+          "form": "breath",
+          "lemma": "breath",
+          "level": "B1",
+          "de": "Atem"
+        },
+        {
+          "pos": 35,
+          "form": "midst",
+          "lemma": "midst",
+          "level": "B2",
+          "de": "Inneren"
+        }
+      ],
+      "20": [
+        {
+          "pos": 5,
+          "form": "holy",
+          "lemma": "holy",
+          "level": "B1",
+          "de": "heiligen"
+        },
+        {
+          "pos": 6,
+          "form": "temple",
+          "lemma": "temple",
+          "level": "B1",
+          "de": "Tempel"
+        },
+        {
+          "pos": 10,
+          "form": "earth",
+          "lemma": "earth",
+          "level": "A2",
+          "de": "Erde"
+        },
+        {
+          "pos": 12,
+          "form": "silent",
+          "lemma": "silent",
+          "level": "B1",
+          "de": "still"
+        }
+      ]
+    },
+    "3": {
+      "1": [
+        {
+          "pos": 1,
+          "form": "prayer",
+          "lemma": "prayer",
+          "level": "B1",
+          "de": "Gebet"
+        },
+        {
+          "pos": 5,
+          "form": "prophet",
+          "lemma": "prophet",
+          "level": "B2",
+          "de": "Prophet"
+        },
+        {
+          "pos": 8,
+          "form": "victorious",
+          "lemma": "victorious",
+          "level": "B2",
+          "de": "siegreichen"
+        }
+      ],
+      "2": [
+        {
+          "pos": 3,
+          "form": "heard",
+          "lemma": "hear",
+          "level": "A2",
+          "de": "gehört"
+        },
+        {
+          "pos": 6,
+          "form": "fame",
+          "lemma": "fame",
+          "level": "B2",
+          "de": "Ruf"
+        },
+        {
+          "pos": 10,
+          "form": "awe",
+          "lemma": "awe",
+          "level": "C1",
+          "de": "Ehrfurcht"
+        },
+        {
+          "pos": 13,
+          "form": "deeds",
+          "lemma": "deed",
+          "level": "B2",
+          "de": "Taten"
+        },
+        {
+          "pos": 15,
+          "form": "Renew",
+          "lemma": "renew",
+          "level": "B2",
+          "de": "erneuere"
+        },
+        {
+          "pos": 34,
+          "form": "wrath",
+          "lemma": "wrath",
+          "level": "C1",
+          "de": "Zorn"
+        },
+        {
+          "pos": 36,
+          "form": "remember",
+          "lemma": "remember",
+          "level": "A2",
+          "de": "gedenkst"
+        },
+        {
+          "pos": 37,
+          "form": "mercy",
+          "lemma": "mercy",
+          "level": "B2",
+          "de": "Barmherzigkeit"
+        },
+        {
+          "pos": 18,
+          "pos_end": 21,
+          "form": "in the midst of",
+          "lemma": "in the midst of",
+          "level": "C1",
+          "de": "inmitten"
+        }
+      ],
+      "3": [
+        {
+          "pos": 12,
+          "form": "glory",
+          "lemma": "glory",
+          "level": "B2",
+          "de": "Herrlichkeit"
+        },
+        {
+          "pos": 13,
+          "form": "covered",
+          "lemma": "cover",
+          "level": "A2",
+          "de": "bedeckte"
+        },
+        {
+          "pos": 15,
+          "form": "heavens",
+          "lemma": "heaven",
+          "level": "A2",
+          "de": "Himmel"
+        },
+        {
+          "pos": 18,
+          "form": "praise",
+          "lemma": "praise",
+          "level": "B1",
+          "de": "Lob"
+        },
+        {
+          "pos": 19,
+          "form": "filled",
+          "lemma": "fill",
+          "level": "A2",
+          "de": "erfüllte"
+        }
+      ],
+      "4": [
+        {
+          "pos": 1,
+          "form": "splendor",
+          "lemma": "splendor",
+          "level": "C1",
+          "de": "Glanz"
+        },
+        {
+          "pos": 5,
+          "form": "sunrise",
+          "lemma": "sunrise",
+          "level": "B1",
+          "de": "Sonnenaufgang"
+        },
+        {
+          "pos": 6,
+          "form": "Rays",
+          "lemma": "ray",
+          "level": "B2",
+          "de": "Strahlen"
+        },
+        {
+          "pos": 7,
+          "form": "shine",
+          "lemma": "shine",
+          "level": "B1",
+          "de": "strahlen"
+        },
+        {
+          "pos": 15,
+          "form": "hidden",
+          "lemma": "hide",
+          "level": "A2",
+          "de": "verborgen"
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "Plague",
+          "lemma": "plague",
+          "level": "B2",
+          "de": "Seuche"
+        },
+        {
+          "pos": 5,
+          "form": "pestilence",
+          "lemma": "pestilence",
+          "level": "C2",
+          "de": "Pest"
+        },
+        {
+          "pos": 6,
+          "form": "followed",
+          "lemma": "follow",
+          "level": "A2",
+          "de": "folgte"
+        }
+      ],
+      "6": [
+        {
+          "pos": 3,
+          "form": "shook",
+          "lemma": "shake",
+          "level": "B1",
+          "de": "erschütterte"
+        },
+        {
+          "pos": 7,
+          "form": "looked",
+          "lemma": "look",
+          "level": "A1",
+          "de": "blickte"
+        },
+        {
+          "pos": 11,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Nationen"
+        },
+        {
+          "pos": 12,
+          "form": "tremble",
+          "lemma": "tremble",
+          "level": "B2",
+          "de": "erzittern"
+        },
+        {
+          "pos": 14,
+          "form": "ancient",
+          "lemma": "ancient",
+          "level": "B2",
+          "de": "uralten"
+        },
+        {
+          "pos": 15,
+          "form": "mountains",
+          "lemma": "mountain",
+          "level": "A2",
+          "de": "Berge"
+        },
+        {
+          "pos": 17,
+          "form": "crumbled",
+          "lemma": "crumble",
+          "level": "B2",
+          "de": "zerfielen"
+        },
+        {
+          "pos": 19,
+          "form": "age-old",
+          "lemma": "age-old",
+          "level": "B2",
+          "de": "uralten"
+        },
+        {
+          "pos": 20,
+          "form": "hills",
+          "lemma": "hill",
+          "level": "A2",
+          "de": "Hügel"
+        },
+        {
+          "pos": 21,
+          "form": "collapsed",
+          "lemma": "collapse",
+          "level": "B2",
+          "de": "stürzten ein"
+        },
+        {
+          "pos": 25,
+          "form": "eternal",
+          "lemma": "eternal",
+          "level": "B2",
+          "de": "ewig"
+        }
+      ],
+      "7": [
+        {
+          "pos": 3,
+          "form": "tents",
+          "lemma": "tent",
+          "level": "B1",
+          "de": "Zelte"
+        },
+        {
+          "pos": 7,
+          "form": "affliction",
+          "lemma": "affliction",
+          "level": "C1",
+          "de": "Bedrängnis"
+        },
+        {
+          "pos": 9,
+          "form": "dwellings",
+          "lemma": "dwelling",
+          "level": "B2",
+          "de": "Wohnstätten"
+        },
+        {
+          "pos": 15,
+          "form": "trembled",
+          "lemma": "tremble",
+          "level": "B2",
+          "de": "zitterten"
+        }
+      ],
+      "8": [
+        {
+          "pos": 2,
+          "form": "displeased",
+          "lemma": "displease",
+          "level": "B2",
+          "de": "unzufrieden"
+        },
+        {
+          "pos": 5,
+          "form": "rivers",
+          "lemma": "river",
+          "level": "A2",
+          "de": "Flüsse"
+        },
+        {
+          "pos": 8,
+          "form": "anger",
+          "lemma": "anger",
+          "level": "B1",
+          "de": "Zorn"
+        },
+        {
+          "pos": 11,
+          "form": "rivers",
+          "lemma": "river",
+          "level": "A2",
+          "de": "Flüsse"
+        },
+        {
+          "pos": 14,
+          "form": "wrath",
+          "lemma": "wrath",
+          "level": "C1",
+          "de": "Grimm"
+        },
+        {
+          "pos": 20,
+          "form": "rode",
+          "lemma": "ride",
+          "level": "B1",
+          "de": "rittest"
+        },
+        {
+          "pos": 23,
+          "form": "horses",
+          "lemma": "horse",
+          "level": "A2",
+          "de": "Rossen"
+        },
+        {
+          "pos": 26,
+          "form": "chariots",
+          "lemma": "chariot",
+          "level": "B2",
+          "de": "Wagen"
+        },
+        {
+          "pos": 28,
+          "form": "salvation",
+          "lemma": "salvation",
+          "level": "B2",
+          "de": "Rettung"
+        }
+      ],
+      "9": [
+        {
+          "pos": 1,
+          "form": "uncovered",
+          "lemma": "uncover",
+          "level": "B2",
+          "de": "entblößtest"
+        },
+        {
+          "pos": 3,
+          "form": "bow",
+          "lemma": "bow",
+          "level": "B1",
+          "de": "Bogen"
+        },
+        {
+          "pos": 5,
+          "form": "called",
+          "lemma": "call",
+          "level": "A1",
+          "de": "riefst"
+        },
+        {
+          "pos": 8,
+          "form": "sworn",
+          "lemma": "swear",
+          "level": "B1",
+          "de": "geschworenen"
+        },
+        {
+          "pos": 9,
+          "form": "arrows",
+          "lemma": "arrow",
+          "level": "B1",
+          "de": "Pfeile"
+        },
+        {
+          "pos": 12,
+          "form": "split",
+          "lemma": "split",
+          "level": "B1",
+          "de": "spaltetest"
+        },
+        {
+          "pos": 16,
+          "form": "rivers",
+          "lemma": "river",
+          "level": "A2",
+          "de": "Ströme"
+        }
+      ],
+      "10": [
+        {
+          "pos": 1,
+          "form": "mountains",
+          "lemma": "mountain",
+          "level": "A2",
+          "de": "Berge"
+        },
+        {
+          "pos": 6,
+          "form": "afraid",
+          "lemma": "afraid",
+          "level": "A2",
+          "de": "fürchteten"
+        },
+        {
+          "pos": 8,
+          "form": "storm",
+          "lemma": "storm",
+          "level": "B1",
+          "de": "Sturzregen"
+        },
+        {
+          "pos": 14,
+          "form": "deep",
+          "lemma": "deep",
+          "level": "A2",
+          "de": "Tiefe"
+        },
+        {
+          "pos": 15,
+          "form": "roared",
+          "lemma": "roar",
+          "level": "B2",
+          "de": "brüllte"
+        },
+        {
+          "pos": 17,
+          "pos_end": 18,
+          "form": "lifted up",
+          "lemma": "lifted up",
+          "level": "B1",
+          "de": "erhob"
+        }
+      ],
+      "11": [
+        {
+          "pos": 4,
+          "form": "stood",
+          "lemma": "stand",
+          "level": "A1",
+          "de": "standen"
+        },
+        {
+          "pos": 5,
+          "form": "still",
+          "lemma": "still",
+          "level": "A2",
+          "de": "still"
+        },
+        {
+          "pos": 14,
+          "form": "arrows",
+          "lemma": "arrow",
+          "level": "B1",
+          "de": "Pfeile"
+        },
+        {
+          "pos": 20,
+          "form": "shining",
+          "lemma": "shine",
+          "level": "B1",
+          "de": "Glanz"
+        },
+        {
+          "pos": 23,
+          "form": "glittering",
+          "lemma": "glitter",
+          "level": "B2",
+          "de": "blitzenden"
+        },
+        {
+          "pos": 24,
+          "form": "spear",
+          "lemma": "spear",
+          "level": "B2",
+          "de": "Speer"
+        }
+      ],
+      "12": [
+        {
+          "pos": 1,
+          "form": "marched",
+          "lemma": "march",
+          "level": "B1",
+          "de": "schrittest"
+        },
+        {
+          "pos": 6,
+          "form": "wrath",
+          "lemma": "wrath",
+          "level": "C1",
+          "de": "Grimm"
+        },
+        {
+          "pos": 8,
+          "form": "threshed",
+          "lemma": "thresh",
+          "level": "C1",
+          "de": "draschst"
+        },
+        {
+          "pos": 10,
+          "form": "nations",
+          "lemma": "nation",
+          "level": "B1",
+          "de": "Nationen"
+        },
+        {
+          "pos": 12,
+          "form": "anger",
+          "lemma": "anger",
+          "level": "B1",
+          "de": "Zorn"
+        }
+      ],
+      "13": [
+        {
+          "pos": 5,
+          "form": "salvation",
+          "lemma": "salvation",
+          "level": "B2",
+          "de": "Rettung"
+        },
+        {
+          "pos": 5,
+          "form": "salvation",
+          "lemma": "salvation",
+          "level": "B2",
+          "de": "Rettung"
+        },
+        {
+          "pos": 14,
+          "form": "anointed",
+          "lemma": "anoint",
+          "level": "C1",
+          "de": "Gesalbten"
+        },
+        {
+          "pos": 16,
+          "form": "crushed",
+          "lemma": "crush",
+          "level": "B2",
+          "de": "zerschlugst"
+        },
+        {
+          "pos": 23,
+          "form": "wickedness",
+          "lemma": "wickedness",
+          "level": "B2",
+          "de": "Gottlosigkeit"
+        },
+        {
+          "pos": 25,
+          "form": "stripped",
+          "lemma": "strip",
+          "level": "B2",
+          "de": "entblößtest"
+        }
+      ],
+      "14": [
+        {
+          "pos": 1,
+          "form": "pierced",
+          "lemma": "pierce",
+          "level": "B2",
+          "de": "durchbohrtest"
+        },
+        {
+          "pos": 6,
+          "form": "warriors",
+          "lemma": "warrior",
+          "level": "B2",
+          "de": "Krieger"
+        },
+        {
+          "pos": 10,
+          "form": "spears",
+          "lemma": "spear",
+          "level": "B2",
+          "de": "Speere"
+        },
+        {
+          "pos": 15,
+          "form": "whirlwind",
+          "lemma": "whirlwind",
+          "level": "B2",
+          "de": "Sturm"
+        },
+        {
+          "pos": 17,
+          "form": "scatter",
+          "lemma": "scatter",
+          "level": "B2",
+          "de": "zerstreuen"
+        },
+        {
+          "pos": 19,
+          "form": "gloating",
+          "lemma": "gloat",
+          "level": "C1",
+          "de": "frohlockend"
+        },
+        {
+          "pos": 23,
+          "form": "devour",
+          "lemma": "devour",
+          "level": "B2",
+          "de": "verschlingen"
+        },
+        {
+          "pos": 25,
+          "form": "wretched",
+          "lemma": "wretched",
+          "level": "C1",
+          "de": "Elenden"
+        },
+        {
+          "pos": 27,
+          "form": "secret",
+          "lemma": "secret",
+          "level": "B1",
+          "de": "Verborgenheit"
+        }
+      ],
+      "15": [
+        {
+          "pos": 1,
+          "form": "trampled",
+          "lemma": "trample",
+          "level": "B2",
+          "de": "zertratst"
+        },
+        {
+          "pos": 6,
+          "form": "horses",
+          "lemma": "horse",
+          "level": "A2",
+          "de": "Rossen"
+        },
+        {
+          "pos": 7,
+          "form": "churning",
+          "lemma": "churn",
+          "level": "B2",
+          "de": "aufwühlend"
+        },
+        {
+          "pos": 8,
+          "form": "mighty",
+          "lemma": "mighty",
+          "level": "B2",
+          "de": "gewaltigen"
+        }
+      ],
+      "16": [
+        {
+          "pos": 1,
+          "form": "heard",
+          "lemma": "hear",
+          "level": "A2",
+          "de": "hörte"
+        },
+        {
+          "pos": 5,
+          "form": "trembled",
+          "lemma": "tremble",
+          "level": "B2",
+          "de": "erbebte"
+        },
+        {
+          "pos": 7,
+          "form": "lips",
+          "lemma": "lip",
+          "level": "B1",
+          "de": "Lippen"
+        },
+        {
+          "pos": 8,
+          "form": "quivered",
+          "lemma": "quiver",
+          "level": "C1",
+          "de": "zitterten"
+        },
+        {
+          "pos": 11,
+          "form": "voice",
+          "lemma": "voice",
+          "level": "A2",
+          "de": "Stimme"
+        },
+        {
+          "pos": 12,
+          "form": "Rottenness",
+          "lemma": "rottenness",
+          "level": "C2",
+          "de": "Fäulnis"
+        },
+        {
+          "pos": 13,
+          "form": "enters",
+          "lemma": "enter",
+          "level": "A2",
+          "de": "dringt ein"
+        },
+        {
+          "pos": 16,
+          "form": "bones",
+          "lemma": "bone",
+          "level": "B1",
+          "de": "Gebeine"
+        },
+        {
+          "pos": 19,
+          "form": "tremble",
+          "lemma": "tremble",
+          "level": "B2",
+          "de": "zittere"
+        },
+        {
+          "pos": 26,
+          "form": "wait",
+          "lemma": "wait",
+          "level": "A2",
+          "de": "warten"
+        },
+        {
+          "pos": 27,
+          "form": "quietly",
+          "lemma": "quietly",
+          "level": "B1",
+          "de": "ruhig"
+        },
+        {
+          "pos": 32,
+          "form": "trouble",
+          "lemma": "trouble",
+          "level": "B1",
+          "de": "Drangsal"
+        },
+        {
+          "pos": 41,
+          "form": "invade",
+          "lemma": "invade",
+          "level": "B2",
+          "de": "überfallen"
+        }
+      ],
+      "17": [
+        {
+          "pos": 6,
+          "form": "flourish",
+          "lemma": "flourish",
+          "level": "B2",
+          "de": "blüht"
+        },
+        {
+          "pos": 8,
+          "form": "fruit",
+          "lemma": "fruit",
+          "level": "A2",
+          "de": "Frucht"
+        },
+        {
+          "pos": 12,
+          "form": "vines",
+          "lemma": "vine",
+          "level": "B1",
+          "de": "Weinstöcken"
+        },
+        {
+          "pos": 14,
+          "form": "labor",
+          "lemma": "labor",
+          "level": "B1",
+          "de": "Ertrag"
+        },
+        {
+          "pos": 17,
+          "form": "olive",
+          "lemma": "olive",
+          "level": "B1",
+          "de": "Ölbaums"
+        },
+        {
+          "pos": 18,
+          "form": "fails",
+          "lemma": "fail",
+          "level": "B1",
+          "de": "fehlschlägt"
+        },
+        {
+          "pos": 20,
+          "form": "fields",
+          "lemma": "field",
+          "level": "A2",
+          "de": "Felder"
+        },
+        {
+          "pos": 21,
+          "form": "yield",
+          "lemma": "yield",
+          "level": "B2",
+          "de": "bringen"
+        },
+        {
+          "pos": 25,
+          "form": "flocks",
+          "lemma": "flock",
+          "level": "B1",
+          "de": "Herden"
+        },
+        {
+          "pos": 31,
+          "form": "fold",
+          "lemma": "fold",
+          "level": "B2",
+          "de": "Pferch"
+        },
+        {
+          "pos": 36,
+          "form": "herd",
+          "lemma": "herd",
+          "level": "B1",
+          "de": "Vieh"
+        },
+        {
+          "pos": 39,
+          "form": "stalls",
+          "lemma": "stall",
+          "level": "B2",
+          "de": "Ställen"
+        },
+        {
+          "pos": 3,
+          "pos_end": 4,
+          "form": "fig tree",
+          "lemma": "fig tree",
+          "level": "A2",
+          "de": "Feigenbaum"
+        }
+      ],
+      "18": [
+        {
+          "pos": 3,
+          "form": "rejoice",
+          "lemma": "rejoice",
+          "level": "B2",
+          "de": "freuen"
+        },
+        {
+          "pos": 9,
+          "form": "joyful",
+          "lemma": "joyful",
+          "level": "B1",
+          "de": "frohlocken"
+        },
+        {
+          "pos": 15,
+          "form": "salvation",
+          "lemma": "salvation",
+          "level": "B2",
+          "de": "Rettung"
+        }
+      ],
+      "19": [
+        {
+          "pos": 5,
+          "form": "strength",
+          "lemma": "strength",
+          "level": "B1",
+          "de": "Kraft"
+        },
+        {
+          "pos": 9,
+          "form": "deer's",
+          "lemma": "deer",
+          "level": "B1",
+          "de": "Hirschkuh"
+        },
+        {
+          "pos": 14,
+          "form": "enables",
+          "lemma": "enable",
+          "level": "B2",
+          "de": "lässt"
+        },
+        {
+          "pos": 24,
+          "form": "director",
+          "lemma": "director",
+          "level": "B1",
+          "de": "Dirigent"
+        },
+        {
+          "pos": 27,
+          "form": "stringed",
+          "lemma": "string",
+          "level": "B1",
+          "de": "Saiten"
+        },
+        {
+          "pos": 28,
+          "form": "instruments",
+          "lemma": "instrument",
+          "level": "B1",
+          "de": "Instrumenten"
+        }
+      ]
+    }
+  }
+}
