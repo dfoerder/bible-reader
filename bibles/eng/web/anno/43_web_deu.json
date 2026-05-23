@@ -128,6 +128,27 @@
           "lemma": "interpret",
           "level": "B2",
           "de": "übersetzt"
+        },
+        {
+          "pos": 6,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 15,
+          "form": "Messiah",
+          "lemma": "Messiah",
+          "level": "A1",
+          "de": "Messias"
+        },
+        {
+          "pos": 20,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "42": [
@@ -292,6 +313,55 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Übersetzung"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 11,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 13,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 17,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 22,
+          "form": "Cephas",
+          "lemma": "Cephas",
+          "level": "A1",
+          "de": "Kephas"
+        },
+        {
+          "pos": 27,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "43": [
@@ -427,6 +497,27 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 11,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 15,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "44": [
@@ -485,6 +576,34 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 4,
+          "form": "Bethsaida",
+          "lemma": "Bethsaida",
+          "level": "A1",
+          "de": "Betsaida"
+        },
+        {
+          "pos": 9,
+          "form": "Andrew",
+          "lemma": "Andrew",
+          "level": "A1",
+          "de": "Andreas"
+        },
+        {
+          "pos": 11,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "45": [
@@ -641,6 +760,48 @@
           "lemma": "of",
           "level": "A1",
           "de": "des"
+        },
+        {
+          "pos": 0,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 2,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
+        },
+        {
+          "pos": 13,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
+        },
+        {
+          "pos": 21,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 23,
+          "form": "Nazareth",
+          "lemma": "Nazareth",
+          "level": "A1",
+          "de": "Nazareth"
+        },
+        {
+          "pos": 27,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
         }
       ],
       "26": [
@@ -748,6 +909,13 @@
           "lemma": "know",
           "level": "A1",
           "de": "kennt"
+        },
+        {
+          "pos": 0,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "27": [
@@ -969,6 +1137,27 @@
           "lemma": "baptize",
           "level": "B2",
           "de": "am Taufen"
+        },
+        {
+          "pos": 5,
+          "form": "Bethany",
+          "lemma": "Bethany",
+          "level": "A1",
+          "de": "Bethanien"
+        },
+        {
+          "pos": 8,
+          "form": "Jordan",
+          "lemma": "Jordan",
+          "level": "A1",
+          "de": "Jordan"
+        },
+        {
+          "pos": 10,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "29": [
@@ -1133,6 +1322,20 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "30": [
@@ -1289,6 +1492,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 21,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "21": [
@@ -1424,6 +1634,20 @@
           "lemma": "no",
           "level": "A1",
           "de": "Nein"
+        },
+        {
+          "pos": 7,
+          "form": "Elijah",
+          "lemma": "Elijah",
+          "level": "A1",
+          "de": "Elia"
+        },
+        {
+          "pos": 13,
+          "form": "Are",
+          "lemma": "Are",
+          "level": "A1",
+          "de": "are"
         }
       ],
       "22": [
@@ -1616,6 +1840,13 @@
           "lemma": "yourself",
           "level": "A2",
           "de": "dich selbst"
+        },
+        {
+          "pos": 5,
+          "form": "Who",
+          "lemma": "Who",
+          "level": "A1",
+          "de": "Wer"
         }
       ],
       "23": [
@@ -1779,6 +2010,20 @@
           "lemma": "say",
           "level": "A1",
           "de": "sagte"
+        },
+        {
+          "pos": 20,
+          "form": "Isaiah",
+          "lemma": "Isaiah",
+          "level": "A1",
+          "de": "Jesaja"
+        },
+        {
+          "pos": 23,
+          "form": "said",
+          "lemma": "said",
+          "level": "A1",
+          "de": "said"
         }
       ],
       "24": [
@@ -1979,6 +2224,13 @@
           "lemma": "prophet",
           "level": "B1",
           "de": "Prophet"
+        },
+        {
+          "pos": 15,
+          "form": "Elijah",
+          "lemma": "Elijah",
+          "level": "A1",
+          "de": "Elia"
         }
       ],
       "46": [
@@ -2101,6 +2353,34 @@
           "lemma": "see",
           "level": "A1",
           "de": "sieh"
+        },
+        {
+          "pos": 0,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
+        },
+        {
+          "pos": 11,
+          "form": "Nazareth",
+          "lemma": "Nazareth",
+          "level": "A1",
+          "de": "Nazareth"
+        },
+        {
+          "pos": 12,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 16,
+          "form": "Come",
+          "lemma": "Come",
+          "level": "A1",
+          "de": "Komm"
         }
       ],
       "47": [
@@ -2222,6 +2502,20 @@
           "lemma": "deceit",
           "level": "C1",
           "de": "Falschheit"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 2,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
         }
       ],
       "48": [
@@ -2393,6 +2687,34 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 0,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 25,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "49": [
@@ -2486,6 +2808,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
+        },
+        {
+          "pos": 14,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "50": [
@@ -2657,6 +2993,20 @@
           "lemma": "this",
           "level": "A1",
           "de": "diese"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 7,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "6": [
@@ -2729,6 +3079,13 @@
           "lemma": "be",
           "level": "A1",
           "de": "war"
+        },
+        {
+          "pos": 10,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "7": [
@@ -3313,6 +3670,13 @@
           "lemma": "to",
           "level": "A1",
           "de": "für"
+        },
+        {
+          "pos": 19,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "32": [
@@ -3456,6 +3820,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 0,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "33": [
@@ -3731,6 +4102,20 @@
           "lemma": "spirit",
           "level": "B2",
           "de": "Geist"
+        },
+        {
+          "pos": 17,
+          "form": "On",
+          "lemma": "On",
+          "level": "A1",
+          "de": "on"
+        },
+        {
+          "pos": 38,
+          "form": "Spirit",
+          "lemma": "Spirit",
+          "level": "A1",
+          "de": "Geist"
         }
       ],
       "34": [
@@ -3903,6 +4288,13 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jüngern"
+        },
+        {
+          "pos": 4,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "16": [
@@ -4054,6 +4446,27 @@
           "lemma": "through",
           "level": "A2",
           "de": "durch"
+        },
+        {
+          "pos": 6,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
+        },
+        {
+          "pos": 13,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "18": [
@@ -4375,6 +4788,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "du"
+        },
+        {
+          "pos": 12,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "20": [
@@ -4461,6 +4881,13 @@
           "lemma": "the",
           "level": "A1",
           "de": "der"
+        },
+        {
+          "pos": 12,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "1": [
@@ -4568,6 +4995,20 @@
           "lemma": "be",
           "level": "A1",
           "de": "war"
+        },
+        {
+          "pos": 11,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 16,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "2": [
@@ -4619,6 +5060,13 @@
           "lemma": "with",
           "level": "A1",
           "de": "bei"
+        },
+        {
+          "pos": 7,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "3": [
@@ -5942,6 +6390,27 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 0,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
+        },
+        {
+          "pos": 15,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
+        },
+        {
+          "pos": 27,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "36": [
@@ -6050,6 +6519,13 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "37": [
@@ -6115,6 +6591,13 @@
           "lemma": "follow",
           "level": "B1",
           "de": "folgten"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "38": [
@@ -6335,6 +6818,13 @@
           "lemma": "stay",
           "level": "B1",
           "de": "wohnst"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "39": [
@@ -6619,6 +7109,27 @@
           "lemma": "brother",
           "level": "A1",
           "de": "Bruder"
+        },
+        {
+          "pos": 6,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
+        },
+        {
+          "pos": 11,
+          "form": "Andrew",
+          "lemma": "Andrew",
+          "level": "A1",
+          "de": "Andreas"
+        },
+        {
+          "pos": 12,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
         }
       ]
     },
@@ -6714,6 +7225,20 @@
           "lemma": "there",
           "level": "A1",
           "de": "dort"
+        },
+        {
+          "pos": 8,
+          "form": "Cana",
+          "lemma": "Cana",
+          "level": "A1",
+          "de": "Kana"
+        },
+        {
+          "pos": 10,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "2": [
@@ -6779,6 +7304,13 @@
           "lemma": "marriage",
           "level": "B1",
           "de": "Hochzeit"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "3": [
@@ -6887,6 +7419,13 @@
           "lemma": "wine",
           "level": "B1",
           "de": "Wein"
+        },
+        {
+          "pos": 13,
+          "form": "wine",
+          "lemma": "wine",
+          "level": "A1",
+          "de": "wine"
         }
       ],
       "4": [
@@ -7037,6 +7576,13 @@
           "lemma": "come",
           "level": "A1",
           "de": "gekommen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "5": [
@@ -7432,6 +7978,20 @@
           "lemma": "brim",
           "level": "C1",
           "de": "Rand"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 9,
+          "form": "water",
+          "lemma": "water",
+          "level": "A1",
+          "de": "water"
         }
       ],
       "8": [
@@ -8199,6 +8759,27 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 8,
+          "form": "Cana",
+          "lemma": "Cana",
+          "level": "A1",
+          "de": "Kana"
+        },
+        {
+          "pos": 10,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "12": [
@@ -8355,6 +8936,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tage"
+        },
+        {
+          "pos": 6,
+          "form": "Capernaum",
+          "lemma": "Capernaum",
+          "level": "A1",
+          "de": "Kapernaum"
         }
       ],
       "13": [
@@ -8449,6 +9037,20 @@
           "lemma": "to",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "14": [
@@ -9046,6 +9648,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "gesagt"
+        },
+        {
+          "pos": 24,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "23": [
@@ -9202,6 +9811,13 @@
           "lemma": "do",
           "level": "A1",
           "de": "tat"
+        },
+        {
+          "pos": 5,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "24": [
@@ -9274,6 +9890,13 @@
           "lemma": "everyone",
           "level": "A1",
           "de": "alle"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "25": [
@@ -9910,6 +10533,13 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "20": [
@@ -10060,6 +10690,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tagen"
+        },
+        {
+          "pos": 4,
+          "form": "It",
+          "lemma": "It",
+          "level": "A1",
+          "de": "it"
         }
       ]
     },
@@ -10162,6 +10799,13 @@
           "lemma": "Jew",
           "level": "B1",
           "de": "Juden"
+        },
+        {
+          "pos": 9,
+          "form": "Nicodemus",
+          "lemma": "Nicodemus",
+          "level": "A1",
+          "de": "Nikodemus"
         }
       ],
       "2": [
@@ -10431,6 +11075,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 36,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "3": [
@@ -10566,6 +11217,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "4": [
@@ -10750,6 +11408,20 @@
           "lemma": "bear",
           "level": "A2",
           "de": "geboren"
+        },
+        {
+          "pos": 0,
+          "form": "Nicodemus",
+          "lemma": "Nicodemus",
+          "level": "A1",
+          "de": "Nikodemus"
+        },
+        {
+          "pos": 26,
+          "form": "born",
+          "lemma": "born",
+          "level": "A1",
+          "de": "born"
         }
       ],
       "5": [
@@ -10906,6 +11578,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "16": [
@@ -12026,6 +12705,27 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 3,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
+        },
+        {
+          "pos": 16,
+          "form": "Jordan",
+          "lemma": "Jordan",
+          "level": "A1",
+          "de": "Jordan"
+        },
+        {
+          "pos": 31,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "27": [
@@ -12126,6 +12826,13 @@
           "lemma": "heaven",
           "level": "A2",
           "de": "Himmel"
+        },
+        {
+          "pos": 0,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "28": [
@@ -12254,6 +12961,20 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 6,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 12,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "29": [
@@ -12837,6 +13558,20 @@
           "lemma": "baptize",
           "level": "C1",
           "de": "taufte"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 12,
+          "form": "Judea",
+          "lemma": "Judea",
+          "level": "A1",
+          "de": "Judäa"
         }
       ],
       "23": [
@@ -12959,6 +13694,27 @@
           "lemma": "baptize",
           "level": "C1",
           "de": "getauft"
+        },
+        {
+          "pos": 0,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
+        },
+        {
+          "pos": 5,
+          "form": "Enon",
+          "lemma": "Enon",
+          "level": "A1",
+          "de": "Enon"
+        },
+        {
+          "pos": 7,
+          "form": "Salim",
+          "lemma": "Salim",
+          "level": "A1",
+          "de": "Salim"
         }
       ],
       "24": [
@@ -13010,6 +13766,13 @@
           "lemma": "prison",
           "level": "B1",
           "de": "Gefängnis"
+        },
+        {
+          "pos": 1,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "25": [
@@ -13125,6 +13888,13 @@
           "lemma": "purification",
           "level": "C2",
           "de": "Reinigung"
+        },
+        {
+          "pos": 9,
+          "form": "Johns",
+          "lemma": "Johns",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "6": [
@@ -13355,6 +14125,13 @@
           "lemma": "anew",
           "level": "C1",
           "de": "neu"
+        },
+        {
+          "pos": 7,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "8": [
@@ -13640,6 +14417,13 @@
           "lemma": "be",
           "level": "A1",
           "de": "sein"
+        },
+        {
+          "pos": 0,
+          "form": "Nicodemus",
+          "lemma": "Nicodemus",
+          "level": "A1",
+          "de": "Nikodemus"
         }
       ],
       "10": [
@@ -13734,6 +14518,20 @@
           "lemma": "thing",
           "level": "A1",
           "de": "Dinge"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 8,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "11": [
@@ -14370,6 +15168,13 @@
           "lemma": "up",
           "level": "A1",
           "de": "hoch"
+        },
+        {
+          "pos": 1,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "15": [
@@ -15491,6 +16296,13 @@
           "lemma": "hour",
           "level": "B1",
           "de": "Stunde"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -15591,6 +16403,20 @@
           "lemma": "drink",
           "level": "A1",
           "de": "Schluck"
+        },
+        {
+          "pos": 3,
+          "form": "Samaria",
+          "lemma": "Samaria",
+          "level": "A1",
+          "de": "Samaria"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "8": [
@@ -15904,6 +16730,13 @@
           "lemma": "Samaritan",
           "level": "C1",
           "de": "Samaritern"
+        },
+        {
+          "pos": 23,
+          "form": "woman",
+          "lemma": "woman",
+          "level": "A1",
+          "de": "woman"
         }
       ],
       "10": [
@@ -16144,6 +16977,13 @@
           "lemma": "water",
           "level": "A1",
           "de": "Wasser"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "41": [
@@ -16430,6 +17270,13 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 26,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "43": [
@@ -16516,6 +17363,13 @@
           "lemma": "into",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 12,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "44": [
@@ -16609,6 +17463,13 @@
           "lemma": "country",
           "level": "B1",
           "de": "Vaterland"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "45": [
@@ -16807,6 +17668,20 @@
           "lemma": "feast",
           "level": "B2",
           "de": "Fest"
+        },
+        {
+          "pos": 5,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 19,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "11": [
@@ -17147,6 +18022,13 @@
           "lemma": "livestock",
           "level": "B2",
           "de": "Vieh"
+        },
+        {
+          "pos": 6,
+          "form": "Jacob",
+          "lemma": "Jacob",
+          "level": "A1",
+          "de": "Jakob"
         }
       ],
       "13": [
@@ -17226,6 +18108,13 @@
           "lemma": "again",
           "level": "A1",
           "de": "wieder"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "14": [
@@ -17738,6 +18627,13 @@
           "lemma": "here",
           "level": "A1",
           "de": "hierher"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "17": [
@@ -17859,6 +18755,13 @@
           "lemma": "husband",
           "level": "B1",
           "de": "Mann"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "18": [
@@ -18244,6 +19147,13 @@
           "lemma": "worship",
           "level": "B2",
           "de": "anbeten"
+        },
+        {
+          "pos": 12,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "36": [
@@ -18835,6 +19745,13 @@
           "lemma": "do",
           "level": "A1",
           "de": "getan habe"
+        },
+        {
+          "pos": 6,
+          "form": "Samaritans",
+          "lemma": "Samaritans",
+          "level": "A1",
+          "de": "Samariter"
         }
       ],
       "40": [
@@ -18963,6 +19880,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tage"
+        },
+        {
+          "pos": 3,
+          "form": "Samaritans",
+          "lemma": "Samaritans",
+          "level": "A1",
+          "de": "Samariter"
         }
       ],
       "51": [
@@ -19276,6 +20200,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 26,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "53": [
@@ -19453,6 +20384,13 @@
           "lemma": "house",
           "level": "B1",
           "de": "Haus"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "54": [
@@ -19546,6 +20484,27 @@
           "lemma": "into",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "Judea",
+          "lemma": "Judea",
+          "level": "A1",
+          "de": "Judäa"
+        },
+        {
+          "pos": 15,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "1": [
@@ -19674,6 +20633,20 @@
           "lemma": "than",
           "level": "A1",
           "de": "als"
+        },
+        {
+          "pos": 11,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 19,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "2": [
@@ -19725,6 +20698,13 @@
           "lemma": "disciple",
           "level": "B1",
           "de": "Jünger"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "3": [
@@ -19762,6 +20742,20 @@
           "lemma": "into",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 2,
+          "form": "Judea",
+          "lemma": "Judea",
+          "level": "A1",
+          "de": "Judäa"
+        },
+        {
+          "pos": 6,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "4": [
@@ -19807,6 +20801,13 @@
           "lemma": "through",
           "level": "A2",
           "de": "durch"
+        },
+        {
+          "pos": 5,
+          "form": "Samaria",
+          "lemma": "Samaria",
+          "level": "A1",
+          "de": "Samaria"
         }
       ],
       "5": [
@@ -19935,6 +20936,34 @@
           "lemma": "son",
           "level": "A1",
           "de": "Sohn"
+        },
+        {
+          "pos": 7,
+          "form": "Samaria",
+          "lemma": "Samaria",
+          "level": "A1",
+          "de": "Samaria"
+        },
+        {
+          "pos": 9,
+          "form": "Sychar",
+          "lemma": "Sychar",
+          "level": "A1",
+          "de": "Sychar"
+        },
+        {
+          "pos": 16,
+          "form": "Jacob",
+          "lemma": "Jacob",
+          "level": "A1",
+          "de": "Jakob"
+        },
+        {
+          "pos": 21,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
         }
       ],
       "31": [
@@ -20372,6 +21401,13 @@
           "lemma": "work",
           "level": "A1",
           "de": "Werk"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "35": [
@@ -20607,6 +21643,13 @@
           "lemma": "already",
           "level": "B1",
           "de": "schon"
+        },
+        {
+          "pos": 10,
+          "form": "harvest",
+          "lemma": "harvest",
+          "level": "A1",
+          "de": "harvest"
         }
       ],
       "26": [
@@ -21398,6 +22441,20 @@
           "lemma": "father",
           "level": "A1",
           "de": "Vater"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 17,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "22": [
@@ -22001,6 +23058,20 @@
           "lemma": "thing",
           "level": "A1",
           "de": "Dinge"
+        },
+        {
+          "pos": 8,
+          "form": "Messiah",
+          "lemma": "Messiah",
+          "level": "A1",
+          "de": "Messias"
+        },
+        {
+          "pos": 14,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "46": [
@@ -22157,6 +23228,34 @@
           "lemma": "at",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 5,
+          "form": "Cana",
+          "lemma": "Cana",
+          "level": "A1",
+          "de": "Kana"
+        },
+        {
+          "pos": 7,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 25,
+          "form": "Capernaum",
+          "lemma": "Capernaum",
+          "level": "A1",
+          "de": "Kapernaum"
         }
       ],
       "47": [
@@ -22398,6 +23497,27 @@
           "lemma": "death",
           "level": "B1",
           "de": "Todes"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 9,
+          "form": "Judea",
+          "lemma": "Judea",
+          "level": "A1",
+          "de": "Judäa"
+        },
+        {
+          "pos": 11,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "48": [
@@ -22520,6 +23640,13 @@
           "lemma": "believe",
           "level": "B1",
           "de": "glauben"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "49": [
@@ -22769,6 +23896,20 @@
           "lemma": "way",
           "level": "A1",
           "de": "Weg"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ]
     },
@@ -22864,6 +24005,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 4,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "47": [
@@ -23243,6 +24391,13 @@
           "lemma": "truth",
           "level": "B1",
           "de": "Wahrheit"
+        },
+        {
+          "pos": 4,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "34": [
@@ -23628,6 +24783,20 @@
           "lemma": "to",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 11,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "2": [
@@ -23756,6 +24925,20 @@
           "lemma": "porch",
           "level": "B2",
           "de": "Säulenhallen"
+        },
+        {
+          "pos": 2,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
+        },
+        {
+          "pos": 16,
+          "form": "Bethesda",
+          "lemma": "Bethesda",
+          "level": "A1",
+          "de": "Bethesda"
         }
       ],
       "3": [
@@ -24374,6 +25557,13 @@
           "lemma": "Sabbath",
           "level": "B2",
           "de": "Sabbat"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "17": [
@@ -24467,6 +25657,13 @@
           "lemma": "too",
           "level": "A1",
           "de": "auch"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "18": [
@@ -24942,6 +26139,13 @@
           "lemma": "likewise",
           "level": "B2",
           "de": "ebenso"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "20": [
@@ -25409,6 +26613,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 11,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "37": [
@@ -25858,6 +27069,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "40": [
@@ -26087,6 +27305,13 @@
           "lemma": "walk",
           "level": "A1",
           "de": "geh"
+        },
+        {
+          "pos": 3,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "12": [
@@ -26223,6 +27448,13 @@
           "lemma": "walk",
           "level": "A1",
           "de": "geh"
+        },
+        {
+          "pos": 4,
+          "form": "Who",
+          "lemma": "Who",
+          "level": "A1",
+          "de": "Wer"
         }
       ],
       "13": [
@@ -26358,6 +27590,13 @@
           "lemma": "place",
           "level": "A1",
           "de": "Ort"
+        },
+        {
+          "pos": 11,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "14": [
@@ -26543,6 +27782,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 25,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "15": [
@@ -26657,6 +27910,13 @@
           "lemma": "well",
           "level": "A1",
           "de": "gesund"
+        },
+        {
+          "pos": 11,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "41": [
@@ -27292,6 +28552,13 @@
           "lemma": "hope",
           "level": "B1",
           "de": "Hoffnung"
+        },
+        {
+          "pos": 17,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "26": [
@@ -28309,6 +29576,13 @@
           "lemma": "well",
           "level": "A2",
           "de": "gesund"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -28536,6 +29810,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 30,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "8": [
@@ -28616,6 +29897,13 @@
           "lemma": "walk",
           "level": "A1",
           "de": "geh"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "9": [
@@ -28944,6 +30232,13 @@
           "lemma": "mat",
           "level": "B1",
           "de": "Matte"
+        },
+        {
+          "pos": 9,
+          "form": "It",
+          "lemma": "It",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "21": [
@@ -30108,6 +31403,13 @@
           "lemma": "little",
           "level": "A1",
           "de": "wenig"
+        },
+        {
+          "pos": 0,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
         }
       ],
       "8": [
@@ -30173,6 +31475,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 4,
+          "form": "Andrew",
+          "lemma": "Andrew",
+          "level": "A1",
+          "de": "Andreas"
+        },
+        {
+          "pos": 5,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
         }
       ],
       "9": [
@@ -30501,6 +31817,13 @@
           "lemma": "thousand",
           "level": "B1",
           "de": "tausend"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "61": [
@@ -30644,6 +31967,13 @@
           "lemma": "stumble",
           "level": "B2",
           "de": "stolpern"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "62": [
@@ -31119,6 +32449,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 8,
+          "form": "believe",
+          "lemma": "believe",
+          "level": "A1",
+          "de": "believe"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "65": [
@@ -31821,6 +33165,13 @@
           "lemma": "alone",
           "level": "A2",
           "de": "allein"
+        },
+        {
+          "pos": 34,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "23": [
@@ -31964,6 +33315,13 @@
           "lemma": "thanks",
           "level": "A1",
           "de": "Dank"
+        },
+        {
+          "pos": 3,
+          "form": "Tiberias",
+          "lemma": "Tiberias",
+          "level": "A1",
+          "de": "Tiberias"
         }
       ],
       "24": [
@@ -32121,6 +33479,27 @@
           "lemma": "seek",
           "level": "B1",
           "de": "suchend"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 21,
+          "form": "Capernaum",
+          "lemma": "Capernaum",
+          "level": "A1",
+          "de": "Kapernaum"
+        },
+        {
+          "pos": 23,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "25": [
@@ -32873,6 +34252,13 @@
           "lemma": "yourself",
           "level": "B1",
           "de": "euch"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "54": [
@@ -33350,6 +34736,13 @@
           "lemma": "desire",
           "level": "B2",
           "de": "wünschten"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "12": [
@@ -33879,6 +35272,13 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -34073,6 +35473,13 @@
           "lemma": "himself",
           "level": "A2",
           "de": "sich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "41": [
@@ -34385,6 +35792,20 @@
           "lemma": "heaven",
           "level": "A2",
           "de": "Himmel"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 8,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
         }
       ],
       "43": [
@@ -34436,6 +35857,13 @@
           "lemma": "yourself",
           "level": "A2",
           "de": "euch"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "44": [
@@ -35902,6 +37330,13 @@
           "lemma": "fill",
           "level": "B1",
           "de": "satt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "27": [
@@ -36378,6 +37813,13 @@
           "lemma": "send",
           "level": "A1",
           "de": "gesandt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "30": [
@@ -36555,6 +37997,13 @@
           "lemma": "do",
           "level": "A1",
           "de": "tun"
+        },
+        {
+          "pos": 5,
+          "form": "What",
+          "lemma": "What",
+          "level": "A1",
+          "de": "Was"
         }
       ],
       "71": [
@@ -36697,6 +38146,27 @@
           "lemma": "twelve",
           "level": "A1",
           "de": "Zwölf"
+        },
+        {
+          "pos": 4,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 8,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 9,
+          "form": "Iscariot",
+          "lemma": "Iscariot",
+          "level": "A1",
+          "de": "Iskariot"
         }
       ],
       "31": [
@@ -37090,6 +38560,20 @@
           "lemma": "heaven",
           "level": "A2",
           "de": "Himmel"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 12,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "33": [
@@ -37510,6 +38994,13 @@
           "lemma": "thirsty",
           "level": "B1",
           "de": "durstig"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "16": [
@@ -37745,6 +39236,20 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 13,
+          "form": "Capernaum",
+          "lemma": "Capernaum",
+          "level": "A1",
+          "de": "Kapernaum"
+        },
+        {
+          "pos": 19,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "18": [
@@ -38010,6 +39515,13 @@
           "lemma": "afraid",
           "level": "A2",
           "de": "ängstlich"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "20": [
@@ -39185,6 +40697,13 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 11,
+          "form": "Capernaum",
+          "lemma": "Capernaum",
+          "level": "A1",
+          "de": "Kapernaum"
         }
       ],
       "60": [
@@ -39335,6 +40854,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 10,
+          "form": "This",
+          "lemma": "This",
+          "level": "A1",
+          "de": "Dies"
         }
       ],
       "1": [
@@ -39477,6 +41003,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 22,
+          "form": "Tiberias",
+          "lemma": "Tiberias",
+          "level": "A1",
+          "de": "Tiberias"
         }
       ],
       "2": [
@@ -39691,6 +41238,13 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jüngern"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "4": [
@@ -39977,6 +41531,20 @@
           "lemma": "eat",
           "level": "A1",
           "de": "essen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 18,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
         }
       ],
       "66": [
@@ -40177,6 +41745,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "ihr"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "68": [
@@ -40292,6 +41867,20 @@
           "lemma": "life",
           "level": "A1",
           "de": "Lebens"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "69": [
@@ -40413,6 +42002,13 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 11,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "70": [
@@ -40520,6 +42116,13 @@
           "lemma": "devil",
           "level": "B1",
           "de": "Teufel"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ]
     },
@@ -40643,6 +42246,13 @@
           "lemma": "Galilee",
           "level": "B1",
           "de": "Galiläa"
+        },
+        {
+          "pos": 5,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "42": [
@@ -41238,6 +42848,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "dessen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "22": [
@@ -41387,6 +43004,20 @@
           "lemma": "boy",
           "level": "A1",
           "de": "Jungen"
+        },
+        {
+          "pos": 0,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
+        },
+        {
+          "pos": 10,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "23": [
@@ -41606,6 +43237,13 @@
           "lemma": "sabbath",
           "level": "B2",
           "de": "Sabbat"
+        },
+        {
+          "pos": 12,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "24": [
@@ -41779,6 +43417,13 @@
           "lemma": "kill",
           "level": "A2",
           "de": "töten"
+        },
+        {
+          "pos": 5,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "16": [
@@ -41872,6 +43517,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "17": [
@@ -42389,6 +44041,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "20": [
@@ -42589,6 +44248,13 @@
           "lemma": "ready",
           "level": "A1",
           "de": "bereit"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -42945,6 +44611,13 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 9,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "10": [
@@ -43196,6 +44869,13 @@
           "lemma": "man",
           "level": "A1",
           "de": "Mensch"
+        },
+        {
+          "pos": 9,
+          "form": "man",
+          "lemma": "man",
+          "level": "A1",
+          "de": "man"
         }
       ],
       "47": [
@@ -43290,6 +44970,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "ihr"
+        },
+        {
+          "pos": 5,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "48": [
@@ -43548,6 +45235,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 0,
+          "form": "Nicodemus",
+          "lemma": "Nicodemus",
+          "level": "A1",
+          "de": "Nikodemus"
         }
       ],
       "26": [
@@ -43711,6 +45405,13 @@
           "lemma": "the",
           "level": "A1",
           "de": "der"
+        },
+        {
+          "pos": 23,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "27": [
@@ -43861,6 +45562,20 @@
           "lemma": "from",
           "level": "A1",
           "de": "her"
+        },
+        {
+          "pos": 11,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
+        },
+        {
+          "pos": 20,
+          "form": "from",
+          "lemma": "from",
+          "level": "A1",
+          "de": "from"
         }
       ],
       "28": [
@@ -44115,6 +45830,20 @@
           "lemma": "know",
           "level": "A1",
           "de": "kennt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 10,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "29": [
@@ -44514,6 +46243,13 @@
           "lemma": "come",
           "level": "A1",
           "de": "kommen"
+        },
+        {
+          "pos": 7,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "37": [
@@ -44691,6 +46427,13 @@
           "lemma": "drink",
           "level": "A1",
           "de": "trinken"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "38": [
@@ -45017,6 +46760,13 @@
           "lemma": "glorify",
           "level": "B2",
           "de": "verherrlicht"
+        },
+        {
+          "pos": 24,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "40": [
@@ -45388,6 +47138,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 7,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 18,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
         }
       ],
       "53": [
@@ -45717,6 +47481,13 @@
           "lemma": "astray",
           "level": "C1",
           "de": "in die Irre"
+        },
+        {
+          "pos": 11,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "13": [
@@ -45932,6 +47703,13 @@
           "lemma": "teach",
           "level": "B1",
           "de": "lehrte"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -46233,6 +48011,13 @@
         },
         {
           "pos": 14,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "er"
+        },
+        {
+          "pos": 27,
           "form": "he",
           "lemma": "he",
           "level": "A1",
@@ -46544,6 +48329,20 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "34": [
@@ -46998,6 +48797,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "2": [
@@ -47656,6 +49462,13 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jünger"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "32": [
@@ -47912,6 +49725,13 @@
           "lemma": "free",
           "level": "B1",
           "de": "frei"
+        },
+        {
+          "pos": 19,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "34": [
@@ -48034,6 +49854,13 @@
           "lemma": "sin",
           "level": "B2",
           "de": "Sünde"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "35": [
@@ -48348,6 +50175,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 5,
+          "form": "Abrahams",
+          "lemma": "Abrahams",
+          "level": "A1",
+          "de": "Abrahams"
         }
       ],
       "38": [
@@ -48518,6 +50352,13 @@
           "lemma": "father",
           "level": "A1",
           "de": "Vater"
+        },
+        {
+          "pos": 23,
+          "form": "father",
+          "lemma": "father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "39": [
@@ -48653,6 +50494,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 6,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Abrahams",
+          "lemma": "Abrahams",
+          "level": "A1",
+          "de": "Abrahams"
+        },
+        {
+          "pos": 22,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "40": [
@@ -48809,6 +50678,20 @@
           "lemma": "this",
           "level": "A1",
           "de": "das"
+        },
+        {
+          "pos": 19,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 20,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "21": [
@@ -49008,6 +50891,20 @@
           "lemma": "come",
           "level": "A1",
           "de": "kommen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 6,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "22": [
@@ -49307,6 +51204,13 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 4,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "24": [
@@ -49484,6 +51388,13 @@
           "lemma": "sin",
           "level": "B2",
           "de": "Sünden"
+        },
+        {
+          "pos": 24,
+          "form": "sins",
+          "lemma": "sins",
+          "level": "A1",
+          "de": "sins"
         }
       ],
       "25": [
@@ -49648,6 +51559,20 @@
           "lemma": "beginning",
           "level": "B1",
           "de": "Anfang"
+        },
+        {
+          "pos": 7,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "6": [
@@ -49833,6 +51758,13 @@
           "lemma": "finger",
           "level": "B1",
           "de": "Finger"
+        },
+        {
+          "pos": 15,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -50031,6 +51963,13 @@
           "lemma": "her",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 13,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "8": [
@@ -50388,6 +52327,13 @@
           "lemma": "middle",
           "level": "B1",
           "de": "Mitte"
+        },
+        {
+          "pos": 23,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "10": [
@@ -50510,6 +52456,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "56": [
@@ -50603,6 +52556,13 @@
           "lemma": "glad",
           "level": "B1",
           "de": "froh"
+        },
+        {
+          "pos": 2,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "57": [
@@ -50724,6 +52684,20 @@
           "lemma": "see",
           "level": "B1",
           "de": "gesehen"
+        },
+        {
+          "pos": 6,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 17,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "58": [
@@ -50832,6 +52806,20 @@
           "lemma": "be",
           "level": "A1",
           "de": "BIN"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 10,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "59": [
@@ -51031,6 +53019,13 @@
           "lemma": "by",
           "level": "A1",
           "de": "vorbei"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "46": [
@@ -51323,6 +53318,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 21,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "48": [
@@ -51444,6 +53446,13 @@
           "lemma": "demon",
           "level": "B2",
           "de": "Dämon"
+        },
+        {
+          "pos": 13,
+          "form": "Samaritan",
+          "lemma": "Samaritan",
+          "level": "A1",
+          "de": "Samariter"
         }
       ],
       "49": [
@@ -51551,6 +53560,20 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 2,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "50": [
@@ -51822,6 +53845,20 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 6,
+          "form": "father",
+          "lemma": "father",
+          "level": "A1",
+          "de": "Vater"
+        },
+        {
+          "pos": 11,
+          "form": "We",
+          "lemma": "We",
+          "level": "A1",
+          "de": "Wir"
         }
       ],
       "42": [
@@ -52034,6 +54071,27 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 6,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 22,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "43": [
@@ -52745,6 +54803,13 @@
           "lemma": "more",
           "level": "A1",
           "de": "mehr"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "12": [
@@ -52950,6 +55015,13 @@
           "lemma": "life",
           "level": "B1",
           "de": "Lebens"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "13": [
@@ -53326,6 +55398,13 @@
           "lemma": "go",
           "level": "A1",
           "de": "gehe"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -53988,6 +56067,13 @@
           "lemma": "thing",
           "level": "A1",
           "de": "Dinge"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "29": [
@@ -54608,6 +56694,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 15,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "19": [
@@ -54799,6 +56892,27 @@
           "lemma": "also",
           "level": "A1",
           "de": "auch"
+        },
+        {
+          "pos": 8,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 11,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "20": [
@@ -54977,6 +57091,13 @@
           "lemma": "come",
           "level": "A1",
           "de": "gekommen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "1": [
@@ -55028,6 +57149,13 @@
           "lemma": "olive",
           "level": "B1",
           "de": "Ölbäume"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "2": [
@@ -55327,6 +57455,13 @@
           "lemma": "midst",
           "level": "B2",
           "de": "Mitte"
+        },
+        {
+          "pos": 4,
+          "form": "Pharisees",
+          "lemma": "Pharisees",
+          "level": "A1",
+          "de": "Pharisäer"
         }
       ],
       "4": [
@@ -55548,6 +57683,13 @@
           "lemma": "her",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 4,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "51": [
@@ -55903,6 +58045,13 @@
           "lemma": "death",
           "level": "A2",
           "de": "Tod"
+        },
+        {
+          "pos": 14,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "53": [
@@ -56046,6 +58195,13 @@
           "lemma": "be",
           "level": "A1",
           "de": "sein"
+        },
+        {
+          "pos": 6,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "54": [
@@ -56223,6 +58379,13 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "55": [
@@ -56442,6 +58605,20 @@
           "lemma": "word",
           "level": "A1",
           "de": "Wort"
+        },
+        {
+          "pos": 12,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 15,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ]
     },
@@ -56868,6 +59045,13 @@
           "lemma": "prophet",
           "level": "B2",
           "de": "Prophet"
+        },
+        {
+          "pos": 20,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "18": [
@@ -57508,6 +59692,13 @@
           "lemma": "remain",
           "level": "B1",
           "de": "bleibt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "21": [
@@ -58405,6 +60596,13 @@
           "lemma": "see",
           "level": "A1",
           "de": "sehe"
+        },
+        {
+          "pos": 3,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "11": [
@@ -58624,6 +60822,20 @@
           "lemma": "sight",
           "level": "B1",
           "de": "Sehkraft"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "Siloam",
+          "lemma": "Siloam",
+          "level": "A1",
+          "de": "Siloah"
         }
       ],
       "12": [
@@ -58710,6 +60922,13 @@
           "lemma": "know",
           "level": "A1",
           "de": "weiß"
+        },
+        {
+          "pos": 6,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "13": [
@@ -58868,6 +61087,13 @@
           "lemma": "eye",
           "level": "A1",
           "de": "Augen"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -59059,6 +61285,13 @@
           "lemma": "see",
           "level": "A1",
           "de": "sehe"
+        },
+        {
+          "pos": 16,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "31": [
@@ -59603,6 +61836,13 @@
           "lemma": "out",
           "level": "A1",
           "de": "hinaus"
+        },
+        {
+          "pos": 3,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "35": [
@@ -59753,6 +61993,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "1": [
@@ -60366,6 +62613,13 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 12,
+          "form": "world",
+          "lemma": "world",
+          "level": "A1",
+          "de": "world"
         }
       ],
       "36": [
@@ -60566,6 +62820,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "38": [
@@ -60802,6 +63063,13 @@
           "lemma": "blind",
           "level": "B1",
           "de": "blind"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "40": [
@@ -61263,6 +63531,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "ihr"
+        },
+        {
+          "pos": 28,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "28": [
@@ -61363,6 +63638,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "29": [
@@ -61499,6 +63781,20 @@
           "lemma": "from",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 7,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "30": [
@@ -62230,6 +64526,27 @@
           "lemma": "he",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 5,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "es"
+        },
+        {
+          "pos": 10,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
+        },
+        {
+          "pos": 18,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "es"
         }
       ],
       "10": [
@@ -62526,6 +64843,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "33": [
@@ -62782,6 +65106,13 @@
           "lemma": "god",
           "level": "A2",
           "de": "Götter"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "35": [
@@ -63108,6 +65439,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 27,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "22": [
@@ -63166,6 +65504,13 @@
           "lemma": "at",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 8,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "23": [
@@ -63252,6 +65597,13 @@
           "lemma": "porch",
           "level": "B2",
           "de": "Säulenhalle"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "24": [
@@ -63437,6 +65789,13 @@
           "lemma": "plainly",
           "level": "B2",
           "de": "offen"
+        },
+        {
+          "pos": 22,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "25": [
@@ -63593,6 +65952,20 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "41": [
@@ -63728,6 +66101,20 @@
           "lemma": "true",
           "level": "A2",
           "de": "wahr"
+        },
+        {
+          "pos": 6,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
+        },
+        {
+          "pos": 14,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "42": [
@@ -64461,6 +66848,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -64576,6 +66970,13 @@
           "lemma": "door",
           "level": "A1",
           "de": "Tür"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "8": [
@@ -65209,6 +67610,20 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 14,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 19,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "37": [
@@ -65507,6 +67922,13 @@
           "lemma": "father",
           "level": "A1",
           "de": "Vater"
+        },
+        {
+          "pos": 29,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "39": [
@@ -65736,6 +68158,20 @@
           "lemma": "stay",
           "level": "B1",
           "de": "blieb"
+        },
+        {
+          "pos": 6,
+          "form": "Jordan",
+          "lemma": "Jordan",
+          "level": "A1",
+          "de": "Jordan"
+        },
+        {
+          "pos": 11,
+          "form": "John",
+          "lemma": "John",
+          "level": "A1",
+          "de": "Johannes"
         }
       ],
       "1": [
@@ -68198,6 +70634,34 @@
           "lemma": "sister",
           "level": "B1",
           "de": "Schwester"
+        },
+        {
+          "pos": 6,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
+        },
+        {
+          "pos": 8,
+          "form": "Bethany",
+          "lemma": "Bethany",
+          "level": "A1",
+          "de": "Bethanien"
+        },
+        {
+          "pos": 13,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 17,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
         }
       ],
       "2": [
@@ -68347,6 +70811,20 @@
           "lemma": "sick",
           "level": "B1",
           "de": "krank"
+        },
+        {
+          "pos": 3,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 20,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "3": [
@@ -68652,6 +71130,27 @@
           "lemma": "it",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 18,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 26,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "5": [
@@ -68696,6 +71195,27 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
+        },
+        {
+          "pos": 8,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "6": [
@@ -68918,6 +71438,13 @@
           "lemma": "again",
           "level": "A1",
           "de": "wieder"
+        },
+        {
+          "pos": 11,
+          "form": "Judea",
+          "lemma": "Judea",
+          "level": "A1",
+          "de": "Judäa"
         }
       ],
       "8": [
@@ -69230,6 +71757,13 @@
           "lemma": "world",
           "level": "B1",
           "de": "Welt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "10": [
@@ -69573,6 +72107,13 @@
           "lemma": "sleep",
           "level": "B1",
           "de": "Schlaf"
+        },
+        {
+          "pos": 13,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "12": [
@@ -69803,6 +72344,13 @@
           "lemma": "sleep",
           "level": "B1",
           "de": "Schlaf"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "14": [
@@ -69861,6 +72409,20 @@
           "lemma": "dead",
           "level": "B1",
           "de": "tot"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 7,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "15": [
@@ -70162,6 +72724,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 0,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 5,
+          "form": "Didymus",
+          "lemma": "Didymus",
+          "level": "A1",
+          "de": "Didymus"
         }
       ],
       "17": [
@@ -70269,6 +72845,13 @@
           "lemma": "already",
           "level": "B1",
           "de": "bereits"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "18": [
@@ -70320,6 +72903,20 @@
           "lemma": "away",
           "level": "A1",
           "de": "entfernt"
+        },
+        {
+          "pos": 1,
+          "form": "Bethany",
+          "lemma": "Bethany",
+          "level": "A1",
+          "de": "Bethanien"
+        },
+        {
+          "pos": 4,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "19": [
@@ -70442,6 +73039,20 @@
           "lemma": "brother",
           "level": "B1",
           "de": "Bruders"
+        },
+        {
+          "pos": 9,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
+        },
+        {
+          "pos": 11,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
         }
       ],
       "20": [
@@ -70556,6 +73167,27 @@
           "lemma": "house",
           "level": "A1",
           "de": "Haus"
+        },
+        {
+          "pos": 2,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
         }
       ],
       "21": [
@@ -70663,6 +73295,20 @@
           "lemma": "die",
           "level": "B1",
           "de": "gestorben"
+        },
+        {
+          "pos": 1,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "22": [
@@ -70749,6 +73395,27 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 9,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 10,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 13,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "23": [
@@ -70807,6 +73474,13 @@
           "lemma": "again",
           "level": "A1",
           "de": "wieder"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "24": [
@@ -70928,6 +73602,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 0,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
         }
       ],
       "25": [
@@ -71092,6 +73773,13 @@
           "lemma": "die",
           "level": "B1",
           "de": "stirbt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "26": [
@@ -71356,6 +74044,13 @@
           "lemma": "world",
           "level": "B1",
           "de": "Welt"
+        },
+        {
+          "pos": 15,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "28": [
@@ -71512,6 +74207,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 10,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
         }
       ],
       "29": [
@@ -71705,6 +74407,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
         }
       ],
       "31": [
@@ -71974,6 +74690,20 @@
           "lemma": "there",
           "level": "A1",
           "de": "dort"
+        },
+        {
+          "pos": 17,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 29,
+          "form": "She",
+          "lemma": "She",
+          "level": "A1",
+          "de": "Sie"
         }
       ],
       "32": [
@@ -72186,6 +74916,20 @@
           "lemma": "die",
           "level": "B1",
           "de": "gestorben"
+        },
+        {
+          "pos": 2,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "33": [
@@ -72335,6 +75079,13 @@
           "lemma": "trouble",
           "level": "B1",
           "de": "betrübt"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "34": [
@@ -72435,6 +75186,13 @@
           "lemma": "see",
           "level": "A1",
           "de": "sieh"
+        },
+        {
+          "pos": 6,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "35": [
@@ -72444,6 +75202,13 @@
           "lemma": "weep",
           "level": "B2",
           "de": "weinte"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "36": [
@@ -72835,6 +75600,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "39": [
@@ -73055,6 +75827,20 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tage"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 6,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
         }
       ],
       "40": [
@@ -73169,6 +75955,13 @@
           "lemma": "glory",
           "level": "B2",
           "de": "Herrlichkeit"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "41": [
@@ -73397,6 +76190,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 15,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "42": [
@@ -73596,6 +76396,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 26,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "43": [
@@ -73689,6 +76496,13 @@
           "lemma": "out",
           "level": "A1",
           "de": "heraus"
+        },
+        {
+          "pos": 11,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "44": [
@@ -73901,6 +76715,13 @@
           "lemma": "go",
           "level": "A1",
           "de": "gehen"
+        },
+        {
+          "pos": 21,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "45": [
@@ -74008,6 +76829,20 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 8,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "46": [
@@ -74129,6 +76964,13 @@
           "lemma": "do",
           "level": "A1",
           "de": "getan"
+        },
+        {
+          "pos": 15,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "47": [
@@ -74644,6 +77486,13 @@
           "lemma": "all",
           "level": "A1",
           "de": "allem"
+        },
+        {
+          "pos": 6,
+          "form": "Caiaphas",
+          "lemma": "Caiaphas",
+          "level": "A1",
+          "de": "Kaiphas"
         }
       ],
       "50": [
@@ -74978,6 +77827,13 @@
           "lemma": "nation",
           "level": "B1",
           "de": "Volk"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "52": [
@@ -75470,6 +78326,20 @@
           "lemma": "disciple",
           "level": "B2",
           "de": "Jüngern"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 23,
+          "form": "Ephraim",
+          "lemma": "Ephraim",
+          "level": "A1",
+          "de": "Ephraim"
         }
       ],
       "55": [
@@ -75634,6 +78504,13 @@
           "lemma": "themselves",
           "level": "A2",
           "de": "sich"
+        },
+        {
+          "pos": 16,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "56": [
@@ -76276,6 +79153,13 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "17": [
@@ -76446,6 +79330,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 10,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "18": [
@@ -76902,6 +79793,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 0,
+          "form": "Isaiah",
+          "lemma": "Isaiah",
+          "level": "A1",
+          "de": "Jesaja"
         }
       ],
       "42": [
@@ -77317,6 +80215,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "45": [
@@ -77573,6 +80478,20 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 15,
+          "form": "light",
+          "lemma": "light",
+          "level": "A1",
+          "de": "light"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "37": [
@@ -77885,6 +80804,20 @@
           "lemma": "reveal",
           "level": "B2",
           "de": "offenbart"
+        },
+        {
+          "pos": 4,
+          "form": "Isaiah",
+          "lemma": "Isaiah",
+          "level": "A1",
+          "de": "Jesaja"
+        },
+        {
+          "pos": 13,
+          "form": "Lord",
+          "lemma": "Lord",
+          "level": "A1",
+          "de": "Herr"
         }
       ],
       "39": [
@@ -77950,6 +80883,13 @@
           "lemma": "again",
           "level": "A1",
           "de": "wiederum"
+        },
+        {
+          "pos": 7,
+          "form": "Isaiah",
+          "lemma": "Isaiah",
+          "level": "A1",
+          "de": "Jesaja"
         }
       ],
       "40": [
@@ -78162,6 +81102,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 0,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "26": [
@@ -78516,6 +81463,13 @@
           "lemma": "time",
           "level": "A1",
           "de": "Stunde"
+        },
+        {
+          "pos": 14,
+          "form": "time",
+          "lemma": "time",
+          "level": "A1",
+          "de": "time"
         }
       ],
       "28": [
@@ -78952,6 +81906,13 @@
           "lemma": "sake",
           "level": "B2",
           "de": "willen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "1": [
@@ -79094,6 +82055,27 @@
           "lemma": "dead",
           "level": "A2",
           "de": "Toten"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 9,
+          "form": "Bethany",
+          "lemma": "Bethany",
+          "level": "A1",
+          "de": "Bethanien"
+        },
+        {
+          "pos": 11,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "2": [
@@ -79236,6 +82218,20 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 7,
+          "form": "Martha",
+          "lemma": "Martha",
+          "level": "A1",
+          "de": "Martha"
+        },
+        {
+          "pos": 10,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "3": [
@@ -79469,6 +82465,20 @@
           "lemma": "ointment",
           "level": "C1",
           "de": "Salbe"
+        },
+        {
+          "pos": 0,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 17,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "4": [
@@ -79555,6 +82565,20 @@
           "lemma": "say",
           "level": "A1",
           "de": "sagte"
+        },
+        {
+          "pos": 1,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 2,
+          "form": "Iscariot",
+          "lemma": "Iscariot",
+          "level": "A1",
+          "de": "Iskariot"
         }
       ],
       "5": [
@@ -80240,6 +83264,27 @@
           "lemma": "man",
           "level": "A1",
           "de": "Menschen"
+        },
+        {
+          "pos": 13,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
+        },
+        {
+          "pos": 20,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 33,
+          "form": "Man",
+          "lemma": "Man",
+          "level": "A1",
+          "de": "man"
         }
       ],
       "35": [
@@ -80494,6 +83539,13 @@
           "lemma": "go",
           "level": "A1",
           "de": "geht"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "21": [
@@ -80615,6 +83667,34 @@
           "lemma": "see",
           "level": "A1",
           "de": "sehen"
+        },
+        {
+          "pos": 4,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 8,
+          "form": "Bethsaida",
+          "lemma": "Bethsaida",
+          "level": "A1",
+          "de": "Betsaida"
+        },
+        {
+          "pos": 10,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 20,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "22": [
@@ -80702,6 +83782,41 @@
           "lemma": "tell",
           "level": "A1",
           "de": "sagten es"
+        },
+        {
+          "pos": 0,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 4,
+          "form": "Andrew",
+          "lemma": "Andrew",
+          "level": "A1",
+          "de": "Andreas"
+        },
+        {
+          "pos": 8,
+          "form": "Andrew",
+          "lemma": "Andrew",
+          "level": "A1",
+          "de": "Andreas"
+        },
+        {
+          "pos": 11,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 15,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "23": [
@@ -80802,6 +83917,20 @@
           "lemma": "glorify",
           "level": "C1",
           "de": "verherrlicht"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
         }
       ],
       "24": [
@@ -81522,6 +84651,13 @@
           "lemma": "burial",
           "level": "B2",
           "de": "Begräbnisses"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "8": [
@@ -81856,6 +84992,13 @@
           "lemma": "dead",
           "level": "A2",
           "de": "Toten"
+        },
+        {
+          "pos": 25,
+          "form": "Lazarus",
+          "lemma": "Lazarus",
+          "level": "A1",
+          "de": "Lazarus"
         }
       ],
       "10": [
@@ -82052,6 +85195,13 @@
           "lemma": "in",
           "level": "A1",
           "de": "an"
+        },
+        {
+          "pos": 14,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "12": [
@@ -82187,6 +85337,20 @@
           "lemma": "to",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "13": [
@@ -82421,6 +85585,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 32,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "14": [
@@ -82507,6 +85678,13 @@
           "lemma": "write",
           "level": "B1",
           "de": "geschrieben"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -82615,6 +85793,13 @@
           "lemma": "colt",
           "level": "C1",
           "de": "Füllen"
+        },
+        {
+          "pos": 5,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
         }
       ],
       "46": [
@@ -83532,6 +86717,13 @@
           "lemma": "speak",
           "level": "B1",
           "de": "rede"
+        },
+        {
+          "pos": 24,
+          "form": "speak",
+          "lemma": "speak",
+          "level": "A1",
+          "de": "speak"
         }
       ]
     },
@@ -83634,6 +86826,20 @@
           "lemma": "foot",
           "level": "A1",
           "de": "Füße"
+        },
+        {
+          "pos": 4,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 5,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "7": [
@@ -83741,6 +86947,20 @@
           "lemma": "later",
           "level": "A2",
           "de": "später"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "8": [
@@ -83897,6 +87117,27 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 0,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 4,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "9": [
@@ -84004,6 +87245,20 @@
           "lemma": "head",
           "level": "A1",
           "de": "Kopf"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "10": [
@@ -84188,6 +87443,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 26,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "36": [
@@ -84344,6 +87613,41 @@
           "lemma": "afterwards",
           "level": "B1",
           "de": "später"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 9,
+          "form": "going",
+          "lemma": "going",
+          "level": "A1",
+          "de": "going"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 12,
+          "form": "Where",
+          "lemma": "Where",
+          "level": "A1",
+          "de": "Wo"
         }
       ],
       "37": [
@@ -84472,6 +87776,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 0,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 18,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "38": [
@@ -84664,6 +87982,13 @@
           "lemma": "time",
           "level": "A1",
           "de": "Mal"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "21": [
@@ -84827,6 +88152,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "22": [
@@ -85022,6 +88354,13 @@
           "lemma": "breast",
           "level": "B2",
           "de": "Brust"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "24": [
@@ -85143,6 +88482,20 @@
           "lemma": "speak",
           "level": "A1",
           "de": "spricht"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "25": [
@@ -85518,6 +88871,13 @@
           "lemma": "end",
           "level": "A1",
           "de": "Ende"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "2": [
@@ -85632,6 +88992,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 11,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 12,
+          "form": "Iscariot",
+          "lemma": "Iscariot",
+          "level": "A1",
+          "de": "Iskariot"
         }
       ],
       "3": [
@@ -85788,6 +89162,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "4": [
@@ -86279,6 +89660,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "32": [
@@ -87935,6 +91323,48 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "It",
+          "lemma": "It",
+          "level": "A1",
+          "de": "it"
+        },
+        {
+          "pos": 19,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
+        },
+        {
+          "pos": 33,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 37,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 38,
+          "form": "Iscariot",
+          "lemma": "Iscariot",
+          "level": "A1",
+          "de": "Iskariot"
         }
       ],
       "27": [
@@ -88063,6 +91493,20 @@
           "lemma": "quickly",
           "level": "B1",
           "de": "schnell"
+        },
+        {
+          "pos": 6,
+          "form": "Satan",
+          "lemma": "Satan",
+          "level": "A1",
+          "de": "Satan"
+        },
+        {
+          "pos": 11,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "28": [
@@ -88361,6 +91805,20 @@
           "lemma": "poor",
           "level": "B1",
           "de": "Armen"
+        },
+        {
+          "pos": 4,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "30": [
@@ -88944,6 +92402,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 32,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "19": [
@@ -89257,6 +92722,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 22,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ]
     },
@@ -90127,6 +93599,13 @@
           "lemma": "way",
           "level": "A1",
           "de": "Weg"
+        },
+        {
+          "pos": 0,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
         }
       ],
       "11": [
@@ -91532,6 +95011,34 @@
           "lemma": "I",
           "level": "A1",
           "de": "ich"
+        },
+        {
+          "pos": 6,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 13,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 25,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 30,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "29": [
@@ -92720,6 +96227,20 @@
           "lemma": "world",
           "level": "A2",
           "de": "Welt"
+        },
+        {
+          "pos": 0,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 2,
+          "form": "Iscariot",
+          "lemma": "Iscariot",
+          "level": "A1",
+          "de": "Iskariot"
         }
       ],
       "24": [
@@ -93130,6 +96651,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 35,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "23": [
@@ -93335,6 +96863,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "25": [
@@ -93578,6 +97113,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "7": [
@@ -93742,6 +97284,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 21,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "8": [
@@ -93849,6 +97398,20 @@
           "lemma": "we",
           "level": "A1",
           "de": "uns"
+        },
+        {
+          "pos": 0,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 15,
+          "form": "us",
+          "lemma": "us",
+          "level": "A1",
+          "de": "us"
         }
       ],
       "9": [
@@ -94094,6 +97657,27 @@
           "pos": 28,
           "form": "Father",
           "lemma": "father",
+          "level": "A1",
+          "de": "Vater"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 19,
+          "form": "Philip",
+          "lemma": "Philip",
+          "level": "A1",
+          "de": "Philippus"
+        },
+        {
+          "pos": 36,
+          "form": "Father",
+          "lemma": "Father",
           "level": "A1",
           "de": "Vater"
         }
@@ -99491,6 +103075,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 0,
+          "form": "In",
+          "lemma": "In",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 20,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "24": [
@@ -99903,6 +103501,13 @@
           "lemma": "the",
           "level": "A1",
           "de": "den"
+        },
+        {
+          "pos": 35,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "6": [
@@ -101341,6 +104946,13 @@
           "lemma": "go",
           "level": "A1",
           "de": "hin"
+        },
+        {
+          "pos": 19,
+          "form": "going",
+          "lemma": "going",
+          "level": "A1",
+          "de": "going"
         }
       ],
       "31": [
@@ -101385,6 +104997,13 @@
           "lemma": "believe",
           "level": "A2",
           "de": "glaubt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "32": [
@@ -101845,6 +105464,13 @@
           "lemma": "world",
           "level": "A1",
           "de": "Welt"
+        },
+        {
+          "pos": 26,
+          "form": "world",
+          "lemma": "world",
+          "level": "A1",
+          "de": "world"
         }
       ],
       "16": [
@@ -101973,6 +105599,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 17,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "17": [
@@ -102277,6 +105910,20 @@
           "lemma": "father",
           "level": "A1",
           "de": "Vater"
+        },
+        {
+          "pos": 17,
+          "form": "A",
+          "lemma": "A",
+          "level": "A1",
+          "de": "Ein"
+        },
+        {
+          "pos": 34,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "18": [
@@ -102412,6 +106059,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "am Sagen"
+        },
+        {
+          "pos": 3,
+          "form": "What",
+          "lemma": "What",
+          "level": "A1",
+          "de": "Was"
         }
       ],
       "19": [
@@ -102701,6 +106355,27 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 24,
+          "form": "A",
+          "lemma": "A",
+          "level": "A1",
+          "de": "Ein"
+        },
+        {
+          "pos": 41,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "20": [
@@ -103359,6 +107034,13 @@
           "pos": 4,
           "form": "Father",
           "lemma": "father",
+          "level": "A1",
+          "de": "Vater"
+        },
+        {
+          "pos": 20,
+          "form": "Father",
+          "lemma": "Father",
           "level": "A1",
           "de": "Vater"
         }
@@ -104600,6 +108282,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "2": [
@@ -104885,6 +108574,20 @@
           "lemma": "send",
           "level": "A1",
           "de": "gesandt hast"
+        },
+        {
+          "pos": 18,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 19,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "4": [
@@ -106478,6 +110181,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 27,
+          "form": "them",
+          "lemma": "them",
+          "level": "A1",
+          "de": "them"
         }
       ],
       "16": [
@@ -108108,6 +111818,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 9,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "22": [
@@ -108744,6 +112461,13 @@
           "lemma": "world",
           "level": "A2",
           "de": "Welt"
+        },
+        {
+          "pos": 0,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ],
       "25": [
@@ -108865,6 +112589,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 1,
+          "form": "Father",
+          "lemma": "Father",
+          "level": "A1",
+          "de": "Vater"
         }
       ]
     },
@@ -109102,6 +112833,13 @@
           "lemma": "death",
           "level": "B1",
           "de": "Tode"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "32": [
@@ -109237,6 +112975,13 @@
           "lemma": "die",
           "level": "B1",
           "de": "sterben"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "33": [
@@ -109365,6 +113110,20 @@
           "lemma": "Jew",
           "level": "A2",
           "de": "Juden"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "34": [
@@ -109472,6 +113231,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "35": [
@@ -109636,6 +113402,13 @@
           "lemma": "do",
           "level": "A1",
           "de": "getan"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "21": [
@@ -109806,6 +113579,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "sagte"
+        },
+        {
+          "pos": 23,
+          "form": "said",
+          "lemma": "said",
+          "level": "A1",
+          "de": "said"
         }
       ],
       "22": [
@@ -109984,6 +113764,13 @@
           "lemma": "that",
           "level": "A1",
           "de": "das"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "23": [
@@ -110119,6 +113906,20 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "If",
+          "lemma": "If",
+          "level": "A1",
+          "de": "Wenn"
         }
       ],
       "24": [
@@ -110178,6 +113979,20 @@
           "lemma": "priest",
           "level": "B1",
           "de": "Priester"
+        },
+        {
+          "pos": 0,
+          "form": "Annas",
+          "lemma": "Annas",
+          "level": "A1",
+          "de": "Hannas"
+        },
+        {
+          "pos": 5,
+          "form": "Caiaphas",
+          "lemma": "Caiaphas",
+          "level": "A1",
+          "de": "Kaiphas"
         }
       ],
       "25": [
@@ -110376,6 +114191,20 @@
           "lemma": "not",
           "level": "A1",
           "de": "nicht"
+        },
+        {
+          "pos": 1,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 2,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "6": [
@@ -110497,6 +114326,13 @@
           "lemma": "ground",
           "level": "B1",
           "de": "Boden"
+        },
+        {
+          "pos": 8,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "es"
         }
       ],
       "7": [
@@ -110598,6 +114434,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Nazareth",
+          "lemma": "Nazareth",
+          "level": "A1",
+          "de": "Nazareth"
         }
       ],
       "8": [
@@ -110726,6 +114576,20 @@
           "lemma": "way",
           "level": "A1",
           "de": "Weg"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 2,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "9": [
@@ -111040,6 +114904,27 @@
           "lemma": "be",
           "level": "A1",
           "de": "war"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 24,
+          "form": "Malchus",
+          "lemma": "Malchus",
+          "level": "A1",
+          "de": "Malchus"
         }
       ],
       "11": [
@@ -111203,6 +115088,20 @@
           "lemma": "it",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 4,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "12": [
@@ -111317,6 +115216,13 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 13,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "13": [
@@ -111439,6 +115345,20 @@
           "lemma": "year",
           "level": "A1",
           "de": "Jahr"
+        },
+        {
+          "pos": 4,
+          "form": "Annas",
+          "lemma": "Annas",
+          "level": "A1",
+          "de": "Hannas"
+        },
+        {
+          "pos": 11,
+          "form": "Caiaphas",
+          "lemma": "Caiaphas",
+          "level": "A1",
+          "de": "Kaiphas"
         }
       ],
       "14": [
@@ -111574,6 +115494,13 @@
           "lemma": "people",
           "level": "A1",
           "de": "Volk"
+        },
+        {
+          "pos": 3,
+          "form": "Caiaphas",
+          "lemma": "Caiaphas",
+          "level": "A1",
+          "de": "Kaiphas"
         }
       ],
       "15": [
@@ -111767,6 +115694,34 @@
           "lemma": "priest",
           "level": "B1",
           "de": "Priesters"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 21,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "16": [
@@ -111994,6 +115949,20 @@
           "lemma": "in",
           "level": "A1",
           "de": "herein"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 32,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "17": [
@@ -112150,6 +116119,13 @@
           "lemma": "not",
           "level": "A1",
           "de": "nicht"
+        },
+        {
+          "pos": 9,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "18": [
@@ -112362,6 +116338,13 @@
           "lemma": "himself",
           "level": "A1",
           "de": "sich"
+        },
+        {
+          "pos": 23,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "19": [
@@ -112456,6 +116439,13 @@
           "lemma": "teaching",
           "level": "B1",
           "de": "Lehre"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "20": [
@@ -112647,6 +116637,20 @@
           "lemma": "secret",
           "level": "B1",
           "de": "Geheimen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 3,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "1": [
@@ -112831,6 +116835,20 @@
           "lemma": "enter",
           "level": "B1",
           "de": "betraten"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "Kidron",
+          "lemma": "Kidron",
+          "level": "A1",
+          "de": "Kidron"
         }
       ],
       "2": [
@@ -112938,6 +116956,20 @@
           "lemma": "disciple",
           "level": "B1",
           "de": "Jüngern"
+        },
+        {
+          "pos": 1,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "3": [
@@ -113102,6 +117134,20 @@
           "lemma": "weapon",
           "level": "B1",
           "de": "Waffen"
+        },
+        {
+          "pos": 0,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
+        },
+        {
+          "pos": 16,
+          "form": "Pharisees",
+          "lemma": "Pharisees",
+          "level": "A1",
+          "de": "Pharisäer"
         }
       ],
       "4": [
@@ -113259,6 +117305,13 @@
           "lemma": "for",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "5": [
@@ -113387,6 +117440,34 @@
           "lemma": "them",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 5,
+          "form": "Nazareth",
+          "lemma": "Nazareth",
+          "level": "A1",
+          "de": "Nazareth"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "Judas",
+          "lemma": "Judas",
+          "level": "A1",
+          "de": "Judas"
         }
       ],
       "36": [
@@ -113641,6 +117722,20 @@
           "lemma": "here",
           "level": "A1",
           "de": "hier"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 2,
+          "form": "My",
+          "lemma": "My",
+          "level": "A1",
+          "de": "Mein"
         }
       ],
       "37": [
@@ -114000,6 +118095,27 @@
           "lemma": "voice",
           "level": "B1",
           "de": "Stimme"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 12,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "38": [
@@ -114219,6 +118335,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "39": [
@@ -114524,6 +118647,20 @@
           "lemma": "robber",
           "level": "B2",
           "de": "Räuber"
+        },
+        {
+          "pos": 10,
+          "form": "Barabbas",
+          "lemma": "Barabbas",
+          "level": "A1",
+          "de": "Barabbas"
+        },
+        {
+          "pos": 12,
+          "form": "Barabbas",
+          "lemma": "Barabbas",
+          "level": "A1",
+          "de": "Barabbas"
         }
       ],
       "26": [
@@ -114738,6 +118875,20 @@
           "lemma": "him",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 15,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 28,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "27": [
@@ -114803,6 +118954,13 @@
           "lemma": "crow",
           "level": "C1",
           "de": "krähte"
+        },
+        {
+          "pos": 0,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "28": [
@@ -114994,6 +119152,34 @@
           "lemma": "Passover",
           "level": "B2",
           "de": "Passah"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 5,
+          "form": "Caiaphas",
+          "lemma": "Caiaphas",
+          "level": "A1",
+          "de": "Kaiphas"
+        },
+        {
+          "pos": 8,
+          "form": "Praetorium",
+          "lemma": "Praetorium",
+          "level": "A1",
+          "de": "Prätorium"
+        },
+        {
+          "pos": 19,
+          "form": "Praetorium",
+          "lemma": "Praetorium",
+          "level": "A1",
+          "de": "Prätorium"
         }
       ],
       "29": [
@@ -115101,6 +119287,13 @@
           "lemma": "man",
           "level": "A1",
           "de": "Mann"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "30": [
@@ -115276,6 +119469,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 1,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "2": [
@@ -115732,6 +119939,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 1,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 29,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "5": [
@@ -115860,6 +120081,20 @@
           "lemma": "man",
           "level": "A1",
           "de": "Mensch"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "26": [
@@ -116016,6 +120251,13 @@
           "lemma": "son",
           "level": "A1",
           "de": "Sohn"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "27": [
@@ -116301,6 +120543,13 @@
           "lemma": "thirsty",
           "level": "B1",
           "de": "durstig"
+        },
+        {
+          "pos": 2,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "29": [
@@ -116635,6 +120884,13 @@
           "lemma": "spirit",
           "level": "B2",
           "de": "Geist"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "36": [
@@ -116849,6 +121105,13 @@
           "lemma": "pierce",
           "level": "C1",
           "de": "durchbohrt haben"
+        },
+        {
+          "pos": 4,
+          "form": "They",
+          "lemma": "They",
+          "level": "A1",
+          "de": "Sie"
         }
       ],
       "38": [
@@ -117112,6 +121375,41 @@
           "lemma": "body",
           "level": "A2",
           "de": "Leib"
+        },
+        {
+          "pos": 3,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
+        },
+        {
+          "pos": 5,
+          "form": "Arimathaea",
+          "lemma": "Arimathaea",
+          "level": "A1",
+          "de": "Arimathäa"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 28,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "39": [
@@ -117269,6 +121567,20 @@
           "lemma": "pound",
           "level": "B1",
           "de": "Pfund"
+        },
+        {
+          "pos": 0,
+          "form": "Nicodemus",
+          "lemma": "Nicodemus",
+          "level": "A1",
+          "de": "Nikodemus"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "40": [
@@ -117425,6 +121737,13 @@
           "lemma": "bury",
           "level": "B2",
           "de": "begraben"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "6": [
@@ -117673,6 +121992,34 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 13,
+          "form": "Crucify",
+          "lemma": "Crucify",
+          "level": "A1",
+          "de": "Kreuzige"
+        },
+        {
+          "pos": 14,
+          "form": "Crucify",
+          "lemma": "Crucify",
+          "level": "A1",
+          "de": "Kreuzige"
+        },
+        {
+          "pos": 15,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 34,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
         }
       ],
       "7": [
@@ -117836,6 +122183,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 23,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "8": [
@@ -117901,6 +122255,13 @@
           "lemma": "afraid",
           "level": "B1",
           "de": "in Furcht"
+        },
+        {
+          "pos": 2,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "9": [
@@ -118022,6 +122383,27 @@
           "lemma": "answer",
           "level": "A1",
           "de": "Antwort"
+        },
+        {
+          "pos": 4,
+          "form": "Praetorium",
+          "lemma": "Praetorium",
+          "level": "A1",
+          "de": "Prätorium"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "10": [
@@ -118199,6 +122581,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 25,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "21": [
@@ -118384,6 +122780,34 @@
           "lemma": "Jew",
           "level": "A2",
           "de": "Juden"
+        },
+        {
+          "pos": 9,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 12,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 16,
+          "form": "Jews",
+          "lemma": "Jews",
+          "level": "A1",
+          "de": "Juden"
+        },
+        {
+          "pos": 25,
+          "form": "Jews",
+          "lemma": "Jews",
+          "level": "A1",
+          "de": "Juden"
         }
       ],
       "22": [
@@ -118442,6 +122866,20 @@
           "lemma": "write",
           "level": "B1",
           "de": "geschrieben"
+        },
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 8,
+          "form": "written",
+          "lemma": "written",
+          "level": "A1",
+          "de": "written"
         }
       ],
       "23": [
@@ -118682,6 +123120,13 @@
           "lemma": "throughout",
           "level": "B2",
           "de": "durchgehend"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "24": [
@@ -119037,6 +123482,20 @@
           "lemma": "thing",
           "level": "A1",
           "de": "Dinge"
+        },
+        {
+          "pos": 20,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "werden"
+        },
+        {
+          "pos": 29,
+          "form": "They",
+          "lemma": "They",
+          "level": "A1",
+          "de": "Sie"
         }
       ],
       "25": [
@@ -119165,6 +123624,41 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 19,
+          "form": "Clopas",
+          "lemma": "Clopas",
+          "level": "A1",
+          "de": "Klopas"
+        },
+        {
+          "pos": 21,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 22,
+          "form": "Magdalene",
+          "lemma": "Magdalene",
+          "level": "A1",
+          "de": "Magdalena"
         }
       ],
       "41": [
@@ -119500,6 +123994,13 @@
           "lemma": "there",
           "level": "A1",
           "de": "dorthin"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "31": [
@@ -120097,6 +124598,13 @@
           "lemma": "leg",
           "level": "B1",
           "de": "Beine"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "34": [
@@ -120587,6 +125095,20 @@
           "lemma": "sin",
           "level": "B1",
           "de": "Sünde"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 2,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "12": [
@@ -120806,6 +125328,13 @@
           "lemma": "Caesar",
           "level": "B2",
           "de": "Kaiser"
+        },
+        {
+          "pos": 2,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
         }
       ],
       "13": [
@@ -120976,6 +125505,34 @@
           "lemma": "Hebrew",
           "level": "B2",
           "de": "Hebräisch"
+        },
+        {
+          "pos": 1,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 21,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 26,
+          "form": "Gabbatha",
+          "lemma": "Gabbatha",
+          "level": "A1",
+          "de": "Gabbatha"
         }
       ],
       "14": [
@@ -121353,6 +125910,807 @@
           "lemma": "Caesar",
           "level": "B2",
           "de": "Kaiser"
+        },
+        {
+          "pos": 3,
+          "form": "Away",
+          "lemma": "Away",
+          "level": "A1",
+          "de": "away"
+        },
+        {
+          "pos": 10,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
+        },
+        {
+          "pos": 11,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 19,
+          "form": "King",
+          "lemma": "King",
+          "level": "A1",
+          "de": "king"
+        }
+      ],
+      "16": [
+        {
+          "pos": 0,
+          "form": "So",
+          "lemma": "So",
+          "level": "A1",
+          "de": "So"
+        },
+        {
+          "pos": 1,
+          "form": "then",
+          "lemma": "then",
+          "level": "A1",
+          "de": "Dann"
+        },
+        {
+          "pos": 2,
+          "form": "he",
+          "lemma": "he",
+          "level": "A1",
+          "de": "Er"
+        },
+        {
+          "pos": 3,
+          "form": "delivered",
+          "lemma": "delivered",
+          "level": "A1",
+          "de": "delivered"
+        },
+        {
+          "pos": 4,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
+        },
+        {
+          "pos": 5,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "to"
+        },
+        {
+          "pos": 6,
+          "form": "them",
+          "lemma": "them",
+          "level": "A1",
+          "de": "them"
+        },
+        {
+          "pos": 7,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "to"
+        },
+        {
+          "pos": 8,
+          "form": "be",
+          "lemma": "be",
+          "level": "A1",
+          "de": "Sei"
+        },
+        {
+          "pos": 9,
+          "form": "crucified",
+          "lemma": "crucified",
+          "level": "A1",
+          "de": "crucified"
+        },
+        {
+          "pos": 10,
+          "form": "So",
+          "lemma": "So",
+          "level": "A1",
+          "de": "So"
+        },
+        {
+          "pos": 11,
+          "form": "they",
+          "lemma": "they",
+          "level": "A1",
+          "de": "Sie"
+        },
+        {
+          "pos": 12,
+          "form": "took",
+          "lemma": "took",
+          "level": "A1",
+          "de": "took"
+        },
+        {
+          "pos": 13,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 15,
+          "form": "led",
+          "lemma": "led",
+          "level": "A1",
+          "de": "led"
+        },
+        {
+          "pos": 16,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
+        },
+        {
+          "pos": 17,
+          "form": "away",
+          "lemma": "away",
+          "level": "A1",
+          "de": "away"
+        }
+      ],
+      "17": [
+        {
+          "pos": 0,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
+        },
+        {
+          "pos": 1,
+          "form": "went",
+          "lemma": "went",
+          "level": "A1",
+          "de": "went"
+        },
+        {
+          "pos": 2,
+          "form": "out",
+          "lemma": "out",
+          "level": "A1",
+          "de": "out"
+        },
+        {
+          "pos": 3,
+          "form": "bearing",
+          "lemma": "bearing",
+          "level": "A1",
+          "de": "bearing"
+        },
+        {
+          "pos": 4,
+          "form": "his",
+          "lemma": "his",
+          "level": "A1",
+          "de": "his"
+        },
+        {
+          "pos": 5,
+          "form": "cross",
+          "lemma": "cross",
+          "level": "A1",
+          "de": "cross"
+        },
+        {
+          "pos": 6,
+          "form": "to",
+          "lemma": "to",
+          "level": "A1",
+          "de": "to"
+        },
+        {
+          "pos": 7,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 8,
+          "form": "place",
+          "lemma": "place",
+          "level": "A1",
+          "de": "place"
+        },
+        {
+          "pos": 9,
+          "form": "called",
+          "lemma": "called",
+          "level": "A1",
+          "de": "called"
+        },
+        {
+          "pos": 10,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 11,
+          "form": "Place",
+          "lemma": "Place",
+          "level": "A1",
+          "de": "place"
+        },
+        {
+          "pos": 12,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 13,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "Ein"
+        },
+        {
+          "pos": 14,
+          "form": "Skull",
+          "lemma": "Skull",
+          "level": "A1",
+          "de": "Schädel"
+        },
+        {
+          "pos": 15,
+          "form": "which",
+          "lemma": "which",
+          "level": "A1",
+          "de": "which"
+        },
+        {
+          "pos": 16,
+          "form": "is",
+          "lemma": "is",
+          "level": "A1",
+          "de": "Ist"
+        },
+        {
+          "pos": 17,
+          "form": "called",
+          "lemma": "called",
+          "level": "A1",
+          "de": "called"
+        },
+        {
+          "pos": 18,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 19,
+          "form": "Hebrew",
+          "lemma": "Hebrew",
+          "level": "A1",
+          "de": "Hebräer"
+        },
+        {
+          "pos": 20,
+          "form": "Golgotha",
+          "lemma": "Golgotha",
+          "level": "A1",
+          "de": "Golgatha"
+        }
+      ],
+      "18": [
+        {
+          "pos": 0,
+          "form": "where",
+          "lemma": "where",
+          "level": "A1",
+          "de": "Wo"
+        },
+        {
+          "pos": 1,
+          "form": "they",
+          "lemma": "they",
+          "level": "A1",
+          "de": "Sie"
+        },
+        {
+          "pos": 2,
+          "form": "crucified",
+          "lemma": "crucified",
+          "level": "A1",
+          "de": "crucified"
+        },
+        {
+          "pos": 3,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
+        },
+        {
+          "pos": 4,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 5,
+          "form": "with",
+          "lemma": "with",
+          "level": "A1",
+          "de": "with"
+        },
+        {
+          "pos": 6,
+          "form": "him",
+          "lemma": "him",
+          "level": "A1",
+          "de": "him"
+        },
+        {
+          "pos": 7,
+          "form": "two",
+          "lemma": "two",
+          "level": "A1",
+          "de": "Zwei"
+        },
+        {
+          "pos": 8,
+          "form": "others",
+          "lemma": "others",
+          "level": "A1",
+          "de": "others"
+        },
+        {
+          "pos": 9,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "on"
+        },
+        {
+          "pos": 10,
+          "form": "either",
+          "lemma": "either",
+          "level": "A1",
+          "de": "either"
+        },
+        {
+          "pos": 11,
+          "form": "side",
+          "lemma": "side",
+          "level": "A1",
+          "de": "side"
+        },
+        {
+          "pos": 12,
+          "form": "one",
+          "lemma": "one",
+          "level": "A1",
+          "de": "one"
+        },
+        {
+          "pos": 13,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 14,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 16,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 17,
+          "form": "middle",
+          "lemma": "middle",
+          "level": "A1",
+          "de": "middle"
+        }
+      ],
+      "19": [
+        {
+          "pos": 0,
+          "form": "Pilate",
+          "lemma": "Pilate",
+          "level": "A1",
+          "de": "Pilatus"
+        },
+        {
+          "pos": 1,
+          "form": "wrote",
+          "lemma": "wrote",
+          "level": "A1",
+          "de": "wrote"
+        },
+        {
+          "pos": 2,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "de": "Ein"
+        },
+        {
+          "pos": 3,
+          "form": "title",
+          "lemma": "title",
+          "level": "A1",
+          "de": "title"
+        },
+        {
+          "pos": 4,
+          "form": "also",
+          "lemma": "also",
+          "level": "A1",
+          "de": "also"
+        },
+        {
+          "pos": 5,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 6,
+          "form": "put",
+          "lemma": "put",
+          "level": "A1",
+          "de": "Put"
+        },
+        {
+          "pos": 7,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
+        },
+        {
+          "pos": 8,
+          "form": "on",
+          "lemma": "on",
+          "level": "A1",
+          "de": "on"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 10,
+          "form": "cross",
+          "lemma": "cross",
+          "level": "A1",
+          "de": "cross"
+        },
+        {
+          "pos": 11,
+          "form": "There",
+          "lemma": "There",
+          "level": "A1",
+          "de": "there"
+        },
+        {
+          "pos": 12,
+          "form": "was",
+          "lemma": "was",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 13,
+          "form": "written",
+          "lemma": "written",
+          "level": "A1",
+          "de": "written"
+        },
+        {
+          "pos": 14,
+          "form": "JESUS",
+          "lemma": "JESUS",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 15,
+          "form": "OF",
+          "lemma": "OF",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 16,
+          "form": "NAZARETH",
+          "lemma": "NAZARETH",
+          "level": "A1",
+          "de": "Nazareth"
+        },
+        {
+          "pos": 17,
+          "form": "THE",
+          "lemma": "THE",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 18,
+          "form": "KING",
+          "lemma": "KING",
+          "level": "A1",
+          "de": "king"
+        },
+        {
+          "pos": 19,
+          "form": "OF",
+          "lemma": "OF",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 20,
+          "form": "THE",
+          "lemma": "THE",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 21,
+          "form": "JEWS",
+          "lemma": "JEWS",
+          "level": "A1",
+          "de": "Juden"
+        }
+      ],
+      "20": [
+        {
+          "pos": 0,
+          "form": "Therefore",
+          "lemma": "Therefore",
+          "level": "A1",
+          "de": "Therefore"
+        },
+        {
+          "pos": 1,
+          "form": "many",
+          "lemma": "many",
+          "level": "A1",
+          "de": "many"
+        },
+        {
+          "pos": 2,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 3,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 4,
+          "form": "Jews",
+          "lemma": "Jews",
+          "level": "A1",
+          "de": "Juden"
+        },
+        {
+          "pos": 5,
+          "form": "read",
+          "lemma": "read",
+          "level": "A1",
+          "de": "read"
+        },
+        {
+          "pos": 6,
+          "form": "this",
+          "lemma": "this",
+          "level": "A1",
+          "de": "Dies"
+        },
+        {
+          "pos": 7,
+          "form": "title",
+          "lemma": "title",
+          "level": "A1",
+          "de": "title"
+        },
+        {
+          "pos": 8,
+          "form": "for",
+          "lemma": "for",
+          "level": "A1",
+          "de": "Für"
+        },
+        {
+          "pos": 9,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 10,
+          "form": "place",
+          "lemma": "place",
+          "level": "A1",
+          "de": "place"
+        },
+        {
+          "pos": 11,
+          "form": "where",
+          "lemma": "where",
+          "level": "A1",
+          "de": "Wo"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 13,
+          "form": "was",
+          "lemma": "was",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 14,
+          "form": "crucified",
+          "lemma": "crucified",
+          "level": "A1",
+          "de": "crucified"
+        },
+        {
+          "pos": 15,
+          "form": "was",
+          "lemma": "was",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 16,
+          "form": "near",
+          "lemma": "near",
+          "level": "A1",
+          "de": "near"
+        },
+        {
+          "pos": 17,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 18,
+          "form": "city",
+          "lemma": "city",
+          "level": "A1",
+          "de": "city"
+        },
+        {
+          "pos": 19,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 20,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
+        },
+        {
+          "pos": 21,
+          "form": "was",
+          "lemma": "was",
+          "level": "A1",
+          "de": "was"
+        },
+        {
+          "pos": 22,
+          "form": "written",
+          "lemma": "written",
+          "level": "A1",
+          "de": "written"
+        },
+        {
+          "pos": 23,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 24,
+          "form": "Hebrew",
+          "lemma": "Hebrew",
+          "level": "A1",
+          "de": "Hebräer"
+        },
+        {
+          "pos": 25,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 26,
+          "form": "Latin",
+          "lemma": "Latin",
+          "level": "A1",
+          "de": "Lateinisch"
+        },
+        {
+          "pos": 27,
+          "form": "and",
+          "lemma": "and",
+          "level": "A1",
+          "de": "and"
+        },
+        {
+          "pos": 28,
+          "form": "in",
+          "lemma": "in",
+          "level": "A1",
+          "de": "in"
+        },
+        {
+          "pos": 29,
+          "form": "Greek",
+          "lemma": "Greek",
+          "level": "A1",
+          "de": "Griechisch"
         }
       ]
     },
@@ -121554,6 +126912,20 @@
           "lemma": "tomb",
           "level": "B2",
           "de": "Grab"
+        },
+        {
+          "pos": 8,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 9,
+          "form": "Magdalene",
+          "lemma": "Magdalene",
+          "level": "A1",
+          "de": "Magdalena"
         }
       ],
       "2": [
@@ -121824,6 +127196,34 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 6,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 7,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 14,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "They",
+          "lemma": "They",
+          "level": "A1",
+          "de": "Sie"
         }
       ],
       "3": [
@@ -121917,6 +127317,13 @@
           "lemma": "tomb",
           "level": "B2",
           "de": "Grab"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "4": [
@@ -122017,6 +127424,13 @@
           "lemma": "first",
           "level": "A1",
           "de": "zuerst"
+        },
+        {
+          "pos": 8,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "5": [
@@ -122239,6 +127653,20 @@
           "lemma": "lie",
           "level": "B1",
           "de": "liegen"
+        },
+        {
+          "pos": 1,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 2,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "7": [
@@ -122898,6 +128326,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "22": [
@@ -123233,6 +128675,27 @@
           "lemma": "come",
           "level": "A1",
           "de": "kam"
+        },
+        {
+          "pos": 1,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 7,
+          "form": "Didymus",
+          "lemma": "Didymus",
+          "level": "A1",
+          "de": "Didymus"
+        },
+        {
+          "pos": 12,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "25": [
@@ -123615,6 +129078,20 @@
           "lemma": "teacher",
           "level": "A2",
           "de": "Lehrer"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 4,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
         }
       ],
       "17": [
@@ -123876,6 +129353,27 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 23,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 37,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "18": [
@@ -124018,6 +129516,20 @@
           "lemma": "her",
           "level": "A1",
           "de": "ihr"
+        },
+        {
+          "pos": 0,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
+        },
+        {
+          "pos": 1,
+          "form": "Magdalene",
+          "lemma": "Magdalene",
+          "level": "A1",
+          "de": "Magdalena"
         }
       ],
       "19": [
@@ -124328,6 +129840,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 30,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "20": [
@@ -124626,6 +130145,13 @@
           "lemma": "tomb",
           "level": "B2",
           "de": "Grab"
+        },
+        {
+          "pos": 1,
+          "form": "Mary",
+          "lemma": "Mary",
+          "level": "A1",
+          "de": "Maria"
         }
       ],
       "12": [
@@ -124789,6 +130315,13 @@
           "lemma": "lie",
           "level": "B2",
           "de": "gelegen"
+        },
+        {
+          "pos": 21,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "13": [
@@ -125116,6 +130649,20 @@
           "lemma": "be",
           "level": "A1",
           "de": "war"
+        },
+        {
+          "pos": 10,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 18,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -125443,6 +130990,13 @@
           "lemma": "away",
           "level": "A2",
           "de": "weg"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "31": [
@@ -125613,6 +131167,27 @@
           "lemma": "name",
           "level": "A1",
           "de": "Namen"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 12,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
+        },
+        {
+          "pos": 16,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "26": [
@@ -125811,6 +131386,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 9,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 13,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "27": [
@@ -126002,6 +131591,20 @@
           "lemma": "believing",
           "level": "B1",
           "de": "gläubig"
+        },
+        {
+          "pos": 4,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 5,
+          "form": "Reach",
+          "lemma": "Reach",
+          "level": "A1",
+          "de": "reichen"
         }
       ],
       "28": [
@@ -126053,6 +131656,20 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 0,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 3,
+          "form": "My",
+          "lemma": "My",
+          "level": "A1",
+          "de": "Mein"
         }
       ],
       "29": [
@@ -126195,6 +131812,20 @@
           "lemma": "believe",
           "level": "B1",
           "de": "geglaubt"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 20,
+          "form": "believed",
+          "lemma": "believed",
+          "level": "A1",
+          "de": "believed"
         }
       ],
       "30": [
@@ -126323,6 +131954,13 @@
           "lemma": "book",
           "level": "A1",
           "de": "Buch"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ]
     },
@@ -126390,6 +132028,20 @@
           "lemma": "man",
           "level": "A1",
           "de": "Mann"
+        },
+        {
+          "pos": 0,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 5,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "22": [
@@ -126532,6 +132184,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "23": [
@@ -126793,6 +132452,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 14,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "24": [
@@ -127161,6 +132827,13 @@
           "lemma": "write",
           "level": "B1",
           "de": "geschrieben"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "16": [
@@ -127408,6 +133081,27 @@
           "lemma": "sheep",
           "level": "B1",
           "de": "Schafe"
+        },
+        {
+          "pos": 8,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 11,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 29,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "17": [
@@ -127774,6 +133468,48 @@
           "lemma": "sheep",
           "level": "B1",
           "de": "Schafe"
+        },
+        {
+          "pos": 7,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 10,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 17,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 27,
+          "form": "Do",
+          "lemma": "Do",
+          "level": "A1",
+          "de": "Tu"
+        },
+        {
+          "pos": 48,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 49,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "18": [
@@ -128510,6 +134246,27 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 13,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 23,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "1": [
@@ -128646,6 +134403,20 @@
           "lemma": "way",
           "level": "A1",
           "de": "Weise"
+        },
+        {
+          "pos": 3,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 14,
+          "form": "Tiberias",
+          "lemma": "Tiberias",
+          "level": "A1",
+          "de": "Tiberias"
         }
       ],
       "2": [
@@ -128753,6 +134524,62 @@
           "lemma": "together",
           "level": "A1",
           "de": "zusammen"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 2,
+          "form": "Thomas",
+          "lemma": "Thomas",
+          "level": "A1",
+          "de": "Thomas"
+        },
+        {
+          "pos": 4,
+          "form": "Didymus",
+          "lemma": "Didymus",
+          "level": "A1",
+          "de": "Didymus"
+        },
+        {
+          "pos": 5,
+          "form": "Nathanael",
+          "lemma": "Nathanael",
+          "level": "A1",
+          "de": "Nathanael"
+        },
+        {
+          "pos": 7,
+          "form": "Cana",
+          "lemma": "Cana",
+          "level": "A1",
+          "de": "Kana"
+        },
+        {
+          "pos": 9,
+          "form": "Galilee",
+          "lemma": "Galilee",
+          "level": "A1",
+          "de": "Galiläa"
+        },
+        {
+          "pos": 14,
+          "form": "Zebedee",
+          "lemma": "Zebedee",
+          "level": "A1",
+          "de": "Zebedäus"
         }
       ],
       "3": [
@@ -128958,6 +134785,20 @@
           "lemma": "nothing",
           "level": "A1",
           "de": "nichts"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "4": [
@@ -129086,6 +134927,20 @@
           "lemma": "be",
           "level": "A1",
           "de": "war"
+        },
+        {
+          "pos": 6,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 19,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "5": [
@@ -129186,6 +135041,13 @@
           "lemma": "no",
           "level": "A1",
           "de": "nein"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "6": [
@@ -129455,6 +135317,13 @@
           "lemma": "fish",
           "level": "A1",
           "de": "Fischen"
+        },
+        {
+          "pos": 4,
+          "form": "Cast",
+          "lemma": "Cast",
+          "level": "A1",
+          "de": "werfen"
         }
       ],
       "7": [
@@ -129695,6 +135564,41 @@
           "lemma": "sea",
           "level": "A1",
           "de": "Meer"
+        },
+        {
+          "pos": 4,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 8,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 11,
+          "form": "Lord",
+          "lemma": "Lord",
+          "level": "A1",
+          "de": "Herr"
+        },
+        {
+          "pos": 14,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 15,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "8": [
@@ -130157,6 +136061,13 @@
           "lemma": "catch",
           "level": "B1",
           "de": "gefangen"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "11": [
@@ -130349,6 +136260,20 @@
           "lemma": "tear",
           "level": "B2",
           "de": "zerrissen"
+        },
+        {
+          "pos": 0,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 1,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
         }
       ],
       "12": [
@@ -130519,6 +136444,13 @@
           "lemma": "lord",
           "level": "A2",
           "de": "Herr"
+        },
+        {
+          "pos": 0,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "13": [
@@ -130619,6 +136551,13 @@
           "lemma": "likewise",
           "level": "B2",
           "de": "ebenso"
+        },
+        {
+          "pos": 1,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "14": [
@@ -130754,6 +136693,13 @@
           "lemma": "dead",
           "level": "A1",
           "de": "Toten"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
         }
       ],
       "15": [
@@ -131029,6 +136975,48 @@
           "lemma": "lamb",
           "level": "B2",
           "de": "Lämmer"
+        },
+        {
+          "pos": 7,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 10,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 11,
+          "form": "Peter",
+          "lemma": "Peter",
+          "level": "A1",
+          "de": "Petrus"
+        },
+        {
+          "pos": 12,
+          "form": "Simon",
+          "lemma": "Simon",
+          "level": "A1",
+          "de": "Simon"
+        },
+        {
+          "pos": 15,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 36,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ]
     }

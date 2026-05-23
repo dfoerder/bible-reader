@@ -58,6 +58,20 @@
           "lemma": "king",
           "level": "A1",
           "de": "König"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 9,
+          "form": "Cyrus",
+          "lemma": "Cyrus",
+          "level": "A1",
+          "de": "Kyrus"
         }
       ],
       "1": [
@@ -179,6 +193,41 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 8,
+          "form": "Jehoiakim",
+          "lemma": "Jehoiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 11,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 13,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 16,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 18,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "2": [
@@ -497,6 +546,27 @@
           "lemma": "god",
           "level": "A1",
           "de": "Gottes"
+        },
+        {
+          "pos": 3,
+          "form": "Jehoiakim",
+          "lemma": "Jehoiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 6,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 28,
+          "form": "Shinar",
+          "lemma": "Shinar",
+          "level": "A1",
+          "de": "Schinar"
         }
       ],
       "3": [
@@ -703,6 +773,20 @@
           "lemma": "noble",
           "level": "B2",
           "de": "Adligen"
+        },
+        {
+          "pos": 4,
+          "form": "Ashpenaz",
+          "lemma": "Ashpenaz",
+          "level": "A1",
+          "de": "Aschpenas"
+        },
+        {
+          "pos": 20,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "4": [
@@ -1602,6 +1686,13 @@
           "lemma": "dream",
           "level": "B1",
           "de": "Träumen"
+        },
+        {
+          "pos": 18,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "18": [
@@ -1772,6 +1863,13 @@
           "lemma": "before",
           "level": "A2",
           "de": "vor"
+        },
+        {
+          "pos": 24,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "19": [
@@ -1921,6 +2019,34 @@
           "lemma": "king",
           "level": "A2",
           "de": "König"
+        },
+        {
+          "pos": 14,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 15,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 16,
+          "form": "Mishael",
+          "lemma": "Mishael",
+          "level": "A1",
+          "de": "Mischael"
+        },
+        {
+          "pos": 18,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
         }
       ],
       "20": [
@@ -2254,6 +2380,41 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 15,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 16,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 17,
+          "form": "Mishael",
+          "lemma": "Mishael",
+          "level": "A1",
+          "de": "Mischael"
+        },
+        {
+          "pos": 19,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
         }
       ],
       "12": [
@@ -2959,6 +3120,41 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 8,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 9,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 10,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 11,
+          "form": "Mishael",
+          "lemma": "Mishael",
+          "level": "A1",
+          "de": "Mischael"
+        },
+        {
+          "pos": 13,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
         }
       ],
       "7": [
@@ -3101,6 +3297,62 @@
           "lemma": "to",
           "level": "A1",
           "de": "zu"
+        },
+        {
+          "pos": 10,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 15,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
+        },
+        {
+          "pos": 18,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 19,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 22,
+          "form": "Mishael",
+          "lemma": "Mishael",
+          "level": "A1",
+          "de": "Mischael"
+        },
+        {
+          "pos": 23,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 26,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 27,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "8": [
@@ -3362,6 +3614,13 @@
           "lemma": "himself",
           "level": "A2",
           "de": "sich"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "9": [
@@ -3476,6 +3735,20 @@
           "lemma": "eunuch",
           "level": "C2",
           "de": "Eunuchen"
+        },
+        {
+          "pos": 1,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 3,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "10": [
@@ -3814,6 +4087,13 @@
           "lemma": "king",
           "level": "A2",
           "de": "König"
+        },
+        {
+          "pos": 7,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ]
     },
@@ -3987,6 +4267,20 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 3,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 7,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
         }
       ],
       "27": [
@@ -4164,6 +4458,13 @@
           "lemma": "king",
           "level": "A1",
           "de": "König"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "28": [
@@ -4440,6 +4741,13 @@
           "lemma": "this",
           "level": "A1",
           "de": "diese"
+        },
+        {
+          "pos": 18,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "29": [
@@ -6236,6 +6544,13 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "17": [
@@ -6344,6 +6659,34 @@
           "lemma": "companion",
           "level": "B2",
           "de": "Gefährten"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 12,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 13,
+          "form": "Mishael",
+          "lemma": "Mishael",
+          "level": "A1",
+          "de": "Mischael"
+        },
+        {
+          "pos": 15,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
         }
       ],
       "18": [
@@ -6542,6 +6885,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 29,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "19": [
@@ -6670,6 +7027,20 @@
           "lemma": "heaven",
           "level": "A2",
           "de": "Himmels"
+        },
+        {
+          "pos": 6,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 14,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "20": [
@@ -6792,6 +7163,13 @@
           "lemma": "his",
           "level": "A1",
           "de": "sein"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "46": [
@@ -6948,6 +7326,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 3,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 10,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "47": [
@@ -7203,6 +7595,13 @@
           "lemma": "secret",
           "level": "B1",
           "de": "Geheimnis"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "48": [
@@ -7437,6 +7836,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 22,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 34,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "49": [
@@ -7600,6 +8020,48 @@
           "lemma": "king",
           "level": "A2",
           "de": "Königs"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 8,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 9,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 11,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
+        },
+        {
+          "pos": 19,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 21,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "11": [
@@ -8126,6 +8588,13 @@
           "lemma": "slay",
           "level": "C1",
           "de": "getötet"
+        },
+        {
+          "pos": 16,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "14": [
@@ -8311,6 +8780,20 @@
           "lemma": "Babylon",
           "level": "B1",
           "de": "Babylon"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 9,
+          "form": "Arioch",
+          "lemma": "Arioch",
+          "level": "A1",
+          "de": "Arioch"
         }
       ],
       "15": [
@@ -8461,6 +8944,27 @@
           "lemma": "to",
           "level": "A1",
           "de": "zu"
+        },
+        {
+          "pos": 2,
+          "form": "Arioch",
+          "lemma": "Arioch",
+          "level": "A1",
+          "de": "Arioch"
+        },
+        {
+          "pos": 16,
+          "form": "Arioch",
+          "lemma": "Arioch",
+          "level": "A1",
+          "de": "Arioch"
+        },
+        {
+          "pos": 22,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "6": [
@@ -11531,6 +12035,34 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 5,
+          "form": "Arioch",
+          "lemma": "Arioch",
+          "level": "A1",
+          "de": "Arioch"
+        },
+        {
+          "pos": 17,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 31,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "25": [
@@ -11787,6 +12319,27 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 1,
+          "form": "Arioch",
+          "lemma": "Arioch",
+          "level": "A1",
+          "de": "Arioch"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 27,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "41": [
@@ -13372,6 +13925,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 8,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 9,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "2": [
@@ -14702,6 +15269,13 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf."
+        },
+        {
+          "pos": 40,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "8": [
@@ -14883,6 +15457,13 @@
           "lemma": "ever",
           "level": "A2",
           "de": "immer."
+        },
+        {
+          "pos": 2,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "10": [
@@ -15245,6 +15826,34 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 0,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 1,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 3,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
+        },
+        {
+          "pos": 7,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "17": [
@@ -15897,6 +16506,34 @@
           "lemma": "heat",
           "level": "B1",
           "de": "geheizt"
+        },
+        {
+          "pos": 2,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 15,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 16,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 18,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "20": [
@@ -16053,6 +16690,27 @@
           "lemma": "furnace",
           "level": "B2",
           "de": "Ofen"
+        },
+        {
+          "pos": 12,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 13,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 15,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "11": [
@@ -16480,6 +17138,34 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 15,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 16,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 17,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 19,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "13": [
@@ -16601,6 +17287,34 @@
           "lemma": "king",
           "level": "A2",
           "de": "König"
+        },
+        {
+          "pos": 1,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 9,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 10,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 12,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "14": [
@@ -16780,6 +17494,34 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 0,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 7,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 8,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 10,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "15": [
@@ -17650,6 +18392,27 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 23,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 24,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 26,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "23": [
@@ -17765,6 +18528,27 @@
           "lemma": "furnace",
           "level": "B2",
           "de": "Ofens"
+        },
+        {
+          "pos": 3,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 4,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 6,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "24": [
@@ -18027,6 +18811,13 @@
           "lemma": "king",
           "level": "A1",
           "de": "König"
+        },
+        {
+          "pos": 1,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "25": [
@@ -18553,6 +19344,55 @@
           "lemma": "fire",
           "level": "A2",
           "de": "Feuers."
+        },
+        {
+          "pos": 1,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 16,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 17,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 19,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
+        },
+        {
+          "pos": 33,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 34,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 36,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "27": [
@@ -19223,6 +20063,34 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott."
+        },
+        {
+          "pos": 0,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 9,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 10,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 12,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "29": [
@@ -19562,6 +20430,27 @@
           "lemma": "sort",
           "level": "B2",
           "de": "Weise."
+        },
+        {
+          "pos": 19,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 20,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 22,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
         }
       ],
       "30": [
@@ -19627,6 +20516,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "Shadrach",
+          "lemma": "Shadrach",
+          "level": "A1",
+          "de": "Schadrach"
+        },
+        {
+          "pos": 5,
+          "form": "Meshach",
+          "lemma": "Meshach",
+          "level": "A1",
+          "de": "Meschach"
+        },
+        {
+          "pos": 7,
+          "form": "Abednego",
+          "lemma": "Abednego",
+          "level": "A1",
+          "de": "Abed-Nego"
+        },
+        {
+          "pos": 12,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "1": [
@@ -19840,6 +20757,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 26,
+          "form": "Dura",
+          "lemma": "Dura",
+          "level": "A1",
+          "de": "Dura"
+        },
+        {
+          "pos": 31,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "2": [
@@ -20159,6 +21097,20 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 1,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 39,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "3": [
@@ -20521,6 +21473,20 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 33,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 46,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "4": [
@@ -20870,6 +21836,13 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 28,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ]
     },
@@ -21422,6 +22395,13 @@
           "lemma": "abase",
           "level": "C2",
           "de": "demütigen"
+        },
+        {
+          "pos": 2,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "26": [
@@ -21940,6 +22920,13 @@
           "lemma": "king",
           "level": "B1",
           "de": "König"
+        },
+        {
+          "pos": 6,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "29": [
@@ -22048,6 +23035,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "30": [
@@ -22267,6 +23261,13 @@
           "lemma": "majesty",
           "level": "B2",
           "de": "Majestät"
+        },
+        {
+          "pos": 9,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "1": [
@@ -22409,6 +23410,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 0,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "2": [
@@ -22837,6 +23845,13 @@
           "lemma": "palace",
           "level": "B1",
           "de": "Palast"
+        },
+        {
+          "pos": 1,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "5": [
@@ -25051,6 +26066,20 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 4,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 9,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
         }
       ],
       "19": [
@@ -25369,6 +26398,34 @@
           "lemma": "adversary",
           "level": "C1",
           "de": "Feinde"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 5,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
+        },
+        {
+          "pos": 20,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
+        },
+        {
+          "pos": 30,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
         }
       ],
       "20": [
@@ -30564,6 +31621,20 @@
           "lemma": "kingdom",
           "level": "B1",
           "de": "Königreich"
+        },
+        {
+          "pos": 2,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
+        },
+        {
+          "pos": 6,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "30": [
@@ -30622,6 +31693,13 @@
           "lemma": "slay",
           "level": "C1",
           "de": "getötet"
+        },
+        {
+          "pos": 3,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
         }
       ],
       "6": [
@@ -31221,6 +32299,13 @@
           "lemma": "kingdom",
           "level": "B1",
           "de": "Königreich"
+        },
+        {
+          "pos": 24,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
         }
       ],
       "8": [
@@ -31513,6 +32598,13 @@
           "lemma": "perplexed",
           "level": "C1",
           "de": "verwirrt"
+        },
+        {
+          "pos": 3,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
         }
       ],
       "10": [
@@ -33471,6 +34563,13 @@
           "lemma": "this",
           "level": "A1",
           "de": "dies"
+        },
+        {
+          "pos": 3,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
         }
       ],
       "23": [
@@ -34192,6 +35291,34 @@
           "lemma": "inscribe",
           "level": "B2",
           "de": "eingeschrieben"
+        },
+        {
+          "pos": 7,
+          "form": "MENE",
+          "lemma": "MENE",
+          "level": "A1",
+          "de": "MENE"
+        },
+        {
+          "pos": 8,
+          "form": "MENE",
+          "lemma": "MENE",
+          "level": "A1",
+          "de": "MENE"
+        },
+        {
+          "pos": 9,
+          "form": "TEKEL",
+          "lemma": "TEKEL",
+          "level": "A1",
+          "de": "TEKEL"
+        },
+        {
+          "pos": 10,
+          "form": "UPHARSIN",
+          "lemma": "UPHARSIN",
+          "level": "A1",
+          "de": "UPHARSIN"
         }
       ],
       "31": [
@@ -34264,6 +35391,13 @@
           "lemma": "old",
           "level": "A1",
           "de": "alt"
+        },
+        {
+          "pos": 0,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ],
       "11": [
@@ -34665,6 +35799,13 @@
           "lemma": "soothsayer",
           "level": "C1",
           "de": "Wahrsager"
+        },
+        {
+          "pos": 41,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "12": [
@@ -34940,6 +36081,27 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 25,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 30,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
+        },
+        {
+          "pos": 33,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "13": [
@@ -35173,6 +36335,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "aus"
+        },
+        {
+          "pos": 2,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 14,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 18,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 28,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 37,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "14": [
@@ -36219,6 +37416,13 @@
           "lemma": "interpretation",
           "level": "B2",
           "de": "Deutung"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "18": [
@@ -36348,6 +37552,13 @@
           "lemma": "majesty",
           "level": "B2",
           "de": "Majestät"
+        },
+        {
+          "pos": 7,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
         }
       ],
       "19": [
@@ -38424,6 +39635,13 @@
           "lemma": "kingdom",
           "level": "B1",
           "de": "Königreich"
+        },
+        {
+          "pos": 2,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ],
       "2": [
@@ -38609,6 +39827,13 @@
           "lemma": "damage",
           "level": "B1",
           "de": "Schaden"
+        },
+        {
+          "pos": 7,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "3": [
@@ -38807,6 +40032,13 @@
           "lemma": "realm",
           "level": "C1",
           "de": "Reich"
+        },
+        {
+          "pos": 2,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "4": [
@@ -39068,6 +40300,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 11,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "5": [
@@ -39231,6 +40470,20 @@
           "lemma": "his",
           "level": "A1",
           "de": "seines"
+        },
+        {
+          "pos": 12,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 24,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "6": [
@@ -40039,6 +41292,13 @@
           "lemma": "decree",
           "level": "C1",
           "de": "Erlass"
+        },
+        {
+          "pos": 2,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ],
       "10": [
@@ -40357,6 +41617,13 @@
           "lemma": "before",
           "level": "A2",
           "de": "vorher"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "26": [
@@ -40965,6 +42232,27 @@
           "lemma": "Persian",
           "level": "B1",
           "de": "Perser"
+        },
+        {
+          "pos": 2,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 8,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
+        },
+        {
+          "pos": 14,
+          "form": "Cyrus",
+          "lemma": "Cyrus",
+          "level": "A1",
+          "de": "Kyrus"
         }
       ],
       "16": [
@@ -42127,6 +43415,13 @@
           "lemma": "forever",
           "level": "A2",
           "de": "für immer"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "22": [
@@ -42709,6 +44004,20 @@
           "lemma": "his",
           "level": "A1",
           "de": "seinen"
+        },
+        {
+          "pos": 19,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 42,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "24": [
@@ -43048,6 +44357,13 @@
           "lemma": "den",
           "level": "B2",
           "de": "Grube"
+        },
+        {
+          "pos": 11,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "25": [
@@ -43197,6 +44513,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 2,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ]
     },
@@ -47413,6 +48736,13 @@
           "lemma": "heart",
           "level": "B1",
           "de": "Herzen"
+        },
+        {
+          "pos": 10,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "6": [
@@ -49131,6 +50461,27 @@
           "lemma": "matter",
           "level": "B1",
           "de": "Angelegenheiten"
+        },
+        {
+          "pos": 5,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
+        },
+        {
+          "pos": 8,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 9,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "2": [
@@ -49309,6 +50660,13 @@
           "lemma": "sea",
           "level": "B1",
           "de": "Meer"
+        },
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "3": [
@@ -50163,6 +51521,20 @@
           "lemma": "first",
           "level": "A1",
           "de": "Anfang"
+        },
+        {
+          "pos": 9,
+          "form": "Belshazzar",
+          "lemma": "Belshazzar",
+          "level": "A1",
+          "de": "Belsazar"
+        },
+        {
+          "pos": 18,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "2": [
@@ -50424,6 +51796,27 @@
           "lemma": "river",
           "level": "A2",
           "de": "Fluss"
+        },
+        {
+          "pos": 19,
+          "form": "Susa",
+          "lemma": "Susa",
+          "level": "A1",
+          "de": "Susa"
+        },
+        {
+          "pos": 26,
+          "form": "Elam",
+          "lemma": "Elam",
+          "level": "A1",
+          "de": "Elam"
+        },
+        {
+          "pos": 39,
+          "form": "Ulai",
+          "lemma": "Ulai",
+          "level": "A1",
+          "de": "Ulai"
         }
       ],
       "3": [
@@ -51395,6 +52788,13 @@
           "lemma": "king",
           "level": "A2",
           "de": "König"
+        },
+        {
+          "pos": 8,
+          "form": "Greece",
+          "lemma": "Greece",
+          "level": "A1",
+          "de": "Griechenland"
         }
       ],
       "22": [
@@ -54857,6 +56257,13 @@
           "lemma": "man",
           "level": "A1",
           "de": "Mann"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "26": [
@@ -55280,6 +56687,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "16": [
@@ -55429,6 +56843,20 @@
           "lemma": "vision",
           "level": "B2",
           "de": "Vision"
+        },
+        {
+          "pos": 10,
+          "form": "Ulai",
+          "lemma": "Ulai",
+          "level": "A1",
+          "de": "Ulai"
+        },
+        {
+          "pos": 15,
+          "form": "Gabriel",
+          "lemma": "Gabriel",
+          "level": "A1",
+          "de": "Gabriel"
         }
       ],
       "17": [
@@ -56200,6 +57628,20 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 15,
+          "form": "Media",
+          "lemma": "Media",
+          "level": "A1",
+          "de": "Medien"
+        },
+        {
+          "pos": 17,
+          "form": "Persia",
+          "lemma": "Persia",
+          "level": "A1",
+          "de": "Persien"
         }
       ]
     },
@@ -57574,6 +59016,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 2,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
+        },
+        {
+          "pos": 27,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "12": [
@@ -57849,6 +59305,13 @@
           "lemma": "to",
           "level": "A1",
           "de": "an"
+        },
+        {
+          "pos": 39,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "13": [
@@ -58117,6 +59580,20 @@
           "lemma": "truth",
           "level": "B1",
           "de": "Wahrheit"
+        },
+        {
+          "pos": 8,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
+        },
+        {
+          "pos": 24,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "14": [
@@ -58337,6 +59814,20 @@
           "lemma": "voice",
           "level": "B1",
           "de": "Stimme"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 13,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "15": [
@@ -58577,6 +60068,13 @@
           "lemma": "wickedly",
           "level": "C1",
           "de": "böse"
+        },
+        {
+          "pos": 14,
+          "form": "Egypt",
+          "lemma": "Egypt",
+          "level": "A1",
+          "de": "Ägypten"
         }
       ],
       "16": [
@@ -61324,6 +62822,20 @@
           "lemma": "Chaldean",
           "level": "C1",
           "de": "Chaldäern,"
+        },
+        {
+          "pos": 5,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
+        },
+        {
+          "pos": 9,
+          "form": "Ahasuerus",
+          "lemma": "Ahasuerus",
+          "level": "A1",
+          "de": "Ahasveros"
         }
       ],
       "2": [
@@ -61571,6 +63083,27 @@
           "lemma": "year",
           "level": "A1",
           "de": "Jahre."
+        },
+        {
+          "pos": 8,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 24,
+          "form": "Jeremiah",
+          "lemma": "Jeremiah",
+          "level": "A1",
+          "de": "Jeremia"
+        },
+        {
+          "pos": 34,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "3": [
@@ -61706,6 +63239,13 @@
           "lemma": "ash",
           "level": "B2",
           "de": "Asche."
+        },
+        {
+          "pos": 7,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "4": [
@@ -61926,6 +63466,27 @@
           "lemma": "commandment",
           "level": "B2",
           "de": "Gebote,"
+        },
+        {
+          "pos": 3,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 5,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 17,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "5": [
@@ -63137,6 +64698,34 @@
           "lemma": "vision",
           "level": "B2",
           "de": "Vision"
+        },
+        {
+          "pos": 5,
+          "form": "Cyrus",
+          "lemma": "Cyrus",
+          "level": "A1",
+          "de": "Kyrus"
+        },
+        {
+          "pos": 8,
+          "form": "Persia",
+          "lemma": "Persia",
+          "level": "A1",
+          "de": "Persien"
+        },
+        {
+          "pos": 14,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 19,
+          "form": "Belteshazzar",
+          "lemma": "Belteshazzar",
+          "level": "A1",
+          "de": "Beltschazar"
         }
       ],
       "2": [
@@ -63202,6 +64791,13 @@
           "lemma": "week",
           "level": "A2",
           "de": "Wochen"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "3": [
@@ -63558,6 +65154,13 @@
           "lemma": "be",
           "level": "A1",
           "de": "ist"
+        },
+        {
+          "pos": 22,
+          "form": "Hiddekel",
+          "lemma": "Hiddekel",
+          "level": "A1",
+          "de": "Hiddekel"
         }
       ],
       "5": [
@@ -63722,6 +65325,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "aus"
+        },
+        {
+          "pos": 22,
+          "form": "Uphaz",
+          "lemma": "Uphaz",
+          "level": "A1",
+          "de": "Uphaz"
         }
       ],
       "16": [
@@ -64656,6 +66266,20 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 16,
+          "form": "strong",
+          "lemma": "strong",
+          "level": "A1",
+          "de": "strong"
+        },
+        {
+          "pos": 35,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "20": [
@@ -65157,6 +66781,13 @@
           "lemma": "tremble",
           "level": "B2",
           "de": "zitternd"
+        },
+        {
+          "pos": 4,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "12": [
@@ -65440,6 +67071,13 @@
           "lemma": "sake",
           "level": "B2",
           "de": "willen"
+        },
+        {
+          "pos": 8,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "13": [
@@ -65666,6 +67304,13 @@
           "lemma": "Persia",
           "level": "B1",
           "de": "Persien"
+        },
+        {
+          "pos": 14,
+          "form": "Michael",
+          "lemma": "Michael",
+          "level": "A1",
+          "de": "Michael"
         }
       ],
       "14": [
@@ -66508,6 +68153,13 @@
           "lemma": "themselves",
           "level": "A2",
           "de": "sich"
+        },
+        {
+          "pos": 1,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "8": [
@@ -67293,6 +68945,13 @@
           "lemma": "prince",
           "level": "B1",
           "de": "Fürst"
+        },
+        {
+          "pos": 26,
+          "form": "Michael",
+          "lemma": "Michael",
+          "level": "A1",
+          "de": "Michael"
         }
       ]
     },
@@ -73253,6 +74912,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 8,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ],
       "2": [
@@ -81117,6 +82783,13 @@
           "lemma": "end",
           "level": "A2",
           "de": "Endes"
+        },
+        {
+          "pos": 5,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
         }
       ],
       "10": [

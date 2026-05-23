@@ -58,6 +58,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 5,
+          "form": "Joel",
+          "lemma": "Joel",
+          "level": "A1",
+          "de": "Joel"
+        },
+        {
+          "pos": 9,
+          "form": "Pethuel",
+          "lemma": "Pethuel",
+          "level": "A1",
+          "de": "Pethuel"
         }
       ],
       "2": [
@@ -1418,6 +1432,13 @@
           "lemma": "field",
           "level": "A2",
           "de": "Feldes"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "20": [
@@ -3797,6 +3818,20 @@
           "lemma": "it",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "12": [
@@ -3947,6 +3982,13 @@
           "lemma": "mourn",
           "level": "B2",
           "de": "Trauer"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "13": [
@@ -4360,6 +4402,20 @@
           "lemma": "your",
           "level": "A1",
           "de": "euren"
+        },
+        {
+          "pos": 22,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 24,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "15": [
@@ -4439,6 +4495,13 @@
           "lemma": "assembly",
           "level": "B2",
           "de": "Versammlung"
+        },
+        {
+          "pos": 4,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
         }
       ],
       "6": [
@@ -7816,6 +7879,20 @@
           "lemma": "hand",
           "level": "A1",
           "de": "Hand"
+        },
+        {
+          "pos": 4,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "2": [
@@ -8381,6 +8458,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 18,
+          "form": "Eden",
+          "lemma": "Eden",
+          "level": "A1",
+          "de": "Eden"
         }
       ],
       "4": [
@@ -10202,6 +10286,13 @@
           "lemma": "border",
           "level": "B1",
           "de": "Grenze"
+        },
+        {
+          "pos": 6,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "7": [
@@ -10620,6 +10711,20 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 16,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 32,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "9": [
@@ -11140,6 +11245,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 4,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
+        },
+        {
+          "pos": 8,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
+        },
+        {
+          "pos": 18,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 33,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "17": [
@@ -11347,6 +11487,27 @@
           "lemma": "more",
           "level": "A1",
           "de": "mehr"
+        },
+        {
+          "pos": 7,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 12,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
+        },
+        {
+          "pos": 17,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "18": [
@@ -11666,6 +11827,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 24,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 44,
+          "form": "Shittim",
+          "lemma": "Shittim",
+          "level": "A1",
+          "de": "Schittim"
         }
       ],
       "19": [
@@ -11857,6 +12032,27 @@
           "lemma": "land",
           "level": "A2",
           "de": "Land"
+        },
+        {
+          "pos": 0,
+          "form": "Egypt",
+          "lemma": "Egypt",
+          "level": "A1",
+          "de": "Ägypten"
+        },
+        {
+          "pos": 6,
+          "form": "Edom",
+          "lemma": "Edom",
+          "level": "A1",
+          "de": "Edom"
+        },
+        {
+          "pos": 20,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "20": [
@@ -11929,6 +12125,20 @@
           "lemma": "generation",
           "level": "B1",
           "de": "Geschlecht"
+        },
+        {
+          "pos": 1,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 7,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "1": [
@@ -12043,6 +12253,20 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 15,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 17,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "2": [
@@ -12332,6 +12556,20 @@
           "lemma": "land",
           "level": "A1",
           "de": "Land"
+        },
+        {
+          "pos": 14,
+          "form": "Jehoshaphat",
+          "lemma": "Jehoshaphat",
+          "level": "A1",
+          "de": "Josaphat"
+        },
+        {
+          "pos": 30,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "3": [
@@ -12757,6 +12995,27 @@
           "lemma": "head",
           "level": "A1",
           "de": "Haupt"
+        },
+        {
+          "pos": 7,
+          "form": "Tyre",
+          "lemma": "Tyre",
+          "level": "A1",
+          "de": "Tyrus"
+        },
+        {
+          "pos": 9,
+          "form": "Sidon",
+          "lemma": "Sidon",
+          "level": "A1",
+          "de": "Sidon"
+        },
+        {
+          "pos": 15,
+          "form": "Philistia",
+          "lemma": "Philistia",
+          "level": "A1",
+          "de": "Philistäa"
         }
       ],
       "5": [
@@ -12978,6 +13237,20 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 11,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 14,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
         }
       ],
       "11": [

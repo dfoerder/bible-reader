@@ -65,6 +65,20 @@
           "lemma": "say",
           "level": "A1",
           "de": "sagend"
+        },
+        {
+          "pos": 5,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 9,
+          "form": "Amittai",
+          "lemma": "Amittai",
+          "level": "A1",
+          "de": "Amittai"
         }
       ],
       "2": [
@@ -201,6 +215,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 3,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
         }
       ],
       "3": [
@@ -500,6 +521,55 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 7,
+          "form": "Tarshish",
+          "lemma": "Tarshish",
+          "level": "A1",
+          "de": "Tarsis"
+        },
+        {
+          "pos": 12,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 17,
+          "form": "Joppa",
+          "lemma": "Joppa",
+          "level": "A1",
+          "de": "Joppe"
+        },
+        {
+          "pos": 24,
+          "form": "Tarshish",
+          "lemma": "Tarshish",
+          "level": "A1",
+          "de": "Tarsis"
+        },
+        {
+          "pos": 40,
+          "form": "Tarshish",
+          "lemma": "Tarshish",
+          "level": "A1",
+          "de": "Tarsis"
+        },
+        {
+          "pos": 45,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "4": [
@@ -707,6 +777,13 @@
           "lemma": "up",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 1,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "5": [
@@ -1077,6 +1154,13 @@
           "lemma": "asleep",
           "level": "A2",
           "de": "schlafend"
+        },
+        {
+          "pos": 29,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "6": [
@@ -1567,6 +1651,20 @@
           "lemma": "on",
           "level": "A1",
           "de": "auf"
+        },
+        {
+          "pos": 24,
+          "form": "us",
+          "lemma": "us",
+          "level": "A1",
+          "de": "us"
+        },
+        {
+          "pos": 34,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "8": [
@@ -1800,6 +1898,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "du"
+        },
+        {
+          "pos": 32,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "9": [
@@ -1970,6 +2075,20 @@
           "lemma": "land",
           "level": "A1",
           "de": "Land"
+        },
+        {
+          "pos": 4,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 11,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "10": [
@@ -2210,6 +2329,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 29,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "11": [
@@ -2657,6 +2783,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "euch"
+        },
+        {
+          "pos": 33,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "13": [
@@ -3096,6 +3229,41 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 7,
+          "form": "We",
+          "lemma": "We",
+          "level": "A1",
+          "de": "Wir"
+        },
+        {
+          "pos": 10,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 31,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 37,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "15": [
@@ -3218,6 +3386,13 @@
           "lemma": "rage",
           "level": "B2",
           "de": "Toben"
+        },
+        {
+          "pos": 4,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "16": [
@@ -3318,6 +3493,20 @@
           "lemma": "vow",
           "level": "C1",
           "de": "Gelübde"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 12,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "17": [
@@ -3468,6 +3657,27 @@
           "lemma": "night",
           "level": "A1",
           "de": "Nächte"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 8,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 10,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ]
     },
@@ -3685,6 +3895,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "7": [
@@ -3821,6 +4038,13 @@
           "lemma": "temple",
           "level": "B1",
           "de": "Tempel"
+        },
+        {
+          "pos": 8,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "8": [
@@ -4042,6 +4266,13 @@
           "lemma": "to",
           "level": "A1",
           "de": "zu"
+        },
+        {
+          "pos": 22,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "10": [
@@ -4136,6 +4367,20 @@
           "lemma": "land",
           "level": "A2",
           "de": "Land."
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 9,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "1": [
@@ -4216,6 +4461,20 @@
           "lemma": "belly",
           "level": "B2",
           "de": "Bauch"
+        },
+        {
+          "pos": 1,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "2": [
@@ -4395,6 +4654,20 @@
           "lemma": "voice",
           "level": "B1",
           "de": "Stimme"
+        },
+        {
+          "pos": 9,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 18,
+          "form": "Sheol",
+          "lemma": "Sheol",
+          "level": "A1",
+          "de": "Scheol"
         }
       ],
       "3": [
@@ -6008,6 +6281,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "sprechend"
+        },
+        {
+          "pos": 4,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "2": [
@@ -6122,6 +6402,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 3,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
         }
       ],
       "3": [
@@ -6265,6 +6552,27 @@
           "lemma": "across",
           "level": "B1",
           "de": "hindurch"
+        },
+        {
+          "pos": 1,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 6,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
+        },
+        {
+          "pos": 12,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
         }
       ],
       "4": [
@@ -6422,6 +6730,27 @@
           "lemma": "overthrow",
           "level": "C1",
           "de": "zerstört"
+        },
+        {
+          "pos": 0,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
+        },
+        {
+          "pos": 8,
+          "form": "days",
+          "lemma": "days",
+          "level": "A1",
+          "de": "days"
+        },
+        {
+          "pos": 19,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
         }
       ],
       "5": [
@@ -6572,6 +6901,20 @@
           "lemma": "least",
           "level": "B1",
           "de": "Geringsten"
+        },
+        {
+          "pos": 3,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
+        },
+        {
+          "pos": 5,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ]
     },
@@ -6632,6 +6975,13 @@
           "lemma": "angry",
           "level": "B1",
           "de": "zornig"
+        },
+        {
+          "pos": 3,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "2": [
@@ -6992,6 +7342,27 @@
           "lemma": "harm",
           "level": "B2",
           "de": "Schaden"
+        },
+        {
+          "pos": 3,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 7,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 27,
+          "form": "Tarshish",
+          "lemma": "Tarshish",
+          "level": "A1",
+          "de": "Tarsis"
         }
       ],
       "3": [
@@ -7141,6 +7512,13 @@
           "lemma": "live",
           "level": "A1",
           "de": "leben"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "4": [
@@ -7206,6 +7584,13 @@
           "lemma": "angry",
           "level": "B1",
           "de": "zornig"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "5": [
@@ -7474,6 +7859,13 @@
           "lemma": "city",
           "level": "A1",
           "de": "Stadt"
+        },
+        {
+          "pos": 1,
+          "form": "Jonah",
+          "lemma": "Jonah",
+          "level": "A1",
+          "de": "Jona"
         }
       ],
       "11": [
@@ -7715,6 +8107,13 @@
           "lemma": "livestock",
           "level": "B2",
           "de": "Vieh"
+        },
+        {
+          "pos": 5,
+          "form": "Nineveh",
+          "lemma": "Nineveh",
+          "level": "A1",
+          "de": "Ninive"
         }
       ],
       "6": [
@@ -7978,6 +8377,20 @@
           "lemma": "vine",
           "level": "B2",
           "de": "Pflanze"
+        },
+        {
+          "pos": 0,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 1,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "7": [
