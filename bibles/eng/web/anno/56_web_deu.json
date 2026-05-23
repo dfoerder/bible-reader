@@ -1688,6 +1688,34 @@
           "lemma": "godliness",
           "level": "C2",
           "de": "Frömmigkeit"
+        },
+        {
+          "pos": 0,
+          "form": "Paul",
+          "lemma": "Paul",
+          "level": "A1",
+          "de": "Paulus"
+        },
+        {
+          "pos": 4,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 9,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 10,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "2": [
@@ -1789,6 +1817,13 @@
           "lemma": "begin",
           "level": "A2",
           "de": "begann"
+        },
+        {
+          "pos": 6,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "3": [
@@ -1960,6 +1995,13 @@
           "lemma": "savior",
           "level": "B2",
           "de": "Retters"
+        },
+        {
+          "pos": 21,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "4": [
@@ -2117,6 +2159,34 @@
           "lemma": "savior",
           "level": "B2",
           "de": "Retter"
+        },
+        {
+          "pos": 1,
+          "form": "Titus",
+          "lemma": "Titus",
+          "level": "A1",
+          "de": "Titus"
+        },
+        {
+          "pos": 15,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
+        },
+        {
+          "pos": 21,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 22,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "5": [
@@ -3775,6 +3845,13 @@
           "lemma": "thing",
           "level": "A1",
           "de": "Dingen"
+        },
+        {
+          "pos": 14,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "11": [
@@ -4147,6 +4224,20 @@
           "lemma": "savior",
           "level": "B2",
           "de": "Heiland"
+        },
+        {
+          "pos": 16,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 17,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "14": [
@@ -5003,6 +5094,13 @@
           "lemma": "appear",
           "level": "B1",
           "de": "erschien"
+        },
+        {
+          "pos": 5,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "5": [
@@ -5430,6 +5528,27 @@
           "lemma": "there",
           "level": "A1",
           "de": "dort"
+        },
+        {
+          "pos": 3,
+          "form": "Artemas",
+          "lemma": "Artemas",
+          "level": "A1",
+          "de": "Artemas"
+        },
+        {
+          "pos": 7,
+          "form": "Tychicus",
+          "lemma": "Tychicus",
+          "level": "A1",
+          "de": "Tychikus"
+        },
+        {
+          "pos": 15,
+          "form": "Nicopolis",
+          "lemma": "Nicopolis",
+          "level": "A1",
+          "de": "Nikopolis"
         }
       ],
       "13": [
@@ -5545,6 +5664,20 @@
           "lemma": "they",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 1,
+          "form": "Zenas",
+          "lemma": "Zenas",
+          "level": "A1",
+          "de": "Zenas"
+        },
+        {
+          "pos": 5,
+          "form": "Apollos",
+          "lemma": "Apollos",
+          "level": "A1",
+          "de": "Apollos"
         }
       ],
       "14": [
@@ -5895,6 +6028,20 @@
           "lemma": "savior",
           "level": "B2",
           "de": "Retter"
+        },
+        {
+          "pos": 8,
+          "form": "Jesus",
+          "lemma": "Jesus",
+          "level": "A1",
+          "de": "Jesus"
+        },
+        {
+          "pos": 9,
+          "form": "Christ",
+          "lemma": "Christ",
+          "level": "A1",
+          "de": "Christus"
         }
       ],
       "7": [

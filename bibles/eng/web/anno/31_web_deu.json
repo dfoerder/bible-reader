@@ -679,6 +679,34 @@
           "lemma": "speak",
           "level": "B1",
           "de": "geredet"
+        },
+        {
+          "pos": 3,
+          "form": "Jacob",
+          "lemma": "Jacob",
+          "level": "A1",
+          "de": "Jakob"
+        },
+        {
+          "pos": 11,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
+        },
+        {
+          "pos": 39,
+          "form": "Esau",
+          "lemma": "Esau",
+          "level": "A1",
+          "de": "Esau"
+        },
+        {
+          "pos": 41,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "19": [
@@ -1407,6 +1435,34 @@
           "lemma": "battle",
           "level": "B1",
           "de": "Schlacht"
+        },
+        {
+          "pos": 3,
+          "form": "Obadiah",
+          "lemma": "Obadiah",
+          "level": "A1",
+          "de": "Obadja"
+        },
+        {
+          "pos": 9,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 12,
+          "form": "Edom",
+          "lemma": "Edom",
+          "level": "A1",
+          "de": "Edom"
+        },
+        {
+          "pos": 18,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "2": [
@@ -1933,6 +1989,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "spricht"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "5": [
@@ -3215,6 +3278,20 @@
           "lemma": "Yahweh",
           "level": "B2",
           "de": "Jahwes"
+        },
+        {
+          "pos": 6,
+          "form": "Zion",
+          "lemma": "Zion",
+          "level": "A1",
+          "de": "Zion"
+        },
+        {
+          "pos": 12,
+          "form": "Esau",
+          "lemma": "Esau",
+          "level": "A1",
+          "de": "Esau"
         }
       ],
       "11": [
@@ -3485,6 +3562,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 29,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "12": [
@@ -3733,6 +3817,13 @@
           "lemma": "distress",
           "level": "B2",
           "de": "Bedrängnis"
+        },
+        {
+          "pos": 20,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "13": [
@@ -4386,6 +4477,13 @@
           "lemma": "head",
           "level": "A1",
           "de": "Haupt"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ]
     }

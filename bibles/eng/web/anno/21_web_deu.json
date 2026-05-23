@@ -875,6 +875,20 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 8,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 11,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "2": [
@@ -961,6 +975,13 @@
           "lemma": "vanity",
           "level": "C1",
           "de": "Eitelkeit"
+        },
+        {
+          "pos": 2,
+          "form": "vanities",
+          "lemma": "vanities",
+          "level": "A1",
+          "de": "vanities"
         }
       ],
       "3": [
@@ -4548,6 +4569,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 34,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "25": [
@@ -27340,6 +27368,13 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 24,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "13": [
@@ -28174,6 +28209,13 @@
           "lemma": "sun",
           "level": "A1",
           "de": "Sonne"
+        },
+        {
+          "pos": 39,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ]
     },
@@ -36829,6 +36871,13 @@
           "lemma": "all",
           "level": "A1",
           "de": "alles"
+        },
+        {
+          "pos": 33,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ]
     },

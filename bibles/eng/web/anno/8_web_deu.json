@@ -191,6 +191,20 @@
           "lemma": "husband",
           "level": "B1",
           "de": "Ehemänner"
+        },
+        {
+          "pos": 0,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
+        },
+        {
+          "pos": 2,
+          "form": "Go",
+          "lemma": "Go",
+          "level": "A1",
+          "de": "Geh"
         }
       ],
       "12": [
@@ -445,6 +459,13 @@
           "lemma": "son",
           "level": "A1",
           "de": "Söhne"
+        },
+        {
+          "pos": 20,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
         }
       ],
       "13": [
@@ -708,6 +729,20 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 30,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 35,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "14": [
@@ -838,6 +873,20 @@
           "lemma": "her",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 9,
+          "form": "Orpah",
+          "lemma": "Orpah",
+          "level": "A1",
+          "de": "Orpa"
+        },
+        {
+          "pos": 14,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "15": [
@@ -974,6 +1023,13 @@
           "lemma": "sister-in-law",
           "level": "C1",
           "de": "Schwägerin"
+        },
+        {
+          "pos": 17,
+          "form": "sister-in-law",
+          "lemma": "sister-in-law",
+          "level": "A1",
+          "de": "sister-in-law"
         }
       ],
       "6": [
@@ -1412,6 +1468,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 27,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "8": [
@@ -2212,6 +2275,13 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 0,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "17": [
@@ -2410,6 +2480,13 @@
           "lemma": "me",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 27,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "18": [
@@ -3098,6 +3175,13 @@
           "lemma": "I",
           "level": "A1",
           "de": "mich"
+        },
+        {
+          "pos": 29,
+          "form": "me",
+          "lemma": "me",
+          "level": "A1",
+          "de": "me"
         }
       ],
       "22": [
@@ -3558,6 +3642,20 @@
           "lemma": "son",
           "level": "A2",
           "de": "Söhne."
+        },
+        {
+          "pos": 19,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 27,
+          "form": "Moab",
+          "lemma": "Moab",
+          "level": "A1",
+          "de": "Moab"
         }
       ],
       "2": [
@@ -3777,6 +3875,55 @@
           "lemma": "there",
           "level": "A1",
           "de": "dort."
+        },
+        {
+          "pos": 6,
+          "form": "Elimelech",
+          "lemma": "Elimelech",
+          "level": "A1",
+          "de": "Elimelech"
+        },
+        {
+          "pos": 13,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
+        },
+        {
+          "pos": 21,
+          "form": "Mahlon",
+          "lemma": "Mahlon",
+          "level": "A1",
+          "de": "Machlon"
+        },
+        {
+          "pos": 23,
+          "form": "Chilion",
+          "lemma": "Chilion",
+          "level": "A1",
+          "de": "Kiljon"
+        },
+        {
+          "pos": 26,
+          "form": "Bethlehem",
+          "lemma": "Bethlehem",
+          "level": "A1",
+          "de": "Bethlehem"
+        },
+        {
+          "pos": 27,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 34,
+          "form": "Moab",
+          "lemma": "Moab",
+          "level": "A1",
+          "de": "Moab"
         }
       ],
       "3": [
@@ -3856,6 +4003,13 @@
           "lemma": "son",
           "level": "A2",
           "de": "Söhne."
+        },
+        {
+          "pos": 0,
+          "form": "Elimelech",
+          "lemma": "Elimelech",
+          "level": "A1",
+          "de": "Elimelech"
         }
       ],
       "4": [
@@ -4047,6 +4201,27 @@
           "lemma": "year",
           "level": "A1",
           "de": "Jahre."
+        },
+        {
+          "pos": 8,
+          "form": "Moab",
+          "lemma": "Moab",
+          "level": "A1",
+          "de": "Moab"
+        },
+        {
+          "pos": 15,
+          "form": "Orpah",
+          "lemma": "Orpah",
+          "level": "A1",
+          "de": "Orpa"
+        },
+        {
+          "pos": 22,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "5": [
@@ -4161,6 +4336,20 @@
           "lemma": "husband",
           "level": "B1",
           "de": "Ehemann."
+        },
+        {
+          "pos": 0,
+          "form": "Mahlon",
+          "lemma": "Mahlon",
+          "level": "A1",
+          "de": "Machlon"
+        },
+        {
+          "pos": 2,
+          "form": "Chilion",
+          "lemma": "Chilion",
+          "level": "A1",
+          "de": "Kiljon"
         }
       ]
     },
@@ -5232,6 +5421,13 @@
           "lemma": "harvest",
           "level": "B2",
           "de": "Ernte"
+        },
+        {
+          "pos": 0,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "22": [
@@ -5416,6 +5612,20 @@
           "lemma": "field",
           "level": "B1",
           "de": "Feld"
+        },
+        {
+          "pos": 0,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
+        },
+        {
+          "pos": 3,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "23": [
@@ -5600,6 +5810,13 @@
           "lemma": "mother-in-law",
           "level": "B2",
           "de": "Schwiegermutter"
+        },
+        {
+          "pos": 8,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "11": [
@@ -5945,6 +6162,13 @@
           "lemma": "before",
           "level": "A1",
           "de": "vorher"
+        },
+        {
+          "pos": 0,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "12": [
@@ -6123,6 +6347,27 @@
           "lemma": "refuge",
           "level": "C1",
           "de": "Zuflucht"
+        },
+        {
+          "pos": 1,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 13,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 17,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "13": [
@@ -6666,6 +6911,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 3,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "15": [
@@ -6837,6 +7089,13 @@
           "lemma": "she",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 7,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "6": [
@@ -7023,6 +7282,13 @@
           "lemma": "Moab",
           "level": "C1",
           "de": "Moab."
+        },
+        {
+          "pos": 18,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
         }
       ],
       "7": [
@@ -7447,6 +7713,20 @@
           "lemma": "maiden",
           "level": "C1",
           "de": "Mägden."
+        },
+        {
+          "pos": 1,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 4,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "9": [
@@ -8155,6 +8435,13 @@
           "lemma": "she",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 19,
+          "form": "her",
+          "lemma": "her",
+          "level": "A1",
+          "de": "her"
         }
       ],
       "17": [
@@ -8870,6 +9157,20 @@
           "lemma": "be",
           "level": "A1",
           "de": "ist"
+        },
+        {
+          "pos": 19,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 40,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "20": [
@@ -9146,6 +9447,27 @@
           "lemma": "kinsman",
           "level": "C1",
           "de": "Verwandten"
+        },
+        {
+          "pos": 0,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
+        },
+        {
+          "pos": 9,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 24,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
         }
       ]
     },
@@ -9518,6 +9840,13 @@
           "lemma": "down",
           "level": "A1",
           "de": "nieder"
+        },
+        {
+          "pos": 1,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "8": [
@@ -9809,6 +10138,13 @@
           "lemma": "kinsman",
           "level": "C1",
           "de": "Verwandter"
+        },
+        {
+          "pos": 9,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "10": [
@@ -10036,6 +10372,13 @@
           "lemma": "rich",
           "level": "B1",
           "de": "reich"
+        },
+        {
+          "pos": 6,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "16": [
@@ -10348,6 +10691,13 @@
           "lemma": "mother-in-law",
           "level": "B1",
           "de": "Schwiegermutter"
+        },
+        {
+          "pos": 2,
+          "form": "He",
+          "lemma": "He",
+          "level": "A1",
+          "de": "Er"
         }
       ],
       "18": [
@@ -11323,6 +11673,20 @@
           "lemma": "morning",
           "level": "A2",
           "de": "Morgen"
+        },
+        {
+          "pos": 54,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 60,
+          "form": "morning",
+          "lemma": "morning",
+          "level": "A1",
+          "de": "morning"
         }
       ],
       "14": [
@@ -11790,6 +12154,13 @@
           "lemma": "city",
           "level": "A2",
           "de": "Stadt"
+        },
+        {
+          "pos": 11,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "1": [
@@ -11939,6 +12310,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dir"
+        },
+        {
+          "pos": 0,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
         }
       ],
       "2": [
@@ -12075,6 +12453,13 @@
           "lemma": "floor",
           "level": "A2",
           "de": "Tenne"
+        },
+        {
+          "pos": 2,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "3": [
@@ -12709,6 +13094,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Salmon",
+          "lemma": "Salmon",
+          "level": "A1",
+          "de": "Salmon"
+        },
+        {
+          "pos": 6,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 8,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 13,
+          "form": "Obed",
+          "lemma": "Obed",
+          "level": "A1",
+          "de": "Obed"
         }
       ],
       "22": [
@@ -12781,6 +13194,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Obed",
+          "lemma": "Obed",
+          "level": "A1",
+          "de": "Obed"
+        },
+        {
+          "pos": 6,
+          "form": "Jesse",
+          "lemma": "Jesse",
+          "level": "A1",
+          "de": "Isai"
+        },
+        {
+          "pos": 8,
+          "form": "Jesse",
+          "lemma": "Jesse",
+          "level": "A1",
+          "de": "Isai"
+        },
+        {
+          "pos": 13,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
         }
       ],
       "16": [
@@ -12881,6 +13322,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 0,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
         }
       ],
       "17": [
@@ -13079,6 +13527,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 20,
+          "form": "Obed",
+          "lemma": "Obed",
+          "level": "A1",
+          "de": "Obed"
+        },
+        {
+          "pos": 26,
+          "form": "Jesse",
+          "lemma": "Jesse",
+          "level": "A1",
+          "de": "Isai"
+        },
+        {
+          "pos": 30,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
         }
       ],
       "18": [
@@ -13172,6 +13641,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 9,
+          "form": "Perez",
+          "lemma": "Perez",
+          "level": "A1",
+          "de": "Perez"
+        },
+        {
+          "pos": 10,
+          "form": "Perez",
+          "lemma": "Perez",
+          "level": "A1",
+          "de": "Perez"
+        },
+        {
+          "pos": 15,
+          "form": "Hezron",
+          "lemma": "Hezron",
+          "level": "A1",
+          "de": "Hezron"
         }
       ],
       "19": [
@@ -13244,6 +13734,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Hezron",
+          "lemma": "Hezron",
+          "level": "A1",
+          "de": "Hezron"
+        },
+        {
+          "pos": 6,
+          "form": "Ram",
+          "lemma": "Ram",
+          "level": "A1",
+          "de": "Ram"
+        },
+        {
+          "pos": 8,
+          "form": "Ram",
+          "lemma": "Ram",
+          "level": "A1",
+          "de": "Ram"
+        },
+        {
+          "pos": 13,
+          "form": "Amminadab",
+          "lemma": "Amminadab",
+          "level": "A1",
+          "de": "Amminadab"
         }
       ],
       "20": [
@@ -13316,6 +13834,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Amminadab",
+          "lemma": "Amminadab",
+          "level": "A1",
+          "de": "Amminadab"
+        },
+        {
+          "pos": 6,
+          "form": "Nahshon",
+          "lemma": "Nahshon",
+          "level": "A1",
+          "de": "Nachschon"
+        },
+        {
+          "pos": 8,
+          "form": "Nahshon",
+          "lemma": "Nahshon",
+          "level": "A1",
+          "de": "Nachschon"
+        },
+        {
+          "pos": 13,
+          "form": "Salmon",
+          "lemma": "Salmon",
+          "level": "A1",
+          "de": "Salmon"
         }
       ],
       "1": [
@@ -13586,6 +14132,27 @@
           "lemma": "down",
           "level": "A1",
           "de": "nieder"
+        },
+        {
+          "pos": 1,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 17,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 31,
+          "form": "down",
+          "lemma": "down",
+          "level": "A1",
+          "de": "down"
         }
       ],
       "2": [
@@ -14370,6 +14937,27 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 57,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 60,
+          "form": "I",
+          "lemma": "I",
+          "level": "A1",
+          "de": "Ich"
+        },
+        {
+          "pos": 63,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "5": [
@@ -14646,6 +15234,27 @@
           "lemma": "inheritance",
           "level": "B2",
           "de": "Erbteil"
+        },
+        {
+          "pos": 1,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 3,
+          "form": "On",
+          "lemma": "On",
+          "level": "A1",
+          "de": "on"
+        },
+        {
+          "pos": 21,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "6": [
@@ -15496,6 +16105,13 @@
           "lemma": "Naomi",
           "level": "A1",
           "de": "Noomi"
+        },
+        {
+          "pos": 0,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
         }
       ],
       "10": [
@@ -15871,6 +16487,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 1,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
         }
       ],
       "11": [
@@ -16174,6 +16797,48 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 16,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 27,
+          "form": "Rachel",
+          "lemma": "Rachel",
+          "level": "A1",
+          "de": "Rahel"
+        },
+        {
+          "pos": 30,
+          "form": "Leah",
+          "lemma": "Leah",
+          "level": "A1",
+          "de": "Lea"
+        },
+        {
+          "pos": 37,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
+        },
+        {
+          "pos": 43,
+          "form": "Ephrathah",
+          "lemma": "Ephrathah",
+          "level": "A1",
+          "de": "Efrata"
+        },
+        {
+          "pos": 48,
+          "form": "Bethlehem",
+          "lemma": "Bethlehem",
+          "level": "A1",
+          "de": "Bethlehem"
         }
       ],
       "12": [
@@ -16330,6 +16995,34 @@
           "lemma": "woman",
           "level": "A1",
           "de": "Frau"
+        },
+        {
+          "pos": 8,
+          "form": "Perez",
+          "lemma": "Perez",
+          "level": "A1",
+          "de": "Perez"
+        },
+        {
+          "pos": 10,
+          "form": "Tamar",
+          "lemma": "Tamar",
+          "level": "A1",
+          "de": "Tamar"
+        },
+        {
+          "pos": 13,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 18,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "13": [
@@ -16494,6 +17187,27 @@
           "lemma": "son",
           "level": "A1",
           "de": "Sohn"
+        },
+        {
+          "pos": 1,
+          "form": "Boaz",
+          "lemma": "Boaz",
+          "level": "A1",
+          "de": "Boas"
+        },
+        {
+          "pos": 3,
+          "form": "Ruth",
+          "lemma": "Ruth",
+          "level": "A1",
+          "de": "Rut"
+        },
+        {
+          "pos": 16,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "14": [
@@ -16664,6 +17378,27 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 4,
+          "form": "Naomi",
+          "lemma": "Naomi",
+          "level": "A1",
+          "de": "Noomi"
+        },
+        {
+          "pos": 7,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 26,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "15": [

@@ -142,6 +142,34 @@
           "lemma": "palace",
           "level": "B2",
           "de": "Palast,"
+        },
+        {
+          "pos": 3,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 7,
+          "form": "Hacaliah",
+          "lemma": "Hacaliah",
+          "level": "A1",
+          "de": "Hachalja"
+        },
+        {
+          "pos": 12,
+          "form": "Chislev",
+          "lemma": "Chislev",
+          "level": "A1",
+          "de": "Chislev"
+        },
+        {
+          "pos": 21,
+          "form": "Shushan",
+          "lemma": "Shushan",
+          "level": "A1",
+          "de": "Schuschan"
         }
       ],
       "2": [
@@ -355,6 +383,27 @@
           "lemma": "concerning",
           "level": "B2",
           "de": "bezüglich"
+        },
+        {
+          "pos": 0,
+          "form": "Hanani",
+          "lemma": "Hanani",
+          "level": "A1",
+          "de": "Hanani"
+        },
+        {
+          "pos": 12,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 31,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "3": [
@@ -617,6 +666,13 @@
           "lemma": "fire",
           "level": "A1",
           "de": "Feuer."
+        },
+        {
+          "pos": 25,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "4": [
@@ -1008,6 +1064,13 @@
           "lemma": "commandment",
           "level": "B2",
           "de": "Gebote:"
+        },
+        {
+          "pos": 5,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "6": [
@@ -2136,6 +2199,13 @@
           "lemma": "there",
           "level": "A1",
           "de": "dort"
+        },
+        {
+          "pos": 48,
+          "form": "there",
+          "lemma": "there",
+          "level": "A1",
+          "de": "there"
         }
       ],
       "10": [
@@ -3184,6 +3254,13 @@
           "lemma": "to",
           "level": "A1",
           "de": "nach"
+        },
+        {
+          "pos": 33,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "8": [
@@ -4278,6 +4355,20 @@
           "lemma": "presence",
           "level": "B2",
           "de": "Gegenwart"
+        },
+        {
+          "pos": 3,
+          "form": "Nisan",
+          "lemma": "Nisan",
+          "level": "A1",
+          "de": "Nisan"
+        },
+        {
+          "pos": 9,
+          "form": "Artaxerxes",
+          "lemma": "Artaxerxes",
+          "level": "A1",
+          "de": "Artaxerxes"
         }
       ],
       "2": [
@@ -5148,6 +5239,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "sie"
+        },
+        {
+          "pos": 26,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "16": [
@@ -6286,6 +6384,27 @@
           "lemma": "king",
           "level": "A2",
           "de": "König"
+        },
+        {
+          "pos": 2,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
+        },
+        {
+          "pos": 6,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 12,
+          "form": "Geshem",
+          "lemma": "Geshem",
+          "level": "A1",
+          "de": "Geschem"
         }
       ],
       "20": [
@@ -6591,6 +6710,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tage"
+        },
+        {
+          "pos": 4,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "12": [
@@ -7741,6 +7867,34 @@
           "lemma": "bar",
           "level": "B2",
           "de": "Querbalken"
+        },
+        {
+          "pos": 0,
+          "form": "Joiada",
+          "lemma": "Joiada",
+          "level": "A1",
+          "de": "Jojada"
+        },
+        {
+          "pos": 4,
+          "form": "Paseah",
+          "lemma": "Paseah",
+          "level": "A1",
+          "de": "Paseach"
+        },
+        {
+          "pos": 6,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 10,
+          "form": "Besodeiah",
+          "lemma": "Besodeiah",
+          "level": "A1",
+          "de": "Besodja"
         }
       ],
       "7": [
@@ -7898,6 +8052,41 @@
           "lemma": "river",
           "level": "B1",
           "de": "Stromes"
+        },
+        {
+          "pos": 3,
+          "form": "Melatiah",
+          "lemma": "Melatiah",
+          "level": "A1",
+          "de": "Melatja"
+        },
+        {
+          "pos": 5,
+          "form": "Gibeonite",
+          "lemma": "Gibeonite",
+          "level": "A1",
+          "de": "Gibeoniter"
+        },
+        {
+          "pos": 7,
+          "form": "Jadon",
+          "lemma": "Jadon",
+          "level": "A1",
+          "de": "Jadon"
+        },
+        {
+          "pos": 9,
+          "form": "Meronothite",
+          "lemma": "Meronothite",
+          "level": "A1",
+          "de": "Meroniter"
+        },
+        {
+          "pos": 16,
+          "form": "Mizpah",
+          "lemma": "Mizpah",
+          "level": "A1",
+          "de": "Mizpa"
         }
       ],
       "8": [
@@ -8090,6 +8279,34 @@
           "lemma": "wall",
           "level": "A2",
           "de": "Mauer"
+        },
+        {
+          "pos": 3,
+          "form": "Uzziel",
+          "lemma": "Uzziel",
+          "level": "A1",
+          "de": "Usiel"
+        },
+        {
+          "pos": 7,
+          "form": "Harhaiah",
+          "lemma": "Harhaiah",
+          "level": "A1",
+          "de": "Harhaja"
+        },
+        {
+          "pos": 14,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 24,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "9": [
@@ -8205,6 +8422,27 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 3,
+          "form": "Rephaiah",
+          "lemma": "Rephaiah",
+          "level": "A1",
+          "de": "Refaja"
+        },
+        {
+          "pos": 7,
+          "form": "Hur",
+          "lemma": "Hur",
+          "level": "A1",
+          "de": "Hur"
+        },
+        {
+          "pos": 15,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "10": [
@@ -8363,6 +8601,34 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 3,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 7,
+          "form": "Harumaph",
+          "lemma": "Harumaph",
+          "level": "A1",
+          "de": "Harumaph"
+        },
+        {
+          "pos": 17,
+          "form": "Hattush",
+          "lemma": "Hattush",
+          "level": "A1",
+          "de": "Hattusch"
+        },
+        {
+          "pos": 21,
+          "form": "Hashabneiah",
+          "lemma": "Hashabneiah",
+          "level": "A1",
+          "de": "Haschabnja"
         }
       ],
       "11": [
@@ -8477,6 +8743,34 @@
           "lemma": "furnace",
           "level": "B2",
           "de": "Öfen"
+        },
+        {
+          "pos": 0,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
+        },
+        {
+          "pos": 4,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
+        },
+        {
+          "pos": 6,
+          "form": "Hasshub",
+          "lemma": "Hasshub",
+          "level": "A1",
+          "de": "Haschub"
+        },
+        {
+          "pos": 10,
+          "form": "Pahathmoab",
+          "lemma": "Pahathmoab",
+          "level": "A1",
+          "de": "Pahat-Moab"
         }
       ],
       "12": [
@@ -8620,6 +8914,27 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 3,
+          "form": "Shallum",
+          "lemma": "Shallum",
+          "level": "A1",
+          "de": "Schallum"
+        },
+        {
+          "pos": 7,
+          "form": "Hallohesh",
+          "lemma": "Hallohesh",
+          "level": "A1",
+          "de": "Hallohesh"
+        },
+        {
+          "pos": 15,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "13": [
@@ -8854,6 +9169,20 @@
           "lemma": "gate",
           "level": "A2",
           "de": "Tor"
+        },
+        {
+          "pos": 0,
+          "form": "Hanun",
+          "lemma": "Hanun",
+          "level": "A1",
+          "de": "Hanun"
+        },
+        {
+          "pos": 5,
+          "form": "Zanoah",
+          "lemma": "Zanoah",
+          "level": "A1",
+          "de": "Sanoah"
         }
       ],
       "14": [
@@ -9046,6 +9375,34 @@
           "lemma": "bar",
           "level": "B2",
           "de": "Balken"
+        },
+        {
+          "pos": 0,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
+        },
+        {
+          "pos": 4,
+          "form": "Rechab",
+          "lemma": "Rechab",
+          "level": "A1",
+          "de": "Rechab"
+        },
+        {
+          "pos": 11,
+          "form": "Beth",
+          "lemma": "Beth",
+          "level": "A1",
+          "de": "Beth"
+        },
+        {
+          "pos": 12,
+          "form": "Haccherem",
+          "lemma": "Haccherem",
+          "level": "A1",
+          "de": "Haccherem"
         }
       ],
       "15": [
@@ -9421,6 +9778,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Shallun",
+          "lemma": "Shallun",
+          "level": "A1",
+          "de": "Schallun"
+        },
+        {
+          "pos": 4,
+          "form": "Colhozeh",
+          "lemma": "Colhozeh",
+          "level": "A1",
+          "de": "Kol-Hose"
+        },
+        {
+          "pos": 11,
+          "form": "Mizpah",
+          "lemma": "Mizpah",
+          "level": "A1",
+          "de": "Mizpa"
+        },
+        {
+          "pos": 39,
+          "form": "Shelah",
+          "lemma": "Shelah",
+          "level": "A1",
+          "de": "Schela"
+        },
+        {
+          "pos": 55,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
         }
       ],
       "26": [
@@ -9586,6 +9978,20 @@
           "lemma": "stand out",
           "level": "B2",
           "de": "hervorsteht"
+        },
+        {
+          "pos": 2,
+          "form": "Nethinim",
+          "lemma": "Nethinim",
+          "level": "A1",
+          "de": "Nethinim"
+        },
+        {
+          "pos": 5,
+          "form": "Ophel",
+          "lemma": "Ophel",
+          "level": "A1",
+          "de": "Ofel"
         }
       ],
       "27": [
@@ -9737,6 +10143,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Tekoites",
+          "lemma": "Tekoites",
+          "level": "A1",
+          "de": "Tekoiter"
+        },
+        {
+          "pos": 20,
+          "form": "Ophel",
+          "lemma": "Ophel",
+          "level": "A1",
+          "de": "Ofel"
         }
       ],
       "28": [
@@ -10054,6 +10474,34 @@
           "lemma": "make repairs",
           "level": "B2",
           "de": "besserte aus"
+        },
+        {
+          "pos": 2,
+          "form": "Zadok",
+          "lemma": "Zadok",
+          "level": "A1",
+          "de": "Zadok"
+        },
+        {
+          "pos": 6,
+          "form": "Immer",
+          "lemma": "Immer",
+          "level": "A1",
+          "de": "Immer"
+        },
+        {
+          "pos": 16,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 20,
+          "form": "Shecaniah",
+          "lemma": "Shecaniah",
+          "level": "A1",
+          "de": "Schechanja"
         }
       ],
       "30": [
@@ -10240,6 +10688,48 @@
           "lemma": "room",
           "level": "B1",
           "de": "Kammer."
+        },
+        {
+          "pos": 2,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 6,
+          "form": "Shelemiah",
+          "lemma": "Shelemiah",
+          "level": "A1",
+          "de": "Schelemja"
+        },
+        {
+          "pos": 8,
+          "form": "Hanun",
+          "lemma": "Hanun",
+          "level": "A1",
+          "de": "Hanun"
+        },
+        {
+          "pos": 13,
+          "form": "Zalaph",
+          "lemma": "Zalaph",
+          "level": "A1",
+          "de": "Zalaph"
+        },
+        {
+          "pos": 19,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 23,
+          "form": "Berechiah",
+          "lemma": "Berechiah",
+          "level": "A1",
+          "de": "Berechja"
         }
       ],
       "16": [
@@ -10494,6 +10984,41 @@
           "lemma": "man",
           "level": "A1",
           "de": "Männer"
+        },
+        {
+          "pos": 2,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 6,
+          "form": "Azbuk",
+          "lemma": "Azbuk",
+          "level": "A1",
+          "de": "Asbuk"
+        },
+        {
+          "pos": 14,
+          "form": "Beth",
+          "lemma": "Beth",
+          "level": "A1",
+          "de": "Beth"
+        },
+        {
+          "pos": 15,
+          "form": "Zur",
+          "lemma": "Zur",
+          "level": "A1",
+          "de": "Zur"
+        },
+        {
+          "pos": 25,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
         }
       ],
       "17": [
@@ -10672,6 +11197,34 @@
           "lemma": "district",
           "level": "B2",
           "de": "Bezirk"
+        },
+        {
+          "pos": 4,
+          "form": "Rehum",
+          "lemma": "Rehum",
+          "level": "A1",
+          "de": "Rehum"
+        },
+        {
+          "pos": 8,
+          "form": "Bani",
+          "lemma": "Bani",
+          "level": "A1",
+          "de": "Bani"
+        },
+        {
+          "pos": 14,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        },
+        {
+          "pos": 22,
+          "form": "Keilah",
+          "lemma": "Keilah",
+          "level": "A1",
+          "de": "Kehila"
         }
       ],
       "18": [
@@ -10786,6 +11339,27 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 4,
+          "form": "Bavvai",
+          "lemma": "Bavvai",
+          "level": "A1",
+          "de": "Bawai"
+        },
+        {
+          "pos": 8,
+          "form": "Henadad",
+          "lemma": "Henadad",
+          "level": "A1",
+          "de": "Henadad"
+        },
+        {
+          "pos": 16,
+          "form": "Keilah",
+          "lemma": "Keilah",
+          "level": "A1",
+          "de": "Kehila"
         }
       ],
       "19": [
@@ -10979,6 +11553,27 @@
           "lemma": "wall",
           "level": "A2",
           "de": "Mauer"
+        },
+        {
+          "pos": 3,
+          "form": "Ezer",
+          "lemma": "Ezer",
+          "level": "A1",
+          "de": "Ezer"
+        },
+        {
+          "pos": 7,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 11,
+          "form": "Mizpah",
+          "lemma": "Mizpah",
+          "level": "A1",
+          "de": "Mizpa"
         }
       ],
       "20": [
@@ -11164,6 +11759,27 @@
           "lemma": "priest",
           "level": "B1",
           "de": "Priester"
+        },
+        {
+          "pos": 2,
+          "form": "Baruch",
+          "lemma": "Baruch",
+          "level": "A1",
+          "de": "Baruch"
+        },
+        {
+          "pos": 6,
+          "form": "Zabbai",
+          "lemma": "Zabbai",
+          "level": "A1",
+          "de": "Sabbai"
+        },
+        {
+          "pos": 24,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
         }
       ],
       "1": [
@@ -11449,6 +12065,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
+        },
+        {
+          "pos": 31,
+          "form": "Hammeah",
+          "lemma": "Hammeah",
+          "level": "A1",
+          "de": "Hammeah"
+        },
+        {
+          "pos": 39,
+          "form": "Hananel",
+          "lemma": "Hananel",
+          "level": "A1",
+          "de": "Hananel"
         }
       ],
       "2": [
@@ -11549,6 +12186,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 7,
+          "form": "Jericho",
+          "lemma": "Jericho",
+          "level": "A1",
+          "de": "Jericho"
+        },
+        {
+          "pos": 12,
+          "form": "Zaccur",
+          "lemma": "Zaccur",
+          "level": "A1",
+          "de": "Sakkur"
+        },
+        {
+          "pos": 16,
+          "form": "Imri",
+          "lemma": "Imri",
+          "level": "A1",
+          "de": "Jimri"
         }
       ],
       "3": [
@@ -11706,6 +12364,13 @@
           "lemma": "bar",
           "level": "B2",
           "de": "Querbalken"
+        },
+        {
+          "pos": 3,
+          "form": "Hassenaah",
+          "lemma": "Hassenaah",
+          "level": "A1",
+          "de": "Hassenaah"
         }
       ],
       "4": [
@@ -11942,6 +12607,62 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 3,
+          "form": "Meremoth",
+          "lemma": "Meremoth",
+          "level": "A1",
+          "de": "Meremot"
+        },
+        {
+          "pos": 7,
+          "form": "Uriah",
+          "lemma": "Uriah",
+          "level": "A1",
+          "de": "Uria"
+        },
+        {
+          "pos": 11,
+          "form": "Hakkoz",
+          "lemma": "Hakkoz",
+          "level": "A1",
+          "de": "Hakkoz"
+        },
+        {
+          "pos": 17,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 21,
+          "form": "Berechiah",
+          "lemma": "Berechiah",
+          "level": "A1",
+          "de": "Berechja"
+        },
+        {
+          "pos": 25,
+          "form": "Meshezabel",
+          "lemma": "Meshezabel",
+          "level": "A1",
+          "de": "Meschesabel"
+        },
+        {
+          "pos": 31,
+          "form": "Zadok",
+          "lemma": "Zadok",
+          "level": "A1",
+          "de": "Zadok"
+        },
+        {
+          "pos": 35,
+          "form": "Baana",
+          "lemma": "Baana",
+          "level": "A1",
+          "de": "Baana"
         }
       ],
       "5": [
@@ -12276,6 +12997,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 2,
+          "form": "Meremoth",
+          "lemma": "Meremoth",
+          "level": "A1",
+          "de": "Meremot"
+        },
+        {
+          "pos": 6,
+          "form": "Uriah",
+          "lemma": "Uriah",
+          "level": "A1",
+          "de": "Uria"
+        },
+        {
+          "pos": 10,
+          "form": "Hakkoz",
+          "lemma": "Hakkoz",
+          "level": "A1",
+          "de": "Hakkoz"
+        },
+        {
+          "pos": 21,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
+        },
+        {
+          "pos": 30,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
         }
       ],
       "22": [
@@ -12526,6 +13282,41 @@
           "lemma": "house",
           "level": "A1",
           "de": "Haus"
+        },
+        {
+          "pos": 2,
+          "form": "Benjamin",
+          "lemma": "Benjamin",
+          "level": "A1",
+          "de": "Benjamin"
+        },
+        {
+          "pos": 4,
+          "form": "Hasshub",
+          "lemma": "Hasshub",
+          "level": "A1",
+          "de": "Haschub"
+        },
+        {
+          "pos": 13,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 17,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        },
+        {
+          "pos": 21,
+          "form": "Ananiah",
+          "lemma": "Ananiah",
+          "level": "A1",
+          "de": "Ananja"
         }
       ],
       "24": [
@@ -12682,6 +13473,27 @@
           "lemma": "corner",
           "level": "B1",
           "de": "Ecke"
+        },
+        {
+          "pos": 2,
+          "form": "Binnui",
+          "lemma": "Binnui",
+          "level": "A1",
+          "de": "Binnui"
+        },
+        {
+          "pos": 6,
+          "form": "Henadad",
+          "lemma": "Henadad",
+          "level": "A1",
+          "de": "Henadad"
+        },
+        {
+          "pos": 14,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
         }
       ],
       "25": [
@@ -12965,6 +13777,34 @@
           "lemma": "repair",
           "level": "B1",
           "de": "Ausbesserungen"
+        },
+        {
+          "pos": 0,
+          "form": "Palal",
+          "lemma": "Palal",
+          "level": "A1",
+          "de": "Palal"
+        },
+        {
+          "pos": 4,
+          "form": "Uzai",
+          "lemma": "Uzai",
+          "level": "A1",
+          "de": "Usai"
+        },
+        {
+          "pos": 36,
+          "form": "Pedaiah",
+          "lemma": "Pedaiah",
+          "level": "A1",
+          "de": "Pedaja"
+        },
+        {
+          "pos": 40,
+          "form": "Parosh",
+          "lemma": "Parosh",
+          "level": "A1",
+          "de": "Parosch"
         }
       ],
       "31": [
@@ -13193,6 +14033,20 @@
           "lemma": "corner",
           "level": "B1",
           "de": "Ecke"
+        },
+        {
+          "pos": 2,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
+        },
+        {
+          "pos": 24,
+          "form": "Hammiphkad",
+          "lemma": "Hammiphkad",
+          "level": "A1",
+          "de": "Hammiphkad"
         }
       ],
       "32": [
@@ -13736,6 +14590,27 @@
           "lemma": "angry",
           "level": "B1",
           "de": "zornig"
+        },
+        {
+          "pos": 2,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
+        },
+        {
+          "pos": 3,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 19,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "8": [
@@ -14191,6 +15066,13 @@
           "lemma": "wall",
           "level": "A2",
           "de": "Mauer"
+        },
+        {
+          "pos": 0,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "21": [
@@ -15127,6 +16009,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 38,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "17": [
@@ -16182,6 +17071,13 @@
           "lemma": "we",
           "level": "A1",
           "de": "uns"
+        },
+        {
+          "pos": 23,
+          "form": "us",
+          "lemma": "us",
+          "level": "A1",
+          "de": "us"
         }
       ],
       "13": [
@@ -17124,6 +18020,13 @@
           "lemma": "Jew",
           "level": "A2",
           "de": "Juden"
+        },
+        {
+          "pos": 2,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
         }
       ],
       "2": [
@@ -17441,6 +18344,13 @@
           "lemma": "burn",
           "level": "B1",
           "de": "verbrannt"
+        },
+        {
+          "pos": 9,
+          "form": "Samaria",
+          "lemma": "Samaria",
+          "level": "A1",
+          "de": "Samaria"
         }
       ],
       "3": [
@@ -17633,6 +18543,13 @@
           "lemma": "wall",
           "level": "A2",
           "de": "mauer"
+        },
+        {
+          "pos": 1,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
         }
       ],
       "4": [
@@ -18282,6 +19199,13 @@
           "lemma": "they",
           "level": "A1",
           "de": "von ihnen"
+        },
+        {
+          "pos": 38,
+          "form": "them",
+          "lemma": "them",
+          "level": "A1",
+          "de": "them"
         }
       ],
       "12": [
@@ -18580,6 +19504,13 @@
           "lemma": "promise",
           "level": "B1",
           "de": "Versprechen"
+        },
+        {
+          "pos": 3,
+          "form": "We",
+          "lemma": "We",
+          "level": "A1",
+          "de": "Wir"
         }
       ],
       "13": [
@@ -18957,6 +19888,13 @@
           "lemma": "promise",
           "level": "B1",
           "de": "Versprechen"
+        },
+        {
+          "pos": 42,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "14": [
@@ -19281,6 +20219,20 @@
           "lemma": "governor",
           "level": "B2",
           "de": "Statthalters"
+        },
+        {
+          "pos": 16,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 29,
+          "form": "Artaxerxes",
+          "lemma": "Artaxerxes",
+          "level": "A1",
+          "de": "Artaxerxes"
         }
       ],
       "15": [
@@ -19600,6 +20552,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "vor"
+        },
+        {
+          "pos": 43,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "6": [
@@ -20442,6 +21401,13 @@
           "lemma": "enemy",
           "level": "B1",
           "de": "Feinden"
+        },
+        {
+          "pos": 3,
+          "form": "The",
+          "lemma": "The",
+          "level": "A1",
+          "de": "Der"
         }
       ],
       "10": [
@@ -22750,6 +23716,13 @@
           "lemma": "word",
           "level": "A1",
           "de": "Worten"
+        },
+        {
+          "pos": 4,
+          "form": "It",
+          "lemma": "It",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "7": [
@@ -23826,6 +24799,41 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 6,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 10,
+          "form": "Delaiah",
+          "lemma": "Delaiah",
+          "level": "A1",
+          "de": "Delaja"
+        },
+        {
+          "pos": 14,
+          "form": "Mehetabel",
+          "lemma": "Mehetabel",
+          "level": "A1",
+          "de": "Mehetabel"
+        },
+        {
+          "pos": 25,
+          "form": "Let",
+          "lemma": "Let",
+          "level": "A1",
+          "de": "Lass"
+        },
+        {
+          "pos": 60,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "1": [
@@ -24165,6 +25173,27 @@
           "lemma": "gate",
           "level": "B1",
           "de": "Toren"
+        },
+        {
+          "pos": 6,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
+        },
+        {
+          "pos": 8,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 11,
+          "form": "Geshem",
+          "lemma": "Geshem",
+          "level": "A1",
+          "de": "Geschem"
         }
       ],
       "2": [
@@ -24328,6 +25357,27 @@
           "lemma": "me",
           "level": "A1",
           "de": "mir"
+        },
+        {
+          "pos": 0,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
+        },
+        {
+          "pos": 2,
+          "form": "Geshem",
+          "lemma": "Geshem",
+          "level": "A1",
+          "de": "Geschem"
+        },
+        {
+          "pos": 19,
+          "form": "Ono",
+          "lemma": "Ono",
+          "level": "A1",
+          "de": "Ono"
         }
       ],
       "3": [
@@ -24819,6 +25869,13 @@
           "lemma": "hand",
           "level": "A1",
           "de": "Hand"
+        },
+        {
+          "pos": 1,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
         }
       ],
       "16": [
@@ -25202,6 +26259,20 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 7,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 12,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
         }
       ],
       "18": [
@@ -25414,6 +26485,48 @@
           "lemma": "wife",
           "level": "A1",
           "de": "Frau"
+        },
+        {
+          "pos": 5,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 15,
+          "form": "Shecaniah",
+          "lemma": "Shecaniah",
+          "level": "A1",
+          "de": "Schechanja"
+        },
+        {
+          "pos": 19,
+          "form": "Arah",
+          "lemma": "Arah",
+          "level": "A1",
+          "de": "Arach"
+        },
+        {
+          "pos": 23,
+          "form": "Jehohanan",
+          "lemma": "Jehohanan",
+          "level": "A1",
+          "de": "Johanan"
+        },
+        {
+          "pos": 29,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 33,
+          "form": "Berechiah",
+          "lemma": "Berechiah",
+          "level": "A1",
+          "de": "Berechja"
         }
       ],
       "19": [
@@ -25578,6 +26691,13 @@
           "lemma": "fear",
           "level": "B1",
           "de": "Furcht"
+        },
+        {
+          "pos": 15,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
         }
       ],
       "11": [
@@ -25939,6 +27059,20 @@
           "lemma": "he",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 16,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 18,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
         }
       ],
       "13": [
@@ -26330,6 +27464,27 @@
           "lemma": "fear",
           "level": "B1",
           "de": "Furcht"
+        },
+        {
+          "pos": 3,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 5,
+          "form": "Sanballat",
+          "lemma": "Sanballat",
+          "level": "A1",
+          "de": "Sanballat"
+        },
+        {
+          "pos": 15,
+          "form": "Noadiah",
+          "lemma": "Noadiah",
+          "level": "A1",
+          "de": "Noadja"
         }
       ],
       "15": [
@@ -26483,6 +27638,20 @@
           "lemma": "eighty-eight",
           "level": "A2",
           "de": "achtundachtzig"
+        },
+        {
+          "pos": 3,
+          "form": "Bethlehem",
+          "lemma": "Bethlehem",
+          "level": "A1",
+          "de": "Bethlehem"
+        },
+        {
+          "pos": 5,
+          "form": "Netophah",
+          "lemma": "Netophah",
+          "level": "A1",
+          "de": "Netopha"
         }
       ],
       "27": [
@@ -26527,6 +27696,13 @@
           "lemma": "twenty-eight",
           "level": "A2",
           "de": "achtundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Anathoth",
+          "lemma": "Anathoth",
+          "level": "A1",
+          "de": "Anatot"
         }
       ],
       "28": [
@@ -26557,6 +27733,20 @@
           "lemma": "forty-two",
           "level": "A2",
           "de": "zweiundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Beth",
+          "lemma": "Beth",
+          "level": "A1",
+          "de": "Beth"
+        },
+        {
+          "pos": 4,
+          "form": "Azmaveth",
+          "lemma": "Azmaveth",
+          "level": "A1",
+          "de": "Asmawet"
         }
       ],
       "29": [
@@ -26608,6 +27798,34 @@
           "lemma": "forty-three",
           "level": "A2",
           "de": "dreiundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Kiriath",
+          "lemma": "Kiriath",
+          "level": "A1",
+          "de": "Kirjat"
+        },
+        {
+          "pos": 4,
+          "form": "Jearim",
+          "lemma": "Jearim",
+          "level": "A1",
+          "de": "Jearim"
+        },
+        {
+          "pos": 5,
+          "form": "Chephirah",
+          "lemma": "Chephirah",
+          "level": "A1",
+          "de": "Kefira"
+        },
+        {
+          "pos": 7,
+          "form": "Beeroth",
+          "lemma": "Beeroth",
+          "level": "A1",
+          "de": "Beerot"
         }
       ],
       "30": [
@@ -26659,6 +27877,20 @@
           "lemma": "twenty-one",
           "level": "A2",
           "de": "einundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Ramah",
+          "lemma": "Ramah",
+          "level": "A1",
+          "de": "Rama"
+        },
+        {
+          "pos": 5,
+          "form": "Geba",
+          "lemma": "Geba",
+          "level": "A1",
+          "de": "Geba"
         }
       ],
       "66": [
@@ -28279,6 +29511,34 @@
           "lemma": "city",
           "level": "A1",
           "de": "Stadt"
+        },
+        {
+          "pos": 22,
+          "form": "Nebuchadnezzar",
+          "lemma": "Nebuchadnezzar",
+          "level": "A1",
+          "de": "Nebukadnezar"
+        },
+        {
+          "pos": 26,
+          "form": "Babylon",
+          "lemma": "Babylon",
+          "level": "A1",
+          "de": "Babylon"
+        },
+        {
+          "pos": 34,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
+        },
+        {
+          "pos": 37,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "7": [
@@ -28365,6 +29625,97 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 4,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 5,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 6,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 7,
+          "form": "Raamiah",
+          "lemma": "Raamiah",
+          "level": "A1",
+          "de": "Raamja"
+        },
+        {
+          "pos": 8,
+          "form": "Nahamani",
+          "lemma": "Nahamani",
+          "level": "A1",
+          "de": "Nahamani"
+        },
+        {
+          "pos": 9,
+          "form": "Mordecai",
+          "lemma": "Mordecai",
+          "level": "A1",
+          "de": "Mordechai"
+        },
+        {
+          "pos": 10,
+          "form": "Bilshan",
+          "lemma": "Bilshan",
+          "level": "A1",
+          "de": "Bilshan"
+        },
+        {
+          "pos": 11,
+          "form": "Mispereth",
+          "lemma": "Mispereth",
+          "level": "A1",
+          "de": "Mispereth"
+        },
+        {
+          "pos": 12,
+          "form": "Bigvai",
+          "lemma": "Bigvai",
+          "level": "A1",
+          "de": "Bigwai"
+        },
+        {
+          "pos": 13,
+          "form": "Nehum",
+          "lemma": "Nehum",
+          "level": "A1",
+          "de": "Nehum"
+        },
+        {
+          "pos": 14,
+          "form": "Baanah",
+          "lemma": "Baanah",
+          "level": "A1",
+          "de": "Baana"
+        },
+        {
+          "pos": 24,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "8": [
@@ -28423,6 +29774,13 @@
           "lemma": "seventy-two",
           "level": "A2",
           "de": "zweiundsiebzig"
+        },
+        {
+          "pos": 3,
+          "form": "Parosh",
+          "lemma": "Parosh",
+          "level": "A1",
+          "de": "Parosch"
         }
       ],
       "9": [
@@ -28467,6 +29825,13 @@
           "lemma": "seventy-two",
           "level": "A2",
           "de": "zweiundsiebzig"
+        },
+        {
+          "pos": 3,
+          "form": "Shephatiah",
+          "lemma": "Shephatiah",
+          "level": "A1",
+          "de": "Schefatja"
         }
       ],
       "10": [
@@ -28511,6 +29876,13 @@
           "lemma": "fifty-two",
           "level": "A2",
           "de": "zweiundfünfzig"
+        },
+        {
+          "pos": 3,
+          "form": "Arah",
+          "lemma": "Arah",
+          "level": "A1",
+          "de": "Arach"
         }
       ],
       "41": [
@@ -28569,6 +29941,13 @@
           "lemma": "forty-seven",
           "level": "A2",
           "de": "siebenundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Pashhur",
+          "lemma": "Pashhur",
+          "level": "A1",
+          "de": "Paschur"
         }
       ],
       "42": [
@@ -28613,6 +29992,13 @@
           "lemma": "seventeen",
           "level": "A2",
           "de": "siebzehn"
+        },
+        {
+          "pos": 3,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
         }
       ],
       "43": [
@@ -28692,6 +30078,27 @@
           "lemma": "seventy-four",
           "level": "A2",
           "de": "vierundsiebzig"
+        },
+        {
+          "pos": 5,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 7,
+          "form": "Kadmiel",
+          "lemma": "Kadmiel",
+          "level": "A1",
+          "de": "Kadmiel"
+        },
+        {
+          "pos": 12,
+          "form": "Hodevah",
+          "lemma": "Hodevah",
+          "level": "A1",
+          "de": "Hodewa"
         }
       ],
       "44": [
@@ -28750,6 +30157,13 @@
           "lemma": "forty-eight",
           "level": "A2",
           "de": "achtundvierzig"
+        },
+        {
+          "pos": 5,
+          "form": "Asaph",
+          "lemma": "Asaph",
+          "level": "A1",
+          "de": "Asaf"
         }
       ],
       "45": [
@@ -28913,6 +30327,48 @@
           "lemma": "thirty-eight",
           "level": "A2",
           "de": "achtunddreißig"
+        },
+        {
+          "pos": 5,
+          "form": "Shallum",
+          "lemma": "Shallum",
+          "level": "A1",
+          "de": "Schallum"
+        },
+        {
+          "pos": 9,
+          "form": "Ater",
+          "lemma": "Ater",
+          "level": "A1",
+          "de": "Ater"
+        },
+        {
+          "pos": 13,
+          "form": "Talmon",
+          "lemma": "Talmon",
+          "level": "A1",
+          "de": "Talmon"
+        },
+        {
+          "pos": 17,
+          "form": "Akkub",
+          "lemma": "Akkub",
+          "level": "A1",
+          "de": "Akkub"
+        },
+        {
+          "pos": 21,
+          "form": "Hatita",
+          "lemma": "Hatita",
+          "level": "A1",
+          "de": "Hatita"
+        },
+        {
+          "pos": 25,
+          "form": "Shobai",
+          "lemma": "Shobai",
+          "level": "A1",
+          "de": "Schobai"
         }
       ],
       "31": [
@@ -28964,6 +30420,13 @@
           "lemma": "twenty-two",
           "level": "A2",
           "de": "zweiundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Michmas",
+          "lemma": "Michmas",
+          "level": "A1",
+          "de": "Michmas"
         }
       ],
       "32": [
@@ -29015,6 +30478,20 @@
           "lemma": "twenty-three",
           "level": "A2",
           "de": "dreiundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Bethel",
+          "lemma": "Bethel",
+          "level": "A1",
+          "de": "Bethel"
+        },
+        {
+          "pos": 5,
+          "form": "Ai",
+          "lemma": "Ai",
+          "level": "A1",
+          "de": "Ai"
         }
       ],
       "33": [
@@ -29059,6 +30536,13 @@
           "lemma": "fifty-two",
           "level": "A2",
           "de": "zweiundfünfzig"
+        },
+        {
+          "pos": 5,
+          "form": "Nebo",
+          "lemma": "Nebo",
+          "level": "A1",
+          "de": "Nebo"
         }
       ],
       "34": [
@@ -29131,6 +30615,13 @@
           "lemma": "fifty-four",
           "level": "A2",
           "de": "vierundfünfzig"
+        },
+        {
+          "pos": 5,
+          "form": "Elam",
+          "lemma": "Elam",
+          "level": "A1",
+          "de": "Elam"
         }
       ],
       "35": [
@@ -29175,6 +30666,13 @@
           "lemma": "twenty",
           "level": "A1",
           "de": "zwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
         }
       ],
       "61": [
@@ -29345,6 +30843,55 @@
           "lemma": "Israel",
           "level": "A1",
           "de": "Israel"
+        },
+        {
+          "pos": 7,
+          "form": "Tel",
+          "lemma": "Tel",
+          "level": "A1",
+          "de": "Tel"
+        },
+        {
+          "pos": 8,
+          "form": "Melah",
+          "lemma": "Melah",
+          "level": "A1",
+          "de": "Melah"
+        },
+        {
+          "pos": 9,
+          "form": "Tel",
+          "lemma": "Tel",
+          "level": "A1",
+          "de": "Tel"
+        },
+        {
+          "pos": 10,
+          "form": "Harsha",
+          "lemma": "Harsha",
+          "level": "A1",
+          "de": "Harscha"
+        },
+        {
+          "pos": 11,
+          "form": "Cherub",
+          "lemma": "Cherub",
+          "level": "A1",
+          "de": "Cherub"
+        },
+        {
+          "pos": 12,
+          "form": "Addon",
+          "lemma": "Addon",
+          "level": "A1",
+          "de": "Addon"
+        },
+        {
+          "pos": 14,
+          "form": "Immer",
+          "lemma": "Immer",
+          "level": "A1",
+          "de": "Immer"
         }
       ],
       "62": [
@@ -29431,6 +30978,27 @@
           "lemma": "forty-two",
           "level": "A1",
           "de": "zweiundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Delaiah",
+          "lemma": "Delaiah",
+          "level": "A1",
+          "de": "Delaja"
+        },
+        {
+          "pos": 7,
+          "form": "Tobiah",
+          "lemma": "Tobiah",
+          "level": "A1",
+          "de": "Tobija"
+        },
+        {
+          "pos": 11,
+          "form": "Nekoda",
+          "lemma": "Nekoda",
+          "level": "A1",
+          "de": "Nekoda"
         }
       ],
       "63": [
@@ -29629,6 +31197,34 @@
           "lemma": "name",
           "level": "A1",
           "de": "Namen"
+        },
+        {
+          "pos": 6,
+          "form": "Hobaiah",
+          "lemma": "Hobaiah",
+          "level": "A1",
+          "de": "Hobaja"
+        },
+        {
+          "pos": 10,
+          "form": "Hakkoz",
+          "lemma": "Hakkoz",
+          "level": "A1",
+          "de": "Hakkoz"
+        },
+        {
+          "pos": 14,
+          "form": "Barzillai",
+          "lemma": "Barzillai",
+          "level": "A1",
+          "de": "Barsillai"
+        },
+        {
+          "pos": 23,
+          "form": "Barzillai",
+          "lemma": "Barzillai",
+          "level": "A1",
+          "de": "Barsillai"
         }
       ],
       "64": [
@@ -29942,6 +31538,20 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 22,
+          "form": "Urim",
+          "lemma": "Urim",
+          "level": "A1",
+          "de": "Urim"
+        },
+        {
+          "pos": 24,
+          "form": "Thummim",
+          "lemma": "Thummim",
+          "level": "A1",
+          "de": "Tummim"
         }
       ],
       "1": [
@@ -30298,6 +31908,27 @@
           "lemma": "many",
           "level": "A1",
           "de": "viele"
+        },
+        {
+          "pos": 4,
+          "form": "Hanani",
+          "lemma": "Hanani",
+          "level": "A1",
+          "de": "Hanani"
+        },
+        {
+          "pos": 6,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 15,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "3": [
@@ -31149,6 +32780,13 @@
           "lemma": "forty-five",
           "level": "A2",
           "de": "fünfundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Jericho",
+          "lemma": "Jericho",
+          "level": "A1",
+          "de": "Jericho"
         }
       ],
       "37": [
@@ -31200,6 +32838,27 @@
           "lemma": "twenty-one",
           "level": "A2",
           "de": "einundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Lod",
+          "lemma": "Lod",
+          "level": "A1",
+          "de": "Lod"
+        },
+        {
+          "pos": 4,
+          "form": "Hadid",
+          "lemma": "Hadid",
+          "level": "A1",
+          "de": "Hadid"
+        },
+        {
+          "pos": 6,
+          "form": "Ono",
+          "lemma": "Ono",
+          "level": "A1",
+          "de": "Ono"
         }
       ],
       "38": [
@@ -31258,6 +32917,13 @@
           "lemma": "thirty",
           "level": "A1",
           "de": "dreißig"
+        },
+        {
+          "pos": 3,
+          "form": "Senaah",
+          "lemma": "Senaah",
+          "level": "A1",
+          "de": "Senaah"
         }
       ],
       "39": [
@@ -31344,6 +33010,20 @@
           "lemma": "seventy-three",
           "level": "A2",
           "de": "dreiundsiebzig"
+        },
+        {
+          "pos": 5,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 10,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
         }
       ],
       "40": [
@@ -31388,6 +33068,13 @@
           "lemma": "fifty-two",
           "level": "A2",
           "de": "zweiundfünfzig"
+        },
+        {
+          "pos": 3,
+          "form": "Immer",
+          "lemma": "Immer",
+          "level": "A1",
+          "de": "Immer"
         }
       ],
       "16": [
@@ -31432,6 +33119,13 @@
           "lemma": "twenty-eight",
           "level": "A2",
           "de": "achtundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Bebai",
+          "lemma": "Bebai",
+          "level": "A1",
+          "de": "Bebai"
         }
       ],
       "17": [
@@ -31490,6 +33184,13 @@
           "lemma": "twenty-two",
           "level": "A2",
           "de": "zweiundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Azgad",
+          "lemma": "Azgad",
+          "level": "A1",
+          "de": "Asgad"
         }
       ],
       "18": [
@@ -31534,6 +33235,13 @@
           "lemma": "sixty-seven",
           "level": "A2",
           "de": "siebenundsechzig"
+        },
+        {
+          "pos": 3,
+          "form": "Adonikam",
+          "lemma": "Adonikam",
+          "level": "A1",
+          "de": "Adonikam"
         }
       ],
       "19": [
@@ -31578,6 +33286,13 @@
           "lemma": "sixty-seven",
           "level": "A2",
           "de": "siebenundsechzig"
+        },
+        {
+          "pos": 3,
+          "form": "Bigvai",
+          "lemma": "Bigvai",
+          "level": "A1",
+          "de": "Bigwai"
         }
       ],
       "20": [
@@ -31622,6 +33337,13 @@
           "lemma": "fifty-five",
           "level": "A2",
           "de": "fünfundfünfzig"
+        },
+        {
+          "pos": 3,
+          "form": "Adin",
+          "lemma": "Adin",
+          "level": "A1",
+          "de": "Adin"
         }
       ],
       "46": [
@@ -32103,6 +33825,20 @@
           "lemma": "ninety-eight",
           "level": "B1",
           "de": "achtundneunzig"
+        },
+        {
+          "pos": 3,
+          "form": "Ater",
+          "lemma": "Ater",
+          "level": "A1",
+          "de": "Ater"
+        },
+        {
+          "pos": 5,
+          "form": "Hezekiah",
+          "lemma": "Hezekiah",
+          "level": "A1",
+          "de": "Hiskia"
         }
       ],
       "22": [
@@ -32147,6 +33883,13 @@
           "lemma": "twenty-eight",
           "level": "A2",
           "de": "achtundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Hashum",
+          "lemma": "Hashum",
+          "level": "A1",
+          "de": "Haschum"
         }
       ],
       "23": [
@@ -32191,6 +33934,13 @@
           "lemma": "twenty-four",
           "level": "A2",
           "de": "vierundzwanzig"
+        },
+        {
+          "pos": 3,
+          "form": "Bezai",
+          "lemma": "Bezai",
+          "level": "A1",
+          "de": "Besai"
         }
       ],
       "24": [
@@ -32235,6 +33985,13 @@
           "lemma": "twelve",
           "level": "A1",
           "de": "zwölf"
+        },
+        {
+          "pos": 3,
+          "form": "Hariph",
+          "lemma": "Hariph",
+          "level": "A1",
+          "de": "Hariph"
         }
       ],
       "25": [
@@ -32265,6 +34022,13 @@
           "lemma": "ninety-five",
           "level": "B1",
           "de": "fünfundneunzig"
+        },
+        {
+          "pos": 3,
+          "form": "Gibeon",
+          "lemma": "Gibeon",
+          "level": "A1",
+          "de": "Gibeon"
         }
       ],
       "11": [
@@ -32358,6 +34122,27 @@
           "lemma": "eighteen",
           "level": "A2",
           "de": "achtzehn"
+        },
+        {
+          "pos": 3,
+          "form": "Pahathmoab",
+          "lemma": "Pahathmoab",
+          "level": "A1",
+          "de": "Pahat-Moab"
+        },
+        {
+          "pos": 8,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 10,
+          "form": "Joab",
+          "lemma": "Joab",
+          "level": "A1",
+          "de": "Joab"
         }
       ],
       "12": [
@@ -32416,6 +34201,13 @@
           "lemma": "fifty-four",
           "level": "A2",
           "de": "vierundfünfzig"
+        },
+        {
+          "pos": 3,
+          "form": "Elam",
+          "lemma": "Elam",
+          "level": "A1",
+          "de": "Elam"
         }
       ],
       "13": [
@@ -32460,6 +34252,13 @@
           "lemma": "forty-five",
           "level": "A2",
           "de": "fünfundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Zattu",
+          "lemma": "Zattu",
+          "level": "A1",
+          "de": "Sattu"
         }
       ],
       "14": [
@@ -32504,6 +34303,13 @@
           "lemma": "sixty",
           "level": "A2",
           "de": "sechzig"
+        },
+        {
+          "pos": 3,
+          "form": "Zaccai",
+          "lemma": "Zaccai",
+          "level": "A1",
+          "de": "Sakkai"
         }
       ],
       "15": [
@@ -32548,6 +34354,13 @@
           "lemma": "forty-eight",
           "level": "A2",
           "de": "achtundvierzig"
+        },
+        {
+          "pos": 3,
+          "form": "Binnui",
+          "lemma": "Binnui",
+          "level": "A1",
+          "de": "Binnui"
         }
       ],
       "56": [
@@ -32592,6 +34405,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Neziah",
+          "lemma": "Neziah",
+          "level": "A1",
+          "de": "Neziah"
+        },
+        {
+          "pos": 7,
+          "form": "Hatipha",
+          "lemma": "Hatipha",
+          "level": "A1",
+          "de": "Hatipha"
         }
       ],
       "57": [
@@ -32692,6 +34519,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 8,
+          "form": "Sotai",
+          "lemma": "Sotai",
+          "level": "A1",
+          "de": "Sotai"
+        },
+        {
+          "pos": 12,
+          "form": "Sophereth",
+          "lemma": "Sophereth",
+          "level": "A1",
+          "de": "Sophereth"
+        },
+        {
+          "pos": 16,
+          "form": "Perida",
+          "lemma": "Perida",
+          "level": "A1",
+          "de": "Perida"
         }
       ],
       "58": [
@@ -32757,6 +34605,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Jaala",
+          "lemma": "Jaala",
+          "level": "A1",
+          "de": "Jaala"
+        },
+        {
+          "pos": 7,
+          "form": "Darkon",
+          "lemma": "Darkon",
+          "level": "A1",
+          "de": "Darkon"
+        },
+        {
+          "pos": 11,
+          "form": "Giddel",
+          "lemma": "Giddel",
+          "level": "A1",
+          "de": "Giddel"
         }
       ],
       "59": [
@@ -32843,6 +34712,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Shephatiah",
+          "lemma": "Shephatiah",
+          "level": "A1",
+          "de": "Schefatja"
+        },
+        {
+          "pos": 7,
+          "form": "Hattil",
+          "lemma": "Hattil",
+          "level": "A1",
+          "de": "Hattil"
+        },
+        {
+          "pos": 11,
+          "form": "Pochereth",
+          "lemma": "Pochereth",
+          "level": "A1",
+          "de": "Pochereth"
+        },
+        {
+          "pos": 12,
+          "form": "Hazzebaim",
+          "lemma": "Hazzebaim",
+          "level": "A1",
+          "de": "Hazzebaim"
+        },
+        {
+          "pos": 16,
+          "form": "Amon",
+          "lemma": "Amon",
+          "level": "A1",
+          "de": "Amon"
         }
       ],
       "60": [
@@ -32929,6 +34833,13 @@
           "lemma": "ninety-two",
           "level": "A2",
           "de": "zweiundneunzig"
+        },
+        {
+          "pos": 2,
+          "form": "Nethinim",
+          "lemma": "Nethinim",
+          "level": "A1",
+          "de": "Nethinim"
         }
       ],
       "52": [
@@ -32994,6 +34905,371 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Besai",
+          "lemma": "Besai",
+          "level": "A1",
+          "de": "Besai"
+        },
+        {
+          "pos": 7,
+          "form": "Meunim",
+          "lemma": "Meunim",
+          "level": "A1",
+          "de": "Meunim"
+        },
+        {
+          "pos": 11,
+          "form": "Nephushesim",
+          "lemma": "Nephushesim",
+          "level": "A1",
+          "de": "Nephusesim"
+        }
+      ],
+      "51": [
+        {
+          "pos": 0,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 1,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 2,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 3,
+          "form": "Gazzam",
+          "lemma": "Gazzam",
+          "level": "A1",
+          "de": "Gassam"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 5,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 7,
+          "form": "Uzza",
+          "lemma": "Uzza",
+          "level": "A1",
+          "de": "Usa"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 9,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 11,
+          "form": "Paseah",
+          "lemma": "Paseah",
+          "level": "A1",
+          "de": "Paseach"
+        }
+      ],
+      "53": [
+        {
+          "pos": 0,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 1,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 2,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 3,
+          "form": "Bakbuk",
+          "lemma": "Bakbuk",
+          "level": "A1",
+          "de": "Bakbuk"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 5,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 7,
+          "form": "Hakupha",
+          "lemma": "Hakupha",
+          "level": "A1",
+          "de": "Hakupha"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 9,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 11,
+          "form": "Harhur",
+          "lemma": "Harhur",
+          "level": "A1",
+          "de": "Harhur"
+        }
+      ],
+      "54": [
+        {
+          "pos": 0,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 1,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 2,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 3,
+          "form": "Bazlith",
+          "lemma": "Bazlith",
+          "level": "A1",
+          "de": "Bazlith"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 5,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 7,
+          "form": "Mehida",
+          "lemma": "Mehida",
+          "level": "A1",
+          "de": "Mehida"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 9,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 11,
+          "form": "Harsha",
+          "lemma": "Harsha",
+          "level": "A1",
+          "de": "Harscha"
+        }
+      ],
+      "55": [
+        {
+          "pos": 0,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 1,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 2,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 3,
+          "form": "Barkos",
+          "lemma": "Barkos",
+          "level": "A1",
+          "de": "Barkos"
+        },
+        {
+          "pos": 4,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 5,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 6,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 7,
+          "form": "Sisera",
+          "lemma": "Sisera",
+          "level": "A1",
+          "de": "Sisera"
+        },
+        {
+          "pos": 8,
+          "form": "the",
+          "lemma": "the",
+          "level": "A1",
+          "de": "Der"
+        },
+        {
+          "pos": 9,
+          "form": "children",
+          "lemma": "children",
+          "level": "A1",
+          "de": "children"
+        },
+        {
+          "pos": 10,
+          "form": "of",
+          "lemma": "of",
+          "level": "A1",
+          "de": "of"
+        },
+        {
+          "pos": 11,
+          "form": "Temah",
+          "lemma": "Temah",
+          "level": "A1",
+          "de": "Temah"
         }
       ]
     },
@@ -34613,6 +36889,27 @@
           "lemma": "ground",
           "level": "A2",
           "de": "Boden"
+        },
+        {
+          "pos": 1,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
+        },
+        {
+          "pos": 3,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 26,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "7": [
@@ -34755,6 +37052,97 @@
           "lemma": "place",
           "level": "A1",
           "de": "Platz"
+        },
+        {
+          "pos": 1,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 3,
+          "form": "Bani",
+          "lemma": "Bani",
+          "level": "A1",
+          "de": "Bani"
+        },
+        {
+          "pos": 5,
+          "form": "Sherebiah",
+          "lemma": "Sherebiah",
+          "level": "A1",
+          "de": "Scherebja"
+        },
+        {
+          "pos": 6,
+          "form": "Jamin",
+          "lemma": "Jamin",
+          "level": "A1",
+          "de": "Jamin"
+        },
+        {
+          "pos": 7,
+          "form": "Akkub",
+          "lemma": "Akkub",
+          "level": "A1",
+          "de": "Akkub"
+        },
+        {
+          "pos": 8,
+          "form": "Shabbethai",
+          "lemma": "Shabbethai",
+          "level": "A1",
+          "de": "Schabbethai"
+        },
+        {
+          "pos": 9,
+          "form": "Hodiah",
+          "lemma": "Hodiah",
+          "level": "A1",
+          "de": "Hodija"
+        },
+        {
+          "pos": 10,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        },
+        {
+          "pos": 11,
+          "form": "Kelita",
+          "lemma": "Kelita",
+          "level": "A1",
+          "de": "Kelita"
+        },
+        {
+          "pos": 12,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 13,
+          "form": "Jozabad",
+          "lemma": "Jozabad",
+          "level": "A1",
+          "de": "Josabad"
+        },
+        {
+          "pos": 14,
+          "form": "Hanan",
+          "lemma": "Hanan",
+          "level": "A1",
+          "de": "Hanan"
+        },
+        {
+          "pos": 15,
+          "form": "Pelaiah",
+          "lemma": "Pelaiah",
+          "level": "A1",
+          "de": "Pelaja"
         }
       ],
       "8": [
@@ -34904,6 +37292,13 @@
           "lemma": "reading",
           "level": "B1",
           "de": "Lesung"
+        },
+        {
+          "pos": 9,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "9": [
@@ -35221,6 +37616,27 @@
           "lemma": "law",
           "level": "B1",
           "de": "Gesetz"
+        },
+        {
+          "pos": 0,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 6,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
+        },
+        {
+          "pos": 28,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "10": [
@@ -35517,6 +37933,13 @@
           "lemma": "strength",
           "level": "B1",
           "de": "Stärke"
+        },
+        {
+          "pos": 39,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "16": [
@@ -35863,6 +38286,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 48,
+          "form": "Ephraim",
+          "lemma": "Ephraim",
+          "level": "A1",
+          "de": "Ephraim"
         }
       ],
       "17": [
@@ -36174,6 +38604,27 @@
           "lemma": "gladness",
           "level": "B2",
           "de": "Freude"
+        },
+        {
+          "pos": 25,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 29,
+          "form": "Nun",
+          "lemma": "Nun",
+          "level": "A1",
+          "de": "Nun"
+        },
+        {
+          "pos": 36,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "18": [
@@ -36456,6 +38907,13 @@
           "lemma": "ordinance",
           "level": "C1",
           "de": "Verordnung"
+        },
+        {
+          "pos": 21,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "11": [
@@ -37082,6 +39540,13 @@
           "lemma": "law",
           "level": "B1",
           "de": "Gesetzes"
+        },
+        {
+          "pos": 22,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
         }
       ],
       "14": [
@@ -37266,6 +39731,27 @@
           "lemma": "month",
           "level": "A1",
           "de": "Monats"
+        },
+        {
+          "pos": 8,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 12,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
+        },
+        {
+          "pos": 17,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "15": [
@@ -37590,6 +40076,13 @@
           "lemma": "write",
           "level": "A1",
           "de": "geschrieben"
+        },
+        {
+          "pos": 13,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ]
     },
@@ -39804,6 +42297,13 @@
           "lemma": "commandment",
           "level": "B2",
           "de": "Gebote"
+        },
+        {
+          "pos": 6,
+          "form": "Sinai",
+          "lemma": "Sinai",
+          "level": "A1",
+          "de": "Sinai"
         }
       ],
       "14": [
@@ -39954,6 +42454,13 @@
           "lemma": "servant",
           "level": "B1",
           "de": "Knecht"
+        },
+        {
+          "pos": 18,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "15": [
@@ -40455,6 +42962,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "ihm"
+        },
+        {
+          "pos": 0,
+          "form": "Behold",
+          "lemma": "Behold",
+          "level": "A1",
+          "de": "Siehe"
         }
       ],
       "37": [
@@ -40880,6 +43394,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "ihn"
+        },
+        {
+          "pos": 21,
+          "form": "it",
+          "lemma": "it",
+          "level": "A1",
+          "de": "it"
         }
       ],
       "1": [
@@ -42341,6 +44862,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 20,
+          "form": "Sihon",
+          "lemma": "Sihon",
+          "level": "A1",
+          "de": "Sihon"
+        },
+        {
+          "pos": 28,
+          "form": "Heshbon",
+          "lemma": "Heshbon",
+          "level": "A1",
+          "de": "Hesbon"
+        },
+        {
+          "pos": 33,
+          "form": "Og",
+          "lemma": "Og",
+          "level": "A1",
+          "de": "Og"
+        },
+        {
+          "pos": 36,
+          "form": "Bashan",
+          "lemma": "Bashan",
+          "level": "A1",
+          "de": "Basan"
         }
       ],
       "23": [
@@ -42885,6 +45434,13 @@
           "lemma": "please",
           "level": "B1",
           "de": "wollten"
+        },
+        {
+          "pos": 20,
+          "form": "Canaanites",
+          "lemma": "Canaanites",
+          "level": "A1",
+          "de": "Kanaaniter"
         }
       ],
       "25": [
@@ -45071,6 +47627,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 62,
+          "form": "Assyria",
+          "lemma": "Assyria",
+          "level": "A1",
+          "de": "Assyrien"
         }
       ],
       "33": [
@@ -46003,6 +48566,13 @@
           "lemma": "you",
           "level": "A1",
           "de": "dich"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "7": [
@@ -46146,6 +48716,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 2,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 7,
+          "form": "Abram",
+          "lemma": "Abram",
+          "level": "A1",
+          "de": "Abram"
+        },
+        {
+          "pos": 13,
+          "form": "Ur",
+          "lemma": "Ur",
+          "level": "A1",
+          "de": "Ur"
+        },
+        {
+          "pos": 16,
+          "form": "Chaldees",
+          "lemma": "Chaldees",
+          "level": "A1",
+          "de": "Chaldäer"
+        },
+        {
+          "pos": 23,
+          "form": "Abraham",
+          "lemma": "Abraham",
+          "level": "A1",
+          "de": "Abraham"
         }
       ],
       "8": [
@@ -46888,17 +49493,178 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 6,
+          "form": "Pharaoh",
+          "lemma": "Pharaoh",
+          "level": "A1",
+          "de": "Pharao"
         }
       ]
     },
     "10": {
-      "16": [],
-      "17": [],
-      "18": [],
-      "19": [],
-      "20": [],
-      "6": [],
-      "7": [],
+      "16": [
+        {
+          "pos": 0,
+          "form": "Adonijah",
+          "lemma": "Adonijah",
+          "level": "A1",
+          "de": "Adonia"
+        },
+        {
+          "pos": 1,
+          "form": "Bigvai",
+          "lemma": "Bigvai",
+          "level": "A1",
+          "de": "Bigwai"
+        },
+        {
+          "pos": 2,
+          "form": "Adin",
+          "lemma": "Adin",
+          "level": "A1",
+          "de": "Adin"
+        }
+      ],
+      "17": [
+        {
+          "pos": 0,
+          "form": "Ater",
+          "lemma": "Ater",
+          "level": "A1",
+          "de": "Ater"
+        },
+        {
+          "pos": 1,
+          "form": "Hezekiah",
+          "lemma": "Hezekiah",
+          "level": "A1",
+          "de": "Hiskia"
+        },
+        {
+          "pos": 2,
+          "form": "Azzur",
+          "lemma": "Azzur",
+          "level": "A1",
+          "de": "Assur"
+        }
+      ],
+      "18": [
+        {
+          "pos": 0,
+          "form": "Hodiah",
+          "lemma": "Hodiah",
+          "level": "A1",
+          "de": "Hodija"
+        },
+        {
+          "pos": 1,
+          "form": "Hashum",
+          "lemma": "Hashum",
+          "level": "A1",
+          "de": "Haschum"
+        },
+        {
+          "pos": 2,
+          "form": "Bezai",
+          "lemma": "Bezai",
+          "level": "A1",
+          "de": "Besai"
+        }
+      ],
+      "19": [
+        {
+          "pos": 0,
+          "form": "Hariph",
+          "lemma": "Hariph",
+          "level": "A1",
+          "de": "Hariph"
+        },
+        {
+          "pos": 1,
+          "form": "Anathoth",
+          "lemma": "Anathoth",
+          "level": "A1",
+          "de": "Anatot"
+        },
+        {
+          "pos": 2,
+          "form": "Nobai",
+          "lemma": "Nobai",
+          "level": "A1",
+          "de": "Nobai"
+        }
+      ],
+      "20": [
+        {
+          "pos": 0,
+          "form": "Magpiash",
+          "lemma": "Magpiash",
+          "level": "A1",
+          "de": "Magpiasch"
+        },
+        {
+          "pos": 1,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 2,
+          "form": "Hezir",
+          "lemma": "Hezir",
+          "level": "A1",
+          "de": "Hezir"
+        }
+      ],
+      "6": [
+        {
+          "pos": 0,
+          "form": "Daniel",
+          "lemma": "Daniel",
+          "level": "A1",
+          "de": "Daniel"
+        },
+        {
+          "pos": 1,
+          "form": "Ginnethon",
+          "lemma": "Ginnethon",
+          "level": "A1",
+          "de": "Ginnethon"
+        },
+        {
+          "pos": 2,
+          "form": "Baruch",
+          "lemma": "Baruch",
+          "level": "A1",
+          "de": "Baruch"
+        }
+      ],
+      "7": [
+        {
+          "pos": 0,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 1,
+          "form": "Abijah",
+          "lemma": "Abijah",
+          "level": "A1",
+          "de": "Abia"
+        },
+        {
+          "pos": 2,
+          "form": "Mijamin",
+          "lemma": "Mijamin",
+          "level": "A1",
+          "de": "Mijamin"
+        }
+      ],
       "8": [
         {
           "pos": 3,
@@ -46927,6 +49693,27 @@
           "lemma": "priest",
           "level": "B1",
           "de": "Priester"
+        },
+        {
+          "pos": 0,
+          "form": "Maaziah",
+          "lemma": "Maaziah",
+          "level": "A1",
+          "de": "Maaziah"
+        },
+        {
+          "pos": 1,
+          "form": "Bilgai",
+          "lemma": "Bilgai",
+          "level": "A1",
+          "de": "Bilgai"
+        },
+        {
+          "pos": 2,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
         }
       ],
       "9": [
@@ -46999,6 +49786,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 7,
+          "form": "Azaniah",
+          "lemma": "Azaniah",
+          "level": "A1",
+          "de": "Asanja"
+        },
+        {
+          "pos": 8,
+          "form": "Binnui",
+          "lemma": "Binnui",
+          "level": "A1",
+          "de": "Binnui"
+        },
+        {
+          "pos": 13,
+          "form": "Henadad",
+          "lemma": "Henadad",
+          "level": "A1",
+          "de": "Henadad"
+        },
+        {
+          "pos": 14,
+          "form": "Kadmiel",
+          "lemma": "Kadmiel",
+          "level": "A1",
+          "de": "Kadmiel"
         }
       ],
       "10": [
@@ -47022,11 +49844,112 @@
           "lemma": "brother",
           "level": "A2",
           "de": "Brüder"
+        },
+        {
+          "pos": 3,
+          "form": "Shebaniah",
+          "lemma": "Shebaniah",
+          "level": "A1",
+          "de": "Schebanja"
+        },
+        {
+          "pos": 4,
+          "form": "Hodiah",
+          "lemma": "Hodiah",
+          "level": "A1",
+          "de": "Hodija"
+        },
+        {
+          "pos": 5,
+          "form": "Kelita",
+          "lemma": "Kelita",
+          "level": "A1",
+          "de": "Kelita"
+        },
+        {
+          "pos": 6,
+          "form": "Pelaiah",
+          "lemma": "Pelaiah",
+          "level": "A1",
+          "de": "Pelaja"
+        },
+        {
+          "pos": 7,
+          "form": "Hanan",
+          "lemma": "Hanan",
+          "level": "A1",
+          "de": "Hanan"
         }
       ],
-      "11": [],
-      "12": [],
-      "13": [],
+      "11": [
+        {
+          "pos": 0,
+          "form": "Mica",
+          "lemma": "Mica",
+          "level": "A1",
+          "de": "Micha"
+        },
+        {
+          "pos": 1,
+          "form": "Rehob",
+          "lemma": "Rehob",
+          "level": "A1",
+          "de": "Rehob"
+        },
+        {
+          "pos": 2,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        }
+      ],
+      "12": [
+        {
+          "pos": 0,
+          "form": "Zaccur",
+          "lemma": "Zaccur",
+          "level": "A1",
+          "de": "Sakkur"
+        },
+        {
+          "pos": 1,
+          "form": "Sherebiah",
+          "lemma": "Sherebiah",
+          "level": "A1",
+          "de": "Scherebja"
+        },
+        {
+          "pos": 2,
+          "form": "Shebaniah",
+          "lemma": "Shebaniah",
+          "level": "A1",
+          "de": "Schebanja"
+        }
+      ],
+      "13": [
+        {
+          "pos": 0,
+          "form": "Hodiah",
+          "lemma": "Hodiah",
+          "level": "A1",
+          "de": "Hodija"
+        },
+        {
+          "pos": 1,
+          "form": "Bani",
+          "lemma": "Bani",
+          "level": "A1",
+          "de": "Bani"
+        },
+        {
+          "pos": 2,
+          "form": "Beninu",
+          "lemma": "Beninu",
+          "level": "A1",
+          "de": "Beninu"
+        }
+      ],
       "14": [
         {
           "pos": 0,
@@ -47062,9 +49985,66 @@
           "lemma": "people",
           "level": "A1",
           "de": "Volkes"
+        },
+        {
+          "pos": 5,
+          "form": "Parosh",
+          "lemma": "Parosh",
+          "level": "A1",
+          "de": "Parosch"
+        },
+        {
+          "pos": 6,
+          "form": "Pahathmoab",
+          "lemma": "Pahathmoab",
+          "level": "A1",
+          "de": "Pahat-Moab"
+        },
+        {
+          "pos": 7,
+          "form": "Elam",
+          "lemma": "Elam",
+          "level": "A1",
+          "de": "Elam"
+        },
+        {
+          "pos": 8,
+          "form": "Zattu",
+          "lemma": "Zattu",
+          "level": "A1",
+          "de": "Sattu"
+        },
+        {
+          "pos": 9,
+          "form": "Bani",
+          "lemma": "Bani",
+          "level": "A1",
+          "de": "Bani"
         }
       ],
-      "15": [],
+      "15": [
+        {
+          "pos": 0,
+          "form": "Bunni",
+          "lemma": "Bunni",
+          "level": "A1",
+          "de": "Bunni"
+        },
+        {
+          "pos": 1,
+          "form": "Azgad",
+          "lemma": "Azgad",
+          "level": "A1",
+          "de": "Asgad"
+        },
+        {
+          "pos": 2,
+          "form": "Bebai",
+          "lemma": "Bebai",
+          "level": "A1",
+          "de": "Bebai"
+        }
+      ],
       "31": [
         {
           "pos": 0,
@@ -48576,11 +51556,121 @@
           "de": "Haus"
         }
       ],
-      "21": [],
-      "22": [],
-      "23": [],
-      "24": [],
-      "25": [],
+      "21": [
+        {
+          "pos": 0,
+          "form": "Meshezabel",
+          "lemma": "Meshezabel",
+          "level": "A1",
+          "de": "Meschesabel"
+        },
+        {
+          "pos": 1,
+          "form": "Zadok",
+          "lemma": "Zadok",
+          "level": "A1",
+          "de": "Zadok"
+        },
+        {
+          "pos": 2,
+          "form": "Jaddua",
+          "lemma": "Jaddua",
+          "level": "A1",
+          "de": "Jaddua"
+        }
+      ],
+      "22": [
+        {
+          "pos": 0,
+          "form": "Pelatiah",
+          "lemma": "Pelatiah",
+          "level": "A1",
+          "de": "Pelatja"
+        },
+        {
+          "pos": 1,
+          "form": "Hanan",
+          "lemma": "Hanan",
+          "level": "A1",
+          "de": "Hanan"
+        },
+        {
+          "pos": 2,
+          "form": "Anaiah",
+          "lemma": "Anaiah",
+          "level": "A1",
+          "de": "Anaja"
+        }
+      ],
+      "23": [
+        {
+          "pos": 0,
+          "form": "Hoshea",
+          "lemma": "Hoshea",
+          "level": "A1",
+          "de": "Hoschea"
+        },
+        {
+          "pos": 1,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
+        },
+        {
+          "pos": 2,
+          "form": "Hasshub",
+          "lemma": "Hasshub",
+          "level": "A1",
+          "de": "Haschub"
+        }
+      ],
+      "24": [
+        {
+          "pos": 0,
+          "form": "Hallohesh",
+          "lemma": "Hallohesh",
+          "level": "A1",
+          "de": "Hallohesh"
+        },
+        {
+          "pos": 1,
+          "form": "Pilha",
+          "lemma": "Pilha",
+          "level": "A1",
+          "de": "Pilha"
+        },
+        {
+          "pos": 2,
+          "form": "Shobek",
+          "lemma": "Shobek",
+          "level": "A1",
+          "de": "Schobek"
+        }
+      ],
+      "25": [
+        {
+          "pos": 0,
+          "form": "Rehum",
+          "lemma": "Rehum",
+          "level": "A1",
+          "de": "Rehum"
+        },
+        {
+          "pos": 1,
+          "form": "Hashabnah",
+          "lemma": "Hashabnah",
+          "level": "A1",
+          "de": "Haschabna"
+        },
+        {
+          "pos": 2,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        }
+      ],
       "36": [
         {
           "pos": 0,
@@ -49644,6 +52734,13 @@
           "lemma": "house",
           "level": "A1",
           "de": "haus"
+        },
+        {
+          "pos": 5,
+          "form": "Aaron",
+          "lemma": "Aaron",
+          "level": "A1",
+          "de": "Aaron"
         }
       ],
       "39": [
@@ -50025,6 +53122,27 @@
           "lemma": "our",
           "level": "A1",
           "de": "unseres"
+        },
+        {
+          "pos": 4,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
+        },
+        {
+          "pos": 9,
+          "form": "Levi",
+          "lemma": "Levi",
+          "level": "A1",
+          "de": "Levi"
+        },
+        {
+          "pos": 55,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "1": [
@@ -50104,12 +53222,121 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 5,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 11,
+          "form": "Hacaliah",
+          "lemma": "Hacaliah",
+          "level": "A1",
+          "de": "Hachalja"
+        },
+        {
+          "pos": 13,
+          "form": "Zedekiah",
+          "lemma": "Zedekiah",
+          "level": "A1",
+          "de": "Zedekia"
         }
       ],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
+      "2": [
+        {
+          "pos": 0,
+          "form": "Seraiah",
+          "lemma": "Seraiah",
+          "level": "A1",
+          "de": "Seraja"
+        },
+        {
+          "pos": 1,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 2,
+          "form": "Jeremiah",
+          "lemma": "Jeremiah",
+          "level": "A1",
+          "de": "Jeremia"
+        }
+      ],
+      "3": [
+        {
+          "pos": 0,
+          "form": "Pashhur",
+          "lemma": "Pashhur",
+          "level": "A1",
+          "de": "Paschur"
+        },
+        {
+          "pos": 1,
+          "form": "Amariah",
+          "lemma": "Amariah",
+          "level": "A1",
+          "de": "Amarja"
+        },
+        {
+          "pos": 2,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "Hattush",
+          "lemma": "Hattush",
+          "level": "A1",
+          "de": "Hattusch"
+        },
+        {
+          "pos": 1,
+          "form": "Shebaniah",
+          "lemma": "Shebaniah",
+          "level": "A1",
+          "de": "Schebanja"
+        },
+        {
+          "pos": 2,
+          "form": "Malluch",
+          "lemma": "Malluch",
+          "level": "A1",
+          "de": "Malluch"
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
+        },
+        {
+          "pos": 1,
+          "form": "Meremoth",
+          "lemma": "Meremoth",
+          "level": "A1",
+          "de": "Meremot"
+        },
+        {
+          "pos": 2,
+          "form": "Obadiah",
+          "lemma": "Obadiah",
+          "level": "A1",
+          "de": "Obadja"
+        }
+      ],
       "26": [
         {
           "pos": 0,
@@ -50117,9 +53344,52 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "Ahiah",
+          "lemma": "Ahiah",
+          "level": "A1",
+          "de": "Ahija"
+        },
+        {
+          "pos": 2,
+          "form": "Hanan",
+          "lemma": "Hanan",
+          "level": "A1",
+          "de": "Hanan"
+        },
+        {
+          "pos": 3,
+          "form": "Anan",
+          "lemma": "Anan",
+          "level": "A1",
+          "de": "Anan"
         }
       ],
-      "27": [],
+      "27": [
+        {
+          "pos": 0,
+          "form": "Malluch",
+          "lemma": "Malluch",
+          "level": "A1",
+          "de": "Malluch"
+        },
+        {
+          "pos": 1,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
+        },
+        {
+          "pos": 2,
+          "form": "Baanah",
+          "lemma": "Baanah",
+          "level": "A1",
+          "de": "Baana"
+        }
+      ],
       "28": [
         {
           "pos": 0,
@@ -51004,6 +54274,20 @@
           "lemma": "territory",
           "level": "B2",
           "de": "Gebiet"
+        },
+        {
+          "pos": 2,
+          "form": "Levites",
+          "lemma": "Levites",
+          "level": "A1",
+          "de": "Leviten"
+        },
+        {
+          "pos": 6,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "1": [
@@ -51965,6 +55249,13 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 45,
+          "form": "Perez",
+          "lemma": "Perez",
+          "level": "A1",
+          "de": "Perez"
         }
       ],
       "5": [
@@ -52277,6 +55568,20 @@
           "lemma": "man",
           "level": "A1",
           "de": "Männer"
+        },
+        {
+          "pos": 4,
+          "form": "Perez",
+          "lemma": "Perez",
+          "level": "A1",
+          "de": "Perez"
+        },
+        {
+          "pos": 8,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "7": [
@@ -52461,6 +55766,69 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 5,
+          "form": "Benjamin",
+          "lemma": "Benjamin",
+          "level": "A1",
+          "de": "Benjamin"
+        },
+        {
+          "pos": 6,
+          "form": "Sallu",
+          "lemma": "Sallu",
+          "level": "A1",
+          "de": "Sallu"
+        },
+        {
+          "pos": 10,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 14,
+          "form": "Joed",
+          "lemma": "Joed",
+          "level": "A1",
+          "de": "Joed"
+        },
+        {
+          "pos": 18,
+          "form": "Pedaiah",
+          "lemma": "Pedaiah",
+          "level": "A1",
+          "de": "Pedaja"
+        },
+        {
+          "pos": 22,
+          "form": "Kolaiah",
+          "lemma": "Kolaiah",
+          "level": "A1",
+          "de": "Kolaja"
+        },
+        {
+          "pos": 26,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        },
+        {
+          "pos": 30,
+          "form": "Ithiel",
+          "lemma": "Ithiel",
+          "level": "A1",
+          "de": "Ithiel"
+        },
+        {
+          "pos": 34,
+          "form": "Jeshaiah",
+          "lemma": "Jeshaiah",
+          "level": "A1",
+          "de": "Jeschaja"
         }
       ],
       "8": [
@@ -52498,6 +55866,20 @@
           "lemma": "twenty-eight",
           "level": "A1",
           "de": "achtundzwanzig"
+        },
+        {
+          "pos": 2,
+          "form": "Gabbai",
+          "lemma": "Gabbai",
+          "level": "A1",
+          "de": "Gabbai"
+        },
+        {
+          "pos": 3,
+          "form": "Sallai",
+          "lemma": "Sallai",
+          "level": "A1",
+          "de": "Sallai"
         }
       ],
       "9": [
@@ -52605,6 +55987,34 @@
           "lemma": "city",
           "level": "A1",
           "de": "Stadt"
+        },
+        {
+          "pos": 0,
+          "form": "Joel",
+          "lemma": "Joel",
+          "level": "A1",
+          "de": "Joel"
+        },
+        {
+          "pos": 4,
+          "form": "Zichri",
+          "lemma": "Zichri",
+          "level": "A1",
+          "de": "Sichri"
+        },
+        {
+          "pos": 9,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 13,
+          "form": "Hassenuah",
+          "lemma": "Hassenuah",
+          "level": "A1",
+          "de": "Hassenua"
         }
       ],
       "10": [
@@ -52649,6 +56059,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 7,
+          "form": "Joiarib",
+          "lemma": "Joiarib",
+          "level": "A1",
+          "de": "Jojarib"
+        },
+        {
+          "pos": 8,
+          "form": "Jachin",
+          "lemma": "Jachin",
+          "level": "A1",
+          "de": "Jachin"
         }
       ],
       "31": [
@@ -52749,6 +56180,41 @@
           "lemma": "town",
           "level": "A2",
           "de": "Städte"
+        },
+        {
+          "pos": 3,
+          "form": "Benjamin",
+          "lemma": "Benjamin",
+          "level": "A1",
+          "de": "Benjamin"
+        },
+        {
+          "pos": 7,
+          "form": "Geba",
+          "lemma": "Geba",
+          "level": "A1",
+          "de": "Geba"
+        },
+        {
+          "pos": 10,
+          "form": "Michmash",
+          "lemma": "Michmash",
+          "level": "A1",
+          "de": "Michmas"
+        },
+        {
+          "pos": 12,
+          "form": "Aija",
+          "lemma": "Aija",
+          "level": "A1",
+          "de": "Aja"
+        },
+        {
+          "pos": 15,
+          "form": "Bethel",
+          "lemma": "Bethel",
+          "level": "A1",
+          "de": "Bethel"
         }
       ],
       "32": [
@@ -52758,10 +56224,75 @@
           "lemma": "at",
           "level": "A1",
           "de": "bei"
+        },
+        {
+          "pos": 1,
+          "form": "Anathoth",
+          "lemma": "Anathoth",
+          "level": "A1",
+          "de": "Anatot"
+        },
+        {
+          "pos": 2,
+          "form": "Nob",
+          "lemma": "Nob",
+          "level": "A1",
+          "de": "Nob"
+        },
+        {
+          "pos": 3,
+          "form": "Ananiah",
+          "lemma": "Ananiah",
+          "level": "A1",
+          "de": "Ananja"
         }
       ],
-      "33": [],
-      "34": [],
+      "33": [
+        {
+          "pos": 0,
+          "form": "Hazor",
+          "lemma": "Hazor",
+          "level": "A1",
+          "de": "Hazor"
+        },
+        {
+          "pos": 1,
+          "form": "Ramah",
+          "lemma": "Ramah",
+          "level": "A1",
+          "de": "Rama"
+        },
+        {
+          "pos": 2,
+          "form": "Gittaim",
+          "lemma": "Gittaim",
+          "level": "A1",
+          "de": "Gittaim"
+        }
+      ],
+      "34": [
+        {
+          "pos": 0,
+          "form": "Hadid",
+          "lemma": "Hadid",
+          "level": "A1",
+          "de": "Hadid"
+        },
+        {
+          "pos": 1,
+          "form": "Zeboim",
+          "lemma": "Zeboim",
+          "level": "A1",
+          "de": "Zeboim"
+        },
+        {
+          "pos": 2,
+          "form": "Neballat",
+          "lemma": "Neballat",
+          "level": "A1",
+          "de": "Neballat"
+        }
+      ],
       "35": [
         {
           "pos": 1,
@@ -52797,6 +56328,20 @@
           "lemma": "craftsman",
           "level": "B2",
           "de": "Handwerker"
+        },
+        {
+          "pos": 0,
+          "form": "Lod",
+          "lemma": "Lod",
+          "level": "A1",
+          "de": "Lod"
+        },
+        {
+          "pos": 2,
+          "form": "Ono",
+          "lemma": "Ono",
+          "level": "A1",
+          "de": "Ono"
         }
       ],
       "16": [
@@ -52932,6 +56477,20 @@
           "lemma": "house",
           "level": "A1",
           "de": "Hauses;"
+        },
+        {
+          "pos": 1,
+          "form": "Shabbethai",
+          "lemma": "Shabbethai",
+          "level": "A1",
+          "de": "Schabbethai"
+        },
+        {
+          "pos": 3,
+          "form": "Jozabad",
+          "lemma": "Jozabad",
+          "level": "A1",
+          "de": "Josabad"
         }
       ],
       "17": [
@@ -53186,6 +56745,69 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
+        },
+        {
+          "pos": 5,
+          "form": "Mica",
+          "lemma": "Mica",
+          "level": "A1",
+          "de": "Micha"
+        },
+        {
+          "pos": 9,
+          "form": "Zabdi",
+          "lemma": "Zabdi",
+          "level": "A1",
+          "de": "Sabdi"
+        },
+        {
+          "pos": 13,
+          "form": "Asaph",
+          "lemma": "Asaph",
+          "level": "A1",
+          "de": "Asaf"
+        },
+        {
+          "pos": 25,
+          "form": "Bakbukiah",
+          "lemma": "Bakbukiah",
+          "level": "A1",
+          "de": "Bakbukja"
+        },
+        {
+          "pos": 32,
+          "form": "Abda",
+          "lemma": "Abda",
+          "level": "A1",
+          "de": "Abda"
+        },
+        {
+          "pos": 36,
+          "form": "Shammua",
+          "lemma": "Shammua",
+          "level": "A1",
+          "de": "Schammua"
+        },
+        {
+          "pos": 40,
+          "form": "Galal",
+          "lemma": "Galal",
+          "level": "A1",
+          "de": "Galal"
+        },
+        {
+          "pos": 44,
+          "form": "Jeduthun",
+          "lemma": "Jeduthun",
+          "level": "A1",
+          "de": "Jedutun"
         }
       ],
       "18": [
@@ -53387,6 +57009,20 @@
           "lemma": "seventy-two",
           "level": "A2",
           "de": "zweiundsiebzig."
+        },
+        {
+          "pos": 3,
+          "form": "Akkub",
+          "lemma": "Akkub",
+          "level": "A1",
+          "de": "Akkub"
+        },
+        {
+          "pos": 4,
+          "form": "Talmon",
+          "lemma": "Talmon",
+          "level": "A1",
+          "de": "Talmon"
         }
       ],
       "20": [
@@ -53515,6 +57151,20 @@
           "lemma": "inheritance",
           "level": "C1",
           "de": "Erbbesitz."
+        },
+        {
+          "pos": 3,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
+        },
+        {
+          "pos": 15,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "11": [
@@ -53657,6 +57307,48 @@
           "lemma": "house",
           "level": "A1",
           "de": "Haus"
+        },
+        {
+          "pos": 0,
+          "form": "Seraiah",
+          "lemma": "Seraiah",
+          "level": "A1",
+          "de": "Seraja"
+        },
+        {
+          "pos": 4,
+          "form": "Hilkiah",
+          "lemma": "Hilkiah",
+          "level": "A1",
+          "de": "Hilkia"
+        },
+        {
+          "pos": 8,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 12,
+          "form": "Zadok",
+          "lemma": "Zadok",
+          "level": "A1",
+          "de": "Zadok"
+        },
+        {
+          "pos": 16,
+          "form": "Meraioth",
+          "lemma": "Meraioth",
+          "level": "A1",
+          "de": "Merajot"
+        },
+        {
+          "pos": 20,
+          "form": "Ahitub",
+          "lemma": "Ahitub",
+          "level": "A1",
+          "de": "Ahitub"
         }
       ],
       "12": [
@@ -53883,6 +57575,55 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "Adaiah",
+          "lemma": "Adaiah",
+          "level": "A1",
+          "de": "Adaja"
+        },
+        {
+          "pos": 18,
+          "form": "Jeroham",
+          "lemma": "Jeroham",
+          "level": "A1",
+          "de": "Jeroham"
+        },
+        {
+          "pos": 22,
+          "form": "Pelaliah",
+          "lemma": "Pelaliah",
+          "level": "A1",
+          "de": "Pelalja"
+        },
+        {
+          "pos": 26,
+          "form": "Amzi",
+          "lemma": "Amzi",
+          "level": "A1",
+          "de": "Amzi"
+        },
+        {
+          "pos": 30,
+          "form": "Zechariah",
+          "lemma": "Zechariah",
+          "level": "A1",
+          "de": "Sacharja"
+        },
+        {
+          "pos": 34,
+          "form": "Pashhur",
+          "lemma": "Pashhur",
+          "level": "A1",
+          "de": "Paschur"
+        },
+        {
+          "pos": 38,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
         }
       ],
       "13": [
@@ -54046,6 +57787,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 11,
+          "form": "Amashsai",
+          "lemma": "Amashsai",
+          "level": "A1",
+          "de": "Amaschsai"
+        },
+        {
+          "pos": 15,
+          "form": "Azarel",
+          "lemma": "Azarel",
+          "level": "A1",
+          "de": "Asarel"
+        },
+        {
+          "pos": 19,
+          "form": "Ahzai",
+          "lemma": "Ahzai",
+          "level": "A1",
+          "de": "Ahsai"
+        },
+        {
+          "pos": 23,
+          "form": "Meshillemoth",
+          "lemma": "Meshillemoth",
+          "level": "A1",
+          "de": "Meschillemoth"
+        },
+        {
+          "pos": 27,
+          "form": "Immer",
+          "lemma": "Immer",
+          "level": "A1",
+          "de": "Immer"
         }
       ],
       "14": [
@@ -54167,6 +57943,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 14,
+          "form": "Zabdiel",
+          "lemma": "Zabdiel",
+          "level": "A1",
+          "de": "Sabdiel"
+        },
+        {
+          "pos": 18,
+          "form": "Haggedolim",
+          "lemma": "Haggedolim",
+          "level": "A1",
+          "de": "Haggedolim"
         }
       ],
       "15": [
@@ -54274,6 +58064,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 7,
+          "form": "Hasshub",
+          "lemma": "Hasshub",
+          "level": "A1",
+          "de": "Haschub"
+        },
+        {
+          "pos": 11,
+          "form": "Azrikam",
+          "lemma": "Azrikam",
+          "level": "A1",
+          "de": "Asrikam"
+        },
+        {
+          "pos": 15,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        },
+        {
+          "pos": 19,
+          "form": "Bunni",
+          "lemma": "Bunni",
+          "level": "A1",
+          "de": "Bunni"
         }
       ],
       "26": [
@@ -54311,6 +58136,34 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 2,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 5,
+          "form": "Moladah",
+          "lemma": "Moladah",
+          "level": "A1",
+          "de": "Molada"
+        },
+        {
+          "pos": 7,
+          "form": "Beth",
+          "lemma": "Beth",
+          "level": "A1",
+          "de": "Beth"
+        },
+        {
+          "pos": 8,
+          "form": "Pelet",
+          "lemma": "Pelet",
+          "level": "A1",
+          "de": "Pelet"
         }
       ],
       "27": [
@@ -54362,6 +58215,27 @@
           "lemma": "town",
           "level": "A2",
           "de": "Städte"
+        },
+        {
+          "pos": 2,
+          "form": "Hazar",
+          "lemma": "Hazar",
+          "level": "A1",
+          "de": "Hazar"
+        },
+        {
+          "pos": 3,
+          "form": "Shual",
+          "lemma": "Shual",
+          "level": "A1",
+          "de": "Schual"
+        },
+        {
+          "pos": 6,
+          "form": "Beersheba",
+          "lemma": "Beersheba",
+          "level": "A1",
+          "de": "Beerseba"
         }
       ],
       "28": [
@@ -54420,6 +58294,20 @@
           "lemma": "town",
           "level": "A2",
           "de": "Städte"
+        },
+        {
+          "pos": 2,
+          "form": "Ziklag",
+          "lemma": "Ziklag",
+          "level": "A1",
+          "de": "Ziklag"
+        },
+        {
+          "pos": 5,
+          "form": "Meconah",
+          "lemma": "Meconah",
+          "level": "A1",
+          "de": "Mekona"
         }
       ],
       "29": [
@@ -54464,6 +58352,34 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 2,
+          "form": "En",
+          "lemma": "En",
+          "level": "A1",
+          "de": "En"
+        },
+        {
+          "pos": 3,
+          "form": "Rimmon",
+          "lemma": "Rimmon",
+          "level": "A1",
+          "de": "Rimmon"
+        },
+        {
+          "pos": 6,
+          "form": "Zorah",
+          "lemma": "Zorah",
+          "level": "A1",
+          "de": "Zora"
+        },
+        {
+          "pos": 9,
+          "form": "Jarmuth",
+          "lemma": "Jarmuth",
+          "level": "A1",
+          "de": "Jarmut"
         }
       ],
       "30": [
@@ -54585,6 +58501,48 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Zanoah",
+          "lemma": "Zanoah",
+          "level": "A1",
+          "de": "Sanoah"
+        },
+        {
+          "pos": 1,
+          "form": "Adullam",
+          "lemma": "Adullam",
+          "level": "A1",
+          "de": "Adullam"
+        },
+        {
+          "pos": 5,
+          "form": "Lachish",
+          "lemma": "Lachish",
+          "level": "A1",
+          "de": "Lachis"
+        },
+        {
+          "pos": 9,
+          "form": "Azekah",
+          "lemma": "Azekah",
+          "level": "A1",
+          "de": "Aseka"
+        },
+        {
+          "pos": 17,
+          "form": "Beersheba",
+          "lemma": "Beersheba",
+          "level": "A1",
+          "de": "Beerseba"
+        },
+        {
+          "pos": 22,
+          "form": "Hinnom",
+          "lemma": "Hinnom",
+          "level": "A1",
+          "de": "Hinnom"
         }
       ],
       "21": [
@@ -54650,6 +58608,41 @@
           "lemma": "the",
           "level": "A1",
           "de": "die"
+        },
+        {
+          "pos": 2,
+          "form": "Nethinim",
+          "lemma": "Nethinim",
+          "level": "A1",
+          "de": "Nethinim"
+        },
+        {
+          "pos": 5,
+          "form": "Ophel",
+          "lemma": "Ophel",
+          "level": "A1",
+          "de": "Ofel"
+        },
+        {
+          "pos": 7,
+          "form": "Ziha",
+          "lemma": "Ziha",
+          "level": "A1",
+          "de": "Ziha"
+        },
+        {
+          "pos": 9,
+          "form": "Gishpa",
+          "lemma": "Gishpa",
+          "level": "A1",
+          "de": "Gischpa"
+        },
+        {
+          "pos": 13,
+          "form": "Nethinim",
+          "lemma": "Nethinim",
+          "level": "A1",
+          "de": "Nethinim"
         }
       ],
       "22": [
@@ -54876,6 +58869,55 @@
           "lemma": "house",
           "level": "A1",
           "de": "Haus"
+        },
+        {
+          "pos": 7,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
+        },
+        {
+          "pos": 9,
+          "form": "Uzzi",
+          "lemma": "Uzzi",
+          "level": "A1",
+          "de": "Usi"
+        },
+        {
+          "pos": 13,
+          "form": "Bani",
+          "lemma": "Bani",
+          "level": "A1",
+          "de": "Bani"
+        },
+        {
+          "pos": 17,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        },
+        {
+          "pos": 21,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
+        },
+        {
+          "pos": 25,
+          "form": "Mica",
+          "lemma": "Mica",
+          "level": "A1",
+          "de": "Micha"
+        },
+        {
+          "pos": 30,
+          "form": "Asaph",
+          "lemma": "Asaph",
+          "level": "A1",
+          "de": "Asaf"
         }
       ],
       "23": [
@@ -55182,6 +59224,34 @@
           "lemma": "people",
           "level": "A1",
           "de": "Volk"
+        },
+        {
+          "pos": 0,
+          "form": "Pethahiah",
+          "lemma": "Pethahiah",
+          "level": "A1",
+          "de": "Pethaja"
+        },
+        {
+          "pos": 4,
+          "form": "Meshezabel",
+          "lemma": "Meshezabel",
+          "level": "A1",
+          "de": "Meschesabel"
+        },
+        {
+          "pos": 9,
+          "form": "Zerah",
+          "lemma": "Zerah",
+          "level": "A1",
+          "de": "Serah"
+        },
+        {
+          "pos": 13,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "25": [
@@ -55381,6 +59451,41 @@
           "lemma": "village",
           "level": "B1",
           "de": "Dörfern"
+        },
+        {
+          "pos": 12,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 15,
+          "form": "Kiriath",
+          "lemma": "Kiriath",
+          "level": "A1",
+          "de": "Kirjat"
+        },
+        {
+          "pos": 16,
+          "form": "Arba",
+          "lemma": "Arba",
+          "level": "A1",
+          "de": "Arba"
+        },
+        {
+          "pos": 22,
+          "form": "Dibon",
+          "lemma": "Dibon",
+          "level": "A1",
+          "de": "Dibon"
+        },
+        {
+          "pos": 28,
+          "form": "Jekabzeel",
+          "lemma": "Jekabzeel",
+          "level": "A1",
+          "de": "Jekabzeel"
         }
       ]
     },
@@ -55427,6 +59532,55 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 3,
+          "form": "Eliakim",
+          "lemma": "Eliakim",
+          "level": "A1",
+          "de": "Eljakim"
+        },
+        {
+          "pos": 4,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        },
+        {
+          "pos": 5,
+          "form": "Miniamin",
+          "lemma": "Miniamin",
+          "level": "A1",
+          "de": "Minjamin"
+        },
+        {
+          "pos": 6,
+          "form": "Micaiah",
+          "lemma": "Micaiah",
+          "level": "A1",
+          "de": "Michaja"
+        },
+        {
+          "pos": 7,
+          "form": "Elioenai",
+          "lemma": "Elioenai",
+          "level": "A1",
+          "de": "Elioenai"
+        },
+        {
+          "pos": 8,
+          "form": "Zechariah",
+          "lemma": "Zechariah",
+          "level": "A1",
+          "de": "Sacharja"
+        },
+        {
+          "pos": 10,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
         }
       ],
       "42": [
@@ -55534,6 +59688,69 @@
           "lemma": "overseer",
           "level": "C1",
           "de": "Aufseher"
+        },
+        {
+          "pos": 1,
+          "form": "Maaseiah",
+          "lemma": "Maaseiah",
+          "level": "A1",
+          "de": "Maaseja"
+        },
+        {
+          "pos": 3,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 5,
+          "form": "Eleazar",
+          "lemma": "Eleazar",
+          "level": "A1",
+          "de": "Eleasar"
+        },
+        {
+          "pos": 7,
+          "form": "Uzzi",
+          "lemma": "Uzzi",
+          "level": "A1",
+          "de": "Usi"
+        },
+        {
+          "pos": 9,
+          "form": "Jehohanan",
+          "lemma": "Jehohanan",
+          "level": "A1",
+          "de": "Johanan"
+        },
+        {
+          "pos": 11,
+          "form": "Malchijah",
+          "lemma": "Malchijah",
+          "level": "A1",
+          "de": "Malkija"
+        },
+        {
+          "pos": 13,
+          "form": "Elam",
+          "lemma": "Elam",
+          "level": "A1",
+          "de": "Elam"
+        },
+        {
+          "pos": 15,
+          "form": "Ezer",
+          "lemma": "Ezer",
+          "level": "A1",
+          "de": "Ezer"
+        },
+        {
+          "pos": 21,
+          "form": "Jezrahiah",
+          "lemma": "Jezrahiah",
+          "level": "A1",
+          "de": "Jesrahja"
         }
       ],
       "43": [
@@ -56221,6 +60438,13 @@
           "lemma": "wait",
           "level": "B1",
           "de": "dienten"
+        },
+        {
+          "pos": 47,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "45": [
@@ -56441,6 +60665,20 @@
           "lemma": "son",
           "level": "A1",
           "de": "Sohnes"
+        },
+        {
+          "pos": 26,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 29,
+          "form": "Solomon",
+          "lemma": "Solomon",
+          "level": "A1",
+          "de": "Salomo"
         }
       ],
       "16": [
@@ -56457,6 +60695,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Iddo",
+          "lemma": "Iddo",
+          "level": "A1",
+          "de": "Iddo"
+        },
+        {
+          "pos": 2,
+          "form": "Zechariah",
+          "lemma": "Zechariah",
+          "level": "A1",
+          "de": "Sacharja"
+        },
+        {
+          "pos": 4,
+          "form": "Ginnethon",
+          "lemma": "Ginnethon",
+          "level": "A1",
+          "de": "Ginnethon"
+        },
+        {
+          "pos": 5,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
         }
       ],
       "17": [
@@ -56480,6 +60746,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Abijah",
+          "lemma": "Abijah",
+          "level": "A1",
+          "de": "Abia"
+        },
+        {
+          "pos": 2,
+          "form": "Zichri",
+          "lemma": "Zichri",
+          "level": "A1",
+          "de": "Sichri"
+        },
+        {
+          "pos": 4,
+          "form": "Miniamin",
+          "lemma": "Miniamin",
+          "level": "A1",
+          "de": "Minjamin"
+        },
+        {
+          "pos": 6,
+          "form": "Moadiah",
+          "lemma": "Moadiah",
+          "level": "A1",
+          "de": "Moadja"
+        },
+        {
+          "pos": 7,
+          "form": "Piltai",
+          "lemma": "Piltai",
+          "level": "A1",
+          "de": "Piltai"
         }
       ],
       "18": [
@@ -56496,6 +60797,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Bilgah",
+          "lemma": "Bilgah",
+          "level": "A1",
+          "de": "Bilga"
+        },
+        {
+          "pos": 2,
+          "form": "Shammua",
+          "lemma": "Shammua",
+          "level": "A1",
+          "de": "Schammua"
+        },
+        {
+          "pos": 4,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 5,
+          "form": "Jehonathan",
+          "lemma": "Jehonathan",
+          "level": "A1",
+          "de": "Jehonathan"
         }
       ],
       "19": [
@@ -56519,6 +60848,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 2,
+          "form": "Joiarib",
+          "lemma": "Joiarib",
+          "level": "A1",
+          "de": "Jojarib"
+        },
+        {
+          "pos": 3,
+          "form": "Mattenai",
+          "lemma": "Mattenai",
+          "level": "A1",
+          "de": "Mattenai"
+        },
+        {
+          "pos": 5,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 6,
+          "form": "Uzzi",
+          "lemma": "Uzzi",
+          "level": "A1",
+          "de": "Usi"
         }
       ],
       "20": [
@@ -56535,6 +60892,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Sallai",
+          "lemma": "Sallai",
+          "level": "A1",
+          "de": "Sallai"
+        },
+        {
+          "pos": 2,
+          "form": "Kallai",
+          "lemma": "Kallai",
+          "level": "A1",
+          "de": "Kallai"
+        },
+        {
+          "pos": 4,
+          "form": "Amok",
+          "lemma": "Amok",
+          "level": "A1",
+          "de": "Amok"
+        },
+        {
+          "pos": 5,
+          "form": "Eber",
+          "lemma": "Eber",
+          "level": "A1",
+          "de": "Eber"
         }
       ],
       "21": [
@@ -56551,6 +60936,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Hilkiah",
+          "lemma": "Hilkiah",
+          "level": "A1",
+          "de": "Hilkia"
+        },
+        {
+          "pos": 2,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        },
+        {
+          "pos": 4,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 5,
+          "form": "Nethanel",
+          "lemma": "Nethanel",
+          "level": "A1",
+          "de": "Netanel"
         }
       ],
       "22": [
@@ -56750,6 +61163,41 @@
           "lemma": "Persian",
           "level": "B2",
           "de": "Perser"
+        },
+        {
+          "pos": 8,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
+        },
+        {
+          "pos": 9,
+          "form": "Joiada",
+          "lemma": "Joiada",
+          "level": "A1",
+          "de": "Jojada"
+        },
+        {
+          "pos": 11,
+          "form": "Johanan",
+          "lemma": "Johanan",
+          "level": "A1",
+          "de": "Johanan"
+        },
+        {
+          "pos": 13,
+          "form": "Jaddua",
+          "lemma": "Jaddua",
+          "level": "A1",
+          "de": "Jaddua"
+        },
+        {
+          "pos": 29,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ],
       "23": [
@@ -56913,6 +61361,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 3,
+          "form": "Levi",
+          "lemma": "Levi",
+          "level": "A1",
+          "de": "Levi"
+        },
+        {
+          "pos": 21,
+          "form": "Johanan",
+          "lemma": "Johanan",
+          "level": "A1",
+          "de": "Johanan"
+        },
+        {
+          "pos": 25,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
         }
       ],
       "24": [
@@ -57171,6 +61640,48 @@
           "lemma": "watch",
           "level": "B1",
           "de": "Wache"
+        },
+        {
+          "pos": 5,
+          "form": "Hashabiah",
+          "lemma": "Hashabiah",
+          "level": "A1",
+          "de": "Hascharja"
+        },
+        {
+          "pos": 6,
+          "form": "Sherebiah",
+          "lemma": "Sherebiah",
+          "level": "A1",
+          "de": "Scherebja"
+        },
+        {
+          "pos": 8,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 12,
+          "form": "Kadmiel",
+          "lemma": "Kadmiel",
+          "level": "A1",
+          "de": "Kadmiel"
+        },
+        {
+          "pos": 29,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 33,
+          "form": "God",
+          "lemma": "God",
+          "level": "A1",
+          "de": "Gott"
         }
       ],
       "25": [
@@ -57257,6 +61768,48 @@
           "lemma": "gate",
           "level": "A2",
           "de": "Toren"
+        },
+        {
+          "pos": 0,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
+        },
+        {
+          "pos": 2,
+          "form": "Bakbukiah",
+          "lemma": "Bakbukiah",
+          "level": "A1",
+          "de": "Bakbukja"
+        },
+        {
+          "pos": 3,
+          "form": "Obadiah",
+          "lemma": "Obadiah",
+          "level": "A1",
+          "de": "Obadja"
+        },
+        {
+          "pos": 4,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 5,
+          "form": "Talmon",
+          "lemma": "Talmon",
+          "level": "A1",
+          "de": "Talmon"
+        },
+        {
+          "pos": 6,
+          "form": "Akkub",
+          "lemma": "Akkub",
+          "level": "A1",
+          "de": "Akkub"
         }
       ],
       "31": [
@@ -57528,6 +62081,13 @@
           "lemma": "gate",
           "level": "A2",
           "de": "Tor"
+        },
+        {
+          "pos": 7,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "32": [
@@ -57600,6 +62160,20 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "Hoshaiah",
+          "lemma": "Hoshaiah",
+          "level": "A1",
+          "de": "Hoschaja"
+        },
+        {
+          "pos": 11,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "33": [
@@ -57616,6 +62190,27 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 1,
+          "form": "Azariah",
+          "lemma": "Azariah",
+          "level": "A1",
+          "de": "Asarja"
+        },
+        {
+          "pos": 2,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
+        },
+        {
+          "pos": 4,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
         }
       ],
       "34": [
@@ -57639,6 +62234,34 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 0,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 2,
+          "form": "Benjamin",
+          "lemma": "Benjamin",
+          "level": "A1",
+          "de": "Benjamin"
+        },
+        {
+          "pos": 4,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 6,
+          "form": "Jeremiah",
+          "lemma": "Jeremiah",
+          "level": "A1",
+          "de": "Jeremia"
         }
       ],
       "35": [
@@ -57823,6 +62446,55 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 8,
+          "form": "Zechariah",
+          "lemma": "Zechariah",
+          "level": "A1",
+          "de": "Sacharja"
+        },
+        {
+          "pos": 12,
+          "form": "Jonathan",
+          "lemma": "Jonathan",
+          "level": "A1",
+          "de": "Jonathan"
+        },
+        {
+          "pos": 16,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 20,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
+        },
+        {
+          "pos": 24,
+          "form": "Micaiah",
+          "lemma": "Micaiah",
+          "level": "A1",
+          "de": "Michaja"
+        },
+        {
+          "pos": 28,
+          "form": "Zaccur",
+          "lemma": "Zaccur",
+          "level": "A1",
+          "de": "Sakkur"
+        },
+        {
+          "pos": 32,
+          "form": "Asaph",
+          "lemma": "Asaph",
+          "level": "A1",
+          "de": "Asaf"
         }
       ],
       "6": [
@@ -57832,6 +62504,27 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 0,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 2,
+          "form": "Joiarib",
+          "lemma": "Joiarib",
+          "level": "A1",
+          "de": "Jojarib"
+        },
+        {
+          "pos": 3,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
         }
       ],
       "7": [
@@ -57939,6 +62632,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Sallu",
+          "lemma": "Sallu",
+          "level": "A1",
+          "de": "Sallu"
+        },
+        {
+          "pos": 1,
+          "form": "Amok",
+          "lemma": "Amok",
+          "level": "A1",
+          "de": "Amok"
+        },
+        {
+          "pos": 2,
+          "form": "Hilkiah",
+          "lemma": "Hilkiah",
+          "level": "A1",
+          "de": "Hilkia"
+        },
+        {
+          "pos": 3,
+          "form": "Jedaiah",
+          "lemma": "Jedaiah",
+          "level": "A1",
+          "de": "Jedaja"
+        },
+        {
+          "pos": 19,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
         }
       ],
       "8": [
@@ -58032,6 +62760,48 @@
           "lemma": "brother",
           "level": "A2",
           "de": "Brüder"
+        },
+        {
+          "pos": 3,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 4,
+          "form": "Binnui",
+          "lemma": "Binnui",
+          "level": "A1",
+          "de": "Binnui"
+        },
+        {
+          "pos": 5,
+          "form": "Kadmiel",
+          "lemma": "Kadmiel",
+          "level": "A1",
+          "de": "Kadmiel"
+        },
+        {
+          "pos": 6,
+          "form": "Sherebiah",
+          "lemma": "Sherebiah",
+          "level": "A1",
+          "de": "Scherebja"
+        },
+        {
+          "pos": 7,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 9,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
         }
       ],
       "9": [
@@ -58134,6 +62904,20 @@
           "lemma": "office",
           "level": "B1",
           "de": "Ämtern"
+        },
+        {
+          "pos": 1,
+          "form": "Bakbukiah",
+          "lemma": "Bakbukiah",
+          "level": "A1",
+          "de": "Bakbukja"
+        },
+        {
+          "pos": 3,
+          "form": "Unno",
+          "lemma": "Unno",
+          "level": "A1",
+          "de": "Unno"
         }
       ],
       "10": [
@@ -58234,6 +63018,48 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 0,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 5,
+          "form": "Joiakim",
+          "lemma": "Joiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 7,
+          "form": "Joiakim",
+          "lemma": "Joiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 12,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
+        },
+        {
+          "pos": 14,
+          "form": "Eliashib",
+          "lemma": "Eliashib",
+          "level": "A1",
+          "de": "Eljaschib"
+        },
+        {
+          "pos": 19,
+          "form": "Joiada",
+          "lemma": "Joiada",
+          "level": "A1",
+          "de": "Jojada"
         }
       ],
       "1": [
@@ -58356,12 +63182,142 @@
           "lemma": "and",
           "level": "A1",
           "de": "und"
+        },
+        {
+          "pos": 12,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 16,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 18,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 19,
+          "form": "Seraiah",
+          "lemma": "Seraiah",
+          "level": "A1",
+          "de": "Seraja"
+        },
+        {
+          "pos": 20,
+          "form": "Jeremiah",
+          "lemma": "Jeremiah",
+          "level": "A1",
+          "de": "Jeremia"
+        },
+        {
+          "pos": 21,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
         }
       ],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
+      "2": [
+        {
+          "pos": 0,
+          "form": "Amariah",
+          "lemma": "Amariah",
+          "level": "A1",
+          "de": "Amarja"
+        },
+        {
+          "pos": 1,
+          "form": "Malluch",
+          "lemma": "Malluch",
+          "level": "A1",
+          "de": "Malluch"
+        },
+        {
+          "pos": 2,
+          "form": "Hattush",
+          "lemma": "Hattush",
+          "level": "A1",
+          "de": "Hattusch"
+        }
+      ],
+      "3": [
+        {
+          "pos": 0,
+          "form": "Shecaniah",
+          "lemma": "Shecaniah",
+          "level": "A1",
+          "de": "Schechanja"
+        },
+        {
+          "pos": 1,
+          "form": "Rehum",
+          "lemma": "Rehum",
+          "level": "A1",
+          "de": "Rehum"
+        },
+        {
+          "pos": 2,
+          "form": "Meremoth",
+          "lemma": "Meremoth",
+          "level": "A1",
+          "de": "Meremot"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "Iddo",
+          "lemma": "Iddo",
+          "level": "A1",
+          "de": "Iddo"
+        },
+        {
+          "pos": 1,
+          "form": "Ginnethoi",
+          "lemma": "Ginnethoi",
+          "level": "A1",
+          "de": "Ginnethoi"
+        },
+        {
+          "pos": 2,
+          "form": "Abijah",
+          "lemma": "Abijah",
+          "level": "A1",
+          "de": "Abia"
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "Mijamin",
+          "lemma": "Mijamin",
+          "level": "A1",
+          "de": "Mijamin"
+        },
+        {
+          "pos": 1,
+          "form": "Maadiah",
+          "lemma": "Maadiah",
+          "level": "A1",
+          "de": "Maadja"
+        },
+        {
+          "pos": 2,
+          "form": "Bilgah",
+          "lemma": "Bilgah",
+          "level": "A1",
+          "de": "Bilga"
+        }
+      ],
       "46": [
         {
           "pos": 0,
@@ -58523,6 +63479,20 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott"
+        },
+        {
+          "pos": 5,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 7,
+          "form": "Asaph",
+          "lemma": "Asaph",
+          "level": "A1",
+          "de": "Asaf"
         }
       ],
       "47": [
@@ -58877,6 +63847,13 @@
           "lemma": "Aaron",
           "level": "A1",
           "de": "Aaron"
+        },
+        {
+          "pos": 6,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
         }
       ],
       "11": [
@@ -58949,6 +63926,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Joiada",
+          "lemma": "Joiada",
+          "level": "A1",
+          "de": "Jojada"
+        },
+        {
+          "pos": 6,
+          "form": "Jonathan",
+          "lemma": "Jonathan",
+          "level": "A1",
+          "de": "Jonathan"
+        },
+        {
+          "pos": 8,
+          "form": "Jonathan",
+          "lemma": "Jonathan",
+          "level": "A1",
+          "de": "Jonathan"
+        },
+        {
+          "pos": 13,
+          "form": "Jaddua",
+          "lemma": "Jaddua",
+          "level": "A1",
+          "de": "Jaddua"
         }
       ],
       "12": [
@@ -59035,6 +64040,41 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 4,
+          "form": "Joiakim",
+          "lemma": "Joiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 12,
+          "form": "Seraiah",
+          "lemma": "Seraiah",
+          "level": "A1",
+          "de": "Seraja"
+        },
+        {
+          "pos": 13,
+          "form": "Meraiah",
+          "lemma": "Meraiah",
+          "level": "A1",
+          "de": "Meraja"
+        },
+        {
+          "pos": 15,
+          "form": "Jeremiah",
+          "lemma": "Jeremiah",
+          "level": "A1",
+          "de": "Jeremia"
+        },
+        {
+          "pos": 16,
+          "form": "Hananiah",
+          "lemma": "Hananiah",
+          "level": "A1",
+          "de": "Hananja"
         }
       ],
       "13": [
@@ -59051,6 +64091,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
+        },
+        {
+          "pos": 2,
+          "form": "Meshullam",
+          "lemma": "Meshullam",
+          "level": "A1",
+          "de": "Meschullam"
+        },
+        {
+          "pos": 4,
+          "form": "Amariah",
+          "lemma": "Amariah",
+          "level": "A1",
+          "de": "Amarja"
+        },
+        {
+          "pos": 5,
+          "form": "Jehohanan",
+          "lemma": "Jehohanan",
+          "level": "A1",
+          "de": "Johanan"
         }
       ],
       "14": [
@@ -59067,6 +64135,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Malluchi",
+          "lemma": "Malluchi",
+          "level": "A1",
+          "de": "Malluchi"
+        },
+        {
+          "pos": 2,
+          "form": "Jonathan",
+          "lemma": "Jonathan",
+          "level": "A1",
+          "de": "Jonathan"
+        },
+        {
+          "pos": 4,
+          "form": "Shebaniah",
+          "lemma": "Shebaniah",
+          "level": "A1",
+          "de": "Schebanja"
+        },
+        {
+          "pos": 5,
+          "form": "Joseph",
+          "lemma": "Joseph",
+          "level": "A1",
+          "de": "Josef"
         }
       ],
       "15": [
@@ -59083,6 +64179,34 @@
           "lemma": "of",
           "level": "A1",
           "de": "von"
+        },
+        {
+          "pos": 1,
+          "form": "Harim",
+          "lemma": "Harim",
+          "level": "A1",
+          "de": "Harim"
+        },
+        {
+          "pos": 2,
+          "form": "Adna",
+          "lemma": "Adna",
+          "level": "A1",
+          "de": "Adna"
+        },
+        {
+          "pos": 4,
+          "form": "Meraioth",
+          "lemma": "Meraioth",
+          "level": "A1",
+          "de": "Merajot"
+        },
+        {
+          "pos": 5,
+          "form": "Helkai",
+          "lemma": "Helkai",
+          "level": "A1",
+          "de": "Helkai"
         }
       ],
       "26": [
@@ -59260,6 +64384,41 @@
           "lemma": "scribe",
           "level": "C1",
           "de": "Schriftgelehrten"
+        },
+        {
+          "pos": 6,
+          "form": "Joiakim",
+          "lemma": "Joiakim",
+          "level": "A1",
+          "de": "Jojakim"
+        },
+        {
+          "pos": 10,
+          "form": "Jeshua",
+          "lemma": "Jeshua",
+          "level": "A1",
+          "de": "Jesua"
+        },
+        {
+          "pos": 14,
+          "form": "Jozadak",
+          "lemma": "Jozadak",
+          "level": "A1",
+          "de": "Jozadak"
+        },
+        {
+          "pos": 20,
+          "form": "Nehemiah",
+          "lemma": "Nehemiah",
+          "level": "A1",
+          "de": "Nehemia"
+        },
+        {
+          "pos": 25,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
         }
       ],
       "27": [
@@ -59565,6 +64724,13 @@
           "lemma": "harp",
           "level": "C1",
           "de": "Harfen"
+        },
+        {
+          "pos": 7,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "28": [
@@ -59865,6 +65031,34 @@
           "lemma": "Jerusalem",
           "level": "A1",
           "de": "Jerusalem"
+        },
+        {
+          "pos": 2,
+          "form": "Beth",
+          "lemma": "Beth",
+          "level": "A1",
+          "de": "Beth"
+        },
+        {
+          "pos": 3,
+          "form": "Gilgal",
+          "lemma": "Gilgal",
+          "level": "A1",
+          "de": "Gilgal"
+        },
+        {
+          "pos": 10,
+          "form": "Geba",
+          "lemma": "Geba",
+          "level": "A1",
+          "de": "Geba"
+        },
+        {
+          "pos": 12,
+          "form": "Azmaveth",
+          "lemma": "Azmaveth",
+          "level": "A1",
+          "de": "Asmawet"
         }
       ],
       "30": [
@@ -60135,6 +65329,76 @@
           "lemma": "they",
           "level": "A1",
           "de": "ihnen"
+        },
+        {
+          "pos": 3,
+          "form": "Shemaiah",
+          "lemma": "Shemaiah",
+          "level": "A1",
+          "de": "Schemaja"
+        },
+        {
+          "pos": 5,
+          "form": "Azarel",
+          "lemma": "Azarel",
+          "level": "A1",
+          "de": "Asarel"
+        },
+        {
+          "pos": 6,
+          "form": "Milalai",
+          "lemma": "Milalai",
+          "level": "A1",
+          "de": "Milalai"
+        },
+        {
+          "pos": 7,
+          "form": "Gilalai",
+          "lemma": "Gilalai",
+          "level": "A1",
+          "de": "Gilalai"
+        },
+        {
+          "pos": 8,
+          "form": "Maai",
+          "lemma": "Maai",
+          "level": "A1",
+          "de": "Maai"
+        },
+        {
+          "pos": 9,
+          "form": "Nethanel",
+          "lemma": "Nethanel",
+          "level": "A1",
+          "de": "Netanel"
+        },
+        {
+          "pos": 11,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 12,
+          "form": "Hanani",
+          "lemma": "Hanani",
+          "level": "A1",
+          "de": "Hanani"
+        },
+        {
+          "pos": 18,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 24,
+          "form": "Ezra",
+          "lemma": "Ezra",
+          "level": "A1",
+          "de": "Esra"
         }
       ],
       "37": [
@@ -60375,6 +65639,20 @@
           "lemma": "eastward",
           "level": "B2",
           "de": "ostwärts"
+        },
+        {
+          "pos": 18,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
+        },
+        {
+          "pos": 29,
+          "form": "David",
+          "lemma": "David",
+          "level": "A1",
+          "de": "David"
         }
       ],
       "38": [
@@ -60905,6 +66183,27 @@
           "lemma": "guard",
           "level": "B1",
           "de": "Wache"
+        },
+        {
+          "pos": 5,
+          "form": "Ephraim",
+          "lemma": "Ephraim",
+          "level": "A1",
+          "de": "Ephraim"
+        },
+        {
+          "pos": 20,
+          "form": "Hananel",
+          "lemma": "Hananel",
+          "level": "A1",
+          "de": "Hananel"
+        },
+        {
+          "pos": 25,
+          "form": "Hammeah",
+          "lemma": "Hammeah",
+          "level": "A1",
+          "de": "Hammeah"
         }
       ],
       "40": [
@@ -61317,6 +66616,13 @@
           "lemma": "forever",
           "level": "B1",
           "de": "für immer"
+        },
+        {
+          "pos": 9,
+          "form": "Moses",
+          "lemma": "Moses",
+          "level": "A1",
+          "de": "Mose"
         }
       ],
       "2": [
@@ -61522,6 +66828,13 @@
           "lemma": "blessing",
           "level": "B2",
           "de": "Segen"
+        },
+        {
+          "pos": 15,
+          "form": "Balaam",
+          "lemma": "Balaam",
+          "level": "A1",
+          "de": "Bileam"
         }
       ],
       "3": [
@@ -62492,6 +67805,13 @@
           "lemma": "sin",
           "level": "B1",
           "de": "sündigen"
+        },
+        {
+          "pos": 1,
+          "form": "Solomon",
+          "lemma": "Solomon",
+          "level": "A1",
+          "de": "Salomo"
         }
       ],
       "27": [
@@ -63386,6 +68706,13 @@
           "lemma": "sabbath",
           "level": "B2",
           "de": "Sabbat"
+        },
+        {
+          "pos": 26,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
         }
       ],
       "22": [
@@ -63805,6 +69132,27 @@
           "lemma": "of",
           "level": "A1",
           "de": "aus"
+        },
+        {
+          "pos": 13,
+          "form": "Ashdod",
+          "lemma": "Ashdod",
+          "level": "A1",
+          "de": "Aschdod"
+        },
+        {
+          "pos": 15,
+          "form": "Ammon",
+          "lemma": "Ammon",
+          "level": "A1",
+          "de": "Ammon"
+        },
+        {
+          "pos": 18,
+          "form": "Moab",
+          "lemma": "Moab",
+          "level": "A1",
+          "de": "Moab"
         }
       ],
       "24": [
@@ -63990,6 +69338,13 @@
           "lemma": "people",
           "level": "A1",
           "de": "Volkes"
+        },
+        {
+          "pos": 9,
+          "form": "Ashdod",
+          "lemma": "Ashdod",
+          "level": "A1",
+          "de": "Aschdod"
         }
       ],
       "25": [
@@ -64621,6 +69976,27 @@
           "lemma": "in",
           "level": "A1",
           "de": "in"
+        },
+        {
+          "pos": 4,
+          "form": "Tyre",
+          "lemma": "Tyre",
+          "level": "A1",
+          "de": "Tyrus"
+        },
+        {
+          "pos": 25,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 28,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "17": [
@@ -64791,6 +70167,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 7,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "18": [
@@ -64996,6 +70379,13 @@
           "lemma": "sabbath",
           "level": "B2",
           "de": "Sabbat"
+        },
+        {
+          "pos": 25,
+          "form": "Israel",
+          "lemma": "Israel",
+          "level": "A1",
+          "de": "Israel"
         }
       ],
       "19": [
@@ -65398,6 +70788,13 @@
           "lemma": "day",
           "level": "A1",
           "de": "Tag"
+        },
+        {
+          "pos": 9,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "20": [
@@ -65512,6 +70909,13 @@
           "lemma": "twice",
           "level": "B1",
           "de": "zweimal"
+        },
+        {
+          "pos": 13,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "11": [
@@ -65803,6 +71207,13 @@
           "lemma": "treasury",
           "level": "B2",
           "de": "Schatzkammern"
+        },
+        {
+          "pos": 3,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "13": [
@@ -66085,6 +71496,48 @@
           "lemma": "brother",
           "level": "A1",
           "de": "Brüder"
+        },
+        {
+          "pos": 6,
+          "form": "Shelemiah",
+          "lemma": "Shelemiah",
+          "level": "A1",
+          "de": "Schelemja"
+        },
+        {
+          "pos": 10,
+          "form": "Zadok",
+          "lemma": "Zadok",
+          "level": "A1",
+          "de": "Zadok"
+        },
+        {
+          "pos": 17,
+          "form": "Pedaiah",
+          "lemma": "Pedaiah",
+          "level": "A1",
+          "de": "Pedaja"
+        },
+        {
+          "pos": 23,
+          "form": "Hanan",
+          "lemma": "Hanan",
+          "level": "A1",
+          "de": "Hanan"
+        },
+        {
+          "pos": 27,
+          "form": "Zaccur",
+          "lemma": "Zaccur",
+          "level": "A1",
+          "de": "Sakkur"
+        },
+        {
+          "pos": 31,
+          "form": "Mattaniah",
+          "lemma": "Mattaniah",
+          "level": "A1",
+          "de": "Mattanja"
         }
       ],
       "14": [
@@ -66657,6 +72110,20 @@
           "lemma": "food",
           "level": "A2",
           "de": "Nahrung"
+        },
+        {
+          "pos": 6,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 37,
+          "form": "Jerusalem",
+          "lemma": "Jerusalem",
+          "level": "A1",
+          "de": "Jerusalem"
         }
       ],
       "6": [

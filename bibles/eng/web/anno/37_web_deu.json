@@ -403,6 +403,13 @@
           "lemma": "way",
           "level": "A1",
           "de": "Wege"
+        },
+        {
+          "pos": 3,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "8": [
@@ -566,6 +573,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "spricht"
+        },
+        {
+          "pos": 23,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "9": [
@@ -863,6 +877,20 @@
           "lemma": "house",
           "level": "A1",
           "de": "Haus"
+        },
+        {
+          "pos": 0,
+          "form": "You",
+          "lemma": "You",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 22,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "10": [
@@ -1253,6 +1281,55 @@
           "lemma": "say",
           "level": "A1",
           "de": "sprechend:"
+        },
+        {
+          "pos": 5,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
+        },
+        {
+          "pos": 23,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 27,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 31,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 34,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 37,
+          "form": "Joshua",
+          "lemma": "Joshua",
+          "level": "A1",
+          "de": "Josua"
+        },
+        {
+          "pos": 41,
+          "form": "Jehozadak",
+          "lemma": "Jehozadak",
+          "level": "A1",
+          "de": "Jozadak"
         }
       ],
       "2": [
@@ -1474,6 +1551,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "sprechend:"
+        },
+        {
+          "pos": 5,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
         }
       ],
       "4": [
@@ -2253,6 +2337,62 @@
           "lemma": "fear",
           "level": "B1",
           "de": "fürchtete"
+        },
+        {
+          "pos": 1,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 5,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 7,
+          "form": "Joshua",
+          "lemma": "Joshua",
+          "level": "A1",
+          "de": "Josua"
+        },
+        {
+          "pos": 11,
+          "form": "Jehozadak",
+          "lemma": "Jehozadak",
+          "level": "A1",
+          "de": "Jozadak"
+        },
+        {
+          "pos": 26,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 33,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 37,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 47,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "13": [
@@ -2360,6 +2500,20 @@
           "lemma": "say",
           "level": "A1",
           "de": "spricht"
+        },
+        {
+          "pos": 1,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
+        },
+        {
+          "pos": 16,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "14": [
@@ -2693,6 +2847,41 @@
           "lemma": "God",
           "level": "A1",
           "de": "Gott,"
+        },
+        {
+          "pos": 6,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 10,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 13,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 18,
+          "form": "Joshua",
+          "lemma": "Joshua",
+          "level": "A1",
+          "de": "Josua"
+        },
+        {
+          "pos": 22,
+          "form": "Jehozadak",
+          "lemma": "Jehozadak",
+          "level": "A1",
+          "de": "Jozadak"
         }
       ],
       "15": [
@@ -2821,6 +3010,13 @@
           "lemma": "king",
           "level": "A2",
           "de": "König."
+        },
+        {
+          "pos": 16,
+          "form": "Darius",
+          "lemma": "Darius",
+          "level": "A1",
+          "de": "Darius"
         }
       ]
     },
@@ -3418,6 +3614,13 @@
           "lemma": "it",
           "level": "A1",
           "de": "es"
+        },
+        {
+          "pos": 0,
+          "form": "Consider",
+          "lemma": "Consider",
+          "level": "A1",
+          "de": "betrachte"
         }
       ],
       "19": [
@@ -4710,6 +4913,20 @@
           "lemma": "earth",
           "level": "A1",
           "de": "Erde"
+        },
+        {
+          "pos": 2,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 5,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
         }
       ],
       "22": [
@@ -5247,6 +5464,41 @@
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen"
+        },
+        {
+          "pos": 4,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 11,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 17,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 19,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 33,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "6": [
@@ -6211,6 +6463,13 @@
           "lemma": "say",
           "level": "A1",
           "de": "und sprach:"
+        },
+        {
+          "pos": 15,
+          "form": "Haggai",
+          "lemma": "Haggai",
+          "level": "A1",
+          "de": "Haggai"
         }
       ],
       "2": [
@@ -6389,6 +6648,41 @@
           "lemma": "say",
           "level": "A1",
           "de": "und sprich:"
+        },
+        {
+          "pos": 3,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 7,
+          "form": "Shealtiel",
+          "lemma": "Shealtiel",
+          "level": "A1",
+          "de": "Schaltiel"
+        },
+        {
+          "pos": 10,
+          "form": "Judah",
+          "lemma": "Judah",
+          "level": "A1",
+          "de": "Juda"
+        },
+        {
+          "pos": 13,
+          "form": "Joshua",
+          "lemma": "Joshua",
+          "level": "A1",
+          "de": "Josua"
+        },
+        {
+          "pos": 17,
+          "form": "Jehozadak",
+          "lemma": "Jehozadak",
+          "level": "A1",
+          "de": "Jozadak"
         }
       ],
       "3": [
@@ -6573,6 +6867,13 @@
           "lemma": "nothing",
           "level": "A1",
           "de": "nichts?"
+        },
+        {
+          "pos": 0,
+          "form": "Who",
+          "lemma": "Who",
+          "level": "A1",
+          "de": "Wer"
         }
       ],
       "4": [
@@ -6800,6 +7101,62 @@
           "lemma": "army",
           "level": "B1",
           "de": "Heerscharen."
+        },
+        {
+          "pos": 4,
+          "form": "Zerubbabel",
+          "lemma": "Zerubbabel",
+          "level": "A1",
+          "de": "Serubbabel"
+        },
+        {
+          "pos": 6,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 7,
+          "form": "Be",
+          "lemma": "Be",
+          "level": "A1",
+          "de": "Sei"
+        },
+        {
+          "pos": 9,
+          "form": "Joshua",
+          "lemma": "Joshua",
+          "level": "A1",
+          "de": "Josua"
+        },
+        {
+          "pos": 12,
+          "form": "Jehozadak",
+          "lemma": "Jehozadak",
+          "level": "A1",
+          "de": "Jozadak"
+        },
+        {
+          "pos": 25,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
+        },
+        {
+          "pos": 32,
+          "form": "you",
+          "lemma": "you",
+          "level": "A1",
+          "de": "you"
+        },
+        {
+          "pos": 34,
+          "form": "Yahweh",
+          "lemma": "Yahweh",
+          "level": "A1",
+          "de": "Jahwe"
         }
       ],
       "5": [
