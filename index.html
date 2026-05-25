@@ -392,6 +392,12 @@ function LevelTest({onComplete}){
 
   if(done){
     const total=answers.filter((a,i)=>a===LEVEL_TEST[i].de).length;
+    const byLevel={};
+    LEVEL_TEST.forEach((q,i)=>{
+      if(!byLevel[q.level])byLevel[q.level]={correct:0,total:0};
+      byLevel[q.level].total++;
+      if(answers[i]===q.de)byLevel[q.level].correct++;
+    });
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{t('result')}</h1>
@@ -399,6 +405,26 @@ function LevelTest({onComplete}){
       <div style={{textAlign:'center',padding:'20px 0'}}>
         <div style={{fontSize:48,fontWeight:700,color:'var(--t-primary)',fontFamily:sans,margin:'16px 0'}}>{result}</div>
         <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{t('nOfTotal').replace('{n}',total).replace('{t}',LEVEL_TEST.length)}</p>
+        <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:340,margin:'16px auto',textAlign:'left'}}>
+          {[
+            {lvl:'A1',desc:{de:'Elementarste Grundlagen',en:'Most basic fundamentals'}},
+            {lvl:'A2',desc:{de:'Einfache Alltagskommunikation',en:'Simple everyday communication'}},
+            {lvl:'B1',desc:{de:'Selbstständige Alltagsbewältigung',en:'Independent everyday use'}},
+            {lvl:'B2',desc:{de:'Flüssige, detaillierte Kommunikation',en:'Fluent, detailed communication'}},
+            {lvl:'C1',desc:{de:'Flexible, effektive Sprachverwendung',en:'Flexible, effective language use'}}
+          ].map(({lvl,desc})=>{const s=byLevel[lvl];if(!s)return null;const pct=Math.round(s.correct/s.total*100);return(
+            <div key={lvl} style={{fontFamily:sans}}>
+              <div style={{display:'flex',alignItems:'center',gap:8,fontSize:14}}>
+                <span style={{fontWeight:700,color:lvl===result?'var(--t-primary)':'var(--t-title)',width:28}}>{lvl}</span>
+                <div style={{flex:1,background:'var(--t-border)',borderRadius:4,height:8,overflow:'hidden'}}>
+                  <div style={{height:'100%',background:pct>=50?'var(--t-green)':'var(--t-accent)',borderRadius:4,width:`${pct}%`}}/>
+                </div>
+                <span style={{color:'var(--t-text2)',width:44,textAlign:'right',fontSize:13}}>{s.correct}/{s.total}</span>
+              </div>
+              <p style={{fontSize:12,color:'var(--t-muted)',margin:'2px 0 0 36px'}}>{desc[uiLang]||desc.de}</p>
+            </div>);
+          })}
+        </div>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 24px',lineHeight:1.6}}>
           {t('levelSet').replace('{l}',result)}<br/>
           {t('levelChangeHint')}
