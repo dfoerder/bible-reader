@@ -1,0 +1,73 @@
+# Projekt-Log
+
+## Branches
+
+- **dev** — Hauptentwicklungsbranch
+- **main** — Produktionsbranch, wird auf GitHub Pages deployed
+- **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
+- **french** — Französische Version (Segond), separat aufbewahrt
+
+## v1.5.3b (23.05.2026)
+
+### Opus 4.7 Review aller 66 Bücher
+- Alle Annotationen mit Opus 4.7 über Batch API reviewt (~$1.500)
+- Transparente Phrasal Verbs entfernt (z.B. "came out", "went up")
+- ~30.000 Eigennamen mit deutschen Entsprechungen annotiert
+- Annotations-Prompt in `review_common.py` als Single Source of Truth
+
+### Wörtliche DE-Übersetzung (web_deu)
+- 66 JSON-Dateien unter `bibles/eng/web/web_deu/`
+- Automatisch aus Annotationen generiert (Phrase-Übersetzungen bevorzugt)
+- Satzzeichen aus englischem Quelltext übernommen
+
+### Übersetzungswahl in Einstellungen
+- 3 deutsche Übersetzungen: Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
+- Auswahl in Einstellungen, wirkt auf die einblendbare Parallelübersetzung
+- Verschiedene Dateiformate werden zur Laufzeit normalisiert
+
+### Weitere Änderungen
+- Home-Button führt wieder zur echten Startseite (nicht "zurück zum Lesen")
+- Versionsnummer mit Datum (dd.mm.yyyy) in der App angezeigt
+- review_common.py: Eigennamen-Annotation als Pflicht im Prompt verankert
+
+## v1.5.2b und früher
+
+### Volltextsuche
+- Suche über alle 66 Bücher mit Kontext und Hervorhebung
+
+### Luther 1912 modernisiert (l1912mod)
+- Komplette modernisierte Luther-Bibel unter `bibles/deu/l1912mod/`
+- Stil: würdevoll aber klar, kurze Sätze
+
+### Batch-Review-Skripte
+- `review_batch_submit.py` — Bücher an Anthropic Batch API senden
+- `review_batch_collect.py` — Ergebnisse abholen und validieren
+- `review_common.py` — Shared Logic (Prompt, Validierung)
+
+### Multi-Wort-Ausdrücke
+- Idiome und Phrasal Verbs als Mehrwortausdrücke annotiert
+- Zwei-Klick-Feature: erst Phrase-Übersetzung, dann Einzelwörter
+
+### Vokabeltraining
+- 15 Schwierigkeitsstufen, adaptives System
+- Spaced Repetition, Selbsteinschätzung
+
+### TTS (Text-to-Speech)
+- Kapitel/Vers vorlesen mit Wort-Hervorhebung
+- Geschwindigkeit anpassbar, Übungsmodus
+
+### Einstufungstest
+- CEFR-Einstufung (A1–C1) per Multiple-Choice
+
+### PWA
+- Service Worker mit Network-first (HTML) und Cache-first (Daten)
+- Offline nutzbar nach erstem Laden
+- Installierbar auf iOS und Android
+
+## v1.0.9b (April 2026)
+
+### Initiale Version
+- Settings-Screen (Level, TTS-Geschwindigkeit, Schriftgröße)
+- Statistik-Seite (Text, Vocabulary, Progress)
+- Gesamtes NT annotiert (27 Bücher)
+- Auto-Modus auf eigenen Branch ausgelagert
