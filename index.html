@@ -133,7 +133,8 @@ const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
   get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}},
-  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  remove(k){try{localStorage.removeItem(k)}catch(e){}}
 };
 
 // ─── i18n ───────────────────────────────────────────────
@@ -1567,7 +1568,7 @@ function App({data}){
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('progress')}</span>
           <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>{t('totalLearned')} <strong style={{color:'var(--t-green)'}}>{globalLearnedCount}</strong></p>
-          <button onClick={()=>{if(confirm(t('resetConfirm'))){setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set())}}} style={S.resetBtn}>{t('resetProgress')}</button>
+          <button onClick={()=>{if(confirm(t('resetConfirm'))){setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-level-tested')}}} style={S.resetBtn}>{t('resetProgress')}</button>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('statsPage')}</span>
