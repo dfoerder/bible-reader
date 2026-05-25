@@ -410,10 +410,7 @@ function LevelTest({onComplete}){
 
   return(<div>
     <header style={S.header}>
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-        <h1 style={{...S.title,margin:0}}>{t('levelTest')}</h1>
-        <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{current>0?t('cancel'):t('skipTest')} →</button>
-      </div>
+      <h1 style={{...S.title,margin:0}}>{t('levelTest')}</h1>
       <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('questionN').replace('{n}',current+1).replace('{t}',LEVEL_TEST.length)}</p>
     </header>
     <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 24px',overflow:'hidden'}}>
@@ -434,6 +431,9 @@ function LevelTest({onComplete}){
         }
         return(<button key={i} onClick={()=>pick(opt)} style={{padding:'14px 20px',border,borderRadius:10,background:bg,color,fontSize:17,fontWeight:600,cursor:selected===null?'pointer':'default',fontFamily:sans,textAlign:'center',transition:'all 0.2s'}}>{opt}</button>);
       })}
+    </div>
+    <div style={{textAlign:'center',marginTop:24}}>
+      <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{current>0?t('cancel'):t('skipTest')} →</button>
     </div>
   </div>);
 }
