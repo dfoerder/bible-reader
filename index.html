@@ -191,6 +191,7 @@ const I18N={
   totalLearned:{de:'Gelernte Wörter gesamt:',en:'Total words learned:'},
   resetProgress:{de:'Fortschritt zurücksetzen',en:'Reset all progress'},
   resetConfirm:{de:'Alle gelernten Wörter und den Fortschritt zurücksetzen?',en:'Reset all learned words and progress?'},
+  retakePlacementConfirm:{de:'Möchtest du den Einstufungstest wiederholen?',en:'Would you like to retake the placement test?'},
   statsPage:{de:'Statistik-Seite',en:'Statistics page'},
   statsText:{de:'Text (Bücher, Kapitel, Verse, Wörter)',en:'Text (books, chapters, verses, words)'},
   statsVocab:{de:'Wörter (Grundformen nach Level)',en:'Vocabulary (base forms by level)'},
@@ -1568,7 +1569,7 @@ function App({data}){
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('progress')}</span>
           <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>{t('totalLearned')} <strong style={{color:'var(--t-green)'}}>{globalLearnedCount}</strong></p>
-          <button onClick={()=>{if(confirm(t('resetConfirm'))){setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-level-tested')}}} style={S.resetBtn}>{t('resetProgress')}</button>
+          <button onClick={()=>{if(confirm(t('resetConfirm'))){setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());if(confirm(t('retakePlacementConfirm'))){LS.remove('bible-level-tested');setPhase('leveltest')}}}} style={S.resetBtn}>{t('resetProgress')}</button>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('statsPage')}</span>
