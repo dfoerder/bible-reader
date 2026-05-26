@@ -629,7 +629,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         setUserLevel(stepToLevel(ns));
         stepChangeRef.current=stepLabel(ns);
       } else if(pct>=0.85&&trainStep<14){
-        const ns=trainStep+1;
+        const ns=Math.min(14,trainStep+(pct>=1?2:1));
         saveStep(ns);
         setUserLevel(stepToLevel(ns));
         stepChangeRef.current=stepLabel(ns);
