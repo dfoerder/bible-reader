@@ -23,6 +23,7 @@
 - „Zu einfach" setzt familiarity=3 (statt 100-Tage-Cooldown)
 - Richtig → familiarity=1, falsch → familiarity=0
 - Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
+- 100% richtig → Doppelsprung (+2 Sublevels), ≥85% → +1 Sublevel
 
 ### Lerneinheiten für Kapitel-Training
 - „Schwierige Wörter trainieren" teilt die Übung in Einheiten zu je 15 Fragen auf
