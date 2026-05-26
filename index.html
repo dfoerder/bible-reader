@@ -282,6 +282,8 @@ const I18N={
   noExercises:{de:'Für dieses Buch gibt es noch keine Übungen.',en:'No exercises available for this book yet.'},
   wellDone:{de:'Gut gemacht!',en:'Well done!'},
   keepPracticing:{de:'Weiter üben!',en:'Keep practicing!'},
+  unitProgress:{de:'Einheit {c} von {t}',en:'Unit {c} of {t}'},
+  retryIntro:{de:'Die falsch beantworteten Fragen werden nun wiederholt.',en:'The incorrectly answered questions will now be repeated.'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   finish:{de:'Beenden',en:'Finish'},
   cloze:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -1245,26 +1247,51 @@ function App({data}){
       (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
     }
   },[bookmarks,bookIdx,chapIdx]);
+  const genOpts=useCallback((words,allDe)=>words.map(w=>{
+    const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
+    return shuffleArr([w.de,...wrong]);
+  }),[]);
+
   const chapTrainRetry=useCallback((wrongItems)=>{
     const retryWords=wrongItems.map(w=>w.ex);
-    const allDe=quizWords.map(w=>w.de);
-    const opts=retryWords.map(w=>{
-      const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
-      return shuffleArr([w.de,...wrong]);
+    setChapTrain(s=>{
+      const opts=genOpts(retryWords,s.allDe);
+      return {...s,words:retryWords,opts,current:0,selected:null,wrong:[],everWrong:s.everWrong||[],isRetry:true,retryPending:null};
     });
-    setChapTrain(s=>({...s,words:retryWords,opts,current:0,selected:null,wrong:[],everWrong:s.everWrong||[]}));
-  },[quizWords]);
+  },[genOpts]);
 
   const startChapTrain=useCallback(()=>{
     if(quizWords.length===0)return;
-    const words=shuffleArr(quizWords).slice(0,15);
+    const wordsToTrain=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
+    if(wordsToTrain.length===0)return;
+    const allWords=shuffleArr(wordsToTrain);
     const allDe=quizWords.map(w=>w.de);
-    const opts=words.map(w=>{
-      const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
-      return shuffleArr([w.de,...wrong]);
+    const units=[];
+    for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
+    const words=units[0];
+    const opts=genOpts(words,allDe);
+    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null});
+  },[quizWords,genOpts,reviewDone,unknownWords]);
+
+  const startNextUnit=useCallback(()=>{
+    setChapTrain(s=>{
+      if(!s||!s.units)return s;
+      const nextIdx=s.unitIdx+1;
+      if(nextIdx>=s.units.length)return s;
+      const words=s.units[nextIdx];
+      const opts=genOpts(words,s.allDe);
+      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitIdx:nextIdx,unitDone:false,isRetry:false,retryPending:null};
     });
-    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[]});
-  },[quizWords]);
+  },[genOpts]);
+
+  const repeatUnit=useCallback(()=>{
+    setChapTrain(s=>{
+      if(!s||!s.units)return s;
+      const words=shuffleArr([...s.units[s.unitIdx]]);
+      const opts=genOpts(words,s.allDe);
+      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitDone:false,isRetry:false,retryPending:null};
+    });
+  },[genOpts]);
 
   const chapTrainPick=useCallback((ans)=>{
     if(!chapTrain||chapTrain.selected!==null)return;
@@ -1279,8 +1306,12 @@ function App({data}){
     setTimeout(()=>{
       if(correct){
         if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
+        else if(updated.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:updated.wrong}));
         else if(updated.wrong.length>0) chapTrainRetry(updated.wrong);
-        else setChapTrain(s=>({...s,done:true}));
+        else setChapTrain(s=>{
+          if(s.units&&s.units.length>1&&s.unitIdx<s.units.length-1) return {...s,unitDone:true};
+          return {...s,done:true};
+        });
       }
     },900);
   },[chapTrain,chapTrainRetry,trainWord]);
@@ -1288,8 +1319,12 @@ function App({data}){
   const chapTrainAdvance=useCallback(()=>{
     if(!chapTrain)return;
     if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
+    else if(chapTrain.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:chapTrain.wrong}));
     else if(chapTrain.wrong.length>0) chapTrainRetry(chapTrain.wrong);
-    else setChapTrain(s=>({...s,done:true}));
+    else setChapTrain(s=>{
+      if(s.units&&s.units.length>1&&s.unitIdx<s.units.length-1) return {...s,unitDone:true};
+      return {...s,done:true};
+    });
   },[chapTrain,chapTrainRetry]);
 
   const goToNav=useCallback(()=>{tts.stop();saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);setLoadedBook(null);setBookAnnotations(null);prevPhaseRef.current='nav';setPhase('nav');(document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0)},[tts,bookIdx,chapIdx,saveBookmark]);
@@ -1694,15 +1729,43 @@ function App({data}){
 
   // ── QUIZ (training only) ──
   if(phase==='quiz'){
+    if(chapTrain&&chapTrain.retryPending){
+      const wrongCount=chapTrain.retryPending.length;
+      const correctCount=chapTrain.total-wrongCount;
+      return(<div>
+        <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
+        <div style={{textAlign:'center',padding:'20px 0'}}>
+          <div style={{fontSize:48,fontWeight:700,color:correctCount>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{correctCount}/{chapTrain.total}</div>
+          {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
+          <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{t('retryIntro')}</p>
+          <button onClick={()=>chapTrainRetry(chapTrain.retryPending)} style={S.startBtn}>{t('next')}</button>
+        </div>
+      </div>);
+    }
+    if(chapTrain&&chapTrain.unitDone){
+      return(<div>
+        <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
+        <div style={{textAlign:'center',padding:'20px 0'}}>
+          <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
+          <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>
+          <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
+          <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+            <button onClick={repeatUnit} style={S.navBtn}>{t('repeat')}</button>
+            <button onClick={startNextUnit} style={S.startBtn}>{t('next')}</button>
+          </div>
+        </div>
+      </div>);
+    }
     if(chapTrain&&chapTrain.done){
       return(<div>
         <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
         <div style={{textAlign:'center',padding:'20px 0'}}>
           <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
+          {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('finish')}</button>
-            <button onClick={startChapTrain} style={S.startBtn}>{t('next')}</button>
+            {chapTrain.units&&chapTrain.units.length>1?<button onClick={repeatUnit} style={S.startBtn}>{t('repeat')}</button>:<button onClick={startChapTrain} style={S.startBtn}>{t('next')}</button>}
           </div>
         </div>
       </div>);
@@ -1712,6 +1775,7 @@ function App({data}){
       return(<div>
         <header style={S.header}>
           <h1 style={S.title}>{t('trainDifficult')}</h1>
+          {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
         </header>
         <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>

@@ -33,6 +33,14 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 - Einzelne Verse oder ganze Kapitel vorlesbar
 - Unbekannte Wörter separat üben (Aussprache)
 
+### Schwierige Wörter (kapitelweise)
+- **Schwierige Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
+- **Schwierige Wörter trainieren**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
+  1. 15 Fragen beantworten
+  2. Zwischenergebnis: „X von 15 richtig"
+  3. Falls Fehler: Ankündigung und Wiederholung der falsch beantworteten Fragen
+  4. Einheitsergebnis mit Buttons „Wiederholen" (Einheit nochmals) und „Weiter" (nächste Einheit). Bei der letzten Einheit: „Beenden" statt „Weiter".
+
 ### Vokabeltraining
 - Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
