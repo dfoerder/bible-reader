@@ -285,6 +285,8 @@ const I18N={
   unitProgress:{de:'Einheit {c} von {t}',en:'Unit {c} of {t}'},
   retryIntro:{de:'Die falsch beantworteten Fragen werden nun wiederholt.',en:'The incorrectly answered questions will now be repeated.'},
   allErrorsCorrected:{de:'Alle Fehler wurden korrigiert.',en:'All errors have been corrected.'},
+  errorSingular:{de:'Fehler — wird nun wiederholt',en:'error — will be repeated now'},
+  errorPlural:{de:'Fehler — werden nun wiederholt',en:'errors — will be repeated now'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   finish:{de:'Beenden',en:'Finish'},
   cloze:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -493,6 +495,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const wrongRef=useRef([]);
   const totalRef=useRef(0);
   const retryRef=useRef(false);
+  const [retryPending,setRetryPending]=useState(null);
+  const [firstPassScore,setFirstPassScore]=useState(null);
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
@@ -534,7 +538,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       const wrong=shuffle(allDePool.filter(d=>d!==q.de)).slice(0,2);
       return shuffle([q.de,...wrong]);
     }));
-    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     setSelectedLevel(lvl);setLastStart('vocab');
   },[wordData]);
@@ -577,6 +581,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       setTimeout(()=>{
         guessRef.current=false;
         if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
+        else if(wrongRef.current.length>0&&!retryRef.current){setFirstPassScore(score+1);setRetryPending(wrongRef.current)}
         else if(wrongRef.current.length>0) startRetry();
         else setDone(true);
       },900);
@@ -587,7 +592,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   },[current,exercises,selected,exType,startRetry,trainWord]);
 
   const startRetry=useCallback(()=>{
-    const wrong=wrongRef.current;
+    const wrong=retryPending||wrongRef.current;
     wrongRef.current=[];
     const retryEx=wrong.map(w=>w.ex);
     setExercises(retryEx);
@@ -604,8 +609,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         return shuffle([ex.de,...wr]);
       }));
     }
-    setCurrent(0);setSelected(null);retryRef.current=true;
-  },[exType,selectedLevel]);
+    setCurrent(0);setSelected(null);retryRef.current=true;setRetryPending(null);
+  },[exType,selectedLevel,retryPending]);
 
   const advance=useCallback(()=>{
     if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
@@ -617,9 +622,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   useEffect(()=>{
     if(!done)return;
-    const pct=score/totalRef.current;
+    const realScore=firstPassScore!=null?firstPassScore:score;
+    const pct=realScore/totalRef.current;
     const hist=LS.get('bible-training-history')||[];
-    hist.push({date:Date.now(),type:exType,level:selectedLevel,step:trainStep,score,total:totalRef.current,pct:Math.round(pct*100)});
+    hist.push({date:Date.now(),type:exType,level:selectedLevel,step:trainStep,score:realScore,total:totalRef.current,pct:Math.round(pct*100)});
     if(hist.length>200) hist.splice(0,hist.length-200);
     LS.set('bible-training-history',hist);
     if(exType==='vocab'){
@@ -642,12 +648,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   },[done]);
 
   if(done){
+    const displayScore=firstPassScore!=null?firstPassScore:score;
+    const hadRetry=firstPassScore!=null;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
-        <div style={{fontSize:48,fontWeight:700,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{score}/{totalRef.current}</div>
-        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{score>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>
-        {stepChangeRef.current&&<p style={{fontSize:14,color:score>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
+        <div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>
+        {hadRetry
+          ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
+          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
+        {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false)}} style={S.navBtn}>{t('finish')}</button>
           {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
@@ -688,6 +698,19 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
       <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
+    </div>);
+  }
+
+  if(mode==='exercise'&&exType==='vocab'&&retryPending){
+    const wrongCount=retryPending.length;
+    const fp=firstPassScore!=null?firstPassScore:score;
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
+      <div style={{textAlign:'center',padding:'20px 0'}}>
+        <div style={{fontSize:48,fontWeight:700,color:fp>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{fp}/{totalRef.current}</div>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'16px 0 8px'}}>{wrongCount} {wrongCount===1?t('errorSingular'):t('errorPlural')}</p>
+        <button onClick={startRetry} style={S.startBtn}>{t('next')}</button>
+      </div>
     </div>);
   }
 
