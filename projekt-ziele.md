@@ -41,6 +41,28 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
   3. Falls Fehler: Ankündigung und Wiederholung der falsch beantworteten Fragen
   4. Einheitsergebnis mit Buttons „Wiederholen" (Einheit nochmals) und „Weiter" (nächste Einheit). Bei der letzten Einheit: „Beenden" statt „Weiter".
 
+### Lernfortschritt (Familiarity-System)
+Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
+- **-1** = undefiniert (noch nie gesehen)
+- **0** = unbekannt
+- **1** = bekannt
+- **2** = gut bekannt
+- **3** = sehr gut bekannt
+
+**Regeln bei „Schwierige Wörter anschauen":**
+- Nur Wörter mit familiarity ≤ 0 werden angezeigt
+- ✓ (bekannt) → familiarity = 1
+- ? (unbekannt) → familiarity = 0
+- `lasttrained`-Timestamp wird gesetzt
+
+**Regeln bei „Schwierige Wörter trainieren":**
+- Nur Wörter mit familiarity ≤ 0 werden trainiert
+- Richtige Antwort (erster Durchgang):
+  - familiarity ≤ 0 → familiarity = 1
+  - familiarity > 0 und `lasttrained` > 2 Tage zurück und familiarity ≤ 2 → familiarity + 1
+- Falsche Antwort → familiarity = 0
+- Wiederholungsdurchgang (Retry): richtig → keine Änderung, falsch → familiarity = 0
+
 ### Vokabeltraining
 - Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen

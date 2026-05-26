@@ -1067,9 +1067,19 @@ function App({data}){
   const [revealedWords,setRevealedWords]=useState(new Set());
   const [expandedPhraseWords,setExpandedPhraseWords]=useState(new Set());
   const [tappedWords,setTappedWords]=useState(new Set(saved.tappedWords||[]));
-  const [wordData,setWordData]=useState(()=>{const wd=LS.get('bible-word-data');if(wd)return wd;const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={learnstatus:'known',lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m});
-  const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.learnstatus==='known').length,[wordData]);
-  const trainWord=useCallback((key,learnstatus)=>{setWordData(prev=>{const e=prev[key]||{learnstatus:'untrained',lasttrained:null,numberoftrainings:0};const next={...prev,[key]:{learnstatus,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1}};LS.set('bible-word-data',next);return next})},[]);
+  const [wordData,setWordData]=useState(()=>{
+    let wd=LS.get('bible-word-data');
+    if(wd){
+      if(Object.values(wd).some(w=>w.learnstatus!==undefined)){
+        const m={};Object.entries(wd).forEach(([k,v])=>{m[k]={familiarity:v.learnstatus==='known'?1:v.learnstatus==='unknown'?0:-1,lasttrained:v.lasttrained||null,numberoftrainings:v.numberoftrainings||0}});
+        LS.set('bible-word-data',m);return m;
+      }
+      return wd;
+    }
+    const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={familiarity:1,lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m;
+  });
+  const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.familiarity>=1).length,[wordData]);
+  const trainWord=useCallback((key,familiarity)=>{setWordData(prev=>{const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0};const next={...prev,[key]:{familiarity,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1}};LS.set('bible-word-data',next);return next})},[]);
   const [expandedTestament,setExpandedTestament]=useState(null);
   const [expandedBook,setExpandedBook]=useState(null);
   const [expandedStatBook,setExpandedStatBook]=useState(null);
@@ -1302,13 +1312,13 @@ function App({data}){
     const correct=ans===ex.de;
     const key=ex.lemma||ex.word;
     if(chapTrain.isRetry){
-      if(!correct)trainWord(key,'unknown');
+      if(!correct)trainWord(key,0);
     }else{
       if(correct){
-        const wd=wordData[key];
-        const recentlyUnknown=wd&&wd.learnstatus==='unknown'&&wd.lasttrained&&(Date.now()-new Date(wd.lasttrained).getTime())<24*60*60*1000;
-        trainWord(key,recentlyUnknown?'unknown':'known');
-      }else trainWord(key,'unknown');
+        const wd=wordData[key]||{familiarity:-1,lasttrained:null};
+        if(wd.familiarity<=0)trainWord(key,1);
+        else if(wd.familiarity>0&&wd.familiarity<=2&&wd.lasttrained&&(Date.now()-new Date(wd.lasttrained).getTime())>=2*24*60*60*1000)trainWord(key,wd.familiarity+1);
+      }else trainWord(key,0);
     }
     const updated={...chapTrain,selected:ans};
     if(correct)updated.score=chapTrain.score+1;
@@ -1946,8 +1956,8 @@ function App({data}){
                   {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
                 </div>
                 <div style={{display:'flex',gap:10,justifyContent:'center'}}>
-                  <button onClick={()=>{const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
-                  <button onClick={()=>{const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
+                  <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
+                  <button onClick={()=>{trainWord(key,0);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
                 </div>
                 {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
                   <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',levelSuggestion)}</p>
