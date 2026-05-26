@@ -68,8 +68,14 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
 - 15 Schwierigkeitsstufen (A1.1 bis C1.3), basierend auf Worthäufigkeit
 - Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger
-- Spaced Repetition: richtig beantwortete Wörter verschwinden für 7 Tage
-- Selbsteinschätzung: "zu einfach" (100 Tage Pause) und "ich rate" (Wiederholung am Ende)
+- Priorisierung der Wortauswahl (15 Wörter pro Übung):
+  1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level (bekannte Schwächen)
+  2. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter)
+  3. familiarity=0 + lasttrained >24h auf höheren Levels (Schwächen darüber)
+  4. familiarity=-1 auf höheren Levels (neue Wörter darüber)
+- Wörter mit familiarity ≥ 1 werden nicht mehr trainiert
+- Selbsteinschätzung: „zu einfach" → familiarity=3, „ich rate" → Wiederholung am Ende
+- Richtig beantwortet → familiarity=1, falsch → familiarity=0
 - Falsch beantwortete Fragen werden am Ende der Übung wiederholt
 
 ### Sprachtest

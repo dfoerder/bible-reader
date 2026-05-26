@@ -17,6 +17,13 @@
 - Training: Spaced-Repetition-Regeln mit 2-Tage-Schwelle für Levelaufstieg
 - Retry-Durchgang: richtig → keine Änderung, falsch → familiarity = 0
 
+### Familiarity-Priorisierung im Vokabeltraining
+- Wortauswahl nach 4-Stufen-Priorität: fam=0 auf Level → fam=-1 auf Level → fam=0 höher → fam=-1 höher
+- 7-Tage-Cooldown-System (`bible-vocab-log`) durch Familiarity-Filterung ersetzt
+- „Zu einfach" setzt familiarity=3 (statt 100-Tage-Cooldown)
+- Richtig → familiarity=1, falsch → familiarity=0
+- Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
+
 ### Lerneinheiten für Kapitel-Training
 - „Schwierige Wörter trainieren" teilt die Übung in Einheiten zu je 15 Fragen auf
 - Ablauf pro Einheit: 15 Fragen → Zwischenergebnis → Wiederholung der Fehler → Einheitsergebnis mit „Wiederholen"/„Weiter"
