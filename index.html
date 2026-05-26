@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.5.5b';
+const APP_VERSION = '1.5.6b';
 const APP_DATE = '26.05.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -275,7 +275,7 @@ const I18N={
   training:{de:'Training',en:'Training'},
   yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
   vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
-  nOfMAvailable:{de:'{n} von {m} Wörtern verfügbar',en:'{n} of {m} words available'},
+  nOfMAvailable:{de:'{n} von {m} Wörtern im aktuellen Sublevel Pool verfügbar ({u} Einheiten)',en:'{n} of {m} words in current sublevel pool available ({u} units)'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
   clozeByBook:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
   clozeByBookTitle:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
@@ -776,7 +776,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
         <button onClick={()=>startVocab(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',fresh).replace('{m}',stepWords.length)}</p>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',fresh).replace('{m}',stepWords.length).replace('{u}',Math.ceil(fresh/15))}</p>
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
