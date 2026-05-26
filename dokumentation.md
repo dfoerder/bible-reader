@@ -62,7 +62,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 15 Schwierigkeitsstufen (A1.1 bis C1.3)
-- Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer
+- Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
 - Priorisierte Wortauswahl (15 Wörter pro Übung):
   1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level
   2. familiarity=-1 auf dem aktuellen Step-Level

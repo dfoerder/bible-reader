@@ -67,7 +67,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
 - 15 Schwierigkeitsstufen (A1.1 bis C1.3), basierend auf Worthäufigkeit
-- Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger
+- Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger, bei 100% Doppelsprung (+2 Sublevels)
 - Priorisierung der Wortauswahl (15 Wörter pro Übung):
   1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level (bekannte Schwächen)
   2. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter)
