@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.5.3b (23.05.2026)
+- **Aktuelle Version:** 1.5.4b (26.05.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~2100 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -42,14 +42,35 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 - Einzelvers-Vorleseoption
 - Übungsmodus für unbekannte Wörter
 
+### Schwierige Wörter (kapitelweise)
+
+- **Schwierige Wörter anschauen:** Alle Wörter über dem CEFR-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0.
+- **Schwierige Wörter trainieren:** Multiple-Choice-Quiz mit den unbekannten Wörtern. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert. Aufgeteilt in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis, Fehler-Wiederholung und Einheitsergebnis.
+
+### Lernfortschritt (Familiarity-System)
+
+Jedes Wort hat einen numerischen `familiarity`-Wert:
+- **-1** = undefiniert (noch nie gesehen)
+- **0** = unbekannt
+- **1** = bekannt
+- **2** = gut bekannt
+- **3** = sehr gut bekannt
+
+**Regeln Kapitel-Training:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
+
 ### Vokabeltraining
 
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 15 Schwierigkeitsstufen (A1.1 bis C1.3)
 - Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer
-- Spaced Repetition mit 7-Tage-Abkühlung für gelernte Wörter
+- Priorisierte Wortauswahl (15 Wörter pro Übung):
+  1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level
+  2. familiarity=-1 auf dem aktuellen Step-Level
+  3. familiarity=0 + lasttrained >24h auf höheren Levels
+  4. familiarity=-1 auf höheren Levels
+- Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
 - Falsch beantwortete Fragen werden am Ende wiederholt
-- Nutzer-Feedback: „zu einfach" (100 Tage Pause), „nur geraten" (Wiederholung)
+- Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
 
 ### Einstufungstest
 
@@ -140,7 +161,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 ### PWA und Offline-Fähigkeit
 
 - **Service Worker** (`sw.js`): Network-first für HTML, Cache-first für Daten
-- **Cache-Name:** `bible-full-v153`
+- **Cache-Name:** `bible-full-v154`
 - Vollständige Offline-Nutzung nach erstem Laden
 - Automatisches Update bei neuer Version
 
@@ -152,8 +173,8 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
+| `bible-word-data` | Familiarity-Daten pro Wort ({familiarity, lasttrained, numberoftrainings}) |
 | `bible-train-step` | Aktuelle Trainingsstufe |
-| `bible-vocab-log` | Zeitstempel trainierter Wörter |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
 | `unk-en-{book}-{chapter}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
