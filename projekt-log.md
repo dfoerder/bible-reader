@@ -7,6 +7,31 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.5.4b (26.05.2026)
+
+### Familiarity-System (Lernfortschritt)
+- Wortdaten von String-basiertem `learnstatus` auf numerisches `familiarity`-System migriert
+- Werte: -1 (undefiniert), 0 (unbekannt), 1 (bekannt), 2 (gut bekannt), 3 (sehr gut bekannt)
+- Rückwärtskompatible Migration bestehender localStorage-Daten beim App-Start
+- Review-Buttons (✓/?) setzen familiarity auf 1 bzw. 0
+- Training: Spaced-Repetition-Regeln mit 2-Tage-Schwelle für Levelaufstieg
+- Retry-Durchgang: richtig → keine Änderung, falsch → familiarity = 0
+
+### Familiarity-Priorisierung im Vokabeltraining
+- Wortauswahl nach 4-Stufen-Priorität: fam=0 auf Level → fam=-1 auf Level → fam=0 höher → fam=-1 höher
+- 7-Tage-Cooldown-System (`bible-vocab-log`) durch Familiarity-Filterung ersetzt
+- „Zu einfach" setzt familiarity=3 (statt 100-Tage-Cooldown)
+- Richtig → familiarity=1, falsch → familiarity=0
+- Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
+- 100% richtig → Doppelsprung (+2 Sublevels), ≥85% → +1 Sublevel
+
+### Lerneinheiten für Kapitel-Training
+- „Schwierige Wörter trainieren" teilt die Übung in Einheiten zu je 15 Fragen auf
+- Ablauf pro Einheit: 15 Fragen → Zwischenergebnis → Wiederholung der Fehler → Einheitsergebnis mit „Wiederholen"/„Weiter"
+- Einheitsanzeige im Quiz-Header („Einheit X von Y")
+- Nur unbekannte Wörter werden trainiert (nach „Schwierige Wörter anschauen")
+- Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert
+
 ## v1.5.3b (23.05.2026)
 
 ### Opus 4.7 Review aller 66 Bücher

@@ -33,13 +33,49 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 - Einzelne Verse oder ganze Kapitel vorlesbar
 - Unbekannte Wörter separat üben (Aussprache)
 
+### Schwierige Wörter (kapitelweise)
+- **Schwierige Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
+- **Schwierige Wörter trainieren**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
+  1. 15 Fragen beantworten
+  2. Zwischenergebnis: „X von 15 richtig"
+  3. Falls Fehler: Ankündigung und Wiederholung der falsch beantworteten Fragen
+  4. Einheitsergebnis mit Buttons „Wiederholen" (Einheit nochmals) und „Weiter" (nächste Einheit). Bei der letzten Einheit: „Beenden" statt „Weiter".
+
+### Lernfortschritt (Familiarity-System)
+Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
+- **-1** = undefiniert (noch nie gesehen)
+- **0** = unbekannt
+- **1** = bekannt
+- **2** = gut bekannt
+- **3** = sehr gut bekannt
+
+**Regeln bei „Schwierige Wörter anschauen":**
+- Nur Wörter mit familiarity ≤ 0 werden angezeigt
+- ✓ (bekannt) → familiarity = 1
+- ? (unbekannt) → familiarity = 0
+- `lasttrained`-Timestamp wird gesetzt
+
+**Regeln bei „Schwierige Wörter trainieren":**
+- Nur Wörter mit familiarity ≤ 0 werden trainiert
+- Richtige Antwort (erster Durchgang):
+  - familiarity ≤ 0 → familiarity = 1
+  - familiarity > 0 und `lasttrained` > 2 Tage zurück und familiarity ≤ 2 → familiarity + 1
+- Falsche Antwort → familiarity = 0
+- Wiederholungsdurchgang (Retry): richtig → keine Änderung, falsch → familiarity = 0
+
 ### Vokabeltraining
 - Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
 - 15 Schwierigkeitsstufen (A1.1 bis C1.3), basierend auf Worthäufigkeit
-- Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger
-- Spaced Repetition: richtig beantwortete Wörter verschwinden für 7 Tage
-- Selbsteinschätzung: "zu einfach" (100 Tage Pause) und "ich rate" (Wiederholung am Ende)
+- Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger, bei 100% Doppelsprung (+2 Sublevels)
+- Priorisierung der Wortauswahl (15 Wörter pro Übung):
+  1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level (bekannte Schwächen)
+  2. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter)
+  3. familiarity=0 + lasttrained >24h auf höheren Levels (Schwächen darüber)
+  4. familiarity=-1 auf höheren Levels (neue Wörter darüber)
+- Wörter mit familiarity ≥ 1 werden nicht mehr trainiert
+- Selbsteinschätzung: „zu einfach" → familiarity=3, „ich rate" → Wiederholung am Ende
+- Richtig beantwortet → familiarity=1, falsch → familiarity=0
 - Falsch beantwortete Fragen werden am Ende der Übung wiederholt
 
 ### Sprachtest
