@@ -284,6 +284,7 @@ const I18N={
   keepPracticing:{de:'Weiter üben!',en:'Keep practicing!'},
   unitProgress:{de:'Einheit {c} von {t}',en:'Unit {c} of {t}'},
   retryIntro:{de:'Die falsch beantworteten Fragen werden nun wiederholt.',en:'The incorrectly answered questions will now be repeated.'},
+  allErrorsCorrected:{de:'Alle Fehler wurden korrigiert.',en:'All errors have been corrected.'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   finish:{de:'Beenden',en:'Finish'},
   cloze:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -1270,7 +1271,8 @@ function App({data}){
     for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const words=units[0];
     const opts=genOpts(words,allDe);
-    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null});
+    const globalTotal=allWords.length;
+    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal});
   },[quizWords,genOpts,reviewDone,unknownWords]);
 
   const startNextUnit=useCallback(()=>{
@@ -1280,7 +1282,8 @@ function App({data}){
       if(nextIdx>=s.units.length)return s;
       const words=s.units[nextIdx];
       const opts=genOpts(words,s.allDe);
-      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitIdx:nextIdx,unitDone:false,isRetry:false,retryPending:null};
+      const unitScore=s.firstPassScore!=null?s.firstPassScore:s.score;
+      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitIdx:nextIdx,unitDone:false,isRetry:false,retryPending:null,firstPassScore:null,globalScore:s.globalScore+unitScore};
     });
   },[genOpts]);
 
@@ -1289,7 +1292,7 @@ function App({data}){
       if(!s||!s.units)return s;
       const words=shuffleArr([...s.units[s.unitIdx]]);
       const opts=genOpts(words,s.allDe);
-      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitDone:false,isRetry:false,retryPending:null};
+      return {...s,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],unitDone:false,isRetry:false,retryPending:null,firstPassScore:null};
     });
   },[genOpts]);
 
@@ -1298,7 +1301,15 @@ function App({data}){
     const ex=chapTrain.words[chapTrain.current];
     const correct=ans===ex.de;
     const key=ex.lemma||ex.word;
-    trainWord(key,correct?'known':'unknown');
+    if(chapTrain.isRetry){
+      if(!correct)trainWord(key,'unknown');
+    }else{
+      if(correct){
+        const wd=wordData[key];
+        const recentlyUnknown=wd&&wd.learnstatus==='unknown'&&wd.lasttrained&&(Date.now()-new Date(wd.lasttrained).getTime())<24*60*60*1000;
+        trainWord(key,recentlyUnknown?'unknown':'known');
+      }else trainWord(key,'unknown');
+    }
     const updated={...chapTrain,selected:ans};
     if(correct)updated.score=chapTrain.score+1;
     else{updated.wrong=[...chapTrain.wrong,{ex,optsIdx:chapTrain.current}];if(!chapTrain.everWrong.includes(key))updated.everWrong=[...chapTrain.everWrong,key]}
@@ -1306,7 +1317,7 @@ function App({data}){
     setTimeout(()=>{
       if(correct){
         if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
-        else if(updated.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:updated.wrong}));
+        else if(updated.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:updated.wrong,firstPassScore:updated.score}));
         else if(updated.wrong.length>0) chapTrainRetry(updated.wrong);
         else setChapTrain(s=>{
           if(s.units&&s.units.length>1&&s.unitIdx<s.units.length-1) return {...s,unitDone:true};
@@ -1314,12 +1325,12 @@ function App({data}){
         });
       }
     },900);
-  },[chapTrain,chapTrainRetry,trainWord]);
+  },[chapTrain,chapTrainRetry,trainWord,wordData]);
 
   const chapTrainAdvance=useCallback(()=>{
     if(!chapTrain)return;
     if(chapTrain.current<chapTrain.words.length-1) setChapTrain(s=>({...s,current:s.current+1,selected:null}));
-    else if(chapTrain.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:chapTrain.wrong}));
+    else if(chapTrain.wrong.length>0&&!chapTrain.isRetry) setChapTrain(s=>({...s,retryPending:chapTrain.wrong,firstPassScore:s.score}));
     else if(chapTrain.wrong.length>0) chapTrainRetry(chapTrain.wrong);
     else setChapTrain(s=>{
       if(s.units&&s.units.length>1&&s.unitIdx<s.units.length-1) return {...s,unitDone:true};
@@ -1743,12 +1754,16 @@ function App({data}){
       </div>);
     }
     if(chapTrain&&chapTrain.unitDone){
+      const displayScore=chapTrain.firstPassScore!=null?chapTrain.firstPassScore:chapTrain.score;
+      const hadRetry=chapTrain.firstPassScore!=null;
       return(<div>
         <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
         <div style={{textAlign:'center',padding:'20px 0'}}>
-          <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
+          <div style={{fontSize:48,fontWeight:700,color:displayScore>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{chapTrain.total}</div>
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>
-          <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
+          {hadRetry
+            ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
+            :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={repeatUnit} style={S.navBtn}>{t('repeat')}</button>
             <button onClick={startNextUnit} style={S.startBtn}>{t('next')}</button>
@@ -1757,12 +1772,20 @@ function App({data}){
       </div>);
     }
     if(chapTrain&&chapTrain.done){
+      const displayScore=chapTrain.firstPassScore!=null?chapTrain.firstPassScore:chapTrain.score;
+      const hadRetry=chapTrain.firstPassScore!=null;
+      const finalGlobalScore=chapTrain.globalScore+displayScore;
+      const isMultiUnit=chapTrain.units&&chapTrain.units.length>1;
       return(<div>
         <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
         <div style={{textAlign:'center',padding:'20px 0'}}>
-          <div style={{fontSize:48,fontWeight:700,color:chapTrain.score>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{chapTrain.score}/{chapTrain.total}</div>
-          {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
-          <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{chapTrain.score>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>
+          {isMultiUnit
+            ?<div style={{fontSize:48,fontWeight:700,color:finalGlobalScore>=chapTrain.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{finalGlobalScore}/{chapTrain.globalTotal}</div>
+            :<div style={{fontSize:48,fontWeight:700,color:displayScore>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{chapTrain.total}</div>}
+          {isMultiUnit&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}: {displayScore}/{chapTrain.total}</p>}
+          {hadRetry
+            ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
+            :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(isMultiUnit?finalGlobalScore>=chapTrain.globalTotal*0.85:displayScore>=chapTrain.total*0.85)?t('wellDone'):t('keepPracticing')}</p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('finish')}</button>
             {chapTrain.units&&chapTrain.units.length>1?<button onClick={repeatUnit} style={S.startBtn}>{t('repeat')}</button>:<button onClick={startChapTrain} style={S.startBtn}>{t('next')}</button>}
