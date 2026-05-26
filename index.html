@@ -477,7 +477,7 @@ function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
 function vocabForStep(step){const lvl=stepToLevel(step);const sub=1+(step%3);const pool=VOCAB_POOL[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};}
 
-function Training({userLevel,setUserLevel,onBack,books,openChapter}){
+function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trainWord}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
@@ -510,27 +510,34 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     setSelectedLevel(lvl);setLastStart('cloze');
   },[]);
 
-  const COOLDOWN=7*24*3600*1000;
-  const getVocabLog=()=>LS.get('bible-vocab-log')||{};
-  const saveVocabLog=log=>LS.set('bible-vocab-log',log);
+  const DAY_MS=24*3600*1000;
 
   const startVocab=useCallback(step=>{
-    const {words,allDe}=vocabForStep(step);
+    const {words:stepWords,allDe}=vocabForStep(step);
     const lvl=stepToLevel(step);
-    const log=getVocabLog();
     const now=Date.now();
-    const fresh=words.filter(w=>!log[lvl+':'+w.en]||now-log[lvl+':'+w.en]>=COOLDOWN);
-    const src=fresh.length>=15?fresh:words;
-    const picked=shuffle(src).slice(0,15);
+    const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
+    const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
+    const prio1=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
+    const prio2=stepWords.filter(w=>fam(w)===-1);
+    const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
+    const higherWords=higherLevels.flatMap(l=>(VOCAB_POOL[l]||[]));
+    const prio3=higherWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
+    const prio4=higherWords.filter(w=>fam(w)===-1);
+    let pool=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
+    if(pool.length<15)pool=[...pool,...shuffle(stepWords.filter(w=>fam(w)<=0&&!pool.includes(w)))];
+    const picked=pool.slice(0,15);
+    if(picked.length===0)return;
+    const allDePool=[...new Set([...allDe,...higherWords.map(w=>w.de)])];
     setExercises(picked);
     setShuffledOpts(picked.map(q=>{
-      const wrong=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
+      const wrong=shuffle(allDePool.filter(d=>d!==q.de)).slice(0,2);
       return shuffle([q.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     setSelectedLevel(lvl);setLastStart('vocab');
-  },[]);
+  },[wordData]);
 
   const startBookCloze=useCallback(bi=>{
     const bookNr=books[bi].nr;
@@ -548,7 +555,6 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     setLastStart({type:'book',bi});
   },[books]);
 
-  const EASY_COOLDOWN=100*24*3600*1000;
   const guessRef=useRef(false);
 
   const pick=useCallback((ans,mode)=>{
@@ -562,10 +568,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       if(exType==='vocab'){
         if(mode==='guess'){
           wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
-        } else {
-          const log=getVocabLog();
-          log[selectedLevel+':'+ex.en]=Date.now()+(mode==='easy'?EASY_COOLDOWN-COOLDOWN:0);
-          saveVocabLog(log);
+        } else if(mode==='easy'){
+          trainWord(ex.en,3);
+        } else if(!retryRef.current){
+          trainWord(ex.en,1);
         }
       }
       setTimeout(()=>{
@@ -576,8 +582,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
       },900);
     } else {
       wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
+      if(exType==='vocab')trainWord(ex.en,0);
     }
-  },[current,exercises,selected,exType,selectedLevel,startRetry]);
+  },[current,exercises,selected,exType,startRetry,trainWord]);
 
   const startRetry=useCallback(()=>{
     const wrong=wrongRef.current;
@@ -585,8 +592,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     const retryEx=wrong.map(w=>w.ex);
     setExercises(retryEx);
     if(exType==='vocab'){
-      const pool=VOCAB_POOL[selectedLevel]||[];
-      const allDe=pool.map(w=>w.de);
+      const allDe=Object.values(VOCAB_POOL).flat().map(w=>w.de);
       setShuffledOpts(retryEx.map(q=>{
         const wr=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
         return shuffle([q.de,...wr]);
@@ -759,9 +765,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter}){
     </div>);
   }
 
-  const {words:stepWords}=vocabForStep(trainStep);const lvlForStep=stepToLevel(trainStep);
-  const log=getVocabLog();const now=Date.now();
-  const fresh=stepWords.filter(w=>!log[lvlForStep+':'+w.en]||now-log[lvlForStep+':'+w.en]>=COOLDOWN).length;
+  const {words:stepWords}=vocabForStep(trainStep);
+  const now=Date.now();
+  const fresh=stepWords.filter(w=>{const d=wordData[w.en];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DAY_MS)}).length;
 
   return(<div>
     <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
@@ -1505,7 +1511,7 @@ function App({data}){
 
   // ── TRAINING ──
   if(phase==='training'){
-    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter}/>;
+    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord}/>;
   }
 
   // ── STATISTICS ──
