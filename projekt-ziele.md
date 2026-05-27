@@ -76,7 +76,8 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - Wörter mit familiarity ≥ 1 werden nicht mehr trainiert
 - Selbsteinschätzung: „zu einfach" → familiarity=3, „ich rate" → Wiederholung am Ende
 - Richtig beantwortet → familiarity=1, falsch → familiarity=0
-- Falsch beantwortete Fragen werden am Ende der Übung wiederholt
+- Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
+- Level-Anpassung basiert auf dem First-Pass-Score
 
 ### Sprachtest
 - Einstufungstest beim ersten Start (Multiple-Choice, Englisch → Deutsch)
