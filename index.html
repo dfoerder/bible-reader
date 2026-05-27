@@ -287,6 +287,7 @@ const I18N={
   allErrorsCorrected:{de:'Alle Fehler wurden korrigiert.',en:'All errors have been corrected.'},
   errorSingular:{de:'Fehler — wird nun wiederholt',en:'error — will be repeated now'},
   errorPlural:{de:'Fehler — werden nun wiederholt',en:'errors — will be repeated now'},
+  totalScore:{de:'Gesamt',en:'Total'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   finish:{de:'Beenden',en:'Finish'},
   cloze:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -497,22 +498,38 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const retryRef=useRef(false);
   const [retryPending,setRetryPending]=useState(null);
   const [firstPassScore,setFirstPassScore]=useState(null);
+  const clozeUnitsRef=useRef(null);
+  const [clozeUnitDone,setClozeUnitDone]=useState(false);
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
   const startCloze=useCallback(lvl=>{
     const pool=CLOZE_EXERCISES[lvl]||CLOZE_EXERCISES['A2']||[];
-    const picked=shuffle(pool).slice(0,10);
+    const now=Date.now();
+    const fam=w=>{const d=wordData[w.answer];return d?d.familiarity:-1;};
+    const lt=w=>{const d=wordData[w.answer];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
+    const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
+    const higherPool=higherLevels.flatMap(l=>(CLOZE_EXERCISES[l]||[]));
+    const prio1=pool.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
+    const prio2=pool.filter(w=>fam(w)===-1);
+    const prio3=higherPool.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
+    const prio4=higherPool.filter(w=>fam(w)===-1);
+    let allWords=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
+    if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
+    if(allWords.length===0)return;
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+    const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
+    const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
       const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
       return shuffle([ex.de,...wrong]);
     }));
-    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
     setSelectedLevel(lvl);setLastStart('cloze');
-  },[]);
+  },[wordData]);
 
   const DAY_MS=24*3600*1000;
 
@@ -545,19 +562,57 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const startBookCloze=useCallback(bi=>{
     const bookNr=books[bi].nr;
-    const allEx=Object.values(CLOZE_EXERCISES).flat().filter(e=>e.book===bookNr);
-    if(allEx.length===0){setMode('noexercises');return}
-    const picked=shuffle(allEx).slice(0,10);
+    const pool=Object.values(CLOZE_EXERCISES).flat().filter(e=>e.book===bookNr);
+    if(pool.length===0){setMode('noexercises');return}
+    const now=Date.now();
+    const fam=w=>{const d=wordData[w.answer];return d?d.familiarity:-1;};
+    const lt=w=>{const d=wordData[w.answer];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
+    const prio1=pool.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
+    const prio2=pool.filter(w=>fam(w)===-1);
+    let allWords=[...shuffle(prio1),...shuffle(prio2)];
+    if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
+    if(allWords.length===0){setMode('noexercises');return}
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+    const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
+    const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
       const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
       return shuffle([ex.de,...wrong]);
     }));
-    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
     setLastStart({type:'book',bi});
-  },[books]);
+  },[books,wordData]);
+
+  const nextClozeUnit=useCallback(()=>{
+    const u=clozeUnitsRef.current;if(!u)return;
+    const unitScore=firstPassScore!=null?firstPassScore:score;
+    const nextIdx=u.unitIdx+1;
+    if(nextIdx>=u.units.length)return;
+    const picked=u.units[nextIdx];
+    clozeUnitsRef.current={...u,unitIdx:nextIdx,globalScore:u.globalScore+unitScore};
+    setExercises(picked);
+    setShuffledOpts(picked.map(ex=>{
+      const wrong=shuffle(u.allDe.filter(d=>d!==ex.de)).slice(0,2);
+      return shuffle([ex.de,...wrong]);
+    }));
+    setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+  },[score,firstPassScore]);
+
+  const repeatClozeUnit=useCallback(()=>{
+    const u=clozeUnitsRef.current;if(!u)return;
+    const picked=shuffle([...u.units[u.unitIdx]]);
+    setExercises(picked);
+    setShuffledOpts(picked.map(ex=>{
+      const wrong=shuffle(u.allDe.filter(d=>d!==ex.de)).slice(0,2);
+      return shuffle([ex.de,...wrong]);
+    }));
+    setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+  },[]);
 
   const guessRef=useRef(false);
 
@@ -567,27 +622,27 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const correct=ans===ex.de;
     setSelected(ans);
     if(mode==='guess') guessRef.current=true;
+    const wordKey=exType==='vocab'?ex.en:ex.answer;
     if(correct){
       if(!retryRef.current)setScore(s=>s+1);
-      if(exType==='vocab'){
-        if(mode==='guess'){
-          wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
-        } else if(mode==='easy'){
-          trainWord(ex.en,3);
-        } else if(!retryRef.current){
-          trainWord(ex.en,1);
-        }
+      if(mode==='guess'){
+        wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
+      } else if(mode==='easy'){
+        trainWord(wordKey,3);
+      } else if(!retryRef.current){
+        trainWord(wordKey,1);
       }
       setTimeout(()=>{
         guessRef.current=false;
         if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
         else if(wrongRef.current.length>0&&!retryRef.current){setFirstPassScore(score+1);setRetryPending(wrongRef.current)}
         else if(wrongRef.current.length>0) startRetry();
+        else if(exType==='cloze'&&clozeUnitsRef.current&&clozeUnitsRef.current.units.length>1&&clozeUnitsRef.current.unitIdx<clozeUnitsRef.current.units.length-1){setClozeUnitDone(true)}
         else setDone(true);
       },900);
     } else {
       wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
-      if(exType==='vocab')trainWord(ex.en,0);
+      trainWord(wordKey,0);
     }
   },[current,exercises,selected,exType,startRetry,trainWord]);
 
@@ -614,9 +669,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const advance=useCallback(()=>{
     if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
+    else if(wrongRef.current.length>0&&!retryRef.current){setFirstPassScore(score);setRetryPending(wrongRef.current)}
     else if(wrongRef.current.length>0) startRetry();
+    else if(exType==='cloze'&&clozeUnitsRef.current&&clozeUnitsRef.current.units.length>1&&clozeUnitsRef.current.unitIdx<clozeUnitsRef.current.units.length-1){setClozeUnitDone(true)}
     else setDone(true);
-  },[current,exercises,startRetry]);
+  },[current,exercises,startRetry,score,exType]);
 
   const stepChangeRef=useRef(null);
 
@@ -650,6 +707,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   if(done){
     const displayScore=firstPassScore!=null?firstPassScore:score;
     const hadRetry=firstPassScore!=null;
+    const u=clozeUnitsRef.current;
+    const showGlobal=exType==='cloze'&&u&&u.units.length>1;
+    const globalScore=showGlobal?u.globalScore+displayScore:null;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
@@ -657,10 +717,31 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
           :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
+        {showGlobal&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('totalScore')}: {globalScore}/{u.globalTotal}</p>}
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>{setMode(null);setDone(false)}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+        </div>
+      </div>
+    </div>);
+  }
+
+  if(mode==='exercise'&&exType==='cloze'&&clozeUnitDone){
+    const displayScore=firstPassScore!=null?firstPassScore:score;
+    const hadRetry=firstPassScore!=null;
+    const u=clozeUnitsRef.current;
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
+      <div style={{textAlign:'center',padding:'20px 0'}}>
+        <div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>
+        {hadRetry
+          ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
+          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
+        {u&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}</p>}
+        <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+          <button onClick={repeatClozeUnit} style={S.navBtn}>{t('repeat')}</button>
+          <button onClick={nextClozeUnit} style={S.startBtn}>{t('next')}</button>
         </div>
       </div>
     </div>);
@@ -668,10 +749,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   if(mode==='exercise'&&exType==='cloze'){
     const ex=exercises[current];const opts=shuffledOpts[current];const parts=ex.text.split('___');
+    const cu=clozeUnitsRef.current;
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{t('cloze')}</h1>
-        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}</p>
+        <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{cu&&cu.units.length>1?' — '+t('unitProgress').replace('{c}',cu.unitIdx+1).replace('{t}',cu.units.length):''}</p>
       </header>
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
@@ -700,7 +782,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
-  if(mode==='exercise'&&exType==='vocab'&&retryPending){
+  if(mode==='exercise'&&retryPending){
     const wrongCount=retryPending.length;
     const fp=firstPassScore!=null?firstPassScore:score;
     return(<div>
