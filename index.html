@@ -743,6 +743,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
           <button onClick={repeatClozeUnit} style={S.navBtn}>{t('repeat')}</button>
           <button onClick={nextClozeUnit} style={S.startBtn}>{t('next')}</button>
         </div>
+        <div style={{marginTop:16}}><button onClick={()=>{setMode(null);setClozeUnitDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('cancel')}</button></div>
       </div>
     </div>);
   }
