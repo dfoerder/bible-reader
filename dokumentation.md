@@ -69,7 +69,8 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
   3. familiarity=0 + lasttrained >24h auf höheren Levels
   4. familiarity=-1 auf höheren Levels
 - Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
-- Falsch beantwortete Fragen werden am Ende wiederholt
+- Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
+- Level-Anpassung basiert auf dem First-Pass-Score (nicht aufgeblähtem Retry-Score)
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
 
 ### Einstufungstest
