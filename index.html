@@ -679,8 +679,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       <div style={{fontFamily:'var(--t-serif)',fontSize:18,lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
         {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
       </div>
-      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 8px'}}>{ex.ref}</p>
-      <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{t('whatMeans')}</p>
+      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
       <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
         {opts.map((opt,i)=>{
           let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)';
