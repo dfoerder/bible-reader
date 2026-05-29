@@ -9,8 +9,8 @@
 
 ## v1.6.0b (29.05.2026)
 
-### Kapitel-Cloze-Übungen (Wörter im Kontext üben)
-- Cloze-Übungen aus den Versen des aktuellen Kapitels generiert
+### Kapitel-Lückentext-Übungen (Wörter im Kontext üben)
+- Lückentext-Übungen aus den Versen des aktuellen Kapitels generiert
 - Schwieriges Wort im Satz hervorgehoben, 3 deutsche Übersetzungsoptionen
 - Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen
 - Lerneinheiten zu je 15 Fragen mit Zwischenergebnis und Fehler-Wiederholung
