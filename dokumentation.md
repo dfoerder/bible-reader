@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.5.4b (26.05.2026)
+- **Aktuelle Version:** 1.6.9b (29.05.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~2100 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -91,7 +91,8 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 - Bücher, Kapitel, Verse, Wörter pro Buch
 - Schwierigkeitsbewertung pro Buch (gewichteter CEFR-Durchschnitt)
 - CEFR-Verteilung der Vokabeln
-- Lernfortschritt (% gelernter Lemmata)
+- Lernfortschritt: bekannte/unbekannte/nicht gesehene Wörter, gelernte und vergessene Wörter
+- **Wortstatistik pro Buch:** 📊-Icon neben jedem Buchnamen in der Navigation. Zeigt beim Klick: Kapitelanzahl, Wörter gesamt, noch nicht angeschaut, bekannte Wörter (davon neu gelernt), unbekannte Wörter (davon vergessen). Annotationen werden lazy geladen.
 
 ---
 

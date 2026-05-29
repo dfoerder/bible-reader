@@ -21,6 +21,13 @@
 - Wechsel fam -1→>0 zählt nicht als „gelernt" (Wort war bereits bekannt)
 - Rückwärtskompatibel zu bestehenden Wortdaten
 
+### Wortstatistik pro Buch und global
+- Globaler Lernfortschritt: bekannte, unbekannte, nicht gesehene, gelernte und vergessene Wörter
+- Pro-Buch-Statistik über 📊-Icon neben jedem Buchnamen in der Navigation
+- Zeigt: Kapitelanzahl, Wörter gesamt, noch nicht angeschaut, bekannte (davon neu gelernt), unbekannte (davon vergessen)
+- Annotationen werden lazy geladen beim ersten Öffnen der Statistik
+- Kapitelanzahl neben dem Buchnamen entfernt (wird in Statistik angezeigt)
+
 ### UI-Umbenennung und Neuordnung
 - „Wörter trainieren" → „Wörter Quiz"
 - Reihenfolge im Vocab-Panel: Wörter anschauen → Wörter im Kontext üben → Wörter Quiz
