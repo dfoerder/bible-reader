@@ -45,7 +45,7 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 ### Schwierige Wörter (kapitelweise)
 
 - **Wörter anschauen:** Alle Wörter über dem CEFR-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0.
-- **Wörter im Kontext üben:** Cloze-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen. Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen.
+- **Wörter im Kontext üben:** Cloze-Übungen, die live aus den Versen des aktuellen Kapitels generiert werden (keine vorgespeicherte Sammlung). Per Annotation wird die Position des schwierigen Wortes im Vers gefunden, der enthaltende Satz extrahiert und das Wort durch eine Lücke ersetzt. Lange Sätze werden am Ende gekürzt, bei direkter Rede wird die Einleitung übersprungen. Der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen. Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen.
 - **Wörter Quiz:** Multiple-Choice-Quiz mit den unbekannten Wörtern. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert. Aufgeteilt in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis, Fehler-Wiederholung und Einheitsergebnis.
 
 ### Lernfortschritt (Familiarity-System)
