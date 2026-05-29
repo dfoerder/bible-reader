@@ -35,7 +35,7 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 
 ### Schwierige Wörter (kapitelweise)
 - **Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
-- **Wörter im Kontext üben**: Cloze-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen.
+- **Wörter im Kontext üben**: Lückentext-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen.
 - **Wörter Quiz**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
   1. 15 Fragen beantworten
   2. Zwischenergebnis: „X von 15 richtig"
@@ -103,7 +103,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 
 ## Offene Ideen / Nächste Schritte
 
-- Lückentext-Übungen (Cloze) für mehr Bücher ausbauen
+- Lückentext-Übungen für mehr Bücher ausbauen
 - Lesefortschritt-Statistiken erweitern
 - Teilen von Versen / Lesezeichen
 - iOS App Store (Capacitor-Bündelung)
