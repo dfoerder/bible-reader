@@ -50,6 +50,11 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - **2** = gut bekannt
 - **3** = sehr gut bekannt
 
+**Zusätzliche Zähler pro Wort:**
+- `learned`: +1 bei Wechsel fam 0 → >0 (aktiv gelernt mit der App)
+- `forgotten`: +1 bei Wechsel fam >0 → 0 (vergessen)
+- Wechsel fam -1 → >0 zählt nicht als „gelernt" (Wort war bereits bekannt)
+
 **Regeln bei „Wörter anschauen":**
 - Nur Wörter mit familiarity ≤ 0 werden angezeigt
 - ✓ (bekannt) → familiarity = 1

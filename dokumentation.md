@@ -57,6 +57,11 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 - **2** = gut bekannt
 - **3** = sehr gut bekannt
 
+**Zusätzliche Zähler pro Wort:**
+- `learned`: Anzahl Male, die fam von 0 → >0 gewechselt hat (aktiv gelernt mit der App)
+- `forgotten`: Anzahl Male, die fam von >0 → 0 gewechselt hat (vergessen)
+- Wechsel von fam -1 → >0 zählt nicht als „gelernt" (Wort war bereits bekannt)
+
 **Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
 
 ### Vokabeltraining
@@ -175,7 +180,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
-| `bible-word-data` | Familiarity-Daten pro Wort ({familiarity, lasttrained, numberoftrainings}) |
+| `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
 | `bible-train-step` | Aktuelle Trainingsstufe |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
 | `unk-en-{book}-{chapter}` | Unbekannte Wörter pro Kapitel |
