@@ -44,8 +44,9 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 
 ### Schwierige Wörter (kapitelweise)
 
-- **Schwierige Wörter anschauen:** Alle Wörter über dem CEFR-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0.
-- **Schwierige Wörter trainieren:** Multiple-Choice-Quiz mit den unbekannten Wörtern. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert. Aufgeteilt in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis, Fehler-Wiederholung und Einheitsergebnis.
+- **Wörter anschauen:** Alle Wörter über dem CEFR-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0.
+- **Wörter im Kontext üben:** Cloze-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen. Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen.
+- **Wörter Quiz:** Multiple-Choice-Quiz mit den unbekannten Wörtern. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert. Aufgeteilt in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis, Fehler-Wiederholung und Einheitsergebnis.
 
 ### Lernfortschritt (Familiarity-System)
 
@@ -56,7 +57,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 - **2** = gut bekannt
 - **3** = sehr gut bekannt
 
-**Regeln Kapitel-Training:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
+**Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
 
 ### Vokabeltraining
 
