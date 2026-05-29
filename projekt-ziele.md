@@ -34,8 +34,9 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 - Unbekannte Wörter separat üben (Aussprache)
 
 ### Schwierige Wörter (kapitelweise)
-- **Schwierige Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
-- **Schwierige Wörter trainieren**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
+- **Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
+- **Wörter im Kontext üben**: Cloze-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen.
+- **Wörter Quiz**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
   1. 15 Fragen beantworten
   2. Zwischenergebnis: „X von 15 richtig"
   3. Falls Fehler: Ankündigung und Wiederholung der falsch beantworteten Fragen
@@ -49,13 +50,13 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - **2** = gut bekannt
 - **3** = sehr gut bekannt
 
-**Regeln bei „Schwierige Wörter anschauen":**
+**Regeln bei „Wörter anschauen":**
 - Nur Wörter mit familiarity ≤ 0 werden angezeigt
 - ✓ (bekannt) → familiarity = 1
 - ? (unbekannt) → familiarity = 0
 - `lasttrained`-Timestamp wird gesetzt
 
-**Regeln bei „Schwierige Wörter trainieren":**
+**Regeln bei „Wörter Quiz":**
 - Nur Wörter mit familiarity ≤ 0 werden trainiert
 - Richtige Antwort (erster Durchgang):
   - familiarity ≤ 0 → familiarity = 1

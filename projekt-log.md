@@ -7,6 +7,20 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.6.0b (29.05.2026)
+
+### Kapitel-Cloze-Übungen (Wörter im Kontext üben)
+- Cloze-Übungen aus den Versen des aktuellen Kapitels generiert
+- Schwieriges Wort im Satz hervorgehoben, 3 deutsche Übersetzungsoptionen
+- Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen
+- Lerneinheiten zu je 15 Fragen mit Zwischenergebnis und Fehler-Wiederholung
+- Nutzt die bestehende chapTrain-Infrastruktur mit `type:'cloze'`-Flag
+
+### UI-Umbenennung und Neuordnung
+- „Wörter trainieren" → „Wörter Quiz"
+- Reihenfolge im Vocab-Panel: Wörter anschauen → Wörter im Kontext üben → Wörter Quiz
+- Am Kapitelende nur „Wörter Quiz"-Link
+
 ## v1.5.4b (26.05.2026)
 
 ### Familiarity-System (Lernfortschritt)
@@ -28,7 +42,7 @@
 - Endergebnis zeigt First-Pass-Score + „Alle Fehler korrigiert"
 
 ### Lerneinheiten für Kapitel-Training
-- „Schwierige Wörter trainieren" teilt die Übung in Einheiten zu je 15 Fragen auf
+- „Wörter Quiz" teilt die Übung in Einheiten zu je 15 Fragen auf
 - Ablauf pro Einheit: 15 Fragen → Zwischenergebnis → Wiederholung der Fehler → Einheitsergebnis mit „Wiederholen"/„Weiter"
 - Einheitsanzeige im Quiz-Header („Einheit X von Y")
 - Nur unbekannte Wörter werden trainiert (nach „Schwierige Wörter anschauen")
