@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.6.5b';
+const APP_VERSION = '1.6.6b';
 const APP_DATE = '29.05.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1205,6 +1205,7 @@ function App({data}){
   const trainWord=useCallback((key,newFam)=>{setWordData(prev=>{const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};const oldFam=e.familiarity;const learned=(e.learned||0)+(oldFam===0&&newFam>0?1:0);const forgotten=(e.forgotten||0)+(oldFam>0&&newFam===0?1:0);const next={...prev,[key]:{familiarity:newFam,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1,learned,forgotten}};LS.set('bible-word-data',next);return next})},[]);
   const [expandedTestament,setExpandedTestament]=useState(null);
   const [expandedBook,setExpandedBook]=useState(null);
+  const [statsBook,setStatsBook]=useState(null);
   const [expandedStatBook,setExpandedStatBook]=useState(null);
   const [expandedStatSection,setExpandedStatSection]=useState(null);
   const [bookmarks,setBookmarks]=useState(()=>LS.get('bible-bookmarks')||{});
@@ -1893,19 +1894,21 @@ function App({data}){
           const bi=i;
           const isOpen=expandedBook===bi;
           const bm=bookmarks[bi];
-          if(isOpen&&book.nr&&!bookLemmas[book.nr])loadBookLemmas(book.nr);
-          const bws=isOpen&&book.nr?getBookWordStats(book.nr):null;
+          const showStats=statsBook===bi;
+          if(showStats&&book.nr&&!bookLemmas[book.nr])loadBookLemmas(book.nr);
+          const bws=showStats&&book.nr?getBookWordStats(book.nr):null;
           return(<div key={bi} style={S.bookItem}>
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
               <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
+              <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {isOpen&&<>
-              {bws?<div style={{...S.statGrid,margin:'8px 0'}}><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div><div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div></div>:bookLemmas[book.nr]===undefined?null:<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('loadingStats')}</p>}
-              <div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>
-            </>}
+            {showStats&&<div style={{padding:'8px 12px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0'}}>
+              {bws?<div style={S.statGrid}><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div><div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div></div>:<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:0}}>{t('loadingStats')}</p>}
+            </div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>}
@@ -1919,19 +1922,21 @@ function App({data}){
           const bi=ntStartIndex+i;
           const isOpen=expandedBook===bi;
           const bm=bookmarks[bi];
-          if(isOpen&&book.nr&&!bookLemmas[book.nr])loadBookLemmas(book.nr);
-          const bws=isOpen&&book.nr?getBookWordStats(book.nr):null;
+          const showStats=statsBook===bi;
+          if(showStats&&book.nr&&!bookLemmas[book.nr])loadBookLemmas(book.nr);
+          const bws=showStats&&book.nr?getBookWordStats(book.nr):null;
           return(<div key={bi} style={S.bookItem}>
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
               <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
+              <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {isOpen&&<>
-              {bws?<div style={{...S.statGrid,margin:'8px 0'}}><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div><div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div></div>:bookLemmas[book.nr]===undefined?null:<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('loadingStats')}</p>}
-              <div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>
-            </>}
+            {showStats&&<div style={{padding:'8px 12px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0'}}>
+              {bws?<div style={S.statGrid}><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div><div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div><div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div></div>:<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:0}}>{t('loadingStats')}</p>}
+            </div>}
+            {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
         })}
       </div>
