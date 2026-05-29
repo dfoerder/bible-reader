@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.6.2b';
+const APP_VERSION = '1.6.3b';
 const APP_DATE = '29.05.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1434,10 +1434,10 @@ function App({data}){
         if(!tSent)continue;
         let sw=tSent.split(/\s+/);lep=Math.min(lep,sw.length-1);
         for(let i=0;i<sw.length&&i<=lsp;i++){if(/^["“„«]/.test(sw[i])){sw=sw.slice(i);lsp-=i;lep-=i;break;}}
-        const MAX=15;let pfx='',sfx='';
-        if(sw.length>MAX){if(lep<MAX){sfx=' …';sw=sw.slice(0,MAX);}else{const st=Math.max(0,lep-MAX+2);pfx='… ';sw=sw.slice(st);lsp-=st;lep-=st;if(sw.length>MAX){sw=sw.slice(0,MAX);sfx=' …';}}}
+        const MAX=15;let sfx='';const origLen=sw.length;
+        if(sw.length>MAX){const end=Math.min(origLen,Math.max(MAX,lep+2));sw=sw.slice(0,end);sfx=' …';}
         const rep=[...sw];for(let p=lsp;p<=lep&&p<rep.length;p++)rep[p]=p===lsp?'___':null;
-        exercises.push({text:pfx+rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma});
+        exercises.push({text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma});
         usedLemmas.add(a.lemma);
       }
     }
