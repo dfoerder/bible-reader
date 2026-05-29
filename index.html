@@ -1192,7 +1192,7 @@ function App({data}){
     const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={familiarity:1,lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m;
   });
   const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.familiarity>=1).length,[wordData]);
-  const trainWord=useCallback((key,familiarity)=>{setWordData(prev=>{const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0};const next={...prev,[key]:{familiarity,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1}};LS.set('bible-word-data',next);return next})},[]);
+  const trainWord=useCallback((key,newFam)=>{setWordData(prev=>{const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};const oldFam=e.familiarity;const learned=(e.learned||0)+(oldFam===0&&newFam>0?1:0);const forgotten=(e.forgotten||0)+(oldFam>0&&newFam===0?1:0);const next={...prev,[key]:{familiarity:newFam,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1,learned,forgotten}};LS.set('bible-word-data',next);return next})},[]);
   const [expandedTestament,setExpandedTestament]=useState(null);
   const [expandedBook,setExpandedBook]=useState(null);
   const [expandedStatBook,setExpandedStatBook]=useState(null);
