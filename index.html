@@ -1908,7 +1908,7 @@ function App({data}){
             ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
             :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(isMultiUnit?finalGlobalScore>=chapTrain.globalTotal*0.85:displayScore>=chapTrain.total*0.85)?t('wellDone'):t('keepPracticing')}</p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading')}} style={S.navBtn}>{t('finish')}</button>
+            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('finish')}</button>
             <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:startChapTrain} style={S.startBtn}>{t('repeat')}</button>
           </div>
         </div>
