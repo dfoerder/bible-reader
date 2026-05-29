@@ -16,6 +16,11 @@
 - Lerneinheiten zu je 15 Fragen mit Zwischenergebnis und Fehler-Wiederholung
 - Nutzt die bestehende chapTrain-Infrastruktur mit `type:'cloze'`-Flag
 
+### Learned/Forgotten-Zähler
+- Pro Wort: `learned` (+1 bei fam 0→>0), `forgotten` (+1 bei fam >0→0)
+- Wechsel fam -1→>0 zählt nicht als „gelernt" (Wort war bereits bekannt)
+- Rückwärtskompatibel zu bestehenden Wortdaten
+
 ### UI-Umbenennung und Neuordnung
 - „Wörter trainieren" → „Wörter Quiz"
 - Reihenfolge im Vocab-Panel: Wörter anschauen → Wörter im Kontext üben → Wörter Quiz
