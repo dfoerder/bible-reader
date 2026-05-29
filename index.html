@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.6.8b';
+const APP_VERSION = '1.6.9b';
 const APP_DATE = '29.05.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1908,7 +1908,6 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
               <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
@@ -1942,7 +1941,6 @@ function App({data}){
             <div style={S.bookRow} onClick={()=>setExpandedBook(isOpen?null:bi)}>
               <span style={S.bookArrow}>{isOpen?'▾':'▸'}</span>
               <h3 style={S.bookName}>{book.name}</h3>
-              <span style={S.bookChapCount}>{t('nCh').replace('{n}',book.numChapters)}</span>
               <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
