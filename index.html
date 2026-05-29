@@ -1369,10 +1369,21 @@ function App({data}){
       (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
     }
   },[bookmarks,bookIdx,chapIdx]);
-  const genOpts=useCallback((words,allDe)=>words.map(w=>{
-    const wrong=shuffleArr(allDe.filter(d=>d!==w.de)).slice(0,2);
-    return shuffleArr([w.de,...wrong]);
-  }),[]);
+  const genOpts=useCallback((words,allDe)=>{
+    const lvlOrder=['A1','A2','B1','B2','C1','C2'];
+    const poolByLvl={};lvlOrder.forEach(l=>{poolByLvl[l]=(VOCAB_POOL[l]||[]).map(w=>w.de)});
+    return words.map(w=>{
+      const wl=w.level||userLevel;
+      const li=lvlOrder.indexOf(wl);
+      let candidates=[];
+      for(let i=li;i<lvlOrder.length&&candidates.length<10;i++){
+        candidates=[...candidates,...(poolByLvl[lvlOrder[i]]||[]).filter(d=>d!==w.de&&!candidates.includes(d))];
+      }
+      if(candidates.length<2)candidates=[...candidates,...allDe.filter(d=>d!==w.de&&!candidates.includes(d))];
+      const wrong=shuffleArr(candidates).slice(0,2);
+      return shuffleArr([w.de,...wrong]);
+    });
+  },[userLevel]);
 
   const chapTrainRetry=useCallback((wrongItems)=>{
     const retryWords=wrongItems.map(w=>w.ex);
