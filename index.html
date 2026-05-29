@@ -1387,7 +1387,7 @@ function App({data}){
     const wordsToTrain=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
     if(wordsToTrain.length===0)return;
     const allWords=shuffleArr(wordsToTrain);
-    const allDe=quizWords.map(w=>w.de);
+    const allDe=[...new Set([...quizWords.map(w=>w.de),...Object.values(VOCAB_POOL).flat().map(w=>w.de)])];
     const units=[];
     for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const words=units[0];
