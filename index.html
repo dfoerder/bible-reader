@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.5.8b';
+const APP_VERSION = '1.5.9b';
 const APP_DATE = '29.05.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -170,7 +170,7 @@ const I18N={
   trainingSection:{de:'Training',en:'Training'},
   vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
   vocabLevelHint:{de:'Wörter über diesem Level werden unter „Schwierige Wörter" angezeigt.',en:'Words above this level are shown under "Difficult Words".'},
-  reviewSettings:{de:'Schwierige Wörter anschauen',en:'Review difficult words'},
+  reviewSettings:{de:'Wörter anschauen',en:'Review words'},
   showLemma:{de:'Grundform anzeigen',en:'Show base form'},
   showCefrLevel:{de:'Sprachlevel anzeigen',en:'Show CEFR level'},
   retakeTest:{de:'Einstufungstest wiederholen',en:'Retake placement test'},
@@ -224,7 +224,7 @@ const I18N={
   vocabCheck:{de:'Kapitel {n} — Schwierige Wörter',en:'Chapter {n} — Difficult Words'},
   noNewVocab:{de:'Keine neuen Wörter über {l}',en:'No new vocabulary above {l}'},
   startReading:{de:'Du kannst direkt lesen.',en:'You can start reading directly.'},
-  whichWords:{de:'Schwierige Wörter anschauen',en:'Review difficult words'},
+  whichWords:{de:'Wörter anschauen',en:'Review words'},
   nWordsAbove:{de:'{n} Wörter über {l}.',en:'{n} words above {l}.'},
   vocabKnown:{de:'Bekannt',en:'Known'},
   vocabUnknown:{de:'Unbekannt',en:'Unknown'},
@@ -235,11 +235,11 @@ const I18N={
   noMarked:{de:'Keine Wörter markiert — reiner Lesefluss!',en:'No words marked — pure reading flow!'},
   nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
   readBtn:{de:'Lesen →',en:'Read →'},
-  trainDifficult:{de:'Schwierige Wörter trainieren',en:'Train difficult words'},
-  trainDifficultAgain:{de:'Schwierige Wörter nochmals trainieren',en:'Train difficult words again'},
-  trainDifficultHint:{de:'Multiple-Choice-Übungen zu den schwierigen Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s difficult words.'},
+  trainDifficult:{de:'Wörter trainieren',en:'Train words'},
+  trainDifficultAgain:{de:'Wörter nochmals trainieren',en:'Train words again'},
+  trainDifficultHint:{de:'Multiple-Choice-Übungen zu den Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s words.'},
   startTraining:{de:'Training starten',en:'Start training'},
-  noWordsToTrain:{de:'Keine schwierigen Wörter zum Trainieren.',en:'No difficult words to train.'},
+  noWordsToTrain:{de:'Keine Wörter zum Trainieren.',en:'No words to train.'},
 
   // Reading
   wordList:{de:'← Wortliste',en:'← Word list'},
@@ -1393,6 +1393,8 @@ function App({data}){
     });
   },[genOpts]);
 
+  const chapTrainFromBottom=useRef(false);
+
   const startChapTrain=useCallback(()=>{
     if(quizWords.length===0)return;
     const wordsToTrain=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
@@ -1919,7 +1921,7 @@ function App({data}){
             ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
             :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(isMultiUnit?finalGlobalScore>=chapTrain.globalTotal*0.85:displayScore>=chapTrain.total*0.85)?t('wellDone'):t('keepPracticing')}</p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('finish')}</button>
+            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('finish')}</button>
             <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:startChapTrain} style={S.startBtn}>{t('repeat')}</button>
           </div>
         </div>
@@ -2101,7 +2103,7 @@ function App({data}){
           </div>
           {trainExpanded&&<div style={{padding:'8px 10px'}}>
             <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('trainDifficultHint')}</p>
-            <button onClick={()=>{prevPhaseRef.current='reading';startChapTrain();setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
+            <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapTrain();setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
           </div>}
         </div>
       </div>}
@@ -2172,7 +2174,7 @@ function App({data}){
     })})()}</div>
 
     {quizWords.length>0&&<div style={{textAlign:'center',marginTop:24,paddingBottom:12,borderBottom:'1px solid var(--t-border)'}}>
-      <button onClick={()=>{prevPhaseRef.current='reading';startChapTrain();setPhase('quiz')}} style={{background:'none',border:'none',cursor:'pointer',fontSize:14,fontFamily:sans,color:'var(--t-accent)',fontWeight:600,padding:'8px 0'}}>{t('trainDifficultAgain')}</button>
+      <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=true;startChapTrain();setPhase('quiz')}} style={{background:'none',border:'none',cursor:'pointer',fontSize:14,fontFamily:sans,color:'var(--t-accent)',fontWeight:600,padding:'8px 0'}}>{t('trainDifficultAgain')}</button>
     </div>}
     <div style={S.chapNav}>
       <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
