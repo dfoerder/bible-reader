@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.7.5b';
+const APP_VERSION = '1.7.6b';
 const APP_DATE = '02.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -291,7 +291,7 @@ const I18N={
   yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
   vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
   nOfMAvailable:{de:'{n} von {m} Wörtern im aktuellen Sublevel verfügbar ({u} Einheiten)',en:'{n} of {m} words in current sublevel available ({u} units)'},
-  nOfMClozeAvailable:{de:'{n} von {m} Wörtern ab Level {l} verfügbar ({u} Einheiten)',en:'{n} of {m} words from level {l} available ({u} units)'},
+  nOfMClozeAvailable:{de:'{n} von {m} Wörtern im aktuellen Sublevel verfügbar ({u} Einheiten)',en:'{n} of {m} words in current sublevel available ({u} units)'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
   clozeByBook:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
   clozeByBookTitle:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
@@ -519,13 +519,21 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
-  const startCloze=useCallback(lvl=>{
-    const pool=CLOZE_EXERCISES[lvl]||CLOZE_EXERCISES['A2']||[];
+  const clozeForStep=useCallback(step=>{
+    const lvl=stepToLevel(step);
+    const sub=1+(step%3);
+    const stepWordSet=new Set((VOCAB_POOL[lvl]||[]).filter(w=>w.sub<=sub).map(w=>w.en));
+    const pool=(CLOZE_EXERCISES[lvl]||[]).filter(e=>stepWordSet.has(e.answer));
+    const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
+    const higherPool=higherLevels.flatMap(l=>(CLOZE_EXERCISES[l]||[]));
+    return {pool,higherPool};
+  },[]);
+  const startCloze=useCallback(step=>{
+    const {pool,higherPool}=clozeForStep(step);
+    const lvl=stepToLevel(step);
     const now=Date.now();
     const fam=w=>{const d=wordData[w.answer];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.answer];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
-    const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
-    const higherPool=higherLevels.flatMap(l=>(CLOZE_EXERCISES[l]||[]));
     const prio1=pool.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
     const prio2=pool.filter(w=>fam(w)===-1);
     const prio3=higherPool.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
@@ -545,7 +553,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
     setSelectedLevel(lvl);setLastStart('cloze');
-  },[wordData]);
+  },[wordData,clozeForStep]);
 
   const DAY_MS=24*3600*1000;
 
@@ -737,7 +745,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(userLevel);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(trainStep);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);
@@ -890,11 +898,13 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const now=Date.now();
   const DMS=86400000;
   const fresh=stepWords.filter(w=>{const d=wordData[w.en];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
-  const clozeAll=[...(CLOZE_EXERCISES[userLevel]||[]),...LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(userLevel)).flatMap(l=>(CLOZE_EXERCISES[l]||[]))];
-  const clozeWords=new Set(clozeAll.map(w=>w.answer));
-  const clozeTotalUniq=clozeWords.size;
+  const {pool:clozeStepPool,higherPool:clozeHigherPool}=clozeForStep(trainStep);
+  const clozeStepWords=new Set(clozeStepPool.map(w=>w.answer));
+  const clozeHigherWords=new Set(clozeHigherPool.map(w=>w.answer));
+  const clozeTotalUniq=clozeStepWords.size;
   let clozeFreshUniq=0;
-  clozeWords.forEach(w=>{const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
+  clozeStepWords.forEach(w=>{const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
+  clozeHigherWords.forEach(w=>{if(clozeStepWords.has(w))return;const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
 
 
   return(<div>
@@ -907,8 +917,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',fresh).replace('{m}',stepWords.length).replace('{u}',Math.ceil(fresh/15))}</p>
       </div>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFreshUniq).replace('{m}',clozeTotalUniq).replace('{l}',userLevel).replace('{u}',Math.ceil(clozeFreshUniq/15))}</p>
+        <button onClick={()=>startCloze(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFreshUniq).replace('{m}',clozeTotalUniq).replace('{u}',Math.ceil(clozeFreshUniq/15))}</p>
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
