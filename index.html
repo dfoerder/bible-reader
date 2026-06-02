@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.7.4b';
+const APP_VERSION = '1.7.5b';
 const APP_DATE = '02.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -291,7 +291,7 @@ const I18N={
   yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
   vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
   nOfMAvailable:{de:'{n} von {m} Wörtern im aktuellen Sublevel verfügbar ({u} Einheiten)',en:'{n} of {m} words in current sublevel available ({u} units)'},
-  nOfMClozeAvailable:{de:'{n} von {m} Kontextübungen ab Level {l} verfügbar ({u} Einheiten)',en:'{n} of {m} context exercises from level {l} available ({u} units)'},
+  nOfMClozeAvailable:{de:'{n} von {m} Wörtern ab Level {l} verfügbar ({u} Einheiten)',en:'{n} of {m} words from level {l} available ({u} units)'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
   clozeByBook:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
   clozeByBookTitle:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
@@ -890,12 +890,12 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const now=Date.now();
   const DMS=86400000;
   const fresh=stepWords.filter(w=>{const d=wordData[w.en];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
-  const clozePool=CLOZE_EXERCISES[userLevel]||[];
-  const clozeFam=w=>{const d=wordData[w.answer];return d?d.familiarity:-1;};
-  const clozeLt=w=>{const d=wordData[w.answer];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
-  const clozeHigher=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(userLevel)).flatMap(l=>(CLOZE_EXERCISES[l]||[]));
-  const clozeFresh=[...clozePool.filter(w=>clozeFam(w)===0&&now-clozeLt(w)>=DMS),...clozePool.filter(w=>clozeFam(w)===-1),...clozeHigher.filter(w=>clozeFam(w)===0&&now-clozeLt(w)>=DMS),...clozeHigher.filter(w=>clozeFam(w)===-1)].length;
-  const clozeTotal=clozePool.length+clozeHigher.length;
+  const clozeAll=[...(CLOZE_EXERCISES[userLevel]||[]),...LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(userLevel)).flatMap(l=>(CLOZE_EXERCISES[l]||[]))];
+  const clozeWords=new Set(clozeAll.map(w=>w.answer));
+  const clozeTotalUniq=clozeWords.size;
+  let clozeFreshUniq=0;
+  clozeWords.forEach(w=>{const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
+
 
   return(<div>
     <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
@@ -908,7 +908,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(userLevel)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFresh).replace('{m}',clozeTotal).replace('{l}',userLevel).replace('{u}',Math.ceil(clozeFresh/15))}</p>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFreshUniq).replace('{m}',clozeTotalUniq).replace('{l}',userLevel).replace('{u}',Math.ceil(clozeFreshUniq/15))}</p>
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
