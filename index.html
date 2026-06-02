@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.7.7b';
+const APP_VERSION = '1.7.8b';
 const APP_DATE = '02.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -901,7 +901,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const {pool:clozeStepPool,higherPool:clozeHigherPool}=clozeForStep(trainStep);
   const clozeStepLemmas=new Set(clozeStepPool.map(w=>w.lemma||w.answer));
   const clozeHigherLemmas=new Set(clozeHigherPool.map(w=>w.lemma||w.answer));
-  const clozeTotalUniq=clozeStepLemmas.size;
+  const clozeTotalUniq=new Set([...clozeStepLemmas,...clozeHigherLemmas]).size;
   let clozeFreshUniq=0;
   clozeStepLemmas.forEach(w=>{const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
   clozeHigherLemmas.forEach(w=>{if(clozeStepLemmas.has(w))return;const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
