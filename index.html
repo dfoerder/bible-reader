@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.7.0b';
+const APP_VERSION = '1.7.1b';
 const APP_DATE = '02.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2263,8 +2263,8 @@ function App({data}){
                   const phr=isPhrase&&!showTr?S.phraseWord:null;
                   const sgl=isPhrase?result.single:null;
                   const pwExp=sgl&&expandedPhraseWords.has(`${verse.n}_${pos}`);
-                  if(showTr){const phE=isPhrase?S.phraseWord:null;return(<span key={i}><span style={S.wg}><span className={hl} style={{...phE,...(sgl?{cursor:'pointer'}:{})}} onClick={sgl?()=>togglePhraseWord(verse.n,pos):undefined}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize}} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}<span style={{...S.tr,fontSize:trSize}} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>)}
-                  if(sgl){return(<span key={i}><span style={S.wg}><span className={hl} style={{...phr,cursor:'pointer'}} onClick={()=>togglePhraseWord(verse.n,pos)}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize}} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}</span>{punct}</span>)}
+                  if(showTr){const phE=isPhrase?S.phraseWord:null;return(<span key={i}><span style={S.wg}><span className={hl} style={{...phE,...(sgl&&!pwExp?{cursor:'pointer'}:{})}} onClick={sgl&&!pwExp?()=>togglePhraseWord(verse.n,pos):undefined}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize,cursor:'pointer'}} onClick={()=>togglePhraseWord(verse.n,pos)} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}<span style={{...S.tr,fontSize:trSize}} onClick={()=>markLearned(key)} title={`${anno.lemma} (${anno.level})`}>{anno.de}</span></span>{punct}</span>)}
+                  if(sgl){return(<span key={i}><span style={S.wg}><span className={hl} style={{...phr,...(!pwExp?{cursor:'pointer'}:{})}} onClick={!pwExp?()=>togglePhraseWord(verse.n,pos):undefined}>{word}</span>{pwExp?<span style={{...S.tr,fontSize:trSize,cursor:'pointer'}} onClick={()=>togglePhraseWord(verse.n,pos)} title={`${sgl.lemma} (${sgl.level})`}>{sgl.de}</span>:null}</span>{punct}</span>)}
                   return(<span key={i}><span style={S.wg}><span className={hl} style={phr}>{word}</span></span>{punct}</span>);
                 }
                 if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(key)}>{token}</span>;
