@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.6.9b';
-const APP_DATE = '29.05.2026';
+const APP_VERSION = '1.7.0b';
+const APP_DATE = '02.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -487,9 +487,9 @@ function LevelTest({onComplete}){
 
 let CLOZE_EXERCISES={A2:[],B1:[],B2:[],C1:[],C2:[]};
 
-let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[]};
+let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[],C2:[]};
 
-const SUBSTEPS=['A1.1','A1.2','A1.3','A2.1','A2.2','A2.3','B1.1','B1.2','B1.3','B2.1','B2.2','B2.3','C1.1','C1.2','C1.3'];
+const SUBSTEPS=['A1.1','A1.2','A1.3','A2.1','A2.2','A2.3','B1.1','B1.2','B1.3','B2.1','B2.2','B2.3','C1.1','C1.2','C1.3','C2.1','C2.2','C2.3'];
 function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));return i>=0?i:6;}
 function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
@@ -706,8 +706,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         saveStep(ns);
         setUserLevel(stepToLevel(ns));
         stepChangeRef.current=stepLabel(ns);
-      } else if(pct>=0.85&&trainStep<14){
-        const ns=Math.min(14,trainStep+(pct>=1?2:1));
+      } else if(pct>=0.85&&trainStep<SUBSTEPS.length-1){
+        const ns=Math.min(SUBSTEPS.length-1,trainStep+(pct>=1?2:1));
         saveStep(ns);
         setUserLevel(stepToLevel(ns));
         stepChangeRef.current=stepLabel(ns);

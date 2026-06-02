@@ -7,6 +7,13 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.7.0b (02.06.2026)
+
+### C2-Sublevels im Vokabeltraining
+- 2.101 C2-Lemmata aus den Bibel-Annotationen in `vocab_pool.json` aufgenommen
+- 3 Sublevels (C2.1, C2.2, C2.3) nach Häufigkeit, insgesamt nun 18 Schwierigkeitsstufen
+- Step-Maximum dynamisch aus SUBSTEPS-Array statt hardcoded
+
 ## v1.6.0b (29.05.2026)
 
 ### Kapitel-Lückentext-Übungen (Wörter im Kontext üben)

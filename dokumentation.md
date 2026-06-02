@@ -67,7 +67,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 ### Vokabeltraining
 
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
-- 15 Schwierigkeitsstufen (A1.1 bis C1.3)
+- 18 Schwierigkeitsstufen (A1.1 bis C2.3)
 - Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
 - Priorisierte Wortauswahl (15 Wörter pro Übung):
   1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level
@@ -119,7 +119,7 @@ bible-reader/
 │       ├── sch1951/                    Schlachter 1951 (66 Dateien)
 │       └── l1912mod/                   Luther 1912 modernisiert (66 Dateien)
 ├── data/
-│   ├── vocab_pool.json                7.500+ Wortpaare für Training
+│   ├── vocab_pool.json                9.600+ Wortpaare für Training
 │   └── context_exercises.json         Lückentext-Übungen
 ├── review_annotations.py              Annotations-Review (Claude API, synchron)
 ├── review_batch_submit.py             Batch-Review einreichen (Anthropic Batch API)
@@ -274,5 +274,5 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
 - **6.376 einzigartige Lemmata**
 - **CEFR-Verteilung:** A1 (624), A2 (907), B1 (2.312), B2 (2.988), C1 (2.254), C2 (1.557)
-- **7.500+ Wortpaare** im Vokabeltraining
+- **9.600+ Wortpaare** im Vokabeltraining
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
