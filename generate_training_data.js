@@ -59,22 +59,80 @@ fs.readdirSync(ANNO_DIR).filter(f => f.endsWith('.json')).sort().forEach(f => {
 });
 
 // Determine canonical level, de, and filter
+// Build Oxford set for inflection checks
+const oxLemmaSet = new Set(Object.keys(oxMap));
+
+const IRREGULAR_MAP = {
+  those:'that',these:'this',women:'woman',men:'man',children:'child',
+  feet:'foot',teeth:'tooth',mice:'mouse',geese:'goose',oxen:'ox',
+  was:'be',were:'be',been:'be',am:'be',is:'be',are:'be',
+  had:'have',has:'have',did:'do',does:'do',doesnt:'do',dont:'do',
+  went:'go',gone:'go',came:'come',took:'take',gave:'give',
+  said:'say',told:'tell',made:'make',got:'get',saw:'see',
+  knew:'know',known:'know',ran:'run',sat:'sit',stood:'stand',
+  fell:'fall',fallen:'fall',kept:'keep',led:'lead',left:'leave',
+  built:'build',sent:'send',spent:'spend',lost:'lose',found:'find',
+  brought:'bring',thought:'think',bought:'buy',caught:'catch',
+  taught:'teach',wrote:'write',written:'write',spoke:'speak',
+  broke:'break',broken:'break',chose:'choose',chosen:'choose',
+  drove:'drive',drove:'drive',ate:'eat',eaten:'eat',
+  threw:'throw',thrown:'throw',drew:'draw',grew:'grow',grew:'grow',
+  wore:'wear',worn:'wear',bore:'bear',born:'bear',
+  began:'begin',begun:'begin',sang:'sing',sung:'sing',
+  drank:'drink',drunk:'drink',swam:'swim',swore:'swear',
+  woke:'wake',woken:'wake',shook:'shake',hid:'hide',hidden:'hide',
+  laid:'lay',paid:'pay',held:'hold',hung:'hang',dug:'dig',
+  bound:'bind',wound:'wind',lit:'light',set:'set',
+  worse:'bad',worst:'bad',better:'good',best:'good',
+  more:'much',most:'much',less:'little',least:'little',
+  further:'far',furthest:'far',
+};
+
+function isInflectedOxford(word) {
+  const lw = word.toLowerCase();
+  if (oxLemmaSet.has(lw)) return false;
+  if (IRREGULAR_MAP[lw] && oxLemmaSet.has(IRREGULAR_MAP[lw])) return true;
+  const bases = [];
+  if (lw.endsWith('s') && lw.length > 2) bases.push(lw.slice(0, -1));
+  if (lw.endsWith('es') && lw.length > 3) bases.push(lw.slice(0, -2));
+  if (lw.endsWith('ies') && lw.length > 4) bases.push(lw.slice(0, -3) + 'y');
+  if (lw.endsWith('ed') && lw.length > 3) bases.push(lw.slice(0, -2), lw.slice(0, -1));
+  if (lw.endsWith('ied') && lw.length > 4) bases.push(lw.slice(0, -3) + 'y');
+  if (lw.endsWith('ing') && lw.length > 4) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
+  if (lw.endsWith('er') && lw.length > 3) bases.push(lw.slice(0, -2), lw.slice(0, -1));
+  if (lw.endsWith('est') && lw.length > 4) bases.push(lw.slice(0, -3), lw.slice(0, -2));
+  if (lw.endsWith('ly') && lw.length > 3) bases.push(lw.slice(0, -2));
+  if (lw.endsWith('n') && lw.length > 3) bases.push(lw.slice(0, -1), lw.slice(0, -2));
+  if (lw.endsWith('en') && lw.length > 3) bases.push(lw.slice(0, -2));
+  if (lw.endsWith('th') && lw.length > 4) bases.push(lw.slice(0, -2));
+  if (lw.endsWith('ieth') && lw.length > 5) bases.push(lw.slice(0, -4) + 'y');
+  return bases.some(b => b.length >= 2 && oxLemmaSet.has(b));
+}
+
+function isNameLike(en, de) {
+  const le = en.toLowerCase().replace(/[^a-z]/g, '').replace(/^y/,'j');
+  const ld = de.toLowerCase().replace(/[^a-zäöüß]/g, '');
+  if (le.length < 3 || ld.length < 3) return false;
+  const prefix = Math.min(3, le.length, ld.length);
+  return le.slice(0, prefix) === ld.slice(0, prefix) && Math.abs(le.length - ld.length) <= 3;
+}
+
 const unified = [];
+let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, name: 0 };
 
 for (const [lemma, data] of Object.entries(lemmaData)) {
   const annoLevel = Object.entries(data.levelCounts).sort((a, b) => b[1] - a[1])[0][0];
   const de = Object.entries(data.deCounts).sort((a, b) => b[1] - a[1])[0][0];
 
-  // Filter proper nouns: uppercase lemma where de is also capitalized (transliterated names)
+  // Filter proper nouns: uppercase lemma where de is also capitalized
   if (lemma[0] === lemma[0].toUpperCase() && lemma[0] !== lemma[0].toLowerCase()
-      && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) continue;
+      && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
   // Determine level: use Oxford if available, otherwise annotation level
   const oxLevels = oxMap[lemma.toLowerCase()];
   let level = annoLevel;
   let isOxford = false;
   if (oxLevels) {
-    // Use the Oxford level closest to our annotation level
     const LEVEL_ORDER = { A1: 0, A2: 1, B1: 2, B2: 3, C1: 4, C2: 5 };
     let bestOx = oxLevels[0];
     let bestDiff = Math.abs(LEVEL_ORDER[bestOx] - LEVEL_ORDER[annoLevel]);
@@ -86,8 +144,24 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
     isOxford = true;
   }
 
+  // Additional filters for non-Oxford words (Bible vocab)
+  if (!isOxford) {
+    if (lemma.includes(' ')) { filterStats.space++; continue; }
+    if (/[+—\/\*]/.test(lemma) || /^\d+$/.test(lemma)) { filterStats.special++; continue; }
+    if (lemma.length <= 2) { filterStats.short++; continue; }
+    if (de.toLowerCase() === lemma.toLowerCase()) { filterStats.noTrans++; continue; }
+    if (/[''']/.test(lemma)) { filterStats.contraction++; continue; }
+    if (lemma !== lemma.toLowerCase()) { filterStats.caseVariant++; continue; }
+    if (de.endsWith('-')) { filterStats.partial++; continue; }
+    if (isInflectedOxford(lemma)) { filterStats.inflected++; continue; }
+    if (isNameLike(lemma, de)) { filterStats.name++; continue; }
+  }
+
   unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, isOxford });
 }
+
+console.log('Filters applied (non-Oxford):');
+Object.entries(filterStats).forEach(([k, v]) => { if (v > 0) console.log(`  ${k}: ${v}`); });
 
 // Split into Oxford words and Bible-specific words
 const oxfordWords = unified.filter(w => w.isOxford);
