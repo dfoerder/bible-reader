@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.8.5b';
+const APP_VERSION = '1.9.0b';
 const APP_DATE = '03.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -294,6 +294,9 @@ const I18N={
   nOfMClozeAvailable:{de:'{n} Wörter verfügbar',en:'{n} words available'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
   clozeByBook:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
+  bibleVocab:{de:'Bibel-Vokabular',en:'Bible vocabulary'},
+  bibleVocabPractice:{de:'Bibel-Wörter üben',en:'Practice Bible words'},
+  bibleCloze:{de:'Bibel-Wörter im Kontext',en:'Bible words in context'},
   clozeByBookTitle:{de:'Wörter im Kontext nach Buch',en:'Vocabulary in context by book'},
   noExercises:{de:'Für dieses Buch gibt es noch keine Übungen.',en:'No exercises available for this book yet.'},
   wellDone:{de:'Gut gemacht!',en:'Well done!'},
@@ -487,14 +490,17 @@ function LevelTest({onComplete}){
 }
 
 let CLOZE_EXERCISES={A1:[],A2:[],B1:[],B2:[],C1:[],C2:[]};
+let BIBLE_EXERCISES={A1:[],A2:[],B1:[],B2:[],C1:[],C2:[]};
 
 let VOCAB_POOL={A1:[],A2:[],B1:[],B2:[],C1:[],C2:[]};
+let BIBLE_VOCAB={A1:[],A2:[],B1:[],B2:[],C1:[],C2:[]};
 
 const SUBSTEPS=['A1.1','A1.2','A1.3','A2.1','A2.2','A2.3','B1.1','B1.2','B1.3','B2.1','B2.2','B2.3','C1.1','C1.2','C1.3','C2.1','C2.2','C2.3'];
 function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));return i>=0?i:6;}
 function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
-function vocabForStep(step){const lvl=stepToLevel(step);const sub=1+(step%3);const pool=VOCAB_POOL[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};}
+function vocabForStep(step,src){const P=src==='bible'?BIBLE_VOCAB:VOCAB_POOL;const lvl=stepToLevel(step);const sub=1+(step%3);const pool=P[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};}
+function maxStepFor(src){const P=src==='bible'?BIBLE_VOCAB:VOCAB_POOL;for(let s=SUBSTEPS.length-1;s>=0;s--){if((P[stepToLevel(s)]||[]).length>0)return s;}return 0;}
 
 function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trainWord}){
   const [mode,setMode]=useState(null);
@@ -502,6 +508,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
   const [trainStep,setTrainStep]=useState(()=>{const s=LS.get('bible-train-step');return s!=null?s:levelToStep(userLevel)+2;});
   const saveStep=s=>{setTrainStep(s);LS.set('bible-train-step',s);};
+  const [bibleStep,setBibleStep]=useState(()=>{const s=LS.get('bible-bible-step');return s!=null?s:levelToStep(userLevel)+2;});
+  const saveBibleStep=s=>{setBibleStep(s);LS.set('bible-bible-step',s);};
+  const exSourceRef=useRef('oxford');
   const [exercises,setExercises]=useState([]);
   const [current,setCurrent]=useState(0);
   const [selected,setSelected]=useState(null);
@@ -519,16 +528,19 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
-  const clozeForStep=useCallback(step=>{
+  const clozeForStep=useCallback((step,src)=>{
+    const CE=src==='bible'?BIBLE_EXERCISES:CLOZE_EXERCISES;
     const lvl=stepToLevel(step);
     const sub=1+(step%3);
-    const pool=(CLOZE_EXERCISES[lvl]||[]).filter(e=>(e.sub||1)<=sub);
+    const pool=(CE[lvl]||[]).filter(e=>(e.sub||1)<=sub);
     const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
-    const higherPool=higherLevels.flatMap(l=>(CLOZE_EXERCISES[l]||[]));
+    const higherPool=higherLevels.flatMap(l=>(CE[l]||[]));
     return {pool,higherPool};
   },[]);
-  const startCloze=useCallback(step=>{
-    const {pool,higherPool}=clozeForStep(step);
+  const startCloze=useCallback((step,src)=>{
+    src=src||'oxford';
+    const CE=src==='bible'?BIBLE_EXERCISES:CLOZE_EXERCISES;
+    const {pool,higherPool}=clozeForStep(step,src);
     const lvl=stepToLevel(step);
     const now=Date.now();
     const fam=w=>{const k=w.lemma||w.answer;const d=wordData[k];return d?d.familiarity:-1;};
@@ -540,7 +552,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     let allWords=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
     if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
     if(allWords.length===0)return;
-    const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+    const allDe=Object.values(CE).flat().map(e=>e.de);
     const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const picked=units[0];
     setExercises(picked);
@@ -551,13 +563,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
     clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
-    setSelectedLevel(lvl);setLastStart('cloze');
+    exSourceRef.current=src;
+    setSelectedLevel(lvl);setLastStart(src==='bible'?'bible-cloze':'cloze');
   },[wordData,clozeForStep]);
 
   const DAY_MS=24*3600*1000;
 
-  const startVocab=useCallback(step=>{
-    const {words:stepWords,allDe}=vocabForStep(step);
+  const startVocab=useCallback((step,src)=>{
+    src=src||'oxford';
+    const VP=src==='bible'?BIBLE_VOCAB:VOCAB_POOL;
+    const {words:stepWords,allDe}=vocabForStep(step,src);
     const lvl=stepToLevel(step);
     const now=Date.now();
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
@@ -565,7 +580,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const prio1=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
     const prio2=stepWords.filter(w=>fam(w)===-1);
     const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
-    const higherWords=higherLevels.flatMap(l=>(VOCAB_POOL[l]||[]));
+    const higherWords=higherLevels.flatMap(l=>(VP[l]||[]));
     const prio3=higherWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
     const prio4=higherWords.filter(w=>fam(w)===-1);
     let pool=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
@@ -580,7 +595,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    setSelectedLevel(lvl);setLastStart('vocab');
+    exSourceRef.current=src;
+    setSelectedLevel(lvl);setLastStart(src==='bible'?'bible-vocab':'vocab');
   },[wordData]);
 
   const startBookCloze=useCallback(bi=>{
@@ -674,14 +690,15 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     wrongRef.current=[];
     const retryEx=wrong.map(w=>w.ex);
     setExercises(retryEx);
+    const src=exSourceRef.current;
     if(exType==='vocab'){
-      const allDe=Object.values(VOCAB_POOL).flat().map(w=>w.de);
+      const allDe=Object.values(src==='bible'?BIBLE_VOCAB:VOCAB_POOL).flat().map(w=>w.de);
       setShuffledOpts(retryEx.map(q=>{
         const wr=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
         return shuffle([q.de,...wr]);
       }));
     } else {
-      const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+      const allDe=Object.values(src==='bible'?BIBLE_EXERCISES:CLOZE_EXERCISES).flat().map(e=>e.de);
       setShuffledOpts(retryEx.map(ex=>{
         const wr=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
         return shuffle([ex.de,...wr]);
@@ -709,15 +726,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     if(hist.length>200) hist.splice(0,hist.length-200);
     LS.set('bible-training-history',hist);
     if(exType==='vocab'||exType==='cloze'){
-      if(pct<0.85&&trainStep>0){
-        const ns=trainStep-1;
-        saveStep(ns);
-        setUserLevel(stepToLevel(ns));
+      const src=exSourceRef.current;
+      const curStep=src==='bible'?bibleStep:trainStep;
+      const mx=maxStepFor(src);
+      if(pct<0.85&&curStep>0){
+        const ns=curStep-1;
+        if(src==='bible')saveBibleStep(ns);else{saveStep(ns);setUserLevel(stepToLevel(ns));}
         stepChangeRef.current=stepLabel(ns);
-      } else if(pct>=0.85&&trainStep<SUBSTEPS.length-1){
-        const ns=Math.min(SUBSTEPS.length-1,trainStep+(pct>=1?2:1));
-        saveStep(ns);
-        setUserLevel(stepToLevel(ns));
+      } else if(pct>=0.85&&curStep<mx){
+        const ns=Math.min(mx,curStep+(pct>=1?2:1));
+        if(src==='bible')saveBibleStep(ns);else{saveStep(ns);setUserLevel(stepToLevel(ns));}
         stepChangeRef.current=stepLabel(ns);
       } else {
         stepChangeRef.current=null;
@@ -744,7 +762,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(trainStep);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(trainStep);else if(lastStart==='bible-vocab')startVocab(bibleStep,'bible');else if(lastStart==='bible-cloze')startCloze(bibleStep,'bible');else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);
@@ -893,16 +911,19 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
-  const {words:stepWords}=vocabForStep(trainStep);
   const now=Date.now();
   const DMS=86400000;
-  const fresh=stepWords.filter(w=>{const d=wordData[w.en];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
-  const {pool:clozeStepPool}=clozeForStep(trainStep);
-  const clozeStepLemmas=new Set(clozeStepPool.map(w=>w.lemma||w.answer));
-  const clozeTotalUniq=clozeStepLemmas.size;
-  let clozeFreshUniq=0;
-  clozeStepLemmas.forEach(w=>{const d=wordData[w];const f=d?d.familiarity:-1;if(f===-1||(f===0&&now-(d&&d.lasttrained?new Date(d.lasttrained).getTime():0)>=DMS))clozeFreshUniq++});
+  const countFresh=(words,keyFn)=>words.filter(w=>{const d=wordData[keyFn(w)];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
 
+  const {words:stepWords}=vocabForStep(trainStep);
+  const fresh=countFresh(stepWords,w=>w.en);
+  const {pool:clozeStepPool}=clozeForStep(trainStep);
+  const clozeFresh=countFresh(clozeStepPool,w=>w.lemma||w.answer);
+
+  const {words:bStepWords}=vocabForStep(bibleStep,'bible');
+  const bFresh=countFresh(bStepWords,w=>w.en);
+  const {pool:bClozePool}=clozeForStep(bibleStep,'bible');
+  const bClozeFresh=countFresh(bClozePool,w=>w.lemma||w.answer);
 
   return(<div>
     <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
@@ -915,10 +936,23 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFreshUniq)}</p>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
+      </div>
+    </div>
+    <div style={{borderTop:'1px solid var(--t-border)',margin:'24px 0 8px'}}/>
+    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{t('bibleVocab')}</p>
+    <p style={{textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 16px'}}>{stepLabel(bibleStep)}</p>
+    <div style={S.settingsSection}>
+      <div style={S.settingsGroup}>
+        <button onClick={()=>startVocab(bibleStep,'bible')} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('bibleVocabPractice')}</button>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',bFresh)}</p>
+      </div>
+      <div style={S.settingsGroup}>
+        <button onClick={()=>startCloze(bibleStep,'bible')} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('bibleCloze')}</button>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',bClozeFresh)}</p>
       </div>
     </div>
   </div>);
@@ -1004,6 +1038,14 @@ async function loadData(){
   try{
     const cr=await fetch('data/context_exercises.json'+CB);
     if(cr.ok) CLOZE_EXERCISES=await cr.json();
+  }catch(e){}
+  try{
+    const bv=await fetch('data/bible_vocab.json'+CB);
+    if(bv.ok) BIBLE_VOCAB=await bv.json();
+  }catch(e){}
+  try{
+    const be=await fetch('data/bible_exercises.json'+CB);
+    if(be.ok) BIBLE_EXERCISES=await be.json();
   }catch(e){}
   return{en};
 }
@@ -1737,10 +1779,17 @@ function App({data}){
             <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
               <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
               <span style={{...S.settingsLabel,marginBottom:0}}>{t('vocabTotal')}</span>
-              <span style={S.statBookWords}>{t('nUnique').replace('{n}',Object.values(VOCAB_POOL).flat().length.toLocaleString())}</span>
+              <span style={S.statBookWords}>{t('nUnique').replace('{n}',(Object.values(VOCAB_POOL).flat().length+Object.values(BIBLE_VOCAB).flat().length).toLocaleString())}</span>
             </div>
             {expandedStatSection==='vocab'&&<div style={S.statBookDetail}>
+              <p style={{fontSize:12,fontWeight:600,color:'var(--t-muted)',margin:'0 0 4px'}}>Oxford 5000</p>
               {levelOrder.map(lvl=>{const words=VOCAB_POOL[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
+                <span style={{fontWeight:600,color:'var(--t-text)',minWidth:28}}>{lvl}</span>
+                <span style={{color:'var(--t-text2)',fontSize:13}}>{words.length}</span>
+                <span style={{color:'var(--t-muted)',fontSize:12,marginLeft:8}}>({s1} · {s2} · {s3})</span>
+              </div>)})}
+              <p style={{fontSize:12,fontWeight:600,color:'var(--t-muted)',margin:'12px 0 4px'}}>{t('bibleVocab')}</p>
+              {levelOrder.map(lvl=>{const words=BIBLE_VOCAB[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
                 <span style={{fontWeight:600,color:'var(--t-text)',minWidth:28}}>{lvl}</span>
                 <span style={{color:'var(--t-text2)',fontSize:13}}>{words.length}</span>
                 <span style={{color:'var(--t-muted)',fontSize:12,marginLeft:8}}>({s1} · {s2} · {s3})</span>
