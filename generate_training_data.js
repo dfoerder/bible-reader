@@ -118,7 +118,7 @@ function isNameLike(en, de) {
 }
 
 const unified = [];
-let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, compoundNum: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, name: 0 };
+let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, compoundNum: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, nameAdj: 0, name: 0 };
 
 for (const [lemma, data] of Object.entries(lemmaData)) {
   const annoLevel = Object.entries(data.levelCounts).sort((a, b) => b[1] - a[1])[0][0];
@@ -155,7 +155,10 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
     if (lemma !== lemma.toLowerCase()) { filterStats.caseVariant++; continue; }
     if (de.endsWith('-')) { filterStats.partial++; continue; }
     if (isInflectedOxford(lemma)) { filterStats.inflected++; continue; }
+    if (/^(yourselves|ourselves|ourself|himself|herself|itself|themselves|myself)$/.test(lemma)) { filterStats.inflected++; continue; }
+    if (/^(jewish|christian|egyptian|roman|greek|hebrew|persian|assyrian|babylonian|philistine|levitical|italian|caesar)$/i.test(lemma)) { filterStats.nameAdj++; continue; }
     if (isNameLike(lemma, de)) { filterStats.name++; continue; }
+    if (oxLemmaSet.has(lemma.replace(/-/g, ''))) { filterStats.inflected++; continue; }
   }
 
   unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, isOxford });
