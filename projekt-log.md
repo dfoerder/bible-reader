@@ -7,6 +7,36 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.3b (04.06.2026)
+
+### Oxford 5000 CEFR-Abgleich
+- Vokabeln mit Oxford 5000 Liste verglichen und alle übereinstimmenden Wörter auf Oxford-CEFR-Level angepasst
+- 1514 von 2708 Wörtern level-korrigiert, 0 Mismatches
+- `compare_levels.js` als Analyseskript erstellt
+
+### Zwei-Pool-Vokabelsystem (Oxford + Bibel)
+- Vokabular aufgeteilt in Oxford 5000 (2708 allgemeine Wörter, A1–C1) und Bibel-spezifisch (2665 Wörter, B1–C2)
+- Eigene Datendateien: `bible_vocab.json` und `bible_exercises.json`
+- Separate Trainings-UI mit eigenem Step-Tracking (`bibleStep`)
+- `exSourceRef` zur Unterscheidung des aktiven Pools während Übungen
+- `maxStepFor(src)` begrenzt Level-Progression pro Pool
+
+### Bibel-Vokabel-Filterung
+- Irreguläre Verbformen über IRREGULAR_MAP (~60 Einträge) erkannt
+- Reguläre Flexionen über Suffix-Stripping (-s, -ed, -ing, -er, -est, -ly, -en, -th)
+- Eigennamen-Erkennung über Präfix-Ähnlichkeit mit y/j-Äquivalenz
+- Gefiltert: Eigennamen, Leerzeichen, Sonderzeichen, kurze Wörter, zusammengesetzte Zahlen, fehlende Übersetzungen, Kontraktionen, Groß-/Kleinschreibungsvarianten, Teilübersetzungen, flektierte Formen, Reflexivpronomen, eigennamenbezogene Adjektive, Oxford-Wörter mit Bindestrich
+
+### Sublevel-Aufschlüsselung in Statistik
+- Vokabelstatistik zeigt Wörter aufgeschlüsselt nach Sublevel für Oxford und Bibel
+
+### Vereinfachte Trainingsanzeige
+- Info-Text zeigt nur noch „N Wörter verfügbar" statt „N von M (X Einheiten)"
+
+### Cloze-Bug behoben
+- Lückentext-Übung blieb bei letzter Frage hängen wenn Retry pending war
+- Familiarity-Lookup nutzte Wortform statt Lemma
+
 ## v1.7.0b (02.06.2026)
 
 ### C2-Sublevels im Vokabeltraining
