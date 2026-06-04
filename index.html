@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.3b';
+const APP_VERSION = '1.9.4b';
 const APP_DATE = '04.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1783,16 +1783,18 @@ function App({data}){
             </div>
             {expandedStatSection==='vocab'&&<div style={S.statBookDetail}>
               <p style={{fontSize:12,fontWeight:600,color:'var(--t-muted)',margin:'0 0 4px'}}>Oxford 5000</p>
-              {levelOrder.map(lvl=>{const words=VOCAB_POOL[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
+              {levelOrder.map(lvl=>{const words=VOCAB_POOL[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;const occ=words.reduce((s,w)=>s+(w.occ||0),0);return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
                 <span style={{fontWeight:600,color:'var(--t-text)',minWidth:28}}>{lvl}</span>
                 <span style={{color:'var(--t-text2)',fontSize:13}}>{words.length}</span>
                 <span style={{color:'var(--t-muted)',fontSize:12,marginLeft:8}}>({s1} · {s2} · {s3})</span>
+                <span style={{color:'var(--t-muted2)',fontSize:11,marginLeft:'auto'}}>{occ.toLocaleString()}×</span>
               </div>)})}
               <p style={{fontSize:12,fontWeight:600,color:'var(--t-muted)',margin:'12px 0 4px'}}>{t('bibleVocab')}</p>
-              {levelOrder.map(lvl=>{const words=BIBLE_VOCAB[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
+              {levelOrder.map(lvl=>{const words=BIBLE_VOCAB[lvl]||[];if(!words.length)return null;const s1=words.filter(w=>w.sub===1).length,s2=words.filter(w=>w.sub===2).length,s3=words.filter(w=>w.sub===3).length;const occ=words.reduce((s,w)=>s+(w.occ||0),0);return(<div key={lvl} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'3px 0'}}>
                 <span style={{fontWeight:600,color:'var(--t-text)',minWidth:28}}>{lvl}</span>
                 <span style={{color:'var(--t-text2)',fontSize:13}}>{words.length}</span>
                 <span style={{color:'var(--t-muted)',fontSize:12,marginLeft:8}}>({s1} · {s2} · {s3})</span>
+                <span style={{color:'var(--t-muted2)',fontSize:11,marginLeft:'auto'}}>{occ.toLocaleString()}×</span>
               </div>)})}
             </div>}
           </div>
