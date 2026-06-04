@@ -27,6 +27,26 @@ for (const line of oxLines) {
 }
 console.log(`  ${Object.keys(oxMap).length} unique Oxford words loaded`);
 
+// ── Load EFLLex (secondary CEFR reference for non-Oxford words) ──
+console.log('Loading EFLLex...');
+const eflLines = fs.readFileSync('EFLLex.tsv', 'utf8').split('\n');
+const eflMap = {};
+for (const line of eflLines.slice(1)) {
+  const cols = line.split('\t');
+  if (!cols[0]) continue;
+  const word = cols[0].toLowerCase();
+  if (oxMap[word]) continue;
+  const docs = +cols[13] || 0;
+  if (docs < 3) continue;
+  const totalFreq = +cols[7] || 0;
+  const freqs = {A1: +cols[2]||0, A2: +cols[3]||0, B1: +cols[4]||0, B2: +cols[5]||0, C1: +cols[6]||0};
+  const best = Object.entries(freqs).sort((a,b) => b[1]-a[1])[0];
+  if (best[1] > 0 && (!eflMap[word] || totalFreq > eflMap[word].freq)) {
+    eflMap[word] = { level: best[0], freq: totalFreq };
+  }
+}
+console.log(`  ${Object.keys(eflMap).length} unique EFLLex words loaded (excluding Oxford)`);
+
 // ── Phase 1: Build unified lemma map from annotations ──
 console.log('\nPhase 1: Scanning annotations...');
 
@@ -92,6 +112,17 @@ function isInflectedOxford(word) {
   const lw = word.toLowerCase();
   if (oxLemmaSet.has(lw)) return false;
   if (IRREGULAR_MAP[lw] && oxLemmaSet.has(IRREGULAR_MAP[lw])) return true;
+  // US→UK spelling variants
+  if (lw.endsWith('or') && oxLemmaSet.has(lw.slice(0,-2)+'our')) return true;
+  if (lw.endsWith('ior') && oxLemmaSet.has(lw.slice(0,-3)+'iour')) return true;
+  if (lw.includes('bor') && oxLemmaSet.has(lw.replace('bor','bour'))) return true;
+  if (lw.includes('vor') && oxLemmaSet.has(lw.replace('vor','vour'))) return true;
+  if (lw.endsWith('ize') && oxLemmaSet.has(lw.slice(0,-3)+'ise')) return true;
+  if (lw.endsWith('ized') && oxLemmaSet.has(lw.slice(0,-4)+'ised')) return true;
+  if (!lw.endsWith('eed') && lw.endsWith('ed') && oxLemmaSet.has(lw.replace(/(?<=\w)ed$/, 'sed'))) return true;
+  if (oxLemmaSet.has(lw.replace(/(?<=\w)e$/, 'ae'))) return true;
+  // Base form where Oxford has the -d/-ed/-ing form
+  if (oxLemmaSet.has(lw+'d') || oxLemmaSet.has(lw+'ed') || oxLemmaSet.has(lw+'ing')) return true;
   const bases = [];
   if (lw.endsWith('s') && lw.length > 2) bases.push(lw.slice(0, -1));
   if (lw.endsWith('es') && lw.length > 3) bases.push(lw.slice(0, -2));
@@ -100,12 +131,32 @@ function isInflectedOxford(word) {
   if (lw.endsWith('ied') && lw.length > 4) bases.push(lw.slice(0, -3) + 'y');
   if (lw.endsWith('ing') && lw.length > 4) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
   if (lw.endsWith('er') && lw.length > 3) bases.push(lw.slice(0, -2), lw.slice(0, -1));
+  if (lw.endsWith('ier') && lw.length > 4) bases.push(lw.slice(0, -3) + 'y');
   if (lw.endsWith('est') && lw.length > 4) bases.push(lw.slice(0, -3), lw.slice(0, -2));
   if (lw.endsWith('ly') && lw.length > 3) bases.push(lw.slice(0, -2));
   if (lw.endsWith('n') && lw.length > 3) bases.push(lw.slice(0, -1), lw.slice(0, -2));
   if (lw.endsWith('en') && lw.length > 3) bases.push(lw.slice(0, -2));
   if (lw.endsWith('th') && lw.length > 4) bases.push(lw.slice(0, -2));
   if (lw.endsWith('ieth') && lw.length > 5) bases.push(lw.slice(0, -4) + 'y');
+  // Derivation suffixes
+  if (lw.endsWith('ness') && lw.length > 5) { bases.push(lw.slice(0, -4)); if (lw.endsWith('iness')) bases.push(lw.slice(0, -5) + 'y'); }
+  if (lw.endsWith('ful') && lw.length > 4) bases.push(lw.slice(0, -3));
+  if (lw.endsWith('less') && lw.length > 5) bases.push(lw.slice(0, -4));
+  if (lw.endsWith('ment') && lw.length > 5) bases.push(lw.slice(0, -4), lw.slice(0, -4) + 'e');
+  if (lw.endsWith('ity') && lw.length > 5) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
+  if (lw.endsWith('ous') && lw.length > 5) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
+  if (lw.endsWith('ings') && lw.length > 5) bases.push(lw.slice(0, -4));
+  if (lw.endsWith('y') && !lw.endsWith('ly') && lw.length > 3) bases.push(lw.slice(0, -1), lw.slice(0, -1) + 'e');
+  // Compound: sun+rise, grand+child etc. (both parts ≥ 3 letters)
+  const NOT_COMPOUND = new Set(['forsake','bondage','bandage','perverse','perversion','winnow',
+    'hissing','appease','endanger','barbed','flatten','fatten','reddish','forego','herbage',
+    'tillage','perchance','dragnet','wayward','offset','penknife','godhead','capstone',
+    'boxwood','frontlet','armlet','inkhorn','forbear']);
+  if (!NOT_COMPOUND.has(lw)) {
+    for (let i = 3; i <= lw.length - 3; i++) {
+      if (oxLemmaSet.has(lw.slice(0,i)) && oxLemmaSet.has(lw.slice(i))) return true;
+    }
+  }
   return bases.some(b => b.length >= 2 && oxLemmaSet.has(b));
 }
 
@@ -128,8 +179,9 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
   if (lemma[0] === lemma[0].toUpperCase() && lemma[0] !== lemma[0].toLowerCase()
       && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
-  // Determine level: use Oxford if available, otherwise annotation level
+  // Determine level: Oxford > EFLLex > annotation level
   const oxLevels = oxMap[lemma.toLowerCase()];
+  const eflLevel = eflMap[lemma.toLowerCase()];
   let level = annoLevel;
   let isOxford = false;
   if (oxLevels) {
@@ -142,6 +194,8 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
     }
     level = bestOx;
     isOxford = true;
+  } else if (eflLevel) {
+    level = eflLevel.level;
   }
 
   // Additional filters for non-Oxford words (Bible vocab)
@@ -155,7 +209,7 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
     if (lemma !== lemma.toLowerCase()) { filterStats.caseVariant++; continue; }
     if (de.endsWith('-')) { filterStats.partial++; continue; }
     if (isInflectedOxford(lemma)) { filterStats.inflected++; continue; }
-    if (/^(yourselves|ourselves|ourself|himself|herself|itself|themselves|myself)$/.test(lemma)) { filterStats.inflected++; continue; }
+    if (/^(yourselves|ourselves|ourself|himself|herself|itself|themselves|myself|oneself)$/.test(lemma)) { filterStats.inflected++; continue; }
     if (/^(jewish|christian|egyptian|roman|greek|hebrew|persian|assyrian|babylonian|philistine|levitical|italian|caesar)$/i.test(lemma)) { filterStats.nameAdj++; continue; }
     if (isNameLike(lemma, de)) { filterStats.name++; continue; }
     if (oxLemmaSet.has(lemma.replace(/-/g, ''))) { filterStats.inflected++; continue; }
@@ -214,12 +268,20 @@ for (const lvl of LEVELS) {
 console.log(`  Total: ${biTotal}`);
 
 // Show level changes
-let changed = 0, unchanged = 0;
+let oxChanged = 0, oxUnchanged = 0;
 for (const w of oxfordWords) {
-  if (w.level !== w.annoLevel) changed++;
-  else unchanged++;
+  if (w.level !== w.annoLevel) oxChanged++;
+  else oxUnchanged++;
 }
-console.log(`\nOxford level adjustments: ${changed} changed, ${unchanged} unchanged`);
+console.log(`\nOxford level adjustments: ${oxChanged} changed, ${oxUnchanged} unchanged`);
+let eflChanged = 0, eflUnchanged = 0;
+for (const w of bibleWords) {
+  if (eflMap[w.lemma.toLowerCase()]) {
+    if (w.level !== w.annoLevel) eflChanged++;
+    else eflUnchanged++;
+  }
+}
+console.log(`EFLLex level adjustments: ${eflChanged} changed, ${eflUnchanged} unchanged (${bibleWords.length - eflChanged - eflUnchanged} not in EFLLex)`);
 
 // ── Shared: Load Bible texts and extract cloze ──
 
@@ -358,7 +420,7 @@ for (const lvl of LEVELS) {
   const ceSet = new Set(oxExercises[lvl].map(e => e.lemma));
   vocabPool[lvl] = oxByLevel[lvl]
     .filter(w => ceSet.has(w.lemma))
-    .map(w => ({ en: w.lemma, de: w.de, sub: w.sub }));
+    .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
 fs.writeFileSync('data/vocab_pool.json', JSON.stringify(vocabPool));
 console.log('  Written: data/vocab_pool.json');
@@ -376,7 +438,7 @@ for (const lvl of LEVELS) {
   const ceSet = new Set(biExercises[lvl].map(e => e.lemma));
   biblePool[lvl] = biByLevel[lvl]
     .filter(w => ceSet.has(w.lemma))
-    .map(w => ({ en: w.lemma, de: w.de, sub: w.sub }));
+    .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
 fs.writeFileSync('data/bible_vocab.json', JSON.stringify(biblePool));
 console.log('  Written: data/bible_vocab.json');
