@@ -118,7 +118,7 @@ function isNameLike(en, de) {
 }
 
 const unified = [];
-let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, name: 0 };
+let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, compoundNum: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, name: 0 };
 
 for (const [lemma, data] of Object.entries(lemmaData)) {
   const annoLevel = Object.entries(data.levelCounts).sort((a, b) => b[1] - a[1])[0][0];
@@ -149,6 +149,7 @@ for (const [lemma, data] of Object.entries(lemmaData)) {
     if (lemma.includes(' ')) { filterStats.space++; continue; }
     if (/[+—\/\*]/.test(lemma) || /^\d+$/.test(lemma)) { filterStats.special++; continue; }
     if (lemma.length <= 2) { filterStats.short++; continue; }
+    if (/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)\b/i.test(lemma) && lemma.includes('-')) { filterStats.compoundNum++; continue; }
     if (de.toLowerCase() === lemma.toLowerCase()) { filterStats.noTrans++; continue; }
     if (/[''']/.test(lemma)) { filterStats.contraction++; continue; }
     if (lemma !== lemma.toLowerCase()) { filterStats.caseVariant++; continue; }
