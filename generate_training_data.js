@@ -78,6 +78,30 @@ fs.readdirSync(ANNO_DIR).filter(f => f.endsWith('.json')).sort().forEach(f => {
   }
 });
 
+// Merge case variants: "After" + "after" → "after" (keep lowercase as canonical)
+const merged = {};
+for (const [lem, data] of Object.entries(lemmaData)) {
+  const key = lem.toLowerCase();
+  if (!merged[key]) {
+    merged[key] = { levelCounts: {}, deCounts: {}, freq: 0, occurrences: [], originalCasings: [] };
+  }
+  const m = merged[key];
+  for (const [lvl, cnt] of Object.entries(data.levelCounts)) m.levelCounts[lvl] = (m.levelCounts[lvl] || 0) + cnt;
+  for (const [de, cnt] of Object.entries(data.deCounts)) m.deCounts[de] = (m.deCounts[de] || 0) + cnt;
+  m.freq += data.freq;
+  m.occurrences.push(...data.occurrences);
+  m.originalCasings.push(lem);
+}
+// Use original casing with most occurrences for proper noun detection
+const lemmaDataMerged = {};
+for (const [key, data] of Object.entries(merged)) {
+  const bestCasing = data.originalCasings.sort((a, b) => {
+    const freqA = lemmaData[a].freq, freqB = lemmaData[b].freq;
+    return freqB - freqA;
+  })[0];
+  lemmaDataMerged[key] = { ...data, displayLemma: bestCasing };
+}
+
 // Determine canonical level, de, and filter
 // Build Oxford set for inflection checks
 const oxLemmaSet = new Set(Object.keys(oxMap));
@@ -171,17 +195,18 @@ function isNameLike(en, de) {
 const unified = [];
 let filterStats = { properNoun: 0, space: 0, special: 0, short: 0, compoundNum: 0, noTrans: 0, contraction: 0, caseVariant: 0, partial: 0, inflected: 0, nameAdj: 0, name: 0 };
 
-for (const [lemma, data] of Object.entries(lemmaData)) {
+for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   const annoLevel = Object.entries(data.levelCounts).sort((a, b) => b[1] - a[1])[0][0];
   const de = Object.entries(data.deCounts).sort((a, b) => b[1] - a[1])[0][0];
+  const origLemma = data.displayLemma;
 
   // Filter proper nouns: uppercase lemma where de is also capitalized
-  if (lemma[0] === lemma[0].toUpperCase() && lemma[0] !== lemma[0].toLowerCase()
+  if (origLemma[0] === origLemma[0].toUpperCase() && origLemma[0] !== origLemma[0].toLowerCase()
       && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
   // Determine level: Oxford > EFLLex > annotation level
-  const oxLevels = oxMap[lemma.toLowerCase()];
-  const eflLevel = eflMap[lemma.toLowerCase()];
+  const oxLevels = oxMap[lemma];
+  const eflLevel = eflMap[lemma];
   let level = annoLevel;
   let isOxford = false;
   if (oxLevels) {
