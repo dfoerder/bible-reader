@@ -16,6 +16,17 @@
 - Inflektionsfilter prüft jetzt auch gegen Kaggle-Wörter (nicht nur Oxford)
 - Einheitlicher Pool: 5.086 Wörter (Oxford: 2.654, Kaggle: 945, Opus: 1.488)
 
+### Annotations-Levels angeglichen
+- Alle 66 Annotations-Dateien an die neuen CEFR-Levels angepasst (Oxford/Kaggle/Opus)
+- 142.501 von 772.783 Annotationen aktualisiert
+- Lesen und Training zeigen jetzt konsistente Levels
+
+### Lernfokus-Einstellung
+- Umschalter im Training: „CEFR-Level (A1→C2)" oder „Häufigkeit in der Bibel"
+- Frequenz-Modus: 5.086 Wörter nach Bibel-Häufigkeit sortiert, in 18 Stufen aufgeteilt
+- Separater Step-Tracker für jeden Modus
+- Zeigt Wörteranzahl pro Stufe im Frequenz-Modus
+
 ### UI-Bereinigung
 - Bibel-Vokabular-Sektion aus dem Training entfernt
 - Separater Step-Tracker (`bibleStep`) und `exSourceRef` entfernt
