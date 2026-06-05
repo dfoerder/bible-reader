@@ -98,8 +98,8 @@ for (const [key, data] of Object.entries(merged)) {
 }
 
 // Determine canonical level, de, and filter
-// Build Oxford set for inflection checks
-const oxLemmaSet = new Set(Object.keys(oxMap));
+// Build general set (Oxford + Kaggle) for inflection checks
+const oxLemmaSet = new Set([...Object.keys(oxMap), ...Object.keys(kagMap)]);
 
 const IRREGULAR_MAP = {
   those:'that',these:'this',women:'woman',men:'man',children:'child',
@@ -203,7 +203,7 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   const oxLevels = oxMap[lemma];
   const kagLevel = kagMap[lemma];
   let level = annoLevel;
-  let isOxford = false;
+  let isGeneral = false;
   if (oxLevels) {
     const LEVEL_ORDER = { A1: 0, A2: 1, B1: 2, B2: 3, C1: 4, C2: 5 };
     let bestOx = oxLevels[0];
@@ -213,13 +213,14 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
       if (d < bestDiff) { bestDiff = d; bestOx = ol; }
     }
     level = bestOx;
-    isOxford = true;
+    isGeneral = true;
   } else if (kagLevel) {
     level = kagLevel;
+    isGeneral = true;
   }
 
-  // Additional filters for non-Oxford words (Bible vocab)
-  if (!isOxford) {
+  // Additional filters for Bible-only words (not in Oxford or Kaggle)
+  if (!isGeneral) {
     if (lemma.includes(' ')) { filterStats.space++; continue; }
     if (/[+—\/\*]/.test(lemma) || /^\d+$/.test(lemma)) { filterStats.special++; continue; }
     if (lemma.length <= 2) { filterStats.short++; continue; }
@@ -235,17 +236,17 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
     if (oxLemmaSet.has(lemma.replace(/-/g, ''))) { filterStats.inflected++; continue; }
   }
 
-  unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, isOxford });
+  unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, isGeneral });
 }
 
 console.log('Filters applied (non-Oxford):');
 Object.entries(filterStats).forEach(([k, v]) => { if (v > 0) console.log(`  ${k}: ${v}`); });
 
-// Split into Oxford words and Bible-specific words
-const oxfordWords = unified.filter(w => w.isOxford);
-const bibleWords = unified.filter(w => !w.isOxford);
+// Split into general words (Oxford + Kaggle) and Bible-specific words
+const oxfordWords = unified.filter(w => w.isGeneral);
+const bibleWords = unified.filter(w => !w.isGeneral);
 
-console.log(`  Total: ${unified.length} (Oxford: ${oxfordWords.length}, Bible: ${bibleWords.length})`);
+console.log(`  Total: ${unified.length} (General: ${oxfordWords.length}, Bible: ${bibleWords.length})`);
 
 // ── Assign sublevels within each level by frequency ──
 function assignSublevels(words) {
@@ -267,7 +268,9 @@ function assignSublevels(words) {
 const oxByLevel = assignSublevels(oxfordWords);
 const biByLevel = assignSublevels(bibleWords);
 
-console.log('\nOxford word list:');
+const oxOnlyCount = oxfordWords.filter(w => oxMap[w.lemma]).length;
+const kagOnlyCount = oxfordWords.filter(w => !oxMap[w.lemma]).length;
+console.log(`\nGeneral word list (Oxford ${oxOnlyCount} + Kaggle ${kagOnlyCount}):`);
 let oxTotal = 0;
 for (const lvl of LEVELS) {
   if (oxByLevel[lvl].length > 0) {
@@ -293,15 +296,7 @@ for (const w of oxfordWords) {
   if (w.level !== w.annoLevel) oxChanged++;
   else oxUnchanged++;
 }
-console.log(`\nOxford level adjustments: ${oxChanged} changed, ${oxUnchanged} unchanged`);
-let kagChanged = 0, kagUnchanged = 0;
-for (const w of bibleWords) {
-  if (kagMap[w.lemma.toLowerCase()]) {
-    if (w.level !== w.annoLevel) kagChanged++;
-    else kagUnchanged++;
-  }
-}
-console.log(`Kaggle level adjustments: ${kagChanged} changed, ${kagUnchanged} unchanged (${bibleWords.length - kagChanged - kagUnchanged} not in Kaggle)`);
+console.log(`\nGeneral pool level adjustments: ${oxChanged} changed, ${oxUnchanged} unchanged`);
 
 // ── Shared: Load Bible texts and extract cloze ──
 
@@ -465,7 +460,7 @@ console.log('  Written: data/bible_vocab.json');
 
 // ── Final stats ──
 console.log('\n=== Final statistics ===');
-console.log('\nOxford vocabulary (general training):');
+console.log('\nGeneral vocabulary (Oxford + Kaggle):');
 for (const lvl of LEVELS) {
   if (vocabPool[lvl].length > 0 || oxExercises[lvl].length > 0)
     console.log(`  ${lvl}: vocab=${vocabPool[lvl].length}, cloze=${oxExercises[lvl].length}`);
