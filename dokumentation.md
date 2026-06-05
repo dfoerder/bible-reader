@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.9.4b (05.06.2026)
+- **Aktuelle Version:** 1.9.5b (05.06.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~2100 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -74,7 +74,7 @@ Zwei separate Wort-Pools mit eigenem Step-Tracking:
 
 **Bibel-Vokabular** (bibelspezifisch, 2.327 Wörter, A1–C2):
 - Wörter die nicht in Oxford 5000 vorkommen, aber in der Bibel relevant sind
-- CEFR-Level aus EFLLex (Graded-Reader-Frequenz, ≥3 Dokumente) oder Annotations-Level als Fallback
+- CEFR-Level aus Kaggle CEFR (8.653 Wörter) oder Annotations-Level als Fallback
 - Extensive Filterung: Eigennamen, Flexionsformen, Derivationen, US/UK-Varianten, Komposita von Oxford-Wörtern
 - Jedes Wort hat ein `occ`-Feld (Anzahl Vorkommen in der WEB-Bibel)
 
@@ -138,9 +138,9 @@ bible-reader/
 │   ├── bible_vocab.json               Bibel-Vokabular (2.327, A1–C2)
 │   └── bible_exercises.json           Bibel-Vokabular Lückentext-Übungen
 ├── generate_training_data.js           Generiert vocab/exercise-Dateien aus Annotationen
-│                                       (Oxford 5000 + EFLLex CEFR-Abgleich, Filterung)
+│                                       (Oxford 5000 + Kaggle CEFR-Abgleich, Filterung)
 ├── oxford_5000.csv                    Oxford 5000 Referenzliste (extern)
-├── EFLLex.tsv                         EFLLex Referenzliste (extern, CC BY-NC-SA 4.0)
+├── kaggle_cefr.csv                    Kaggle CEFR Referenzliste (8.653 Wörter, extern)
 ├── compare_levels.js                  Einmaliges Analyseskript: Oxford vs. unsere Levels
 ├── review_annotations.py              Annotations-Review (Claude API, synchron)
 ├── review_batch_submit.py             Batch-Review einreichen (Anthropic Batch API)
@@ -190,7 +190,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 ### PWA und Offline-Fähigkeit
 
 - **Service Worker** (`sw.js`): Network-first für HTML, Cache-first für Daten
-- **Cache-Name:** `bible-full-v194` (wird bei jedem Deploy hochgezählt)
+- **Cache-Name:** `bible-full-v195` (wird bei jedem Deploy hochgezählt)
 - Vollständige Offline-Nutzung nach erstem Laden
 - Automatisches Update bei neuer Version
 
@@ -296,6 +296,6 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
 - **4.981 einzigartige Lemmata** (nach Filterung und Zusammenführung)
 - **Oxford 5000 Pool:** 2.654 Wörter (A1: 599, A2: 485, B1: 456, B2: 637, C1: 477)
-- **Bibel-Vokabular Pool:** 2.327 Wörter (A1: 11, A2: 25, B1: 59, B2: 431, C1: 948, C2: 853)
-- **CEFR-Quellen:** Oxford 5000 (handkuratiert), EFLLex (frequenzbasiert, 1.700 Einträge), Annotations-Level (Fallback)
+- **Bibel-Vokabular Pool:** 2.327 Wörter (A1: 10, A2: 23, B1: 163, B2: 531, C1: 753, C2: 847)
+- **CEFR-Quellen:** Oxford 5000 (handkuratiert), Kaggle CEFR (4.338 zusätzliche Wörter), Annotations-Level (Fallback)
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE

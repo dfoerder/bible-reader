@@ -27,27 +27,7 @@ for (const line of oxLines) {
 }
 console.log(`  ${Object.keys(oxMap).length} unique Oxford words loaded`);
 
-// ── Load EFLLex (secondary CEFR reference for non-Oxford words) ──
-console.log('Loading EFLLex...');
-const eflLines = fs.readFileSync('EFLLex.tsv', 'utf8').split('\n');
-const eflMap = {};
-for (const line of eflLines.slice(1)) {
-  const cols = line.split('\t');
-  if (!cols[0]) continue;
-  const word = cols[0].toLowerCase();
-  if (oxMap[word]) continue;
-  const docs = +cols[13] || 0;
-  if (docs < 3) continue;
-  const totalFreq = +cols[7] || 0;
-  const freqs = {A1: +cols[2]||0, A2: +cols[3]||0, B1: +cols[4]||0, B2: +cols[5]||0, C1: +cols[6]||0};
-  const best = Object.entries(freqs).sort((a,b) => b[1]-a[1])[0];
-  if (best[1] > 0 && (!eflMap[word] || totalFreq > eflMap[word].freq)) {
-    eflMap[word] = { level: best[0], freq: totalFreq };
-  }
-}
-console.log(`  ${Object.keys(eflMap).length} unique EFLLex words loaded (excluding Oxford)`);
-
-// ── Load Kaggle CEFR (tertiary reference) ──
+// ── Load Kaggle CEFR (secondary reference) ──
 console.log('Loading Kaggle CEFR...');
 const kagLines = fs.readFileSync('kaggle_cefr.csv', 'utf8').split('\n').slice(1);
 const kagMap = {};
@@ -219,10 +199,9 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   if (origLemma[0] === origLemma[0].toUpperCase() && origLemma[0] !== origLemma[0].toLowerCase()
       && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
-  // Determine level: Oxford > Kaggle > EFLLex > annotation level
+  // Determine level: Oxford > Kaggle > annotation level
   const oxLevels = oxMap[lemma];
   const kagLevel = kagMap[lemma];
-  const eflLevel = eflMap[lemma];
   let level = annoLevel;
   let isOxford = false;
   if (oxLevels) {
@@ -237,8 +216,6 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
     isOxford = true;
   } else if (kagLevel) {
     level = kagLevel;
-  } else if (eflLevel) {
-    level = eflLevel.level;
   }
 
   // Additional filters for non-Oxford words (Bible vocab)
@@ -317,14 +294,6 @@ for (const w of oxfordWords) {
   else oxUnchanged++;
 }
 console.log(`\nOxford level adjustments: ${oxChanged} changed, ${oxUnchanged} unchanged`);
-let eflChanged = 0, eflUnchanged = 0;
-for (const w of bibleWords) {
-  if (eflMap[w.lemma.toLowerCase()]) {
-    if (w.level !== w.annoLevel) eflChanged++;
-    else eflUnchanged++;
-  }
-}
-console.log(`EFLLex level adjustments: ${eflChanged} changed, ${eflUnchanged} unchanged (${bibleWords.length - eflChanged - eflUnchanged} not in EFLLex)`);
 let kagChanged = 0, kagUnchanged = 0;
 for (const w of bibleWords) {
   if (kagMap[w.lemma.toLowerCase()]) {
