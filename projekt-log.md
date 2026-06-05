@@ -7,6 +7,30 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.4b (05.06.2026)
+
+### EFLLex als zweite CEFR-Referenz
+- EFLLex-Wortliste (15.280 Lemmata aus Graded Readers) als Fallback für Bibel-Wörter die nicht in Oxford 5000 sind
+- Mindest-Schwellenwert: nur Wörter mit ≥3 Dokumenten in EFLLex werden übernommen (gegen Rauschen)
+- 1700 nutzbare EFLLex-Einträge, davon 158 Level-Anpassungen bei Bibel-Wörtern
+- Level-Priorität: Oxford 5000 > EFLLex > Annotations-Level
+
+### Erweiterte Filterung
+- US/UK-Schreibvarianten: -or→-our (auch interior), -ize→-ise
+- Derivationssuffixe: -ness, -ful, -less, -ment, -ity, -ous, -ings, -y (Adjektiv)
+- Kompositum-Erkennung mit min. 3 Buchstaben pro Teil und Ausnahmeliste für Scheinkomposita (forsake, bondage, perverse etc.)
+- Basisformen: Wort + -d/-ed/-ing ergibt Oxford-Eintrag → filtern
+- Reflexivpronomen (oneself), eigennamenbezogene Adjektive (jewish, egyptian etc.), caesar
+- Case-Varianten zusammengeführt: "After"+"after" → "after" (Eigennamen-Check auf häufigste Originalschreibung)
+
+### Occurrence Counts und Statistik
+- Jedes Wort in beiden Pools hat jetzt ein `occ`-Feld (Anzahl Vorkommen in der WEB-Bibel)
+- Statistikseite zeigt min–max Vorkommen pro Level (z.B. „1–56.635×")
+
+### Aktuelle Zahlen
+- Oxford 5000: 2.654 Wörter (A1–C1)
+- Bibel-Vokabular: 2.327 Wörter (A1–C2, davon 158 EFLLex-korrigiert)
+
 ## v1.9.3b (04.06.2026)
 
 ### Oxford 5000 CEFR-Abgleich
