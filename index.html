@@ -288,7 +288,11 @@ const I18N={
 
   // Training
   training:{de:'Training',en:'Training'},
+  trainFocus:{de:'Lernfokus',en:'Learning focus'},
+  trainFocusLevel:{de:'CEFR-Level (A1→C2)',en:'CEFR level (A1→C2)'},
+  trainFocusFreq:{de:'Häufigkeit in der Bibel',en:'Frequency in Bible'},
   yourLevel:{de:'Dein Level: {l}',en:'Your level: {l}'},
+  yourStep:{de:'Stufe {s} von {t}',en:'Step {s} of {t}'},
   vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
   nOfMAvailable:{de:'{n} Wörter verfügbar',en:'{n} words available'},
   nOfMClozeAvailable:{de:'{n} Wörter verfügbar',en:'{n} words available'},
@@ -494,15 +498,32 @@ const SUBSTEPS=['A1.1','A1.2','A1.3','A2.1','A2.2','A2.3','B1.1','B1.2','B1.3','
 function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));return i>=0?i:6;}
 function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
-function vocabForStep(step){const lvl=stepToLevel(step);const sub=1+(step%3);const pool=VOCAB_POOL[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};}
+let FREQ_POOL=[];
+function buildFreqPool(){
+  FREQ_POOL=Object.values(VOCAB_POOL).flat().sort((a,b)=>(b.occ||0)-(a.occ||0));
+  const n=FREQ_POOL.length;const steps=SUBSTEPS.length;
+  FREQ_POOL.forEach((w,i)=>{w.freqStep=Math.min(Math.floor(i/(n/steps)),steps-1)});
+}
+function vocabForStep(step,focus){
+  if(focus==='freq'){
+    const words=FREQ_POOL.filter(w=>w.freqStep<=step);
+    return {words,allDe:FREQ_POOL.map(w=>w.de)};
+  }
+  const lvl=stepToLevel(step);const sub=1+(step%3);const pool=VOCAB_POOL[lvl]||[];return {words:pool.filter(w=>w.sub<=sub),allDe:pool.map(w=>w.de)};
+}
 function maxStepFor(){for(let s=SUBSTEPS.length-1;s>=0;s--){if((VOCAB_POOL[stepToLevel(s)]||[]).length>0)return s;}return 0;}
 
 function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trainWord}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
+  const [trainFocus,setTrainFocus]=useState(()=>LS.get('bible-train-focus')||'level');
+  const changeFocus=f=>{setTrainFocus(f);LS.set('bible-train-focus',f);};
   const [trainStep,setTrainStep]=useState(()=>{const s=LS.get('bible-train-step');return s!=null?s:levelToStep(userLevel)+2;});
   const saveStep=s=>{setTrainStep(s);LS.set('bible-train-step',s);};
+  const [freqStep,setFreqStep]=useState(()=>{const s=LS.get('bible-freq-step');return s!=null?s:0;});
+  const saveFreqStep=s=>{setFreqStep(s);LS.set('bible-freq-step',s);};
+  const activeStep=trainFocus==='freq'?freqStep:trainStep;
   const [exercises,setExercises]=useState([]);
   const [current,setCurrent]=useState(0);
   const [selected,setSelected]=useState(null);
@@ -520,7 +541,15 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
-  const clozeForStep=useCallback((step)=>{
+  const clozeForStep=useCallback((step,focus)=>{
+    if(focus==='freq'){
+      const allCloze=Object.values(CLOZE_EXERCISES).flat();
+      const stepLemmas=new Set(FREQ_POOL.filter(w=>w.freqStep<=step).map(w=>w.en));
+      const pool=allCloze.filter(e=>stepLemmas.has(e.lemma));
+      const higherLemmas=new Set(FREQ_POOL.filter(w=>w.freqStep>step).map(w=>w.en));
+      const higherPool=allCloze.filter(e=>higherLemmas.has(e.lemma));
+      return {pool,higherPool};
+    }
     const lvl=stepToLevel(step);
     const sub=1+(step%3);
     const pool=(CLOZE_EXERCISES[lvl]||[]).filter(e=>(e.sub||1)<=sub);
@@ -528,8 +557,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const higherPool=higherLevels.flatMap(l=>(CLOZE_EXERCISES[l]||[]));
     return {pool,higherPool};
   },[]);
-  const startCloze=useCallback((step)=>{
-    const {pool,higherPool}=clozeForStep(step);
+  const startCloze=useCallback((step,focus)=>{
+    const {pool,higherPool}=clozeForStep(step,focus);
     const lvl=stepToLevel(step);
     const now=Date.now();
     const fam=w=>{const k=w.lemma||w.answer;const d=wordData[k];return d?d.familiarity:-1;};
@@ -557,16 +586,22 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const DAY_MS=24*3600*1000;
 
-  const startVocab=useCallback((step)=>{
-    const {words:stepWords,allDe}=vocabForStep(step);
-    const lvl=stepToLevel(step);
+  const startVocab=useCallback((step,focus)=>{
+    const {words:stepWords,allDe}=vocabForStep(step,focus);
     const now=Date.now();
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
     const prio1=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
     const prio2=stepWords.filter(w=>fam(w)===-1);
-    const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
-    const higherWords=higherLevels.flatMap(l=>(VOCAB_POOL[l]||[]));
+    let higherWords;
+    if(focus==='freq'){
+      const stepSet=new Set(stepWords.map(w=>w.en));
+      higherWords=FREQ_POOL.filter(w=>!stepSet.has(w.en));
+    } else {
+      const lvl=stepToLevel(step);
+      const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
+      higherWords=higherLevels.flatMap(l=>(VOCAB_POOL[l]||[]));
+    }
     const prio3=higherWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
     const prio4=higherWords.filter(w=>fam(w)===-1);
     let pool=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
@@ -581,7 +616,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    setSelectedLevel(lvl);setLastStart('vocab');
+    setSelectedLevel(stepToLevel(step));setLastStart('vocab');
   },[wordData]);
 
   const startBookCloze=useCallback(bi=>{
@@ -710,16 +745,17 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     if(hist.length>200) hist.splice(0,hist.length-200);
     LS.set('bible-training-history',hist);
     if(exType==='vocab'||exType==='cloze'){
-      const curStep=trainStep;
-      const mx=maxStepFor();
+      const curStep=activeStep;
+      const mx=SUBSTEPS.length-1;
+      const saveFn=trainFocus==='freq'?saveFreqStep:saveStep;
       if(pct<0.85&&curStep>0){
         const ns=curStep-1;
-        saveStep(ns);setUserLevel(stepToLevel(ns));
-        stepChangeRef.current=stepLabel(ns);
+        saveFn(ns);if(trainFocus!=='freq')setUserLevel(stepToLevel(ns));
+        stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
       } else if(pct>=0.85&&curStep<mx){
         const ns=Math.min(mx,curStep+(pct>=1?2:1));
-        saveStep(ns);setUserLevel(stepToLevel(ns));
-        stepChangeRef.current=stepLabel(ns);
+        saveFn(ns);if(trainFocus!=='freq')setUserLevel(stepToLevel(ns));
+        stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
       } else {
         stepChangeRef.current=null;
       }
@@ -745,7 +781,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(trainStep);else if(lastStart==='cloze')startCloze(trainStep);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);
@@ -898,23 +934,33 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const DMS=86400000;
   const countFresh=(words,keyFn)=>words.filter(w=>{const d=wordData[keyFn(w)];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
 
-  const {words:stepWords}=vocabForStep(trainStep);
+  const {words:stepWords}=vocabForStep(activeStep,trainFocus);
   const fresh=countFresh(stepWords,w=>w.en);
-  const {pool:clozeStepPool}=clozeForStep(trainStep);
+  const {pool:clozeStepPool}=clozeForStep(activeStep,trainFocus);
   const clozeFresh=countFresh(clozeStepPool,w=>w.lemma||w.answer);
 
+  const stepInfo=trainFocus==='freq'
+    ?t('yourStep').replace('{s}',activeStep+1).replace('{t}',SUBSTEPS.length)
+    :t('yourLevel').replace('{l}',stepLabel(activeStep));
 
   return(<div>
     <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
     <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>{t('back')}</button></div>
-    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{t('yourLevel').replace('{l}',stepLabel(trainStep))}</p>
+    <div style={{textAlign:'center',margin:'0 0 8px'}}>
+      <span style={{fontSize:12,color:'var(--t-muted2)',fontFamily:sans}}>{t('trainFocus')}</span>
+      <div style={{...S.levelBtns,marginTop:4,marginBottom:12}}>
+        <button onClick={()=>changeFocus('level')} style={{...S.lvlBtn,...(trainFocus==='level'?S.lvlActive:{})}}>{t('trainFocusLevel')}</button>
+        <button onClick={()=>changeFocus('freq')} style={{...S.lvlBtn,...(trainFocus==='freq'?S.lvlActive:{})}}>{t('trainFocusFreq')}</button>
+      </div>
+    </div>
+    <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{stepInfo}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startVocab(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
+        <button onClick={()=>startVocab(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMAvailable').replace('{n}',fresh)}</p>
       </div>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startCloze(trainStep)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
+        <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
       </div>
       <div style={S.settingsGroup}>
@@ -999,7 +1045,7 @@ async function loadData(){
   }catch(e){en.available=false;}
   try{
     const vr=await fetch('data/vocab_pool.json'+CB);
-    if(vr.ok) VOCAB_POOL=await vr.json();
+    if(vr.ok){VOCAB_POOL=await vr.json();buildFreqPool();}
   }catch(e){}
   try{
     const cr=await fetch('data/context_exercises.json'+CB);
