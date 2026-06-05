@@ -42,6 +42,11 @@ for (const line of kagLines) {
 }
 console.log(`  ${Object.keys(kagMap).length} unique Kaggle words loaded (excluding Oxford)`);
 
+// ── Load Opus CEFR levels (for words not in Oxford or Kaggle) ──
+console.log('Loading Opus CEFR levels...');
+const opusMap = JSON.parse(fs.readFileSync('opus_cefr_levels.json', 'utf8'));
+console.log(`  ${Object.keys(opusMap).length} Opus-assigned levels loaded`);
+
 // ── Phase 1: Build unified lemma map from annotations ──
 console.log('\nPhase 1: Scanning annotations...');
 
@@ -199,11 +204,12 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   if (origLemma[0] === origLemma[0].toUpperCase() && origLemma[0] !== origLemma[0].toLowerCase()
       && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
-  // Determine level: Oxford > Kaggle > annotation level
+  // Determine level: Oxford > Kaggle > Opus > annotation level
   const oxLevels = oxMap[lemma];
   const kagLevel = kagMap[lemma];
+  const opusLevel = opusMap[lemma];
   let level = annoLevel;
-  let isGeneral = false;
+  let source = 'anno';
   if (oxLevels) {
     const LEVEL_ORDER = { A1: 0, A2: 1, B1: 2, B2: 3, C1: 4, C2: 5 };
     let bestOx = oxLevels[0];
@@ -213,14 +219,17 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
       if (d < bestDiff) { bestDiff = d; bestOx = ol; }
     }
     level = bestOx;
-    isGeneral = true;
+    source = 'oxford';
   } else if (kagLevel) {
     level = kagLevel;
-    isGeneral = true;
+    source = 'kaggle';
+  } else if (opusLevel) {
+    level = opusLevel;
+    source = 'opus';
   }
 
-  // Additional filters for Bible-only words (not in Oxford or Kaggle)
-  if (!isGeneral) {
+  // Additional filters for non-reference words
+  if (source === 'anno' || source === 'opus') {
     if (lemma.includes(' ')) { filterStats.space++; continue; }
     if (/[+—\/\*]/.test(lemma) || /^\d+$/.test(lemma)) { filterStats.special++; continue; }
     if (lemma.length <= 2) { filterStats.short++; continue; }
@@ -236,17 +245,15 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
     if (oxLemmaSet.has(lemma.replace(/-/g, ''))) { filterStats.inflected++; continue; }
   }
 
-  unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, isGeneral });
+  unified.push({ lemma, level, annoLevel, de, freq: data.freq, occurrences: data.occurrences, source });
 }
 
-console.log('Filters applied (non-Oxford):');
+console.log('Filters applied:');
 Object.entries(filterStats).forEach(([k, v]) => { if (v > 0) console.log(`  ${k}: ${v}`); });
 
-// Split into general words (Oxford + Kaggle) and Bible-specific words
-const oxfordWords = unified.filter(w => w.isGeneral);
-const bibleWords = unified.filter(w => !w.isGeneral);
-
-console.log(`  Total: ${unified.length} (General: ${oxfordWords.length}, Bible: ${bibleWords.length})`);
+const srcCounts = { oxford: 0, kaggle: 0, opus: 0, anno: 0 };
+unified.forEach(w => srcCounts[w.source]++);
+console.log(`  Total: ${unified.length} (Oxford: ${srcCounts.oxford}, Kaggle: ${srcCounts.kaggle}, Opus: ${srcCounts.opus}, Annotation: ${srcCounts.anno})`);
 
 // ── Assign sublevels within each level by frequency ──
 function assignSublevels(words) {
@@ -265,38 +272,24 @@ function assignSublevels(words) {
   return byLevel;
 }
 
-const oxByLevel = assignSublevels(oxfordWords);
-const biByLevel = assignSublevels(bibleWords);
+const byLevel = assignSublevels(unified);
 
-const oxOnlyCount = oxfordWords.filter(w => oxMap[w.lemma]).length;
-const kagOnlyCount = oxfordWords.filter(w => !oxMap[w.lemma]).length;
-console.log(`\nGeneral word list (Oxford ${oxOnlyCount} + Kaggle ${kagOnlyCount}):`);
-let oxTotal = 0;
+console.log('\nWord list:');
+let total = 0;
 for (const lvl of LEVELS) {
-  if (oxByLevel[lvl].length > 0) {
-    console.log(`  ${lvl}: ${oxByLevel[lvl].length}`);
-    oxTotal += oxByLevel[lvl].length;
+  if (byLevel[lvl].length > 0) {
+    console.log(`  ${lvl}: ${byLevel[lvl].length}`);
+    total += byLevel[lvl].length;
   }
 }
-console.log(`  Total: ${oxTotal}`);
+console.log(`  Total: ${total}`);
 
-console.log('\nBible word list:');
-let biTotal = 0;
-for (const lvl of LEVELS) {
-  if (biByLevel[lvl].length > 0) {
-    console.log(`  ${lvl}: ${biByLevel[lvl].length}`);
-    biTotal += biByLevel[lvl].length;
-  }
+let changed = 0, unchanged = 0;
+for (const w of unified) {
+  if (w.level !== w.annoLevel) changed++;
+  else unchanged++;
 }
-console.log(`  Total: ${biTotal}`);
-
-// Show level changes
-let oxChanged = 0, oxUnchanged = 0;
-for (const w of oxfordWords) {
-  if (w.level !== w.annoLevel) oxChanged++;
-  else oxUnchanged++;
-}
-console.log(`\nGeneral pool level adjustments: ${oxChanged} changed, ${oxUnchanged} unchanged`);
+console.log(`\nLevel adjustments: ${changed} changed, ${unchanged} unchanged`);
 
 // ── Shared: Load Bible texts and extract cloze ──
 
@@ -422,72 +415,46 @@ function generateExercises(wordList) {
   return { exercises, noExercise };
 }
 
-// ── Phase 2: Generate Oxford exercises ──
-console.log('\nPhase 2: Generating Oxford context exercises...');
-const { exercises: oxExercises, noExercise: oxNoEx } = generateExercises(oxfordWords);
-fs.writeFileSync('data/context_exercises.json', JSON.stringify(oxExercises));
+// ── Phase 2: Generate exercises ──
+console.log('\nPhase 2: Generating context exercises...');
+const { exercises, noExercise } = generateExercises(unified);
+fs.writeFileSync('data/context_exercises.json', JSON.stringify(exercises));
 console.log('  Written: data/context_exercises.json');
 
-// ── Phase 3: Generate Oxford vocab pool ──
-console.log('\nPhase 3: Generating Oxford vocab pool...');
+// ── Phase 3: Generate vocab pool ──
+console.log('\nPhase 3: Generating vocab pool...');
 const vocabPool = {};
 for (const lvl of LEVELS) {
-  const ceSet = new Set(oxExercises[lvl].map(e => e.lemma));
-  vocabPool[lvl] = oxByLevel[lvl]
+  const ceSet = new Set(exercises[lvl].map(e => e.lemma));
+  vocabPool[lvl] = byLevel[lvl]
     .filter(w => ceSet.has(w.lemma))
     .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
 fs.writeFileSync('data/vocab_pool.json', JSON.stringify(vocabPool));
 console.log('  Written: data/vocab_pool.json');
 
-// ── Phase 4: Generate Bible vocab exercises ──
-console.log('\nPhase 4: Generating Bible vocabulary...');
-const { exercises: biExercises, noExercise: biNoEx } = generateExercises(bibleWords);
-fs.writeFileSync('data/bible_exercises.json', JSON.stringify(biExercises));
-console.log('  Written: data/bible_exercises.json');
-
-// ── Phase 5: Generate Bible vocab pool ──
-console.log('\nPhase 5: Generating Bible vocab pool...');
-const biblePool = {};
-for (const lvl of LEVELS) {
-  const ceSet = new Set(biExercises[lvl].map(e => e.lemma));
-  biblePool[lvl] = biByLevel[lvl]
-    .filter(w => ceSet.has(w.lemma))
-    .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
-}
-fs.writeFileSync('data/bible_vocab.json', JSON.stringify(biblePool));
-console.log('  Written: data/bible_vocab.json');
-
 // ── Final stats ──
 console.log('\n=== Final statistics ===');
-console.log('\nGeneral vocabulary (Oxford + Kaggle):');
 for (const lvl of LEVELS) {
-  if (vocabPool[lvl].length > 0 || oxExercises[lvl].length > 0)
-    console.log(`  ${lvl}: vocab=${vocabPool[lvl].length}, cloze=${oxExercises[lvl].length}`);
+  if (vocabPool[lvl].length > 0 || exercises[lvl].length > 0)
+    console.log(`  ${lvl}: vocab=${vocabPool[lvl].length}, cloze=${exercises[lvl].length}`);
 }
-console.log(`  Total: vocab=${Object.values(vocabPool).flat().length}, cloze=${Object.values(oxExercises).flat().length}`);
-if (oxNoEx > 0) console.log(`  ${oxNoEx} without exercise`);
-
-console.log('\nBible vocabulary (separate training):');
-for (const lvl of LEVELS) {
-  if (biblePool[lvl].length > 0 || biExercises[lvl].length > 0)
-    console.log(`  ${lvl}: vocab=${biblePool[lvl].length}, cloze=${biExercises[lvl].length}`);
-}
-console.log(`  Total: vocab=${Object.values(biblePool).flat().length}, cloze=${Object.values(biExercises).flat().length}`);
-if (biNoEx > 0) console.log(`  ${biNoEx} without exercise`);
+console.log(`  Total: vocab=${Object.values(vocabPool).flat().length}, cloze=${Object.values(exercises).flat().length}`);
+if (noExercise > 0) console.log(`  ${noExercise} without exercise`);
 
 // Verify 0 mismatches
 let mismatch = 0;
 for (const lvl of LEVELS) {
   const vpSet = new Set(vocabPool[lvl].map(w => w.en));
-  const ceSet = new Set(oxExercises[lvl].map(e => e.lemma));
-  vpSet.forEach(w => { if (!ceSet.has(w)) mismatch++; });
-  ceSet.forEach(w => { if (!vpSet.has(w)) mismatch++; });
-}
-for (const lvl of LEVELS) {
-  const vpSet = new Set(biblePool[lvl].map(w => w.en));
-  const ceSet = new Set(biExercises[lvl].map(e => e.lemma));
+  const ceSet = new Set(exercises[lvl].map(e => e.lemma));
   vpSet.forEach(w => { if (!ceSet.has(w)) mismatch++; });
   ceSet.forEach(w => { if (!vpSet.has(w)) mismatch++; });
 }
 console.log(`\nTotal mismatches: ${mismatch}`);
+
+// Write empty bible files (unified pool replaces two-pool system)
+const emptyPool = {};
+LEVELS.forEach(l => { emptyPool[l] = []; });
+fs.writeFileSync('data/bible_vocab.json', JSON.stringify(emptyPool));
+fs.writeFileSync('data/bible_exercises.json', JSON.stringify(emptyPool));
+console.log('Written empty bible_vocab.json and bible_exercises.json (deprecated)');
