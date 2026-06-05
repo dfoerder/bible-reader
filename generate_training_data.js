@@ -47,6 +47,21 @@ for (const line of eflLines.slice(1)) {
 }
 console.log(`  ${Object.keys(eflMap).length} unique EFLLex words loaded (excluding Oxford)`);
 
+// ── Load Kaggle CEFR (tertiary reference) ──
+console.log('Loading Kaggle CEFR...');
+const kagLines = fs.readFileSync('kaggle_cefr.csv', 'utf8').split('\n').slice(1);
+const kagMap = {};
+for (const line of kagLines) {
+  if (!line.trim()) continue;
+  const lastComma = line.lastIndexOf(',');
+  const word = line.slice(0, lastComma).toLowerCase().trim();
+  const level = line.slice(lastComma + 1).trim().toUpperCase();
+  if (!['A1','A2','B1','B2','C1','C2'].includes(level)) continue;
+  if (oxMap[word]) continue;
+  if (!kagMap[word]) kagMap[word] = level;
+}
+console.log(`  ${Object.keys(kagMap).length} unique Kaggle words loaded (excluding Oxford)`);
+
 // ── Phase 1: Build unified lemma map from annotations ──
 console.log('\nPhase 1: Scanning annotations...');
 
@@ -204,8 +219,9 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   if (origLemma[0] === origLemma[0].toUpperCase() && origLemma[0] !== origLemma[0].toLowerCase()
       && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
 
-  // Determine level: Oxford > EFLLex > annotation level
+  // Determine level: Oxford > Kaggle > EFLLex > annotation level
   const oxLevels = oxMap[lemma];
+  const kagLevel = kagMap[lemma];
   const eflLevel = eflMap[lemma];
   let level = annoLevel;
   let isOxford = false;
@@ -219,6 +235,8 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
     }
     level = bestOx;
     isOxford = true;
+  } else if (kagLevel) {
+    level = kagLevel;
   } else if (eflLevel) {
     level = eflLevel.level;
   }
@@ -307,6 +325,14 @@ for (const w of bibleWords) {
   }
 }
 console.log(`EFLLex level adjustments: ${eflChanged} changed, ${eflUnchanged} unchanged (${bibleWords.length - eflChanged - eflUnchanged} not in EFLLex)`);
+let kagChanged = 0, kagUnchanged = 0;
+for (const w of bibleWords) {
+  if (kagMap[w.lemma.toLowerCase()]) {
+    if (w.level !== w.annoLevel) kagChanged++;
+    else kagUnchanged++;
+  }
+}
+console.log(`Kaggle level adjustments: ${kagChanged} changed, ${kagUnchanged} unchanged (${bibleWords.length - kagChanged - kagUnchanged} not in Kaggle)`);
 
 // ── Shared: Load Bible texts and extract cloze ──
 
