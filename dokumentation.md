@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.6.9b (29.05.2026)
+- **Aktuelle Version:** 1.9.4b (05.06.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~2100 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -64,8 +64,21 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 
 **Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
 
-### Vokabeltraining
+### Vokabeltraining (Zwei-Pool-System)
 
+Zwei separate Wort-Pools mit eigenem Step-Tracking:
+
+**Oxford 5000** (allgemeines Englisch, 2.654 Wörter, A1–C1):
+- CEFR-Level direkt aus der Oxford 5000 Liste (handkuratiert)
+- Enthält die wichtigsten Wörter für allgemeines Englisch
+
+**Bibel-Vokabular** (bibelspezifisch, 2.327 Wörter, A1–C2):
+- Wörter die nicht in Oxford 5000 vorkommen, aber in der Bibel relevant sind
+- CEFR-Level aus EFLLex (Graded-Reader-Frequenz, ≥3 Dokumente) oder Annotations-Level als Fallback
+- Extensive Filterung: Eigennamen, Flexionsformen, Derivationen, US/UK-Varianten, Komposita von Oxford-Wörtern
+- Jedes Wort hat ein `occ`-Feld (Anzahl Vorkommen in der WEB-Bibel)
+
+**Training-Mechanik** (beide Pools):
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 18 Schwierigkeitsstufen (A1.1 bis C2.3)
 - Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
@@ -90,7 +103,8 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 
 - Bücher, Kapitel, Verse, Wörter pro Buch
 - Schwierigkeitsbewertung pro Buch (gewichteter CEFR-Durchschnitt)
-- CEFR-Verteilung der Vokabeln
+- CEFR-Verteilung der Vokabeln mit Sublevel-Aufschlüsselung (Oxford 5000 und Bibel-Vokabular getrennt)
+- Min–max Vorkommen pro Level in der Bibel (z.B. „1–56.635×")
 - Lernfortschritt: bekannte/unbekannte/nicht gesehene Wörter, gelernte und vergessene Wörter
 - **Wortstatistik pro Buch:** 📊-Icon neben jedem Buchnamen in der Navigation. Zeigt beim Klick: Kapitelanzahl, Wörter gesamt, noch nicht angeschaut, bekannte Wörter (davon neu gelernt), unbekannte Wörter (davon vergessen). Annotationen werden lazy geladen.
 
@@ -119,8 +133,15 @@ bible-reader/
 │       ├── sch1951/                    Schlachter 1951 (66 Dateien)
 │       └── l1912mod/                   Luther 1912 modernisiert (66 Dateien)
 ├── data/
-│   ├── vocab_pool.json                9.600+ Wortpaare für Training
-│   └── context_exercises.json         Lückentext-Übungen
+│   ├── vocab_pool.json                Oxford 5000 Wortpaare (2.654, A1–C1)
+│   ├── context_exercises.json         Oxford 5000 Lückentext-Übungen
+│   ├── bible_vocab.json               Bibel-Vokabular (2.327, A1–C2)
+│   └── bible_exercises.json           Bibel-Vokabular Lückentext-Übungen
+├── generate_training_data.js           Generiert vocab/exercise-Dateien aus Annotationen
+│                                       (Oxford 5000 + EFLLex CEFR-Abgleich, Filterung)
+├── oxford_5000.csv                    Oxford 5000 Referenzliste (extern)
+├── EFLLex.tsv                         EFLLex Referenzliste (extern, CC BY-NC-SA 4.0)
+├── compare_levels.js                  Einmaliges Analyseskript: Oxford vs. unsere Levels
 ├── review_annotations.py              Annotations-Review (Claude API, synchron)
 ├── review_batch_submit.py             Batch-Review einreichen (Anthropic Batch API)
 ├── review_batch_collect.py            Batch-Ergebnisse abholen und validieren
@@ -169,7 +190,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 ### PWA und Offline-Fähigkeit
 
 - **Service Worker** (`sw.js`): Network-first für HTML, Cache-first für Daten
-- **Cache-Name:** `bible-full-v154`
+- **Cache-Name:** `bible-full-v194` (wird bei jedem Deploy hochgezählt)
 - Vollständige Offline-Nutzung nach erstem Laden
 - Automatisches Update bei neuer Version
 
@@ -182,7 +203,8 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
-| `bible-train-step` | Aktuelle Trainingsstufe |
+| `bible-train-step` | Aktuelle Trainingsstufe (Oxford) |
+| `bible-bible-step` | Aktuelle Trainingsstufe (Bibel-Vokabular) |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
 | `unk-en-{book}-{chapter}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
@@ -272,7 +294,8 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **66 Bücher** mit vollständigen Annotationen (reviewt mit Opus 4.7)
 - **755.526 Wörter** im Bibeltext
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
-- **6.376 einzigartige Lemmata**
-- **CEFR-Verteilung:** A1 (624), A2 (907), B1 (2.312), B2 (2.988), C1 (2.254), C2 (1.557)
-- **9.600+ Wortpaare** im Vokabeltraining
+- **4.981 einzigartige Lemmata** (nach Filterung und Zusammenführung)
+- **Oxford 5000 Pool:** 2.654 Wörter (A1: 599, A2: 485, B1: 456, B2: 637, C1: 477)
+- **Bibel-Vokabular Pool:** 2.327 Wörter (A1: 11, A2: 25, B1: 59, B2: 431, C1: 948, C2: 853)
+- **CEFR-Quellen:** Oxford 5000 (handkuratiert), EFLLex (frequenzbasiert, 1.700 Einträge), Annotations-Level (Fallback)
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
