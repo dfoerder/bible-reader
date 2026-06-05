@@ -9,9 +9,21 @@
 
 ## v1.9.5b (05.06.2026)
 
+### Einheitlicher Vokabelpool
+- Zwei-Pool-System (Oxford + Bibel) durch einen einzigen Pool ersetzt
+- 1.488 Bibel-Wörter durch Opus 4.7 unabhängig CEFR-Level zuordnen lassen (nicht im Bibelkontext, sondern allgemeines Englisch)
+- Level-Priorität: Oxford 5000 > Kaggle CEFR > Opus 4.7 > Annotations-Level
+- Inflektionsfilter prüft jetzt auch gegen Kaggle-Wörter (nicht nur Oxford)
+- Einheitlicher Pool: 5.086 Wörter (Oxford: 2.654, Kaggle: 945, Opus: 1.488)
+
+### UI-Bereinigung
+- Bibel-Vokabular-Sektion aus dem Training entfernt
+- Separater Step-Tracker (`bibleStep`) und `exSourceRef` entfernt
+- Statistikseite zeigt nur noch einen Pool
+- Service Worker cacht keine bible_vocab/bible_exercises mehr
+
 ### EFLLex entfernt
 - EFLLex als CEFR-Referenz entfernt (zu verrauscht, z.B. „moor" als A1 aus einzelnem Graded Reader)
-- Level-Priorität jetzt: Oxford 5000 > Kaggle CEFR > Annotations-Level
 
 ## v1.9.4b (04.06.2026)
 

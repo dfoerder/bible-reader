@@ -64,21 +64,19 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 
 **Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
 
-### Vokabeltraining (Zwei-Pool-System)
+### Vokabeltraining
 
-Zwei separate Wort-Pools mit eigenem Step-Tracking:
+Einheitlicher Wortpool mit 5.086 Wörtern (A1–C2):
 
-**Oxford 5000** (allgemeines Englisch, 2.654 Wörter, A1–C1):
-- CEFR-Level direkt aus der Oxford 5000 Liste (handkuratiert)
-- Enthält die wichtigsten Wörter für allgemeines Englisch
+**CEFR-Level-Quellen** (Priorität):
+1. Oxford 5000 (2.654 Wörter, handkuratiert)
+2. Kaggle CEFR (945 Wörter, nicht in Oxford)
+3. Opus 4.7 (1.488 Wörter, unabhängig von Bibel-Kontext zugeordnet)
 
-**Bibel-Vokabular** (bibelspezifisch, 2.327 Wörter, A1–C2):
-- Wörter die nicht in Oxford 5000 vorkommen, aber in der Bibel relevant sind
-- CEFR-Level aus Kaggle CEFR (8.653 Wörter) oder Annotations-Level als Fallback
-- Extensive Filterung: Eigennamen, Flexionsformen, Derivationen, US/UK-Varianten, Komposita von Oxford-Wörtern
+**Filterung:** Eigennamen, Flexionsformen, Derivationen, US/UK-Varianten, Komposita von Oxford-/Kaggle-Wörtern
 - Jedes Wort hat ein `occ`-Feld (Anzahl Vorkommen in der WEB-Bibel)
 
-**Training-Mechanik** (beide Pools):
+**Training-Mechanik:**
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 18 Schwierigkeitsstufen (A1.1 bis C2.3)
 - Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
@@ -133,14 +131,13 @@ bible-reader/
 │       ├── sch1951/                    Schlachter 1951 (66 Dateien)
 │       └── l1912mod/                   Luther 1912 modernisiert (66 Dateien)
 ├── data/
-│   ├── vocab_pool.json                Oxford 5000 Wortpaare (2.654, A1–C1)
-│   ├── context_exercises.json         Oxford 5000 Lückentext-Übungen
-│   ├── bible_vocab.json               Bibel-Vokabular (2.327, A1–C2)
-│   └── bible_exercises.json           Bibel-Vokabular Lückentext-Übungen
+│   ├── vocab_pool.json                Einheitlicher Wortpool (5.086, A1–C2)
+│   └── context_exercises.json         Lückentext-Übungen (5.086)
 ├── generate_training_data.js           Generiert vocab/exercise-Dateien aus Annotationen
-│                                       (Oxford 5000 + Kaggle CEFR-Abgleich, Filterung)
+│                                       (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
 ├── oxford_5000.csv                    Oxford 5000 Referenzliste (extern)
 ├── kaggle_cefr.csv                    Kaggle CEFR Referenzliste (8.653 Wörter, extern)
+├── opus_cefr_levels.json              Opus 4.7 CEFR-Zuordnung (1.488 Wörter)
 ├── compare_levels.js                  Einmaliges Analyseskript: Oxford vs. unsere Levels
 ├── review_annotations.py              Annotations-Review (Claude API, synchron)
 ├── review_batch_submit.py             Batch-Review einreichen (Anthropic Batch API)
@@ -294,8 +291,7 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **66 Bücher** mit vollständigen Annotationen (reviewt mit Opus 4.7)
 - **755.526 Wörter** im Bibeltext
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
-- **4.981 einzigartige Lemmata** (nach Filterung und Zusammenführung)
-- **Oxford 5000 Pool:** 2.654 Wörter (A1: 599, A2: 485, B1: 456, B2: 637, C1: 477)
-- **Bibel-Vokabular Pool:** 2.327 Wörter (A1: 10, A2: 23, B1: 163, B2: 531, C1: 753, C2: 847)
-- **CEFR-Quellen:** Oxford 5000 (handkuratiert), Kaggle CEFR (4.338 zusätzliche Wörter), Annotations-Level (Fallback)
+- **5.087 einzigartige Lemmata** (nach Filterung und Zusammenführung)
+- **Einheitlicher Vokabelpool:** 5.086 Wörter (A1: 627, A2: 537, B1: 775, B2: 1.475, C1: 1.162, C2: 510)
+- **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488)
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
