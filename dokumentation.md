@@ -76,9 +76,14 @@ Einheitlicher Wortpool mit 5.086 Wörtern (A1–C2):
 **Filterung:** Eigennamen, Flexionsformen, Derivationen, US/UK-Varianten, Komposita von Oxford-/Kaggle-Wörtern
 - Jedes Wort hat ein `occ`-Feld (Anzahl Vorkommen in der WEB-Bibel)
 
+**Lernfokus** (umschaltbar im Training):
+- **CEFR-Level (A1→C2):** Wörter nach Schwierigkeitsstufe, von einfach nach schwer
+- **Häufigkeit in der Bibel:** Wörter nach Vorkommenshäufigkeit, häufigste zuerst
+- Beide Modi nutzen 18 Stufen mit separatem Step-Tracking
+
 **Training-Mechanik:**
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
-- 18 Schwierigkeitsstufen (A1.1 bis C2.3)
+- 18 Schwierigkeitsstufen
 - Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
 - Priorisierte Wortauswahl (15 Wörter pro Übung):
   1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level
