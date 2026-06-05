@@ -7,13 +7,22 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
-## v1.9.4b (05.06.2026)
+## v1.9.5b (05.06.2026)
 
-### EFLLex als zweite CEFR-Referenz
-- EFLLex-Wortliste (15.280 Lemmata aus Graded Readers) als Fallback für Bibel-Wörter die nicht in Oxford 5000 sind
-- Mindest-Schwellenwert: nur Wörter mit ≥3 Dokumenten in EFLLex werden übernommen (gegen Rauschen)
-- 1700 nutzbare EFLLex-Einträge, davon 158 Level-Anpassungen bei Bibel-Wörtern
-- Level-Priorität: Oxford 5000 > EFLLex > Annotations-Level
+### EFLLex entfernt
+- EFLLex als CEFR-Referenz entfernt (zu verrauscht, z.B. „moor" als A1 aus einzelnem Graded Reader)
+- Level-Priorität jetzt: Oxford 5000 > Kaggle CEFR > Annotations-Level
+
+## v1.9.4b (04.06.2026)
+
+### Kaggle CEFR als zweite Referenz
+- Kaggle-CEFR-Wortliste (8.653 Wörter, davon 4.338 nicht in Oxford 5000) als Fallback für Bibel-Wörter
+- 421 Level-Anpassungen bei Bibel-Wörtern durch Kaggle
+
+### EFLLex als dritte CEFR-Referenz (wieder entfernt in v1.9.5b)
+- EFLLex-Wortliste (15.280 Lemmata aus Graded Readers) als Fallback
+- Mindest-Schwellenwert: nur Wörter mit ≥3 Dokumenten
+- Level-Priorität: Oxford 5000 > Kaggle > EFLLex > Annotations-Level
 
 ### Erweiterte Filterung
 - US/UK-Schreibvarianten: -or→-our (auch interior), -ize→-ise
@@ -29,7 +38,7 @@
 
 ### Aktuelle Zahlen
 - Oxford 5000: 2.654 Wörter (A1–C1)
-- Bibel-Vokabular: 2.327 Wörter (A1–C2, davon 158 EFLLex-korrigiert)
+- Bibel-Vokabular: 2.327 Wörter (A1–C2, davon 421 Kaggle-korrigiert)
 
 ## v1.9.3b (04.06.2026)
 
