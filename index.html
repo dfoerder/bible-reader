@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.5b';
-const APP_DATE = '05.06.2026';
+const APP_VERSION = '1.9.6b';
+const APP_DATE = '07.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -2259,7 +2259,7 @@ function App({data}){
                 {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
                   <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',levelSuggestion)}</p>
                   <div style={{display:'flex',gap:8,justifyContent:'center'}}>
-                    <button onClick={()=>{setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(0);setVocabReviewIdx(0)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
+                    <button onClick={()=>{const reviewed=new Set(quizWords.slice(0,vocabReviewIdx).map(w=>w.lemma||w.word));const nl=hasAnno?getChapterAnnotations(annotations,bookName,chapNum,levelSuggestion,tappedWords):getChapterWordsOld(verses,vocab,levelSuggestion);const ni=nl.filter(w=>reviewed.has(w.lemma||w.word)).length;setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(ni);setVocabReviewIdx(ni)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
                     <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',userLevel)}</button>
                   </div>
                 </div>}
