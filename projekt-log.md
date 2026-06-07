@@ -7,6 +7,14 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.6b (07.06.2026)
+
+### Bugfix: Doppelte Wörter nach Level-Anhebung
+- Bei „Wörter anschauen" erschienen nach dem Anheben des Levels bereits angeschaute Wörter erneut
+- Ursache: Review-Index wurde auf 0 zurückgesetzt, während die neu berechnete (kleinere) `quizWords`-Liste an den Anfang sprang
+- Fix: Fortsetzung an der Anzahl der bereits angeschauten Wörter, die im neuen Level verbleiben — Review läuft mit dem ersten noch nicht gesehenen Wort weiter
+- `reviewCheckBase` ebenfalls auf den neuen Index gesetzt (korrekter 20-Wörter-Schwellenwert für den nächsten Level-Vorschlag)
+
 ## v1.9.5b (05.06.2026)
 
 ### Einheitlicher Vokabelpool
