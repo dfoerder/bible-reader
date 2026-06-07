@@ -7,6 +7,13 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.7b (07.06.2026)
+
+### Bugfix: Luther 1912 mod nicht ausklappbar
+- Bei gewählter Übersetzung „Luther 1912 mod" ließ sich der deutsche Vers nicht über Klick auf die Versnummer ausklappen (bei Schlachter funktionierte es)
+- Ursache: Die 66 `bibles/deu/l1912mod/`-Dateien waren nie committet/deployt → Fetch lieferte 404, `deBook` blieb null, Versnummer nicht klickbar
+- Fix: l1912mod-Daten committet und deployt (App-Logik war korrekt)
+
 ## v1.9.6b (07.06.2026)
 
 ### Bugfix: Doppelte Wörter nach Level-Anhebung
