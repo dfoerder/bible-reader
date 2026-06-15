@@ -1,0 +1,24 @@
+#### regeln beim wörtertraining bei den kapiteln
+- schwierige wörter anschauen
+	- nur wörter mit familiarity=0 und familiarity=-1 werden angezeigt
+	- undefiniert --> familiarity=-1
+	- bekannt --> familiarity=1
+	- unbekannt --> familiarity=0
+	- lasttrained: timestamp wird gesetzt
+- schwierige wörter trainieren
+	- nur die wörter mit familiarity=0 oder familiarity=-1 werden trainiert
+	- beantwortung der fragen:
+		- richtige antwort: 
+			- wenn familiarity=0 --> familiarity=1
+			- wenn familiarity>0 und lasttrained timestamp mehr als 2 tage zurück und familiarity <=2 -->  familiarity=familiarity+1
+		- falsche antwort: familiarity=0
+#### regeln beim allgemeinen wörtertraining
+- welche parameter haben wir?
+	- level
+	- familiarity
+	- lasttrained
+	- le
+- priorisierung der zu trainierenden wörter
+	- familiarity=0 and lasttrained vor mehr als 24 stunden
+	- level auf meinem gewählten level
+	- level über meinem gewählten level

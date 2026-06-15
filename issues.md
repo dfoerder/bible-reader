@@ -1,0 +1,3 @@
+- schwierige wörter:
+	- nachdem man abgelehnt hat auf ein neues level zu gehen, sollte dies in diesem kapitel nicht mehr gefragt werden
+- 

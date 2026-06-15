@@ -1,0 +1,28 @@
+.env
+*.bak
+*.swp
+.DS_Store
+node_modules/
+ios/
+www/
+
+# Logs
+*.log
+
+# Transienter Batch-/Lauf-Status
+batch_state.json
+modernize_batch_state.json
+
+# Backups abgeleiteter Daten
+data/*_backup.json
+
+# Claude-Harness
+.claude/
+
+# Icon-Arbeitsdateien (GIMP-Quelle, Zwischenstände)
+*.xcf
+*.alt
+
+# Große externe Datenquellen (lokal vorhalten, nicht versionieren)
+EFLLex.tsv
+oxford_5000.csv
