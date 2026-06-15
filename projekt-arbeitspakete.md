@@ -1,0 +1,5 @@
+- detailverbesserungen, debugging
+- besseres icon für ios entwickeln
+- apple entwicklerkonto eröffnen
+- app so verpacken, dass sie im app store angeboten werden kann
+- app publizieren
