@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.21b';
+const APP_VERSION = '1.9.22b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -537,6 +537,22 @@ function formWrong(target){
   // letzter Fallback: beliebige Form
   const any=Object.values(CLOZE_BY_PF).flat().filter(d=>d!==target.de&&!r.includes(d));
   return [...r,...shuffleArr(any)].slice(0,2);
+}
+// Form-Kategorie (sg/pl/inf/pres/past/part/base) eines Kapitel-Vorkommens aus engl. Wortform + Lemma ableiten
+function clozeFormOf(lemma,form,pos){
+  if(!pos||!form||!lemma)return 'base';
+  const f=form.toLowerCase().replace(/[^a-z]/g,''),l=lemma.toLowerCase();
+  if(pos==='noun'){
+    if(f!==l&&(f===l+'s'||f===l+'es'||(l.endsWith('y')&&f===l.slice(0,-1)+'ies')||(f.endsWith('s')&&!l.endsWith('s')&&f.length>l.length)))return 'pl';
+    return 'sg';
+  }
+  if(pos==='verb'){
+    if(f.endsWith('ing'))return 'part';
+    if(f===l)return 'inf';
+    if(f===l+'s'||f===l+'es')return 'pres';
+    return 'past';
+  }
+  return 'base';
 }
 function vocabForStep(step,focus){
   if(focus==='freq'){
@@ -1498,22 +1514,10 @@ function App({data}){
       (document.body.classList.contains('mode-phone')?document.querySelector('.phone-screen'):window).scrollTo(0,0);
     }
   },[bookmarks,bookIdx,chapIdx]);
-  const genOpts=useCallback((words,allDe)=>{
-    const lvlOrder=['A1','A2','B1','B2','C1','C2'];
-    const poolByLvl={};lvlOrder.forEach(l=>{poolByLvl[l]=(VOCAB_POOL[l]||[]).map(w=>w.de)});
-    return words.map(w=>{
-      const wl=w.level||userLevel;
-      const li=lvlOrder.indexOf(wl);
-      let pool=[];
-      for(let i=li;i<lvlOrder.length&&pool.length<40;i++){
-        pool=[...pool,...(poolByLvl[lvlOrder[i]]||[]).filter(d=>d!==w.de&&!pool.includes(d))];
-      }
-      if(pool.length<10)pool=[...pool,...allDe.filter(d=>d!==w.de&&!pool.includes(d))];
-      // Distraktoren bevorzugt mit gleichem Worttyp (gemeinsamer Helfer)
-      const wrong=posWrongDe(w,pool);
-      return shuffleArr([w.de,...wrong]);
-    });
-  },[userLevel]);
+  const genOpts=useCallback((words)=>{
+    // Distraktoren nach Wortart + Form (Numerus/Tempus) — wie die allgemeine Übung
+    return words.map(w=>shuffleArr([w.de,...formWrong(w)]));
+  },[]);
 
   const chapTrainRetry=useCallback((wrongItems)=>{
     const retryWords=wrongItems.map(w=>w.ex);
@@ -1576,7 +1580,8 @@ function App({data}){
           if(sw.length>MAX){const end=Math.min(origLen,Math.max(MAX,lep+2));sw=sw.slice(0,end);sfx=' …';}
         }
         const rep=[...sw];for(let p=lsp;p<=lep&&p<rep.length;p++)rep[p]=p===lsp?'___':null;
-        exercises.push({text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma});
+        const ipos=EN_POS[a.lemma]||null;
+        exercises.push({text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma,pos:ipos,form:clozeFormOf(a.lemma,a.form,ipos)});
         usedLemmas.add(a.lemma);
       }
     }
