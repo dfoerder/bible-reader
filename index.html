@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.27b';
+const APP_VERSION = '1.9.28b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -181,6 +181,7 @@ const I18N={
   veryFast:{de:'Sehr schnell',en:'Very fast'},
   fontSize:{de:'Schriftgröße',en:'Font size'},
   fontSizeTr:{de:'Schriftgröße Übersetzungen',en:'Translation font size'},
+  fontSizeEx:{de:'Schriftgröße Übungen',en:'Exercise font size'},
   fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
   fontPreviewTr:{de:'Übersetzung',en:'translation'},
   layout:{de:'Layout',en:'Layout'},
@@ -569,11 +570,13 @@ function maxStepFor(){for(let s=SUBSTEPS.length-1;s>=0;s--){if((VOCAB_POOL[stepT
 
 // Knopf "Weitere Beispiele": zeigt nach falscher Antwort weitere Beispielverse zum Lemma.
 // Index liefert nur Referenzen; der Verstext wird on-the-fly aus den Bibeltext-Dateien geholt.
+// Übungs-Schriftgröße: eigene Einstellung, Default = Bibeltext-Größe
+function exFontSize(){return parseInt(LS.get('bible-font-size-ex'))||parseInt(LS.get('bible-font-size'))||18;}
 function MoreExamples({lemma,word}){
   const [open,setOpen]=useState(false);
   const [list,setList]=useState(null); // null=lädt, []=keine, sonst [{ref,text,pos}]
   const [idx,setIdx]=useState(0);
-  const readFs=parseInt(LS.get('bible-font-size'))||18; // gleiche Größe wie der Bibeltext beim Lesen
+  const readFs=exFontSize();
   const reveal=async()=>{
     setOpen(true);setIdx(0);
     if(list!==null)return;
@@ -908,7 +911,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
       </div>
-      <div style={{fontFamily:'var(--t-serif)',fontSize:18,lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
+      <div style={{fontFamily:'var(--t-serif)',fontSize:exFontSize(),lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
         {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
       </div>
       <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
@@ -1388,6 +1391,7 @@ function App({data}){
   const saveBookmark=useCallback((bi,ci,verse)=>{setBookmarks(prev=>{const next={...prev,[bi]:{ch:ci,v:verse||1}};LS.set('bible-bookmarks',next);return next})},[]);
   const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||18);
   const [fontSizeTr,setFontSizeTr]=useState(parseInt(LS.get('bible-font-size-tr'))||14);
+  const [fontSizeEx,setFontSizeEx]=useState(exFontSize());
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
@@ -1848,6 +1852,7 @@ function App({data}){
 
   const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
   const changeFontSizeTr=useCallback(v=>{setFontSizeTr(v);LS.set('bible-font-size-tr',v)},[]);
+  const changeFontSizeEx=useCallback(v=>{setFontSizeEx(v);LS.set('bible-font-size-ex',v)},[]);
 
   const langFooter='World English Bible';
   const otBooks=books.slice(0,ntStartIndex);
@@ -2020,6 +2025,15 @@ function App({data}){
             <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
           </div>
           <p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:1.6,color:'var(--t-accent)',marginTop:8}}>{t('fontPreviewTr')}</p>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('fontSizeEx')}</span>
+          <div style={S.fontSizeRow}>
+            <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
+            <span style={S.fontSizePreview}>{fontSizeEx}px</span>
+            <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+          </div>
+          <p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('layout')}</span>
@@ -2228,7 +2242,7 @@ function App({data}){
           <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(chapTrain.current/chapTrain.words.length)*100}%`}}/>
         </div>
         {isCloze?(()=>{const parts=ex.text.split('___');return(<div>
-          <div style={{fontFamily:'var(--t-serif)',fontSize:18,lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
+          <div style={{fontFamily:'var(--t-serif)',fontSize:exFontSize(),lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
             {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
           </div>
           <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
