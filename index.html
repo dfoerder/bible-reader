@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.24b';
+const APP_VERSION = '1.9.25b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -206,7 +206,7 @@ const I18N={
   clozeContextHint:{de:'Wie viel Text wird bei den Kapitel-Übungen um das Wort gezeigt.',en:'How much text is shown around the word in chapter exercises.'},
   clozeCtxSentence:{de:'Satz',en:'Sentence'},
   clozeCtxVerse:{de:'Ganzer Vers',en:'Whole verse'},
-  moreExamples:{de:'Weitere Beispiele',en:'More examples'},
+  moreExamples:{de:'Weitere Beispiele für {w}',en:'More examples for {w}'},
   noMoreExamples:{de:'Keine weiteren Beispiele vorhanden.',en:'No more examples available.'},
 
   // Stats
@@ -567,7 +567,7 @@ function maxStepFor(){for(let s=SUBSTEPS.length-1;s>=0;s--){if((VOCAB_POOL[stepT
 
 // Knopf "Weitere Beispiele": zeigt nach falscher Antwort weitere Beispielverse zum Lemma.
 // Index liefert nur Referenzen; der Verstext wird on-the-fly aus den Bibeltext-Dateien geholt.
-function MoreExamples({lemma}){
+function MoreExamples({lemma,word}){
   const [open,setOpen]=useState(false);
   const [list,setList]=useState(null); // null=lädt, []=keine, sonst [{ref,text,pos}]
   const reveal=async()=>{
@@ -580,7 +580,7 @@ function MoreExamples({lemma}){
     }))).filter(Boolean);
     setList(out);
   };
-  if(!open)return(<button onClick={reveal} style={{...S.navBtn,marginTop:4}}>{t('moreExamples')}</button>);
+  if(!open)return(<button onClick={reveal} style={{...S.navBtn,marginTop:4}}>{t('moreExamples').replace('{w}',word||lemma)}</button>);
   if(list===null)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>…</p>);
   if(list.length===0)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>{t('noMoreExamples')}</p>);
   return(<div style={{marginTop:10,textAlign:'left',maxWidth:400,marginLeft:'auto',marginRight:'auto'}}>
@@ -916,7 +916,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>
         <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
-        <MoreExamples lemma={ex.lemma}/>
+        <MoreExamples lemma={ex.lemma} word={ex.answer}/>
         <div style={{marginTop:12}}><button onClick={advance} style={S.startBtn}>{t('next')}</button></div>
       </div>}
       <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
@@ -2242,7 +2242,7 @@ function App({data}){
         {chapTrain.selected!==null&&chapTrain.selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
           {isCloze&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>}
           <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
-          {isCloze&&<MoreExamples lemma={ex.lemma}/>}
+          {isCloze&&<MoreExamples lemma={ex.lemma} word={ex.answer}/>}
           <div style={{marginTop:12}}><button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button></div>
         </div>}
         <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('cancel')}</button></div>
