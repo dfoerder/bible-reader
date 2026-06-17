@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.17b';
+const APP_VERSION = '1.9.18b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1539,8 +1539,11 @@ function App({data}){
     setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal});
   },[quizWords,genOpts,reviewDone,unknownWords]);
 
-  const startChapCloze=useCallback(()=>{
+  const startChapCloze=useCallback((ctxOverride)=>{
     if(!hasAnno||quizWords.length===0)return;
+    // ctxOverride (String) erlaubt sofortiges Neu-Generieren mit anderem Kontext, ohne stale State
+    const ctx=(ctxOverride==='sentence'||ctxOverride==='verse')?ctxOverride:clozeCtx;
+    setClozeSettingsOpen(false);
     const chap=annotations[bookName]?.[String(chapNum)];
     if(!chap)return;
     const wordsToUse=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
@@ -1555,7 +1558,7 @@ function App({data}){
         const sp=a.pos,ep=a.pos_end!=null?a.pos_end:a.pos;
         if(sp>=wds.length)continue;
         let tSent,lsp,lep;
-        if(clozeCtx==='verse'){
+        if(ctx==='verse'){
           // Ganzer Vers als Kontext
           tSent=v.text;lsp=sp;lep=ep;
         }else{
@@ -1567,7 +1570,7 @@ function App({data}){
         }
         let sw=tSent.split(/\s+/);lep=Math.min(lep,sw.length-1);
         let sfx='';const origLen=sw.length;
-        if(clozeCtx!=='verse'){
+        if(ctx!=='verse'){
           for(let i=0;i<sw.length&&i<=lsp;i++){if(/^["“„«]/.test(sw[i])){sw=sw.slice(i);lsp-=i;lep-=i;break;}}
           const MAX=15;
           if(sw.length>MAX){const end=Math.min(origLen,Math.max(MAX,lep+2));sw=sw.slice(0,end);sfx=' …';}
@@ -2160,6 +2163,14 @@ function App({data}){
           {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
         </header>
+        {isCloze&&<div style={{textAlign:'right',marginBottom:8}}>
+          <button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0,lineHeight:1}} title={t('clozeContext')}>⚙</button>
+          {clozeSettingsOpen&&<div style={{marginTop:6,padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)',textAlign:'left'}}>
+            <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
+            <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapCloze(o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
+          </div>}
+        </div>}
         <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
           <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(chapTrain.current/chapTrain.words.length)*100}%`}}/>
         </div>
