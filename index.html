@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.13b';
+const APP_VERSION = '1.9.14b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -202,6 +202,10 @@ const I18N={
   deSch1951:{de:'Schlachter 1951',en:'Schlachter 1951'},
   deL1912mod:{de:'Luther 1912 (mod.)',en:'Luther 1912 (mod.)'},
   deWebDeu:{de:'Wörtlich (WEB→DE)',en:'Literal (WEB→DE)'},
+  clozeContext:{de:'Kontext im Lückentext',en:'Cloze context'},
+  clozeContextHint:{de:'Wie viel Text wird bei den Kapitel-Übungen um das Wort gezeigt.',en:'How much text is shown around the word in chapter exercises.'},
+  clozeCtxSentence:{de:'Satz',en:'Sentence'},
+  clozeCtxVerse:{de:'Ganzer Vers',en:'Whole verse'},
 
   // Stats
   statistics:{de:'Statistik',en:'Statistics'},
@@ -1326,6 +1330,8 @@ function App({data}){
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
   const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||'sch1951');
   const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
+  const [clozeCtx,setClozeCtxState]=useState(LS.get('bible-cloze-ctx')||'sentence');
+  const changeClozeCtx=useCallback(v=>{setClozeCtxState(v);LS.set('bible-cloze-ctx',v)},[]);
   useEffect(()=>{const b=document.body;b.classList.toggle('theme-icf',layout==='icf');b.classList.toggle('theme-icf-light',layout==='icf-light');const tc=layout==='icf'?'#0f0f0f':layout==='icf-light'?'#f5f5f5':'#5a4a32';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',tc)},[layout]);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
   const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
@@ -1547,14 +1553,24 @@ function App({data}){
         if(usedLemmas.has(a.lemma)||!targetLemmas.has(a.lemma)||a.phrase!=null)continue;
         const sp=a.pos,ep=a.pos_end!=null?a.pos_end:a.pos;
         if(sp>=wds.length)continue;
-        const sents=v.text.split(/(?<=[.!?…;:])\s+/);
-        let wOff=0,tSent=null,lsp=-1,lep=-1;
-        for(const s of sents){const sl=s.split(/\s+/).length;if(sp>=wOff&&sp<wOff+sl){tSent=s;lsp=sp-wOff;lep=ep-wOff;break;}wOff+=sl;}
-        if(!tSent)continue;
+        let tSent,lsp,lep;
+        if(clozeCtx==='verse'){
+          // Ganzer Vers als Kontext
+          tSent=v.text;lsp=sp;lep=ep;
+        }else{
+          // Nur der Satz mit dem Zielwort
+          const sents=v.text.split(/(?<=[.!?…;:])\s+/);
+          let wOff=0;tSent=null;lsp=-1;lep=-1;
+          for(const s of sents){const sl=s.split(/\s+/).length;if(sp>=wOff&&sp<wOff+sl){tSent=s;lsp=sp-wOff;lep=ep-wOff;break;}wOff+=sl;}
+          if(!tSent)continue;
+        }
         let sw=tSent.split(/\s+/);lep=Math.min(lep,sw.length-1);
-        for(let i=0;i<sw.length&&i<=lsp;i++){if(/^["“„«]/.test(sw[i])){sw=sw.slice(i);lsp-=i;lep-=i;break;}}
-        const MAX=15;let sfx='';const origLen=sw.length;
-        if(sw.length>MAX){const end=Math.min(origLen,Math.max(MAX,lep+2));sw=sw.slice(0,end);sfx=' …';}
+        let sfx='';const origLen=sw.length;
+        if(clozeCtx!=='verse'){
+          for(let i=0;i<sw.length&&i<=lsp;i++){if(/^["“„«]/.test(sw[i])){sw=sw.slice(i);lsp-=i;lep-=i;break;}}
+          const MAX=15;
+          if(sw.length>MAX){const end=Math.min(origLen,Math.max(MAX,lep+2));sw=sw.slice(0,end);sfx=' …';}
+        }
         const rep=[...sw];for(let p=lsp;p<=lep&&p<rep.length;p++)rep[p]=p===lsp?'___':null;
         exercises.push({text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma});
         usedLemmas.add(a.lemma);
@@ -1567,7 +1583,7 @@ function App({data}){
     const words=units[0];const opts=genOpts(words,allDe);
     setChapTrain({type:'cloze',words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:allWords.length});
     setPhase('quiz');
-  },[quizWords,genOpts,reviewDone,unknownWords,annotations,bookName,chapNum,verses,hasAnno]);
+  },[quizWords,genOpts,reviewDone,unknownWords,annotations,bookName,chapNum,verses,hasAnno,clozeCtx]);
 
   const startNextUnit=useCallback(()=>{
     setChapTrain(s=>{
@@ -1951,6 +1967,11 @@ function App({data}){
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
+        </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('clozeContext')}</span>
+          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <p style={S.settingsHint}>{t('clozeContextHint')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('progress')}</span>
