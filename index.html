@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.12b';
+const APP_VERSION = '1.9.13b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -519,6 +519,21 @@ function posWrongDe(target,dePool){
   const ranked=same.length>=2?same:[...same,...cand.filter(d=>DE_POS[d]!==tPos)];
   return shuffleArr(ranked).slice(0,2);
 }
+// Lückentext-Distraktoren: deForm-Pool gruppiert nach Wortart|Form (Numerus/Tempus)
+let CLOZE_BY_PF={};
+function formWrong(target){
+  const key=(target.pos||'')+'|'+(target.form||'base');
+  const same=(CLOZE_BY_PF[key]||[]).filter(d=>d!==target.de);
+  if(same.length>=2)return shuffleArr(same).slice(0,2);
+  // Fallback: gleiche Wortart, beliebige Form
+  const pfx=(target.pos||'')+'|';
+  const samePos=Object.keys(CLOZE_BY_PF).filter(k=>k.startsWith(pfx)).flatMap(k=>CLOZE_BY_PF[k]).filter(d=>d!==target.de&&!same.includes(d));
+  let r=[...same,...shuffleArr(samePos)];
+  if(r.length>=2)return r.slice(0,2);
+  // letzter Fallback: beliebige Form
+  const any=Object.values(CLOZE_BY_PF).flat().filter(d=>d!==target.de&&!r.includes(d));
+  return [...r,...shuffleArr(any)].slice(0,2);
+}
 function vocabForStep(step,focus){
   if(focus==='freq'){
     const words=FREQ_POOL.filter(w=>w.freqStep<=step);
@@ -590,7 +605,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=posWrongDe(ex,allDe);
+      const wrong=formWrong(ex);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
@@ -651,7 +666,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=posWrongDe(ex,allDe);
+      const wrong=formWrong(ex);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
@@ -669,7 +684,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     clozeUnitsRef.current={...u,unitIdx:nextIdx,globalScore:u.globalScore+unitScore};
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=posWrongDe(ex,u.allDe);
+      const wrong=formWrong(ex);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
@@ -681,7 +696,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=shuffle([...u.units[u.unitIdx]]);
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=posWrongDe(ex,u.allDe);
+      const wrong=formWrong(ex);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
@@ -734,7 +749,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     } else {
       const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
       setShuffledOpts(retryEx.map(ex=>{
-        const wr=posWrongDe(ex,allDe);
+        const wr=formWrong(ex);
         return shuffle([ex.de,...wr]);
       }));
     }
@@ -1064,8 +1079,14 @@ async function loadData(){
     if(wr.ok){
       const words=await wr.json();
       VOCAB_POOL=words;buildFreqPool();
-      CLOZE_EXERCISES={};
-      for(const lvl in words)CLOZE_EXERCISES[lvl]=words[lvl].map(w=>({text:w.text,answer:w.answer,de:w.de,pos:w.pos,ref:w.ref,book:w.book,sub:w.sub,level:lvl,lemma:w.en}));
+      CLOZE_EXERCISES={};CLOZE_BY_PF={};
+      for(const lvl in words)CLOZE_EXERCISES[lvl]=words[lvl].map(w=>{
+        const deForm=w.deForm||w.de;const form=w.form||'base';
+        const key=(w.pos||'')+'|'+form;(CLOZE_BY_PF[key]||(CLOZE_BY_PF[key]=[])).push(deForm);
+        // Lückentext zeigt/prüft die flektierte Form (deForm)
+        return {text:w.text,answer:w.answer,de:deForm,pos:w.pos,form,ref:w.ref,book:w.book,sub:w.sub,level:lvl,lemma:w.en};
+      });
+      for(const k in CLOZE_BY_PF)CLOZE_BY_PF[k]=[...new Set(CLOZE_BY_PF[k])];
     }
   }catch(e){}
   return{en};
