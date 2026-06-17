@@ -36,3 +36,7 @@ oxford_5000.csv
 # (Skripte in alt/ bleiben getrackt)
 alt/*.json
 alt/*.xml
+
+# Einmalige History-Bereinigung (Maintenance-Artefakte, nicht versionieren)
+rewrite_history.sh
+purge_paths.txt
