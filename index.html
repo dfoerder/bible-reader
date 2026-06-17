@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.14b';
+const APP_VERSION = '1.9.15b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1930,6 +1930,11 @@ function App({data}){
               <span style={S.toggleLabel}>{t('showCefrLevel')}</span>
             </label>
           </div>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('clozeContext')}</span>
+            <div style={{...S.levelBtns,marginTop:6}}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
+          </div>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('readingSpeed')}</span>
@@ -1967,11 +1972,6 @@ function App({data}){
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
-        </div>
-        <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('clozeContext')}</span>
-          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
-          <p style={S.settingsHint}>{t('clozeContextHint')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('progress')}</span>
