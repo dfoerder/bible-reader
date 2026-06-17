@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.26b';
+const APP_VERSION = '1.9.27b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -573,6 +573,7 @@ function MoreExamples({lemma,word}){
   const [open,setOpen]=useState(false);
   const [list,setList]=useState(null); // null=lädt, []=keine, sonst [{ref,text,pos}]
   const [idx,setIdx]=useState(0);
+  const readFs=parseInt(LS.get('bible-font-size'))||18; // gleiche Größe wie der Bibeltext beim Lesen
   const reveal=async()=>{
     setOpen(true);setIdx(0);
     if(list!==null)return;
@@ -590,7 +591,7 @@ function MoreExamples({lemma,word}){
   if(list.length===0)return(<div style={{marginTop:8}}><p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('noMoreExamples')}</p>{back}</div>);
   const e=list[Math.min(idx,list.length-1)];const ws=e.text.split(/\s+/);
   return(<div style={{marginTop:10,maxWidth:400,marginLeft:'auto',marginRight:'auto'}}>
-    <p style={{fontSize:15,fontFamily:'var(--t-serif)',lineHeight:1.7,color:'var(--t-text)',margin:'0 0 6px',textAlign:'left'}}>
+    <p style={{fontSize:readFs,fontFamily:'var(--t-serif)',lineHeight:1.7,color:'var(--t-text)',margin:'0 0 6px',textAlign:'left'}}>
       {ws.map((w,j)=>(<span key={j} style={j===e.pos?{fontWeight:700,color:'var(--t-accent)'}:undefined}>{w} </span>))}
     </p>
     <p style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 12px',textAlign:'left'}}>{e.ref} — {idx+1}/{list.length}</p>
