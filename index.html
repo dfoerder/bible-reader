@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.8b';
+const APP_VERSION = '1.9.9b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1050,12 +1050,14 @@ async function loadData(){
     en.available=true;
   }catch(e){en.available=false;}
   try{
-    const vr=await fetch('data/vocab_pool.json'+CB);
-    if(vr.ok){VOCAB_POOL=await vr.json();buildFreqPool();}
-  }catch(e){}
-  try{
-    const cr=await fetch('data/context_exercises.json'+CB);
-    if(cr.ok) CLOZE_EXERCISES=await cr.json();
+    // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten
+    const wr=await fetch('data/words.json'+CB);
+    if(wr.ok){
+      const words=await wr.json();
+      VOCAB_POOL=words;buildFreqPool();
+      CLOZE_EXERCISES={};
+      for(const lvl in words)CLOZE_EXERCISES[lvl]=words[lvl].map(w=>({text:w.text,answer:w.answer,de:w.de,pos:w.pos,ref:w.ref,book:w.book,sub:w.sub,level:lvl,lemma:w.en}));
+    }
   }catch(e){}
   return{en};
 }

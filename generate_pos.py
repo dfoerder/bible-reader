@@ -2,16 +2,15 @@
 """Generate part-of-speech (POS) tags for every cloze lemma via the Opus Batch API.
 
 Approach A (bundled): ~150 words per request, one batch job, 50% Batch-API discount.
-Writes a `pos` field into data/context_exercises.json and data/vocab_pool.json,
-and saves the raw map to opus_pos_levels.json.
+Writes a `pos` field into data/words.json and saves the raw map to
+opus_pos_levels.json.
 
 Run:  python3 generate_pos.py          (submit + poll + write, ~minutes)
       python3 generate_pos.py --write  (only re-apply an existing opus_pos_levels.json)
 """
 import json, os, sys, time, re
 
-CE_PATH = "data/context_exercises.json"
-VP_PATH = "data/vocab_pool.json"
+WORDS_PATH = "data/words.json"
 MAP_PATH = "opus_pos_levels.json"
 MODEL = "claude-opus-4-8"
 CHUNK = 150
@@ -36,12 +35,12 @@ def load_env():
 
 
 def build_items():
-    """One item per unique lemma, with a filled-in context sentence."""
-    ce = json.load(open(CE_PATH))
+    """One item per unique word, with a filled-in context sentence."""
+    words = json.load(open(WORDS_PATH))
     items, seen = [], {}
-    for lvl, arr in ce.items():
+    for lvl, arr in words.items():
         for e in arr:
-            lem = e["lemma"]
+            lem = e["en"]
             if lem in seen:
                 continue
             seen[lem] = True
@@ -117,28 +116,17 @@ def submit_and_poll(items):
 
 
 def apply_map(pos_map):
-    ce = json.load(open(CE_PATH))
-    miss_ce = 0
-    for arr in ce.values():
-        for e in arr:
-            p = pos_map.get(e["lemma"])
-            if p:
-                e["pos"] = p
-            else:
-                miss_ce += 1
-    json.dump(ce, open(CE_PATH, "w"), ensure_ascii=False, indent=1)
-
-    vp = json.load(open(VP_PATH))
-    miss_vp = 0
-    for arr in vp.values():
+    words = json.load(open(WORDS_PATH))
+    miss = 0
+    for arr in words.values():
         for e in arr:
             p = pos_map.get(e["en"])
             if p:
                 e["pos"] = p
             else:
-                miss_vp += 1
-    json.dump(vp, open(VP_PATH, "w"), ensure_ascii=False, indent=1)
-    print(f"wrote pos to both files; missing: context_exercises={miss_ce}, vocab_pool={miss_vp}")
+                miss += 1
+    json.dump(words, open(WORDS_PATH, "w"), ensure_ascii=False, separators=(",", ":"))
+    print(f"wrote pos to words.json; missing: {miss}")
 
 
 def main():

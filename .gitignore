@@ -16,6 +16,11 @@ modernize_batch_state.json
 # Backups abgeleiteter Daten
 data/*_backup.json
 
+# Build-Intermediates der Trainingsdaten — von generate_training_data.js erzeugt,
+# zu data/words.json zusammengeführt (Single Source of Truth). Nur words.json wird versioniert.
+data/vocab_pool.json
+data/context_exercises.json
+
 # Claude-Harness
 .claude/
 

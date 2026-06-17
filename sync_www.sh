@@ -13,6 +13,9 @@ cd "$(dirname "$0")"
 FILES=(index.html sw.js manifest.json icon-192.png icon-512.png)
 DIRS=(data bibles lib)
 
+# Build-Intermediates, die NICHT ins Bundle gehören (Single Source ist words.json)
+EXCLUDES=(--exclude=vocab_pool.json --exclude=context_exercises.json --exclude='*_backup.json')
+
 mkdir -p www
 
 echo "→ Dateien spiegeln nach www/"
@@ -21,9 +24,9 @@ for f in "${FILES[@]}"; do
   echo "  $f"
 done
 
-echo "→ Verzeichnisse spiegeln nach www/ (rsync --delete)"
+echo "→ Verzeichnisse spiegeln nach www/ (rsync --delete, ohne Intermediates)"
 for d in "${DIRS[@]}"; do
-  rsync -a --delete "$d/" "www/$d/"
+  rsync -a --delete --delete-excluded "${EXCLUDES[@]}" "$d/" "www/$d/"
   echo "  $d/"
 done
 
