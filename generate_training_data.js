@@ -359,7 +359,9 @@ function extractCloze(verseText, pos, form) {
   }
 
   if (targetInSent >= sentWords.length) return null;
-  sentWords[targetInSent] = '___';
+  // Nachgestellte Satzzeichen gehören in den Satz, nicht ins Wort → hinter ___ behalten
+  const tail = (sentWords[targetInSent].match(/[.,;:!?)\]'"…»«]+$/) || [''])[0];
+  sentWords[targetInSent] = '___' + tail;
   const text = sentWords.join(' ');
   if (!text.includes('___')) return null;
   return text;
@@ -394,8 +396,8 @@ function generateExercises(wordList) {
         const bookName = bookMap[occ.bookNr] || `Book ${occ.bookNr}`;
         bestExercise = {
           text,
-          answer: occ.form,
-          de: w.de,
+          answer: occ.form.replace(/[.,;:!?)\]'"…»«]+$/, ''),
+          de: w.de.replace(/[.,;:!?)\]'"…»«]+$/, ''),
           lemma: w.lemma,
           ref: `${bookName} ${occ.ch}:${occ.vn}`,
           book: occ.bookNr,
