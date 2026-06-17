@@ -7,6 +7,32 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.9b (17.06.2026)
+
+### JSON-Konsolidierung: vocab_pool + context_exercises → words.json
+- Befund: Die beiden Datendateien waren eine perfekte 1:1-Bijektion (5.086 Wörter, identische `de`/`pos`/`sub`/`level`)
+- Zu einer Single Source of Truth `data/words.json` zusammengeführt (1 Eintrag/Wort, alle Felder)
+- `index.html` lädt jetzt **einen** Fetch und leitet daraus `VOCAB_POOL` + `CLOZE_EXERCISES` (mit `lemma`-Alias) ab
+- ~23 % kleiner (1.214 KB → 935 KB), ein Fetch statt zwei
+- `generate_training_data.js` (Phase 4) und `generate_pos.py` schreiben jetzt `words.json`
+- Alt-Dateien als lokale Build-Intermediates gitignored; Verifikation per Round-trip + Node-Simulation der App-Ladelogik (Feld-für-Feld-Gleichheit)
+- Teil eines größeren Konsolidierungsplans → siehe [[projekt-json-konsolidierung]]
+
+### Konsolidierungs-Aufräumarbeiten (AP1/AP2)
+- Legacy-Datenblobs in `alt/` (~37 MB, unreferenziert) aus dem Git-Tracking entfernt, gitignored
+- `sync_www.sh` ergänzt: spiegelt root → `www/` → `ios/` reproduzierbar (`npx cap sync`); behebt Drift zwischen Quelle und Capacitor-Bundle. Root ist alleinige Quelle, `www/`/`ios/` reine Ableitungen
+
+## v1.9.8b (17.06.2026)
+
+### Wortarten (POS) für alle Vokabeln
+- Für alle 5.086 Cloze-Lemmata via Opus Batch API die Wortart bestimmt (`pos`-Feld)
+- POS-Tagging-Skripte `generate_pos.py` (Submit/Poll/Write) und `resume_pos.py` (laufenden Batch fortsetzen)
+
+### POS-basierte Distraktoren
+- Lückentext-Distraktoren bevorzugen jetzt die **gleiche Wortart** wie das Zielwort
+- Bei zu wenigen gleichartigen Kandidaten Auffüllung mit beliebigen Wörtern
+- `DE_POS`/`EN_POS`-Lookup-Maps und `posOf()` in `index.html`
+
 ## v1.9.7b (07.06.2026)
 
 ### Bugfix: Luther 1912 mod nicht ausklappbar
