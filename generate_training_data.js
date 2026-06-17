@@ -451,10 +451,3 @@ for (const lvl of LEVELS) {
   ceSet.forEach(w => { if (!vpSet.has(w)) mismatch++; });
 }
 console.log(`\nTotal mismatches: ${mismatch}`);
-
-// Write empty bible files (unified pool replaces two-pool system)
-const emptyPool = {};
-LEVELS.forEach(l => { emptyPool[l] = []; });
-fs.writeFileSync('data/bible_vocab.json', JSON.stringify(emptyPool));
-fs.writeFileSync('data/bible_exercises.json', JSON.stringify(emptyPool));
-console.log('Written empty bible_vocab.json and bible_exercises.json (deprecated)');

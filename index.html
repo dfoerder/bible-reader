@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.7b';
-const APP_DATE = '07.06.2026';
+const APP_VERSION = '1.9.8b';
+const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -500,11 +500,16 @@ function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));retur
 function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
 let FREQ_POOL=[];
+let DE_POS={},EN_POS={};
 function buildFreqPool(){
   FREQ_POOL=Object.values(VOCAB_POOL).flat().sort((a,b)=>(b.occ||0)-(a.occ||0));
   const n=FREQ_POOL.length;const steps=SUBSTEPS.length;
   FREQ_POOL.forEach((w,i)=>{w.freqStep=Math.min(Math.floor(i/(n/steps)),steps-1)});
+  DE_POS={};EN_POS={};
+  FREQ_POOL.forEach(w=>{if(w.pos){if(w.de&&!(w.de in DE_POS))DE_POS[w.de]=w.pos;if(w.en)EN_POS[w.en]=w.pos;}});
 }
+// Worttyp eines (annotierten) Wortes bestimmen: erst Lemma/EN, dann DE-Übersetzung
+function posOf(w){return (w.pos)||(w.lemma&&EN_POS[w.lemma])||(w.word&&EN_POS[w.word])||(w.de&&DE_POS[w.de])||null;}
 function vocabForStep(step,focus){
   if(focus==='freq'){
     const words=FREQ_POOL.filter(w=>w.freqStep<=step);
@@ -1460,11 +1465,18 @@ function App({data}){
     return words.map(w=>{
       const wl=w.level||userLevel;
       const li=lvlOrder.indexOf(wl);
-      let candidates=[];
-      for(let i=li;i<lvlOrder.length&&candidates.length<10;i++){
-        candidates=[...candidates,...(poolByLvl[lvlOrder[i]]||[]).filter(d=>d!==w.de&&!candidates.includes(d))];
+      const tPos=posOf(w);
+      let pool=[];
+      for(let i=li;i<lvlOrder.length&&pool.length<40;i++){
+        pool=[...pool,...(poolByLvl[lvlOrder[i]]||[]).filter(d=>d!==w.de&&!pool.includes(d))];
       }
-      if(candidates.length<2)candidates=[...candidates,...allDe.filter(d=>d!==w.de&&!candidates.includes(d))];
+      if(pool.length<10)pool=[...pool,...allDe.filter(d=>d!==w.de&&!pool.includes(d))];
+      // Distraktoren bevorzugt mit gleichem Worttyp; bei zu wenigen mit beliebigen auffüllen
+      let candidates=pool;
+      if(tPos){
+        const same=pool.filter(d=>DE_POS[d]===tPos);
+        candidates=same.length>=2?same:[...same,...pool.filter(d=>DE_POS[d]!==tPos)];
+      }
       const wrong=shuffleArr(candidates).slice(0,2);
       return shuffleArr([w.de,...wrong]);
     });
@@ -2085,8 +2097,8 @@ function App({data}){
             ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
             :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(isMultiUnit?finalGlobalScore>=chapTrain.globalTotal*0.85:displayScore>=chapTrain.total*0.85)?t('wellDone'):t('keepPracticing')}</p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('finish')}</button>
-            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:(chapTrain.type==='cloze'?startChapCloze:startChapTrain)} style={S.startBtn}>{t('repeat')}</button>
+            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.startBtn}>{t('finish')}</button>
+            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:(chapTrain.type==='cloze'?startChapCloze:startChapTrain)} style={S.navBtn}>{t('repeat')}</button>
           </div>
         </div>
       </div>);
