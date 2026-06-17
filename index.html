@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.20b';
+const APP_VERSION = '1.9.21b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2158,11 +2158,13 @@ function App({data}){
       const ex=chapTrain.words[chapTrain.current];const opts=chapTrain.opts[chapTrain.current];
       const isCloze=chapTrain.type==='cloze';
       return(<div>
-        <header style={{...S.header,position:'relative'}}>
-          <h1 style={S.title}>{isCloze?t('cloze'):t('trainDifficult')}</h1>
+        <header style={S.header}>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,margin:'0 0 4px'}}>
+            <h1 style={{...S.title,margin:0}}>{isCloze?t('cloze'):t('trainDifficult')}</h1>
+            {isCloze&&<button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{fontSize:22,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0}} title={t('clozeContext')}>⚙</button>}
+          </div>
           {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
-          {isCloze&&<button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{position:'absolute',right:0,top:0,fontSize:24,lineHeight:'34px',height:34,background:'none',border:'none',cursor:'pointer',color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:'0 2px'}} title={t('clozeContext')}>⚙</button>}
         </header>
         {isCloze&&clozeSettingsOpen&&<div style={{maxWidth:400,margin:'0 auto 12px',padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)'}}>
           <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
