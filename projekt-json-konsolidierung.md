@@ -26,11 +26,11 @@ Größter, risikoärmster Gewinn: ~37 MB, 0 Referenzen.
 - [x] `.gitignore` um `alt/*.json` + `alt/*.xml` ergänzt
 - [ ] Optional: `git`-History-Rewrite (`git filter-repo`) falls Repo-Größe stört — separat entscheiden, da Force-Push nötig (noch nicht durchgeführt; Blobs bleiben in der History)
 
-### AP2 — Capacitor-Sync reproduzierbar machen (Drift beheben)  ·  Status: OFFEN
+### AP2 — Capacitor-Sync reproduzierbar machen (Drift beheben)  ·  Status: ERLEDIGT (17.06.2026)
 Root bleibt einzige Quelle; `www/` + `ios/` werden deterministisch erzeugt, nie von Hand bearbeitet.
-- [ ] `sync_www.sh` (oder npm-Script `sync`) anlegen: kopiert `index.html`, `sw.js`, `manifest`/Icons, `data/`, `bibles/` → `www/`, danach `npx cap sync`
-- [ ] In `projekt-regeln.md` verankern: vor jedem iOS-Build `npm run sync` ausführen; `www/` nie manuell editieren
-- [ ] Einmalig aktuellen Stand syncen (POS-Update nach `www/` + `ios/` ziehen)
+- [x] `sync_www.sh` angelegt: spiegelt `index.html`, `sw.js`, `manifest.json`, `icon-192/512.png`, `data/`, `bibles/`, `lib/` → `www/` (rsync `--delete`), danach `npx cap sync` (`--no-cap` für www-only)
+- [x] In `projekt-regeln.md` verankert: vor jedem iOS-Build `./sync_www.sh`; `www/` nie manuell editieren
+- [x] Aktuellen Stand gesynct — POS-Update jetzt in `www/` **und** `ios/` (md5 stimmt mit root überein, Drift weg)
 
 ### AP3 — Zwei data-Dateien aus einer Pipeline erzeugen  ·  Status: TEILWEISE
 Einheitlicher Pool existiert seit v1.9.5b; `pos` heute in **beide** Dateien geschrieben (dupliziert).
