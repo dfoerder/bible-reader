@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.18b';
+const APP_VERSION = '1.9.19b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2158,18 +2158,16 @@ function App({data}){
       const ex=chapTrain.words[chapTrain.current];const opts=chapTrain.opts[chapTrain.current];
       const isCloze=chapTrain.type==='cloze';
       return(<div>
-        <header style={S.header}>
+        <header style={{...S.header,position:'relative'}}>
           <h1 style={S.title}>{isCloze?t('cloze'):t('trainDifficult')}</h1>
           {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
+          {isCloze&&<button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{position:'absolute',top:0,right:0,background:'none',border:'none',cursor:'pointer',fontSize:18,color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:4,lineHeight:1}} title={t('clozeContext')}>⚙</button>}
         </header>
-        {isCloze&&<div style={{textAlign:'right',marginBottom:8}}>
-          <button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0,lineHeight:1}} title={t('clozeContext')}>⚙</button>
-          {clozeSettingsOpen&&<div style={{marginTop:6,padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)',textAlign:'left'}}>
-            <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
-            <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapCloze(o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
-            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
-          </div>}
+        {isCloze&&clozeSettingsOpen&&<div style={{maxWidth:400,margin:'0 auto 12px',padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)'}}>
+          <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
+          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapCloze(o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <p style={S.settingsHint}>{t('clozeContextHint')}</p>
         </div>}
         <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
           <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(chapTrain.current/chapTrain.words.length)*100}%`}}/>
