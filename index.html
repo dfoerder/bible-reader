@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.22b';
+const APP_VERSION = '1.9.23b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -206,6 +206,8 @@ const I18N={
   clozeContextHint:{de:'Wie viel Text wird bei den Kapitel-Übungen um das Wort gezeigt.',en:'How much text is shown around the word in chapter exercises.'},
   clozeCtxSentence:{de:'Satz',en:'Sentence'},
   clozeCtxVerse:{de:'Ganzer Vers',en:'Whole verse'},
+  moreExamples:{de:'Weitere Beispiele',en:'More examples'},
+  noMoreExamples:{de:'Keine weiteren Beispiele vorhanden.',en:'No more examples available.'},
 
   // Stats
   statistics:{de:'Statistik',en:'Statistics'},
@@ -563,6 +565,23 @@ function vocabForStep(step,focus){
 }
 function maxStepFor(){for(let s=SUBSTEPS.length-1;s>=0;s--){if((VOCAB_POOL[stepToLevel(s)]||[]).length>0)return s;}return 0;}
 
+// Knopf "Weitere Beispiele": zeigt nach falscher Antwort weitere (nicht-kuratierte) Beispielverse zum Lemma
+function MoreExamples({lemma}){
+  const [open,setOpen]=useState(false);
+  const [list,setList]=useState(null);
+  const reveal=async()=>{setOpen(true);if(list===null){const ex=await loadExamples();setList(ex[lemma]||[]);}};
+  if(!open)return(<button onClick={reveal} style={{...S.navBtn,marginTop:4}}>{t('moreExamples')}</button>);
+  if(list===null)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>…</p>);
+  if(list.length===0)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>{t('noMoreExamples')}</p>);
+  return(<div style={{marginTop:10,textAlign:'left',maxWidth:400,marginLeft:'auto',marginRight:'auto'}}>
+    {list.map(([ref,text,pos],i)=>{const ws=text.split(/\s+/);return(
+      <p key={i} style={{fontSize:14,fontFamily:'var(--t-serif)',lineHeight:1.6,color:'var(--t-text)',margin:'0 0 10px'}}>
+        {ws.map((w,j)=>(<span key={j} style={j===pos?{fontWeight:700,color:'var(--t-accent)'}:undefined}>{w} </span>))}
+        <span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>({ref})</span>
+      </p>);})}
+  </div>);
+}
+
 function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trainWord}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
@@ -887,7 +906,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       {selected!==null&&selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>
         <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
-        <button onClick={advance} style={S.startBtn}>{t('next')}</button>
+        <MoreExamples lemma={ex.lemma}/>
+        <div style={{marginTop:12}}><button onClick={advance} style={S.startBtn}>{t('next')}</button></div>
       </div>}
       <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
     </div>);
@@ -1023,6 +1043,14 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 // ─── Load all data ──────────────────────────────────────
 const isPWA=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
 const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline support)
+// Zusätzliche Beispielverse pro Lemma — lazy geladen (nur bei "Weitere Beispiele")
+let EXAMPLES=null;
+async function loadExamples(){
+  if(EXAMPLES)return EXAMPLES;
+  try{const r=await fetch('data/examples.json'+CB);if(r.ok)EXAMPLES=await r.json();}catch(e){}
+  if(!EXAMPLES)EXAMPLES={};
+  return EXAMPLES;
+}
 
 const _bookCache={};
 const _annoCache={};
@@ -2204,7 +2232,8 @@ function App({data}){
         {chapTrain.selected!==null&&chapTrain.selected!==ex.de&&<div style={{textAlign:'center',margin:'16px 0 0'}}>
           {isCloze&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{ex.answer} = {ex.de}</p>}
           <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
-          <button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button>
+          {isCloze&&<MoreExamples lemma={ex.lemma}/>}
+          <div style={{marginTop:12}}><button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button></div>
         </div>}
         <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('cancel')}</button></div>
       </div>);
