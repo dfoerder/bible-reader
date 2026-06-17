@@ -22,6 +22,13 @@
 - Legacy-Datenblobs in `alt/` (~37 MB, unreferenziert) aus dem Git-Tracking entfernt, gitignored
 - `sync_www.sh` ergänzt: spiegelt root → `www/` → `ios/` reproduzierbar (`npx cap sync`); behebt Drift zwischen Quelle und Capacitor-Bundle. Root ist alleinige Quelle, `www/`/`ios/` reine Ableitungen
 
+### Repo-History bereinigt (Wartung)
+- `git filter-repo`: 15 unreferenzierte Legacy-Datenpfade aus der gesamten History aller Branches entfernt
+- **`.git`: 116 MB → 38 MB** (−67 %); `alt/`-Provenienz-Skripte und App-Daten unangetastet
+- `main`-Tip-Inhalt unverändert (nur SHAs neu) → GitHub-Pages-Seite identisch; `main` force-gepusht
+- Lokale Branches (`dev`/`automodus`/`french`/`multilingual`) haben neue SHAs → ein evtl. Zweit-Klon müsste neu geklont werden
+- Werkzeuge gitignored: `rewrite_history.sh`, `purge_paths.txt`; Original-Backup als Tar gesichert
+
 ## v1.9.8b (17.06.2026)
 
 ### Wortarten (POS) für alle Vokabeln

@@ -24,7 +24,7 @@ Größter, risikoärmster Gewinn: ~37 MB, 0 Referenzen.
 - [x] Große Datenblobs aus `alt/` untracked (`git rm --cached`): `nt_annotations_en.json`, `ot_annotations_en.json`, `bible_ot_en.json`, `bible_nt_en.json`, `phrase_levels.json`, `ita-riveduta.osis.xml` — Dateien bleiben lokal
 - [x] Altskripte (`convert_osis_to_json.py`, `extract_vocab.py`, `generate_context_exercises.py`, `merge_phrases.py`, `modernize_*.py`, …) als Provenienz **behalten** (weiter getrackt)
 - [x] `.gitignore` um `alt/*.json` + `alt/*.xml` ergänzt
-- [ ] Optional: `git`-History-Rewrite (`git filter-repo`) falls Repo-Größe stört — separat entscheiden, da Force-Push nötig (noch nicht durchgeführt; Blobs bleiben in der History)
+- [x] `git`-History-Rewrite durchgeführt (17.06.2026, `git filter-repo`): 15 Legacy-Datenpfade aus der **gesamten** History aller Branches entfernt (inkl. inhaltsgleicher Dubletten `bible_nt/ot_en.json` root↔alt/). **`.git`: 116 MB → 38 MB** (−67 %). Provenienz-Skripte in `alt/` erhalten, App-Daten intakt, `main`-Tip-Inhalt unverändert (nur SHAs neu) → GitHub-Pages-Seite identisch. `main` force-gepusht; lokale Branches mit neuen SHAs. Original-Backup als Tar gesichert. Skript+Pfadliste: `rewrite_history.sh`/`purge_paths.txt` (gitignored).
 
 ### AP2 — Capacitor-Sync reproduzierbar machen (Drift beheben)  ·  Status: ERLEDIGT (17.06.2026)
 Root bleibt einzige Quelle; `www/` + `ios/` werden deterministisch erzeugt, nie von Hand bearbeitet.
