@@ -26,3 +26,8 @@ data/*_backup.json
 # Große externe Datenquellen (lokal vorhalten, nicht versionieren)
 EFLLex.tsv
 oxford_5000.csv
+
+# Legacy-Datenblobs in alt/ — lokal als Provenienz behalten, nicht versionieren
+# (Skripte in alt/ bleiben getrackt)
+alt/*.json
+alt/*.xml
