@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.9b';
+const APP_VERSION = '1.9.10b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -510,6 +510,15 @@ function buildFreqPool(){
 }
 // Worttyp eines (annotierten) Wortes bestimmen: erst Lemma/EN, dann DE-Übersetzung
 function posOf(w){return (w.pos)||(w.lemma&&EN_POS[w.lemma])||(w.word&&EN_POS[w.word])||(w.de&&DE_POS[w.de])||null;}
+// Zwei falsche DE-Optionen, bevorzugt mit gleichem Worttyp wie das Zielwort; bei zu wenigen mit beliebigen auffüllen
+function posWrongDe(target,dePool){
+  const cand=dePool.filter(d=>d!==target.de);
+  const tPos=posOf(target);
+  if(!tPos)return shuffleArr(cand).slice(0,2);
+  const same=cand.filter(d=>DE_POS[d]===tPos);
+  const ranked=same.length>=2?same:[...same,...cand.filter(d=>DE_POS[d]!==tPos)];
+  return shuffleArr(ranked).slice(0,2);
+}
 function vocabForStep(step,focus){
   if(focus==='freq'){
     const words=FREQ_POOL.filter(w=>w.freqStep<=step);
@@ -581,7 +590,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+      const wrong=posWrongDe(ex,allDe);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
@@ -617,7 +626,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const allDePool=[...new Set([...allDe,...higherWords.map(w=>w.de)])];
     setExercises(picked);
     setShuffledOpts(picked.map(q=>{
-      const wrong=shuffle(allDePool.filter(d=>d!==q.de)).slice(0,2);
+      const wrong=posWrongDe(q,allDePool);
       return shuffle([q.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
@@ -642,7 +651,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+      const wrong=posWrongDe(ex,allDe);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
@@ -660,7 +669,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     clozeUnitsRef.current={...u,unitIdx:nextIdx,globalScore:u.globalScore+unitScore};
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=shuffle(u.allDe.filter(d=>d!==ex.de)).slice(0,2);
+      const wrong=posWrongDe(ex,u.allDe);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
@@ -672,7 +681,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const picked=shuffle([...u.units[u.unitIdx]]);
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
-      const wrong=shuffle(u.allDe.filter(d=>d!==ex.de)).slice(0,2);
+      const wrong=posWrongDe(ex,u.allDe);
       return shuffle([ex.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setSelected(null);setDone(false);setClozeUnitDone(false);setRetryPending(null);setFirstPassScore(null);
@@ -719,13 +728,13 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     if(exType==='vocab'){
       const allDe=Object.values(VOCAB_POOL).flat().map(w=>w.de);
       setShuffledOpts(retryEx.map(q=>{
-        const wr=shuffle(allDe.filter(d=>d!==q.de)).slice(0,2);
+        const wr=posWrongDe(q,allDe);
         return shuffle([q.de,...wr]);
       }));
     } else {
       const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
       setShuffledOpts(retryEx.map(ex=>{
-        const wr=shuffle(allDe.filter(d=>d!==ex.de)).slice(0,2);
+        const wr=posWrongDe(ex,allDe);
         return shuffle([ex.de,...wr]);
       }));
     }
@@ -1467,19 +1476,13 @@ function App({data}){
     return words.map(w=>{
       const wl=w.level||userLevel;
       const li=lvlOrder.indexOf(wl);
-      const tPos=posOf(w);
       let pool=[];
       for(let i=li;i<lvlOrder.length&&pool.length<40;i++){
         pool=[...pool,...(poolByLvl[lvlOrder[i]]||[]).filter(d=>d!==w.de&&!pool.includes(d))];
       }
       if(pool.length<10)pool=[...pool,...allDe.filter(d=>d!==w.de&&!pool.includes(d))];
-      // Distraktoren bevorzugt mit gleichem Worttyp; bei zu wenigen mit beliebigen auffüllen
-      let candidates=pool;
-      if(tPos){
-        const same=pool.filter(d=>DE_POS[d]===tPos);
-        candidates=same.length>=2?same:[...same,...pool.filter(d=>DE_POS[d]!==tPos)];
-      }
-      const wrong=shuffleArr(candidates).slice(0,2);
+      // Distraktoren bevorzugt mit gleichem Worttyp (gemeinsamer Helfer)
+      const wrong=posWrongDe(w,pool);
       return shuffleArr([w.de,...wrong]);
     });
   },[userLevel]);
