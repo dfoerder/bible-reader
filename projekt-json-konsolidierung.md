@@ -64,9 +64,13 @@ ein Fetch, größte Ersparnis. A als risikoärmerer Zwischenschritt möglich.
 - [x] Alt-Dateien `vocab_pool.json` + `context_exercises.json` aus Tracking entfernt, gitignored (lokale Build-Intermediates); Einmal-Migration `build_words.py` gelöscht
 - Hinweis: `compare_levels.js` (historisches Analyse-Tool) liest noch den lokalen `vocab_pool.json`-Intermediate — unkritisch, nicht Teil der App.
 
-### AP4 — `bibles/`-Struktur: bewusste Entscheidung dokumentieren  ·  Status: OFFEN
+### AP4 — `bibles/`-Struktur: bewusste Entscheidung dokumentieren  ·  Status: ERLEDIGT (17.06.2026)
 793 Dateien, lazy pro Buch geladen.
-- [ ] Empfehlung festhalten: **nicht** zusammenführen — Per-Buch-Lazy-Loading ist ein Feature (Offline, Teil-Download, kleinere Fetches). Konsolidierung würde Ladeverhalten verschlechtern.
+- [x] **Entscheidung: `bibles/` NICHT zusammenführen.** Per-Buch-Lazy-Loading ist ein
+  bewusstes Feature — die App lädt nur das gerade gelesene Buch (`{nr}_web.json`) bzw. dessen
+  Annotationen (`anno/{nr}_web_deu.json`) statt eines Monolithen. Vorteile: schnelle Erst-Fetches,
+  geringer Speicher, Offline-Teilbestände, granulares SW-Caching. Eine Zusammenführung (~100 MB
+  Einzeldatei) würde Start- und Ladeverhalten deutlich verschlechtern und PWA-Caching verschlechtern.
 
 ## Empfohlene Reihenfolge
 1. **AP1** (sofortiger Aufräum-Gewinn, kein Risiko)
