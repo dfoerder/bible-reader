@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Erzeugt data/examples.json: pro Lemma mehrere (nicht-kuratierte) Beispielverse
-aus der ganzen Bibel, damit der Nutzer bei einer falsch beantworteten Kontext-
-Übung über "Weitere Beispiele" das Wort in weiteren Sätzen sehen kann.
+"""Erzeugt data/examples.json: pro Lemma ein schlanker Index von Vers-Referenzen
+(ohne Verstext), damit der Nutzer bei einer falsch beantworteten Kontext-Übung
+über "Weitere Beispiele" das Wort in weiteren Sätzen sehen kann. Der Verstext
+wird in der App on-the-fly aus den Bibeltext-Dateien geholt (fetchBook/_bookCache).
 
-Format (kompakt, Arrays):  { "<lemma>": [ ["<ref>", "<verstext>", <wortindex>], ... ] }
+Format (kompakt):  { "<lemma>": [ [<bookNr>, <chapter>, <verse>, <wortindex>], ... ] }
 
-Lazy in der App geladen (nicht beim Start). Reihenfolge unabhängig von der
-übrigen Trainingsdaten-Pipeline.
+Lazy in der App geladen (nicht beim Start).
 
 Run:  python3 generate_examples.py
 """
@@ -63,7 +63,7 @@ def main():
                     seen_lemmas.add(lem)
                     if ref == curated.get(lem):  # Übungssatz nicht doppeln
                         continue
-                    by_lemma.setdefault(lem, []).append((ref, vt, pos))
+                    by_lemma.setdefault(lem, []).append([nr, int(cn), int(vn), pos])
 
     # Pro Lemma höchstens MAX_PER_LEMMA, gleichmäßig über die Vorkommen gestreut
     out = {}
@@ -74,7 +74,7 @@ def main():
         else:
             step = len(occ) / MAX_PER_LEMMA
             picks = [occ[int(i * step)] for i in range(MAX_PER_LEMMA)]
-        out[lem] = [[r, t, p] for (r, t, p) in picks]
+        out[lem] = picks
 
     json.dump(out, open(OUT, "w"), ensure_ascii=False, separators=(",", ":"))
     total = sum(len(v) for v in out.values())

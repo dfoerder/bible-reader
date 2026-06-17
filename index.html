@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.23b';
+const APP_VERSION = '1.9.24b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -565,16 +565,26 @@ function vocabForStep(step,focus){
 }
 function maxStepFor(){for(let s=SUBSTEPS.length-1;s>=0;s--){if((VOCAB_POOL[stepToLevel(s)]||[]).length>0)return s;}return 0;}
 
-// Knopf "Weitere Beispiele": zeigt nach falscher Antwort weitere (nicht-kuratierte) Beispielverse zum Lemma
+// Knopf "Weitere Beispiele": zeigt nach falscher Antwort weitere Beispielverse zum Lemma.
+// Index liefert nur Referenzen; der Verstext wird on-the-fly aus den Bibeltext-Dateien geholt.
 function MoreExamples({lemma}){
   const [open,setOpen]=useState(false);
-  const [list,setList]=useState(null);
-  const reveal=async()=>{setOpen(true);if(list===null){const ex=await loadExamples();setList(ex[lemma]||[]);}};
+  const [list,setList]=useState(null); // null=lädt, []=keine, sonst [{ref,text,pos}]
+  const reveal=async()=>{
+    setOpen(true);
+    if(list!==null)return;
+    const idx=await loadExamples();
+    const refs=idx[lemma]||[];
+    const out=(await Promise.all(refs.map(async([nr,ch,vn,pos])=>{
+      try{const bk=await fetchBook(nr);const c=bk.chapters.find(x=>x.number===ch);const v=c&&c.verses.find(x=>x.n===vn);return v?{ref:`${bk.name} ${ch}:${vn}`,text:v.text,pos}:null;}catch(e){return null;}
+    }))).filter(Boolean);
+    setList(out);
+  };
   if(!open)return(<button onClick={reveal} style={{...S.navBtn,marginTop:4}}>{t('moreExamples')}</button>);
   if(list===null)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>…</p>);
   if(list.length===0)return(<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,marginTop:8}}>{t('noMoreExamples')}</p>);
   return(<div style={{marginTop:10,textAlign:'left',maxWidth:400,marginLeft:'auto',marginRight:'auto'}}>
-    {list.map(([ref,text,pos],i)=>{const ws=text.split(/\s+/);return(
+    {list.map(({ref,text,pos},i)=>{const ws=text.split(/\s+/);return(
       <p key={i} style={{fontSize:14,fontFamily:'var(--t-serif)',lineHeight:1.6,color:'var(--t-text)',margin:'0 0 10px'}}>
         {ws.map((w,j)=>(<span key={j} style={j===pos?{fontWeight:700,color:'var(--t-accent)'}:undefined}>{w} </span>))}
         <span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>({ref})</span>
