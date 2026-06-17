@@ -431,7 +431,24 @@ for (const lvl of LEVELS) {
     .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
 fs.writeFileSync('data/vocab_pool.json', JSON.stringify(vocabPool));
-console.log('  Written: data/vocab_pool.json');
+console.log('  Written: data/vocab_pool.json (Build-Intermediate, gitignored)');
+
+// ── Phase 4: Merge zu words.json (Single Source of Truth, von der App geladen) ──
+// vocab_pool + context_exercises sind eine 1:1-Bijektion (vocabPool ist auf Lemmas
+// mit Übung gefiltert) → ein Eintrag pro Wort mit allen Feldern. pos wird danach von
+// generate_pos.py ergänzt.
+console.log('\nPhase 4: Merging into words.json...');
+const words = {};
+for (const lvl of LEVELS) {
+  const occByLemma = {};
+  for (const v of vocabPool[lvl]) occByLemma[v.en] = v.occ;
+  words[lvl] = exercises[lvl].map(e => ({
+    en: e.lemma, de: e.de, sub: e.sub, occ: occByLemma[e.lemma],
+    text: e.text, answer: e.answer, ref: e.ref, book: e.book,
+  }));
+}
+fs.writeFileSync('data/words.json', JSON.stringify(words));
+console.log('  Written: data/words.json');
 
 // ── Final stats ──
 console.log('\n=== Final statistics ===');

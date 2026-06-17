@@ -32,13 +32,37 @@ Root bleibt einzige Quelle; `www/` + `ios/` werden deterministisch erzeugt, nie 
 - [x] In `projekt-regeln.md` verankert: vor jedem iOS-Build `./sync_www.sh`; `www/` nie manuell editieren
 - [x] Aktuellen Stand gesynct — POS-Update jetzt in `www/` **und** `ios/` (md5 stimmt mit root überein, Drift weg)
 
-### AP3 — Zwei data-Dateien aus einer Pipeline erzeugen  ·  Status: TEILWEISE
-Einheitlicher Pool existiert seit v1.9.5b; `pos` heute in **beide** Dateien geschrieben (dupliziert).
-- `vocab_pool.json`: `{en, de, pos, occ, sub}` je CEFR-Level
-- `context_exercises.json`: `{text, answer, de, lemma, pos, ref, book, sub}` je CEFR-Level
-- [ ] Gemeinsame Wort-Identität (`en`/`lemma` + `de` + `pos` + `sub`) aus **einer** Master-Quelle ableiten, statt `pos` parallel zu pflegen
-- [ ] Prüfen, ob Laufzeit zwei getrennte Dateien braucht (Quiz vs. Lückentext) — falls ja: getrennt **lassen**, aber gemeinsam generieren; falls nein: zu einer Datei mit Wort-Tabelle + referenzierenden Übungen zusammenführen
-- [ ] Generierungs-Skripte (`assign_cefr_levels.py`, `generate_pos.py`, `generate_training_data.js`) auf gemeinsame Quelle ausrichten
+### AP3 — Zwei data-Dateien aus einer Pipeline erzeugen  ·  Status: ANALYSIERT (17.06.2026), Umsetzung offen
+
+**Befund (verifiziert):** Die beiden Dateien sind eine perfekte **1:1-Bijektion**.
+- `context_exercises`: 5086 Einträge = genau 1 Übung pro Lemma
+- `vocab_pool`: 5086 eindeutige Wörter
+- 100 % Lemma-Überlappung (0 fehlend), `pos` zu 100 % aus Pool ableitbar
+- `de` in beiden Dateien **identisch** (5086 gleich, 0 abweichend)
+- Gemeinsam (redundant): `lemma`/`en`, `de`, `pos`, `sub` · nur CE: `text`,`answer`,`ref`,`book` · nur VP: `occ`
+
+**Runtime:** `vocab_pool`→`VOCAB_POOL` (Quiz, Frequenz, Statistik, POS-Distraktoren);
+`context_exercises`→`CLOZE_EXERCISES` nur für Buch-Lückentext (`startBookCloze`).
+Kapitel-Lückentext wird live aus Annotationen erzeugt → **nicht** betroffen. Beide Dateien werden
+beim Start zusammen geladen (2 Fetches).
+
+**Optionen (Größen gemessen):**
+| | Ergebnis | Ersparnis | Risiko |
+|---|---|---|---|
+| Aktuell | 2 Dateien, 1214 KB, 2 Fetches | — | — |
+| A — schlank | CE ohne `de`+`pos`, Lookup aus Pool | −142 KB (12 %) | gering |
+| B — zusammengeführt | ein `words.json`, 1 Eintrag/Wort | −280 KB (23 %), 1 Fetch | mittel |
+
+**Empfehlung: Variante B** (`words.json`) — echte Konsolidierung, beendet Parallelpflege von `de`/`pos`,
+ein Fetch, größte Ersparnis. A als risikoärmerer Zwischenschritt möglich.
+
+**Umsetzung Variante B — Status: ERLEDIGT (17.06.2026)**
+- [x] `data/words.json` erzeugt (5086 Wörter, 1 Eintrag/Wort, alle Felder); Round-trip + Node-Simulation der App-Ladelogik beweisen Feld-für-Feld-Gleichheit zu den Alt-Dateien
+- [x] `index.html`: ein Fetch `data/words.json` → leitet `VOCAB_POOL` + `CLOZE_EXERCISES` (mit `lemma`-Alias) ab; zwei alte Fetches entfernt
+- [x] `sw.js`: precached nur noch `words.json`; `CACHE_NAME` → `bible-full-v199`, `APP_VERSION` → `1.9.9b`
+- [x] `generate_training_data.js`: Phase 4 ergänzt → schreibt `words.json`; `generate_pos.py`: schreibt `pos` jetzt in `words.json`
+- [x] Alt-Dateien `vocab_pool.json` + `context_exercises.json` aus Tracking entfernt, gitignored (lokale Build-Intermediates); Einmal-Migration `build_words.py` gelöscht
+- Hinweis: `compare_levels.js` (historisches Analyse-Tool) liest noch den lokalen `vocab_pool.json`-Intermediate — unkritisch, nicht Teil der App.
 
 ### AP4 — `bibles/`-Struktur: bewusste Entscheidung dokumentieren  ·  Status: OFFEN
 793 Dateien, lazy pro Buch geladen.
