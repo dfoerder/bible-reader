@@ -359,9 +359,14 @@ function extractCloze(verseText, pos, form) {
   }
 
   if (targetInSent >= sentWords.length) return null;
-  // Nachgestellte Satzzeichen gehören in den Satz, nicht ins Wort → hinter ___ behalten
-  const tail = (sentWords[targetInSent].match(/[.,;:!?)\]'"…»«]+$/) || [''])[0];
-  sentWords[targetInSent] = '___' + tail;
+  // Rand-Satzzeichen (auch typografische Quotes) gehören in den Satz, nicht ins Wort
+  // → um das ___ herum behalten (Bindestrich NICHT, der ist Teil von Komposita)
+  const EDGE_L = /^[.,;:!?…(){}\[\]"'«»‹›„‚“”‘’`´¿¡]+/;
+  const EDGE_T = /[.,;:!?…(){}\[\]"'«»‹›„‚“”‘’`´¿¡]+$/;
+  const tok = sentWords[targetInSent];
+  const lead = (tok.match(EDGE_L) || [''])[0];
+  const trail = (tok.match(EDGE_T) || [''])[0];
+  sentWords[targetInSent] = lead + '___' + trail;
   const text = sentWords.join(' ');
   if (!text.includes('___')) return null;
   return text;
@@ -396,8 +401,8 @@ function generateExercises(wordList) {
         const bookName = bookMap[occ.bookNr] || `Book ${occ.bookNr}`;
         bestExercise = {
           text,
-          answer: occ.form.replace(/[.,;:!?)\]'"…»«]+$/, ''),
-          de: w.de.replace(/[.,;:!?)\]'"…»«]+$/, ''),
+          answer: occ.form.replace(/^[.,;:!?…(){}\[\]'"«»‹›„‚“”‘’`´¿¡]+|[.,;:!?…(){}\[\]'"«»‹›„‚“”‘’`´¿¡]+$/g, ''),
+          de: w.de.replace(/^[.,;:!?…(){}\[\]'"«»‹›„‚“”‘’`´¿¡]+|[.,;:!?…(){}\[\]'"«»‹›„‚“”‘’`´¿¡]+$/g, ''),
           lemma: w.lemma,
           ref: `${bookName} ${occ.ch}:${occ.vn}`,
           book: occ.bookNr,
