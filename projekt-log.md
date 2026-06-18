@@ -7,6 +7,15 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## App Store Plan (18.06.2026)
+
+Detaillierte Checkliste für die App-Store-Einreichung in `projekt-arbeitspakete.md` festgehalten:
+- **Design & Assets:** Icon (alle Größen), Launch Screen, Screenshots (6.7"/6.5"/5.5"), Preview-Video
+- **Apple Developer Setup:** Account (99$/Jahr), App Store Connect, Bundle ID `de.biblereader.app`, Signing
+- **Metadaten:** Name/Beschreibung DE+EN, Keywords, Datenschutzerklärung, Support-URL, Altersfreigabe (4+), Kategorie Bildung/Bücher
+- **Technisch:** Tip-Jar via StoreKit (1.99/4.99/9.99 $), Spendenhinweis bei Sprachpaket-Downloads, Gerätetest, Barrierefreiheit (Dynamic Type, VoiceOver)
+- **TestFlight & Review** → Veröffentlichung → danach Android/Play Store
+
 ## v1.9.34b (18.06.2026)
 
 ### Lernfortschritt-Statistik überarbeitet
