@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.33b';
+const APP_VERSION = '1.9.34b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -195,6 +195,8 @@ const I18N={
   totalLearned:{de:'Gelernte Wörter gesamt:',en:'Total words learned:'},
   statPracticed:{de:'Geübt',en:'Practiced'},
   statUnpracticed:{de:'Ungeübt',en:'Unpracticed'},
+  statBelowLevel:{de:'Unter deinem Niveau (wahrscheinlich bekannt)',en:'Below your level (probably known)'},
+  statAtAboveLevel:{de:'Auf/über deinem Niveau (eventuell unbekannt)',en:'At/above your level (possibly unknown)'},
   statOfWhichKnown:{de:'davon bekannt',en:'of which known'},
   statOfWhichUnknown:{de:'davon unbekannt',en:'of which unknown'},
   resetProgress:{de:'Fortschritt zurücksetzen',en:'Reset all progress'},
@@ -1397,7 +1399,25 @@ function App({data}){
     const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={familiarity:1,lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m;
   });
   const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.familiarity>=1).length,[wordData]);
-  const globalWordStats=useMemo(()=>{const vals=Object.values(wordData);const known=vals.filter(w=>w.familiarity>=1).length;const unknown=vals.filter(w=>w.familiarity===0).length;const learned=vals.filter(w=>(w.learned||0)>0).length;const forgotten=vals.filter(w=>(w.forgotten||0)>0&&w.familiarity===0).length;const practiced=known+unknown;return{known,unknown,learned,forgotten,practiced}},[wordData]);
+  const globalWordStats=useMemo(()=>{
+    const vals=Object.values(wordData);
+    const known=vals.filter(w=>w.familiarity>=1).length;
+    const unknown=vals.filter(w=>w.familiarity===0).length;
+    const learned=vals.filter(w=>(w.learned||0)>0).length;
+    const forgotten=vals.filter(w=>(w.forgotten||0)>0&&w.familiarity===0).length;
+    const practiced=known+unknown;
+    // Ungeübte: Wörter in VOCAB_POOL ohne wordData-Eintrag oder fam=-1
+    const li=LEVELS.indexOf(userLevel);
+    let belowLevel=0,atAboveLevel=0;
+    LEVELS.forEach((lvl,i)=>{
+      const words=VOCAB_POOL[lvl]||[];
+      words.forEach(w=>{
+        const d=wordData[w.en];
+        if(!d||d.familiarity===-1){if(i<li)belowLevel++;else atAboveLevel++;}
+      });
+    });
+    return{known,unknown,learned,forgotten,practiced,belowLevel,atAboveLevel};
+  },[wordData,userLevel]);
   const [bookLemmas,setBookLemmas]=useState({});
   const loadBookLemmas=useCallback(async(bookNr)=>{if(bookLemmas[bookNr])return;const anno=await fetchAnno(bookNr);if(!anno)return;const lemmas=new Set();Object.values(anno.chapters).forEach(ch=>{Object.values(ch).forEach(va=>{(va||[]).forEach(a=>{if(a.phrase==null)lemmas.add(a.lemma)})})});setBookLemmas(prev=>({...prev,[bookNr]:[...lemmas]}))},[bookLemmas]);
   const getBookWordStats=useCallback((bookNr)=>{const lemmas=bookLemmas[bookNr];if(!lemmas)return null;let known=0,unknown=0,learned=0,forgotten=0;lemmas.forEach(l=>{const d=wordData[l];if(!d||d.familiarity===-1)return;if(d.familiarity>=1)known++;if(d.familiarity===0)unknown++;if((d.learned||0)>0)learned++;if((d.forgotten||0)>0&&d.familiarity===0)forgotten++});return{known,unknown,notSeen:lemmas.length-known-unknown,learned,forgotten,total:lemmas.length}},[bookLemmas,wordData]);
@@ -2036,7 +2056,13 @@ function App({data}){
                 <span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.unknown}</span> {t('statUnknown')}
                 <span style={{marginLeft:16,color:'var(--t-muted)',fontSize:13}}>— {t('statForgotten')}: <span style={{color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span></span>
               </div>
-              <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{stats.allLemmas-globalWordStats.practiced}</span> {t('statUnpracticed')}</div>
+              <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel+globalWordStats.atAboveLevel}</span> {t('statUnpracticed')}</div>
+              <div style={{paddingLeft:16}}>
+                <span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel}</span> <span style={{fontSize:13}}>{t('statBelowLevel')}</span>
+              </div>
+              <div style={{paddingLeft:16}}>
+                <span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.atAboveLevel}</span> <span style={{fontSize:13}}>{t('statAtAboveLevel')}</span>
+              </div>
             </div>
             <button onClick={()=>setShowResetDialog(true)} style={{...S.resetBtn,marginTop:8}}>{t('resetProgress')}</button>
           </div>
