@@ -1,6 +1,16 @@
 ## Laufend
 - detailverbesserungen, debugging
 
+### Abgeschlossen (Session 18.06.2026, v1.9.30b–v1.9.42b)
+- POS-Distraktoren einheitlich in allen Übungen (Wortart + Numerus/Tempus)
+- Flexions-Übersetzungen (`deForm`/`form`) via Opus-Batch für alle 5086 Wörter
+- „Weitere Beispiele für \<wort\>" bei falscher Antwort (on-the-fly, 207 KB Refs-Index)
+- Separate Schriftgröße für Übungstexte; Bibeltext-Default 16 px
+- Fortschritt-Statistik (Geübt/Bekannt/Unbekannt/Ungeübt) als 📊-Panel im Training-Screen
+- Lernfortschritt-Logik: gelernt vs. geübt im Ergebnis, fam=0 vor fam=-1 priorisiert
+- 24h-Regel in `trainWord` zentralisiert (Familiarity nur nach 24h erhöhbar)
+- Bugfixes: leerer Bildschirm nach Reload (NaN-Check), belowLevel-Statistik im Freq-Modus
+
 ## Vor der App-Store-Einreichung
 
 ### Design & Assets
