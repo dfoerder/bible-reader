@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.31b';
+const APP_VERSION = '1.9.32b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -193,6 +193,9 @@ const I18N={
   layoutModernDark:{de:'Modern Dunkel',en:'Modern Dark'},
   progress:{de:'Fortschritt',en:'Progress'},
   totalLearned:{de:'Gelernte Wörter gesamt:',en:'Total words learned:'},
+  statPracticed:{de:'Geübt',en:'Practiced'},
+  statOfWhichKnown:{de:'davon bekannt',en:'of which known'},
+  statOfWhichUnknown:{de:'davon unbekannt',en:'of which unknown'},
   resetProgress:{de:'Fortschritt zurücksetzen',en:'Reset all progress'},
   resetConfirm:{de:'Alle gelernten Wörter und den Fortschritt zurücksetzen?',en:'Reset all learned words and progress?'},
   retakePlacementConfirm:{de:'Möchtest du den Einstufungstest wiederholen?',en:'Would you like to retake the placement test?'},
@@ -1393,7 +1396,7 @@ function App({data}){
     const gl=saved.globalLearned||[];const m={};gl.forEach(k=>{m[k]={familiarity:1,lasttrained:null,numberoftrainings:0}});if(gl.length>0)LS.set('bible-word-data',m);return m;
   });
   const globalLearnedCount=useMemo(()=>Object.values(wordData).filter(w=>w.familiarity>=1).length,[wordData]);
-  const globalWordStats=useMemo(()=>{const vals=Object.values(wordData);const known=vals.filter(w=>w.familiarity>=1).length;const unknown=vals.filter(w=>w.familiarity===0).length;const learned=vals.filter(w=>(w.learned||0)>0).length;const forgotten=vals.filter(w=>(w.forgotten||0)>0&&w.familiarity===0).length;return{known,unknown,learned,forgotten}},[wordData]);
+  const globalWordStats=useMemo(()=>{const vals=Object.values(wordData);const known=vals.filter(w=>w.familiarity>=1).length;const unknown=vals.filter(w=>w.familiarity===0).length;const learned=vals.filter(w=>(w.learned||0)>0).length;const forgotten=vals.filter(w=>(w.forgotten||0)>0&&w.familiarity===0).length;const practiced=known+unknown;return{known,unknown,learned,forgotten,practiced}},[wordData]);
   const [bookLemmas,setBookLemmas]=useState({});
   const loadBookLemmas=useCallback(async(bookNr)=>{if(bookLemmas[bookNr])return;const anno=await fetchAnno(bookNr);if(!anno)return;const lemmas=new Set();Object.values(anno.chapters).forEach(ch=>{Object.values(ch).forEach(va=>{(va||[]).forEach(a=>{if(a.phrase==null)lemmas.add(a.lemma)})})});setBookLemmas(prev=>({...prev,[bookNr]:[...lemmas]}))},[bookLemmas]);
   const getBookWordStats=useCallback((bookNr)=>{const lemmas=bookLemmas[bookNr];if(!lemmas)return null;let known=0,unknown=0,learned=0,forgotten=0;lemmas.forEach(l=>{const d=wordData[l];if(!d||d.familiarity===-1)return;if(d.familiarity>=1)known++;if(d.familiarity===0)unknown++;if((d.learned||0)>0)learned++;if((d.forgotten||0)>0&&d.familiarity===0)forgotten++});return{known,unknown,notSeen:lemmas.length-known-unknown,learned,forgotten,total:lemmas.length}},[bookLemmas,wordData]);
@@ -2020,6 +2023,21 @@ function App({data}){
             <div style={{...S.levelBtns,marginTop:6}}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
             <p style={S.settingsHint}>{t('clozeContextHint')}</p>
           </div>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('progress')}</span>
+            <div style={{marginTop:8,fontSize:14,fontFamily:sans,color:'var(--t-text2)',lineHeight:2}}>
+              <div><span style={{color:'var(--t-title)',fontWeight:600}}>{globalWordStats.practiced}</span> {t('statPracticed')}</div>
+              <div style={{paddingLeft:16}}>
+                <span style={{color:'var(--t-green)',fontWeight:600}}>{globalWordStats.known}</span> {t('statKnown')}
+                <span style={{marginLeft:16,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{globalWordStats.learned}</span></span>
+              </div>
+              <div style={{paddingLeft:16}}>
+                <span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.unknown}</span> {t('statUnknown')}
+                <span style={{marginLeft:16,color:'var(--t-muted)',fontSize:13}}>— {t('statForgotten')}: <span style={{color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span></span>
+              </div>
+            </div>
+            <button onClick={()=>setShowResetDialog(true)} style={{...S.resetBtn,marginTop:8}}>{t('resetProgress')}</button>
+          </div>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('readingSpeed')}</span>
@@ -2070,20 +2088,15 @@ function App({data}){
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
         </div>
-        <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('progress')}</span>
-          <p style={{fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'4px 0'}}>{t('totalLearned')} <strong style={{color:'var(--t-green)'}}>{globalLearnedCount}</strong></p>
-          <button onClick={()=>setShowResetDialog(true)} style={S.resetBtn}>{t('resetProgress')}</button>
-          {(showResetDialog||showRetakeDialog)&&<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
-            <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
-              <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
-              <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-                <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
-                <button onClick={()=>{setShowResetDialog(false);setShowRetakeDialog(false)}} style={{padding:'10px 24px',borderRadius:8,border:'1.5px solid var(--t-border)',background:'transparent',color:'var(--t-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
-              </div>
+        {(showResetDialog||showRetakeDialog)&&<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
+          <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
+            <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
+            <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+              <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+              <button onClick={()=>{setShowResetDialog(false);setShowRetakeDialog(false)}} style={{padding:'10px 24px',borderRadius:8,border:'1.5px solid var(--t-border)',background:'transparent',color:'var(--t-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
             </div>
-          </div>}
-        </div>
+          </div>
+        </div>}
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('statsPage')}</span>
           {[{key:'text',i:'statsText'},{key:'vocabulary',i:'statsVocab'},{key:'progress',i:'statsProgress'}].map(s=>(
