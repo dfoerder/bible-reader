@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.35b';
+const APP_VERSION = '1.9.36b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1421,7 +1421,20 @@ function App({data}){
   const [bookLemmas,setBookLemmas]=useState({});
   const loadBookLemmas=useCallback(async(bookNr)=>{if(bookLemmas[bookNr])return;const anno=await fetchAnno(bookNr);if(!anno)return;const lemmas=new Set();Object.values(anno.chapters).forEach(ch=>{Object.values(ch).forEach(va=>{(va||[]).forEach(a=>{if(a.phrase==null)lemmas.add(a.lemma)})})});setBookLemmas(prev=>({...prev,[bookNr]:[...lemmas]}))},[bookLemmas]);
   const getBookWordStats=useCallback((bookNr)=>{const lemmas=bookLemmas[bookNr];if(!lemmas)return null;let known=0,unknown=0,learned=0,forgotten=0;lemmas.forEach(l=>{const d=wordData[l];if(!d||d.familiarity===-1)return;if(d.familiarity>=1)known++;if(d.familiarity===0)unknown++;if((d.learned||0)>0)learned++;if((d.forgotten||0)>0&&d.familiarity===0)forgotten++});return{known,unknown,notSeen:lemmas.length-known-unknown,learned,forgotten,total:lemmas.length}},[bookLemmas,wordData]);
-  const trainWord=useCallback((key,newFam)=>{setWordData(prev=>{const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};const oldFam=e.familiarity;const learned=(e.learned||0)+(oldFam===0&&newFam>0?1:0);const forgotten=(e.forgotten||0)+(oldFam>0&&newFam===0?1:0);const next={...prev,[key]:{familiarity:newFam,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1,learned,forgotten}};LS.set('bible-word-data',next);return next})},[]);
+  const trainWord=useCallback((key,newFam)=>{setWordData(prev=>{
+    const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};
+    const oldFam=e.familiarity;
+    const lt=e.lasttrained?new Date(e.lasttrained).getTime():null;
+    const DAY=24*3600*1000;
+    // Familiarity kann nur erhöht werden wenn das Wort seit >24h nicht geübt wurde (oder noch nie).
+    // Erniedrigen (falsche Antwort → 0) ist immer erlaubt.
+    const canIncrease=!lt||(Date.now()-lt>=DAY);
+    const effectiveFam=newFam>oldFam&&!canIncrease?oldFam:newFam;
+    const learned=(e.learned||0)+(oldFam===0&&effectiveFam>0?1:0);
+    const forgotten=(e.forgotten||0)+(oldFam>0&&effectiveFam===0?1:0);
+    const next={...prev,[key]:{familiarity:effectiveFam,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1,learned,forgotten}};
+    LS.set('bible-word-data',next);return next;
+  })},[]);
   const [expandedTestament,setExpandedTestament]=useState(null);
   const [expandedBook,setExpandedBook]=useState(null);
   const [statsBook,setStatsBook]=useState(null);
