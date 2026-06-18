@@ -16,6 +16,13 @@ Detaillierte Checkliste für die App-Store-Einreichung in `projekt-arbeitspakete
 - **Technisch:** Tip-Jar via StoreKit (1.99/4.99/9.99 $), Spendenhinweis bei Sprachpaket-Downloads, Gerätetest, Barrierefreiheit (Dynamic Type, VoiceOver)
 - **TestFlight & Review** → Veröffentlichung → danach Android/Play Store
 
+## v1.9.42b (18.06.2026)
+
+### Fortschritt-Statistik ins Training verschoben
+- Fortschritt-Unterabschnitt aus den Einstellungen entfernt (Reset-Knopf bleibt)
+- Neues 📊-Icon neben dem Titel „Training" — öffnet Modal mit vollständiger Fortschritt-Statistik (Geübt/Bekannt/Unbekannt/Ungeübt + Aufschlüsselung) und Reset-Knopf; Klick außerhalb schließt es
+- Bugfixes: Panel musste innerhalb des `phase==='training'`-early-return-Blocks stehen (sonst nicht gerendert); Icon-Ausrichtung via Flex-Zeile statt absoluter Positionierung
+
 ## v1.9.38b (18.06.2026)
 
 ### Bugfix: Leerer Bildschirm nach Reload
