@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.41b';
+const APP_VERSION = '1.9.42b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1061,9 +1061,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     :t('yourLevel').replace('{l}',stepLabel(activeStep));
 
   return(<div>
-    <header style={{...S.header,position:'relative'}}>
-      <h1 style={S.title}>{t('training')}</h1>
-      {onShowProgress&&<button onClick={onShowProgress} style={{position:'absolute',right:0,top:0,fontSize:22,lineHeight:'34px',height:34,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:'0 2px'}} title={t('progress')}>📊</button>}
+    <header style={S.header}>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,margin:'0 0 4px'}}>
+        <h1 style={{...S.title,margin:0}}>{t('training')}</h1>
+        {onShowProgress&&<button onClick={onShowProgress} style={{fontSize:20,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:0}} title={t('progress')}>📊</button>}
+      </div>
     </header>
     <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>{t('back')}</button></div>
     <div style={{textAlign:'center',margin:'0 0 8px'}}>
