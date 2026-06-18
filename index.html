@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.37b';
+const APP_VERSION = '1.9.38b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1410,8 +1410,8 @@ function App({data}){
     // Effektives Level: höchstes aus userLevel, trainStep-Level (aus LS) und freqStep-Level
     const trainStepLS=parseInt(LS.get('bible-train-step'));
     const freqStepLS=parseInt(LS.get('bible-freq-step'));
-    const trainLvl=trainStepLS!=null?stepToLevel(Math.min(trainStepLS,SUBSTEPS.length-1)):null;
-    const freqLvl=freqStepLS!=null?stepToLevel(Math.min(freqStepLS,SUBSTEPS.length-1)):null;
+    const trainLvl=!isNaN(trainStepLS)?stepToLevel(Math.min(trainStepLS,SUBSTEPS.length-1)):null;
+    const freqLvl=!isNaN(freqStepLS)?stepToLevel(Math.min(freqStepLS,SUBSTEPS.length-1)):null;
     const liUser=LEVELS.indexOf(userLevel);
     const liTrain=trainLvl?LEVELS.indexOf(trainLvl):-1;
     const liFreq=freqLvl?LEVELS.indexOf(freqLvl):-1;
