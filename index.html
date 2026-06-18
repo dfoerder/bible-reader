@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.28b';
+const APP_VERSION = '1.9.29b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -182,6 +182,9 @@ const I18N={
   fontSize:{de:'Schriftgröße',en:'Font size'},
   fontSizeTr:{de:'Schriftgröße Übersetzungen',en:'Translation font size'},
   fontSizeEx:{de:'Schriftgröße Übungen',en:'Exercise font size'},
+  fsBibleText:{de:'Bibeltext',en:'Bible text'},
+  fsTranslations:{de:'Übersetzungen',en:'Translations'},
+  fsExercises:{de:'Übungen',en:'Exercises'},
   fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
   fontPreviewTr:{de:'Übersetzung',en:'translation'},
   layout:{de:'Layout',en:'Layout'},
@@ -2010,30 +2013,33 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('fontSize')}</span>
-          <div style={S.fontSizeRow}>
-            <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
-            <span style={S.fontSizePreview}>{fontSize}px</span>
-            <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+          <div style={{marginTop:8}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsBibleText')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSize}px</span>
+              <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+            <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
           </div>
-          <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
-        </div>
-        <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('fontSizeTr')}</span>
-          <div style={S.fontSizeRow}>
-            <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
-            <span style={S.fontSizePreview}>{fontSizeTr}px</span>
-            <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSizeTr}px</span>
+              <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+            <p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:1.6,color:'var(--t-accent)',marginTop:8}}>{t('fontPreviewTr')}</p>
           </div>
-          <p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:1.6,color:'var(--t-accent)',marginTop:8}}>{t('fontPreviewTr')}</p>
-        </div>
-        <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('fontSizeEx')}</span>
-          <div style={S.fontSizeRow}>
-            <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
-            <span style={S.fontSizePreview}>{fontSizeEx}px</span>
-            <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsExercises')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSizeEx}px</span>
+              <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+            <p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
           </div>
-          <p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('layout')}</span>
