@@ -7,6 +7,27 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.34b (18.06.2026)
+
+### Lernfortschritt-Statistik überarbeitet
+- **Fortschritt** ist jetzt ein Unterabschnitt von Training (kein eigenständiger Bereich)
+- Neue Gliederung: Geübt (= Bekannt + Unbekannt) · Ungeübt (= alle Wörter − Geübt)
+  - Bekannt → davon gelernt (fam 0→>0)
+  - Unbekannt → davon vergessen (fam >0→0)
+  - Ungeübt aufgeteilt in: unter deinem Niveau (wahrscheinlich bekannt) / auf und über deinem Niveau (eventuell unbekannt) — berechnet aus VOCAB_POOL + userLevel, passt sich automatisch bei Level-Änderung an
+
+### Ergebnisscreen: gelernt vs. geübt
+- Nach Cloze-Übungen: „X gelernt" (grün, fam 0→>0) und „Y geübt" (fam -1→>0) separat angezeigt
+- `preFam`-Snapshot beim Start der Übung für alle drei Cloze-Pfade (allgemein, Buch, Kapitel)
+
+### Cloze-Wortauswahl verbessert
+- Kapitel-Cloze priorisiert jetzt fam=0 (bekannte Schwächen) vor fam=-1 (neue Wörter) — wie allgemeine und Buch-Cloze bereits
+
+### Schriftgrösse
+- Bereich „Schriftgröße" mit Unterabschnitten Bibeltext / Übersetzungen / Übungen
+- Separate Schriftgröße für Übungstexte (Default = Bibeltext-Größe)
+- Bibeltext-Default auf 16 px (Kindle-Standard)
+
 ## v1.9.30b (18.06.2026)
 
 ### Übungs-Features und Verbesserungen
