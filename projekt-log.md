@@ -7,6 +7,19 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.30b (18.06.2026)
+
+### Übungs-Features und Verbesserungen
+- **POS-Distraktoren überall einheitlich**: `posWrongDe` zu gemeinsamem `formWrong`-Helfer ausgebaut, der Wortart **und** Form (Numerus/Tempus) matcht — gilt jetzt für alle 8 Distraktoren-Stellen (allgemeine + kapitelspezifische Cloze, Wiederholung, Retry)
+- **Kapitel-Cloze angeglichen**: `clozeFormOf`-Helfer leitet Form-Kategorie (sg/pl/pres/past/part) aus englischer Wortform + Lemma ab; `genOpts` nutzt jetzt denselben `formWrong`-Pool
+- **Kontext-Einstellung**: Schalter „Satz | Ganzer Vers" im Kapitel-Lückentext (Inline-Panel im Abschnitt **und** im laufenden Training neben dem Titel)
+- **„Weitere Beispiele für \<wort\>"**: Bei falscher Antwort in beiden Cloze-Übungen; schlanker Refs-Index (207 KB, `data/examples.json`), Verstext on-the-fly via `fetchBook`; Einzelbeispiel-Stepper mit „Nächstes Beispiel" + „Zurück"
+- **Separate Schriftgröße für Übungstexte**: Einstellungsbereich „Schriftgröße" mit Unterabschnitten Bibeltext / Übersetzungen / Übungen; Bibeltext-Default auf 16 px (Kindle-Standard)
+
+### Datenqualität
+- **Flexions-Übersetzungen** (`deForm`/`form`): Via Opus-Batch für alle 5086 Wörter erzeugt — Lückentext zeigt/prüft jetzt flektierte Form (Männer, kamen), Distraktoren passen in Numerus/Tempus; behebt nebenbei Lemma-Fehler (be→„sein", tell→„erzählen")
+- **Randzeichen-Bereinigung**: Satzzeichen (incl. typografische Quotes), Bindestrich-Präfixe aus `answer`/`de` entfernt; 16 Präfix-Fragmente per Opus + Review durch saubere Grundformen ersetzt (`fix_hyphen_de.py`)
+
 ## v1.9.9b (17.06.2026)
 
 ### JSON-Konsolidierung: vocab_pool + context_exercises → words.json
