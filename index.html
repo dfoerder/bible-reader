@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.40b';
+const APP_VERSION = '1.9.41b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1940,7 +1940,35 @@ function App({data}){
 
   // ── TRAINING ──
   if(phase==='training'){
-    return <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)}/>;
+    return(<div style={{height:'100%'}}>
+      <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)}/>
+      {showProgressPanel&&<div onClick={()=>setShowProgressPanel(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9998}}>
+        <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'20px 24px',maxWidth:340,width:'90%',fontFamily:sans}}>
+          <h2 style={{fontSize:17,fontWeight:600,color:'var(--t-title)',margin:'0 0 14px'}}>{t('progress')}</h2>
+          <div style={{fontSize:14,color:'var(--t-text2)',lineHeight:2.2}}>
+            <div><span style={{color:'var(--t-title)',fontWeight:600}}>{globalWordStats.practiced}</span> {t('statPracticed')}</div>
+            <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{globalWordStats.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{globalWordStats.learned}</span></span></div>
+            <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span></span></div>
+            <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel+globalWordStats.atAboveLevel}</span> {t('statUnpracticed')}</div>
+            <div style={{paddingLeft:16}}><span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel}</span> <span style={{fontSize:13}}>{t('statBelowLevel')}</span></div>
+            <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.atAboveLevel}</span> <span style={{fontSize:13}}>{t('statAtAboveLevel')}</span></div>
+          </div>
+          <div style={{display:'flex',gap:10,marginTop:16,justifyContent:'space-between',alignItems:'center'}}>
+            <button onClick={()=>{setShowProgressPanel(false);setShowResetDialog(true)}} style={S.resetBtn}>{t('resetProgress')}</button>
+            <button onClick={()=>setShowProgressPanel(false)} style={S.navBtn}>{t('close')}</button>
+          </div>
+        </div>
+      </div>}
+      {(showResetDialog||showRetakeDialog)&&<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
+        <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
+          <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
+          <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+            <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+            <button onClick={()=>{setShowResetDialog(false);setShowRetakeDialog(false)}} style={{padding:'10px 24px',borderRadius:8,border:'1.5px solid var(--t-border)',background:'transparent',color:'var(--t-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
+          </div>
+        </div>
+      </div>}
+    </div>);
   }
 
   // ── STATISTICS ──
@@ -2644,23 +2672,6 @@ function App({data}){
         <button onClick={closePractice} style={S.practiceX}>✕</button>
       </div>
     </div>)}
-  {showProgressPanel&&<div onClick={()=>setShowProgressPanel(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9998}}>
-    <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'20px 24px',maxWidth:340,width:'90%',fontFamily:sans}}>
-      <h2 style={{fontSize:17,fontWeight:600,color:'var(--t-title)',margin:'0 0 14px'}}>{t('progress')}</h2>
-      <div style={{fontSize:14,color:'var(--t-text2)',lineHeight:2.2}}>
-        <div><span style={{color:'var(--t-title)',fontWeight:600}}>{globalWordStats.practiced}</span> {t('statPracticed')}</div>
-        <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{globalWordStats.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{globalWordStats.learned}</span></span></div>
-        <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span></span></div>
-        <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel+globalWordStats.atAboveLevel}</span> {t('statUnpracticed')}</div>
-        <div style={{paddingLeft:16}}><span style={{color:'var(--t-muted)',fontWeight:600}}>{globalWordStats.belowLevel}</span> <span style={{fontSize:13}}>{t('statBelowLevel')}</span></div>
-        <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.atAboveLevel}</span> <span style={{fontSize:13}}>{t('statAtAboveLevel')}</span></div>
-      </div>
-      <div style={{display:'flex',gap:10,marginTop:16,justifyContent:'space-between',alignItems:'center'}}>
-        <button onClick={()=>{setShowProgressPanel(false);setShowResetDialog(true)}} style={S.resetBtn}>{t('resetProgress')}</button>
-        <button onClick={()=>setShowProgressPanel(false)} style={S.navBtn}>{t('close')}</button>
-      </div>
-    </div>
-  </div>}
   </div>);
 }
 
