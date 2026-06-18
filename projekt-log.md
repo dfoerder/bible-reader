@@ -16,6 +16,13 @@ Detaillierte Checkliste für die App-Store-Einreichung in `projekt-arbeitspakete
 - **Technisch:** Tip-Jar via StoreKit (1.99/4.99/9.99 $), Spendenhinweis bei Sprachpaket-Downloads, Gerätetest, Barrierefreiheit (Dynamic Type, VoiceOver)
 - **TestFlight & Review** → Veröffentlichung → danach Android/Play Store
 
+## v1.9.38b (18.06.2026)
+
+### Bugfix: Leerer Bildschirm nach Reload
+- `parseInt(null)` gibt `NaN` zurück wenn `bible-train-step`/`bible-freq-step` noch nie im localStorage gesetzt wurden
+- `NaN != null` ist in JavaScript `true` → `stepToLevel(NaN)` wurde aufgerufen → `SUBSTEPS[NaN] = undefined` → `.split('.')` TypeError → React-Render crashte → leerer Bildschirm nach „Loading data…"
+- Fix: `!isNaN()` Guard statt `!= null` (eingeführt in v1.9.37b)
+
 ## v1.9.37b (18.06.2026)
 
 ### Bugfixes
