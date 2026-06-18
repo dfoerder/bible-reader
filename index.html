@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.32b';
+const APP_VERSION = '1.9.33b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -194,6 +194,7 @@ const I18N={
   progress:{de:'Fortschritt',en:'Progress'},
   totalLearned:{de:'Gelernte Wörter gesamt:',en:'Total words learned:'},
   statPracticed:{de:'Geübt',en:'Practiced'},
+  statUnpracticed:{de:'Ungeübt',en:'Unpracticed'},
   statOfWhichKnown:{de:'davon bekannt',en:'of which known'},
   statOfWhichUnknown:{de:'davon unbekannt',en:'of which unknown'},
   resetProgress:{de:'Fortschritt zurücksetzen',en:'Reset all progress'},
@@ -2035,6 +2036,7 @@ function App({data}){
                 <span style={{color:'var(--t-accent)',fontWeight:600}}>{globalWordStats.unknown}</span> {t('statUnknown')}
                 <span style={{marginLeft:16,color:'var(--t-muted)',fontSize:13}}>— {t('statForgotten')}: <span style={{color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span></span>
               </div>
+              <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{stats.allLemmas-globalWordStats.practiced}</span> {t('statUnpracticed')}</div>
             </div>
             <button onClick={()=>setShowResetDialog(true)} style={{...S.resetBtn,marginTop:8}}>{t('resetProgress')}</button>
           </div>
