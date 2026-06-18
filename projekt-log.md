@@ -16,6 +16,18 @@ Detaillierte Checkliste für die App-Store-Einreichung in `projekt-arbeitspakete
 - **Technisch:** Tip-Jar via StoreKit (1.99/4.99/9.99 $), Spendenhinweis bei Sprachpaket-Downloads, Gerätetest, Barrierefreiheit (Dynamic Type, VoiceOver)
 - **TestFlight & Review** → Veröffentlichung → danach Android/Play Store
 
+## v1.9.37b (18.06.2026)
+
+### Bugfixes
+
+#### Familiarity steigt nicht mehr durch Retry in derselben Session
+- **Bug:** Wort falsch beantwortet → am Ende der Übung nochmals richtig beantwortet → Familiarity wurde auf 1 gesetzt und als „gelernt" gezählt
+- **Fix:** 24h-Regel direkt in `trainWord` verankert: Familiarity kann nur erhöht werden, wenn `lasttrained` null oder >24h zurückliegt. Erniedrigen (falsche Antwort → 0) ist immer erlaubt. Gilt zentral für alle Pfade.
+
+#### „Unter deinem Niveau" zeigte 0 nach Trainings-Aufstieg
+- **Bug:** Im Frequenz-Modus wird `userLevel` beim Aufsteigen nicht aktualisiert → `belowLevel` war immer 0
+- **Fix:** `globalWordStats` nimmt jetzt das höchste der drei Level-Quellen: `userLevel`, `stepToLevel(trainStep)` (Level-Modus), `stepToLevel(freqStep)` (Frequenz-Modus) — jeweils aus LS gelesen
+
 ## v1.9.34b (18.06.2026)
 
 ### Lernfortschritt-Statistik überarbeitet
