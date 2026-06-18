@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.30b';
+const APP_VERSION = '1.9.31b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -283,6 +283,9 @@ const I18N={
   verseN:{de:'Vers {n}',en:'Verse {n}'},
   repeat:{de:'Wiederholen',en:'Repeat'},
   learned:{de:'Gelernt',en:'Learned'},
+  practiced:{de:'Geübt',en:'Practiced'},
+  learnedN:{de:'{n} gelernt',en:'{n} learned'},
+  practicedN:{de:'{n} geübt',en:'{n} practiced'},
   allPracticed:{de:'Alle Wörter geübt!',en:'All words practiced!'},
   practiceAgain:{de:'Nochmal üben',en:'Practice again'},
   backToText:{de:'Zurück zum Text',en:'Back to text'},
@@ -665,6 +668,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     let allWords=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
     if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
     if(allWords.length===0)return;
+    const preFam={};allWords.forEach(w=>{const k=w.lemma||w.answer;preFam[k]=fam(w);});
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
     const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const picked=units[0];
@@ -675,7 +679,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
+    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length,preFam};
     setSelectedLevel(lvl);setLastStart('cloze');
   },[wordData,clozeForStep]);
 
@@ -726,6 +730,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     let allWords=[...shuffle(prio1),...shuffle(prio2)];
     if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
     if(allWords.length===0){setMode('noexercises');return}
+    const preFam={};allWords.forEach(w=>{const k=w.lemma||w.answer;preFam[k]=fam(w);});
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
     const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const picked=units[0];
@@ -736,7 +741,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length};
+    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length,preFam};
     setLastStart({type:'book',bi});
   },[books,wordData]);
 
@@ -865,6 +870,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const u=clozeUnitsRef.current;
     const showGlobal=exType==='cloze'&&u&&u.units.length>1;
     const globalScore=showGlobal?u.globalScore+displayScore:null;
+    // A: gelernt (preFam=0→fam>0) vs. geübt (preFam=-1→fam>0)
+    const preFam=u?.preFam||{};
+    const learnedCount=Object.entries(preFam).filter(([k,pf])=>pf===0&&(wordData[k]?.familiarity||0)>0).length;
+    const practicedCount=Object.entries(preFam).filter(([k,pf])=>pf===-1&&(wordData[k]?.familiarity||0)>0).length;
+    const showLP=exType==='cloze'&&(learnedCount>0||practicedCount>0);
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
@@ -872,6 +882,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
           :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
+        {showLP&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'-12px 0 16px'}}>
+          {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
+          {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
+        </p>}
         {showGlobal&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('totalScore')}: {globalScore}/{u.globalTotal}</p>}
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
@@ -1641,11 +1655,17 @@ function App({data}){
       }
     }
     if(exercises.length===0)return;
-    const allWords=shuffleArr(exercises);
+    // B: fam=0 (bekannte Schwächen) vor fam=-1 (neue Wörter) priorisieren
+    const fam=w=>{const d=wordData[w.lemma];return d?d.familiarity:-1;};
+    const known0=shuffleArr(exercises.filter(w=>fam(w)===0));
+    const newWords=shuffleArr(exercises.filter(w=>fam(w)===-1));
+    const allWords=[...known0,...newWords];
+    // preFam: Zustand vor der Übung für A (Ergebnisanzeige)
+    const preFam={};allWords.forEach(w=>{preFam[w.lemma]=fam(w);});
     const allDe=[...new Set([...quizWords.map(w=>w.de),...Object.values(VOCAB_POOL).flat().map(w=>w.de)])];
     const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
     const words=units[0];const opts=genOpts(words,allDe);
-    setChapTrain({type:'cloze',words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:allWords.length});
+    setChapTrain({type:'cloze',words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:allWords.length,preFam});
     setPhase('quiz');
   },[quizWords,genOpts,reviewDone,unknownWords,annotations,bookName,chapNum,verses,hasAnno,clozeCtx]);
 
@@ -2210,6 +2230,9 @@ function App({data}){
       const hadRetry=chapTrain.firstPassScore!=null;
       const finalGlobalScore=chapTrain.globalScore+displayScore;
       const isMultiUnit=chapTrain.units&&chapTrain.units.length>1;
+      const chapPreFam=chapTrain.preFam||{};
+      const chapLearned=Object.entries(chapPreFam).filter(([k,pf])=>pf===0&&(wordData[k]?.familiarity||0)>0).length;
+      const chapPracticed=Object.entries(chapPreFam).filter(([k,pf])=>pf===-1&&(wordData[k]?.familiarity||0)>0).length;
       return(<div>
         <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
         <div style={{textAlign:'center',padding:'20px 0'}}>
@@ -2220,6 +2243,10 @@ function App({data}){
           {hadRetry
             ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
             :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(isMultiUnit?finalGlobalScore>=chapTrain.globalTotal*0.85:displayScore>=chapTrain.total*0.85)?t('wellDone'):t('keepPracticing')}</p>}
+          {(chapLearned>0||chapPracticed>0)&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'-12px 0 16px'}}>
+            {chapLearned>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',chapLearned)}</span>}
+            {chapPracticed>0&&<span>{t('practicedN').replace('{n}',chapPracticed)}</span>}
+          </p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.startBtn}>{t('finish')}</button>
             <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:(chapTrain.type==='cloze'?startChapCloze:startChapTrain)} style={S.navBtn}>{t('repeat')}</button>
