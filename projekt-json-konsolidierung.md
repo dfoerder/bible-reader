@@ -64,6 +64,12 @@ ein Fetch, größte Ersparnis. A als risikoärmerer Zwischenschritt möglich.
 - [x] Alt-Dateien `vocab_pool.json` + `context_exercises.json` aus Tracking entfernt, gitignored (lokale Build-Intermediates); Einmal-Migration `build_words.py` gelöscht
 - Hinweis: `compare_levels.js` (historisches Analyse-Tool) liest noch den lokalen `vocab_pool.json`-Intermediate — unkritisch, nicht Teil der App.
 
+**Nachträge zu `words.json` (18.06.2026, v1.9.34b):**
+- [x] `deForm` + `form` ergänzt (via `generate_deform.py`, Opus-Batch): flektierte DE-Übersetzung passend zur Wortform im Satz (Plural/Vergangenheit), Form-Kategorie (`sg`/`pl`/`inf`/`pres`/`past`/`part`/`base`) für Distraktor-Matching
+- [x] Randzeichen-Bereinigung: Satzzeichen aus `answer`/`de` entfernt; 16 Bindestrich-Präfixe durch saubere Grundformen ersetzt (`fix_hyphen_de.py`)
+- [x] `data/examples.json` ergänzt (via `generate_examples.py`): schlanker Refs-Index (207 KB, Lemma → Vers-Referenzen) für „Weitere Beispiele"-Feature; Verstext on-the-fly via `fetchBook`
+- Aktuelles Wort-Schema: `{en, de, deForm, form, pos, sub, occ, text, answer, ref, book}`
+
 ### AP4 — `bibles/`-Struktur: bewusste Entscheidung dokumentieren  ·  Status: ERLEDIGT (17.06.2026)
 793 Dateien, lazy pro Buch geladen.
 - [x] **Entscheidung: `bibles/` NICHT zusammenführen.** Per-Buch-Lazy-Loading ist ein
