@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.44b';
+const APP_VERSION = '1.9.45b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -891,16 +891,15 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
-        {showVocabSession
-          ?<div style={{fontSize:48,fontWeight:700,color:vocabSessionScore>=vocabSessionTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{vocabSessionScore}/{vocabSessionTotal}</div>
-          :showGlobal
-            ?<div style={{fontSize:48,fontWeight:700,color:globalScore>=u.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{globalScore}/{u.globalTotal}</div>
-            :<div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>}
-        {showVocabSession&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('vocabRound').replace('{n}',vs.rounds+1)}: {displayScore}/{totalRef.current}</p>}
+        {showGlobal
+          ?<div style={{fontSize:48,fontWeight:700,color:globalScore>=u.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{globalScore}/{u.globalTotal}</div>
+          :<div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>}
+        {showVocabSession&&<p style={{fontSize:15,fontWeight:600,color:'var(--t-muted)',fontFamily:sans,margin:'6px 0 0'}}>{t('totalScore')}: {vocabSessionScore}/{vocabSessionTotal}</p>}
+        {showVocabSession&&<p style={{fontSize:12,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0'}}>{t('vocabRound').replace('{n}',vs.rounds+1)}: {displayScore}/{totalRef.current}</p>}
         {showGlobal&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}: {displayScore}/{totalRef.current}</p>}
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
-          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(showVocabSession?vocabSessionScore>=vocabSessionTotal*0.85:showGlobal?globalScore>=u.globalTotal*0.85:displayScore>=totalRef.current*0.85)?t('wellDone'):t('keepPracticing')}</p>}
+          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(showGlobal?globalScore>=u.globalTotal*0.85:displayScore>=totalRef.current*0.85)?t('wellDone'):t('keepPracticing')}</p>}
         {showLP&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'-12px 0 16px'}}>
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
