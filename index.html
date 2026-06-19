@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.43b';
+const APP_VERSION = '1.9.44b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -326,6 +326,7 @@ const I18N={
   wellDone:{de:'Gut gemacht!',en:'Well done!'},
   keepPracticing:{de:'Weiter üben!',en:'Keep practicing!'},
   unitProgress:{de:'Einheit {c} von {t}',en:'Unit {c} of {t}'},
+  vocabRound:{de:'Runde {n}',en:'Round {n}'},
   retryIntro:{de:'Die falsch beantworteten Fragen werden nun wiederholt.',en:'The incorrectly answered questions will now be repeated.'},
   allErrorsCorrected:{de:'Alle Fehler wurden korrigiert.',en:'All errors have been corrected.'},
   errorSingular:{de:'Fehler — wird nun wiederholt',en:'error — will be repeated now'},
@@ -643,6 +644,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const [firstPassScore,setFirstPassScore]=useState(null);
   const clozeUnitsRef=useRef(null);
   const [clozeUnitDone,setClozeUnitDone]=useState(false);
+  const vocabSessionRef=useRef({correct:0,total:0,rounds:0});
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
@@ -877,6 +879,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const u=clozeUnitsRef.current;
     const showGlobal=exType==='cloze'&&u&&u.units.length>1;
     const globalScore=showGlobal?u.globalScore+displayScore:null;
+    const vs=vocabSessionRef.current;
+    const showVocabSession=exType==='vocab'&&vs.rounds>0;
+    const vocabSessionScore=showVocabSession?vs.correct+displayScore:null;
+    const vocabSessionTotal=showVocabSession?vs.total+totalRef.current:null;
     // A: gelernt (preFam=0→fam>0) vs. geübt (preFam=-1→fam>0)
     const preFam=u?.preFam||{};
     const learnedCount=Object.entries(preFam).filter(([k,pf])=>pf===0&&(wordData[k]?.familiarity||0)>0).length;
@@ -885,13 +891,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
-        {showGlobal
-          ?<div style={{fontSize:48,fontWeight:700,color:globalScore>=u.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{globalScore}/{u.globalTotal}</div>
-          :<div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>}
+        {showVocabSession
+          ?<div style={{fontSize:48,fontWeight:700,color:vocabSessionScore>=vocabSessionTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{vocabSessionScore}/{vocabSessionTotal}</div>
+          :showGlobal
+            ?<div style={{fontSize:48,fontWeight:700,color:globalScore>=u.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{globalScore}/{u.globalTotal}</div>
+            :<div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>}
+        {showVocabSession&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('vocabRound').replace('{n}',vs.rounds+1)}: {displayScore}/{totalRef.current}</p>}
         {showGlobal&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}: {displayScore}/{totalRef.current}</p>}
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
-          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(showGlobal?globalScore>=u.globalTotal*0.85:displayScore>=totalRef.current*0.85)?t('wellDone'):t('keepPracticing')}</p>}
+          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(showVocabSession?vocabSessionScore>=vocabSessionTotal*0.85:showGlobal?globalScore>=u.globalTotal*0.85:displayScore>=totalRef.current*0.85)?t('wellDone'):t('keepPracticing')}</p>}
         {showLP&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'-12px 0 16px'}}>
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
@@ -899,7 +908,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;if(lastStart==='vocab'){const rs=firstPassScore!=null?firstPassScore:score;vocabSessionRef.current={correct:vocabSessionRef.current.correct+rs,total:vocabSessionRef.current.total+totalRef.current,rounds:vocabSessionRef.current.rounds+1};startVocab(activeStep,trainFocus);}else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);
@@ -1081,7 +1090,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{stepInfo}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startVocab(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
+        <button onClick={()=>{vocabSessionRef.current={correct:0,total:0,rounds:0};startVocab(activeStep,trainFocus)}} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{trainFocus==='freq'?t('nOfMTotal').replace('{n}',stepWords.length):t('nOfMAvailable').replace('{n}',fresh)}</p>
       </div>
       <div style={S.settingsGroup}>
