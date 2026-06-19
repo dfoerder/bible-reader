@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.42b';
+const APP_VERSION = '1.9.43b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -885,15 +885,17 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
-        <div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>
+        {showGlobal
+          ?<div style={{fontSize:48,fontWeight:700,color:globalScore>=u.globalTotal*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{globalScore}/{u.globalTotal}</div>
+          :<div style={{fontSize:48,fontWeight:700,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{totalRef.current}</div>}
+        {showGlobal&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}: {displayScore}/{totalRef.current}</p>}
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
-          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
+          :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{(showGlobal?globalScore>=u.globalTotal*0.85:displayScore>=totalRef.current*0.85)?t('wellDone'):t('keepPracticing')}</p>}
         {showLP&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'-12px 0 16px'}}>
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
         </p>}
-        {showGlobal&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('totalScore')}: {globalScore}/{u.globalTotal}</p>}
         {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
@@ -914,7 +916,8 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         {hadRetry
           ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
           :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=totalRef.current*0.85?t('wellDone'):t('keepPracticing')}</p>}
-        {u&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}</p>}
+        {u&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('unitProgress').replace('{c}',u.unitIdx+1).replace('{t}',u.units.length)}</p>}
+        {u&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('totalScore')}: {u.globalScore+displayScore}/{u.units.slice(0,u.unitIdx+1).reduce((s,unit)=>s+unit.length,0)}</p>}
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={repeatClozeUnit} style={S.navBtn}>{t('repeat')}</button>
           <button onClick={nextClozeUnit} style={S.startBtn}>{t('next')}</button>
@@ -2292,7 +2295,8 @@ function App({data}){
         <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
         <div style={{textAlign:'center',padding:'20px 0'}}>
           <div style={{fontSize:48,fontWeight:700,color:displayScore>=chapTrain.total*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans}}>{displayScore}/{chapTrain.total}</div>
-          <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 4px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>
+          <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>
+          <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{t('totalScore')}: {chapTrain.globalScore+displayScore}/{chapTrain.units.slice(0,chapTrain.unitIdx+1).reduce((s,u)=>s+u.length,0)}</p>
           {hadRetry
             ?<p style={{fontSize:16,color:'var(--t-green)',fontFamily:sans,margin:'12px 0 24px'}}>{t('allErrorsCorrected')}</p>
             :<p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'12px 0 24px'}}>{displayScore>=chapTrain.total*0.85?t('wellDone'):t('keepPracticing')}</p>}
