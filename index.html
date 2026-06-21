@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.49b';
+const APP_VERSION = '1.9.50b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2274,14 +2274,14 @@ function App({data}){
               <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'1.7'}}>
-              {bws?<>{[
-                {label:t('statChapters').replace('{n}',book.numChapters),value:null},
-                {label:t('statTotalWords'),value:bws.total},
-                {label:t('statNotSeenWords'),value:bws.notSeen},
-                {label:t('statKnownWords'),value:bws.known,color:'var(--t-green)',sub:bws.learned>0?{label:t('statOfWhichLearned'),value:bws.learned,color:'var(--t-green)'}:null},
-                {label:t('statUnknownWords'),value:bws.unknown,color:'var(--t-accent)',sub:bws.forgotten>0?{label:t('statOfWhichForgotten'),value:bws.forgotten,color:'var(--t-accent)'}:null},
-              ].map((row,ri)=><div key={ri}>{row.value!=null?<div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><span style={{color:'var(--t-text2)'}}>{row.label}</span><span><span style={{fontWeight:600,color:row.color||'var(--t-text)'}}>{row.value}</span>{row.sub&&<span style={{fontSize:12,color:'var(--t-muted)',marginLeft:6}}>({row.sub.value} {row.sub.label})</span>}</span></div>:<div style={{color:'var(--t-text2)'}}>{row.label}</div>}</div>)}</>:<p style={{fontSize:12,color:'var(--t-muted)',margin:0}}>{t('loadingStats')}</p>}
+            {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'2.2'}}>
+              {bws?<>
+                <div style={{color:'var(--t-text2)'}}>{t('statChapters').replace('{n}',book.numChapters)}</div>
+                <div><span style={{color:'var(--t-title)',fontWeight:600}}>{bws.known+bws.unknown}</span> {t('statPracticed')}</div>
+                <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{bws.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{bws.learned}</span></span></div>
+                <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{bws.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{bws.forgotten}</span></span></div>
+                <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{bws.notSeen}</span> {t('statUnpracticed')}</div>
+              </>:<p style={{fontSize:12,color:'var(--t-muted)',margin:0}}>{t('loadingStats')}</p>}
             </div>}
             {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
@@ -2307,14 +2307,14 @@ function App({data}){
               <button onClick={e=>{e.stopPropagation();setStatsBook(showStats?null:bi)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,padding:'2px 6px',color:showStats?'var(--t-accent)':'var(--t-muted)',marginLeft:4}} title={t('statsTitle')}>&#x1F4CA;</button>
               {bm!=null&&<button onClick={e=>{e.stopPropagation();openChapter(bi,typeof bm==='number'?bm:bm.ch)}} style={S.bmBtn}>{t('continueReading').replace('{c}',(typeof bm==='number'?bm:bm.ch)+1).replace('{v}',typeof bm==='object'?bm.v:1)}</button>}
             </div>
-            {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'1.7'}}>
-              {bws?<>{[
-                {label:t('statChapters').replace('{n}',book.numChapters),value:null},
-                {label:t('statTotalWords'),value:bws.total},
-                {label:t('statNotSeenWords'),value:bws.notSeen},
-                {label:t('statKnownWords'),value:bws.known,color:'var(--t-green)',sub:bws.learned>0?{label:t('statOfWhichLearned'),value:bws.learned,color:'var(--t-green)'}:null},
-                {label:t('statUnknownWords'),value:bws.unknown,color:'var(--t-accent)',sub:bws.forgotten>0?{label:t('statOfWhichForgotten'),value:bws.forgotten,color:'var(--t-accent)'}:null},
-              ].map((row,ri)=><div key={ri}>{row.value!=null?<div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><span style={{color:'var(--t-text2)'}}>{row.label}</span><span><span style={{fontWeight:600,color:row.color||'var(--t-text)'}}>{row.value}</span>{row.sub&&<span style={{fontSize:12,color:'var(--t-muted)',marginLeft:6}}>({row.sub.value} {row.sub.label})</span>}</span></div>:<div style={{color:'var(--t-text2)'}}>{row.label}</div>}</div>)}</>:<p style={{fontSize:12,color:'var(--t-muted)',margin:0}}>{t('loadingStats')}</p>}
+            {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'2.2'}}>
+              {bws?<>
+                <div style={{color:'var(--t-text2)'}}>{t('statChapters').replace('{n}',book.numChapters)}</div>
+                <div><span style={{color:'var(--t-title)',fontWeight:600}}>{bws.known+bws.unknown}</span> {t('statPracticed')}</div>
+                <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{bws.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{bws.learned}</span></span></div>
+                <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{bws.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{bws.forgotten}</span></span></div>
+                <div><span style={{color:'var(--t-muted)',fontWeight:600}}>{bws.notSeen}</span> {t('statUnpracticed')}</div>
+              </>:<p style={{fontSize:12,color:'var(--t-muted)',margin:0}}>{t('loadingStats')}</p>}
             </div>}
             {isOpen&&<div style={S.chapGrid}>{Array.from({length:book.numChapters},(_,ci)=>(<button key={ci} onClick={()=>openChapter(bi,ci)} style={{...S.chapBtn,...(ci===(typeof bm==='number'?bm:bm?.ch)?{border:'2px solid var(--t-accent)'}:{})}}>{ci+1}</button>))}</div>}
           </div>);
