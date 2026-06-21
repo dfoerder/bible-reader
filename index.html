@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.51b';
+const APP_VERSION = '1.9.52b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2277,7 +2277,6 @@ function App({data}){
             {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'2.2'}}>
               {bws?<>
                 <div style={{fontWeight:600,color:'var(--t-title)',marginBottom:4}}>{t('progress')} Wörter lernen</div>
-                <div style={{color:'var(--t-text2)'}}>{t('statChapters').replace('{n}',book.numChapters)}</div>
                 <div><span style={{color:'var(--t-title)',fontWeight:600}}>{bws.known+bws.unknown}</span> {t('statPracticed')}</div>
                 <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{bws.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{bws.learned}</span></span></div>
                 <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{bws.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{bws.forgotten}</span></span></div>
@@ -2311,7 +2310,6 @@ function App({data}){
             {showStats&&<div style={{padding:'10px 14px',background:'var(--t-bg2)',borderRadius:8,margin:'4px 0',fontFamily:sans,fontSize:14,lineHeight:'2.2'}}>
               {bws?<>
                 <div style={{fontWeight:600,color:'var(--t-title)',marginBottom:4}}>{t('progress')} Wörter lernen</div>
-                <div style={{color:'var(--t-text2)'}}>{t('statChapters').replace('{n}',book.numChapters)}</div>
                 <div><span style={{color:'var(--t-title)',fontWeight:600}}>{bws.known+bws.unknown}</span> {t('statPracticed')}</div>
                 <div style={{paddingLeft:16}}><span style={{color:'var(--t-green)',fontWeight:600}}>{bws.known}</span> {t('statKnown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichLearned')}: <span style={{color:'var(--t-green)'}}>{bws.learned}</span></span></div>
                 <div style={{paddingLeft:16}}><span style={{color:'var(--t-accent)',fontWeight:600}}>{bws.unknown}</span> {t('statUnknown')}<span style={{marginLeft:12,color:'var(--t-muted)',fontSize:13}}>— {t('statOfWhichForgotten')}: <span style={{color:'var(--t-accent)'}}>{bws.forgotten}</span></span></div>
