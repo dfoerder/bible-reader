@@ -141,15 +141,6 @@ function isInflectedOxford(word) {
   if (NOT_INFLECTED.has(lw)) return false;
   if (oxLemmaSet.has(lw)) return false;
   if (IRREGULAR_MAP[lw] && oxLemmaSet.has(IRREGULAR_MAP[lw])) return true;
-  // US→UK spelling variants
-  if (lw.endsWith('or') && oxLemmaSet.has(lw.slice(0,-2)+'our')) return true;
-  if (lw.endsWith('ior') && oxLemmaSet.has(lw.slice(0,-3)+'iour')) return true;
-  if (lw.includes('bor') && oxLemmaSet.has(lw.replace('bor','bour'))) return true;
-  if (lw.includes('vor') && oxLemmaSet.has(lw.replace('vor','vour'))) return true;
-  if (lw.endsWith('ize') && oxLemmaSet.has(lw.slice(0,-3)+'ise')) return true;
-  if (lw.endsWith('ized') && oxLemmaSet.has(lw.slice(0,-4)+'ised')) return true;
-  if (!lw.endsWith('eed') && lw.endsWith('ed') && oxLemmaSet.has(lw.replace(/(?<=\w)ed$/, 'sed'))) return true;
-  if (oxLemmaSet.has(lw.replace(/(?<=\w)e$/, 'ae'))) return true;
   // Base form where Oxford has the -d/-ed/-ing form
   if (oxLemmaSet.has(lw+'d') || oxLemmaSet.has(lw+'ed') || oxLemmaSet.has(lw+'ing')) return true;
   const bases = [];
