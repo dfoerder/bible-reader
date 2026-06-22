@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.57b';
+const APP_VERSION = '1.9.58b';
 const APP_DATE = '17.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1244,7 +1244,7 @@ async function loadData(){
       const words=await wr.json();
       VOCAB_POOL=words;buildFreqPool();
       CLOZE_EXERCISES={};CLOZE_BY_PF={};
-      for(const lvl in words)CLOZE_EXERCISES[lvl]=words[lvl].map(w=>{
+      for(const lvl in words)CLOZE_EXERCISES[lvl]=words[lvl].filter(w=>w.text).map(w=>{
         const deForm=w.deForm||w.de;const form=w.form||'base';
         const key=(w.pos||'')+'|'+form;(CLOZE_BY_PF[key]||(CLOZE_BY_PF[key]=[])).push(deForm);
         // Lückentext zeigt/prüft die flektierte Form (deForm)
