@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-full-v1966';
+const CACHE_NAME = 'bible-full-v1967';
 const ASSETS = [
   './',
   './index.html',
