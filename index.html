@@ -2095,15 +2095,11 @@ function App({data}){
                 {isOpen&&<div style={S.statBookDetail}>
                   <div style={S.statGrid}>
                     <div style={S.statCell}><span style={S.statCellN}>{bk.total.toLocaleString()}</span><span style={S.statCellL}>{t('uniqueWords')}</span></div>
-                    <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-blue)'}}>{bk.score}</span><span style={S.statCellL}>{t('difficulty').replace('{l}',bk.diffLabel)}</span></div>
-                  </div>
-                  <div style={{...S.statGrid,marginTop:8}}>
-                    {levelOrder.map(lvl=>bk.byLevel[lvl]?(<div key={lvl} style={S.statCell}><span style={S.statCellN}>{bk.byLevel[lvl]}</span><span style={S.statCellL}>{lvl}</span></div>):null)}
                   </div>
                   {bws?<div style={{...S.statGrid,marginTop:8,borderTop:'1px solid var(--t-border)',paddingTop:8}}>
                     <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div>
                     <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div>
-                    <div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div>
+                    <div style={S.statCell}><span style={S.statCellN}>{bws.notSeen}</span><span style={S.statCellL}>{t('statUnpracticed')}</span></div>
                     <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{bws.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div>
                     <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{bws.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div>
                   </div>:<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0'}}>{t('loadingStats')}</p>}
