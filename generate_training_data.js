@@ -236,7 +236,6 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
     if (de.endsWith('-')) { filterStats.partial++; continue; }
     if (isInflectedOxford(lemma)) { filterStats.inflected++; continue; }
     if (/^(yourselves|ourselves|ourself|himself|herself|itself|themselves|myself|oneself)$/.test(lemma)) { filterStats.inflected++; continue; }
-    if (/^(jewish|christian|egyptian|roman|greek|hebrew|persian|assyrian|babylonian|philistine|levitical|italian|caesar)$/i.test(lemma)) { filterStats.nameAdj++; continue; }
     if (isNameLike(lemma, de)) { filterStats.name++; continue; }
     if (oxLemmaSet.has(lemma.replace(/-/g, ''))) { filterStats.inflected++; continue; }
   }
