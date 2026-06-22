@@ -132,8 +132,13 @@ const IRREGULAR_MAP = {
   further:'far',furthest:'far',
 };
 
+const NOT_INFLECTED = new Set([
+  'heed','hiss','sober','muster','adder','archer','badger','fuller','hades','comely','peres','james',
+]);
+
 function isInflectedOxford(word) {
   const lw = word.toLowerCase();
+  if (NOT_INFLECTED.has(lw)) return false;
   if (oxLemmaSet.has(lw)) return false;
   if (IRREGULAR_MAP[lw] && oxLemmaSet.has(IRREGULAR_MAP[lw])) return true;
   // US→UK spelling variants
@@ -162,12 +167,8 @@ function isInflectedOxford(word) {
   if (lw.endsWith('en') && lw.length > 3) bases.push(lw.slice(0, -2));
   if (lw.endsWith('th') && lw.length > 4) bases.push(lw.slice(0, -2));
   if (lw.endsWith('ieth') && lw.length > 5) bases.push(lw.slice(0, -4) + 'y');
-  // Derivation suffixes
+  // Derivation suffixes (ful/less/ment/ity kept as standalone words)
   if (lw.endsWith('ness') && lw.length > 5) { bases.push(lw.slice(0, -4)); if (lw.endsWith('iness')) bases.push(lw.slice(0, -5) + 'y'); }
-  if (lw.endsWith('ful') && lw.length > 4) bases.push(lw.slice(0, -3));
-  if (lw.endsWith('less') && lw.length > 5) bases.push(lw.slice(0, -4));
-  if (lw.endsWith('ment') && lw.length > 5) bases.push(lw.slice(0, -4), lw.slice(0, -4) + 'e');
-  if (lw.endsWith('ity') && lw.length > 5) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
   if (lw.endsWith('ous') && lw.length > 5) bases.push(lw.slice(0, -3), lw.slice(0, -3) + 'e');
   if (lw.endsWith('ings') && lw.length > 5) bases.push(lw.slice(0, -4));
   if (lw.endsWith('y') && !lw.endsWith('ly') && lw.length > 3) bases.push(lw.slice(0, -1), lw.slice(0, -1) + 'e');
