@@ -2250,7 +2250,7 @@ function App({data}){
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           {fromReading&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>}
-          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf.jpg" style={{width:28,height:28,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
+          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf.jpg" style={{width:36,height:36,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={{...S.gearBtn,fontSize:32}} title={t('settings')}>⚙</button>}
         </div>
       </header>
