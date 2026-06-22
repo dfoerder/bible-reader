@@ -428,27 +428,27 @@ console.log('  Written: data/context_exercises.json');
 console.log('\nPhase 3: Generating vocab pool...');
 const vocabPool = {};
 for (const lvl of LEVELS) {
-  const ceSet = new Set(exercises[lvl].map(e => e.lemma));
   vocabPool[lvl] = byLevel[lvl]
-    .filter(w => ceSet.has(w.lemma))
     .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
 fs.writeFileSync('data/vocab_pool.json', JSON.stringify(vocabPool));
 console.log('  Written: data/vocab_pool.json (Build-Intermediate, gitignored)');
 
 // ── Phase 4: Merge zu words.json (Single Source of Truth, von der App geladen) ──
-// vocab_pool + context_exercises sind eine 1:1-Bijektion (vocabPool ist auf Lemmas
-// mit Übung gefiltert) → ein Eintrag pro Wort mit allen Feldern. pos wird danach von
-// generate_pos.py ergänzt.
+// Alle Wörter kommen in words.json. Wörter mit Lückentext-Übung haben zusätzlich
+// text/answer/ref/book. Die App baut VOCAB_POOL aus allen, CLOZE_EXERCISES nur aus
+// Wörtern mit text. pos/deForm werden danach von generate_pos.py / generate_deform.py ergänzt.
 console.log('\nPhase 4: Merging into words.json...');
 const words = {};
 for (const lvl of LEVELS) {
-  const occByLemma = {};
-  for (const v of vocabPool[lvl]) occByLemma[v.en] = v.occ;
-  words[lvl] = exercises[lvl].map(e => ({
-    en: e.lemma, de: e.de, sub: e.sub, occ: occByLemma[e.lemma],
-    text: e.text, answer: e.answer, ref: e.ref, book: e.book,
-  }));
+  const exByLemma = {};
+  for (const e of exercises[lvl]) exByLemma[e.lemma] = e;
+  words[lvl] = vocabPool[lvl].map(v => {
+    const e = exByLemma[v.en];
+    return e
+      ? { en: v.en, de: v.de, sub: v.sub, occ: v.occ, text: e.text, answer: e.answer, ref: e.ref, book: e.book }
+      : { en: v.en, de: v.de, sub: v.sub, occ: v.occ };
+  });
 }
 fs.writeFileSync('data/words.json', JSON.stringify(words));
 console.log('  Written: data/words.json');
@@ -460,14 +460,4 @@ for (const lvl of LEVELS) {
     console.log(`  ${lvl}: vocab=${vocabPool[lvl].length}, cloze=${exercises[lvl].length}`);
 }
 console.log(`  Total: vocab=${Object.values(vocabPool).flat().length}, cloze=${Object.values(exercises).flat().length}`);
-if (noExercise > 0) console.log(`  ${noExercise} without exercise`);
-
-// Verify 0 mismatches
-let mismatch = 0;
-for (const lvl of LEVELS) {
-  const vpSet = new Set(vocabPool[lvl].map(w => w.en));
-  const ceSet = new Set(exercises[lvl].map(e => e.lemma));
-  vpSet.forEach(w => { if (!ceSet.has(w)) mismatch++; });
-  ceSet.forEach(w => { if (!vpSet.has(w)) mismatch++; });
-}
-console.log(`\nTotal mismatches: ${mismatch}`);
+if (noExercise > 0) console.log(`  ${noExercise} vocab-only (no cloze exercise)`);
