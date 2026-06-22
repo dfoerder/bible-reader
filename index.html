@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.66b';
+const APP_VERSION = '1.9.67b';
 const APP_DATE = '22.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2112,18 +2112,6 @@ function App({data}){
             })}</div>
           </div>
         </>}
-        {statsVisible.progress&&<div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('statsProgress')}</span>
-          <div style={S.statGrid}>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{globalWordStats.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{globalWordStats.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div>
-            <div style={S.statCell}><span style={S.statCellN}>{stats.allLemmas-globalWordStats.known-globalWordStats.unknown}</span><span style={S.statCellL}>{t('statNotSeen')}</span></div>
-          </div>
-          <div style={{...S.statGrid,marginTop:8}}>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{globalWordStats.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div>
-            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{globalWordStats.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div>
-          </div>
-        </div>}
       </div>
     </div>);
   }
@@ -2228,7 +2216,7 @@ function App({data}){
         </div>}
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('statsPage')}</span>
-          {[{key:'text',i:'statsText'},{key:'vocabulary',i:'statsVocab'},{key:'progress',i:'statsProgress'}].map(s=>(
+          {[{key:'text',i:'statsText'},{key:'vocabulary',i:'statsVocab'}].map(s=>(
             <label key={s.key} style={S.toggleRow}>
               <input type="checkbox" checked={statsVisible[s.key]} onChange={()=>toggleStatSection(s.key)}/>
               <span style={S.toggleLabel}>{t(s.i)}</span>
