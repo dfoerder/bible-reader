@@ -200,10 +200,6 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   const de = Object.entries(data.deCounts).sort((a, b) => b[1] - a[1])[0][0];
   const origLemma = data.displayLemma;
 
-  // Filter proper nouns: uppercase lemma where de is also capitalized
-  if (origLemma[0] === origLemma[0].toUpperCase() && origLemma[0] !== origLemma[0].toLowerCase()
-      && de[0] === de[0].toUpperCase() && de[0] !== de[0].toLowerCase()) { filterStats.properNoun++; continue; }
-
   // Determine level: Oxford > Kaggle > Opus > annotation level
   const oxLevels = oxMap[lemma];
   const kagLevel = kagMap[lemma];
