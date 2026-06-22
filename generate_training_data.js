@@ -228,7 +228,7 @@ for (const [lemma, data] of Object.entries(lemmaDataMerged)) {
   if (source === 'anno' || source === 'opus') {
     if (lemma.includes(' ')) { filterStats.space++; continue; }
     if (/[+—\/\*]/.test(lemma) || /^\d+$/.test(lemma)) { filterStats.special++; continue; }
-    if (lemma.length <= 2) { filterStats.short++; continue; }
+    if (lemma.length <= 1) { filterStats.short++; continue; }
     if (/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)\b/i.test(lemma) && lemma.includes('-')) { filterStats.compoundNum++; continue; }
     if (de.toLowerCase() === lemma.toLowerCase()) { filterStats.noTrans++; continue; }
     if (/[''']/.test(lemma)) { filterStats.contraction++; continue; }
