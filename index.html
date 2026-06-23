@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.93b';
+const APP_VERSION = '1.9.94b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -732,9 +732,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       currentUnexercised=shuffle(stepWords.filter(w=>fam(w)===-1));
     }
     if(unknown24h.length===0&&currentUnexercised.length===0){
-      if(reviewMode||focus==='freq'){
+      if(focus==='freq'||reviewMode){
         const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
         setMode(allDone?'freqAllDone':'freqComplete');
+      } else {
+        setMode('nowords');
       }
       return;
     }
@@ -1115,6 +1117,13 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
+  if(mode==='nowords'){
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('back')}</button></div>
+      <p style={{textAlign:'center',color:'var(--t-muted)',fontFamily:sans,margin:'40px 20px'}}>{t('noWordsToTrain')}</p>
+    </div>);
+  }
   if(mode==='freqComplete'||mode==='freqAllDone'){
     const fcFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const searchFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
@@ -1179,8 +1188,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const {words:stepWords}=vocabForStep(activeStep,trainFocus);
   const lowerFresh=(()=>{if(trainFocus==='freq')return 0;const lvl=stepToLevel(activeStep);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[])).filter(w=>{const d=wordData[w.en];return d&&d.familiarity===0;}).length;})();
-  const freshWords=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;
-  const fresh=countFresh(freshWords,w=>w.en)+lowerFresh;
+  const fresh=trainFocus==='freq'
+    ?FREQ_POOL.filter(w=>{const d=wordData[w.en];const f=d?d.familiarity:-1;if(w.freqStep===activeStep&&f===-1)return true;if(w.freqStep<=activeStep&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length
+    :countFresh(stepWords,w=>w.en)+lowerFresh;
   const {pool:clozeStepPool}=clozeForStep(activeStep,trainFocus);
   const lowerClozeFresh=(()=>{if(trainFocus==='freq')return 0;const lvl=stepToLevel(activeStep);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(CLOZE_EXERCISES[l]||[])).filter(w=>{const d=wordData[w.lemma||w.answer];return d&&d.familiarity===0;}).length;})();
   const clozeFresh=countFresh(clozeStepPool,w=>w.lemma||w.answer)+lowerClozeFresh;
