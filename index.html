@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.77b';
+const APP_VERSION = '1.9.78b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -703,24 +703,29 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const now=Date.now();
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
-    const prio1=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
-    const prio2=stepWords.filter(w=>fam(w)===-1);
-    let higherWords;
+    const unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS));
+    let lowerUnexercised,currentUnexercised;
     if(focus==='freq'){
-      const stepSet=new Set(stepWords.map(w=>w.en));
-      higherWords=FREQ_POOL.filter(w=>!stepSet.has(w.en));
+      lowerUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1));
+      currentUnexercised=shuffle(stepWords.filter(w=>w.freqStep===step&&fam(w)===-1));
     } else {
-      const lvl=stepToLevel(step);
-      const higherLevels=LEVELS.filter(l=>LEVELS.indexOf(l)>LEVELS.indexOf(lvl));
-      higherWords=higherLevels.flatMap(l=>(VOCAB_POOL[l]||[]));
+      const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);
+      lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1)));
+      currentUnexercised=shuffle(stepWords.filter(w=>fam(w)===-1));
     }
-    const prio3=higherWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
-    const prio4=higherWords.filter(w=>fam(w)===-1);
-    let pool=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
-    if(pool.length<15)pool=[...pool,...shuffle(stepWords.filter(w=>fam(w)<=0&&!pool.includes(w)))];
-    if(pool.length===0){if(focus==='freq'&&step===SUBSTEPS.length-1)setMode('freqComplete');return;}
-    const allDePool=[...new Set([...allDe,...higherWords.map(w=>w.de)])];
-    const units=[];for(let i=0;i<pool.length;i+=15)units.push(pool.slice(i,i+15));
+    if(unknown24h.length===0&&lowerUnexercised.length===0&&currentUnexercised.length===0){if(focus==='freq'&&step===SUBSTEPS.length-1)setMode('freqComplete');return;}
+    const units=[];let u24i=0,lowi=0,curri=0;
+    while(u24i<unknown24h.length||lowi<lowerUnexercised.length||curri<currentUnexercised.length){
+      const unit=[];
+      for(let i=0;i<3&&u24i<unknown24h.length;i++)unit.push(unknown24h[u24i++]);
+      if(lowi<lowerUnexercised.length)unit.push(lowerUnexercised[lowi++]);
+      while(unit.length<15&&curri<currentUnexercised.length)unit.push(currentUnexercised[curri++]);
+      while(unit.length<15&&u24i<unknown24h.length)unit.push(unknown24h[u24i++]);
+      while(unit.length<15&&lowi<lowerUnexercised.length)unit.push(lowerUnexercised[lowi++]);
+      if(unit.length===0)break;
+      units.push(shuffle(unit));
+    }
+    const allDePool=[...new Set([...allDe,...lowerUnexercised.map(w=>w.de)])];
     const picked=units[0];
     setExercises(picked);
     setShuffledOpts(picked.map(q=>{
@@ -729,7 +734,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);setVocabUnitDone(false);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:pool.length};
+    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:unknown24h.length+lowerUnexercised.length+currentUnexercised.length};
     setSelectedLevel(stepToLevel(step));setLastStart('vocab');
   },[wordData]);
 
