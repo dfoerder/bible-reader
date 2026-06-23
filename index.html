@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.97b';
+const APP_VERSION = '1.9.98b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -713,7 +713,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
     let unknown24h,lowerUnexercised,currentUnexercised;
-    if(reviewMode&&focus==='freq'){
+    if(reviewMode){
       currentUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1));
       unknown24h=[];lowerUnexercised=[];
     } else if(allLevels){
