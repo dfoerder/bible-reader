@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.82b';
+const APP_VERSION = '1.9.83b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1474,7 +1474,7 @@ function App({data}){
   const levelTested=LS.get('bible-level-tested');
   const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
   const prevPhaseRef=useRef('nav');
-  const [userLevel,setUserLevel]=useState(saved.userLevel||'B2');
+  const [userLevel,setUserLevel]=useState(saved.userLevel||'B1');
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
   const [unknownWords,setUnknownWords]=useState(new Set(saved.unknownWords||[]));
@@ -2153,9 +2153,6 @@ function App({data}){
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('trainingSection')}</span>
           <div style={{marginTop:8}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('vocabLevel')}</span>
-            <div style={{...S.levelBtns,marginTop:6}}>{["A1","A2","B1","B2","C1"].map(l=>(<button key={l} onClick={()=>setUserLevel(l)} style={{...S.lvlBtn,...(userLevel===l?S.lvlActive:{})}}>{l}</button>))}</div>
-            <p style={S.settingsHint}>{t('vocabLevelHint')}</p>
             <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
           </div>
           <div style={{marginTop:16}}>
