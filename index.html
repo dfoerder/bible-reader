@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.80b';
+const APP_VERSION = '1.9.81b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -643,6 +643,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const wrongRef=useRef([]);
   const totalRef=useRef(0);
   const retryRef=useRef(false);
+  const lowerLevelCorrectRef=useRef(0);
+  const lowerLevelFirstPassCorrectRef=useRef(null);
+  const lowerLevelTotalRef=useRef(0);
   const [retryPending,setRetryPending]=useState(null);
   const [firstPassScore,setFirstPassScore]=useState(null);
   const clozeUnitsRef=useRef(null);
@@ -733,8 +736,11 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       return shuffle([q.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);setVocabUnitDone(false);
+    const lowerKeys=new Set(lowerUnexercised.map(w=>w.en));
+    lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
+    lowerLevelTotalRef.current=picked.filter(w=>lowerKeys.has(w.en)).length;
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:unknown24h.length+lowerUnexercised.length+currentUnexercised.length};
+    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:unknown24h.length+lowerUnexercised.length+currentUnexercised.length,lowerKeys};
     setSelectedLevel(stepToLevel(step));setLastStart('vocab');
   },[wordData]);
 
@@ -805,6 +811,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       const wrong=posWrongDe(q,u.allDePool);
       return shuffle([q.de,...wrong]);
     }));
+    const lk=u.lowerKeys||new Set();
+    lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
+    lowerLevelTotalRef.current=picked.filter(w=>lk.has(w.en)).length;
     setCurrent(0);setScore(0);setSelected(null);setDone(false);setVocabUnitDone(false);setRetryPending(null);setFirstPassScore(null);
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
   },[score,firstPassScore]);
@@ -832,6 +841,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const wordKey=exType==='vocab'?ex.en:(ex.lemma||ex.answer);
     if(correct){
       if(!retryRef.current)setScore(s=>s+1);
+      if(!retryRef.current&&exType==='vocab'&&vocabUnitsRef.current?.lowerKeys?.has(wordKey))lowerLevelCorrectRef.current++;
       if(mode==='guess'){
         wrongRef.current=[...wrongRef.current,{ex,optsIdx:current}];
       } else if(mode==='easy'){
@@ -842,7 +852,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       setTimeout(()=>{
         guessRef.current=false;
         if(current<exercises.length-1){setCurrent(c=>c+1);setSelected(null)}
-        else if(wrongRef.current.length>0&&!retryRef.current){setFirstPassScore(score+1);setRetryPending(wrongRef.current)}
+        else if(wrongRef.current.length>0&&!retryRef.current){lowerLevelFirstPassCorrectRef.current=lowerLevelCorrectRef.current;setFirstPassScore(score+1);setRetryPending(wrongRef.current)}
         else if(wrongRef.current.length>0) startRetry();
         else if(exType==='cloze'&&clozeUnitsRef.current&&clozeUnitsRef.current.units.length>1&&clozeUnitsRef.current.unitIdx<clozeUnitsRef.current.units.length-1){setClozeUnitDone(true)}
         else if(exType==='vocab'&&vocabUnitsRef.current&&vocabUnitsRef.current.units.length>1&&vocabUnitsRef.current.unitIdx<vocabUnitsRef.current.units.length-1){setVocabUnitDone(true)}
@@ -889,7 +899,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   useEffect(()=>{
     if(!done)return;
     const realScore=firstPassScore!=null?firstPassScore:score;
-    const pct=realScore/totalRef.current;
+    const lowerCorrect=lowerLevelFirstPassCorrectRef.current!=null?lowerLevelFirstPassCorrectRef.current:lowerLevelCorrectRef.current;
+    const adjTotal=totalRef.current-lowerLevelTotalRef.current;
+    const pct=adjTotal>0?(realScore-lowerCorrect)/adjTotal:realScore/totalRef.current;
     const hist=LS.get('bible-training-history')||[];
     hist.push({date:Date.now(),type:exType,level:selectedLevel,step:trainStep,score:realScore,total:totalRef.current,pct:Math.round(pct*100)});
     if(hist.length>200) hist.splice(0,hist.length-200);
