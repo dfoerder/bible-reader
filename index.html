@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.81b';
+const APP_VERSION = '1.9.82b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -718,13 +718,12 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }
     if(unknown24h.length===0&&lowerUnexercised.length===0&&currentUnexercised.length===0){if(focus==='freq'&&step===SUBSTEPS.length-1)setMode('freqComplete');return;}
     const units=[];let u24i=0,lowi=0,curri=0;
-    while(u24i<unknown24h.length||lowi<lowerUnexercised.length||curri<currentUnexercised.length){
+    while(u24i<unknown24h.length||curri<currentUnexercised.length){
       const unit=[];
       for(let i=0;i<3&&u24i<unknown24h.length;i++)unit.push(unknown24h[u24i++]);
       if(lowi<lowerUnexercised.length)unit.push(lowerUnexercised[lowi++]);
       while(unit.length<15&&curri<currentUnexercised.length)unit.push(currentUnexercised[curri++]);
       while(unit.length<15&&u24i<unknown24h.length)unit.push(unknown24h[u24i++]);
-      while(unit.length<15&&lowi<lowerUnexercised.length)unit.push(lowerUnexercised[lowi++]);
       if(unit.length===0)break;
       units.push(shuffle(unit));
     }
