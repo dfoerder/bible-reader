@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.68b';
-const APP_DATE = '22.06.2026';
+const APP_VERSION = '1.9.69b';
+const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -1148,9 +1148,6 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{trainFocus==='freq'?t('nOfMTotal').replace('{n}',clozeStepPool.length):t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
-      </div>
-      <div style={S.settingsGroup}>
-        <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
       </div>
     </div>
   </div>);
