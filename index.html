@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.95b';
+const APP_VERSION = '1.9.96b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -929,6 +929,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     hist.push({date:Date.now(),type:exType,level:selectedLevel,step:trainStep,score:realScore,total:totalRef.current,pct:Math.round(pct*100)});
     if(hist.length>200) hist.splice(0,hist.length-200);
     LS.set('bible-training-history',hist);
+    if(reviewModeRef.current){
+      const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
+      setDone(false);setMode(allDone?'freqAllDone':'freqComplete');return;
+    }
     if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current){
       const curStep=activeStep;
       const mx=SUBSTEPS.length-1;
