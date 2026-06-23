@@ -1149,9 +1149,6 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{trainFocus==='freq'?t('nOfMTotal').replace('{n}',clozeStepPool.length):t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
       </div>
-      <div style={S.settingsGroup}>
-        <button onClick={()=>setMode('book')} style={{...S.navBtn,width:'100%',padding:'12px',fontSize:14}}>{t('clozeByBook')}</button>
-      </div>
     </div>
   </div>);
 }
