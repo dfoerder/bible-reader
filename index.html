@@ -365,9 +365,7 @@ const LEVEL_TEST=[
   {en:'house',de:'Haus',wrong:['Stadt','Straße'],level:'A1'},
   {en:'night',de:'Nacht',wrong:['Morgen','Abend'],level:'A1'},
   {en:'brother',de:'Bruder',wrong:['Schwester','Vater'],level:'A1'},
-  {en:'king',de:'König',wrong:['Krieger','Richter'],level:'A1'},
   {en:'voice',de:'Stimme',wrong:['Klang','Schrei'],level:'A2'},
-  {en:'sheep',de:'Schaf',wrong:['Ziege','Esel'],level:'A2'},
   {en:'wrong',de:'Unrecht',wrong:['Recht','Gericht'],level:'A2'},
   {en:'clothes',de:'Kleider',wrong:['Schuhe','Stoffe'],level:'A2'},
   {en:'field',de:'Feld',wrong:['Garten','Hügel'],level:'A2'},
@@ -377,24 +375,26 @@ const LEVEL_TEST=[
   {en:'escape',de:'entkommen',wrong:['ankommen','verstecken'],level:'B1'},
   {en:'praise',de:'loben',wrong:['bitten','flüstern'],level:'B1'},
   {en:'gather',de:'sammeln',wrong:['streuen','trennen'],level:'B1'},
-  {en:'strength',de:'Stärke',wrong:['Schwäche','Müdigkeit'],level:'B1'},
   {en:'flee',de:'fliehen',wrong:['kämpfen','verfolgen'],level:'B2'},
   {en:'mourn',de:'trauern',wrong:['feiern','schweigen'],level:'B2'},
   {en:'likewise',de:'ebenso',wrong:['trotzdem','niemals'],level:'B2'},
-  {en:'stretch',de:'strecken',wrong:['biegen','drehen'],level:'B2'},
   {en:'wilderness',de:'Wildnis',wrong:['Festung','Siedlung'],level:'B2'},
   {en:'wrath',de:'Zorn',wrong:['Gnade','Stolz'],level:'B2'},
-  {en:'slaughter',de:'Gemetzel',wrong:['Ernte','Festmahl'],level:'C1'},
   {en:'anointed',de:'Gesalbter',wrong:['Verbannter','Gelehrter'],level:'C1'},
-  {en:'distressed',de:'betrübt',wrong:['erfreut','gleichgültig'],level:'C1'},
   {en:'valiant',de:'tapfer',wrong:['feige','listig'],level:'C1'},
   {en:'lament',de:'klagen',wrong:['jubeln','flüstern'],level:'C1'},
   {en:'anguish',de:'Qual',wrong:['Trost','Ruhe'],level:'C1'},
+  {en:'slaughter',de:'Gemetzel',wrong:['Ernte','Festmahl'],level:'C1'},
+  {en:'iniquity',de:'Missetat',wrong:['Tugend','Schuld'],level:'C2'},
+  {en:'tabernacle',de:'Stiftshütte',wrong:['Tempel','Zelt'],level:'C2'},
+  {en:'supplication',de:'Flehen',wrong:['Gebet','Klage'],level:'C2'},
+  {en:'abhor',de:'verabscheuen',wrong:['verehren','fürchten'],level:'C2'},
+  {en:'blaspheme',de:'lästern',wrong:['beten','schweigen'],level:'C2'},
 ];
 
 function scoreLevelTest(answers){
-  const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0};
-  const maxByLevel={A1:0,A2:0,B1:0,B2:0,C1:0};
+  const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
+  const maxByLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
   LEVEL_TEST.forEach((q,i)=>{
     maxByLevel[q.level]++;
     if(answers[i]===q.de)byLevel[q.level]++;
@@ -405,7 +405,8 @@ function scoreLevelTest(answers){
   if(pct('B1')<0.5)return 'A2';
   if(pct('B2')<0.5)return 'B1';
   if(pct('C1')<0.5)return 'B2';
-  return 'C1';
+  if(pct('C2')<0.5)return 'C1';
+  return 'C2';
 }
 
 function LevelTest({onComplete}){
@@ -461,7 +462,8 @@ function LevelTest({onComplete}){
             {lvl:'A2',desc:{de:'Einfache Alltagskommunikation',en:'Simple everyday communication'}},
             {lvl:'B1',desc:{de:'Selbstständige Alltagsbewältigung',en:'Independent everyday use'}},
             {lvl:'B2',desc:{de:'Flüssige, detaillierte Kommunikation',en:'Fluent, detailed communication'}},
-            {lvl:'C1',desc:{de:'Flexible, effektive Sprachverwendung',en:'Flexible, effective language use'}}
+            {lvl:'C1',desc:{de:'Flexible, effektive Sprachverwendung',en:'Flexible, effective language use'}},
+            {lvl:'C2',desc:{de:'Beherrschung auf Expertenniveau',en:'Expert-level mastery'}}
           ].map(({lvl,desc})=>{const s=byLevel[lvl];if(!s)return null;const pct=Math.round(s.correct/s.total*100);return(
             <div key={lvl} style={{fontFamily:sans}}>
               <div style={{display:'flex',alignItems:'center',gap:8,fontSize:14}}>
