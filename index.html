@@ -1610,7 +1610,8 @@ function App({data}){
   useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training'||phase==='quiz')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,tappedWords]);
 
   const onLevelTestComplete=useCallback(level=>{
-    setUserLevel(level);LS.set('bible-level-tested',true);setPhase('nav');
+    const step=levelToStep(level);
+    setUserLevel(level);LS.set('bible-level-tested',true);LS.set('bible-train-step',step);LS.set('bible-freq-step',step);setPhase('nav');
   },[]);
 
   const savedScrollRef=useRef(null);
