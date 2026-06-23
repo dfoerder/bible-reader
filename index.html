@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.84b';
+const APP_VERSION = '1.9.85b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -274,6 +274,9 @@ const I18N={
   startTraining:{de:'Training starten',en:'Start training'},
   noWordsToTrain:{de:'Keine Wörter zum Trainieren.',en:'No words to train.'},
   freqComplete:{de:'Gratulation: Du hast alle Wörter des obersten Levels gelernt!',en:'Congratulations: You have learned all words of the highest level!'},
+  freqCompleteLower:{de:'Es gibt noch {n} ungeübte oder unbekannte Wörter auf niedrigeren Stufen. Möchtest du jetzt mit diesen weitermachen?',en:'There are still {n} unexercised or unknown words at lower levels. Would you like to continue with these?'},
+  freqContinue:{de:'Ja, weitermachen',en:'Yes, continue'},
+  freqAllDone:{de:'Gratulation: Du beherrschst scheinbar alle Wörter der Bibel!',en:'Congratulations: You have apparently mastered all words of the Bible!'},
 
   // Reading
   wordList:{de:'← Wortliste',en:'← Word list'},
@@ -701,14 +704,17 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
 
   const DAY_MS=24*3600*1000;
 
-  const startVocab=useCallback((step,focus)=>{
+  const startVocab=useCallback((step,focus,allLevels)=>{
     const {words:stepWords,allDe}=vocabForStep(step,focus);
     const now=Date.now();
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
     const unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS));
     let lowerUnexercised,currentUnexercised;
-    if(focus==='freq'){
+    if(allLevels){
+      lowerUnexercised=[];
+      currentUnexercised=shuffle(FREQ_POOL.filter(w=>fam(w)===-1));
+    } else if(focus==='freq'){
       lowerUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1));
       currentUnexercised=shuffle(stepWords.filter(w=>w.freqStep===step&&fam(w)===-1));
     } else {
@@ -716,7 +722,13 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1)));
       currentUnexercised=shuffle(stepWords.filter(w=>fam(w)===-1));
     }
-    if(unknown24h.length===0&&lowerUnexercised.length===0&&currentUnexercised.length===0){if(focus==='freq'&&step===SUBSTEPS.length-1)setMode('freqComplete');return;}
+    if(unknown24h.length===0&&lowerUnexercised.length===0&&currentUnexercised.length===0){
+      if(focus==='freq'&&step===SUBSTEPS.length-1){
+        const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
+        setMode(allDone?'freqAllDone':'freqComplete');
+      }
+      return;
+    }
     const units=[];let u24i=0,lowi=0,curri=0;
     while(u24i<unknown24h.length||curri<currentUnexercised.length){
       const unit=[];
@@ -1093,11 +1105,23 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
-  if(mode==='freqComplete'){
+  if(mode==='freqComplete'||mode==='freqAllDone'){
+    const fcFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
+    const remaining=mode==='freqComplete'?FREQ_POOL.filter(w=>fcFam(w)<1).length:0;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
       <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('back')}</button></div>
-      <p style={{textAlign:'center',color:'var(--t-muted)',fontFamily:sans,margin:'40px 20px'}}>{t('freqComplete')}</p>
+      <div style={{textAlign:'center',padding:'20px'}}>
+        <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px 20px 0'}}>{mode==='freqAllDone'?t('freqAllDone'):t('freqComplete')}</p>
+        {mode==='freqComplete'&&remaining>0&&<div>
+          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'16px 20px'}}>{t('freqCompleteLower').replace('{n}',remaining)}</p>
+          <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:8}}>
+            <button onClick={()=>startVocab(activeStep,trainFocus,true)} style={S.startBtn}>{t('freqContinue')}</button>
+            <button onClick={()=>setMode(null)} style={S.navBtn}>{t('finish')}</button>
+          </div>
+        </div>}
+        {mode==='freqComplete'&&remaining===0&&<p style={{color:'var(--t-muted)',fontFamily:sans,margin:'16px 20px'}}>{t('freqAllDone')}</p>}
+      </div>
     </div>);
   }
   if(mode==='noexercises'){
