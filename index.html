@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.83b';
+const APP_VERSION = '1.9.84b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -739,7 +739,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
     lowerLevelTotalRef.current=picked.filter(w=>lowerKeys.has(w.en)).length;
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:unknown24h.length+lowerUnexercised.length+currentUnexercised.length,lowerKeys};
+    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:units.reduce((s,u)=>s+u.length,0),lowerKeys};
     setSelectedLevel(stepToLevel(step));setLastStart('vocab');
   },[wordData]);
 
