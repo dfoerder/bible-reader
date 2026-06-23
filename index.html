@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.90b';
+const APP_VERSION = '1.9.91b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -730,7 +730,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1)));
       currentUnexercised=shuffle(stepWords.filter(w=>fam(w)===-1));
     }
-    if(unknown24h.length===0&&lowerUnexercised.length===0&&currentUnexercised.length===0){
+    if(unknown24h.length===0&&currentUnexercised.length===0){
       if(reviewMode||(focus==='freq'&&step===SUBSTEPS.length-1)){
         const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
         setMode(allDone?'freqAllDone':'freqComplete');
