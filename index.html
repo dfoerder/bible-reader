@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.69b';
+const APP_VERSION = '1.9.70b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -509,7 +509,7 @@ function LevelTest({onComplete}){
       })}
     </div>
     <div style={{textAlign:'center',marginTop:24}}>
-      <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{current>0?t('cancel'):t('skipTest')} →</button>
+      <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{t('cancel')}</button>
     </div>
   </div>);
 }
