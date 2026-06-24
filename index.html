@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.4b';
+const APP_VERSION = '1.10.5b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2203,15 +2203,22 @@ function App({data}){
   }
 
   // ── DEV HELPERS ──
+  const [devUnexTop,setDevUnexTop]=useState(5);
+  const [devUnkTop,setDevUnkTop]=useState(0);
+  const [devUnexLower,setDevUnexLower]=useState(20);
+  const [devUnkLower,setDevUnkLower]=useState(0);
   const loadTestData=()=>{
     if(!FREQ_POOL.length)return;
     LS.set('bible-word-data-backup',wordData);
     const newData={};
     const recent=new Date().toISOString();
+    const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
     FREQ_POOL.forEach(w=>{newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};});
     for(let step=0;step<=17;step++){
       const ws=FREQ_POOL.filter(w=>w.freqStep===step);
-      const unex=step===17?5:20;
+      const unex=step===17?devUnexTop:devUnexLower;
+      const unk=step===17?devUnkTop:devUnkLower;
+      ws.slice(-(unex+unk),-unex||undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:1};});
       ws.slice(-unex).forEach(w=>delete newData[w.en]);
     }
     LS.set('bible-word-data',newData);
@@ -2258,11 +2265,19 @@ function App({data}){
           </div>
           <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--t-border)'}}>
             <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
-            <div style={{display:'flex',gap:8,flexWrap:'wrap',marginTop:6}}>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'6px 12px',marginTop:8,fontSize:12,fontFamily:sans}}>
+              {[['C2.3 ungeübt',devUnexTop,setDevUnexTop],['C2.3 unbekannt',devUnkTop,setDevUnkTop],['Tiefere Levels ungeübt',devUnexLower,setDevUnexLower],['Tiefere Levels unbekannt',devUnkLower,setDevUnkLower]].map(([label,val,setter])=>(
+                <label key={label} style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)'}}>
+                  <span style={{fontSize:11}}>{label}</span>
+                  <input type="number" min="0" max="50" value={val} onChange={e=>setter(Math.max(0,parseInt(e.target.value)||0))} style={{width:'100%',padding:'4px 6px',borderRadius:4,border:'1px solid var(--t-border)',background:'var(--t-bg)',color:'var(--t-text2)',fontSize:13,fontFamily:sans}}/>
+                </label>
+              ))}
+            </div>
+            <div style={{display:'flex',gap:8,flexWrap:'wrap',marginTop:8}}>
               <button onClick={loadTestData} style={{...S.navBtn,fontSize:12}}>Test-Daten laden</button>
               <button onClick={restoreTestBackup} style={{...S.navBtn,fontSize:12}}>Backup wiederherstellen</button>
             </div>
-            <p style={{...S.settingsHint,marginTop:6}}>Simuliert pro Level 20 ungeübte + 4 unbekannte Wörter (C2.3: 5+2). Backup wird automatisch erstellt.</p>
+            <p style={{...S.settingsHint,marginTop:6}}>Backup wird automatisch erstellt.</p>
           </div>
         </div>
         <div style={S.settingsGroup}>
