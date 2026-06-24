@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.3b';
+const APP_VERSION = '1.10.4b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2204,28 +2204,21 @@ function App({data}){
 
   // ── DEV HELPERS ──
   const loadTestData=()=>{
-    const pool=FREQ_POOL.length?FREQ_POOL:Object.values(VOCAB_POOL).flat().sort((a,b)=>(b.occ||0)-(a.occ||0));
-    if(!pool.length)return;
+    if(!FREQ_POOL.length)return;
     LS.set('bible-word-data-backup',wordData);
     const newData={};
-    const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
     const recent=new Date().toISOString();
-    const byStep={};
-    pool.forEach(w=>{const s=w.freqStep??0;if(!byStep[s])byStep[s]=[];byStep[s].push(w);});
-    Object.entries(byStep).forEach(([s,ws])=>{
-      const step=parseInt(s);const unex=step===17?5:20;const unk=step===17?2:4;
-      ws.forEach((w,i)=>{
-        const fe=ws.length-1-i;
-        if(fe<unex){}
-        else if(fe<unex+unk){newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:1};}
-        else{newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};}
-      });
-    });
+    FREQ_POOL.forEach(w=>{newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};});
+    for(let step=0;step<=17;step++){
+      const ws=FREQ_POOL.filter(w=>w.freqStep===step);
+      const unex=step===17?5:20;
+      ws.slice(-unex).forEach(w=>delete newData[w.en]);
+    }
     LS.set('bible-word-data',newData);
-    LS.set('bible-freq-step',17);LS.set('bible-train-focus','freq');
-    window.location.reload();
+    LS.set('bible-freq-step',17);LS.set('bible-train-step',17);LS.set('bible-train-focus','freq');
+    setWordData(newData);setPhase('training');
   };
-  const restoreTestBackup=()=>{const b=LS.get('bible-word-data-backup');if(b){LS.set('bible-word-data',b);window.location.reload();}};
+  const restoreTestBackup=()=>{const b=LS.get('bible-word-data-backup');if(b){setWordData(b);LS.set('bible-word-data',b);setPhase('nav');}};
 
   // ── SETTINGS ──
   if(phase==='settings'){
