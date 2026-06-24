@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.9.98b';
+const APP_VERSION = '1.9.99b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2237,6 +2237,33 @@ function App({data}){
           </div>
           <div style={{marginTop:16}}>
             <button onClick={()=>setShowResetDialog(true)} style={S.resetBtn}>{t('resetProgress')}</button>
+          </div>
+          <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--t-border)'}}>
+            <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
+            <div style={{display:'flex',gap:8,flexWrap:'wrap',marginTop:6}}>
+              <button onClick={()=>{
+                LS.set('bible-word-data-backup',wordData);
+                const newData={};
+                const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
+                const recent=new Date().toISOString();
+                const groups={};
+                FREQ_POOL.forEach(w=>{if(!groups[w.freqStep])groups[w.freqStep]=[];groups[w.freqStep].push(w);});
+                Object.entries(groups).forEach(([s,words])=>{
+                  const step=parseInt(s);
+                  const unex=step===17?5:20;
+                  const unk=step===17?2:4;
+                  words.forEach((w,i)=>{
+                    const fe=words.length-1-i;
+                    if(fe<unex){/* ungeübt – kein Eintrag */}
+                    else if(fe<unex+unk){newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:1};}
+                    else{newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};}
+                  });
+                });
+                setWordData(newData);LS.set('bible-word-data',newData);
+              }} style={{...S.navBtn,fontSize:12}}>Test-Daten laden</button>
+              <button onClick={()=>{const b=LS.get('bible-word-data-backup');if(b){setWordData(b);LS.set('bible-word-data',b);}}} style={{...S.navBtn,fontSize:12}}>Backup wiederherstellen</button>
+            </div>
+            <p style={{...S.settingsHint,marginTop:6}}>Simuliert pro Level 20 ungeübte + 4 unbekannte Wörter (C2.3: 5+2). Backup wird automatisch erstellt.</p>
           </div>
         </div>
         <div style={S.settingsGroup}>
