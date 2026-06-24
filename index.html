@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.5b';
+const APP_VERSION = '1.10.6b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2218,8 +2218,8 @@ function App({data}){
       const ws=FREQ_POOL.filter(w=>w.freqStep===step);
       const unex=step===17?devUnexTop:devUnexLower;
       const unk=step===17?devUnkTop:devUnkLower;
-      ws.slice(-(unex+unk),-unex||undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:1};});
-      ws.slice(-unex).forEach(w=>delete newData[w.en]);
+      if(unk>0)ws.slice(-(unex+unk),unex>0?-unex:undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:1};});
+      if(unex>0)ws.slice(-unex).forEach(w=>delete newData[w.en]);
     }
     LS.set('bible-word-data',newData);
     LS.set('bible-freq-step',17);LS.set('bible-train-step',17);LS.set('bible-train-focus','freq');
