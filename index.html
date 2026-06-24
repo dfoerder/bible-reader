@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.13b';
+const APP_VERSION = '1.10.14b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2094,7 +2094,7 @@ function App({data}){
   const [devUnexTop,setDevUnexTop]=useState(5);
   const [devUnkTop,setDevUnkTop]=useState(0);
   const [devForgTop,setDevForgTop]=useState(0);
-  const [devUnexLower,setDevUnexLower]=useState(20);
+  const [devUnexLower,setDevUnexLower]=useState(0);
   const [devUnkLower,setDevUnkLower]=useState(0);
   const [devForgLower,setDevForgLower]=useState(0);
 
