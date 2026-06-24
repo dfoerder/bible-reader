@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.2b';
+const APP_VERSION = '1.10.3b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2210,9 +2210,9 @@ function App({data}){
     const newData={};
     const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
     const recent=new Date().toISOString();
-    const groups={};
-    pool.forEach((w,idx)=>{const s=Math.min(Math.floor(idx/(pool.length/18)),17);if(!groups[s])groups[s]=[];groups[s].push(w);});
-    Object.entries(groups).forEach(([s,ws])=>{
+    const byStep={};
+    pool.forEach(w=>{const s=w.freqStep??0;if(!byStep[s])byStep[s]=[];byStep[s].push(w);});
+    Object.entries(byStep).forEach(([s,ws])=>{
       const step=parseInt(s);const unex=step===17?5:20;const unk=step===17?2:4;
       ws.forEach((w,i)=>{
         const fe=ws.length-1-i;
