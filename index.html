@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.19b';
+const APP_VERSION = '1.10.20b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -750,7 +750,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       while(unit.length<15&&u24i<unknown24h.length)unit.push(unknown24h[u24i++]);
       if(unit.length===0)break;
       units.push(shuffle(unit));
-      if(units.length>=2)break;
+      break;
     }
     if(units.length===0)return;
     const allDePool=[...new Set([...allDe,...lowerUnexercised.map(w=>w.de)])];
