@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.17b';
+const APP_VERSION = '1.10.18b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2219,16 +2219,17 @@ function App({data}){
     const recent=new Date().toISOString();
     const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
     // Alle Wörter bis zum Startstep als bekannt markieren, höhere als nicht-existent lassen
-    FREQ_POOL.forEach(w=>{if(w.freqStep<=devStartStep)newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};});
-    for(let step=0;step<=devStartStep;step++){
+    // Alle Wörter als bekannt markieren (auch höhere Steps!)
+    FREQ_POOL.forEach(w=>{newData[w.en]={familiarity:1,lasttrained:recent,numberoftrainings:3,learned:1,forgotten:0};});
+    // Nur den konfigurierten Startstep mit ungeübten/unbekannten Wörtern einrichten
+    for(let step=0;step<=17;step++){
       const ws=FREQ_POOL.filter(w=>w.freqStep===step);
       const isTop=step===devStartStep;
       const unex=isTop?devUnexTop:devUnexLower;
       const unk=isTop?devUnkTop:devUnkLower;
       const forg=isTop?devForgTop:devForgLower;
-      let offset=0;
-      if(forg>0){ws.slice(-(unex+unk+forg+offset),unex+unk>0?-(unex+unk):undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:2,learned:1,forgotten:1};});offset+=forg;}
-      if(unk>0){ws.slice(-(unex+unk),unex>0?-unex:undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:0};});}
+      if(forg>0)ws.slice(-(unex+unk+forg),unex+unk>0?-(unex+unk):undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:2,learned:1,forgotten:1};});
+      if(unk>0)ws.slice(-(unex+unk),unex>0?-unex:undefined).forEach(w=>{newData[w.en]={familiarity:0,lasttrained:yesterday,numberoftrainings:1,learned:0,forgotten:0};});
       if(unex>0)ws.slice(-unex).forEach(w=>delete newData[w.en]);
     }
     LS.set('bible-word-data',newData);
