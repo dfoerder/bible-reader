@@ -56,7 +56,7 @@ Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacit
 3. `fam=0` + `lasttrained >24h` auf höheren Levels
 4. `fam=-1` auf höheren Levels
 
-Zusätzlich: 1 ungeübtes Wort tieferer Levels pro Einheit als Beimischung.
+Zusätzlich (Erweiterung der Spec): 1 ungeübtes Wort tieferer Levels pro Einheit als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden.
 
 **Levelanpassung (First-Pass-Score):** `<85%` → Step −1 · `≥85%` → Step +1 · `100%` → Step +2
 
