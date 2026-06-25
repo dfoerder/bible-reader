@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.23b';
+const APP_VERSION = '1.10.24b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -939,12 +939,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       const curStep=activeStep;
       const mx=SUBSTEPS.length-1;
       const saveFn=trainFocus==='freq'?saveFreqStep:saveStep;
-      if(pct<0.85&&curStep>0){
-        const ns=curStep-1;
-        saveFn(ns);setUserLevel(stepToLevel(ns));
-        stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
-      } else if(pct>=0.85&&curStep<mx){
-        const ns=Math.min(mx,curStep+(pct>=1?2:1));
+      const delta=pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
+      const ns=Math.max(0,Math.min(mx,curStep+delta));
+      if(ns!==curStep){
         saveFn(ns);setUserLevel(stepToLevel(ns));
         stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
       } else {
