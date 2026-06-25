@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.21b';
+const APP_VERSION = '1.10.22b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1243,6 +1243,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{clozeFresh===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
+        {(()=>{const stepPool=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;const total=stepPool.length;const known=stepPool.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;}).length;return total>0&&known>0?<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{known}/{total} gelernt</p>:null;})()}
       </div>
     </div>
   </div>);
