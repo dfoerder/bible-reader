@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.26b';
+const APP_VERSION = '1.10.27b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1210,7 +1210,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     :countFresh(stepWords,w=>w.en)+lowerFresh;
   const {pool:clozeStepPool}=clozeForStep(activeStep,trainFocus);
   const lowerClozeFresh=(()=>{if(trainFocus==='freq')return 0;const lvl=stepToLevel(activeStep);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(CLOZE_EXERCISES[l]||[])).filter(w=>{const d=wordData[w.lemma||w.answer];return d&&d.familiarity===0&&d.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS;}).length;})();
-  const clozeFresh=countFresh(clozeStepPool,w=>w.lemma||w.answer)+lowerClozeFresh;
+  const clozeFresh=trainFocus==='freq'
+    ?(()=>{const fsMap=new Map(FREQ_POOL.map(w=>[w.en,w.freqStep]));return Object.values(CLOZE_EXERCISES).flat().filter(e=>{const d=wordData[e.lemma];const f=d?d.familiarity:-1;const fs=fsMap.get(e.lemma);if(fs===undefined)return false;if(fs===activeStep&&f===-1)return true;if(fs<=activeStep&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length})()
+    :countFresh(clozeStepPool,w=>w.lemma||w.answer)+lowerClozeFresh;
 
   const stepInfo=trainFocus==='freq'
     ?t('yourStep').replace('{s}',activeStep+1).replace('{t}',SUBSTEPS.length)
