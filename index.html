@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.30b';
+const APP_VERSION = '1.10.31b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -983,7 +983,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
         </p>}
-        {stepChangeRef.current&&<p style={{fontSize:14,color:displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current)}</p>}
+        <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
         <div style={{display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
           {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
