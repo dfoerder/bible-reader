@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.28b';
+const APP_VERSION = '1.10.29b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -690,11 +690,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const prio4=higherPool.filter(w=>fam(w)===-1);
     let allWords=[...shuffle(prio1),...shuffle(prio2),...shuffle(prio3),...shuffle(prio4)];
     if(allWords.length<15)allWords=[...allWords,...shuffle(pool.filter(w=>fam(w)<=0&&!allWords.includes(w)))];
-    if(allWords.length===0){
-      if(focus==='freq'||step===SUBSTEPS.length-1){const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});setMode(allDone?'freqAllDone':'freqComplete');}
-      else setMode('nowords');
-      return;
-    }
+    if(allWords.length===0){setMode('nowords');return;}
     const preFam={};allWords.forEach(w=>{const k=w.lemma||w.answer;preFam[k]=fam(w);});
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
     const picked=allWords.slice(0,15);
