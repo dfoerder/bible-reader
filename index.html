@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.24b';
+const APP_VERSION = '1.10.25b';
 const APP_DATE = '23.06.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -692,16 +692,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     if(allWords.length===0)return;
     const preFam={};allWords.forEach(w=>{const k=w.lemma||w.answer;preFam[k]=fam(w);});
     const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
-    const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
-    const picked=units[0];
+    const picked=allWords.slice(0,15);
+    const units=[picked];
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:picked.length,preFam};
     setExercises(picked);
     setShuffledOpts(picked.map(ex=>{
       const wrong=formWrong(ex);
       return shuffle([ex.de,...wrong]);
     }));
-    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
-    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:allWords.length,preFam};
     setSelectedLevel(lvl);setLastStart('cloze');
   },[wordData,clozeForStep]);
 
