@@ -20,7 +20,7 @@
 - Vollständige Bibel (66 Bücher, 1189 Kapitel)
 - Wort-für-Wort Annotationen mit deutscher Übersetzung
 - CEFR-Schwierigkeitsstufen (A1–C2) pro Wort
-- Wörter oberhalb des Benutzerniveaus werden automatisch mit Übersetzung angezeigt
+- Wörter oberhalb des Benutzerniveaus werden automatisch mit Übersetzung angezeigt — das Lese-Level ist sublevel-genau (18 Stufen A1.1…C2.3), sodass sich Text-Hervorhebung und schwierige Wörter feinstufig anpassen
 - Tippen auf ein Wort zeigt die deutsche Übersetzung
 - Deutsche Parallelübersetzung ein-/ausblendbar pro Vers
 - Wahl zwischen 3 deutschen Übersetzungen: Schlachter 1951, Luther 1912 (modernisiert), Wörtlich (WEB→DE)
@@ -44,7 +44,7 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 
 ### Schwierige Wörter (kapitelweise)
 
-- **Wörter anschauen:** Alle Wörter über dem CEFR-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0.
+- **Wörter anschauen:** Alle Wörter über dem Lese-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0. Das Lese-Level ist ein 18-Stufen-Wert (`userStep` 0–17); ein Wort gilt als „über Level", wenn seine Sublevel-Stufe (aus `words.json` level+sub; für Wörter ohne Pool-Eintrag Fallback auf das obere Band-Ende) größer als `userStep` ist. Dadurch verschwinden die schwierigen Wörter nicht mehr schlagartig beim Eintritt in ein grobes CEFR-Band, sondern feinstufig.
 - **Wörter im Kontext üben:** Lückentext-Übungen, die live aus den Versen des aktuellen Kapitels generiert werden (keine vorgespeicherte Sammlung). Per Annotation wird die Position des schwierigen Wortes im Vers gefunden, der enthaltende Satz extrahiert und das Wort durch eine Lücke ersetzt. Lange Sätze werden am Ende gekürzt, bei direkter Rede wird die Einleitung übersprungen. Der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen. Phrasen werden als Ganzes ersetzt, Einzelwörter innerhalb von Phrasen übersprungen.
 - **Wörter Quiz:** Multiple-Choice-Quiz mit den unbekannten Wörtern. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert. Aufgeteilt in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis, Fehler-Wiederholung und Einheitsergebnis.
 
@@ -217,7 +217,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 
 | Schlüssel | Inhalt |
 |-----------|--------|
-| `bible-reader-state` | Phase, Level, Position, Wortlisten |
+| `bible-reader-state` | Phase, Lese-Level (`userStep` 0–17, sublevel-genau), Position, Wortlisten |
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-layout` | Theme/Layout (classic/icf/icf-light) |

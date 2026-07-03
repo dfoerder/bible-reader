@@ -2,6 +2,14 @@
 - detailverbesserungen, debugging
 - Schwierige Wörter: nach Ablehnung eines Level-Vorschlags im selben Kapitel nicht erneut fragen (übernommen aus issues.md)
 
+## Lese-Level sublevel-genau (18 Stufen) · UMGESETZT (03.07.2026)
+Das Lese-Level ist jetzt ein 18-Stufen-Wert (`userStep` 0–17) statt der 6 groben CEFR-Stufen.
+Kapitel-„schwierige Wörter" und Text-Hervorhebung nutzen `annoStep` (Sublevel aus `words.json`,
+Fallback oberes Band-Ende). Behebt den Cliff, bei dem alle schwierigen Wörter schlagartig bei
+C2.1 verschwanden. Offen/optional: Der Trainingsfortschritt hebt weiterhin das Lese-Level (jetzt
+sublevel-genau gekoppelt); falls unerwünscht → entkoppeln oder manuellen Level-Regler wieder
+einführen (siehe Diskussion 03.07.2026).
+
 ## Trainingskonzept 2.0 — Spaced Repetition · UMGESETZT (03.07.2026)
 Alle Pakete AP-T1 bis AP-T6 abgeschlossen, siehe `projekt-training-konzept.md`.
 Offen: Praxiserfahrung sammeln (sind 4 Wiederholungen pro Einheit im Alltag richtig
