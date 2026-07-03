@@ -89,13 +89,19 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
 
 ## Implementierungspakete
 
-- **AP-T1** Fälligkeits-Helper (`dueFor(word)`) + neuer Einheiten-Mix in `startVocab`
+- **AP-T1** Fälligkeits-Helper (`reviewDue`) + neuer Einheiten-Mix in `startVocab`
   (Slots A–E, Auffüllregel), analog für den allgemeinen Cloze-Start
-- **AP-T2** fam-Treppe in `pick()`: richtige Antwort → fam+1 statt hart fam=1
-  (trainWord-Aufruf mit Zielwert abhängig von altem fam)
+  · **ERLEDIGT (03.07.2026)** — im Browser verifiziert (Slot-Quoten, Intervalle 2/7/60 Tage,
+  fam=3-Stichprobe, Vergessene zuerst)
+- **AP-T2** fam-Treppe in `pick()`: richtige Antwort → fam+1 statt hart fam=1;
+  Intervall-Guard zentral in `trainWord` (24h/2d/7d je Stufe)
+  · **ERLEDIGT (03.07.2026)**
 - **AP-T3** Level-Aufstieg bei Erschöpfung (nowords-Ersatz), Step-17-Verzahnung mit
   freqComplete prüfen
-- **AP-T4** `adjTotal`-Ausweitung auf Slots A/C/D (Levelanpassung nur über B/E)
+- **AP-T4** `adjTotal`-Ausweitung auf Slots A/C/D (Levelanpassung nur über B/E);
+  bei adjTotal=0 (reine Wiederholungs-Einheit) keine Levelanpassung
+  · **ERLEDIGT (03.07.2026)** — mit AP-T1 umgesetzt (untrennbar); Bonus-Fix: startBookCloze
+  setzt die Ausnahme-Refs jetzt zurück (vorher stale aus Vorsession)
 - **AP-T5** Zähler, Fortschritts-Panel, Gratulations-Screen, I18N-Texte
 - **AP-T6** Nach Umsetzung: `dokumentation.md` aktualisieren, dieses Dokument als
   umgesetzt markieren, Deploy mit Changelog
