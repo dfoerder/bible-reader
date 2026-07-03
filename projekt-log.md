@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.35b (03.07.2026)
+
+- Einheitliches Training: ein Button mit Übungsart-Umschalter (Quiz / Im Kontext), gemeinsame Wortauswahl für beide Übungsarten
+
 ## v1.10.34b (03.07.2026)
 
 - Wiederholungen nur für aktiv gelernte Wörter (learned>0) — per ✓ markierte Wörter werden nicht mehr wiederholt
