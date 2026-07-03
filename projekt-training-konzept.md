@@ -23,6 +23,7 @@ Familiarity-Skala, ohne neue Datenfelder (familiarity, lasttrained, learned, for
 |---|---|
 | Wiederholungs-Intervalle | fam=1 fällig nach **2 Tagen**, fam=2 nach **7 Tagen** |
 | fam=3 | Seltene Stichprobe nach **~60 Tagen** (max. 1 pro Einheit) |
+| Wiederholungs-Kandidaten | Nur aktiv gelernte Wörter (`learned` > 0, waren einmal fam=0) — Nachtrag 03.07.2026: direkt als bekannt markierte Wörter (✓) werden nicht wiederholt |
 | Level-Aufstieg bei erschöpftem Level | **Automatisch** mit Gratulations-Hinweis |
 | Beimischung Step+1 | **1 Wort** pro Einheit |
 

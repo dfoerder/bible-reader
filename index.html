@@ -340,6 +340,7 @@ const I18N={
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
   levelUpDone:{de:'Gratulation! Du hast alle Wörter dieser Stufe geübt.',en:'Congratulations! You have practiced all words of this level.'},
   reviewsDue:{de:'{n} Wiederholungen fällig',en:'{n} reviews due'},
+  reviewsDue1:{de:'1 Wiederholung fällig',en:'1 review due'},
   trainContinue:{de:'Weiter',en:'Continue'},
   statFamSteps:{de:'Stufen: {a} gelernt · {b} gefestigt · {c} sicher',en:'Stages: {a} learned · {b} consolidated · {c} secure'},
   finish:{de:'Beenden',en:'Finish'},
@@ -586,9 +587,12 @@ function clozeFormOf(lemma,form,pos){
 }
 // Spaced Repetition (siehe projekt-training-konzept.md): Tage bis zur nächsten
 // Fälligkeit je Familiarity-Stufe. fam=3 wird nur als seltene Stichprobe wiederholt.
+// Wiederholt werden nur aktiv gelernte Wörter (learned>0, waren also einmal fam=0) —
+// direkt als bekannt markierte Wörter (✓ bei „Wörter anschauen") brauchen keine Festigung.
 const REVIEW_WAIT_DAYS={1:2,2:7,3:60};
 function reviewDue(d,now){
   if(!d||d.familiarity<1||d.familiarity>3)return false;
+  if(!((d.learned||0)>0))return false;
   if(!d.lasttrained)return true;
   return now-new Date(d.lasttrained).getTime()>=REVIEW_WAIT_DAYS[d.familiarity]*86400000;
 }
@@ -1346,13 +1350,13 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       <div style={S.settingsGroup}>
         <button onClick={()=>startVocab(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{fresh===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('nOfMAvailable').replace('{n}',fresh)}</p>
-        {dueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{t('reviewsDue').replace('{n}',dueCount)}</p>}
+        {dueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{dueCount===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',dueCount)}</p>}
         {(()=>{const stepPool=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;const total=stepPool.length;const known=stepPool.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;}).length;return total>0&&known>0?<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{known}/{total} gelernt</p>:null;})()}
       </div>
       <div style={S.settingsGroup}>
         <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{clozeFresh===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
-        {clozeDueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{t('reviewsDue').replace('{n}',clozeDueCount)}</p>}
+        {clozeDueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{clozeDueCount===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',clozeDueCount)}</p>}
         {(()=>{const stepPool=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;const total=stepPool.length;const known=stepPool.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;}).length;return total>0&&known>0?<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{known}/{total} gelernt</p>:null;})()}
       </div>
     </div>
