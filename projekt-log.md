@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.36b (03.07.2026)
+
+- Übungsart-Umschalter (Quiz / Im Kontext) in die laufende Übung verlegt — Wechsel jederzeit mitten in der Einheit
+
 ## v1.10.35b (03.07.2026)
 
 - Einheitliches Training: ein Button mit Übungsart-Umschalter (Quiz / Im Kontext), gemeinsame Wortauswahl für beide Übungsarten
