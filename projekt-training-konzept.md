@@ -112,3 +112,7 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   (gelernt/gefestigt/sicher), 🎉-Gratulations-Screen (Mode `levelup`), neue I18N-Keys
 - **AP-T6** Nach Umsetzung: `dokumentation.md` aktualisieren, dieses Dokument als
   umgesetzt markieren, Deploy mit Changelog
+- **Nachtrag (03.07.2026)** — Einheitliches Training: „Wörter üben" und „Wörter im
+  Kontext" zu einem Button mit Übungsart-Umschalter (Quiz / Im Kontext) zusammengeführt;
+  gemeinsame Auswahl-Funktion `selectUnit` für beide Übungsarten; 13 Wörter ohne
+  Kontextübung werden im Kontextmodus übersprungen (Hinweis-Screen bei Restbestand)
