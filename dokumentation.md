@@ -4,8 +4,8 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.9.5b (05.06.2026)
-- **Architektur:** Single-File React-App (`index.html`, ~2100 Zeilen), kein Build-Step
+- **Aktuelle Version:** 1.10.31b (23.06.2026)
+- **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
 - **Zielgruppe:** Deutschsprachige mit Englisch-Niveau ab A2
@@ -66,7 +66,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert:
 
 ### Vokabeltraining
 
-Einheitlicher Wortpool mit 5.086 Wörtern (A1–C2):
+Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigennamen (+710, Level A1), Namens-Adjektiven und US-Schreibvarianten:
 
 **CEFR-Level-Quellen** (Priorität):
 1. Oxford 5000 (2.654 Wörter, handkuratiert)
@@ -84,16 +84,18 @@ Einheitlicher Wortpool mit 5.086 Wörtern (A1–C2):
 **Training-Mechanik:**
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 18 Schwierigkeitsstufen
-- Adaptive Schwierigkeit: < 85% Erfolg = leichter, ≥ 85% = schwerer, 100% = Doppelsprung (+2 Sublevels)
-- Priorisierte Wortauswahl (15 Wörter pro Übung):
-  1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level
-  2. familiarity=-1 auf dem aktuellen Step-Level
-  3. familiarity=0 + lasttrained >24h auf höheren Levels
-  4. familiarity=-1 auf höheren Levels
+- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2
+- Wortauswahl (15 Wörter pro Übung) aus drei Quellen, pro Einheit gemischt:
+  1. familiarity=0 + lasttrained >24h auf aktuellem **und tieferen** Levels (bekannte Schwächen) — max. 3 am Einheitsanfang
+  2. 1 ungeübtes Wort (familiarity=-1) tieferer Levels als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden
+  3. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter) — füllt auf 15 auf; Restplätze wieder aus Quelle 1
+- Höhere Levels werden nicht einbezogen; sind keine Wörter mehr verfügbar → „keine Wörter"-Hinweis bzw. Abschluss-Flow (freqComplete)
 - Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Level-Anpassung basiert auf dem First-Pass-Score (nicht aufgeblähtem Retry-Score)
+- Level-Anpassung basiert auf dem First-Pass-Score (nicht aufgeblähtem Retry-Score); beigemischte Wörter tieferer Levels werden aus der Prozentrechnung herausgerechnet
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
+- 24h-Regel (zentral in `trainWord`): Familiarity kann nur erhöht werden, wenn das Wort noch nie oder vor >24h trainiert wurde; Erniedrigen (falsche Antwort → 0) ist immer erlaubt
+- Häufigkeitsmodus-Abschluss: nach Step 17 (C2.3) → freqComplete-Screen mit schrittweisem Review tieferer Steps (C2.2, C2.1, …); sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
 
 ### Einstufungstest
 
@@ -119,40 +121,50 @@ Einheitlicher Wortpool mit 5.086 Wörtern (A1–C2):
 
 ```
 bible-reader/
-├── index.html                         Haupt-App (React + Babel, ~2100 Zeilen)
+├── index.html                         Haupt-App (React + Babel, ~3000 Zeilen)
 ├── sw.js                              Service Worker (Offline-Caching)
 ├── manifest.json                      PWA-Manifest
 ├── icon-192.png / icon-512.png        App-Icons
+├── lib/                               React, ReactDOM, Babel (lokal gebündelt)
+├── sync_www.sh                        Spiegelt root → www/ → ios/ (Capacitor), vor jedem iOS-Build
+├── www/ · ios/                        Capacitor-Ableitungen (gitignored, nie manuell bearbeiten)
 ├── bibles/
 │   ├── index.json                     Buch-Metadaten und Statistiken
 │   ├── eng/web/
 │   │   ├── {nr}_web.json              Bibeltext (66 Dateien)
-│   │   ├── {nr}_web_deu_parallel.json Schlachter-Paralleltext (66 Dateien)
 │   │   ├── anno/
 │   │   │   └── {nr}_web_deu.json      Annotationen (66 Dateien)
 │   │   └── web_deu/
 │   │       └── {nr}_web_deu.json      Wörtliche DE-Übersetzung (66 Dateien)
-│   └── deu/
-│       ├── sch1951/                    Schlachter 1951 (66 Dateien)
-│       └── l1912mod/                   Luther 1912 modernisiert (66 Dateien)
+│   ├── deu/
+│   │   ├── sch1951/                   Schlachter 1951 (66 Dateien)
+│   │   ├── sch1951mod/                Schlachter modernisiert (vorbereitet für v2)
+│   │   └── l1912mod/                  Luther 1912 modernisiert (66 Dateien)
+│   └── fra/ · ita/ · spa/             lsg1910, riv1927, rv1909 (+ mod-Varianten) —
+│                                      vorbereitet für Version 2, von der App noch nicht genutzt
 ├── data/
-│   ├── vocab_pool.json                Einheitlicher Wortpool (5.086, A1–C2)
-│   └── context_exercises.json         Lückentext-Übungen (5.086)
-├── generate_training_data.js           Generiert vocab/exercise-Dateien aus Annotationen
-│                                       (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
+│   ├── words.json                     Single Source of Truth: Vokabel-Pool + Lückentext-
+│   │                                  Übungen (5.878 Wörter; VOCAB_POOL + CLOZE_EXERCISES
+│   │                                  werden daraus abgeleitet)
+│   ├── examples.json                  Beispielsätze-Index (Lemma → Vers-Referenzen, 207 KB, lazy)
+│   └── vocab_pool.json / context_exercises.json   Lokale Build-Intermediates (gitignored)
+├── generate_training_data.js          Generiert words.json aus Annotationen
+│                                      (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
+├── generate_pos.py / generate_deform.py / generate_examples.py
+│                                      Ergänzen pos / deForm+form / examples.json (Opus Batch)
 ├── oxford_5000.csv                    Oxford 5000 Referenzliste (extern)
 ├── kaggle_cefr.csv                    Kaggle CEFR Referenzliste (8.653 Wörter, extern)
 ├── opus_cefr_levels.json              Opus 4.7 CEFR-Zuordnung (1.488 Wörter)
-├── compare_levels.js                  Einmaliges Analyseskript: Oxford vs. unsere Levels
 ├── review_annotations.py              Annotations-Review (Claude API, synchron)
 ├── review_batch_submit.py             Batch-Review einreichen (Anthropic Batch API)
 ├── review_batch_collect.py            Batch-Ergebnisse abholen und validieren
 ├── review_common.py                   Shared Logic (Prompt, Validierung)
 ├── dokumentation.md                   Diese Dokumentation
 ├── projekt-ziele.md                   Projektziele
-├── projekt-regeln.md                  Git-Workflow-Regeln
-├── projekt-arbeitspakete.md           Arbeitspakete
-└── projekt-log.md                     Entwicklungsprotokoll
+├── projekt-regeln.md                  Git-Workflow- und Deployment-Regeln
+├── projekt-arbeitspakete.md           Arbeitspakete / App-Store-Checkliste
+├── projekt-log.md                     Entwicklungsprotokoll
+└── projekt-json-konsolidierung.md     Datei-Architektur / Konsolidierungsplan
 ```
 
 ### Annotationsformat
@@ -192,7 +204,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 ### PWA und Offline-Fähigkeit
 
 - **Service Worker** (`sw.js`): Network-first für HTML, Cache-first für Daten
-- **Cache-Name:** `bible-full-v195` (wird bei jedem Deploy hochgezählt)
+- **Cache-Name:** `bible-full-vXXXX` (aktuell `bible-full-v2031`, wird bei jedem Deploy hochgezählt)
 - Vollständige Offline-Nutzung nach erstem Laden
 - Automatisches Update bei neuer Version
 
@@ -203,12 +215,21 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-reader-state` | Phase, Level, Position, Wortlisten |
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
+| `bible-layout` | Theme/Layout (classic/icf/icf-light) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
-| `bible-train-step` | Aktuelle Trainingsstufe (Oxford) |
-| `bible-bible-step` | Aktuelle Trainingsstufe (Bibel-Vokabular) |
+| `bible-word-data-backup` | Backup der Wortdaten (Wiederherstellung nach Einstufungstest) |
+| `bible-train-focus` | Lernfokus im Training ('level'/'freq') |
+| `bible-train-step` | Aktuelle Trainingsstufe CEFR-Modus (0–17) |
+| `bible-freq-step` | Aktuelle Trainingsstufe Häufigkeits-Modus (0–17) |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
-| `unk-en-{book}-{chapter}` | Unbekannte Wörter pro Kapitel |
+| `bible-level-tested` | Einstufungstest absolviert |
+| `bible-bookmarks` | Lesezeichen pro Buch |
+| `bible-font-size` / `-tr` / `-ex` | Schriftgrößen (Bibeltext / Übersetzungen / Übungen) |
+| `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
+| `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
+| `bible-stats-visible` | Sichtbare Statistik-Abschnitte |
+| `unk-{lang}-{buch}-{kapitel}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
 
 ### Deutsche Übersetzungen
@@ -225,9 +246,11 @@ Die wörtliche Übersetzung (`web_deu`) wird automatisch aus den Annotationen ge
 
 ### Themes
 
-- **Warm** (Standard): Beige/Braun-Palette
-- **ICF Dark**: Dunkler Hochkontrast-Modus
-- **ICF Light**: Heller, cleaner Modus
+- **Warm** (Standard, `classic`): Beige/Braun-Palette
+- **ICF Dark** (`icf`): Dunkler Hochkontrast-Modus
+- **ICF Light** (`icf-light`): Heller, cleaner Modus
+
+Gespeichert im localStorage-Schlüssel `bible-layout`.
 
 ---
 
@@ -297,6 +320,6 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **755.526 Wörter** im Bibeltext
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
 - **5.087 einzigartige Lemmata** (nach Filterung und Zusammenführung)
-- **Einheitlicher Vokabelpool:** 5.086 Wörter (A1: 627, A2: 537, B1: 775, B2: 1.475, C1: 1.162, C2: 510)
-- **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488)
+- **Einheitlicher Vokabelpool:** 5.878 Wörter (A1: 1.257, A2: 548, B1: 798, B2: 1.503, C1: 1.208, C2: 564) — inkl. Eigennamen (+710, seit v1.9.53b)
+- **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488); Rest: Eigennamen und Pool-Erweiterungen (v1.9.53b–58b)
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE

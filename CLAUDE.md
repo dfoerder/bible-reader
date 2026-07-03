@@ -28,7 +28,7 @@ Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacit
 **Eine einzige Datei:** `index.html` enthält die gesamte App (React via Babel-Standalone, kein Build-Schritt). Kein Framework-Overhead, kein npm run.
 
 **Daten-Laufzeit:**
-- `data/words.json` — Single Source of Truth: Vokabel-Pool + Lückentext-Übungen (5086 Wörter, `VOCAB_POOL` + `CLOZE_EXERCISES` werden daraus abgeleitet)
+- `data/words.json` — Single Source of Truth: Vokabel-Pool + Lückentext-Übungen (5878 Wörter, `VOCAB_POOL` + `CLOZE_EXERCISES` werden daraus abgeleitet)
 - `data/examples.json` — Beispielsätze-Index (207 KB, lazy)
 - `bibles/` — Bibeltexte + Annotationen pro Buch (lazy geladen)
 - `localStorage` — Nutzerstand: `bible-word-data`, `bible-freq-step`, `bible-train-step`, `bible-train-focus`, `bible-reader-state`, u.a.
@@ -50,15 +50,14 @@ Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacit
 
 **Session-Ablauf:** 1 Einheit = 15 Wörter → Ergebnis + ggf. Retry → Levelanpassung. "Weiter" startet neue Session.
 
-**Wortauswahl-Priorität (laut Spec):**
-1. `fam=0` + `lasttrained >24h` auf aktuellem Level (bekannte Schwächen)
-2. `fam=-1` auf aktuellem Level (neue Wörter)
-3. `fam=0` + `lasttrained >24h` auf höheren Levels
-4. `fam=-1` auf höheren Levels
+**Wortauswahl (15 Wörter pro Einheit, drei Quellen gemischt — `startVocab`):**
+1. `fam=0` + `lasttrained >24h` auf aktuellem **und tieferen** Levels (bekannte Schwächen) — max. 3 am Einheitsanfang
+2. 1 ungeübtes Wort (`fam=-1`) tieferer Levels als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden
+3. `fam=-1` auf aktuellem Level (neue Wörter) — füllt auf 15 auf; Restplätze wieder aus Quelle 1
 
-Zusätzlich (Erweiterung der Spec): 1 ungeübtes Wort tieferer Levels pro Einheit als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden.
+Höhere Levels werden nicht einbezogen; ohne verfügbare Wörter → `nowords` bzw. freqComplete-Flow.
 
-**Levelanpassung (First-Pass-Score):** `<85%` → Step −1 · `≥85%` → Step +1 · `100%` → Step +2
+**Levelanpassung (First-Pass-Score, ohne beigemischte Wörter tieferer Levels):** `100%` → Step +2 · `>80%` → Step +1 · `70–80%` → ±0 · `40–69%` → Step −1 · `<40%` → Step −2
 
 **Lernfokus:**
 - `level` (CEFR): `activeStep = trainStep`, Wörter aus `VOCAB_POOL[lvl]`

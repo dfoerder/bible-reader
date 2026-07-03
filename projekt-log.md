@@ -7,6 +7,60 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.9.43b – v1.10.31b (18.–23.06.2026) — Sammel-Eintrag
+
+Rekonstruiert am 03.07.2026 aus der Git-History (Commit-Messages bis v1.9.77b, danach Deploy-Diffs), da das Log in diesem Zeitraum nicht geführt wurde. ~90 deployte Versionen, thematisch zusammengefasst:
+
+### Trainingslogik: Wortauswahl umgebaut (v1.9.78b–v1.10.20b)
+- **v1.9.78b — Kernumbau:** Die alte 4-Stufen-Priorität (aktuelles + *höhere* Levels) ersetzt durch drei gemischte Quellen: `unknown24h` (fam=0, >24h), `lowerUnexercised` (fam=-1 *tieferer* Levels, 1 pro Einheit als Beimischung), `currentUnexercised` (fam=-1 aktueller Step). Höhere Levels werden nicht mehr einbezogen. Einheiten-Aufbau: max. 3 unknown24h am Anfang + 1 tieferes Wort, Rest neue Wörter
+- v1.9.82b–v1.9.88b: mehrfach iteriert (Beimischung nur noch Bonus, fam<1-Erweiterung wieder zurückgenommen)
+- v1.9.93b: fam=0-Wörter tieferer Levels (>24h) fließen im CEFR-Modus zusätzlich in den unknown24h-Pool
+- v1.10.19b/20b: Session erst auf 2, dann auf genau **1 Einheit (15 Wörter)** gekappt — Levelanpassung nach jeder Session (gemäß Spec)
+
+### Levelanpassung: 5-stufiges Delta-System (v1.10.24b)
+- **v1.10.24b:** Neue Regeln — vorher `<85%` → −1 · `≥85%` → +1 · `100%` → +2; neu: `100%` → +2 · `>80%` → +1 · `70–80%` → ±0 · `40–69%` → −1 · `<40%` → −2 (geklemmt auf Step 0–17)
+- v1.9.81b: Beigemischte Lower-Level-Wörter werden aus der Prozentrechnung herausgerechnet (`adjTotal`)
+- v1.10.23b: `userLevel` wird auch im Frequenz-Modus bei Levelwechsel aktualisiert (konsistente Lese-Schwierigkeit)
+- v1.10.30b: Bugfix — `reviewModeRef`-Reset in startCloze (Levelanpassung wurde nach Review-Session bei Cloze übersprungen)
+
+### Abschluss- und Review-Flow (v1.9.85b–v1.10.12b)
+- v1.9.85b: freqComplete-/freqAllDone-Screens eingeführt (nach C2.3 Weitermachen mit ungeübten Wörtern tieferer Stufen)
+- v1.9.88b: Umbau auf schrittweisen Review pro Step (nächsttieferer Step mit fam<1-Wörtern), ohne Levelanpassung
+- v1.9.94b/97b: `nowords`-Screen im CEFR-Modus, bietet Weitermachen mit tieferem Level an
+- v1.10.12b: Abschluss-Flow greift auch im CEFR-Modus nach Step 17 (C2.3)
+- Feinschliffe: freqComplete-Trigger präzisiert (v1.9.91b/92b), Done-Screen nach Review übersprungen (v1.9.96b), reviewMode für alle Fokus-Modi (v1.9.98b), Gratulation nur auf oberstem Level + „Review läuft"-Hinweis (v1.10.9b–11b)
+
+### Cloze-Übungen angeglichen (v1.10.25b–29b)
+- Session auf 1 Einheit gekappt (v1.10.25b), Pool im CEFR-Modus über VOCAB_POOL-Lemmata vereinheitlicht (v1.10.26b), Empty-Pool-Handling wie Vokabeln → nowords-Screen (v1.10.28b/29b)
+
+### Vokabelpool erweitert: 5.086 → 5.878 Wörter
+- v1.9.53b: **+710 Eigennamen** in den Trainingspool
+- v1.9.54b–58b: Namens-Adjektive, Kurzwort-Filter auf 1 Zeichen, -ful/-less/-ment/-ity als eigenständige Wörter, vocab-only-Wörter (ohne Cloze)
+- danach: US-Schreibvarianten (+12), partielle DE-Übersetzungen in Annotationen gefixt (+9) → 5.878
+- Datenqualität: Annotationsfehler bereinigt (Em-Dashes, /f-Genusmarker, +/Zahlen-Lemmata, v1.9.57b); `opus_deform.json`/`opus_pos_levels.json` für den erweiterten Pool aktualisiert
+- Neue Verteilung: A1 1.257 · A2 548 · B1 798 · B2 1.503 · C1 1.208 · C2 564
+
+### Einstufungstest
+- C2 ergänzt: 6×5 Fragen (A1–C2), Scoring und Ergebnisanzeige angepasst
+- Test setzt jetzt auch `bible-train-step` und `bible-freq-step`; Skip-Button → „Abbrechen"
+- v1.9.83b: Wörter-Level-Picker aus den Einstellungen entfernt; Default-Level B2 → B1; v1.10.17b: Fortschritts-Reset setzt userLevel auf B1 zurück
+
+### Session-Ergebnis und Zähler
+- v1.9.43b–47b: Session-Gesamtergebnis über Runden hinweg, „Einheit X von Y", Einheiten werden vorab gebaut
+- Zähler „verfügbare Wörter" mehrfach exakt an den tatsächlichen Trainingspool angeglichen (v1.9.79b–95b, v1.10.27b); v1.9.84b: globalTotal zählt nur geübte Wörter
+- v1.10.21b/22b: „X/Y gelernt"-Fortschrittsanzeige unter Vokabel-/Cloze-Button; v1.10.31b: Done-Screen zeigt aktuelles Level immer an; v1.10.8b: numerische Step-Anzeige im Frequenz-Modus
+
+### UI-Bereinigung
+- Statistikseite: „Dein Fortschritt"-Sektion entfernt, „Nicht gesehen" → „Ungeübt", Schwierigkeit aus Buchstatistik entfernt
+- „Wörter im Kontext nach Buch"-Button von der Trainingsseite entfernt
+- Kopf-Bild (kopf.jpg/kopf2.jpg) statt Brain-Emoji in den Trainings-Buttons, Icongrößen angepasst
+- Beschriftungen präzisiert („Wörter zum Üben auf deinem Level" u.a.)
+
+### Werkzeuge
+- `deploy.sh`: automatischer Version-/Datum-/Cache-Bump beim Deploy
+- Test-Daten-Loader in den Einstellungen (simulierte Familiarity-Verteilungen mit Backup, v1.9.99b–v1.10.18b iteriert)
+- `CLAUDE.md` mit Codebase-Guidance angelegt
+
 ## App Store Plan (18.06.2026)
 
 Detaillierte Checkliste für die App-Store-Einreichung in `projekt-arbeitspakete.md` festgehalten:
