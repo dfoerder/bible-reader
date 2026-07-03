@@ -98,10 +98,15 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   · **ERLEDIGT (03.07.2026)**
 - **AP-T3** Level-Aufstieg bei Erschöpfung (nowords-Ersatz), Step-17-Verzahnung mit
   freqComplete prüfen
+  · **ERLEDIGT (03.07.2026)** — Aufstieg greift trotz fälliger Wiederholungen (level-
+  unabhängig); Step 17 zeigt weiterhin freqComplete; gilt für beide Fokus-Modi
 - **AP-T4** `adjTotal`-Ausweitung auf Slots A/C/D (Levelanpassung nur über B/E);
   bei adjTotal=0 (reine Wiederholungs-Einheit) keine Levelanpassung
   · **ERLEDIGT (03.07.2026)** — mit AP-T1 umgesetzt (untrennbar); Bonus-Fix: startBookCloze
   setzt die Ausnahme-Refs jetzt zurück (vorher stale aus Vorsession)
 - **AP-T5** Zähler, Fortschritts-Panel, Gratulations-Screen, I18N-Texte
+  · **ERLEDIGT (03.07.2026)** — „X Wiederholungen fällig" unter beiden Trainings-Buttons
+  (Vokabeln/Cloze separat gezählt), Stufen-Zeile im Fortschritts-Panel
+  (gelernt/gefestigt/sicher), 🎉-Gratulations-Screen (Mode `levelup`), neue I18N-Keys
 - **AP-T6** Nach Umsetzung: `dokumentation.md` aktualisieren, dieses Dokument als
   umgesetzt markieren, Deploy mit Changelog
