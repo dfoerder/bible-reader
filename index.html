@@ -562,6 +562,7 @@ function posWrongDe(target,dePool){
 // Lückentext-Distraktoren: deForm-Pool gruppiert nach Wortart|Form (Numerus/Tempus)
 let CLOZE_BY_PF={};
 let CLOZE_MAP=new Map(); // Lemma → Cloze-Übung (Kontext-Modus)
+let WORD_BY_EN=new Map(); // en → Wort-Objekt (für Übungsart-Wechsel während der Einheit)
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
   const same=(CLOZE_BY_PF[key]||[]).filter(d=>d!==target.de);
@@ -815,9 +816,10 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
     lowerLevelTotalRef.current=picked.filter(w=>res.excludeKeys.has(w.en)).length;
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    vocabUnitsRef.current={units:[picked],unitIdx:0,allDePool,globalScore:0,globalTotal:picked.length,lowerKeys:res.excludeKeys};
+    const preFam={};picked.forEach(w=>{const d=wordData[w.en];preFam[w.en]=d?d.familiarity:-1;});
+    vocabUnitsRef.current={units:[picked],unitIdx:0,allDePool,globalScore:0,globalTotal:picked.length,preFam,lowerKeys:res.excludeKeys};
     setSelectedLevel(stepToLevel(step));setLastStart('vocab');
-  },[selectUnit,applySelectStatus]);
+  },[selectUnit,applySelectStatus,wordData]);
 
   // Kontext-Modus: gleiche Wortauswahl, Darstellung als Lückentext (Wort → CLOZE_MAP-Übung)
   const startCloze=useCallback((step,focus)=>{
@@ -839,6 +841,36 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     }));
     setSelectedLevel(stepToLevel(step));setLastStart('cloze');
   },[selectUnit,applySelectStatus,wordData]);
+
+  // Übungsart-Wechsel mitten in der Einheit (Quiz ↔ Im Kontext): alle Fragen der
+  // laufenden Einheit werden in die andere Darstellungsform konvertiert; Wörter ohne
+  // Kontextübung bleiben als Quiz-Frage stehen. Score, Fortschritt, Fehlerliste und
+  // die Ausnahme-Mengen der Levelanpassung bleiben erhalten.
+  const switchExercise=useCallback(target=>{
+    if(selected!==null)return;
+    const toCloze=target==='cloze';
+    changeExMode(target);
+    if((exType==='cloze')===toCloze)return;
+    const conv=item=>{
+      if(toCloze)return item.en?(CLOZE_MAP.get(item.en)||item):item;
+      return item.en?item:(WORD_BY_EN.get(item.lemma)||item);
+    };
+    const newEx=exercises.map(conv);
+    const allDePool=vocabUnitsRef.current?.allDePool||[...new Set(Object.values(VOCAB_POOL).flat().map(w=>w.de))];
+    const newOpts=newEx.map(q=>q.en?shuffle([q.de,...posWrongDe(q,allDePool)]):shuffle([q.de,...formWrong(q)]));
+    setExercises(newEx);setShuffledOpts(newOpts);
+    wrongRef.current=wrongRef.current.map(w=>({...w,ex:conv(w.ex)}));
+    const src=(exType==='cloze'?clozeUnitsRef:vocabUnitsRef).current||{};
+    const preFam=src.preFam||{};
+    const lowerKeys=src.lowerKeys||new Set();
+    if(toCloze){
+      clozeUnitsRef.current={units:[newEx],unitIdx:0,allDe:Object.values(CLOZE_EXERCISES).flat().map(e=>e.de),globalScore:0,globalTotal:newEx.length,preFam,lowerKeys};
+      setExType('cloze');setLastStart('cloze');
+    } else {
+      vocabUnitsRef.current={units:[newEx],unitIdx:0,allDePool,globalScore:0,globalTotal:newEx.length,preFam,lowerKeys};
+      setExType('vocab');setLastStart('vocab');
+    }
+  },[selected,exType,exercises]);
 
   const startBookCloze=useCallback(bi=>{
     const bookNr=books[bi].nr;
@@ -935,7 +967,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const correct=ans===ex.de;
     setSelected(ans);
     if(mode==='guess') guessRef.current=true;
-    const wordKey=exType==='vocab'?ex.en:(ex.lemma||ex.answer);
+    const wordKey=ex.en||ex.lemma||ex.answer;
     if(correct){
       if(!retryRef.current)setScore(s=>s+1);
       if(!retryRef.current){const uref=exType==='vocab'?vocabUnitsRef:clozeUnitsRef;if(uref.current?.lowerKeys?.has(wordKey))lowerLevelCorrectRef.current++;}
@@ -969,19 +1001,12 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     wrongRef.current=[];
     const retryEx=wrong.map(w=>w.ex);
     setExercises(retryEx);
-    if(exType==='vocab'){
-      const allDe=Object.values(VOCAB_POOL).flat().map(w=>w.de);
-      setShuffledOpts(retryEx.map(q=>{
-        const wr=posWrongDe(q,allDe);
-        return shuffle([q.de,...wr]);
-      }));
-    } else {
-      const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
-      setShuffledOpts(retryEx.map(ex=>{
-        const wr=formWrong(ex);
-        return shuffle([ex.de,...wr]);
-      }));
-    }
+    // Optionen je nach Item-Form (Quiz-Wort vs. Cloze-Übung) — Einheiten können nach
+    // einem Übungsart-Wechsel gemischt sein (Wörter ohne Kontextübung bleiben Quiz)
+    const allDeV=Object.values(VOCAB_POOL).flat().map(w=>w.de);
+    setShuffledOpts(retryEx.map(q=>q.en
+      ?shuffle([q.de,...posWrongDe(q,allDeV)])
+      :shuffle([q.de,...formWrong(q)])));
     setCurrent(0);setSelected(null);retryRef.current=true;setRetryPending(null);
   },[exType,selectedLevel,retryPending]);
 
@@ -1110,13 +1135,17 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
-  if(mode==='exercise'&&exType==='cloze'&&!retryPending){
+  if(mode==='exercise'&&!retryPending&&exercises[current]&&!exercises[current].en){
     const ex=exercises[current];const opts=shuffledOpts[current];const parts=ex.text.split('___');
     const cu=clozeUnitsRef.current;
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{t('cloze')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{cu&&cu.units.length>1?' — '+t('unitProgress').replace('{c}',cu.unitIdx+1).replace('{t}',cu.units.length):''}</p>
+        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,marginTop:6}}>
+          <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
+          <button onClick={()=>switchExercise('cloze')} style={{...S.lvlBtn,...(exType==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
+        </div>}
       </header>
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
@@ -1159,12 +1188,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     </div>);
   }
 
-  if(mode==='exercise'&&exType==='vocab'){
+  if(mode==='exercise'&&exercises[current]&&exercises[current].en){
     const ex=exercises[current];const opts=shuffledOpts[current];const vu=vocabUnitsRef.current;
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{t('vocab')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{vu&&vu.units.length>1?' — '+t('unitProgress').replace('{c}',vu.unitIdx+1).replace('{t}',vu.units.length):''}</p>
+        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,marginTop:6}}>
+          <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
+          <button onClick={()=>switchExercise('cloze')} style={{...S.lvlBtn,...(exType==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
+        </div>}
       </header>
       <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
         <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${(current/exercises.length)*100}%`}}/>
@@ -1335,13 +1368,6 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         <button onClick={()=>changeFocus('freq')} style={{...S.lvlBtn,...(trainFocus==='freq'?S.lvlActive:{})}}>{t('trainFocusFreq')}</button>
       </div>
     </div>
-    <div style={{textAlign:'center',margin:'0 0 8px'}}>
-      <span style={{fontSize:12,color:'var(--t-muted2)',fontFamily:sans}}>{t('exModeLabel')}</span>
-      <div style={{...S.levelBtns,marginTop:4,marginBottom:12}}>
-        <button onClick={()=>changeExMode('quiz')} style={{...S.lvlBtn,...(exMode==='quiz'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
-        <button onClick={()=>changeExMode('cloze')} style={{...S.lvlBtn,...(exMode==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
-      </div>
-    </div>
     <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{stepInfo}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
@@ -1453,6 +1479,7 @@ async function loadData(){
       for(const k in CLOZE_BY_PF)CLOZE_BY_PF[k]=[...new Set(CLOZE_BY_PF[k])];
       // Lemma → Cloze-Übung (für den Kontext-Modus des einheitlichen Trainings)
       CLOZE_MAP=new Map(Object.values(CLOZE_EXERCISES).flat().map(e=>[e.lemma,e]));
+      WORD_BY_EN=new Map(Object.values(words).flat().map(w=>[w.en,w]));
     }
   }catch(e){}
   return{en};

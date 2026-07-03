@@ -82,8 +82,9 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Beide Modi nutzen 18 Stufen mit separatem Step-Tracking
 
 **Training-Mechanik (Spaced Repetition, Konzept siehe `projekt-training-konzept.md`):**
-- Ein Trainings-Button mit zwei umschaltbaren **Übungsarten** (localStorage `bible-ex-mode`): **Quiz** (englisches Wort → deutsche Übersetzung) oder **Im Kontext** (Lückentext mit Bibelvers). Beide nutzen dieselbe Wortauswahl und denselben Lernstand — Moduswechsel jederzeit zwischen den Einheiten
-- Im Kontextmodus werden die 13 Wörter ohne Kontextübung übersprungen; sind auf einer Stufe nur noch solche übrig, erscheint ein Hinweis mit Wechsel-Button zum Quiz-Modus (der Level-Aufstieg misst sich immer am vollen Pool)
+- Ein Trainings-Button mit zwei **Übungsarten** (localStorage `bible-ex-mode`): **Quiz** (englisches Wort → deutsche Übersetzung) oder **Im Kontext** (Lückentext mit Bibelvers). Beide nutzen dieselbe Wortauswahl und denselben Lernstand
+- Der Übungsart-Umschalter erscheint **in der laufenden Übung** (Header) — Wechsel jederzeit mitten in der Einheit: die restlichen Fragen werden in die andere Darstellungsform konvertiert; Score, Fortschritt, Fehlerliste und Levelanpassung bleiben erhalten. Die zuletzt gewählte Übungsart wird für den nächsten Start gemerkt
+- Wörter ohne Kontextübung (13 Stück) bleiben im Kontextmodus als Quiz-Frage in der Einheit (gemischte Darstellung); startet man im Kontextmodus und es sind auf einer Stufe *nur noch* solche Wörter übrig, erscheint ein Hinweis mit Wechsel-Button zum Quiz-Modus (der Level-Aufstieg misst sich immer am vollen Pool)
 - 18 Schwierigkeitsstufen, zwei Lernfokus-Modi (CEFR-Level / Häufigkeit)
 - Leitner-Treppe: richtige Antwort hebt fällige Wörter stufenweise (fam −1/0 → 1 → 2 → 3), falsche Antwort → fam=0 (vergessen). Gelernte Wörter kommen also wieder — nach 2 Tagen (fam=1), 7 Tagen (fam=2) bzw. als Stichprobe nach 60 Tagen (fam=3)
 - Wiederholt werden **nur aktiv gelernte Wörter** (`learned` > 0, waren also mindestens einmal fam=0). Direkt als bekannt markierte Wörter (✓ bei „Wörter anschauen") oder beim ersten Versuch richtig beantwortete neue Wörter brauchen keine Festigung und bleiben draußen

@@ -116,3 +116,7 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   Kontext" zu einem Button mit Übungsart-Umschalter (Quiz / Im Kontext) zusammengeführt;
   gemeinsame Auswahl-Funktion `selectUnit` für beide Übungsarten; 13 Wörter ohne
   Kontextübung werden im Kontextmodus übersprungen (Hinweis-Screen bei Restbestand)
+- **Nachtrag 2 (03.07.2026)** — Umschalter in die laufende Übung verlegt (Header):
+  Wechsel mitten in der Einheit konvertiert die restlichen Fragen (`switchExercise`);
+  Wörter ohne Kontextübung bleiben als Quiz-Frage → gemischte Einheiten, Rendering
+  pro Item (Wort-Objekt vs. Cloze-Übung)
