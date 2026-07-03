@@ -101,8 +101,8 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 
 ### Einstufungstest
 
-- 30 Multiple-Choice-Fragen zur Bestimmung des CEFR-Niveaus
-- Ergebnis: A1, A2, B1, B2 oder C1
+- 30 Multiple-Choice-Fragen (6×5, A1–C2) zur Bestimmung des CEFR-Niveaus
+- Ergebnis: A1 bis C2; setzt auch die Trainingsstufen (`bible-train-step`, `bible-freq-step`)
 - Passt die Vokabelanzeige automatisch an
 - Jederzeit wiederholbar in den Einstellungen
 
