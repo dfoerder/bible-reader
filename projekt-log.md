@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.34b (03.07.2026)
+
+- Wiederholungen nur für aktiv gelernte Wörter (learned>0) — per ✓ markierte Wörter werden nicht mehr wiederholt
+
 ## v1.10.33b (03.07.2026)
 
 - Training 2.0: Spaced Repetition — Leitner-Treppe (Wiederholungen nach 2/7/60 Tagen), neuer Einheiten-Mix, automatischer Level-Aufstieg, Wiederholungs-Zähler und Stufen-Panel

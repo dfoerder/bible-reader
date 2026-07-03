@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.33b (03.07.2026)
+- **Aktuelle Version:** 1.10.34b (03.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -85,8 +85,9 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
 - 18 Schwierigkeitsstufen, zwei Lernfokus-Modi (CEFR-Level / Häufigkeit)
 - Leitner-Treppe: richtige Antwort hebt fällige Wörter stufenweise (fam −1/0 → 1 → 2 → 3), falsche Antwort → fam=0 (vergessen). Gelernte Wörter kommen also wieder — nach 2 Tagen (fam=1), 7 Tagen (fam=2) bzw. als Stichprobe nach 60 Tagen (fam=3)
+- Wiederholt werden **nur aktiv gelernte Wörter** (`learned` > 0, waren also mindestens einmal fam=0). Direkt als bekannt markierte Wörter (✓ bei „Wörter anschauen") oder beim ersten Versuch richtig beantwortete neue Wörter brauchen keine Festigung und bleiben draußen
 - Einheiten-Mix (15 Wörter, Slots A–E, danach gemischt) — identisch für Vokabel- und Cloze-Training:
-  - **A**: bis 4 fällige Wiederholungen (fam=1/2, am längsten überfällige zuerst; + max. 1 fam=3-Stichprobe) — level-unabhängig
+  - **A**: bis 4 fällige Wiederholungen (fam=1/2 mit `learned`>0, am längsten überfällige zuerst; + max. 1 fam=3-Stichprobe) — level-unabhängig
   - **B**: bis 3 fällige Unbekannte (fam=0, >24h; aktuelles + tiefere Levels), Vergessene zuerst
   - **C**: 1 ungeübtes Wort (fam=−1) tieferer Levels
   - **D**: 1 ungeübtes Wort aus Step+1
@@ -101,8 +102,8 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 
 ### Einstufungstest
 
-- 30 Multiple-Choice-Fragen zur Bestimmung des CEFR-Niveaus
-- Ergebnis: A1, A2, B1, B2 oder C1
+- 30 Multiple-Choice-Fragen (6×5, A1–C2) zur Bestimmung des CEFR-Niveaus
+- Ergebnis: A1 bis C2; setzt auch die Trainingsstufen (`bible-train-step`, `bible-freq-step`)
 - Passt die Vokabelanzeige automatisch an
 - Jederzeit wiederholbar in den Einstellungen
 
