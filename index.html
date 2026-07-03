@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.34b';
+const APP_VERSION = '1.10.35b';
 const APP_DATE = '03.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -341,6 +341,11 @@ const I18N={
   levelUpDone:{de:'Gratulation! Du hast alle Wörter dieser Stufe geübt.',en:'Congratulations! You have practiced all words of this level.'},
   reviewsDue:{de:'{n} Wiederholungen fällig',en:'{n} reviews due'},
   reviewsDue1:{de:'1 Wiederholung fällig',en:'1 review due'},
+  exModeLabel:{de:'Übungsart',en:'Exercise type'},
+  exModeQuiz:{de:'Quiz',en:'Quiz'},
+  exModeContext:{de:'Im Kontext',en:'In context'},
+  clozeGapHint:{de:'Für die verbleibenden {n} Wörter dieser Stufe gibt es keine Kontextübungen. Wechsle in den Quiz-Modus, um sie zu üben.',en:'There are no context exercises for the remaining {n} words of this level. Switch to quiz mode to practice them.'},
+  toQuizMode:{de:'Zum Quiz-Modus',en:'Switch to quiz mode'},
   trainContinue:{de:'Weiter',en:'Continue'},
   statFamSteps:{de:'Stufen: {a} gelernt · {b} gefestigt · {c} sicher',en:'Stages: {a} learned · {b} consolidated · {c} secure'},
   finish:{de:'Beenden',en:'Finish'},
@@ -556,6 +561,7 @@ function posWrongDe(target,dePool){
 }
 // Lückentext-Distraktoren: deForm-Pool gruppiert nach Wortart|Form (Numerus/Tempus)
 let CLOZE_BY_PF={};
+let CLOZE_MAP=new Map(); // Lemma → Cloze-Übung (Kontext-Modus)
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
   const same=(CLOZE_BY_PF[key]||[]).filter(d=>d!==target.de);
@@ -675,6 +681,9 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
   const vocabUnitsRef=useRef(null);
   const [vocabUnitDone,setVocabUnitDone]=useState(false);
   const [levelUpStep,setLevelUpStep]=useState(null);
+  const [exMode,setExMode]=useState(()=>LS.get('bible-ex-mode')||'quiz');
+  const changeExMode=m=>{setExMode(m);LS.set('bible-ex-mode',m);};
+  const [clozeGapCount,setClozeGapCount]=useState(0);
 
   const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 
@@ -695,142 +704,71 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     const higherPool=allCloze.filter(e=>higherLemmas.has(e.lemma));
     return {pool,higherPool};
   },[]);
-  const startCloze=useCallback((step,focus)=>{
-    reviewModeRef.current=false;
-    const lvl=stepToLevel(step);
-    const now=Date.now();
-    const key=w=>w.lemma||w.answer;
-    const fam=w=>{const d=wordData[key(w)];return d?d.familiarity:-1;};
-    const lt=w=>{const d=wordData[key(w)];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
-    const fgt=w=>{const d=wordData[key(w)];return d&&d.forgotten?d.forgotten:0;};
-    const allCloze=Object.values(CLOZE_EXERCISES).flat();
-    // Zuordnung der Cloze-Lemmata zu aktuellem/tieferem/Step+1-Bereich (analog startVocab)
-    let inLower,inCurrent,inNext;
-    if(focus==='freq'){
-      const fsMap=new Map(FREQ_POOL.map(w=>[w.en,w.freqStep]));
-      inLower=e=>{const fs=fsMap.get(e.lemma);return fs!==undefined&&fs<step;};
-      inCurrent=e=>fsMap.get(e.lemma)===step;
-      inNext=e=>step<SUBSTEPS.length-1&&fsMap.get(e.lemma)===step+1;
-    } else {
-      const li=LEVELS.indexOf(lvl);
-      const lowerLemmas=new Set(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[])).map(w=>w.en));
-      const curLemmas=new Set((VOCAB_POOL[lvl]||[]).filter(w=>w.sub<=1+(step%3)).map(w=>w.en));
-      let nextLemmas=new Set();
-      if(step<SUBSTEPS.length-1){const s1=step+1;const lvl1=stepToLevel(s1);const sub1=1+(s1%3);
-        nextLemmas=new Set((VOCAB_POOL[lvl1]||[]).filter(w=>w.sub===sub1).map(w=>w.en));}
-      inLower=e=>lowerLemmas.has(e.lemma);inCurrent=e=>curLemmas.has(e.lemma);inNext=e=>nextLemmas.has(e.lemma);
-    }
-    // Slots A–E wie in startVocab (projekt-training-konzept.md)
-    const unknown24h=shuffle(allCloze.filter(e=>(inCurrent(e)||inLower(e))&&fam(e)===0&&now-lt(e)>=DAY_MS))
-      .sort((a,b)=>(fgt(b)>0?1:0)-(fgt(a)>0?1:0));
-    const lowerUnexercised=shuffle(allCloze.filter(e=>inLower(e)&&fam(e)===-1));
-    const currentUnexercised=shuffle(allCloze.filter(e=>inCurrent(e)&&fam(e)===-1));
-    const nextStepNew=shuffle(allCloze.filter(e=>inNext(e)&&fam(e)===-1));
-    const due12=allCloze.filter(e=>{const d=wordData[key(e)];return d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
-      .sort((a,b)=>{const da=wordData[key(a)],db=wordData[key(b)];
-        const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_MS;
-        const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_MS;
-        return dueA-dueB;});
-    const due3=shuffle(allCloze.filter(e=>{const d=wordData[key(e)];return d&&d.familiarity===3&&reviewDue(d,now);}));
-    const dueReviews=[...due12,...due3.slice(0,1)];
-    if(unknown24h.length===0&&currentUnexercised.length===0&&dueReviews.length===0){setMode('nowords');return;}
-    const unit=[];let ai=0,bi=0,ci=0,di=0,ei=0;
-    for(let i=0;i<4&&ai<dueReviews.length;i++)unit.push(dueReviews[ai++]);
-    for(let i=0;i<3&&bi<unknown24h.length;i++)unit.push(unknown24h[bi++]);
-    if(ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
-    if(di<nextStepNew.length)unit.push(nextStepNew[di++]);
-    while(unit.length<15&&ei<currentUnexercised.length)unit.push(currentUnexercised[ei++]);
-    while(unit.length<15&&ai<dueReviews.length)unit.push(dueReviews[ai++]);
-    while(unit.length<15&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
-    while(unit.length<15&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
-    while(unit.length<15&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
-    if(unit.length===0){setMode('nowords');return;}
-    const picked=shuffle(unit);
-    const preFam={};picked.forEach(w=>{preFam[key(w)]=fam(w);});
-    const allDe=allCloze.map(e=>e.de);
-    const units=[picked];
-    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
-    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
-    const lowerKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(key));
-    lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
-    lowerLevelTotalRef.current=picked.filter(w=>lowerKeys.has(key(w))).length;
-    clozeUnitsRef.current={units,unitIdx:0,allDe,globalScore:0,globalTotal:picked.length,preFam,lowerKeys};
-    setExercises(picked);
-    setShuffledOpts(picked.map(ex=>{
-      const wrong=formWrong(ex);
-      return shuffle([ex.de,...wrong]);
-    }));
-    setSelectedLevel(lvl);setLastStart('cloze');
-  },[wordData,clozeForStep]);
-
   const DAY_MS=24*3600*1000;
 
-  const startVocab=useCallback((step,focus,allLevels,reviewMode)=>{
-    reviewModeRef.current=!!reviewMode;
+  // Gemeinsame Wortauswahl für Quiz- und Kontext-Modus (Slots A–E, projekt-training-konzept.md):
+  // A Wiederholungen (bis 4, Überfälligste zuerst, max. 1 fam=3-Stichprobe), B Unbekannte
+  // (bis 3, Vergessene zuerst), C 1 tieferes ungeübtes Wort, D 1 Wort aus Step+1, E neue
+  // Wörter des aktuellen Levels; Auffüllen bei Knappheit aus A, dann B, dann C/D.
+  // clozeOnly filtert auf Wörter mit Kontextübung (CLOZE_MAP); der Level-Aufstieg misst
+  // sich immer am vollen Pool, damit er nicht feuert, solange Wörter ohne Übung offen sind.
+  const selectUnit=useCallback((step,focus,clozeOnly,allLevels,reviewMode)=>{
     const {words:stepWords,allDe}=vocabForStep(step,focus);
     const now=Date.now();
     const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
     const fgt=w=>{const d=wordData[w.en];return d&&d.forgotten?d.forgotten:0;};
+    const ok=w=>!clozeOnly||CLOZE_MAP.has(w.en);
     let unknown24h,lowerUnexercised,currentUnexercised,dueReviews=[],nextStepNew=[];
+    let fullTrainable=0;
     if(reviewMode){
-      currentUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1));
+      currentUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1&&ok(w)));
       unknown24h=[];lowerUnexercised=[];
     } else if(allLevels){
-      currentUnexercised=shuffle(FREQ_POOL.filter(w=>fam(w)===-1));
-      unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS));
+      currentUnexercised=shuffle(FREQ_POOL.filter(w=>fam(w)===-1&&ok(w)));
+      unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
       lowerUnexercised=[];
     } else {
-      let curUnknown;
+      let curUnknown,curNew;
       if(focus==='freq'){
         curUnknown=stepWords.filter(w=>w.freqStep===step&&fam(w)===0&&now-lt(w)>=DAY_MS);
-        unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS));
-        lowerUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1));
-        currentUnexercised=shuffle(stepWords.filter(w=>w.freqStep===step&&fam(w)===-1));
-        if(step<SUBSTEPS.length-1)nextStepNew=shuffle(FREQ_POOL.filter(w=>w.freqStep===step+1&&fam(w)===-1));
+        curNew=stepWords.filter(w=>w.freqStep===step&&fam(w)===-1);
+        unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
+        lowerUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1&&ok(w)));
+        currentUnexercised=shuffle(curNew.filter(ok));
+        if(step<SUBSTEPS.length-1)nextStepNew=shuffle(FREQ_POOL.filter(w=>w.freqStep===step+1&&fam(w)===-1&&ok(w)));
       } else {
         const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);
-        const lowerFam0=LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS));
+        const lowerFam0=LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
         curUnknown=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
-        unknown24h=shuffle([...curUnknown,...lowerFam0]);
-        lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1)));
-        currentUnexercised=shuffle(stepWords.filter(w=>fam(w)===-1));
+        curNew=stepWords.filter(w=>fam(w)===-1);
+        unknown24h=shuffle([...curUnknown.filter(ok),...lowerFam0]);
+        lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1&&ok(w))));
+        currentUnexercised=shuffle(curNew.filter(ok));
         if(step<SUBSTEPS.length-1){const s1=step+1;const lvl1=stepToLevel(s1);const sub1=1+(s1%3);
-          nextStepNew=shuffle((VOCAB_POOL[lvl1]||[]).filter(w=>w.sub===sub1&&fam(w)===-1));}
+          nextStepNew=shuffle((VOCAB_POOL[lvl1]||[]).filter(w=>w.sub===sub1&&fam(w)===-1&&ok(w)));}
       }
-      // AP-T3: aktueller Step vollständig geübt (keine neuen, keine fälligen unbekannten
-      // Wörter) → automatischer Aufstieg mit Gratulation. Wiederholungen laufen
-      // level-unabhängig weiter. Auf Step 17 greift stattdessen der freqComplete-Flow.
-      if(curUnknown.length===0&&currentUnexercised.length===0&&step<SUBSTEPS.length-1){
-        const ns=step+1;
-        (focus==='freq'?saveFreqStep:saveStep)(ns);
-        setUserLevel(stepToLevel(ns));
-        setLevelUpStep(ns);setMode('levelup');
-        return;
-      }
+      // AP-T3: aktueller Step vollständig geübt → automatischer Aufstieg mit Gratulation.
+      // Wiederholungen laufen level-unabhängig weiter; Step 17 → freqComplete-Flow.
+      if(curUnknown.length===0&&curNew.length===0&&step<SUBSTEPS.length-1)return{status:'levelup'};
+      fullTrainable=curUnknown.length+curNew.length;
       unknown24h.sort((a,b)=>(fgt(b)>0?1:0)-(fgt(a)>0?1:0));
-      const due12=FREQ_POOL.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
+      const due12=FREQ_POOL.filter(w=>{const d=wordData[w.en];return ok(w)&&d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
         .sort((a,b)=>{const da=wordData[a.en],db=wordData[b.en];
           const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_MS;
           const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_MS;
           return dueA-dueB;});
-      const due3=shuffle(FREQ_POOL.filter(w=>{const d=wordData[w.en];return d&&d.familiarity===3&&reviewDue(d,now);}));
+      const due3=shuffle(FREQ_POOL.filter(w=>{const d=wordData[w.en];return ok(w)&&d&&d.familiarity===3&&reviewDue(d,now);}));
       dueReviews=[...due12,...due3.slice(0,1)];
     }
     if(unknown24h.length===0&&currentUnexercised.length===0&&dueReviews.length===0){
+      if(clozeOnly&&fullTrainable>0)return{status:'clozegap',missing:fullTrainable};
       if(focus==='freq'||reviewMode||step===SUBSTEPS.length-1){
         const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
-        setMode(allDone?'freqAllDone':'freqComplete');
-      } else {
-        setMode('nowords');
+        return{status:allDone?'alldone':'complete'};
       }
-      return;
+      return{status:'nowords'};
     }
-    // Einheiten-Mix Slots A–E (projekt-training-konzept.md): A Wiederholungen (bis 4,
-    // Überfälligste zuerst), B Unbekannte (bis 3, Vergessene zuerst), C 1 tieferes
-    // ungeübtes Wort, D 1 Wort aus Step+1, E neue Wörter des aktuellen Levels.
-    // Auffüllen bei Knappheit aus A-Überhang, dann B, dann C/D.
     const unit=[];let ai=0,bi=0,ci=0,di=0,ei=0;
     for(let i=0;i<4&&ai<dueReviews.length;i++)unit.push(dueReviews[ai++]);
     for(let i=0;i<3&&bi<unknown24h.length;i++)unit.push(unknown24h[bi++]);
@@ -841,24 +779,66 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     while(unit.length<15&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
     while(unit.length<15&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
     while(unit.length<15&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
-    if(unit.length===0)return;
-    const units=[shuffle(unit)];
-    const allDePool=[...new Set([...allDe,...lowerUnexercised.map(w=>w.de),...dueReviews.map(w=>w.de),...nextStepNew.map(w=>w.de)])];
-    const picked=units[0];
+    if(unit.length===0)return{status:'nowords'};
+    // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
+    const excludeKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.en));
+    const extraDe=[...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.de);
+    return{status:'ok',unit:shuffle(unit),excludeKeys,extraDe,allDe};
+  },[wordData]);
+
+  // Gemeinsame Behandlung der Auswahl-Ergebnisse ohne Einheit (Aufstieg/Abschluss/leer)
+  const applySelectStatus=useCallback((res,step,focus)=>{
+    if(res.status==='levelup'){
+      const ns=step+1;
+      (focus==='freq'?saveFreqStep:saveStep)(ns);
+      setUserLevel(stepToLevel(ns));
+      setLevelUpStep(ns);setMode('levelup');return true;
+    }
+    if(res.status==='complete'||res.status==='alldone'){setMode(res.status==='alldone'?'freqAllDone':'freqComplete');return true;}
+    if(res.status==='clozegap'){setClozeGapCount(res.missing);setMode('clozegap');return true;}
+    if(res.status!=='ok'){setMode('nowords');return true;}
+    return false;
+  },[]);
+
+  const startVocab=useCallback((step,focus,allLevels,reviewMode)=>{
+    reviewModeRef.current=!!reviewMode;
+    const res=selectUnit(step,focus,false,allLevels,reviewMode);
+    if(applySelectStatus(res,step,focus))return;
+    const picked=res.unit;
+    const allDePool=[...new Set([...res.allDe,...res.extraDe])];
     setExercises(picked);
     setShuffledOpts(picked.map(q=>{
       const wrong=posWrongDe(q,allDePool);
       return shuffle([q.de,...wrong]);
     }));
     setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('vocab');setMode('exercise');setRetryPending(null);setFirstPassScore(null);setVocabUnitDone(false);
-    // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
-    const lowerKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.en));
     lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
-    lowerLevelTotalRef.current=picked.filter(w=>lowerKeys.has(w.en)).length;
+    lowerLevelTotalRef.current=picked.filter(w=>res.excludeKeys.has(w.en)).length;
     wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
-    vocabUnitsRef.current={units,unitIdx:0,allDePool,globalScore:0,globalTotal:units.reduce((s,u)=>s+u.length,0),lowerKeys};
+    vocabUnitsRef.current={units:[picked],unitIdx:0,allDePool,globalScore:0,globalTotal:picked.length,lowerKeys:res.excludeKeys};
     setSelectedLevel(stepToLevel(step));setLastStart('vocab');
-  },[wordData]);
+  },[selectUnit,applySelectStatus]);
+
+  // Kontext-Modus: gleiche Wortauswahl, Darstellung als Lückentext (Wort → CLOZE_MAP-Übung)
+  const startCloze=useCallback((step,focus)=>{
+    reviewModeRef.current=false;
+    const res=selectUnit(step,focus,true,false,false);
+    if(applySelectStatus(res,step,focus))return;
+    const picked=res.unit.map(w=>CLOZE_MAP.get(w.en));
+    const preFam={};res.unit.forEach(w=>{const d=wordData[w.en];preFam[w.en]=d?d.familiarity:-1;});
+    const allDe=Object.values(CLOZE_EXERCISES).flat().map(e=>e.de);
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+    lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
+    lowerLevelTotalRef.current=picked.filter(e=>res.excludeKeys.has(e.lemma)).length;
+    clozeUnitsRef.current={units:[picked],unitIdx:0,allDe,globalScore:0,globalTotal:picked.length,preFam,lowerKeys:res.excludeKeys};
+    setExercises(picked);
+    setShuffledOpts(picked.map(ex=>{
+      const wrong=formWrong(ex);
+      return shuffle([ex.de,...wrong]);
+    }));
+    setSelectedLevel(stepToLevel(step));setLastStart('cloze');
+  },[selectUnit,applySelectStatus,wordData]);
 
   const startBookCloze=useCallback(bi=>{
     const bookNr=books[bi].nr;
@@ -1229,6 +1209,16 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       </div>
     </div>);
   }
+  if(mode==='clozegap'){
+    return(<div>
+      <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
+      <div style={S.navRow}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('back')}</button></div>
+      <div style={{textAlign:'center',padding:'20px'}}>
+        <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px'}}>{t('clozeGapHint').replace('{n}',clozeGapCount)}</p>
+        <button onClick={()=>{changeExMode('quiz');startVocab(activeStep,trainFocus);}} style={S.startBtn}>{t('toQuizMode')}</button>
+      </div>
+    </div>);
+  }
   if(mode==='nowords'){
     const nwFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
     const nwFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
@@ -1345,18 +1335,21 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
         <button onClick={()=>changeFocus('freq')} style={{...S.lvlBtn,...(trainFocus==='freq'?S.lvlActive:{})}}>{t('trainFocusFreq')}</button>
       </div>
     </div>
+    <div style={{textAlign:'center',margin:'0 0 8px'}}>
+      <span style={{fontSize:12,color:'var(--t-muted2)',fontFamily:sans}}>{t('exModeLabel')}</span>
+      <div style={{...S.levelBtns,marginTop:4,marginBottom:12}}>
+        <button onClick={()=>changeExMode('quiz')} style={{...S.lvlBtn,...(exMode==='quiz'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
+        <button onClick={()=>changeExMode('cloze')} style={{...S.lvlBtn,...(exMode==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
+      </div>
+    </div>
     <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{stepInfo}</p>
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
-        <button onClick={()=>startVocab(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{fresh===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('nOfMAvailable').replace('{n}',fresh)}</p>
-        {dueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{dueCount===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',dueCount)}</p>}
-        {(()=>{const stepPool=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;const total=stepPool.length;const known=stepPool.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;}).length;return total>0&&known>0?<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{known}/{total} gelernt</p>:null;})()}
-      </div>
-      <div style={S.settingsGroup}>
-        <button onClick={()=>startCloze(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('clozePractice')}</button>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{clozeFresh===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('nOfMClozeAvailable').replace('{n}',clozeFresh)}</p>
-        {clozeDueCount>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{clozeDueCount===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',clozeDueCount)}</p>}
+        <button onClick={()=>exMode==='cloze'?startCloze(activeStep,trainFocus):startVocab(activeStep,trainFocus)} style={{...S.startBtn,width:'100%',padding:'16px',fontSize:17}}>{t('vocabPractice')}</button>
+        {(()=>{const f=exMode==='cloze'?clozeFresh:fresh;const dc=exMode==='cloze'?clozeDueCount:dueCount;return(<div>
+          <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{f===0&&freqReviewStepRef.current!=null?t('freqReviewInProgress'):(exMode==='cloze'?t('nOfMClozeAvailable'):t('nOfMAvailable')).replace('{n}',f)}</p>
+          {dc>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{dc===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',dc)}</p>}
+        </div>);})()}
         {(()=>{const stepPool=trainFocus==='freq'?FREQ_POOL.filter(w=>w.freqStep===activeStep):stepWords;const total=stepPool.length;const known=stepPool.filter(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;}).length;return total>0&&known>0?<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'2px 0 0',textAlign:'center'}}>{known}/{total} gelernt</p>:null;})()}
       </div>
     </div>
@@ -1458,6 +1451,8 @@ async function loadData(){
         return {text:w.text,answer:w.answer,de:deForm,pos:w.pos,form,ref:w.ref,book:w.book,sub:w.sub,level:lvl,lemma:w.en};
       });
       for(const k in CLOZE_BY_PF)CLOZE_BY_PF[k]=[...new Set(CLOZE_BY_PF[k])];
+      // Lemma → Cloze-Übung (für den Kontext-Modus des einheitlichen Trainings)
+      CLOZE_MAP=new Map(Object.values(CLOZE_EXERCISES).flat().map(e=>[e.lemma,e]));
     }
   }catch(e){}
   return{en};

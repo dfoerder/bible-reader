@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.34b (03.07.2026)
+- **Aktuelle Version:** 1.10.35b (03.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -82,11 +82,12 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Beide Modi nutzen 18 Stufen mit separatem Step-Tracking
 
 **Training-Mechanik (Spaced Repetition, Konzept siehe `projekt-training-konzept.md`):**
-- Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
+- Ein Trainings-Button mit zwei umschaltbaren **Übungsarten** (localStorage `bible-ex-mode`): **Quiz** (englisches Wort → deutsche Übersetzung) oder **Im Kontext** (Lückentext mit Bibelvers). Beide nutzen dieselbe Wortauswahl und denselben Lernstand — Moduswechsel jederzeit zwischen den Einheiten
+- Im Kontextmodus werden die 13 Wörter ohne Kontextübung übersprungen; sind auf einer Stufe nur noch solche übrig, erscheint ein Hinweis mit Wechsel-Button zum Quiz-Modus (der Level-Aufstieg misst sich immer am vollen Pool)
 - 18 Schwierigkeitsstufen, zwei Lernfokus-Modi (CEFR-Level / Häufigkeit)
 - Leitner-Treppe: richtige Antwort hebt fällige Wörter stufenweise (fam −1/0 → 1 → 2 → 3), falsche Antwort → fam=0 (vergessen). Gelernte Wörter kommen also wieder — nach 2 Tagen (fam=1), 7 Tagen (fam=2) bzw. als Stichprobe nach 60 Tagen (fam=3)
 - Wiederholt werden **nur aktiv gelernte Wörter** (`learned` > 0, waren also mindestens einmal fam=0). Direkt als bekannt markierte Wörter (✓ bei „Wörter anschauen") oder beim ersten Versuch richtig beantwortete neue Wörter brauchen keine Festigung und bleiben draußen
-- Einheiten-Mix (15 Wörter, Slots A–E, danach gemischt) — identisch für Vokabel- und Cloze-Training:
+- Einheiten-Mix (15 Wörter, Slots A–E, danach gemischt) — eine gemeinsame Auswahl-Funktion (`selectUnit`) für beide Übungsarten:
   - **A**: bis 4 fällige Wiederholungen (fam=1/2 mit `learned`>0, am längsten überfällige zuerst; + max. 1 fam=3-Stichprobe) — level-unabhängig
   - **B**: bis 3 fällige Unbekannte (fam=0, >24h; aktuelles + tiefere Levels), Vergessene zuerst
   - **C**: 1 ungeübtes Wort (fam=−1) tieferer Levels
@@ -97,7 +98,7 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Level-Aufstieg bei Erschöpfung: hat der aktuelle Step keine neuen und keine fälligen unbekannten Wörter mehr → automatischer Step+1 mit 🎉-Gratulations-Screen; fällige Wiederholungen blockieren den Aufstieg nicht
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
 - Intervall-Guard zentral in `trainWord`: Erhöhen nur nach Ablauf des Stufen-Intervalls (24h / 2 Tage / 7 Tage), Erniedrigen immer erlaubt — gilt für alle Übungspfade inkl. Kapitel-Training
-- Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter den Trainings-Buttons (je Übungstyp gezählt); Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
+- Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter dem Trainings-Button (passend zur gewählten Übungsart); Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
 - Abschluss auf Step 17 (C2.3): freqComplete-Screen mit schrittweisem Review tieferer Steps (C2.2, C2.1, …); sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
 
 ### Einstufungstest
@@ -223,6 +224,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
 | `bible-word-data-backup` | Backup der Wortdaten (Wiederherstellung nach Einstufungstest) |
 | `bible-train-focus` | Lernfokus im Training ('level'/'freq') |
+| `bible-ex-mode` | Übungsart im Training ('quiz'/'cloze') |
 | `bible-train-step` | Aktuelle Trainingsstufe CEFR-Modus (0–17) |
 | `bible-freq-step` | Aktuelle Trainingsstufe Häufigkeits-Modus (0–17) |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
