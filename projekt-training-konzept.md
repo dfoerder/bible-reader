@@ -1,8 +1,9 @@
 # Trainingskonzept 2.0 — Spaced Repetition
 
-**Status: ENTWURF (03.07.2026), noch nicht implementiert.**
-Zielkonzept für das allgemeine Vokabeltraining. Nach Umsetzung wird `dokumentation.md`
-(§ Vokabeltraining, § Lernfortschritt) aktualisiert und dieses Dokument als umgesetzt markiert.
+**Status: UMGESETZT (03.07.2026, AP-T1–T6).**
+Konzept-Dokument des allgemeinen Vokabeltrainings 2.0. Die verbindliche Beschreibung des
+Ist-Verhaltens steht in `dokumentation.md` (§ Vokabeltraining, § Lernfortschritt); dieses
+Dokument hält Motivation, beschlossene Parameter und Umsetzungshistorie fest.
 
 ## Motivation
 
