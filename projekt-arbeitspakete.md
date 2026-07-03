@@ -2,6 +2,12 @@
 - detailverbesserungen, debugging
 - Schwierige Wörter: nach Ablehnung eines Level-Vorschlags im selben Kapitel nicht erneut fragen (übernommen aus issues.md)
 
+## Trainingskonzept 2.0 — Spaced Repetition (beschlossen 03.07.2026)
+Konzept und Implementierungspakete AP-T1 bis AP-T6: siehe `projekt-training-konzept.md`.
+Kern: Leitner-Treppe auf der Familiarity-Skala (fam=1/2/3 fällig nach 2/7/60 Tagen),
+neuer Einheiten-Mix mit Quoten, automatischer Level-Aufstieg bei erschöpftem Level,
+1 Wort aus Step+1 pro Einheit.
+
 ### Abgeschlossen (Session 18.06.2026, v1.9.30b–v1.9.42b)
 - POS-Distraktoren einheitlich in allen Übungen (Wortart + Numerus/Tempus)
 - Flexions-Übersetzungen (`deForm`/`form`) via Opus-Batch für alle 5086 Wörter
