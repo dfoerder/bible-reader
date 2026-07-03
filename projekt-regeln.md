@@ -1,9 +1,10 @@
 # Projektregeln
 
 ## Deployment
-- Entwickelt wird auf dem Branch `dev`
-- Zum Deployen: `dev` in `main` mergen und `main` pushen
-- `dev` wird nie direkt gepusht
+- Entwickelt wird auf dem Branch `dev`; `dev` wird nie direkt gepusht
+- Deploy: `./deploy.sh "Changelog-Zeile"` — bumpt `APP_VERSION`/`APP_DATE` (index.html) und Cache-Name (sw.js), schreibt den Changelog-Eintrag nach `projekt-log.md`, aktualisiert den Versionskopf in `dokumentation.md`, committet, merged `dev` → `main` und pusht (GitHub Pages)
+- Die Changelog-Zeile ist Pflicht — sie wird Commit-Message und Log-Eintrag
+- `APP_VERSION` trägt bis auf Weiteres den Suffix `b` (Beta)
 
 ## Daten-Quelle (Single Source of Truth)
 - Die Web-App lädt zur Laufzeit aus dem Repo-**Root** (`data/`, `bibles/`, `index.html` …);

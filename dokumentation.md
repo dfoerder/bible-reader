@@ -291,10 +291,7 @@ Das Review aller 66 Bücher kostete ca. $1.500 (Batch API mit 50% Rabatt, Opus 4
 
 ## Deployment
 
-1. Entwicklung auf Branch `dev`
-2. `APP_VERSION` in `index.html` und `CACHE_NAME` in `sw.js` hochzählen
-3. Merge `dev` → `main`
-4. Push nach GitHub (GitHub Pages)
+Entwicklung auf Branch `dev`, Deploy mit `./deploy.sh "Changelog-Zeile"`: bumpt `APP_VERSION`/`APP_DATE` (index.html) und `CACHE_NAME` (sw.js), schreibt den Changelog-Eintrag nach `projekt-log.md`, aktualisiert den Versionskopf dieser Dokumentation, merged `dev` → `main` und pusht (GitHub Pages).
 
 Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 

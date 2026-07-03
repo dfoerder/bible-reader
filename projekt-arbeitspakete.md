@@ -1,5 +1,6 @@
 ## Laufend
 - detailverbesserungen, debugging
+- Schwierige Wörter: nach Ablehnung eines Level-Vorschlags im selben Kapitel nicht erneut fragen (übernommen aus issues.md)
 
 ### Abgeschlossen (Session 18.06.2026, v1.9.30b–v1.9.42b)
 - POS-Distraktoren einheitlich in allen Übungen (Wortart + Numerus/Tempus)

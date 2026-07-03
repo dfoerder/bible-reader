@@ -36,54 +36,18 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 ### Schwierige Wörter (kapitelweise)
 - **Wörter anschauen**: alle Wörter über dem CEFR-Level des Nutzers werden einzeln angezeigt (englisch + deutsche Übersetzung). Der Nutzer markiert jedes Wort als bekannt (✓) oder unbekannt (?). Dieser Schritt bestimmt, welche Wörter trainiert werden.
 - **Wörter im Kontext üben**: Lückentext-Übungen mit Sätzen aus dem Kapitel. Das schwierige Wort wird im Satz hervorgehoben, der Nutzer wählt die richtige deutsche Übersetzung aus drei Optionen. Aufgeteilt in Lerneinheiten zu je 15 Fragen.
-- **Wörter Quiz**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert, da noch nicht bekannt ist, welche der Nutzer kann. Die Übung wird in Lerneinheiten zu je 15 Fragen aufgeteilt. Ablauf pro Einheit:
-  1. 15 Fragen beantworten
-  2. Zwischenergebnis: „X von 15 richtig"
-  3. Falls Fehler: Ankündigung und Wiederholung der falsch beantworteten Fragen
-  4. Einheitsergebnis mit Buttons „Wiederholen" (Einheit nochmals) und „Weiter" (nächste Einheit). Bei der letzten Einheit: „Beenden" statt „Weiter".
+- **Wörter Quiz**: Multiple-Choice-Quiz (englisch → deutsch) mit den unbekannten Wörtern des Kapitels, in Lerneinheiten zu je 15 Fragen mit Zwischenergebnis und Fehler-Wiederholung. Wird die Review-Übung übersprungen, werden alle Wörter über dem Level trainiert.
 
 ### Lernfortschritt (Familiarity-System)
-Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
-- **-1** = undefiniert (noch nie gesehen)
-- **0** = unbekannt
-- **1** = bekannt
-- **2** = gut bekannt
-- **3** = sehr gut bekannt
-
-**Zusätzliche Zähler pro Wort:**
-- `learned`: +1 bei Wechsel fam 0 → >0 (aktiv gelernt mit der App)
-- `forgotten`: +1 bei Wechsel fam >0 → 0 (vergessen)
-- Wechsel fam -1 → >0 zählt nicht als „gelernt" (Wort war bereits bekannt)
-
-**Regeln bei „Wörter anschauen":**
-- Nur Wörter mit familiarity ≤ 0 werden angezeigt
-- ✓ (bekannt) → familiarity = 1
-- ? (unbekannt) → familiarity = 0
-- `lasttrained`-Timestamp wird gesetzt
-
-**Regeln bei „Wörter Quiz":**
-- Nur Wörter mit familiarity ≤ 0 werden trainiert
-- Richtige Antwort (erster Durchgang):
-  - familiarity ≤ 0 → familiarity = 1
-  - familiarity > 0 und `lasttrained` > 2 Tage zurück und familiarity ≤ 2 → familiarity + 1
-- Falsche Antwort → familiarity = 0
-- Wiederholungsdurchgang (Retry): richtig → keine Änderung, falsch → familiarity = 0
+Jedes Wort trägt einen numerischen `familiarity`-Wert (−1 = noch nie gesehen bis 3 = sehr gut bekannt), der den Lernstand abbildet, plus Zähler für aktiv gelernte und vergessene Wörter. Die verbindlichen Regeln (Werte, Übergänge, 24h-Regel) stehen in `dokumentation.md` → „Lernfortschritt (Familiarity-System)".
 
 ### Vokabeltraining
-- Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
+- Einheitlicher Vokabelpool aus den Bibel-Annotationen (A1–C2, inkl. Eigennamen)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
-- 18 Schwierigkeitsstufen (A1.1 bis C2.3), basierend auf Worthäufigkeit
-- Adaptives System (5-stufig): 100% → Doppelsprung (+2 Sublevels) · >80% → +1 · 70–80% → Level halten (±0) · 40–69% → −1 · <40% → −2
-- Wortauswahl (15 Wörter pro Übung) aus drei Quellen, pro Einheit gemischt:
-  1. familiarity=0 + lasttrained >24h auf aktuellem und tieferen Levels (bekannte Schwächen) — max. 3 am Einheitsanfang
-  2. 1 ungeübtes Wort (familiarity=-1) tieferer Levels als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden
-  3. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter) — füllt auf 15 auf; Restplätze wieder aus Quelle 1
-- Höhere Levels werden nicht einbezogen; sind keine Wörter mehr verfügbar → „keine Wörter"-Hinweis bzw. Abschluss-Flow (freqComplete)
-- Wörter mit familiarity ≥ 1 werden nicht mehr trainiert
-- Selbsteinschätzung: „zu einfach" → familiarity=3, „ich rate" → Wiederholung am Ende
-- Richtig beantwortet → familiarity=1, falsch → familiarity=0
-- Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Level-Anpassung basiert auf dem First-Pass-Score; beigemischte Wörter tieferer Levels zählen nicht in die Prozentrechnung
+- 18 Schwierigkeitsstufen (A1.1 bis C2.3), zwei Lernfokus-Modi: CEFR-Level oder Häufigkeit in der Bibel
+- Adaptives System: Levelanpassung nach jeder 15er-Einheit anhand des First-Pass-Scores
+- Fehler-Wiederholung am Einheitsende; Selbsteinschätzung („zu einfach", „ich rate")
+- Exakte Mechanik (Wortauswahl, Levelanpassungs-Schwellen, Familiarity-Regeln, Abschluss-Flows): `dokumentation.md` → „Vokabeltraining"
 
 ### Sprachtest
 - Einstufungstest beim ersten Start (Multiple-Choice, Englisch → Deutsch)
