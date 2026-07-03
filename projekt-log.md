@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.33b (03.07.2026)
+
+- Training 2.0: Spaced Repetition — Leitner-Treppe (Wiederholungen nach 2/7/60 Tagen), neuer Einheiten-Mix, automatischer Level-Aufstieg, Wiederholungs-Zähler und Stufen-Panel
+
 ## v1.9.43b – v1.10.31b (18.–23.06.2026) — Sammel-Eintrag
 
 Rekonstruiert am 03.07.2026 aus der Git-History (Commit-Messages bis v1.9.77b, danach Deploy-Diffs), da das Log in diesem Zeitraum nicht geführt wurde. ~90 deployte Versionen, thematisch zusammengefasst:

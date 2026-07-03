@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.31b (23.06.2026)
+- **Aktuelle Version:** 1.10.33b (03.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -50,19 +50,19 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 
 ### Lernfortschritt (Familiarity-System)
 
-Jedes Wort hat einen numerischen `familiarity`-Wert:
+Jedes Wort hat einen numerischen `familiarity`-Wert (Leitner-Treppe, Wiederholungs-Intervalle siehe Klammern):
 - **-1** = undefiniert (noch nie gesehen)
-- **0** = unbekannt
-- **1** = bekannt
-- **2** = gut bekannt
-- **3** = sehr gut bekannt
+- **0** = unbekannt (fällig nach >24h)
+- **1** = gelernt (fällig nach 2 Tagen)
+- **2** = gefestigt (fällig nach 7 Tagen)
+- **3** = sicher (seltene Stichprobe nach 60 Tagen)
 
 **Zusätzliche Zähler pro Wort:**
 - `learned`: Anzahl Male, die fam von 0 → >0 gewechselt hat (aktiv gelernt mit der App)
 - `forgotten`: Anzahl Male, die fam von >0 → 0 gewechselt hat (vergessen)
 - Wechsel von fam -1 → >0 zählt nicht als „gelernt" (Wort war bereits bekannt)
 
-**Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam > 0 + lasttrained > 2 Tage + fam ≤ 2 → fam+1. Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
+**Regeln Wörter Quiz / Wörter im Kontext:** Richtige Antwort: fam ≤ 0 → 1; fam=1 → 2 (nach >2 Tagen); fam=2 → 3 (nach >7 Tagen; zentraler Intervall-Guard in `trainWord`). Falsche Antwort → fam=0. Retry: richtig → keine Änderung, falsch → fam=0.
 
 ### Vokabeltraining
 
@@ -81,21 +81,23 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - **Häufigkeit in der Bibel:** Wörter nach Vorkommenshäufigkeit, häufigste zuerst
 - Beide Modi nutzen 18 Stufen mit separatem Step-Tracking
 
-**Training-Mechanik:**
+**Training-Mechanik (Spaced Repetition, Konzept siehe `projekt-training-konzept.md`):**
 - Multiple-Choice-Quiz: englisches Wort → deutsche Übersetzung
-- 18 Schwierigkeitsstufen
-- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2
-- Wortauswahl (15 Wörter pro Übung) aus drei Quellen, pro Einheit gemischt:
-  1. familiarity=0 + lasttrained >24h auf aktuellem **und tieferen** Levels (bekannte Schwächen) — max. 3 am Einheitsanfang
-  2. 1 ungeübtes Wort (familiarity=-1) tieferer Levels als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden
-  3. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter) — füllt auf 15 auf; Restplätze wieder aus Quelle 1
-- Höhere Levels werden nicht einbezogen; sind keine Wörter mehr verfügbar → „keine Wörter"-Hinweis bzw. Abschluss-Flow (freqComplete)
-- Wörter mit familiarity ≥ 1 erscheinen nicht mehr im Training
+- 18 Schwierigkeitsstufen, zwei Lernfokus-Modi (CEFR-Level / Häufigkeit)
+- Leitner-Treppe: richtige Antwort hebt fällige Wörter stufenweise (fam −1/0 → 1 → 2 → 3), falsche Antwort → fam=0 (vergessen). Gelernte Wörter kommen also wieder — nach 2 Tagen (fam=1), 7 Tagen (fam=2) bzw. als Stichprobe nach 60 Tagen (fam=3)
+- Einheiten-Mix (15 Wörter, Slots A–E, danach gemischt) — identisch für Vokabel- und Cloze-Training:
+  - **A**: bis 4 fällige Wiederholungen (fam=1/2, am längsten überfällige zuerst; + max. 1 fam=3-Stichprobe) — level-unabhängig
+  - **B**: bis 3 fällige Unbekannte (fam=0, >24h; aktuelles + tiefere Levels), Vergessene zuerst
+  - **C**: 1 ungeübtes Wort (fam=−1) tieferer Levels
+  - **D**: 1 ungeübtes Wort aus Step+1
+  - **E**: neue Wörter (fam=−1) des aktuellen Levels — füllt auf 15 auf; bei Knappheit Auffüllen aus A, dann B, dann C/D
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Level-Anpassung basiert auf dem First-Pass-Score (nicht aufgeblähtem Retry-Score); beigemischte Wörter tieferer Levels werden aus der Prozentrechnung herausgerechnet
+- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); reine Wiederholungs-Einheiten lösen keine Anpassung aus
+- Level-Aufstieg bei Erschöpfung: hat der aktuelle Step keine neuen und keine fälligen unbekannten Wörter mehr → automatischer Step+1 mit 🎉-Gratulations-Screen; fällige Wiederholungen blockieren den Aufstieg nicht
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
-- 24h-Regel (zentral in `trainWord`): Familiarity kann nur erhöht werden, wenn das Wort noch nie oder vor >24h trainiert wurde; Erniedrigen (falsche Antwort → 0) ist immer erlaubt
-- Häufigkeitsmodus-Abschluss: nach Step 17 (C2.3) → freqComplete-Screen mit schrittweisem Review tieferer Steps (C2.2, C2.1, …); sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
+- Intervall-Guard zentral in `trainWord`: Erhöhen nur nach Ablauf des Stufen-Intervalls (24h / 2 Tage / 7 Tage), Erniedrigen immer erlaubt — gilt für alle Übungspfade inkl. Kapitel-Training
+- Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter den Trainings-Buttons (je Übungstyp gezählt); Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
+- Abschluss auf Step 17 (C2.3): freqComplete-Screen mit schrittweisem Review tieferer Steps (C2.2, C2.1, …); sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
 
 ### Einstufungstest
 
@@ -291,10 +293,7 @@ Das Review aller 66 Bücher kostete ca. $1.500 (Batch API mit 50% Rabatt, Opus 4
 
 ## Deployment
 
-1. Entwicklung auf Branch `dev`
-2. `APP_VERSION` in `index.html` und `CACHE_NAME` in `sw.js` hochzählen
-3. Merge `dev` → `main`
-4. Push nach GitHub (GitHub Pages)
+Entwicklung auf Branch `dev`, Deploy mit `./deploy.sh "Changelog-Zeile"`: bumpt `APP_VERSION`/`APP_DATE` (index.html) und `CACHE_NAME` (sw.js), schreibt den Changelog-Eintrag nach `projekt-log.md`, aktualisiert den Versionskopf dieser Dokumentation, merged `dev` → `main` und pusht (GitHub Pages).
 
 Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 
