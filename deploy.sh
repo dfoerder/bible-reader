@@ -32,7 +32,9 @@ MSG="Deploy ${NEW_VER} — bump cache, version and date"
 if [ -n "$1" ]; then MSG="$MSG ($1)"; fi
 
 git add sw.js index.html
-git commit -m "$MSG"
+git commit -m "$MSG
+
+Co-Authored-By: Claude Code <noreply@anthropic.com>"
 
 # ── Merge and push ──
 git checkout main
