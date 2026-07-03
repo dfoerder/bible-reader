@@ -73,17 +73,17 @@ Jedes Wort hat einen numerischen `familiarity`-Wert, der den Lernstand abbildet:
 - Alle Vokabeln aus den Bibel-Annotationen (~7.500 Wortpaare)
 - Multiple-Choice: englisches Wort → deutsche Übersetzung wählen
 - 18 Schwierigkeitsstufen (A1.1 bis C2.3), basierend auf Worthäufigkeit
-- Adaptives System: bei <85% Erfolg wird es leichter, bei ≥85% schwieriger, bei 100% Doppelsprung (+2 Sublevels)
-- Priorisierung der Wortauswahl (15 Wörter pro Übung):
-  1. familiarity=0 + lasttrained >24h auf dem aktuellen Step-Level (bekannte Schwächen)
-  2. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter)
-  3. familiarity=0 + lasttrained >24h auf höheren Levels (Schwächen darüber)
-  4. familiarity=-1 auf höheren Levels (neue Wörter darüber)
+- Adaptives System (5-stufig): 100% → Doppelsprung (+2 Sublevels) · >80% → +1 · 70–80% → Level halten (±0) · 40–69% → −1 · <40% → −2
+- Wortauswahl (15 Wörter pro Übung) aus drei Quellen, pro Einheit gemischt:
+  1. familiarity=0 + lasttrained >24h auf aktuellem und tieferen Levels (bekannte Schwächen) — max. 3 am Einheitsanfang
+  2. 1 ungeübtes Wort (familiarity=-1) tieferer Levels als Beimischung, damit alle Wörter mit der Zeit mindestens einmal geübt werden
+  3. familiarity=-1 auf dem aktuellen Step-Level (neue Wörter) — füllt auf 15 auf; Restplätze wieder aus Quelle 1
+- Höhere Levels werden nicht einbezogen; sind keine Wörter mehr verfügbar → „keine Wörter"-Hinweis bzw. Abschluss-Flow (freqComplete)
 - Wörter mit familiarity ≥ 1 werden nicht mehr trainiert
 - Selbsteinschätzung: „zu einfach" → familiarity=3, „ich rate" → Wiederholung am Ende
 - Richtig beantwortet → familiarity=1, falsch → familiarity=0
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Level-Anpassung basiert auf dem First-Pass-Score
+- Level-Anpassung basiert auf dem First-Pass-Score; beigemischte Wörter tieferer Levels zählen nicht in die Prozentrechnung
 
 ### Sprachtest
 - Einstufungstest beim ersten Start (Multiple-Choice, Englisch → Deutsch)
