@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.37b (03.07.2026)
+
+- Lese-Level jetzt sublevel-genau (18 Stufen) — Kapitel-Übungen und Wort-Hervorhebung unterscheiden C2.1/C2.2/C2.3 statt nur grobes C2
+
 ## v1.10.36b (03.07.2026)
 
 - Übungsart-Umschalter (Quiz / Im Kontext) in die laufende Übung verlegt — Wechsel jederzeit mitten in der Einheit

@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.36b';
+const APP_VERSION = '1.10.37b';
 const APP_DATE = '03.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -563,6 +563,7 @@ function posWrongDe(target,dePool){
 let CLOZE_BY_PF={};
 let CLOZE_MAP=new Map(); // Lemma → Cloze-Übung (Kontext-Modus)
 let WORD_BY_EN=new Map(); // en → Wort-Objekt (für Übungsart-Wechsel während der Einheit)
+let WORD_STEP=new Map(); // Lemma → Sublevel-Stufe 0–17 (aus words.json level+sub)
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
   const same=(CLOZE_BY_PF[key]||[]).filter(d=>d!==target.de);
@@ -649,7 +650,7 @@ function MoreExamples({lemma,word}){
   </div>);
 }
 
-function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trainWord,onShowProgress}){
+function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordData,trainWord,onShowProgress}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
@@ -792,7 +793,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
     if(res.status==='levelup'){
       const ns=step+1;
       (focus==='freq'?saveFreqStep:saveStep)(ns);
-      setUserLevel(stepToLevel(ns));
+      setUserStep(ns);
       setLevelUpStep(ns);setMode('levelup');return true;
     }
     if(res.status==='complete'||res.status==='alldone'){setMode(res.status==='alldone'?'freqAllDone':'freqComplete');return true;}
@@ -1043,7 +1044,7 @@ function Training({userLevel,setUserLevel,onBack,books,openChapter,wordData,trai
       const delta=pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
       const ns=Math.max(0,Math.min(mx,curStep+delta));
       if(ns!==curStep){
-        saveFn(ns);setUserLevel(stepToLevel(ns));
+        saveFn(ns);setUserStep(ns);
         stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
       } else {
         stepChangeRef.current=null;
@@ -1480,6 +1481,8 @@ async function loadData(){
       // Lemma → Cloze-Übung (für den Kontext-Modus des einheitlichen Trainings)
       CLOZE_MAP=new Map(Object.values(CLOZE_EXERCISES).flat().map(e=>[e.lemma,e]));
       WORD_BY_EN=new Map(Object.values(words).flat().map(w=>[w.en,w]));
+      WORD_STEP=new Map();
+      for(const lvl in words){const base=LEVELS.indexOf(lvl)*3;words[lvl].forEach(w=>WORD_STEP.set(w.en,base+(w.sub-1)));}
     }
   }catch(e){}
   return{en};
@@ -1539,7 +1542,17 @@ function getAnnotation(annotations, bookName, chapNum, verseNum, wordPos) {
 }
 
 // Get all annotations for a chapter, filtered by level (+ tapped words)
-function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tappedWords) {
+// Sublevel-Stufe (0–17) eines annotierten Wortes: exaktes Sublevel aus dem Pool
+// (words.json level+sub), sonst Fallback auf das obere Ende des groben CEFR-Bands,
+// damit Wörter ohne Sublevel-Info nicht vorzeitig aus den „schwierigen Wörtern"
+// verschwinden. „Schwierig" = annoStep > userStep (feineres 18-Stufen-Raster).
+function annoStep(level,lemma){
+  const s=WORD_STEP.get(lemma);
+  if(s!=null)return s;
+  const li=LEVELS.indexOf(level);
+  return li<0?0:li*3+2;
+}
+function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedWords) {
   const book = annotations[bookName];
   if (!book) return [];
   const chap = book[String(chapNum)];
@@ -1550,7 +1563,7 @@ function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tapped
   Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
       const isPhrase = a.pos_end != null;
-      if ((lvlIdx(a.level) > lvlIdx(userLevel) || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
+      if ((annoStep(a.level,a.lemma) > userStep || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
         seen.add(a.lemma);
         result.push(a);
       }
@@ -1561,11 +1574,11 @@ function getChapterAnnotations(annotations, bookName, chapNum, userLevel, tapped
 }
 
 // Fallback: old vocab.json based lookup
-function getChapterWordsOld(verses,vocab,userLevel){
+function getChapterWordsOld(verses,vocab,userStep){
   const seen=new Set(),result=[];
   verses.forEach(v=>v.text.split(/\s+/).forEach(w=>{
     const c=normalize(w),e=vocab[c];
-    if(e&&lvlIdx(e.level)>lvlIdx(userLevel)&&!seen.has(c)){seen.add(c);result.push({word:c,...e})}
+    if(e&&annoStep(e.level,c)>userStep&&!seen.has(c)){seen.add(c);result.push({word:c,...e})}
   }));
   result.sort((a,b)=>a.word.localeCompare(b.word));
   return result;
@@ -1678,7 +1691,10 @@ function App({data}){
   const levelTested=LS.get('bible-level-tested');
   const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
   const prevPhaseRef=useRef('nav');
-  const [userLevel,setUserLevel]=useState(saved.userLevel||'B1');
+  // Lese-Level als 18-Stufen-Wert (0–17); grobes userLevel nur noch abgeleitet.
+  // Migration: alter grober saved.userLevel → Band-Anfang (.1).
+  const [userStep,setUserStep]=useState(saved.userStep!=null?saved.userStep:(saved.userLevel?LEVELS.indexOf(saved.userLevel)*3:levelToStep('B1')));
+  const userLevel=stepToLevel(userStep);
   const [bookIdx,setBookIdx]=useState(saved.bookIdx||0);
   const [chapIdx,setChapIdx]=useState(saved.chapIdx||0);
   const [unknownWords,setUnknownWords]=useState(new Set(saved.unknownWords||[]));
@@ -1844,11 +1860,11 @@ function App({data}){
     if(nr&&loadedBook) fetchDe(nr,deTrans).then(de=>setDeBook(de));
   },[deTrans]);
 
-  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training'||phase==='quiz')?(prevPhaseRef.current||'nav'):phase,userLevel,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],tappedWords:[...tappedWords]})},[phase,userLevel,bookIdx,chapIdx,unknownWords,learnedWords,tappedWords]);
+  useEffect(()=>{LS.set('bible-reader-state',{phase:(phase==='settings'||phase==='stats'||phase==='leveltest'||phase==='training'||phase==='quiz')?(prevPhaseRef.current||'nav'):phase,userStep,bookIdx,chapIdx,unknownWords:[...unknownWords],learnedWords:[...learnedWords],tappedWords:[...tappedWords]})},[phase,userStep,bookIdx,chapIdx,unknownWords,learnedWords,tappedWords]);
 
   const onLevelTestComplete=useCallback(level=>{
     const step=levelToStep(level);
-    setUserLevel(level);LS.set('bible-level-tested',true);LS.set('bible-train-step',step);LS.set('bible-freq-step',step);setPhase('nav');
+    setUserStep(step);LS.set('bible-level-tested',true);LS.set('bible-train-step',step);LS.set('bible-freq-step',step);setPhase('nav');
   },[]);
 
   const savedScrollRef=useRef(null);
@@ -1892,10 +1908,10 @@ function App({data}){
   const quizWords=useMemo(()=>{
     if(!currentChapter)return[];
     if(hasAnno){
-      return getChapterAnnotations(annotations,bookName,chapNum,userLevel,tappedWords);
+      return getChapterAnnotations(annotations,bookName,chapNum,userStep,tappedWords);
     }
-    return getChapterWordsOld(verses,vocab,userLevel);
-  },[currentChapter,hasAnno,annotations,bookName,chapNum,userLevel,tappedWords,verses,vocab]);
+    return getChapterWordsOld(verses,vocab,userStep);
+  },[currentChapter,hasAnno,annotations,bookName,chapNum,userStep,tappedWords,verses,vocab]);
 
   const chapterKey=useCallback((bi,ci)=>`unk-${lang}-${bi}-${ci}`,[lang]);
   const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
@@ -2126,7 +2142,7 @@ function App({data}){
         const va=chap?.[String(v.n)];
         if(va){
           for(let p=0;p<allWords.length;p++){
-            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(a.pos_end!=null||lvlIdx(a.level)>lvlIdx(userLevel)||tappedWords.has(a.lemma))&&(unknownWords.has(a.lemma)||a.pos_end!=null)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
+            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(a.pos_end!=null||annoStep(a.level,a.lemma)>userStep||tappedWords.has(a.lemma))&&(unknownWords.has(a.lemma)||a.pos_end!=null)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
           }
         }
       } else {
@@ -2250,7 +2266,7 @@ function App({data}){
   // ── TRAINING ──
   if(phase==='training'){
     return(<div style={{height:'100%'}}>
-      <Training userLevel={userLevel} setUserLevel={setUserLevel} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)}/>
+      <Training userLevel={userLevel} userStep={userStep} setUserStep={setUserStep} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)}/>
       {showProgressPanel&&<div onClick={()=>setShowProgressPanel(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9998}}>
         <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'20px 24px',maxWidth:340,width:'90%',fontFamily:sans}}>
           <h2 style={{fontSize:17,fontWeight:600,color:'var(--t-title)',margin:'0 0 14px'}}>{t('progress')} Wörter lernen</h2>
@@ -2273,7 +2289,7 @@ function App({data}){
         <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
           <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setUserLevel('B1');setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+            <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setUserStep(levelToStep('B1'));setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
             <button onClick={()=>{setShowResetDialog(false);setShowRetakeDialog(false)}} style={{padding:'10px 24px',borderRadius:8,border:'1.5px solid var(--t-border)',background:'transparent',color:'var(--t-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
           </div>
         </div>
@@ -2495,7 +2511,7 @@ function App({data}){
           <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
             <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
             <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-              <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setUserLevel('B1');setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+              <button onClick={()=>{if(showResetDialog){setShowResetDialog(false);setWordData({});LS.set('bible-word-data',{});setTappedWords(new Set());setUnknownWords(new Set());setLearnedWords(new Set());LS.remove('bible-train-step');LS.remove('bible-freq-step');LS.remove('bible-training-history');LS.remove('bible-vocab-log');setUserStep(levelToStep('B1'));setShowRetakeDialog(true)}else{setShowRetakeDialog(false);LS.remove('bible-level-tested');setPhase('leveltest')}}} style={{padding:'10px 24px',borderRadius:8,border:'none',background:'var(--t-primary)',color:'var(--t-primary-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
               <button onClick={()=>{setShowResetDialog(false);setShowRetakeDialog(false)}} style={{padding:'10px 24px',borderRadius:8,border:'1.5px solid var(--t-border)',background:'transparent',color:'var(--t-text)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
             </div>
           </div>
@@ -2831,7 +2847,7 @@ function App({data}){
               const item=quizWords[vocabReviewIdx];
               const key=item.lemma||item.word;
               return(<div>
-                {vocabReviewIdx===0&&<p style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 10px',textAlign:'center'}}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',userLevel)} &#x2713;={t('vocabKnown')}, ?={t('vocabUnknown')}</p>}
+                {vocabReviewIdx===0&&<p style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 10px',textAlign:'center'}}>{t('nWordsAbove').replace('{n}',quizWords.length).replace('{l}',stepLabel(userStep))} &#x2713;={t('vocabKnown')}, ?={t('vocabUnknown')}</p>}
                 <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 12px',overflow:'hidden'}}>
                   <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((vocabReviewIdx+1)/quizWords.length)*100}%`}}/>
                 </div>
@@ -2842,14 +2858,14 @@ function App({data}){
                   {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
                 </div>
                 <div style={{display:'flex',gap:10,justifyContent:'center'}}>
-                  <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
-                  <button onClick={()=>{trainWord(key,0);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){const li=LEVELS.indexOf(userLevel);if(li<LEVELS.length-1)setLevelSuggestion(LEVELS[li+1])}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
+                  <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
+                  <button onClick={()=>{trainWord(key,0);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
                 </div>
                 {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
-                  <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',levelSuggestion)}</p>
+                  <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',stepLabel(levelSuggestion))}</p>
                   <div style={{display:'flex',gap:8,justifyContent:'center'}}>
-                    <button onClick={()=>{const reviewed=new Set(quizWords.slice(0,vocabReviewIdx).map(w=>w.lemma||w.word));const nl=hasAnno?getChapterAnnotations(annotations,bookName,chapNum,levelSuggestion,tappedWords):getChapterWordsOld(verses,vocab,levelSuggestion);const ni=nl.filter(w=>reviewed.has(w.lemma||w.word)).length;setUserLevel(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(ni);setVocabReviewIdx(ni)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',levelSuggestion)}</button>
-                    <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',userLevel)}</button>
+                    <button onClick={()=>{const reviewed=new Set(quizWords.slice(0,vocabReviewIdx).map(w=>w.lemma||w.word));const nl=hasAnno?getChapterAnnotations(annotations,bookName,chapNum,levelSuggestion,tappedWords):getChapterWordsOld(verses,vocab,levelSuggestion);const ni=nl.filter(w=>reviewed.has(w.lemma||w.word)).length;setUserStep(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(ni);setVocabReviewIdx(ni)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',stepLabel(levelSuggestion))}</button>
+                    <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',stepLabel(userStep))}</button>
                   </div>
                 </div>}
                 <div style={{textAlign:'center',marginTop:12}}>
@@ -2910,7 +2926,7 @@ function App({data}){
               const role=result.role; // 'single','start','middle','end'
               const key=anno.lemma;
               const isPhrase=anno.pos_end!=null;
-              const isAboveLevel=lvlIdx(anno.level)>lvlIdx(userLevel);
+              const isAboveLevel=annoStep(anno.level,anno.lemma)>userStep;
               const isTapped=tappedWords.has(key);
               if(isAboveLevel||isTapped){
                 const isUnknown=unknownWords.has(key)||(!reviewDone&&isAboveLevel);
