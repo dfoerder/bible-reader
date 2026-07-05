@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.38b';
+const APP_VERSION = '1.10.39b';
 const APP_DATE = '05.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1145,7 +1145,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <header style={S.header}>
         <h1 style={S.title}>{t('cloze')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{cu&&cu.units.length>1?' — '+t('unitProgress').replace('{c}',cu.unitIdx+1).replace('{t}',cu.units.length):''}</p>
-        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,marginTop:6}}>
+        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,justifyContent:'center',marginTop:6}}>
           <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
           <button onClick={()=>switchExercise('cloze')} style={{...S.lvlBtn,...(exType==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
         </div>}
@@ -1197,7 +1197,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <header style={S.header}>
         <h1 style={S.title}>{t('vocab')}</h1>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{vu&&vu.units.length>1?' — '+t('unitProgress').replace('{c}',vu.unitIdx+1).replace('{t}',vu.units.length):''}</p>
-        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,marginTop:6}}>
+        {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,justifyContent:'center',marginTop:6}}>
           <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
           <button onClick={()=>switchExercise('cloze')} style={{...S.lvlBtn,...(exType==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
         </div>}
@@ -2706,7 +2706,7 @@ function App({data}){
             <h1 style={{...S.title,margin:0}}>{t('chapPractice')}</h1>
             {isCloze&&<button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{fontSize:22,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0}} title={t('clozeContext')}>⚙</button>}
           </div>
-          {hasAnno&&<div style={{...S.levelBtns,marginTop:6,marginBottom:2}}>
+          {hasAnno&&<div style={{...S.levelBtns,justifyContent:'center',marginTop:6,marginBottom:2}}>
             <button onClick={()=>switchChapExercise('quiz')} style={{...S.lvlBtn,...(chapTrain.mode==='quiz'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
             <button onClick={()=>switchChapExercise('cloze')} style={{...S.lvlBtn,...(chapTrain.mode==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
           </div>}

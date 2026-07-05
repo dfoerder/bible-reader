@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.39b (05.07.2026)
+
+- Übungsart-Umschalter (Quiz / Im Kontext) zentriert unter dem Titel
+
 ## v1.10.38b (05.07.2026)
 
 - Kapitel-Training vereinheitlicht: Wörter Quiz + Wörter im Kontext zu einem 'Wörter üben'-Block mit Übungsart-Umschalter (Wechsel mitten in der Einheit)
