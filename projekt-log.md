@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.38b (05.07.2026)
+
+- Kapitel-Training vereinheitlicht: Wörter Quiz + Wörter im Kontext zu einem 'Wörter üben'-Block mit Übungsart-Umschalter (Wechsel mitten in der Einheit)
+
 ## v1.10.37b (03.07.2026)
 
 - Lese-Level jetzt sublevel-genau (18 Stufen) — Kapitel-Übungen und Wort-Hervorhebung unterscheiden C2.1/C2.2/C2.3 statt nur grobes C2
