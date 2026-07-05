@@ -2267,6 +2267,8 @@ function App({data}){
   const [devUnexLower,setDevUnexLower]=useState(0);
   const [devUnkLower,setDevUnkLower]=useState(0);
   const [devForgLower,setDevForgLower]=useState(0);
+  const [devBackups,setDevBackups]=useState([]);
+  const [devBackupsOpen,setDevBackupsOpen]=useState(false);
 
   // ── LEVEL TEST ──
   if(phase==='leveltest'){
@@ -2383,9 +2385,19 @@ function App({data}){
   }
 
   // ── DEV HELPERS ──
+  // ── Test-Backups: mehrere, zeitgestempelt ──
+  const fmtTs=ts=>{if(!ts)return 'Früheres Backup';const d=new Date(ts);const p=n=>String(n).padStart(2,'0');return `${p(d.getDate())}.${p(d.getMonth()+1)}.${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;};
+  const backupSummary=data=>{const v=Object.values(data||{});return `${v.length} Wörter · ${v.filter(w=>w&&w.familiarity>=1).length} bekannt`;};
+  // Liste lesen; alten Einzel-Slot (falls vorhanden) als „Früheres Backup" voranstellen
+  const readBackups=()=>{const l=LS.get('bible-word-data-backups');const arr=Array.isArray(l)?l:[];const old=LS.get('bible-word-data-backup');return old?[{ts:null,data:old},...arr]:arr;};
+  // Quota-sicher speichern (LS.set schluckt Fehler): direkt setItem, bei Überlauf ältestes (am Ende) fallenlassen
+  const persistBackups=list=>{let arr=list.slice(0,12);for(;;){try{localStorage.setItem('bible-word-data-backups',JSON.stringify(arr));break;}catch(e){if(!arr.length)break;arr=arr.slice(0,-1);}}LS.remove('bible-word-data-backup');return arr;};
+  const restoreBackup=b=>{if(b&&b.data){setWordData(b.data);LS.set('bible-word-data',b.data);setPhase('nav');}};
+  const deleteBackup=idx=>{setDevBackups(persistBackups(devBackups.filter((_,i)=>i!==idx)));};
   const loadTestData=()=>{
     if(!FREQ_POOL.length)return;
-    LS.set('bible-word-data-backup',wordData);
+    // Aktuellen Stand als NEUES, zeitgestempeltes Backup sichern — ältere bleiben erhalten
+    setDevBackups(persistBackups([{ts:new Date().toISOString(),data:wordData},...readBackups()]));
     const newData={};
     const recent=new Date().toISOString();
     const yesterday=new Date(Date.now()-25*3600*1000).toISOString();
@@ -2407,7 +2419,6 @@ function App({data}){
     LS.set('bible-freq-step',devStartStep);LS.set('bible-train-step',devStartStep);LS.set('bible-train-focus','freq');
     setWordData(newData);setPhase('training');
   };
-  const restoreTestBackup=()=>{const b=LS.get('bible-word-data-backup');if(b){setWordData(b);LS.set('bible-word-data',b);setPhase('nav');}};
 
   // ── SETTINGS ──
   if(phase==='settings'){
@@ -2463,9 +2474,23 @@ function App({data}){
             </div>
             <div style={{display:'flex',gap:8,flexWrap:'wrap',marginTop:8}}>
               <button onClick={loadTestData} style={{...S.navBtn,fontSize:12}}>Test-Daten laden</button>
-              <button onClick={restoreTestBackup} style={{...S.navBtn,fontSize:12}}>Backup wiederherstellen</button>
+              <button onClick={()=>{setDevBackups(readBackups());setDevBackupsOpen(o=>!o)}} style={{...S.navBtn,fontSize:12}}>Backup wiederherstellen{devBackupsOpen?' ▾':' ▸'}</button>
             </div>
-            <p style={{...S.settingsHint,marginTop:6}}>Backup wird automatisch erstellt.</p>
+            {devBackupsOpen&&<div style={{marginTop:8,display:'flex',flexDirection:'column',gap:6}}>
+              {devBackups.length===0
+                ?<p style={{...S.settingsHint,margin:0}}>Keine Backups vorhanden.</p>
+                :devBackups.map((b,i)=>(
+                  <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'6px 8px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)'}}>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontSize:12,color:'var(--t-text2)',fontFamily:sans}}>{fmtTs(b.ts)}</div>
+                      <div style={{fontSize:10,color:'var(--t-muted)',fontFamily:sans}}>{backupSummary(b.data)}</div>
+                    </div>
+                    <button onClick={()=>restoreBackup(b)} style={{...S.navBtn,fontSize:11,padding:'4px 8px'}}>Wiederherstellen</button>
+                    <button onClick={()=>deleteBackup(i)} title="Löschen" style={{background:'none',border:'none',cursor:'pointer',fontSize:14,color:'var(--t-muted)',padding:'0 4px',lineHeight:1}}>✕</button>
+                  </div>
+                ))}
+            </div>}
+            <p style={{...S.settingsHint,marginTop:6}}>Bei jedem „Test-Daten laden" wird der aktuelle Stand als neues, zeitgestempeltes Backup gesichert (max. 12).</p>
           </div>
         </div>
         <div style={S.settingsGroup}>

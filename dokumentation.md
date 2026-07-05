@@ -226,7 +226,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-layout` | Theme/Layout (classic/icf/icf-light) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
-| `bible-word-data-backup` | Backup der Wortdaten (Wiederherstellung nach Einstufungstest) |
+| `bible-word-data-backups` | Liste zeitgestempelter Wortdaten-Backups (Entwickler-Werkzeug „Test-Daten laden"; max. 12, ältestes wird bei Speicherüberlauf verworfen). Migriert den früheren Einzel-Slot `bible-word-data-backup`. |
 | `bible-train-focus` | Lernfokus im Training ('level'/'freq') |
 | `bible-ex-mode` | Übungsart im Training ('quiz'/'cloze') |
 | `bible-train-step` | Aktuelle Trainingsstufe CEFR-Modus (0–17) |
