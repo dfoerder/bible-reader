@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.40b (05.07.2026)
+- **Aktuelle Version:** 1.10.41b (05.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -226,7 +226,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-layout` | Theme/Layout (classic/icf/icf-light) |
 | `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
-| `bible-word-data-backups` | Liste zeitgestempelter Wortdaten-Backups (Entwickler-Werkzeug „Test-Daten laden"; max. 12, ältestes wird bei Speicherüberlauf verworfen). Migriert den früheren Einzel-Slot `bible-word-data-backup`. |
+| `bible-word-data-backups` | Liste zeitgestempelter Lernstand-Backups (Entwickler-Werkzeug „Test-Daten laden"; max. 12, ältestes wird bei Speicherüberlauf verworfen). Jedes Backup ist ein vollständiger Snapshot: Wortdaten, Lese-Level (`userStep`) samt Wortlisten, Trainingsstufen, Lernfokus, Übungsart, Trainingshistorie und Kapitel-Markierungen (`unk-*`/`rev-*`). Migriert den früheren Einzel-Slot `bible-word-data-backup` (nur Wortdaten). |
 | `bible-train-focus` | Lernfokus im Training ('level'/'freq') |
 | `bible-ex-mode` | Übungsart im Training ('quiz'/'cloze') |
 | `bible-train-step` | Aktuelle Trainingsstufe CEFR-Modus (0–17) |
