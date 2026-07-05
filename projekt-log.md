@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.40b (05.07.2026)
+
+- Test-Backups zeitgestempelt: mehrere Backups statt einem Slot, Auswahl beim Wiederherstellen (Entwickler-Werkzeug)
+
 ## v1.10.39b (05.07.2026)
 
 - Übungsart-Umschalter (Quiz / Im Kontext) zentriert unter dem Titel
