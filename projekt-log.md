@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.42b (05.07.2026)
+
+- Beschleunigter Test-Modus (Entwickler): alle Lern-Fristen ÷96 (24h→15min), nur ¼ des Wortpools mit erhaltenen Level-Verhältnissen
+
 ## v1.10.41b (05.07.2026)
 
 - Test-Backups sichern jetzt den vollständigen Lernstand (Stufen, Lernfokus, Lese-Level, Historie, Kapitel-Markierungen) statt nur der Wortdaten
