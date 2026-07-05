@@ -2461,6 +2461,20 @@ function App({data}){
     LS.set('bible-freq-step',devStartStep);LS.set('bible-train-step',devStartStep);LS.set('bible-train-focus','freq');
     setWordData(newData);setPhase('training');
   };
+  // Frischer Start (für beschleunigte Tests): sichert den aktuellen Stand als Backup
+  // und setzt dann ALLES auf ungeübt — wie ein neuer Nutzer auf der gewählten Startstufe.
+  // Die Top/Tiefer-Verteilungswerte werden bewusst NICHT verwendet (nur der Startstufen-Slider).
+  const freshTestStart=()=>{
+    setDevBackups(persistBackups([{ts:new Date().toISOString(),data:wordData,snap:makeSnapshot()},...readBackups()]));
+    const empty={};
+    LS.set('bible-word-data',empty);setWordData(empty);
+    LS.set('bible-train-step',devStartStep);LS.set('bible-freq-step',devStartStep);
+    setUserStep(devStartStep);
+    setUnknownWords(new Set());setLearnedWords(new Set());setTappedWords(new Set());
+    LS.remove('bible-training-history');
+    try{const del=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^(unk|rev)-/.test(k))del.push(k);}del.forEach(k=>LS.remove(k));}catch(e){}
+    setPhase('training');
+  };
 
   // ── SETTINGS ──
   if(phase==='settings'){
@@ -2521,6 +2535,7 @@ function App({data}){
             </div>
             <div style={{display:'flex',gap:8,flexWrap:'wrap',marginTop:8}}>
               <button onClick={loadTestData} style={{...S.navBtn,fontSize:12}}>Test-Daten laden</button>
+              <button onClick={freshTestStart} style={{...S.navBtn,fontSize:12}}>Frischer Start</button>
               <button onClick={()=>{setDevBackups(readBackups());setDevBackupsOpen(o=>!o)}} style={{...S.navBtn,fontSize:12}}>Backup wiederherstellen{devBackupsOpen?' ▾':' ▸'}</button>
             </div>
             {devBackupsOpen&&<div style={{marginTop:8,display:'flex',flexDirection:'column',gap:6}}>
@@ -2537,7 +2552,7 @@ function App({data}){
                   </div>
                 ))}
             </div>}
-            <p style={{...S.settingsHint,marginTop:6}}>Bei jedem „Test-Daten laden" wird der aktuelle Stand als neues, zeitgestempeltes Backup gesichert (max. 12).</p>
+            <p style={{...S.settingsHint,marginTop:6}}>„Test-Daten laden": alles bekannt + oben konfigurierte Lücken. „Frischer Start": alles ungeübt ab der Startstufe (Verteilungswerte werden ignoriert) — für beschleunigte Tests. Beide sichern den aktuellen Stand vorher als zeitgestempeltes Backup (max. 12).</p>
           </div>
         </div>
         <div style={S.settingsGroup}>
