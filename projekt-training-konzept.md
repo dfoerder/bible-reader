@@ -120,3 +120,9 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   Wechsel mitten in der Einheit konvertiert die restlichen Fragen (`switchExercise`);
   Wörter ohne Kontextübung bleiben als Quiz-Frage → gemischte Einheiten, Rendering
   pro Item (Wort-Objekt vs. Cloze-Übung)
+- **Nachtrag 3 (03.07.2026)** — Gleiches Prinzip für das **Kapitel-Training**: „Wörter Quiz"
+  und „Wörter im Kontext üben" zu einem „Wörter üben"-Block zusammengeführt.
+  `startChapTrain`/`startChapCloze` → gemeinsames `startChapExercise(mode)` +
+  `buildChapClozeMap` (Lemma → live erzeugte Cloze-Übung) + `switchChapExercise`;
+  Rendering pro Item (`ex.text`), Umschalter im Übungs-Header, `bible-ex-mode` geteilt
+  mit dem allgemeinen Training. Kapitel behält Multi-Unit (alle schwierigen Wörter).

@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.37b';
-const APP_DATE = '03.07.2026';
+const APP_VERSION = '1.10.38b';
+const APP_DATE = '05.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -267,8 +267,10 @@ const I18N={
   nTranslated:{de:'{n} Wörter werden beim Lesen übersetzt.',en:'{n} words will be translated while reading.'},
   readBtn:{de:'Lesen →',en:'Read →'},
   trainDifficult:{de:'Wörter Quiz',en:'Word Quiz'},
-  trainDifficultAgain:{de:'Wörter Quiz',en:'Word Quiz'},
+  trainDifficultAgain:{de:'Wörter üben',en:'Practice words'},
   trainDifficultHint:{de:'Multiple-Choice-Übungen zu den Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s words.'},
+  chapPractice:{de:'Wörter üben',en:'Practice words'},
+  chapPracticeHint:{de:'Übe die schwierigen Wörter dieses Kapitels — als Quiz oder im Kontext (in der Übung umschaltbar).',en:'Practice this chapter\'s difficult words — as a quiz or in context (switchable during the exercise).'},
   chapClozeTitle:{de:'Wörter im Kontext üben',en:'Practice words in context'},
   chapClozeHint:{de:'Die Wörter dieses Kapitels im Satzzusammenhang üben.',en:'Practice this chapter\'s words in sentence context.'},
   startTraining:{de:'Training starten',en:'Start training'},
@@ -1817,6 +1819,9 @@ function App({data}){
   const [quizExpanded,setQuizExpanded]=useState(false);
   const [vocabReviewIdx,setVocabReviewIdx]=useState(0);
   const [trainExpanded,setTrainExpanded]=useState(false);
+  // Übungsart im Kapitel-Training (geteilt mit dem allgemeinen Training via bible-ex-mode)
+  const [exMode,setExMode]=useState(()=>LS.get('bible-ex-mode')||'quiz');
+  const changeExMode=useCallback(m=>{setExMode(m);LS.set('bible-ex-mode',m);},[]);
   const [clozeExpanded,setClozeExpanded]=useState(false);
   const [vocabPanelOpen,setVocabPanelOpen]=useState(false);
   const [vocabSettingsOpen,setVocabSettingsOpen]=useState(false);
@@ -1965,44 +1970,23 @@ function App({data}){
 
   const chapTrainFromBottom=useRef(false);
 
-  const startChapTrain=useCallback(()=>{
-    if(quizWords.length===0)return;
-    const wordsToTrain=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
-    if(wordsToTrain.length===0)return;
-    const allWords=shuffleArr(wordsToTrain);
-    const allDe=[...new Set([...quizWords.map(w=>w.de),...Object.values(VOCAB_POOL).flat().map(w=>w.de)])];
-    const units=[];
-    for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
-    const words=units[0];
-    const opts=genOpts(words,allDe);
-    const globalTotal=allWords.length;
-    setChapTrain({words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal});
-  },[quizWords,genOpts,reviewDone,unknownWords]);
-
-  const startChapCloze=useCallback((ctxOverride)=>{
-    if(!hasAnno||quizWords.length===0)return;
-    // ctxOverride (String) erlaubt sofortiges Neu-Generieren mit anderem Kontext, ohne stale State
-    const ctx=(ctxOverride==='sentence'||ctxOverride==='verse')?ctxOverride:clozeCtx;
-    setClozeSettingsOpen(false);
+  // Lückentext-Übung pro Lemma aus den Versen des aktuellen Kapitels generieren.
+  // Liefert Map(lemma → Cloze-Übung); Wörter ohne brauchbare Position fehlen (Fallback: Quiz).
+  const buildChapClozeMap=useCallback((targetLemmas,ctx)=>{
+    const map=new Map();
     const chap=annotations[bookName]?.[String(chapNum)];
-    if(!chap)return;
-    const wordsToUse=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
-    const targetLemmas=new Set(wordsToUse.map(w=>w.lemma||w.word));
-    if(targetLemmas.size===0)return;
-    const exercises=[];const usedLemmas=new Set();
+    if(!chap)return map;
     for(const v of verses){
       const va=chap[String(v.n)];if(!va)continue;
       const wds=v.text.split(/\s+/);
       for(const a of va){
-        if(usedLemmas.has(a.lemma)||!targetLemmas.has(a.lemma)||a.phrase!=null)continue;
+        if(map.has(a.lemma)||!targetLemmas.has(a.lemma)||a.phrase!=null)continue;
         const sp=a.pos,ep=a.pos_end!=null?a.pos_end:a.pos;
         if(sp>=wds.length)continue;
         let tSent,lsp,lep;
         if(ctx==='verse'){
-          // Ganzer Vers als Kontext
           tSent=v.text;lsp=sp;lep=ep;
         }else{
-          // Nur der Satz mit dem Zielwort
           const sents=v.text.split(/(?<=[.!?…;:])\s+/);
           let wOff=0;tSent=null;lsp=-1;lep=-1;
           for(const s of sents){const sl=s.split(/\s+/).length;if(sp>=wOff&&sp<wOff+sl){tSent=s;lsp=sp-wOff;lep=ep-wOff;break;}wOff+=sl;}
@@ -2017,24 +2001,50 @@ function App({data}){
         }
         const rep=[...sw];for(let p=lsp;p<=lep&&p<rep.length;p++)rep[p]=p===lsp?'___':null;
         const ipos=EN_POS[a.lemma]||null;
-        exercises.push({text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma,pos:ipos,form:clozeFormOf(a.lemma,a.form,ipos)});
-        usedLemmas.add(a.lemma);
+        map.set(a.lemma,{text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma,pos:ipos,form:clozeFormOf(a.lemma,a.form,ipos)});
       }
     }
-    if(exercises.length===0)return;
-    // B: fam=0 (bekannte Schwächen) vor fam=-1 (neue Wörter) priorisieren
-    const fam=w=>{const d=wordData[w.lemma];return d?d.familiarity:-1;};
-    const known0=shuffleArr(exercises.filter(w=>fam(w)===0));
-    const newWords=shuffleArr(exercises.filter(w=>fam(w)===-1));
-    const allWords=[...known0,...newWords];
-    // preFam: Zustand vor der Übung für A (Ergebnisanzeige)
-    const preFam={};allWords.forEach(w=>{preFam[w.lemma]=fam(w);});
-    const allDe=[...new Set([...quizWords.map(w=>w.de),...Object.values(VOCAB_POOL).flat().map(w=>w.de)])];
-    const units=[];for(let i=0;i<allWords.length;i+=15)units.push(allWords.slice(i,i+15));
-    const words=units[0];const opts=genOpts(words,allDe);
-    setChapTrain({type:'cloze',words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitIdx:0,unitDone:false,allDe,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:allWords.length,preFam});
-    setPhase('quiz');
-  },[quizWords,genOpts,reviewDone,unknownWords,annotations,bookName,chapNum,verses,hasAnno,clozeCtx]);
+    return map;
+  },[annotations,bookName,chapNum,verses]);
+
+  // Einheitliches Kapitel-Training: eine Wortauswahl, zwei Darstellungen (Quiz / Im Kontext).
+  // Ein Item ist entweder ein Quiz-Wort (Annotation, kein .text) oder eine Cloze-Übung (.text).
+  const startChapExercise=useCallback((mode,ctxOverride)=>{
+    if(quizWords.length===0)return;
+    const ctx=(ctxOverride==='sentence'||ctxOverride==='verse')?ctxOverride:clozeCtx;
+    setClozeSettingsOpen(false);
+    const wordsToUse=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
+    if(wordsToUse.length===0)return;
+    const quizMap=new Map(wordsToUse.map(w=>[w.lemma||w.word,w]));
+    const clozeMap=hasAnno?buildChapClozeMap(new Set(quizMap.keys()),ctx):new Map();
+    const useCloze=mode==='cloze'&&hasAnno;
+    const fam=k=>{const d=wordData[k];return d?d.familiarity:-1;};
+    // fam=0 (bekannte Schwächen) vor fam=-1 (neue Wörter), innerhalb gemischt
+    const lemmas=[...quizMap.keys()];
+    const ordered=[...shuffleArr(lemmas.filter(k=>fam(k)===0)),...shuffleArr(lemmas.filter(k=>fam(k)!==0))];
+    const toItem=k=>useCloze?(clozeMap.get(k)||quizMap.get(k)):quizMap.get(k);
+    const preFam={};ordered.forEach(k=>{preFam[k]=fam(k);});
+    const unitsLemmas=[];for(let i=0;i<ordered.length;i+=15)unitsLemmas.push(ordered.slice(i,i+15));
+    const units=unitsLemmas.map(ul=>ul.map(toItem));
+    const words=units[0];const opts=genOpts(words);
+    setChapTrain({mode,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitsLemmas,quizMap,clozeMap,unitIdx:0,unitDone:false,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:ordered.length,preFam});
+  },[quizWords,hasAnno,clozeCtx,reviewDone,unknownWords,wordData,buildChapClozeMap,genOpts]);
+
+  // Übungsart mitten in der Kapitel-Übung wechseln: aktuelle Einheit + Einheitenliste in
+  // die andere Darstellung konvertieren (Wörter ohne Kontextübung bleiben Quiz). Fortschritt
+  // und Fehlerliste bleiben erhalten.
+  const switchChapExercise=useCallback(target=>{
+    changeExMode(target);
+    setChapTrain(s=>{
+      if(!s||s.selected!==null||s.mode===target)return s;
+      const useCloze=target==='cloze'&&hasAnno;
+      const toItem=k=>useCloze?(s.clozeMap.get(k)||s.quizMap.get(k)):s.quizMap.get(k);
+      const conv=item=>toItem(item.lemma||item.word);
+      const words=s.words.map(conv);
+      const units=(s.unitsLemmas||[]).map(ul=>ul.map(toItem));
+      return {...s,mode:target,words,units,opts:genOpts(words),wrong:s.wrong.map(w=>({...w,ex:conv(w.ex)})),retryPending:s.retryPending?s.retryPending.map(w=>({...w,ex:conv(w.ex)})):null};
+    });
+  },[hasAnno,changeExMode,genOpts]);
 
   const startNextUnit=useCallback(()=>{
     setChapTrain(s=>{
@@ -2682,26 +2692,30 @@ function App({data}){
           </p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.startBtn}>{t('finish')}</button>
-            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:(chapTrain.type==='cloze'?startChapCloze:startChapTrain)} style={S.navBtn}>{t('repeat')}</button>
+            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:()=>startChapExercise(chapTrain.mode)} style={S.navBtn}>{t('repeat')}</button>
           </div>
         </div>
       </div>);
     }
     if(chapTrain){
       const ex=chapTrain.words[chapTrain.current];const opts=chapTrain.opts[chapTrain.current];
-      const isCloze=chapTrain.type==='cloze';
+      const isCloze=!!ex.text;
       return(<div>
         <header style={S.header}>
           <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,margin:'0 0 4px'}}>
-            <h1 style={{...S.title,margin:0}}>{isCloze?t('cloze'):t('trainDifficult')}</h1>
+            <h1 style={{...S.title,margin:0}}>{t('chapPractice')}</h1>
             {isCloze&&<button onClick={()=>setClozeSettingsOpen(s=>!s)} style={{fontSize:22,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0}} title={t('clozeContext')}>⚙</button>}
           </div>
+          {hasAnno&&<div style={{...S.levelBtns,marginTop:6,marginBottom:2}}>
+            <button onClick={()=>switchChapExercise('quiz')} style={{...S.lvlBtn,...(chapTrain.mode==='quiz'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
+            <button onClick={()=>switchChapExercise('cloze')} style={{...S.lvlBtn,...(chapTrain.mode==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
+          </div>}
           {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
         </header>
         {isCloze&&clozeSettingsOpen&&<div style={{maxWidth:400,margin:'0 auto 12px',padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)'}}>
           <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
-          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapCloze(o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapExercise('cloze',o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('clozeContextHint')}</p>
         </div>}
         <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
@@ -2875,28 +2889,13 @@ function App({data}){
             })():<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:0}}>{t('vocabDone').replace('{n}',quizWords.length)}</p>}
           </div>}
         </div>
-        {hasAnno&&<div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden'}}>
-          <div onClick={()=>{setClozeExpanded(e=>!e);setClozeSettingsOpen(false)}} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{clozeExpanded?'▾':'▸'}</span> {t('chapClozeTitle')}</span>
-            <button onClick={e=>{e.stopPropagation();setClozeSettingsOpen(s=>!s)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,color:clozeSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0,lineHeight:1}} title={t('clozeContext')}>⚙</button>
-          </div>
-          {clozeSettingsOpen&&<div style={{padding:'8px 10px',borderBottom:'1px solid var(--t-border)',background:'var(--t-bg)'}}>
-            <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
-            <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
-            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
-          </div>}
-          {clozeExpanded&&<div style={{padding:'8px 10px'}}>
-            <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('chapClozeHint')}</p>
-            <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapCloze()}} style={S.navBtn}>{t('startTraining')}</button>
-          </div>}
-        </div>}
-        <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginTop:hasAnno?8:0,overflow:'hidden'}}>
+        <div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden'}}>
           <div onClick={()=>setTrainExpanded(e=>!e)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{trainExpanded?'▾':'▸'}</span> {t('trainDifficult')}</span>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{trainExpanded?'▾':'▸'}</span> {t('chapPractice')}</span>
           </div>
           {trainExpanded&&<div style={{padding:'8px 10px'}}>
-            <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('trainDifficultHint')}</p>
-            <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapTrain();setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
+            <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('chapPracticeHint')}</p>
+            <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapExercise(exMode);setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
           </div>}
         </div>
       </div>}
@@ -2967,7 +2966,7 @@ function App({data}){
     })})()}</div>
 
     {quizWords.length>0&&<div style={{textAlign:'center',marginTop:24,paddingBottom:12,borderBottom:'1px solid var(--t-border)'}}>
-      <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=true;startChapTrain();setPhase('quiz')}} style={{background:'none',border:'none',cursor:'pointer',fontSize:14,fontFamily:sans,color:'var(--t-accent)',fontWeight:600,padding:'8px 0'}}>{t('trainDifficultAgain')}</button>
+      <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=true;startChapExercise(exMode);setPhase('quiz')}} style={{background:'none',border:'none',cursor:'pointer',fontSize:14,fontFamily:sans,color:'var(--t-accent)',fontWeight:600,padding:'8px 0'}}>{t('trainDifficultAgain')}</button>
     </div>}
     <div style={S.chapNav}>
       <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
