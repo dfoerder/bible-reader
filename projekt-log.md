@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.43b (05.07.2026)
+
+- Dev-Werkzeug 'Frischer Start': alles ungeübt ab Startstufe — sauberer Ausgangspunkt für beschleunigte Tests (ohne synthetische Verteilung)
+
 ## v1.10.42b (05.07.2026)
 
 - Beschleunigter Test-Modus (Entwickler): alle Lern-Fristen ÷96 (24h→15min), nur ¼ des Wortpools mit erhaltenen Level-Verhältnissen
