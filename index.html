@@ -329,6 +329,9 @@ const I18N={
   yourStep:{de:'Level {s} von {t}',en:'Level {s} of {t}'},
   vocabPractice:{de:'Wörter üben',en:'Practice vocabulary'},
   nOfMAvailable:{de:'{n} Wörter zum Üben auf deinem Level',en:'{n} words to practice at your level'},
+  stillToPractice:{de:'Noch {n} Wörter auf dieser Stufe zu üben',en:'{n} more words to practice at this level'},
+  stillToPractice1:{de:'Noch 1 Wort auf dieser Stufe zu üben',en:'1 more word to practice at this level'},
+  stepAllPracticed:{de:'Alle Wörter dieser Stufe geübt!',en:'All words at this level practiced!'},
   nOfMTotal:{de:'{n} Wörter zum Üben auf diesem Level',en:'{n} words to practice at this level'},
   nOfMClozeAvailable:{de:'{n} Wörter zum Üben auf deinem Level',en:'{n} words to practice at your level'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -879,6 +882,28 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   },[]);
   const DAY_MS=DAY_EFF;
 
+  // „Noch zu üben"-Zähler für eine Stufe (identisch für Home-Screen UND Ergebnis-Screen):
+  // fresh = neue (fam=-1) + fällige unbekannte (fam=0, >Frist) Wörter; due = fällige
+  // Wiederholungen (Slot A, fam=1/2 + max. 1 fam=3-Stichprobe, level-unabhängig).
+  const computeCounts=useCallback((step,focus)=>{
+    const now=Date.now();const DMS=DAY_EFF;
+    const countFresh=(words,keyFn)=>words.filter(w=>{const d=wordData[keyFn(w)];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
+    const {words:stepWords}=vocabForStep(step,focus);
+    const lowerFresh=focus==='freq'?0:(()=>{const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[])).filter(w=>{const d=wordData[w.en];return d&&d.familiarity===0&&d.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS;}).length;})();
+    const fresh=focus==='freq'
+      ?FREQ_POOL.filter(w=>{const d=wordData[w.en];const f=d?d.familiarity:-1;if(w.freqStep===step&&f===-1)return true;if(w.freqStep<=step&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length
+      :countFresh(stepWords,w=>w.en)+lowerFresh;
+    const {pool:clozeStepPool}=clozeForStep(step,focus);
+    const lowerClozeFresh=focus==='freq'?0:(()=>{const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(CLOZE_EXERCISES[l]||[])).filter(w=>{const d=wordData[w.lemma||w.answer];return d&&d.familiarity===0&&d.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS;}).length;})();
+    const clozeFresh=focus==='freq'
+      ?(()=>{const fsMap=new Map(FREQ_POOL.map(w=>[w.en,w.freqStep]));return Object.values(CLOZE_EXERCISES).flat().filter(e=>{const d=wordData[e.lemma];const f=d?d.familiarity:-1;const fs=fsMap.get(e.lemma);if(fs===undefined)return false;if(fs===step&&f===-1)return true;if(fs<=step&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length})()
+      :countFresh(clozeStepPool,w=>w.lemma||w.answer)+lowerClozeFresh;
+    const countDue=(items,keyFn)=>{let d12=0,d3=false;items.forEach(it=>{const d=wordData[keyFn(it)];if(!d)return;if(d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now))d12++;else if(d.familiarity===3&&reviewDue(d,now))d3=true;});return d12+(d3?1:0);};
+    const dueCount=countDue(FREQ_POOL,w=>w.en);
+    const clozeDueCount=countDue(Object.values(CLOZE_EXERCISES).flat(),w=>w.lemma||w.answer);
+    return {fresh,clozeFresh,dueCount,clozeDueCount};
+  },[wordData,clozeForStep]);
+
   // Wortauswahl Slots A–E: dünner Wrapper um die reine Funktion selectUnitPure
   // (Modulebene, wird auch von der Lerner-Simulation genutzt)
   const selectUnit=useCallback((step,focus,clozeOnly,allLevels,reviewMode)=>
@@ -1164,6 +1189,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     const learnedCount=Object.entries(preFam).filter(([k,pf])=>pf===0&&(wordData[k]?.familiarity||0)>0).length;
     const practicedCount=Object.entries(preFam).filter(([k,pf])=>pf===-1&&(wordData[k]?.familiarity||0)>0).length;
     const showLP=exType==='cloze'&&(learnedCount>0||practicedCount>0);
+    // Noch zu üben auf der (nach evtl. Anpassung) aktuellen Stufe — dieselbe Zählung wie Home-Screen
+    const cnt=computeCounts(activeStep,trainFocus);
+    const remFresh=exType==='cloze'?cnt.clozeFresh:cnt.fresh;
+    const remDue=exType==='cloze'?cnt.clozeDueCount:cnt.dueCount;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('result')}</h1></header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
@@ -1178,8 +1207,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
         </p>}
-        <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 16px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
-        <div style={{display:'flex',gap:12,justifyContent:'center'}}>
+        <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
+        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
+        {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
+        <div style={{marginTop:remDue>0?0:12,display:'flex',gap:12,justifyContent:'center'}}>
           <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
           {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
         </div>
@@ -1443,24 +1474,8 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     </div>);
   }
 
-  const now=Date.now();
-  const DMS=DAY_EFF;
-  const countFresh=(words,keyFn)=>words.filter(w=>{const d=wordData[keyFn(w)];if(!d)return true;return d.familiarity<=0&&(d.familiarity===-1||now-new Date(d.lasttrained).getTime()>=DMS)}).length;
-
+  const {fresh,clozeFresh,dueCount,clozeDueCount}=computeCounts(activeStep,trainFocus);
   const {words:stepWords}=vocabForStep(activeStep,trainFocus);
-  const lowerFresh=(()=>{if(trainFocus==='freq')return 0;const lvl=stepToLevel(activeStep);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[])).filter(w=>{const d=wordData[w.en];return d&&d.familiarity===0&&d.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS;}).length;})();
-  const fresh=trainFocus==='freq'
-    ?FREQ_POOL.filter(w=>{const d=wordData[w.en];const f=d?d.familiarity:-1;if(w.freqStep===activeStep&&f===-1)return true;if(w.freqStep<=activeStep&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length
-    :countFresh(stepWords,w=>w.en)+lowerFresh;
-  const {pool:clozeStepPool}=clozeForStep(activeStep,trainFocus);
-  const lowerClozeFresh=(()=>{if(trainFocus==='freq')return 0;const lvl=stepToLevel(activeStep);const li=LEVELS.indexOf(lvl);return LEVELS.slice(0,li).flatMap(l=>(CLOZE_EXERCISES[l]||[])).filter(w=>{const d=wordData[w.lemma||w.answer];return d&&d.familiarity===0&&d.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS;}).length;})();
-  const clozeFresh=trainFocus==='freq'
-    ?(()=>{const fsMap=new Map(FREQ_POOL.map(w=>[w.en,w.freqStep]));return Object.values(CLOZE_EXERCISES).flat().filter(e=>{const d=wordData[e.lemma];const f=d?d.familiarity:-1;const fs=fsMap.get(e.lemma);if(fs===undefined)return false;if(fs===activeStep&&f===-1)return true;if(fs<=activeStep&&f===0&&d?.lasttrained&&now-new Date(d.lasttrained).getTime()>=DMS)return true;return false;}).length})()
-    :countFresh(clozeStepPool,w=>w.lemma||w.answer)+lowerClozeFresh;
-  // Fällige Wiederholungen (Slot A): fam=1/2 nach Intervall, plus max. 1 fam=3-Stichprobe
-  const countDue=(items,keyFn)=>{let d12=0,d3=false;items.forEach(it=>{const d=wordData[keyFn(it)];if(!d)return;if(d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now))d12++;else if(d.familiarity===3&&reviewDue(d,now))d3=true;});return d12+(d3?1:0);};
-  const dueCount=countDue(FREQ_POOL,w=>w.en);
-  const clozeDueCount=countDue(Object.values(CLOZE_EXERCISES).flat(),w=>w.lemma||w.answer);
 
   const stepInfo=trainFocus==='freq'
     ?t('yourStep').replace('{s}',activeStep+1).replace('{t}',SUBSTEPS.length)
