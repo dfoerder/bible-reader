@@ -47,6 +47,7 @@ dosiert?) und Quoten/Intervalle ggf. nachjustieren.
 - Kategorie: Bildung / Bücher
 
 ### Technisch
+- **Entwickler-Einstellungen ausblenden** (Abschnitt ENTWICKLER in den Einstellungen: Test-Daten laden, Frischer Start, Backups, beschleunigter Test-Modus, Lerner-Simulation) — ein normaler Nutzer darf seinen Lernstand nicht versehentlich mit Test-Daten überschreiben können; dabei auch prüfen, dass `bible-test-accel` bei Nutzern nicht gesetzt ist
 - Tip-Jar via StoreKit / In-App Purchase implementieren (2–3 Stufen, 1.99 / 4.99 / 9.99 $)
 - Spendenhinweis-Dialog bei Sprachpaket-Downloads
 - Offline-Verhalten und Fehlerbehandlung testen
