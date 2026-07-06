@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.49b (06.07.2026)
+
+- Review-Phase startet mit den nützlichsten Wörtern (B2) und läuft nach CEFR-Nützlichkeit in Zickzack-Reihenfolge um B2.2 statt nach Häufigkeit
+
 ## v1.10.48b (06.07.2026)
 
 - Ergebnis-Screen zeigt nach jeder Einheit, wieviele Wörter auf der Stufe noch zu üben sind (plus fällige Wiederholungen)
