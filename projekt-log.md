@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.44b (06.07.2026)
+
+- Lerner-Simulation (Entwickler): simuliert N Trainings-Einheiten mit realistischen Fehlerquoten gegen die echte Logik — Report mit Level-Trajektorie und fam-Verteilung
+
 ## v1.10.43b (05.07.2026)
 
 - Dev-Werkzeug 'Frischer Start': alles ungeübt ab Startstufe — sauberer Ausgangspunkt für beschleunigte Tests (ohne synthetische Verteilung)

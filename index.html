@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.43b';
-const APP_DATE = '05.07.2026';
+const APP_VERSION = '1.10.44b';
+const APP_DATE = '06.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -657,6 +657,166 @@ function MoreExamples({lemma,word}){
   </div>);
 }
 
+// ── Reine Trainings-Bausteine (von Training/App UND der Lerner-Simulation genutzt) ──
+// Levelanpassung nach First-Pass-Quote (5-stufig)
+const levelDelta=pct=>pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
+// Familiarity-Übergang inkl. Intervall-Guard (Erhöhen nur nach Ablauf der Stufen-Frist,
+// Erniedrigen immer erlaubt); liefert den neuen Wortdaten-Eintrag
+function applyTrainWord(e,newFam,now){
+  e=e||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};
+  const oldFam=e.familiarity;
+  const lt=e.lasttrained?new Date(e.lasttrained).getTime():null;
+  const waitDays=oldFam>=1?(REVIEW_WAIT_DAYS[oldFam]||60):1;
+  const canIncrease=!lt||(now-lt>=waitDays*DAY_EFF);
+  const effectiveFam=newFam>oldFam&&!canIncrease?oldFam:newFam;
+  return {familiarity:effectiveFam,lasttrained:new Date(now).toISOString(),
+    numberoftrainings:(e.numberoftrainings||0)+1,
+    learned:(e.learned||0)+(oldFam===0&&effectiveFam>0?1:0),
+    forgotten:(e.forgotten||0)+(oldFam>0&&effectiveFam===0?1:0)};
+}
+// Gemeinsame Wortauswahl für Quiz- und Kontext-Modus (Slots A–E, projekt-training-konzept.md):
+// A Wiederholungen (bis 4, Überfälligste zuerst, max. 1 fam=3-Stichprobe), B Unbekannte
+// (bis 3, Vergessene zuerst), C 1 tieferes ungeübtes Wort, D 1 Wort aus Step+1, E neue
+// Wörter des aktuellen Levels; Auffüllen bei Knappheit aus A, dann B, dann C/D.
+// clozeOnly filtert auf Wörter mit Kontextübung (CLOZE_MAP); der Level-Aufstieg misst
+// sich immer am vollen Pool. wd = Wortdaten, now = Zeitpunkt (virtuelle Uhr möglich).
+function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
+  const {words:stepWords,allDe}=vocabForStep(step,focus);
+  const fam=w=>{const d=wd[w.en];return d?d.familiarity:-1;};
+  const lt=w=>{const d=wd[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
+  const fgt=w=>{const d=wd[w.en];return d&&d.forgotten?d.forgotten:0;};
+  const ok=w=>!clozeOnly||CLOZE_MAP.has(w.en);
+  let unknown24h,lowerUnexercised,currentUnexercised,dueReviews=[],nextStepNew=[];
+  let fullTrainable=0;
+  if(reviewMode){
+    currentUnexercised=shuffleArr(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1&&ok(w)));
+    unknown24h=[];lowerUnexercised=[];
+  } else if(allLevels){
+    currentUnexercised=shuffleArr(FREQ_POOL.filter(w=>fam(w)===-1&&ok(w)));
+    unknown24h=shuffleArr(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_EFF&&ok(w)));
+    lowerUnexercised=[];
+  } else {
+    let curUnknown,curNew;
+    if(focus==='freq'){
+      curUnknown=stepWords.filter(w=>w.freqStep===step&&fam(w)===0&&now-lt(w)>=DAY_EFF);
+      curNew=stepWords.filter(w=>w.freqStep===step&&fam(w)===-1);
+      unknown24h=shuffleArr(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_EFF&&ok(w)));
+      lowerUnexercised=shuffleArr(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1&&ok(w)));
+      currentUnexercised=shuffleArr(curNew.filter(ok));
+      if(step<SUBSTEPS.length-1)nextStepNew=shuffleArr(FREQ_POOL.filter(w=>w.freqStep===step+1&&fam(w)===-1&&ok(w)));
+    } else {
+      const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);
+      const lowerFam0=LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===0&&now-lt(w)>=DAY_EFF&&ok(w)));
+      curUnknown=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_EFF);
+      curNew=stepWords.filter(w=>fam(w)===-1);
+      unknown24h=shuffleArr([...curUnknown.filter(ok),...lowerFam0]);
+      lowerUnexercised=shuffleArr(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1&&ok(w))));
+      currentUnexercised=shuffleArr(curNew.filter(ok));
+      if(step<SUBSTEPS.length-1){const s1=step+1;const lvl1=stepToLevel(s1);const sub1=1+(s1%3);
+        nextStepNew=shuffleArr((VOCAB_POOL[lvl1]||[]).filter(w=>w.sub===sub1&&fam(w)===-1&&ok(w)));}
+    }
+    // AP-T3: aktueller Step vollständig geübt → automatischer Aufstieg mit Gratulation.
+    // Wiederholungen laufen level-unabhängig weiter; Step 17 → freqComplete-Flow.
+    if(curUnknown.length===0&&curNew.length===0&&step<SUBSTEPS.length-1)return{status:'levelup'};
+    fullTrainable=curUnknown.length+curNew.length;
+    unknown24h.sort((a,b)=>(fgt(b)>0?1:0)-(fgt(a)>0?1:0));
+    const due12=FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
+      .sort((a,b)=>{const da=wd[a.en],db=wd[b.en];
+        const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_EFF;
+        const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_EFF;
+        return dueA-dueB;});
+    const due3=shuffleArr(FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity===3&&reviewDue(d,now);}));
+    dueReviews=[...due12,...due3.slice(0,1)];
+  }
+  if(unknown24h.length===0&&currentUnexercised.length===0&&dueReviews.length===0){
+    if(clozeOnly&&fullTrainable>0)return{status:'clozegap',missing:fullTrainable};
+    if(focus==='freq'||reviewMode||step===SUBSTEPS.length-1){
+      const allDone=FREQ_POOL.every(w=>{const d=wd[w.en];return d&&d.familiarity>=1;});
+      return{status:allDone?'alldone':'complete'};
+    }
+    return{status:'nowords'};
+  }
+  const unit=[];let ai=0,bi=0,ci=0,di=0,ei=0;
+  for(let i=0;i<4&&ai<dueReviews.length;i++)unit.push(dueReviews[ai++]);
+  for(let i=0;i<3&&bi<unknown24h.length;i++)unit.push(unknown24h[bi++]);
+  if(ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
+  if(di<nextStepNew.length)unit.push(nextStepNew[di++]);
+  while(unit.length<15&&ei<currentUnexercised.length)unit.push(currentUnexercised[ei++]);
+  while(unit.length<15&&ai<dueReviews.length)unit.push(dueReviews[ai++]);
+  while(unit.length<15&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
+  while(unit.length<15&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
+  while(unit.length<15&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
+  if(unit.length===0)return{status:'nowords'};
+  // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
+  const excludeKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.en));
+  const extraDe=[...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.de);
+  return{status:'ok',unit:shuffleArr(unit),excludeKeys,extraDe,allDe};
+}
+
+// ── Lerner-Simulation (Entwickler-Werkzeug) ──
+// Spielt N Einheiten des allgemeinen Trainings gegen die ECHTEN Bausteine durch
+// (selectUnitPure, applyTrainWord, levelDelta) — auf einer Kopie der Wortdaten mit
+// virtueller Uhr. Der echte Lernstand bleibt unberührt. Der Retry-Durchgang ist
+// zustandsneutral (richtig → keine Änderung, falsch → fam bleibt 0) und wird übersprungen.
+// Antwortmodell p(richtig): Wiederholung fam=1 85% / fam≥2 90% · Schwachpunkt fam=0 65% ·
+// neue Wörter nach Abstand zur wahren Stufe: ≤−3 97% · −2/−1 92% · 0 68% · +1 55% · +2 40% · ≥+3 25%
+function simAnswerProb(w,d,trueStep){
+  if(d&&d.familiarity>=1)return d.familiarity>=2?0.9:0.85;
+  if(d&&d.familiarity===0)return 0.65;
+  const ws=WORD_STEP.get(w.en);const diff=(ws!=null?ws:trueStep)-trueStep;
+  return diff<=-3?0.97:diff<0?0.92:diff===0?0.68:diff===1?0.55:diff===2?0.4:0.25;
+}
+function runLearnerSim(cfg){
+  let seed=(cfg.seed||42)%2147483647;if(seed<=0)seed+=2147483646;
+  const rng=()=>{seed=Math.imul(48271,seed)%2147483647;return (seed&2147483647)/2147483648;};
+  let wd={};let step=cfg.startStep;let now=Date.now();const start=now;
+  const perDay=cfg.unitsPerDay||3;const gap=DAY_EFF/perDay;
+  const lines=[];const events=[];
+  let ups=0,downs=0,holds=0,exhaustUps=0,reviewsDone=0;
+  for(let u=1;u<=cfg.units;u++){
+    const day=((now-start)/DAY_EFF).toFixed(1);
+    // Erschöpfungs-Aufstiege verbrauchen keine Einheit (der Nutzer startet sofort neu)
+    let guard=0,res=selectUnitPure(wd,step,'level',false,false,false,now);
+    while(res.status==='levelup'&&guard++<SUBSTEPS.length){
+      exhaustUps++;events.push(`Tag ${day}: ${SUBSTEPS[step]} erschöpft → automatischer Aufstieg auf ${SUBSTEPS[step+1]}`);
+      step++;res=selectUnitPure(wd,step,'level',false,false,false,now);
+    }
+    if(res.status!=='ok'){events.push(`Tag ${day}: Ende nach ${u-1} Einheiten (${res.status})`);break;}
+    let cc=0,ct=0,rev=0;
+    res.unit.forEach(w=>{
+      const d=wd[w.en];
+      if(d&&d.familiarity>=1)rev++;
+      const okAns=rng()<simAnswerProb(w,d,cfg.trueStep);
+      if(!res.excludeKeys.has(w.en)){ct++;if(okAns)cc++;}
+      const cf=d?d.familiarity:-1;
+      wd[w.en]=applyTrainWord(d,okAns?(cf>=1?Math.min(3,cf+1):1):0,now);
+    });
+    reviewsDone+=rev;
+    if(ct>0){
+      const pct=cc/ct;
+      const ns=Math.max(0,Math.min(SUBSTEPS.length-1,step+levelDelta(pct)));
+      const mark=ns-step>1?'⇈':ns>step?'↑':step-ns>1?'⇊':ns<step?'↓':'=';
+      if(ns>step)ups++;else if(ns<step)downs++;else holds++;
+      lines.push(`#${String(u).padStart(3)} Tag ${String(day).padStart(5)}  ${SUBSTEPS[step].padEnd(5)} ${String(Math.round(100*pct)).padStart(3)}% ${mark}${rev?`  (${rev} Wdh.)`:''}`);
+      step=ns;
+    } else {
+      lines.push(`#${String(u).padStart(3)} Tag ${String(day).padStart(5)}  ${SUBSTEPS[step].padEnd(5)} — nur Wiederholungen (${rev})`);
+      holds++;
+    }
+    now+=gap;
+  }
+  const vals=Object.values(wd);
+  const famC={};vals.forEach(v=>{famC[v.familiarity]=(famC[v.familiarity]||0)+1;});
+  const summary=[
+    `Lerner: wahres Niveau ${SUBSTEPS[cfg.trueStep]} · Start ${SUBSTEPS[cfg.startStep]} · ${cfg.units} Einheiten (${perDay}/Tag)`,
+    `Endstufe: ${SUBSTEPS[step]}   ↑${ups} ↓${downs} =${holds}   Erschöpfungs-Aufstiege: ${exhaustUps}`,
+    `Wiederholungen absolviert: ${reviewsDone} · Wörter berührt: ${vals.length}`,
+    `fam am Ende — unbekannt ${famC[0]||0} · gelernt ${famC[1]||0} · gefestigt ${famC[2]||0} · sicher ${famC[3]||0}`,
+    `aktiv gelernt (learned>0): ${vals.filter(v=>(v.learned||0)>0).length} · Vergessens-Ereignisse: ${vals.reduce((s,v)=>s+(v.forgotten||0),0)}`
+  ];
+  return [...summary,'',...events,'',...lines].join('\n');
+}
+
 function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordData,trainWord,onShowProgress}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
@@ -715,86 +875,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   },[]);
   const DAY_MS=DAY_EFF;
 
-  // Gemeinsame Wortauswahl für Quiz- und Kontext-Modus (Slots A–E, projekt-training-konzept.md):
-  // A Wiederholungen (bis 4, Überfälligste zuerst, max. 1 fam=3-Stichprobe), B Unbekannte
-  // (bis 3, Vergessene zuerst), C 1 tieferes ungeübtes Wort, D 1 Wort aus Step+1, E neue
-  // Wörter des aktuellen Levels; Auffüllen bei Knappheit aus A, dann B, dann C/D.
-  // clozeOnly filtert auf Wörter mit Kontextübung (CLOZE_MAP); der Level-Aufstieg misst
-  // sich immer am vollen Pool, damit er nicht feuert, solange Wörter ohne Übung offen sind.
-  const selectUnit=useCallback((step,focus,clozeOnly,allLevels,reviewMode)=>{
-    const {words:stepWords,allDe}=vocabForStep(step,focus);
-    const now=Date.now();
-    const fam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
-    const lt=w=>{const d=wordData[w.en];return d&&d.lasttrained?new Date(d.lasttrained).getTime():0;};
-    const fgt=w=>{const d=wordData[w.en];return d&&d.forgotten?d.forgotten:0;};
-    const ok=w=>!clozeOnly||CLOZE_MAP.has(w.en);
-    let unknown24h,lowerUnexercised,currentUnexercised,dueReviews=[],nextStepNew=[];
-    let fullTrainable=0;
-    if(reviewMode){
-      currentUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1&&ok(w)));
-      unknown24h=[];lowerUnexercised=[];
-    } else if(allLevels){
-      currentUnexercised=shuffle(FREQ_POOL.filter(w=>fam(w)===-1&&ok(w)));
-      unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
-      lowerUnexercised=[];
-    } else {
-      let curUnknown,curNew;
-      if(focus==='freq'){
-        curUnknown=stepWords.filter(w=>w.freqStep===step&&fam(w)===0&&now-lt(w)>=DAY_MS);
-        curNew=stepWords.filter(w=>w.freqStep===step&&fam(w)===-1);
-        unknown24h=shuffle(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
-        lowerUnexercised=shuffle(FREQ_POOL.filter(w=>w.freqStep<step&&fam(w)===-1&&ok(w)));
-        currentUnexercised=shuffle(curNew.filter(ok));
-        if(step<SUBSTEPS.length-1)nextStepNew=shuffle(FREQ_POOL.filter(w=>w.freqStep===step+1&&fam(w)===-1&&ok(w)));
-      } else {
-        const lvl=stepToLevel(step);const li=LEVELS.indexOf(lvl);
-        const lowerFam0=LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS&&ok(w)));
-        curUnknown=stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_MS);
-        curNew=stepWords.filter(w=>fam(w)===-1);
-        unknown24h=shuffle([...curUnknown.filter(ok),...lowerFam0]);
-        lowerUnexercised=shuffle(LEVELS.slice(0,li).flatMap(l=>(VOCAB_POOL[l]||[]).filter(w=>fam(w)===-1&&ok(w))));
-        currentUnexercised=shuffle(curNew.filter(ok));
-        if(step<SUBSTEPS.length-1){const s1=step+1;const lvl1=stepToLevel(s1);const sub1=1+(s1%3);
-          nextStepNew=shuffle((VOCAB_POOL[lvl1]||[]).filter(w=>w.sub===sub1&&fam(w)===-1&&ok(w)));}
-      }
-      // AP-T3: aktueller Step vollständig geübt → automatischer Aufstieg mit Gratulation.
-      // Wiederholungen laufen level-unabhängig weiter; Step 17 → freqComplete-Flow.
-      if(curUnknown.length===0&&curNew.length===0&&step<SUBSTEPS.length-1)return{status:'levelup'};
-      fullTrainable=curUnknown.length+curNew.length;
-      unknown24h.sort((a,b)=>(fgt(b)>0?1:0)-(fgt(a)>0?1:0));
-      const due12=FREQ_POOL.filter(w=>{const d=wordData[w.en];return ok(w)&&d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
-        .sort((a,b)=>{const da=wordData[a.en],db=wordData[b.en];
-          const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_MS;
-          const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_MS;
-          return dueA-dueB;});
-      const due3=shuffle(FREQ_POOL.filter(w=>{const d=wordData[w.en];return ok(w)&&d&&d.familiarity===3&&reviewDue(d,now);}));
-      dueReviews=[...due12,...due3.slice(0,1)];
-    }
-    if(unknown24h.length===0&&currentUnexercised.length===0&&dueReviews.length===0){
-      if(clozeOnly&&fullTrainable>0)return{status:'clozegap',missing:fullTrainable};
-      if(focus==='freq'||reviewMode||step===SUBSTEPS.length-1){
-        const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
-        return{status:allDone?'alldone':'complete'};
-      }
-      return{status:'nowords'};
-    }
-    const unit=[];let ai=0,bi=0,ci=0,di=0,ei=0;
-    for(let i=0;i<4&&ai<dueReviews.length;i++)unit.push(dueReviews[ai++]);
-    for(let i=0;i<3&&bi<unknown24h.length;i++)unit.push(unknown24h[bi++]);
-    if(ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
-    if(di<nextStepNew.length)unit.push(nextStepNew[di++]);
-    while(unit.length<15&&ei<currentUnexercised.length)unit.push(currentUnexercised[ei++]);
-    while(unit.length<15&&ai<dueReviews.length)unit.push(dueReviews[ai++]);
-    while(unit.length<15&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
-    while(unit.length<15&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
-    while(unit.length<15&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
-    if(unit.length===0)return{status:'nowords'};
-    // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
-    const excludeKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.en));
-    const extraDe=[...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.de);
-    return{status:'ok',unit:shuffle(unit),excludeKeys,extraDe,allDe};
-  },[wordData]);
-
+  // Wortauswahl Slots A–E: dünner Wrapper um die reine Funktion selectUnitPure
+  // (Modulebene, wird auch von der Lerner-Simulation genutzt)
+  const selectUnit=useCallback((step,focus,clozeOnly,allLevels,reviewMode)=>
+    selectUnitPure(wordData,step,focus,clozeOnly,allLevels,reviewMode,Date.now()),[wordData]);
   // Gemeinsame Behandlung der Auswahl-Ergebnisse ohne Einheit (Aufstieg/Abschluss/leer)
   const applySelectStatus=useCallback((res,step,focus)=>{
     if(res.status==='levelup'){
@@ -1048,7 +1132,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       const curStep=activeStep;
       const mx=SUBSTEPS.length-1;
       const saveFn=trainFocus==='freq'?saveFreqStep:saveStep;
-      const delta=pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
+      const delta=levelDelta(pct);
       const ns=Math.max(0,Math.min(mx,curStep+delta));
       if(ns!==curStep){
         saveFn(ns);setUserStep(ns);
@@ -1765,19 +1849,9 @@ function App({data}){
   const loadBookLemmas=useCallback(async(bookNr)=>{if(bookLemmas[bookNr])return;const anno=await fetchAnno(bookNr);if(!anno)return;const lemmas=new Set();Object.values(anno.chapters).forEach(ch=>{Object.values(ch).forEach(va=>{(va||[]).forEach(a=>{if(a.phrase==null)lemmas.add(a.lemma)})})});setBookLemmas(prev=>({...prev,[bookNr]:[...lemmas]}))},[bookLemmas]);
   const getBookWordStats=useCallback((bookNr)=>{const lemmas=bookLemmas[bookNr];if(!lemmas)return null;let known=0,unknown=0,learned=0,forgotten=0;lemmas.forEach(l=>{const d=wordData[l];if(!d||d.familiarity===-1)return;if(d.familiarity>=1)known++;if(d.familiarity===0)unknown++;if((d.learned||0)>0)learned++;if((d.forgotten||0)>0&&d.familiarity===0)forgotten++});return{known,unknown,notSeen:lemmas.length-known-unknown,learned,forgotten,total:lemmas.length}},[bookLemmas,wordData]);
   const trainWord=useCallback((key,newFam)=>{setWordData(prev=>{
-    const e=prev[key]||{familiarity:-1,lasttrained:null,numberoftrainings:0,learned:0,forgotten:0};
-    const oldFam=e.familiarity;
-    const lt=e.lasttrained?new Date(e.lasttrained).getTime():null;
-    const DAY=DAY_EFF;
-    // Familiarity kann nur erhöht werden, wenn das Wort lange genug nicht geübt wurde
-    // (Spaced-Repetition-Intervall je Stufe: fam<1 → 24h, fam=1 → 2 Tage, fam=2 → 7 Tage).
-    // Erniedrigen (falsche Antwort → 0) ist immer erlaubt.
-    const waitDays=oldFam>=1?(REVIEW_WAIT_DAYS[oldFam]||60):1;
-    const canIncrease=!lt||(Date.now()-lt>=waitDays*DAY);
-    const effectiveFam=newFam>oldFam&&!canIncrease?oldFam:newFam;
-    const learned=(e.learned||0)+(oldFam===0&&effectiveFam>0?1:0);
-    const forgotten=(e.forgotten||0)+(oldFam>0&&effectiveFam===0?1:0);
-    const next={...prev,[key]:{familiarity:effectiveFam,lasttrained:new Date().toISOString(),numberoftrainings:e.numberoftrainings+1,learned,forgotten}};
+    // Übergangs- und Intervall-Logik zentral in applyTrainWord
+    // (Modulebene, wird auch von der Lerner-Simulation genutzt)
+    const next={...prev,[key]:applyTrainWord(prev[key],newFam,Date.now())};
     LS.set('bible-word-data',next);return next;
   })},[]);
   const [expandedTestament,setExpandedTestament]=useState(null);
@@ -2284,6 +2358,11 @@ function App({data}){
   const [devForgLower,setDevForgLower]=useState(0);
   const [devBackups,setDevBackups]=useState([]);
   const [devBackupsOpen,setDevBackupsOpen]=useState(false);
+  const [simTrueStep,setSimTrueStep]=useState(6);
+  const [simStartStep,setSimStartStep]=useState(6);
+  const [simUnits,setSimUnits]=useState(40);
+  const [simPerDay,setSimPerDay]=useState(3);
+  const [simReport,setSimReport]=useState('');
 
   // ── LEVEL TEST ──
   if(phase==='leveltest'){
@@ -2553,6 +2632,30 @@ function App({data}){
                 ))}
             </div>}
             <p style={{...S.settingsHint,marginTop:6}}>„Test-Daten laden": alles bekannt + oben konfigurierte Lücken. „Frischer Start": alles ungeübt ab der Startstufe (Verteilungswerte werden ignoriert) — für beschleunigte Tests. Beide sichern den aktuellen Stand vorher als zeitgestempeltes Backup (max. 12).</p>
+            <div style={{marginTop:12,paddingTop:10,borderTop:'1px dashed var(--t-border)'}}>
+              <span style={{fontSize:11,fontWeight:600,color:'var(--t-muted)',fontFamily:sans}}>LERNER-SIMULATION</span>
+              <div style={{marginTop:6,fontSize:12,fontFamily:sans,display:'grid',gridTemplateColumns:'1fr 1fr',gap:'6px 10px'}}>
+                <label style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)'}}>
+                  <span style={{fontSize:10}}>Wahres Niveau = {SUBSTEPS[simTrueStep]}</span>
+                  <input type="range" min="0" max="17" value={simTrueStep} onChange={e=>setSimTrueStep(parseInt(e.target.value))} style={{width:'100%'}}/>
+                </label>
+                <label style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)'}}>
+                  <span style={{fontSize:10}}>Startstufe = {SUBSTEPS[simStartStep]}</span>
+                  <input type="range" min="0" max="17" value={simStartStep} onChange={e=>setSimStartStep(parseInt(e.target.value))} style={{width:'100%'}}/>
+                </label>
+                <label style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)'}}>
+                  <span style={{fontSize:10}}>Einheiten</span>
+                  <input type="number" min="1" max="500" value={simUnits} onChange={e=>setSimUnits(Math.max(1,Math.min(500,parseInt(e.target.value)||1)))} style={{width:'100%',padding:'3px 5px',borderRadius:4,border:'1px solid var(--t-border)',background:'var(--t-bg)',color:'var(--t-text2)',fontSize:12,fontFamily:sans}}/>
+                </label>
+                <label style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)'}}>
+                  <span style={{fontSize:10}}>Einheiten pro Tag</span>
+                  <input type="number" min="1" max="50" value={simPerDay} onChange={e=>setSimPerDay(Math.max(1,Math.min(50,parseInt(e.target.value)||1)))} style={{width:'100%',padding:'3px 5px',borderRadius:4,border:'1px solid var(--t-border)',background:'var(--t-bg)',color:'var(--t-text2)',fontSize:12,fontFamily:sans}}/>
+                </label>
+              </div>
+              <button onClick={()=>setSimReport(runLearnerSim({trueStep:simTrueStep,startStep:simStartStep,units:simUnits,unitsPerDay:simPerDay,seed:Date.now()}))} style={{...S.navBtn,fontSize:12,marginTop:8}}>Simulation starten</button>
+              {simReport&&<pre style={{marginTop:8,padding:8,border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)',fontSize:10,lineHeight:1.5,color:'var(--t-text2)',overflow:'auto',maxHeight:280,whiteSpace:'pre'}}>{simReport}</pre>}
+              <p style={{...S.settingsHint,marginTop:4}}>Simuliert einen Lerner mit realistischen Fehlerquoten gegen die echte Trainingslogik (virtuelle Uhr, Kopie der Wortdaten) — der eigene Lernstand bleibt unberührt.</p>
+            </div>
           </div>
         </div>
         <div style={S.settingsGroup}>
