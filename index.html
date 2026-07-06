@@ -1350,9 +1350,17 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   }
   if(mode==='nowords'){
     const nwFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
-    const nwFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
+    // Erst prüfen, ob die aktuell rezensierte Stufe noch Wörter hat — nur wenn sie
+    // wirklich fertig ist, eine Stufe tiefer suchen (sonst Sprung vor Stufen-Abschluss)
     let nwStep=-1,nwCount=0;
-    for(let s=nwFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&nwFam(w)<1).length;if(c>0){nwStep=s;nwCount=c;break;}}
+    if(freqReviewStepRef.current!=null){
+      const here=FREQ_POOL.filter(w=>w.freqStep===freqReviewStepRef.current&&nwFam(w)<1).length;
+      if(here>0){nwStep=freqReviewStepRef.current;nwCount=here;}
+    }
+    if(nwStep<0){
+      const nwFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
+      for(let s=nwFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&nwFam(w)<1).length;if(c>0){nwStep=s;nwCount=c;break;}}
+    }
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
       <div style={S.navRow}><button onClick={()=>{setMode(null);freqReviewStepRef.current=null;}} style={S.navBtn}>{t('back')}</button></div>
@@ -1370,9 +1378,18 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   }
   if(mode==='freqComplete'||mode==='freqAllDone'){
     const fcFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
-    const searchFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
+    // Erst prüfen, ob die aktuell rezensierte Stufe noch Wörter hat — nur wenn sie
+    // wirklich fertig ist, eine Stufe tiefer suchen (sonst Sprung vor Stufen-Abschluss,
+    // z.B. nach nur einer 15er-Einheit von 81 Wörtern auf C2.2)
     let nextStep=-1,nextCount=0;
-    for(let s=searchFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&fcFam(w)<1).length;if(c>0){nextStep=s;nextCount=c;break;}}
+    if(freqReviewStepRef.current!=null){
+      const here=FREQ_POOL.filter(w=>w.freqStep===freqReviewStepRef.current&&fcFam(w)<1).length;
+      if(here>0){nextStep=freqReviewStepRef.current;nextCount=here;}
+    }
+    if(nextStep<0){
+      const searchFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
+      for(let s=searchFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&fcFam(w)<1).length;if(c>0){nextStep=s;nextCount=c;break;}}
+    }
     const isAllDone=mode==='freqAllDone'||nextStep<0;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
