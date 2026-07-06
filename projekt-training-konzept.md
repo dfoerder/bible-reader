@@ -126,3 +126,12 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   `buildChapClozeMap` (Lemma → live erzeugte Cloze-Übung) + `switchChapExercise`;
   Rendering pro Item (`ex.text`), Umschalter im Übungs-Header, `bible-ex-mode` geteilt
   mit dem allgemeinen Training. Kapitel behält Multi-Unit (alle schwierigen Wörter).
+- **Nachtrag 4 (05.07.2026) — Lerner-Simulation (Entwickler-Werkzeug):** Kernbausteine als
+  reine Funktionen extrahiert (`selectUnitPure`, `applyTrainWord`, `levelDelta`); die
+  Simulation spielt N Einheiten mit realistischen Fehlerquoten (p richtig: unter Niveau 92–97 % ·
+  auf Niveau 68 % · +1 Sublevel 55 % · Wiederholungen 85–90 % · fam=0 65 %) gegen die echte
+  Logik durch — Kopie der Wortdaten, virtuelle Uhr, Report mit Level-Trajektorie.
+  **Validierungsergebnis:** Der Regelkreis konvergiert: überschätzter Lerner (Start C1.1,
+  wahr B1.1) fällt in 5 Einheiten auf B1.1; unterschätzter (Start A2.1, wahr C1.1) steigt in
+  6 Einheiten auf C1.1; korrekt eingestufte pendeln an ihrer wahren Stufe (Gleichgewicht an
+  der Grenze, da 68 % im −1-Band und eine Stufe tiefer 92 % im +1-Band liegen).
