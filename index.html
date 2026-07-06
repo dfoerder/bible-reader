@@ -282,7 +282,7 @@ const I18N={
   noWordsToTrain:{de:'Keine Wörter zum Trainieren.',en:'No words to train.'},
   freqComplete:{de:'Gratulation: Du hast alle Wörter des obersten Levels gelernt!',en:'Congratulations: You have learned all words of the highest level!'},
   freqCompleteLower:{de:'Es gibt noch {n} ungeübte Wörter auf Level {l}. Möchtest du jetzt mit diesen weitermachen?',en:'There are still {n} unexercised words at level {l}. Would you like to continue with these?'},
-  freqReviewInProgress:{de:'Du bist daran, die ungeübten Wörter der tieferen Levels zu lernen.',en:'You are working through the unexercised words of the lower levels.'},
+  freqReviewInProgress:{de:'Du übst jetzt die restlichen Wörter — die nützlichsten (B2) zuerst.',en:'You are now practicing the remaining words — the most useful ones (B2) first.'},
   freqContinue:{de:'Ja, weitermachen',en:'Yes, continue'},
   freqAllDone:{de:'Gratulation: Du beherrschst scheinbar alle Wörter der Bibel!',en:'Congratulations: You have apparently mastered all words of the Bible!'},
 
@@ -681,12 +681,26 @@ function applyTrainWord(e,newFam,now){
     learned:(e.learned||0)+(oldFam===0&&effectiveFam>0?1:0),
     forgotten:(e.forgotten||0)+(oldFam>0&&effectiveFam===0?1:0)};
 }
+// Review-Phase (nach C2.3): CEFR-Sublevels in Nützlichkeits-Reihenfolge — Zickzack-Spirale
+// um B2.2 (nützlichste Wörter zuerst): B2.2, B2.3, B2.1, C1.1, B1.3, C1.2, … bis A1.1.
+const REVIEW_ORDER=(()=>{const c=10;/*B2.2*/const o=[c];for(let d=1;d<SUBSTEPS.length;d++){if(c+d<SUBSTEPS.length)o.push(c+d);if(c-d>=0)o.push(c-d);}return o;})();
+// Anzahl noch ungeübter (fam<1) Wörter eines CEFR-Sublevels
+function reviewCount(wd,s){const sub=1+(s%3);return (VOCAB_POOL[stepToLevel(s)]||[]).filter(w=>{const d=wd[w.en];return w.sub===sub&&!(d&&d.familiarity>=1);}).length;}
+// Nächste Review-Stufe: aktuelle Stufe zuerst zu Ende, dann nächste in der Nützlichkeits-
+// Reihenfolge mit ungeübten Wörtern. cur=aktuelle Review-Stufe oder null (Ersteintritt).
+function reviewNextStep(wd,cur){
+  if(cur!=null){const c=reviewCount(wd,cur);if(c>0)return{step:cur,count:c};}
+  const startIdx=cur==null?0:REVIEW_ORDER.indexOf(cur)+1;
+  for(let i=startIdx;i<REVIEW_ORDER.length;i++){const s=REVIEW_ORDER[i];const c=reviewCount(wd,s);if(c>0)return{step:s,count:c};}
+  return{step:-1,count:0};
+}
 // Gemeinsame Wortauswahl für Quiz- und Kontext-Modus (Slots A–E, projekt-training-konzept.md):
 // A Wiederholungen (bis 4, Überfälligste zuerst, max. 1 fam=3-Stichprobe), B Unbekannte
 // (bis 3, Vergessene zuerst), C 1 tieferes ungeübtes Wort, D 1 Wort aus Step+1, E neue
 // Wörter des aktuellen Levels; Auffüllen bei Knappheit aus A, dann B, dann C/D.
 // clozeOnly filtert auf Wörter mit Kontextübung (CLOZE_MAP); der Level-Aufstieg misst
 // sich immer am vollen Pool. wd = Wortdaten, now = Zeitpunkt (virtuelle Uhr möglich).
+// reviewMode: step ist ein CEFR-Sublevel (SUBSTEPS-Index), Wörter aus VOCAB_POOL nach sub.
 function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
   const {words:stepWords,allDe}=vocabForStep(step,focus);
   const fam=w=>{const d=wd[w.en];return d?d.familiarity:-1;};
@@ -696,7 +710,9 @@ function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
   let unknown24h,lowerUnexercised,currentUnexercised,dueReviews=[],nextStepNew=[];
   let fullTrainable=0;
   if(reviewMode){
-    currentUnexercised=shuffleArr(FREQ_POOL.filter(w=>w.freqStep===step&&fam(w)<1&&ok(w)));
+    // step = CEFR-Sublevel: ungeübte Wörter dieses Sublevels (Nützlichkeits-Reihenfolge)
+    const sub=1+(step%3);
+    currentUnexercised=shuffleArr((VOCAB_POOL[stepToLevel(step)]||[]).filter(w=>w.sub===sub&&fam(w)<1&&ok(w)));
     unknown24h=[];lowerUnexercised=[];
   } else if(allLevels){
     currentUnexercised=shuffleArr(FREQ_POOL.filter(w=>fam(w)===-1&&ok(w)));
@@ -1380,25 +1396,15 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     </div>);
   }
   if(mode==='nowords'){
-    const nwFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
-    // Erst prüfen, ob die aktuell rezensierte Stufe noch Wörter hat — nur wenn sie
-    // wirklich fertig ist, eine Stufe tiefer suchen (sonst Sprung vor Stufen-Abschluss)
-    let nwStep=-1,nwCount=0;
-    if(freqReviewStepRef.current!=null){
-      const here=FREQ_POOL.filter(w=>w.freqStep===freqReviewStepRef.current&&nwFam(w)<1).length;
-      if(here>0){nwStep=freqReviewStepRef.current;nwCount=here;}
-    }
-    if(nwStep<0){
-      const nwFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
-      for(let s=nwFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&nwFam(w)<1).length;if(c>0){nwStep=s;nwCount=c;break;}}
-    }
+    // Review-Reihenfolge: aktuelle Stufe zuerst zu Ende, dann nächste nach Nützlichkeit (CEFR)
+    const {step:nwStep,count:nwCount}=reviewNextStep(wordData,freqReviewStepRef.current);
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
       <div style={S.navRow}><button onClick={()=>{setMode(null);freqReviewStepRef.current=null;}} style={S.navBtn}>{t('back')}</button></div>
       <div style={{textAlign:'center',padding:'20px'}}>
         <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px'}}>{freqReviewStepRef.current!=null?t('freqReviewInProgress'):nwStep>=0?t('freqComplete'):t('noWordsToTrain')}</p>
         {nwStep>=0&&<div>
-          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nwCount).replace('{l}',trainFocus==='freq'?(nwStep+1):stepLabel(nwStep))}</p>
+          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nwCount).replace('{l}',stepLabel(nwStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{freqReviewStepRef.current=nwStep;startVocab(nwStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);freqReviewStepRef.current=null;}} style={S.navBtn}>{t('finish')}</button>
@@ -1408,19 +1414,9 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     </div>);
   }
   if(mode==='freqComplete'||mode==='freqAllDone'){
-    const fcFam=w=>{const d=wordData[w.en];return d?d.familiarity:-1;};
-    // Erst prüfen, ob die aktuell rezensierte Stufe noch Wörter hat — nur wenn sie
-    // wirklich fertig ist, eine Stufe tiefer suchen (sonst Sprung vor Stufen-Abschluss,
-    // z.B. nach nur einer 15er-Einheit von 81 Wörtern auf C2.2)
-    let nextStep=-1,nextCount=0;
-    if(freqReviewStepRef.current!=null){
-      const here=FREQ_POOL.filter(w=>w.freqStep===freqReviewStepRef.current&&fcFam(w)<1).length;
-      if(here>0){nextStep=freqReviewStepRef.current;nextCount=here;}
-    }
-    if(nextStep<0){
-      const searchFrom=(freqReviewStepRef.current!=null?freqReviewStepRef.current:activeStep)-1;
-      for(let s=searchFrom;s>=0;s--){const c=FREQ_POOL.filter(w=>w.freqStep===s&&fcFam(w)<1).length;if(c>0){nextStep=s;nextCount=c;break;}}
-    }
+    // Review-Reihenfolge: aktuelle Stufe zuerst zu Ende (nicht nach 1 Einheit springen),
+    // dann nächste nach Nützlichkeit (CEFR, Zickzack um B2.2)
+    const {step:nextStep,count:nextCount}=reviewNextStep(wordData,freqReviewStepRef.current);
     const isAllDone=mode==='freqAllDone'||nextStep<0;
     return(<div>
       <header style={S.header}><h1 style={S.title}>{t('training')}</h1></header>
@@ -1428,7 +1424,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{textAlign:'center',padding:'20px'}}>
         <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px'}}>{isAllDone?t('freqAllDone'):freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('freqComplete')}</p>
         {!isAllDone&&<div>
-          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nextCount).replace('{l}',trainFocus==='freq'?(nextStep+1):stepLabel(nextStep))}</p>
+          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nextCount).replace('{l}',stepLabel(nextStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{freqReviewStepRef.current=nextStep;startVocab(nextStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);freqReviewStepRef.current=null;reviewModeRef.current=false;}} style={S.navBtn}>{t('finish')}</button>
