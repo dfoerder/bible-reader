@@ -126,8 +126,8 @@ function toggleViewMode(){
 })();
 </script>
 <script type="text/babel">
-const {useState,useEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.50b';
+const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
+const APP_VERSION = '1.10.51b';
 const APP_DATE = '06.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -333,6 +333,7 @@ const I18N={
   stillToPractice:{de:'Noch {n} Wörter auf dieser Stufe zu üben',en:'{n} more words to practice at this level'},
   stillToPractice1:{de:'Noch 1 Wort auf dieser Stufe zu üben',en:'1 more word to practice at this level'},
   stepAllPracticed:{de:'Alle Wörter dieser Stufe geübt!',en:'All words at this level practiced!'},
+  topLevelToReview:{de:'🎉 Oberste Stufe (C2.3) gemeistert! Weiter geht es mit der Wiederholung — den nützlichsten Wörtern zuerst.',en:'🎉 Top level (C2.3) mastered! Continue with review — the most useful words first.'},
   nOfMTotal:{de:'{n} Wörter zum Üben auf diesem Level',en:'{n} words to practice at this level'},
   nOfMClozeAvailable:{de:'{n} Wörter zum Üben auf deinem Level',en:'{n} words to practice at your level'},
   clozePractice:{de:'Wörter im Kontext',en:'Vocabulary in context'},
@@ -1163,8 +1164,11 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   },[current,exercises,startRetry,score,exType]);
 
   const stepChangeRef=useRef(null);
+  const [reviewPending,setReviewPending]=useState(false);
 
-  useEffect(()=>{
+  // useLayoutEffect: Levelanpassung + reviewPending synchron vor dem Paint setzen,
+  // damit der Ergebnis-Screen sofort korrekt rendert (kein Flackern der Level-/Review-Zeile)
+  useLayoutEffect(()=>{
     if(!done)return;
     const realScore=firstPassScore!=null?firstPassScore:score;
     const lowerCorrect=lowerLevelFirstPassCorrectRef.current!=null?lowerLevelFirstPassCorrectRef.current:lowerLevelCorrectRef.current;
@@ -1179,13 +1183,18 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       setDone(false);setMode(allDone?'freqAllDone':'freqComplete');return;
     }
     // adjTotal===0: Einheit bestand nur aus Wiederholungen/Beimischungen → keine Levelanpassung
+    let reviewPend=false;
     if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current&&adjTotal>=MIN_LEVEL_ADJ_WORDS){
       const curStep=activeStep;
       const mx=SUBSTEPS.length-1;
       const saveFn=trainFocus==='freq'?saveFreqStep:saveStep;
       const delta=levelDelta(pct);
       const ns=Math.max(0,Math.min(mx,curStep+delta));
-      if(ns!==curStep){
+      if(curStep===mx&&delta>0){
+        // Oberste Stufe (C2.3) + aufstiegswürdige Leistung → Übergang in die Review ("Level 18"):
+        // man muss nicht erst ganz C2.3 durchüben. Weiter-Button startet die erste Review-Einheit.
+        reviewPend=true;stepChangeRef.current=null;
+      } else if(ns!==curStep){
         saveFn(ns);setUserStep(ns);
         stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
       } else {
@@ -1194,6 +1203,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     } else {
       stepChangeRef.current=null;
     }
+    setReviewPending(reviewPend);
   },[done]);
 
   if(done){
@@ -1229,12 +1239,24 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
           {learnedCount>0&&<span style={{color:'var(--t-green)',marginRight:12}}>✓ {t('learnedN').replace('{n}',learnedCount)}</span>}
           {practicedCount>0&&<span>{t('practicedN').replace('{n}',practicedCount)}</span>}
         </p>}
-        <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
-        <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
-        {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
+        {reviewPending
+          ?<p style={{fontSize:15,color:'var(--t-green)',fontWeight:600,fontFamily:sans,margin:'0 0 16px',padding:'0 12px'}}>{t('topLevelToReview')}</p>
+          :<>
+            <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
+            <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
+            {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
+          </>}
         <div style={{marginTop:remDue>0?0:12,display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>{setMode(null);setDone(false);clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
-          {lastStart&&<button onClick={()=>{setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi)}} style={S.startBtn}>{t('next')}</button>}
+          <button onClick={()=>{setMode(null);setDone(false);setReviewPending(false);clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
+          {lastStart&&<button onClick={()=>{
+            setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;
+            if(reviewPending){
+              setReviewPending(false);
+              const {step}=reviewNextStep(wordData,null);
+              if(step>=0){freqReviewStepRef.current=step;startVocab(step,trainFocus,false,true);}
+              else{const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});setMode(allDone?'freqAllDone':'freqComplete');}
+            }else if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi);
+          }} style={S.startBtn}>{t('next')}</button>}
         </div>
       </div>
     </div>);

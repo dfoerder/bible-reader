@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.50b (06.07.2026)
+- **Aktuelle Version:** 1.10.51b (06.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -100,6 +100,7 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
 - Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); eine Anpassung erfolgt erst ab **5 gewerteten Wörtern** — kurz vor Stufen-Erschöpfung bestehen Einheiten fast nur aus Wiederholungen, und auf 1–3 Wörtern wäre die Quote reines Rauschen (Level wird dann gehalten, bis der Erschöpfungs-Aufstieg greift)
 - Level-Aufstieg bei Erschöpfung: hat der aktuelle Step keine neuen und keine fälligen unbekannten Wörter mehr → automatischer Step+1 mit 🎉-Gratulations-Screen; fällige Wiederholungen blockieren den Aufstieg nicht
+- Review als „Level 18": Auf der obersten Stufe (C2.3) gibt es keinen höheren Step. Wird dort eine Einheit **aufstiegswürdig** absolviert (>80% = normalerweise +1/+2), springt der Ergebnis-Screen direkt in die Review über („🎉 Oberste Stufe gemeistert!", Weiter-Button startet die erste Review-Einheit ab B2.2) — man muss also nicht erst ganz C2.3 durchüben. Bei Halten (70–80%) oder Abstieg (<70%) bleibt/sinkt das Level normal
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
 - Intervall-Guard zentral in `trainWord`: Erhöhen nur nach Ablauf des Stufen-Intervalls (24h / 2 Tage / 7 Tage), Erniedrigen immer erlaubt — gilt für alle Übungspfade inkl. Kapitel-Training
 - Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter dem Trainings-Button (passend zur gewählten Übungsart); dieselbe Zahl (gemeinsame Funktion `computeCounts`) erscheint auch auf dem Ergebnis-Screen nach jeder Einheit („Noch X Wörter auf dieser Stufe zu üben", bezogen auf die — nach evtl. Levelanpassung — aktuelle Stufe; bei 0 → „Alle Wörter dieser Stufe geübt!"). Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
