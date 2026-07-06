@@ -135,3 +135,12 @@ bleiben unverändert (nutzen weiterhin `trainWord` und profitieren automatisch v
   wahr B1.1) fällt in 5 Einheiten auf B1.1; unterschätzter (Start A2.1, wahr C1.1) steigt in
   6 Einheiten auf C1.1; korrekt eingestufte pendeln an ihrer wahren Stufe (Gleichgewicht an
   der Grenze, da 68 % im −1-Band und eine Stufe tiefer 92 % im +1-Band liegen).
+- **Nachtrag 5 (06.07.2026) — Fund aus dem Halte-Band-Szenario + Fix:** Ein Lerner, der
+  konstant im 70–80 %-Band bleibt (Level bewegt sich nur über den Erschöpfungs-Aufstieg),
+  wurde kurz vor der Erschöpfung fälschlich degradiert: Einheiten bestehen dort fast nur
+  aus Wiederholungen/Beimischungen, die Levelanpassung basierte auf 1–3 gewerteten Wörtern
+  (1 Fehler bei 2 Wörtern = 50 % → −1). **Fix:** Levelanpassung erst ab `MIN_LEVEL_ADJ_WORDS`
+  (5) gewerteten Wörtern, darunter Level halten. Deterministischer Retest: A2.1 (183 Wörter)
+  in 25 Einheiten / 8,3 virtuellen Tagen vollständig abgearbeitet → automatischer Aufstieg
+  auf A2.2 (183/183 bekannt), null ungewollte Levelwechsel — der „natürliche" Aufstieg über
+  Erschöpfung funktioniert damit end-to-end.
