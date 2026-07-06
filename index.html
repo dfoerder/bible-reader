@@ -660,6 +660,10 @@ function MoreExamples({lemma,word}){
 // ── Reine Trainings-Bausteine (von Training/App UND der Lerner-Simulation genutzt) ──
 // Levelanpassung nach First-Pass-Quote (5-stufig)
 const levelDelta=pct=>pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
+// Mindestzahl gewerteter Wörter für eine Levelanpassung: kurz vor Stufen-Erschöpfung
+// bestehen Einheiten fast nur aus Wiederholungen/Beimischungen — auf 1–3 gewerteten
+// Wörtern wäre die Quote reines Rauschen (1 Fehler = Absturz). Darunter: Level halten.
+const MIN_LEVEL_ADJ_WORDS=5;
 // Familiarity-Übergang inkl. Intervall-Guard (Erhöhen nur nach Ablauf der Stufen-Frist,
 // Erniedrigen immer erlaubt); liefert den neuen Wortdaten-Eintrag
 function applyTrainWord(e,newFam,now){
@@ -792,7 +796,7 @@ function runLearnerSim(cfg){
       wd[w.en]=applyTrainWord(d,okAns?(cf>=1?Math.min(3,cf+1):1):0,now);
     });
     reviewsDone+=rev;
-    if(ct>0){
+    if(ct>=MIN_LEVEL_ADJ_WORDS){
       const pct=cc/ct;
       const ns=Math.max(0,Math.min(SUBSTEPS.length-1,step+levelDelta(pct)));
       const mark=ns-step>1?'⇈':ns>step?'↑':step-ns>1?'⇊':ns<step?'↓':'=';
@@ -800,7 +804,7 @@ function runLearnerSim(cfg){
       lines.push(`#${String(u).padStart(3)} Tag ${String(day).padStart(5)}  ${SUBSTEPS[step].padEnd(5)} ${String(Math.round(100*pct)).padStart(3)}% ${mark}${rev?`  (${rev} Wdh.)`:''}`);
       step=ns;
     } else {
-      lines.push(`#${String(u).padStart(3)} Tag ${String(day).padStart(5)}  ${SUBSTEPS[step].padEnd(5)} — nur Wiederholungen (${rev})`);
+      lines.push(`#${String(u).padStart(3)} Tag ${String(day).padStart(5)}  ${SUBSTEPS[step].padEnd(5)} — keine Anpassung (${ct} gewertet, ${rev} Wdh.)`);
       holds++;
     }
     now+=gap;
@@ -1128,7 +1132,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       setDone(false);setMode(allDone?'freqAllDone':'freqComplete');return;
     }
     // adjTotal===0: Einheit bestand nur aus Wiederholungen/Beimischungen → keine Levelanpassung
-    if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current&&adjTotal>0){
+    if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current&&adjTotal>=MIN_LEVEL_ADJ_WORDS){
       const curStep=activeStep;
       const mx=SUBSTEPS.length-1;
       const saveFn=trainFocus==='freq'?saveFreqStep:saveStep;
