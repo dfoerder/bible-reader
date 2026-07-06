@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.51b (06.07.2026)
+
+- Review als 'Level 18': auf C2.3 bei aufstiegswürdiger Einheit direkt in den Review-Modus springen, statt erst ganz C2.3 durchüben zu müssen
+
 ## v1.10.50b (06.07.2026)
 
 - Review-Phase mischt jetzt fällige Wiederholungen mit ein (kein Vergessen während der langen Review); Grammatik-Fix '1 ungeübtes Wort'
