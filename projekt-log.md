@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.50b (06.07.2026)
+
+- Review-Phase mischt jetzt fällige Wiederholungen mit ein (kein Vergessen während der langen Review); Grammatik-Fix '1 ungeübtes Wort'
+
 ## v1.10.49b (06.07.2026)
 
 - Review-Phase startet mit den nützlichsten Wörtern (B2) und läuft nach CEFR-Nützlichkeit in Zickzack-Reihenfolge um B2.2 statt nach Häufigkeit
