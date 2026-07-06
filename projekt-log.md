@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.46b (06.07.2026)
+
+- Arbeitspakete: Entwickler-Einstellungen vor App-Store-Einreichung ausblenden (Notiz)
+
 ## v1.10.45b (06.07.2026)
 
 - Levelanpassung erst ab 5 gewerteten Wörtern — behebt fälschliche Abstufung kurz vor Stufen-Erschöpfung; natürlicher Erschöpfungs-Aufstieg end-to-end verifiziert
