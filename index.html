@@ -282,6 +282,7 @@ const I18N={
   noWordsToTrain:{de:'Keine Wörter zum Trainieren.',en:'No words to train.'},
   freqComplete:{de:'Gratulation: Du hast alle Wörter des obersten Levels gelernt!',en:'Congratulations: You have learned all words of the highest level!'},
   freqCompleteLower:{de:'Es gibt noch {n} ungeübte Wörter auf Level {l}. Möchtest du jetzt mit diesen weitermachen?',en:'There are still {n} unexercised words at level {l}. Would you like to continue with these?'},
+  freqCompleteLower1:{de:'Es gibt noch 1 ungeübtes Wort auf Level {l}. Möchtest du jetzt damit weitermachen?',en:'There is still 1 unexercised word at level {l}. Would you like to continue with it?'},
   freqReviewInProgress:{de:'Du übst jetzt die restlichen Wörter — die nützlichsten (B2) zuerst.',en:'You are now practicing the remaining words — the most useful ones (B2) first.'},
   freqContinue:{de:'Ja, weitermachen',en:'Yes, continue'},
   freqAllDone:{de:'Gratulation: Du beherrschst scheinbar alle Wörter der Bibel!',en:'Congratulations: You have apparently mastered all words of the Bible!'},
@@ -709,11 +710,22 @@ function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
   const ok=w=>!clozeOnly||CLOZE_MAP.has(w.en);
   let unknown24h,lowerUnexercised,currentUnexercised,dueReviews=[],nextStepNew=[];
   let fullTrainable=0;
+  // Slot A — fällige Wiederholungen (fam=1/2 nach Intervall, Überfälligste zuerst; +1 fam=3-Stichprobe)
+  const computeDue=()=>{
+    const due12=FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
+      .sort((a,b)=>{const da=wd[a.en],db=wd[b.en];
+        const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_EFF;
+        const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_EFF;
+        return dueA-dueB;});
+    const due3=shuffleArr(FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity===3&&reviewDue(d,now);}));
+    return [...due12,...due3.slice(0,1)];
+  };
   if(reviewMode){
-    // step = CEFR-Sublevel: ungeübte Wörter dieses Sublevels (Nützlichkeits-Reihenfolge)
+    // step = CEFR-Sublevel: ungeübte Wörter dieses Sublevels (Nützlichkeits-Reihenfolge);
+    // fällige Wiederholungen laufen wie im normalen Training mit (kein Vergessen in der langen Review)
     const sub=1+(step%3);
     currentUnexercised=shuffleArr((VOCAB_POOL[stepToLevel(step)]||[]).filter(w=>w.sub===sub&&fam(w)<1&&ok(w)));
-    unknown24h=[];lowerUnexercised=[];
+    unknown24h=[];lowerUnexercised=[];dueReviews=computeDue();
   } else if(allLevels){
     currentUnexercised=shuffleArr(FREQ_POOL.filter(w=>fam(w)===-1&&ok(w)));
     unknown24h=shuffleArr(stepWords.filter(w=>fam(w)===0&&now-lt(w)>=DAY_EFF&&ok(w)));
@@ -743,13 +755,7 @@ function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
     if(curUnknown.length===0&&curNew.length===0&&step<SUBSTEPS.length-1)return{status:'levelup'};
     fullTrainable=curUnknown.length+curNew.length;
     unknown24h.sort((a,b)=>(fgt(b)>0?1:0)-(fgt(a)>0?1:0));
-    const due12=FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity>=1&&d.familiarity<=2&&reviewDue(d,now);})
-      .sort((a,b)=>{const da=wd[a.en],db=wd[b.en];
-        const dueA=(da.lasttrained?new Date(da.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[da.familiarity]*DAY_EFF;
-        const dueB=(db.lasttrained?new Date(db.lasttrained).getTime():0)+REVIEW_WAIT_DAYS[db.familiarity]*DAY_EFF;
-        return dueA-dueB;});
-    const due3=shuffleArr(FREQ_POOL.filter(w=>{const d=wd[w.en];return ok(w)&&d&&d.familiarity===3&&reviewDue(d,now);}));
-    dueReviews=[...due12,...due3.slice(0,1)];
+    dueReviews=computeDue();
   }
   if(unknown24h.length===0&&currentUnexercised.length===0&&dueReviews.length===0){
     if(clozeOnly&&fullTrainable>0)return{status:'clozegap',missing:fullTrainable};
@@ -1404,7 +1410,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{textAlign:'center',padding:'20px'}}>
         <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px'}}>{freqReviewStepRef.current!=null?t('freqReviewInProgress'):nwStep>=0?t('freqComplete'):t('noWordsToTrain')}</p>
         {nwStep>=0&&<div>
-          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nwCount).replace('{l}',stepLabel(nwStep))}</p>
+          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{(nwCount===1?t('freqCompleteLower1'):t('freqCompleteLower').replace('{n}',nwCount)).replace('{l}',stepLabel(nwStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{freqReviewStepRef.current=nwStep;startVocab(nwStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);freqReviewStepRef.current=null;}} style={S.navBtn}>{t('finish')}</button>
@@ -1424,7 +1430,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{textAlign:'center',padding:'20px'}}>
         <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'20px'}}>{isAllDone?t('freqAllDone'):freqReviewStepRef.current!=null?t('freqReviewInProgress'):t('freqComplete')}</p>
         {!isAllDone&&<div>
-          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{t('freqCompleteLower').replace('{n}',nextCount).replace('{l}',stepLabel(nextStep))}</p>
+          <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{(nextCount===1?t('freqCompleteLower1'):t('freqCompleteLower').replace('{n}',nextCount)).replace('{l}',stepLabel(nextStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
             <button onClick={()=>{freqReviewStepRef.current=nextStep;startVocab(nextStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);freqReviewStepRef.current=null;reviewModeRef.current=false;}} style={S.navBtn}>{t('finish')}</button>
