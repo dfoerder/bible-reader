@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.47b (06.07.2026)
+
+- Fix: Review-Phase (nach C2.3) sprang nach nur 1 Einheit zur nächsttieferen Stufe, statt die aktuelle Stufe systematisch abzuarbeiten
+
 ## v1.10.46b (06.07.2026)
 
 - Arbeitspakete: Entwickler-Einstellungen vor App-Store-Einreichung ausblenden (Notiz)
