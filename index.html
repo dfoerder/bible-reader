@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.53b';
+const APP_VERSION = '1.10.54b';
 const APP_DATE = '07.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -353,6 +353,7 @@ const I18N={
   errorPlural:{de:'Fehler — werden nun wiederholt',en:'errors — will be repeated now'},
   totalScore:{de:'Gesamt',en:'Total'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
+  levelStay:{de:'Level {l}',en:'Level {l}'},
   levelUpDone:{de:'Gratulation! Du hast alle Wörter dieser Stufe geübt.',en:'Congratulations! You have practiced all words of this level.'},
   reviewsDue:{de:'{n} Wiederholungen fällig',en:'{n} reviews due'},
   reviewsDue1:{de:'1 Wiederholung fällig',en:'1 review due'},
@@ -1262,7 +1263,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         {reviewPending
           ?<p style={{fontSize:15,color:'var(--t-green)',fontWeight:600,fontFamily:sans,margin:'0 0 16px',padding:'0 12px'}}>{t('topLevelToReview')}</p>
           :<>
-            <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('levelNow').replace('{l}',stepChangeRef.current||(trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep)))}</p>
+            <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{stepChangeRef.current?t('levelNow').replace('{l}',stepChangeRef.current):t('levelStay').replace('{l}',trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep))}</p>
             <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
             {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
           </>}
