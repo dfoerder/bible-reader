@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.55b';
+const APP_VERSION = '1.10.56b';
 const APP_DATE = '07.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1015,6 +1015,30 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     setSelectedLevel(stepToLevel(step));setLastStart('cloze');
   },[selectUnit,applySelectStatus,wordData]);
 
+  // Review-Einheit im aktuell gewählten Übungsmodus starten, damit die Übungsart über
+  // Einheiten-Grenzen hinweg erhalten bleibt. Quiz: normale Vokabel-Einheit (startVocab).
+  // Kontext: dieselbe Review-Wortauswahl (NICHT clozeOnly!), als Lückentext dargestellt wo
+  // möglich, sonst als Quiz (gemischte Einheit wie im normalen Kontext-Training). Die Auswahl
+  // bleibt identisch zur Quiz-Auswahl — sonst zählte reviewCount Wörter, die eine reine
+  // Kontext-Einheit nie auswählt → Endlosschleife.
+  const startReview=useCallback((step)=>{
+    if(exMode!=='cloze'){startVocab(step,trainFocus,false,true);return;}
+    reviewModeRef.current=true;
+    const res=selectUnit(step,trainFocus,false,false,true);
+    if(applySelectStatus(res,step,trainFocus))return;
+    const picked=res.unit.map(w=>CLOZE_MAP.get(w.en)||w);
+    const allDePool=[...new Set([...res.allDe,...res.extraDe])];
+    const preFam={};res.unit.forEach(w=>{const d=wordData[w.en];preFam[w.en]=d?d.familiarity:-1;});
+    setExercises(picked);
+    setShuffledOpts(picked.map(q=>q.en?shuffle([q.de,...posWrongDe(q,allDePool)]):shuffle([q.de,...formWrong(q)])));
+    setCurrent(0);setScore(0);setDone(false);setSelected(null);setExType('cloze');setMode('exercise');setRetryPending(null);setFirstPassScore(null);setClozeUnitDone(false);setVocabUnitDone(false);
+    wrongRef.current=[];totalRef.current=picked.length;retryRef.current=false;
+    lowerLevelCorrectRef.current=0;lowerLevelFirstPassCorrectRef.current=null;
+    lowerLevelTotalRef.current=picked.filter(e=>res.excludeKeys.has(e.lemma||e.en)).length;
+    clozeUnitsRef.current={units:[picked],unitIdx:0,allDe:Object.values(CLOZE_EXERCISES).flat().map(e=>e.de),allDePool,globalScore:0,globalTotal:picked.length,preFam,lowerKeys:res.excludeKeys};
+    setSelectedLevel(stepToLevel(step));setLastStart('cloze');
+  },[exMode,trainFocus,startVocab,selectUnit,applySelectStatus,wordData]);
+
   // Übungsart-Wechsel mitten in der Einheit (Quiz ↔ Im Kontext): alle Fragen der
   // laufenden Einheit werden in die andere Darstellungsform konvertiert; Wörter ohne
   // Kontextübung bleiben als Quiz-Frage stehen. Score, Fortschritt, Fehlerliste und
@@ -1283,7 +1307,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
             if(reviewPending){
               setReviewPending(false);
               const {step}=reviewNextStep(wordData,null);
-              if(step>=0){setReviewStep(step);startVocab(step,trainFocus,false,true);}
+              if(step>=0){setReviewStep(step);startReview(step);}
               else{const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});if(allDone)setReviewStep(null);setMode(allDone?'freqAllDone':'freqComplete');}
             }else if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi);
           }} style={S.startBtn}>{t('next')}</button>}
@@ -1466,7 +1490,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         {nwStep>=0&&<div>
           <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{(nwCount===1?t('freqCompleteLower1'):t('freqCompleteLower').replace('{n}',nwCount)).replace('{l}',stepLabel(nwStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{setReviewStep(nwStep);startVocab(nwStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
+            <button onClick={()=>{setReviewStep(nwStep);startReview(nwStep);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);}} style={S.navBtn}>{t('finish')}</button>
           </div>
         </div>}
@@ -1488,7 +1512,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         {!isAllDone&&!doneForToday&&<div>
           <p style={{color:'var(--t-muted)',fontFamily:sans,margin:'0 20px 16px'}}>{(nextCount===1?t('freqCompleteLower1'):t('freqCompleteLower').replace('{n}',nextCount)).replace('{l}',stepLabel(nextStep))}</p>
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{setReviewStep(nextStep);startVocab(nextStep,trainFocus,false,true);}} style={S.startBtn}>{t('freqContinue')}</button>
+            <button onClick={()=>{setReviewStep(nextStep);startReview(nextStep);}} style={S.startBtn}>{t('freqContinue')}</button>
             <button onClick={()=>{setMode(null);reviewModeRef.current=false;}} style={S.navBtn}>{t('finish')}</button>
           </div>
         </div>}
@@ -1563,7 +1587,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
             // In der Review-Phase (persistent): dort weitermachen statt normales C2.3-Training —
             // sonst könnte eine schwache C2.3-Einheit unter das Top-Level absenken.
             const {step}=reviewNextStep(wordData,freqReviewStepRef.current);
-            if(step>=0){setReviewStep(step);startVocab(step,trainFocus,false,true);}
+            if(step>=0){setReviewStep(step);startReview(step);}
             else{const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});if(allDone)setReviewStep(null);setMode(allDone?'freqAllDone':'freqComplete');}
           }else if(exMode==='cloze')startCloze(activeStep,trainFocus);
           else startVocab(activeStep,trainFocus);
