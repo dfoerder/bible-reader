@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.51b';
-const APP_DATE = '06.07.2026';
+const APP_VERSION = '1.10.52b';
+const APP_DATE = '07.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -178,6 +178,9 @@ const I18N={
   reviewSettings:{de:'Wörter anschauen',en:'Review words'},
   showLemma:{de:'Grundform anzeigen',en:'Show base form'},
   showCefrLevel:{de:'Sprachlevel anzeigen',en:'Show CEFR level'},
+  showExLevel:{de:'Stufen in Übungen anzeigen (CEFR + Häufigkeit)',en:'Show levels in exercises (CEFR + frequency)'},
+  exercisesSection:{de:'Übungen',en:'Exercises'},
+  exLevelBoth:{de:'CEFR {c} · Häufigkeit {f}/18',en:'CEFR {c} · frequency {f}/18'},
   retakeTest:{de:'Einstufungstest wiederholen',en:'Retake placement test'},
   readingSpeed:{de:'Lesegeschwindigkeit (Vorlesen)',en:'Reading speed (TTS)'},
   slow:{de:'Langsam',en:'Slow'},
@@ -557,6 +560,7 @@ function buildFreqPool(){
   FREQ_POOL=Object.values(VOCAB_POOL).flat().sort((a,b)=>(b.occ||0)-(a.occ||0));
   const n=FREQ_POOL.length;const steps=SUBSTEPS.length;
   FREQ_POOL.forEach((w,i)=>{w.freqStep=Math.min(Math.floor(i/(n/steps)),steps-1)});
+  FREQ_STEP_OF=new Map(FREQ_POOL.map(w=>[w.en,w.freqStep]));
   DE_POS={};EN_POS={};
   FREQ_POOL.forEach(w=>{if(w.pos){if(w.de&&!(w.de in DE_POS))DE_POS[w.de]=w.pos;if(w.en)EN_POS[w.en]=w.pos;}});
 }
@@ -576,6 +580,21 @@ let CLOZE_BY_PF={};
 let CLOZE_MAP=new Map(); // Lemma → Cloze-Übung (Kontext-Modus)
 let WORD_BY_EN=new Map(); // en → Wort-Objekt (für Übungsart-Wechsel während der Einheit)
 let WORD_STEP=new Map(); // Lemma → Sublevel-Stufe 0–17 (aus words.json level+sub)
+let FREQ_STEP_OF=new Map(); // en → Häufigkeitsstufe 0–17 (freqStep)
+// Level-Info für die Übungsanzeige (Einstellung „Level in Übungen"): CEFR-Sublevel
+// (A1.1…C2.3) + Häufigkeitsstufe (1…18). null, wenn das Wort in keiner Skala liegt.
+function exLevelInfo(en){
+  const cs=WORD_STEP.get(en),fs=FREQ_STEP_OF.get(en);
+  if(cs==null&&fs==null)return null;
+  return {cefr:cs!=null?SUBSTEPS[cs]:'—',freq:fs!=null?fs+1:'—'};
+}
+// Level-Zeile in Übungen (nur wenn Einstellung „Stufen in Übungen" aktiv)
+function ExLevelTag({en}){
+  if(LS.get('bible-show-ex-level')!==true)return null;
+  const li=exLevelInfo(en);
+  if(!li)return null;
+  return <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',margin:'6px 0 0'}}>{t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)}</p>;
+}
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
   const same=(CLOZE_BY_PF[key]||[]).filter(d=>d!==target.de);
@@ -1324,7 +1343,8 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{fontFamily:'var(--t-serif)',fontSize:exFontSize(),lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
         {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
       </div>
-      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
+      <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 6px'}}>{ex.ref}</p>
+      <div style={{textAlign:'center',margin:'0 0 20px'}}><ExLevelTag en={ex.lemma}/></div>
       <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:300,margin:'0 auto'}}>
         {opts.map((opt,i)=>{
           let bg='var(--t-card-solid)',border='1.5px solid var(--t-border)',color='var(--t-text)';
@@ -1376,6 +1396,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{textAlign:'center',margin:'24px 0 32px'}}>
         <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
         <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.en}</p>
+        <ExLevelTag en={ex.en}/>
       </div>
       <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:400,margin:'0 auto'}}>
         {opts.map((opt,i)=>{
@@ -1927,6 +1948,7 @@ function App({data}){
   const [fontSizeEx,setFontSizeEx]=useState(exFontSize());
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
+  const [showExLevel,setShowExLevel]=useState(LS.get('bible-show-ex-level')===true);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
   const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||'sch1951');
@@ -2644,6 +2666,13 @@ function App({data}){
             </label>
           </div>
           <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('exercisesSection')}</span>
+            <label style={{...S.toggleRow,marginTop:6}}>
+              <input type="checkbox" checked={showExLevel} onChange={()=>{const v=!showExLevel;setShowExLevel(v);LS.set('bible-show-ex-level',v)}}/>
+              <span style={S.toggleLabel}>{t('showExLevel')}</span>
+            </label>
+          </div>
+          <div style={{marginTop:16}}>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('clozeContext')}</span>
             <div style={{...S.levelBtns,marginTop:6}}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
             <p style={S.settingsHint}>{t('clozeContextHint')}</p>
@@ -2975,12 +3004,14 @@ function App({data}){
           <div style={{fontFamily:'var(--t-serif)',fontSize:exFontSize(),lineHeight:2,color:'var(--t-title)',textAlign:'center',margin:'16px 0 8px'}}>
             {parts[0]}<span style={{display:'inline-block',padding:'0 4px',background:'var(--t-accent-bg)',borderRadius:4,fontWeight:700,color:'var(--t-accent)'}}>{ex.answer}</span>{parts[1]}
           </div>
-          <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 20px'}}>{ex.ref}</p>
+          <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:'0 0 6px'}}>{ex.ref}</p>
+      <div style={{textAlign:'center',margin:'0 0 20px'}}><ExLevelTag en={ex.lemma}/></div>
         </div>)})()
         :<div style={{textAlign:'center',margin:'24px 0 32px'}}>
           <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
           <p style={{fontSize:28,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:0}}>{ex.form&&ex.form!==ex.lemma?ex.form:(ex.lemma||ex.word)}</p>
           {ex.form&&ex.form!==ex.lemma&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>({ex.lemma||ex.word})</p>}
+          <ExLevelTag en={ex.lemma||ex.word}/>
         </div>}
         <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:400,margin:'0 auto'}}>
           {opts.map((opt,i)=>{
