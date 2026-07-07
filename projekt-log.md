@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.58b (07.07.2026)
+
+- Lernwortpool: Eigennamen auf die wichtigsten mit Lernwert kuratiert — 242 obskure Namen (Genealogien wie Zichri, Uzzi, Schefatja) entfernt, 48 fehlende wichtige ergänzt (Moses, Josua, Jeremia, Elia, Paulus, Petrus, Pharao u.a. mit Bibel-Beispielsätzen); Pool 5878 → 5684 Wörter
+
 ## v1.10.57b (07.07.2026)
 
 - Entwickler-Einstellungen: beschleunigter Testmodus bietet jetzt zusätzlich ⅛ Wortpool (neben ¼) zur weiteren Testbeschleunigung — Lern-Fristen bleiben unverändert (÷96); umschaltbar unter Einstellungen → Entwickler → Wortpool

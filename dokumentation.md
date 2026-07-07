@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.57b (07.07.2026)
+- **Aktuelle Version:** 1.10.58b (07.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -69,7 +69,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert (Leitner-Treppe, Wiederholun
 
 ### Vokabeltraining
 
-Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigennamen (+710, Level A1), Namens-Adjektiven und US-Schreibvarianten:
+Einheitlicher Wortpool mit 5.684 Wörtern (A1–C2). Eigennamen (Level A1) sind auf die **wichtigsten mit Lernwert** kuratiert (englische Form ≠ deutsche): Bibelbuch-Autoren/Propheten, Erzväter, Könige, Apostel, Kernorte — obskure Namen (Genealogien) wurden entfernt (v1.9.53b: +710 Eigennamen ergänzt, später auf ~90 relevante reduziert):
 
 **CEFR-Level-Quellen** (Priorität):
 1. Oxford 5000 (2.654 Wörter, handkuratiert)
@@ -156,7 +156,7 @@ bible-reader/
 │                                      vorbereitet für Version 2, von der App noch nicht genutzt
 ├── data/
 │   ├── words.json                     Single Source of Truth: Vokabel-Pool + Lückentext-
-│   │                                  Übungen (5.878 Wörter; VOCAB_POOL + CLOZE_EXERCISES
+│   │                                  Übungen (5.684 Wörter; VOCAB_POOL + CLOZE_EXERCISES
 │   │                                  werden daraus abgeleitet)
 │   ├── examples.json                  Beispielsätze-Index (Lemma → Vers-Referenzen, 207 KB, lazy)
 │   └── vocab_pool.json / context_exercises.json   Lokale Build-Intermediates (gitignored)
@@ -211,7 +211,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `de` | Deutsche Übersetzung (kontextbezogen) |
 | `phrase` | Position der zugehörigen Phrase-Annotation (nur bei Einzelwort-Annotationen innerhalb einer Phrase) |
 
-**Eigennamen:** Alle Eigennamen (Personen, Orte) sind annotiert — immer Level A1. Deutsche Entsprechungen werden verwendet: Christ→Christus, Moses→Mose, Egypt→Ägypten, Isaiah→Jesaja. Namen ohne Änderung (Jesus, Abraham) erhalten die gleiche Form als `de`.
+**Eigennamen:** Im **Bibeltext** sind alle Eigennamen (Personen, Orte) annotiert — immer Level A1. Deutsche Entsprechungen werden verwendet: Christ→Christus, Moses→Mose, Egypt→Ägypten, Isaiah→Jesaja. Namen ohne Änderung (Jesus, Abraham) erhalten die gleiche Form als `de`. Im **Lernwortpool** (`words.json`) steht dagegen nur eine kuratierte Auswahl der wichtigsten Namen mit Lernwert (en ≠ de) — obskure Namen aus Genealogien sind nicht enthalten.
 
 ### PWA und Offline-Fähigkeit
 
@@ -332,6 +332,6 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **755.526 Wörter** im Bibeltext
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
 - **5.087 einzigartige Lemmata** (nach Filterung und Zusammenführung)
-- **Einheitlicher Vokabelpool:** 5.878 Wörter (A1: 1.257, A2: 548, B1: 798, B2: 1.503, C1: 1.208, C2: 564) — inkl. Eigennamen (+710, seit v1.9.53b)
+- **Einheitlicher Vokabelpool:** 5.684 Wörter (A1: 1.063, A2: 548, B1: 798, B2: 1.503, C1: 1.208, C2: 564) — Eigennamen auf die wichtigsten mit Lernwert kuratiert (obskure entfernt, fehlende wichtige wie Moses/Jeremiah/Elia ergänzt)
 - **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488); Rest: Eigennamen und Pool-Erweiterungen (v1.9.53b–58b)
 - **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
