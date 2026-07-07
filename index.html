@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.56b';
+const APP_VERSION = '1.10.57b';
 const APP_DATE = '07.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -137,9 +137,10 @@ const LS = {
   remove(k){try{localStorage.removeItem(k)}catch(e){}}
 };
 // Beschleunigter Test-Modus (Entwickler-Einstellungen): alle Lern-Fristen ÷96
-// (24h→15min, 2d→30min, 7d→105min, 60d→15h) und nur ¼ des Wortpools (pro
+// (24h→15min, 2d→30min, 7d→105min, 60d→15h) und nur ¼ bzw. ⅛ des Wortpools (pro
 // Level/Sublevel proportional). Wirkt ab dem nächsten Laden der App.
 const TEST_ACCEL=!!LS.get('bible-test-accel');
+const TEST_POOL_DIV=LS.get('bible-test-pool-div')===8?8:4; // ⅛ oder ¼ (Standard) des Pools
 const DAY_EFF=86400000/(TEST_ACCEL?96:1); // „effektiver Tag" für alle Lern-Fristen
 
 // ─── i18n ───────────────────────────────────────────────
@@ -1579,7 +1580,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       </div>
     </div>
     <p style={{textAlign:'center',fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 20px'}}>{stepInfo}</p>
-    {TEST_ACCEL&&<p style={{textAlign:'center',fontSize:12,color:'var(--t-accent)',fontFamily:sans,margin:'-12px 0 16px'}}>⚡ Beschleunigter Testmodus (Fristen ÷96, ¼ Pool)</p>}
+    {TEST_ACCEL&&<p style={{textAlign:'center',fontSize:12,color:'var(--t-accent)',fontFamily:sans,margin:'-12px 0 16px'}}>⚡ Beschleunigter Testmodus (Fristen ÷96, {TEST_POOL_DIV===8?'⅛':'¼'} Pool)</p>}
     <div style={S.settingsSection}>
       <div style={S.settingsGroup}>
         <button onClick={()=>{
@@ -1689,12 +1690,12 @@ async function loadData(){
     if(wr.ok){
       const words=await wr.json();
       if(TEST_ACCEL){
-        // Beschleunigter Test: ¼ des Pools, pro Level+Sublevel jedes 4. Wort —
+        // Beschleunigter Test: ¼ bzw. ⅛ des Pools, pro Level+Sublevel jedes n-te Wort —
         // die Level-Verhältnisse bleiben dadurch exakt erhalten
         for(const lvl in words){
           const bySub={};
           words[lvl].forEach(w=>{(bySub[w.sub]||(bySub[w.sub]=[])).push(w);});
-          words[lvl]=Object.keys(bySub).sort().flatMap(s=>bySub[s].filter((_,i)=>i%4===0));
+          words[lvl]=Object.keys(bySub).sort().flatMap(s=>bySub[s].filter((_,i)=>i%TEST_POOL_DIV===0));
         }
       }
       VOCAB_POOL=words;buildFreqPool();
@@ -2730,9 +2731,15 @@ function App({data}){
             <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
             <label style={{...S.toggleRow,marginTop:8}}>
               <input type="checkbox" checked={TEST_ACCEL} onChange={()=>{TEST_ACCEL?LS.remove('bible-test-accel'):LS.set('bible-test-accel',true);location.reload();}}/>
-              <span style={S.toggleLabel}>Beschleunigter Test — Fristen ÷96, ¼ Wortpool (lädt App neu)</span>
+              <span style={S.toggleLabel}>Beschleunigter Test — Fristen ÷96, reduzierter Wortpool (lädt App neu)</span>
             </label>
             {TEST_ACCEL&&<p style={{...S.settingsHint,margin:'2px 0 0'}}>Aktiv: unbekannt 15 min · gelernt 30 min · gefestigt 105 min · sicher 15 h</p>}
+            {TEST_ACCEL&&<div style={{display:'flex',gap:8,alignItems:'center',marginTop:6}}>
+              <span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>Wortpool:</span>
+              {[4,8].map(d=>(
+                <button key={d} onClick={()=>{if(TEST_POOL_DIV!==d){LS.set('bible-test-pool-div',d);location.reload();}}} style={{padding:'3px 12px',borderRadius:6,border:'1px solid var(--t-border)',background:TEST_POOL_DIV===d?'var(--t-accent-bg)':'var(--t-bg)',color:TEST_POOL_DIV===d?'var(--t-accent)':'var(--t-muted)',fontSize:13,fontFamily:sans,cursor:'pointer',fontWeight:TEST_POOL_DIV===d?700:400}}>{d===4?'¼':'⅛'}</button>
+              ))}
+            </div>}
             <div style={{marginTop:8,fontSize:12,fontFamily:sans}}>
               <label style={{display:'flex',flexDirection:'column',gap:2,color:'var(--t-muted)',marginBottom:8}}>
                 <span style={{fontSize:11}}>Startstufe (1–18) = {SUBSTEPS[devStartStep]||devStartStep+1}</span>
