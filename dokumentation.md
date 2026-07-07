@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.54b (07.07.2026)
+- **Aktuelle Version:** 1.10.55b (07.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -105,6 +105,8 @@ Einheitlicher Wortpool mit 5.878 Wörtern (A1–C2), seit v1.9.53b inkl. Eigenna
 - Intervall-Guard zentral in `trainWord`: Erhöhen nur nach Ablauf des Stufen-Intervalls (24h / 2 Tage / 7 Tage), Erniedrigen immer erlaubt — gilt für alle Übungspfade inkl. Kapitel-Training
 - Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter dem Trainings-Button (passend zur gewählten Übungsart); dieselbe Zahl (gemeinsame Funktion `computeCounts`) erscheint auch auf dem Ergebnis-Screen nach jeder Einheit („Noch X Wörter auf dieser Stufe zu üben", bezogen auf die — nach evtl. Levelanpassung — aktuelle Stufe; bei 0 → „Alle Wörter dieser Stufe geübt!"). Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
 - Abschluss (oberste Stufe C2.3 erreicht): **Review-Phase** über die restlichen ungeübten Wörter, geordnet nach **CEFR-Nützlichkeit** (nicht nach Häufigkeit) — Reihenfolge als Zickzack-Spirale um B2.2 (die nützlichsten Wörter zuerst): `B2.2, B2.3, B2.1, C1.1, B1.3, C1.2, B1.2, C1.3, B1.1, C2.1, A2.3, C2.2, A2.2, C2.3, A2.1, A1.3, A1.2, A1.1` (`REVIEW_ORDER`/`reviewNextStep`). Jedes CEFR-Sublevel wird in 15er-Einheiten vollständig durchgearbeitet, bevor zum nächsten gewechselt wird; gilt für beide Fokus-Modi, Anzeige als CEFR-Label. Fällige Wiederholungen (Slot A) laufen auch in der Review mit (wie im normalen Training), damit während der langen Review-Phase Gelerntes nicht verblasst. Sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
+  - **Nur heute offene Wörter je Sublevel:** ein Sublevel gilt als „für heute erledigt", wenn nur noch fam=0-Wörter übrig sind, die heute schon geübt wurden — der Intervall-Guard lässt sie am selben Tag ohnehin nicht auf fam≥1 steigen (sonst drehte sich dasselbe Wort endlos, `reviewCount`/`currentUnexercised` filtern fam=-1 ODER fam=0-mit-Frist-abgelaufen). Sind alle heutigen Wörter durch, aber noch nicht alles fam≥1 → Meldung „Für heute geschafft" (`freqDoneToday`), morgen geht es weiter
+  - **Review-Phase ist persistent** (`bible-review-step` in localStorage, gesetzt/gelöscht via `setReviewStep`): sie überlebt „Beenden" und App-Neustart. Solange die Review läuft, setzt der Trainings-Button die Review fort (statt eine normale C2.3-Einheit zu starten, die per Levelanpassung wieder unter das Top-Level absenken könnte). Der Marker wird erst gelöscht, wenn alles fam≥1 ist (freqAllDone)
 
 ### Einstufungstest
 
