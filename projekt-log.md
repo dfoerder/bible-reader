@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.52b (07.07.2026)
+
+- Einstellung 'Stufen in Übungen anzeigen': zeigt neben dem englischen Wort CEFR-Sublevel (A1.1…C2.3) und Häufigkeitsstufe (1…18)
+
 ## v1.10.51b (06.07.2026)
 
 - Review als 'Level 18': auf C2.3 bei aufstiegswürdiger Einheit direkt in den Review-Modus springen, statt erst ganz C2.3 durchüben zu müssen
