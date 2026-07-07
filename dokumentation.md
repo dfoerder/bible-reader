@@ -239,6 +239,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-font-size` / `-tr` / `-ex` | Schriftgrößen (Bibeltext / Übersetzungen / Übungen) |
 | `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
+| `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel + Häufigkeitsstufe (1–18) |
 | `bible-stats-visible` | Sichtbare Statistik-Abschnitte |
 | `unk-{lang}-{buch}-{kapitel}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
