@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.53b (07.07.2026)
+
+- Stufen in Übungen anzeigen gilt jetzt auch im Einstufungstest (CEFR-Sublevel + Häufigkeitsstufe unter dem englischen Wort)
+
 ## v1.10.52b (07.07.2026)
 
 - Einstellung 'Stufen in Übungen anzeigen': zeigt neben dem englischen Wort CEFR-Sublevel (A1.1…C2.3) und Häufigkeitsstufe (1…18)
