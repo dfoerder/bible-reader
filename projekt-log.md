@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.54b (07.07.2026)
+
+- Allgemeines Training: nach der Einheit erscheint bei unveränderter Stufe nur noch 'Level B1.1' statt der irreführenden Meldung 'Dein Level ist jetzt …'
+
 ## v1.10.53b (07.07.2026)
 
 - Stufen in Übungen anzeigen gilt jetzt auch im Einstufungstest (CEFR-Sublevel + Häufigkeitsstufe unter dem englischen Wort)
