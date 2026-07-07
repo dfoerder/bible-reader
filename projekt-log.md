@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.55b (07.07.2026)
+
+- Vokabeltraining Review-Phase: Steckenbleiben behoben (heute schon geübte Wörter blockieren ein Sublevel nicht mehr, neue Meldung 'Für heute geschafft') und Review-Phase ist jetzt persistent — 'Beenden' + Neustart setzt die Review fort statt ins normale C2.3-Training abzusenken
+
 ## v1.10.54b (07.07.2026)
 
 - Allgemeines Training: nach der Einheit erscheint bei unveränderter Stufe nur noch 'Level B1.1' statt der irreführenden Meldung 'Dein Level ist jetzt …'
