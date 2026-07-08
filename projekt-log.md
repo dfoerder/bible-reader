@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.59b (08.07.2026)
+
+- Lernwortpool: kuratierte A1-Eigennamen jetzt tatsächlich ausgeliefert — obskure Genealogie-Namen entfernt, wichtige (Moses, Josua, Elia, Paulus u.a.) ergänzt; A1-Pool 1257 → 1063, Gesamt 5878 → 5684 (Datenänderung aus 1.10.58b nachgereicht)
+
 ## v1.10.58b (07.07.2026)
 
 - Lernwortpool: Eigennamen auf die wichtigsten mit Lernwert kuratiert — 242 obskure Namen (Genealogien wie Zichri, Uzzi, Schefatja) entfernt, 48 fehlende wichtige ergänzt (Moses, Josua, Jeremia, Elia, Paulus, Petrus, Pharao u.a. mit Bibel-Beispielsätzen); Pool 5878 → 5684 Wörter
