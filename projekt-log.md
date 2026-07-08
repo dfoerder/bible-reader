@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.60b (08.07.2026)
+
+- Lernwortpool: 69 obskure Eigennamen aus A2–C2 entfernt (Genealogie-/Herkunftsnamen wie Jehdeiah, Tehaphnehes, Kohathite, Shunammite u.a.) — Pool 5684 → 5615
+
 ## v1.10.59b (08.07.2026)
 
 - Lernwortpool: kuratierte A1-Eigennamen jetzt tatsächlich ausgeliefert — obskure Genealogie-Namen entfernt, wichtige (Moses, Josua, Elia, Paulus u.a.) ergänzt; A1-Pool 1257 → 1063, Gesamt 5878 → 5684 (Datenänderung aus 1.10.58b nachgereicht)
