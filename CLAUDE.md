@@ -22,7 +22,7 @@ Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacit
 **Eine einzige Datei:** `index.html` enthält die gesamte App (React via Babel-Standalone, kein Build-Schritt). Kein Framework-Overhead, kein npm run.
 
 **Daten-Laufzeit:**
-- `data/words.json` — Single Source of Truth: Vokabel-Pool + Lückentext-Übungen (5878 Wörter, `VOCAB_POOL` + `CLOZE_EXERCISES` werden daraus abgeleitet)
+- `data/words.json` — Single Source of Truth: Vokabel-Pool + Lückentext-Übungen (5615 Wörter, `VOCAB_POOL` + `CLOZE_EXERCISES` werden daraus abgeleitet)
 - `data/examples.json` — Beispielsätze-Index (207 KB, lazy)
 - `bibles/` — Bibeltexte + Annotationen pro Buch (lazy geladen)
 - `localStorage` — Nutzerstand: `bible-word-data`, `bible-freq-step`, `bible-train-step`, `bible-train-focus`, `bible-reader-state`, u.a.
