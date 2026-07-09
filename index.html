@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.62b';
+const APP_VERSION = '1.10.63b';
 const APP_DATE = '09.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -218,6 +218,7 @@ const I18N={
   appLanguage:{de:'App-Sprache',en:'App language'},
   germanTranslation:{de:'Deutsche Übersetzung',en:'German translation'},
   germanTranslationHint:{de:'Wird beim Aufklappen der Verse angezeigt.',en:'Shown when expanding verses.'},
+  showAllDeVerses:{de:'Alle deutschen Verse einblenden',en:'Show all German verses'},
   wordTranslations:{de:'Wortübersetzungen',en:'Word translations'},
   autoShowTranslations:{de:'Übersetzungen automatisch anzeigen',en:'Show translations automatically'},
   autoShowTranslationsHint:{de:'Aus: Übersetzungen erscheinen nur, wenn man ein Wort antippt.',en:'Off: translations appear only when you tap a word.'},
@@ -2027,7 +2028,8 @@ function App({data}){
   const [bookAnnotations,setBookAnnotations]=useState(null);
   const [deBook,setDeBook]=useState(null);
   const [expandedVerses,setExpandedVerses]=useState(new Set());
-  const [showAllDe,setShowAllDe]=useState(false);
+  const [showAllDe,setShowAllDe]=useState(LS.get('bible-show-all-de')===true);
+  const changeShowAllDe=useCallback(v=>{setShowAllDe(v);LS.set('bible-show-all-de',v);if(!v)setExpandedVerses(new Set())},[]);
   const [dePrompt,setDePrompt]=useState(null);
   const [showResetDialog,setShowResetDialog]=useState(false);
   const [showRetakeDialog,setShowRetakeDialog]=useState(false);
@@ -2869,6 +2871,10 @@ function App({data}){
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
+          <label style={{...S.toggleRow,marginTop:8}}>
+            <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
+            <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
+          </label>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('wordTranslations')}</span>
@@ -3257,6 +3263,10 @@ function App({data}){
         <div>
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <label style={{...S.toggleRow,marginTop:8}}>
+            <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
+            <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
+          </label>
         </div>
         <div>
           <span style={S.settingsLabel}>{t('wordTranslations')}</span>
@@ -3415,7 +3425,7 @@ function App({data}){
       <div style={S.deDialog} onClick={e=>e.stopPropagation()}>
         <p style={S.deDialogText}>{dePrompt==='show'?t('showAllBilingual'):t('hideAllGerman')}</p>
         <div style={S.deDialogBtns}>
-          <button style={S.deDialogBtn} onClick={()=>{if(dePrompt==='show')setShowAllDe(true);else{setShowAllDe(false);setExpandedVerses(new Set())}setDePrompt(null)}}>{t('yes')}</button>
+          <button style={S.deDialogBtn} onClick={()=>{changeShowAllDe(dePrompt==='show');setDePrompt(null)}}>{t('yes')}</button>
           <button style={{...S.deDialogBtn,...S.deDialogBtnCancel}} onClick={()=>setDePrompt(null)}>{t('no')}</button>
         </div>
       </div>
