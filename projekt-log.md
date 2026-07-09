@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.62b (09.07.2026)
+
+- Lernwortpool: kuratierte Datenbasis (words.json) jetzt tatsächlich ausgeliefert — Eigennamen-Bereinigung aus 1.10.58b–60b nun auch in der Datendatei auf main (5878 → 5615 Einträge); Cache-Bump erzwingt Neuladen des Wortpools.
+
 ## v1.10.61b (09.07.2026)
 
 - Einstellungen: neue Option „Wortübersetzungen — automatisch anzeigen" (Standard: an). Ausgeschaltet erscheinen die deutschen Wortübersetzungen erst beim Antippen des Wortes; verfügbar im Haupt-Menü und im Lese-Panel.
