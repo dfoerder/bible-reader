@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.65b (09.07.2026)
+
+- Texteinstellungen: Zeilenabstand für englischen Bibeltext und deutsche Übersetzung jetzt einheitlich 1.2–3.0 einstellbar — volle Kontrolle beim Nutzer.
+
 ## v1.10.64b (09.07.2026)
 
 - Texteinstellungen: Zeilenabstand jetzt getrennt für englischen Bibeltext (1.8–3.0) und deutsche Übersetzung (1.2–2.6) einstellbar — im Haupt-Menü und im Lese-Panel, bleibt gespeichert.

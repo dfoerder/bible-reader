@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.64b';
+const APP_VERSION = '1.10.65b';
 const APP_DATE = '09.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -2850,7 +2850,7 @@ function App({data}){
             <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:14}}>{t('lineSpacing')}</span>
             <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeight(Math.max(1.8,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
+              <button onClick={()=>changeLineHeight(Math.max(1.2,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
               <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
               <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
             </div>
@@ -2867,7 +2867,7 @@ function App({data}){
             <div style={{...S.fontSizeRow,marginTop:6}}>
               <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
               <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeightTr(Math.min(2.6,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
+              <button onClick={()=>changeLineHeightTr(Math.min(3.0,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
             </div>
           </div>
           <div style={{marginTop:16}}>
@@ -3257,7 +3257,7 @@ function App({data}){
             </div>
             <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:10}}>{t('lineSpacing')}</span>
             <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeight(Math.max(1.8,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
+              <button onClick={()=>changeLineHeight(Math.max(1.2,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
               <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
               <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
             </div>
@@ -3273,7 +3273,7 @@ function App({data}){
             <div style={{...S.fontSizeRow,marginTop:6}}>
               <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
               <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeightTr(Math.min(2.6,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
+              <button onClick={()=>changeLineHeightTr(Math.min(3.0,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
             </div>
           </div>
           <div style={{marginTop:12}}>
