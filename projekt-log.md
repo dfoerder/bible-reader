@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.63b (09.07.2026)
+
+- Einstellungen: neue Option „Alle deutschen Verse einblenden" — zeigt unter jedem englischen Vers dauerhaft den entsprechenden deutschen Vers; umschaltbar im Haupt-Menü und im Lese-Panel, bleibt gespeichert.
+
 ## v1.10.62b (09.07.2026)
 
 - Lernwortpool: kuratierte Datenbasis (words.json) jetzt tatsächlich ausgeliefert — Eigennamen-Bereinigung aus 1.10.58b–60b nun auch in der Datendatei auf main (5878 → 5615 Einträge); Cache-Bump erzwingt Neuladen des Wortpools.
