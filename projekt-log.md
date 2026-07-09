@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.61b (09.07.2026)
+
+- Einstellungen: neue Option „Wortübersetzungen — automatisch anzeigen" (Standard: an). Ausgeschaltet erscheinen die deutschen Wortübersetzungen erst beim Antippen des Wortes; verfügbar im Haupt-Menü und im Lese-Panel.
+
 ## v1.10.60b (08.07.2026)
 
 - Lernwortpool: 69 obskure Eigennamen aus A2–C2 entfernt (Genealogie-/Herkunftsnamen wie Jehdeiah, Tehaphnehes, Kohathite, Shunammite u.a.) — Pool 5684 → 5615

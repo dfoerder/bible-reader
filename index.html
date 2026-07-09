@@ -127,8 +127,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.60b';
-const APP_DATE = '08.07.2026';
+const APP_VERSION = '1.10.61b';
+const APP_DATE = '09.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 const LS = {
@@ -218,6 +218,9 @@ const I18N={
   appLanguage:{de:'App-Sprache',en:'App language'},
   germanTranslation:{de:'Deutsche Übersetzung',en:'German translation'},
   germanTranslationHint:{de:'Wird beim Aufklappen der Verse angezeigt.',en:'Shown when expanding verses.'},
+  wordTranslations:{de:'Wortübersetzungen',en:'Word translations'},
+  autoShowTranslations:{de:'Übersetzungen automatisch anzeigen',en:'Show translations automatically'},
+  autoShowTranslationsHint:{de:'Aus: Übersetzungen erscheinen nur, wenn man ein Wort antippt.',en:'Off: translations appear only when you tap a word.'},
   deSch1951:{de:'Schlachter 1951',en:'Schlachter 1951'},
   deL1912mod:{de:'Luther 1912 (mod.)',en:'Luther 1912 (mod.)'},
   deWebDeu:{de:'Wörtlich (WEB→DE)',en:'Literal (WEB→DE)'},
@@ -242,6 +245,10 @@ const I18N={
   vocabTotal:{de:'Wörter — Gesamt',en:'Vocabulary — Total'},
   nUnique:{de:'{n} einzigartige Wörter',en:'{n} unique words'},
   uniqueWords:{de:'Einzigartige Wörter',en:'Unique words'},
+  chapWordStats:{de:'Wortstatistik (Kapitel)',en:'Word statistics (chapter)'},
+  chapStatsHint:{de:'Lernstand der annotierten Wörter dieses Kapitels.',en:'Learning progress of this chapter\'s annotated words.'},
+  chapNoStats:{de:'Für dieses Kapitel liegt keine Wortstatistik vor.',en:'No word statistics available for this chapter.'},
+  chapNoDifficult:{de:'Keine Wörter über deinem Level in diesem Kapitel.',en:'No words above your level in this chapter.'},
   vocabPerBook:{de:'Wörter pro Buch',en:'Vocabulary per book'},
   difficulty:{de:'Schwierigkeit ({l})',en:'Difficulty ({l})'},
   wordsLearned:{de:'Gelernte Wörter',en:'Words learned'},
@@ -1996,6 +2003,7 @@ function App({data}){
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [showExLevel,setShowExLevel]=useState(LS.get('bible-show-ex-level')===true);
+  const [autoTranslate,setAutoTranslate]=useState(LS.get('bible-auto-translate')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
   const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||'sch1951');
@@ -2041,7 +2049,8 @@ function App({data}){
   const [exMode,setExMode]=useState(()=>LS.get('bible-ex-mode')||'quiz');
   const changeExMode=useCallback(m=>{setExMode(m);LS.set('bible-ex-mode',m);},[]);
   const [clozeExpanded,setClozeExpanded]=useState(false);
-  const [vocabPanelOpen,setVocabPanelOpen]=useState(false);
+  // Kapitel-Werkzeugleiste: null | 'stats' | 'training' | 'settings'
+  const [chapTab,setChapTab]=useState(null);
   const [vocabSettingsOpen,setVocabSettingsOpen]=useState(false);
   const [clozeSettingsOpen,setClozeSettingsOpen]=useState(false);
   const reviewKey=useCallback((bi,ci)=>`rev-${lang}-${bi}-${ci}`,[lang]);
@@ -2136,6 +2145,18 @@ function App({data}){
     return getChapterWordsOld(verses,vocab,userStep);
   },[currentChapter,hasAnno,annotations,bookName,chapNum,userStep,tappedWords,verses,vocab]);
 
+  // Lernstand-Statistik für das aktuelle Kapitel (bekannt/unbekannt/ungeübt) — analog getBookWordStats
+  const chapWordStats=useMemo(()=>{
+    if(!currentChapter||!hasAnno)return null;
+    const book=annotations[bookName];const chap=book&&book[String(chapNum)];
+    if(!chap)return null;
+    const lemmas=new Set();
+    Object.values(chap).forEach(vs=>(vs||[]).forEach(a=>{if(a&&a.lemma)lemmas.add(a.lemma)}));
+    let known=0,unknown=0,learned=0,forgotten=0;
+    lemmas.forEach(l=>{const d=wordData[l];if(!d||d.familiarity===-1)return;if(d.familiarity>=1)known++;if(d.familiarity===0)unknown++;if((d.learned||0)>0)learned++;if((d.forgotten||0)>0&&d.familiarity===0)forgotten++});
+    return{known,unknown,notSeen:lemmas.size-known-unknown,learned,forgotten,total:lemmas.size};
+  },[currentChapter,hasAnno,annotations,bookName,chapNum,wordData]);
+
   const chapterKey=useCallback((bi,ci)=>`unk-${lang}-${bi}-${ci}`,[lang]);
   const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
   const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
@@ -2147,7 +2168,7 @@ function App({data}){
     tts.stop();tts.lastStoppedVerse.current=null;
     saveBookmark(bookIdx,chapIdx,visibleVerseRef.current);
     setBookIdx(bi);setChapIdx(ci);saveBookmark(bi,ci);visibleVerseRef.current=1;
-    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setVocabPanelOpen(false);setReviewDone(!!LS.get(reviewKey(bi,ci)));setReviewKnownCount(0);setReviewCheckBase(0);setLevelSuggestion(null);
+    setUnknownWords(loadChapterWords(bi,ci));setLearnedWords(new Set());setRevealedWords(new Set());setExpandedVerses(new Set());setShowAllDe(false);setChapTrain(null);setChapTab(null);setReviewDone(!!LS.get(reviewKey(bi,ci)));setReviewKnownCount(0);setReviewCheckBase(0);setLevelSuggestion(null);
     const nr=books[bi].nr;
     setLoading(true);
     try{
@@ -2849,6 +2870,14 @@ function App({data}){
           <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
         </div>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('wordTranslations')}</span>
+          <label style={{...S.toggleRow,marginTop:6}}>
+            <input type="checkbox" checked={autoTranslate} onChange={()=>{const v=!autoTranslate;setAutoTranslate(v);LS.set('bible-auto-translate',v)}}/>
+            <span style={S.toggleLabel}>{t('autoShowTranslations')}</span>
+          </label>
+          <p style={S.settingsHint}>{t('autoShowTranslationsHint')}</p>
+        </div>
         {(showResetDialog||showRetakeDialog)&&<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
           <div style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:320,textAlign:'center',fontFamily:sans}}>
             <p style={{fontSize:16,fontWeight:600,color:'var(--t-title)',margin:'0 0 16px'}}>{showResetDialog?t('resetConfirm'):t('retakePlacementConfirm')}</p>
@@ -3169,12 +3198,86 @@ function App({data}){
     </div>
 
 
-    {quizWords.length>0&&!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
-      <div onClick={()=>setVocabPanelOpen(p=>!p)} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 12px',cursor:'pointer'}}>
-        <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{vocabPanelOpen?'▾':'▸'}</span> {t('difficultWords')}</span>
-        <span style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans}}>{unknownWords.size}/{quizWords.length}</span>
+    {!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
+      <div style={{display:'flex',alignItems:'stretch',borderBottom:chapTab?'1px solid var(--t-border)':'none'}}>
+        {[{k:'stats',ic:'📊',lb:t('statistics')},{k:'training',ic:null,lb:t('training')},{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
+          const active=chapTab===tab.k;
+          return(<button key={tab.k} onClick={()=>setChapTab(c=>c===tab.k?null:tab.k)} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:3,padding:'9px 4px',border:'none',borderBottom:active?'2px solid var(--t-accent)':'2px solid transparent',background:active?'var(--t-bg)':'transparent',cursor:'pointer',color:active?'var(--t-accent)':'var(--t-muted)',fontFamily:sans}}>
+            {tab.k==='training'?<img src="files/kopf2.jpg" style={{width:22,height:22,objectFit:'cover',borderRadius:'50%',...(active?{}:{filter:'grayscale(0.5) opacity(0.7)'})}}/>:<span style={{fontSize:20,lineHeight:1}}>{tab.ic}</span>}
+            <span style={{fontSize:11,fontWeight:600,lineHeight:1.1,textAlign:'center'}}>{tab.lb}{tab.k==='training'&&quizWords.length>0?` (${unknownWords.size}/${quizWords.length})`:''}</span>
+          </button>);
+        })}
       </div>
-      {vocabPanelOpen&&<div style={{padding:'0 12px 12px'}}>
+      {chapTab==='stats'&&<div style={{padding:'12px'}}>
+        <span style={S.settingsLabel}>{t('chapWordStats')}</span>
+        {chapWordStats&&chapWordStats.total>0?<>
+          <div style={S.statGrid}>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{chapWordStats.known}</span><span style={S.statCellL}>{t('statKnown')}</span></div>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{chapWordStats.unknown}</span><span style={S.statCellL}>{t('statUnknown')}</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{chapWordStats.notSeen}</span><span style={S.statCellL}>{t('statUnpracticed')}</span></div>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-green)'}}>{chapWordStats.learned}</span><span style={S.statCellL}>{t('statLearnedCount')}</span></div>
+            <div style={S.statCell}><span style={{...S.statCellN,color:'var(--t-accent)'}}>{chapWordStats.forgotten}</span><span style={S.statCellL}>{t('statForgotten')}</span></div>
+            <div style={S.statCell}><span style={S.statCellN}>{chapWordStats.total}</span><span style={S.statCellL}>{t('uniqueWords')}</span></div>
+          </div>
+          <p style={S.settingsHint}>{t('chapStatsHint')}</p>
+        </>:<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0'}}>{t('chapNoStats')}</p>}
+      </div>}
+      {chapTab==='settings'&&<div style={{padding:'12px',display:'flex',flexDirection:'column',gap:18}}>
+        <div>
+          <span style={S.settingsLabel}>{t('fontSize')}</span>
+          <div style={{marginTop:4}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsBibleText')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSize}px</span>
+              <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+          </div>
+          <div style={{marginTop:12}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSizeTr}px</span>
+              <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+          </div>
+          <div style={{marginTop:12}}>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsExercises')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
+              <span style={S.fontSizePreview}>{fontSizeEx}px</span>
+              <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span style={S.settingsLabel}>{t('layout')}</span>
+          <div style={S.levelBtns}>{[{k:'classic',i:'layoutClassic'},{k:'icf-light',i:'layoutModernLight'},{k:'icf',i:'layoutModernDark'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+        </div>
+        <div>
+          <span style={S.settingsLabel}>{t('germanTranslation')}</span>
+          <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+        </div>
+        <div>
+          <span style={S.settingsLabel}>{t('wordTranslations')}</span>
+          <label style={{...S.toggleRow,marginTop:6}}>
+            <input type="checkbox" checked={autoTranslate} onChange={()=>{const v=!autoTranslate;setAutoTranslate(v);LS.set('bible-auto-translate',v)}}/>
+            <span style={S.toggleLabel}>{t('autoShowTranslations')}</span>
+          </label>
+          <p style={S.settingsHint}>{t('autoShowTranslationsHint')}</p>
+        </div>
+        <div>
+          <span style={S.settingsLabel}>{t('readingSpeed')}</span>
+          <div style={S.speedPresets}>{[{l:'🐌',v:0.2},{k:'slow',v:0.4},{k:'normal',v:0.65},{k:'fast',v:0.85},{k:'veryFast',v:1.0}].map(p=>(
+            <button key={p.v} onClick={()=>tts.setSpeed(p.v)} style={{...S.speedPresetBtn,...(Math.abs(tts.speed-p.v)<0.06?S.speedPresetActive:{})}}>{p.l||t(p.k)}</button>
+          ))}</div>
+          <div style={S.speedSliderRow}>
+            <input type="range" min="0.2" max="1.0" step="0.05" value={tts.speed} onChange={e=>tts.setSpeed(parseFloat(e.target.value))} style={S.speedSlider}/>
+            <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
+          </div>
+        </div>
+      </div>}
+      {chapTab==='training'&&(quizWords.length>0?<div style={{padding:'12px'}}>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
           <div onClick={()=>{setQuizExpanded(e=>!e);setVocabReviewIdx(0);setVocabSettingsOpen(false)}} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
             <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{quizExpanded?'▾':'▸'}</span> {t('whichWords')}</span>
@@ -3232,7 +3335,7 @@ function App({data}){
             <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapExercise(exMode);setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
           </div>}
         </div>
-      </div>}
+      </div>:<div style={{padding:'16px 12px',textAlign:'center'}}><p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:0}}>{t('chapNoDifficult')}</p></div>)}
     </div>}
 
     <div style={{...S.text,fontSize}}>{(()=>{const trSize=fontSizeTr;return verses.map(verse=>{
@@ -3262,7 +3365,7 @@ function App({data}){
               const isAboveLevel=annoStep(anno.level,anno.lemma)>userStep;
               const isTapped=tappedWords.has(key);
               if(isAboveLevel||isTapped){
-                const isUnknown=unknownWords.has(key)||(!reviewDone&&isAboveLevel);
+                const isUnknown=unknownWords.has(key)||(!reviewDone&&isAboveLevel&&autoTranslate);
                 if(!isUnknown)return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>setUnknownWords(u=>new Set([...u,key]))}>{token}</span>;
                 const isL=learnedWords.has(key);
                 const isR=revealedWords.has(key);
