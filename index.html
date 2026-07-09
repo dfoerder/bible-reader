@@ -127,7 +127,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.63b';
+const APP_VERSION = '1.10.64b';
 const APP_DATE = '09.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -196,6 +196,7 @@ const I18N={
   fsExercises:{de:'Übungen',en:'Exercises'},
   fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
   fontPreviewTr:{de:'Übersetzung',en:'translation'},
+  lineSpacing:{de:'Zeilenabstand',en:'Line spacing'},
   layout:{de:'Layout',en:'Layout'},
   layoutClassic:{de:'Klassisch',en:'Classic'},
   layoutModernLight:{de:'Modern Hell',en:'Modern Light'},
@@ -2000,6 +2001,8 @@ function App({data}){
   const saveBookmark=useCallback((bi,ci,verse)=>{setBookmarks(prev=>{const next={...prev,[bi]:{ch:ci,v:verse||1}};LS.set('bible-bookmarks',next);return next})},[]);
   const [fontSize,setFontSize]=useState(parseInt(LS.get('bible-font-size'))||16);
   const [fontSizeTr,setFontSizeTr]=useState(parseInt(LS.get('bible-font-size-tr'))||14);
+  const [lineHeight,setLineHeight]=useState(parseFloat(LS.get('bible-line-height'))||2.4);
+  const [lineHeightTr,setLineHeightTr]=useState(parseFloat(LS.get('bible-line-height-tr'))||1.6);
   const [fontSizeEx,setFontSizeEx]=useState(exFontSize());
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
@@ -2494,6 +2497,8 @@ function App({data}){
   const changeFontSize=useCallback(v=>{setFontSize(v);LS.set('bible-font-size',v)},[]);
   const changeFontSizeTr=useCallback(v=>{setFontSizeTr(v);LS.set('bible-font-size-tr',v)},[]);
   const changeFontSizeEx=useCallback(v=>{setFontSizeEx(v);LS.set('bible-font-size-ex',v)},[]);
+  const changeLineHeight=useCallback(v=>{const n=Math.round(v*10)/10;setLineHeight(n);LS.set('bible-line-height',n)},[]);
+  const changeLineHeightTr=useCallback(v=>{const n=Math.round(v*10)/10;setLineHeightTr(n);LS.set('bible-line-height-tr',n)},[]);
 
   const langFooter='World English Bible';
   const otBooks=books.slice(0,ntStartIndex);
@@ -2843,6 +2848,12 @@ function App({data}){
               <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
             </div>
             <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:14}}>{t('lineSpacing')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeLineHeight(Math.max(1.8,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
+              <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
+              <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
+            </div>
           </div>
           <div style={{marginTop:16}}>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
@@ -2852,6 +2863,12 @@ function App({data}){
               <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
             </div>
             <p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:1.6,color:'var(--t-accent)',marginTop:8}}>{t('fontPreviewTr')}</p>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:14}}>{t('lineSpacing')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
+              <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
+              <button onClick={()=>changeLineHeightTr(Math.min(2.6,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
+            </div>
           </div>
           <div style={{marginTop:16}}>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsExercises')}</span>
@@ -3238,6 +3255,12 @@ function App({data}){
               <span style={S.fontSizePreview}>{fontSize}px</span>
               <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
             </div>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:10}}>{t('lineSpacing')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeLineHeight(Math.max(1.8,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
+              <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
+              <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
+            </div>
           </div>
           <div style={{marginTop:12}}>
             <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
@@ -3245,6 +3268,12 @@ function App({data}){
               <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
               <span style={S.fontSizePreview}>{fontSizeTr}px</span>
               <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+            </div>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:10}}>{t('lineSpacing')}</span>
+            <div style={{...S.fontSizeRow,marginTop:6}}>
+              <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
+              <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
+              <button onClick={()=>changeLineHeightTr(Math.min(2.6,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
             </div>
           </div>
           <div style={{marginTop:12}}>
@@ -3348,7 +3377,7 @@ function App({data}){
       </div>:<div style={{padding:'16px 12px',textAlign:'center'}}><p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:0}}>{t('chapNoDifficult')}</p></div>)}
     </div>}
 
-    <div style={{...S.text,fontSize}}>{(()=>{const trSize=fontSizeTr;return verses.map(verse=>{
+    <div style={{...S.text,fontSize,lineHeight}}>{(()=>{const trSize=fontSizeTr;return verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
       let wordIdx=0;
       const useAnno=hasAnno;
@@ -3408,7 +3437,7 @@ function App({data}){
           }
         })}{' '}
       </span>
-      {showDe&&deText&&<div style={{...S.deVerse,fontSize:trSize,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
+      {showDe&&deText&&<div style={{...S.deVerse,fontSize:trSize,lineHeight:lineHeightTr,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
       </div>);
     })})()}</div>
 

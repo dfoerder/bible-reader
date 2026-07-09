@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.64b (09.07.2026)
+
+- Texteinstellungen: Zeilenabstand jetzt getrennt für englischen Bibeltext (1.8–3.0) und deutsche Übersetzung (1.2–2.6) einstellbar — im Haupt-Menü und im Lese-Panel, bleibt gespeichert.
+
 ## v1.10.63b (09.07.2026)
 
 - Einstellungen: neue Option „Alle deutschen Verse einblenden" — zeigt unter jedem englischen Vers dauerhaft den entsprechenden deutschen Vers; umschaltbar im Haupt-Menü und im Lese-Panel, bleibt gespeichert.
