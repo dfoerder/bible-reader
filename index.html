@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- INSTANCE-HEAD-START: html[lang], apple-mobile-web-app-title und <title> sind
+     instanzspezifisch — Sync-Skript ersetzt diesen Block für abgeleitete Instanzen. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -10,6 +12,7 @@
   <link rel="manifest" href="manifest.json"/>
   <link rel="apple-touch-icon" href="icon-192.png"/>
   <title>Bible — Reading Aid</title>
+  <!-- INSTANCE-HEAD-END -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
@@ -98,16 +101,21 @@
 <div id="root"><div class="loading"><span class="spinner"></span> Loading data...</div></div>
 </div></div>
 <script>
+// Läuft vor dem Babel-Block, hat also kein Zugriff auf INSTANCE dort unten —
+// eigener, gleich zu haltender Präfix. Sync-Skript ersetzt beide Stellen synchron.
+/* LS-PREFIX-EARLY-START */
+var LS_PREFIX='';
+/* LS-PREFIX-EARLY-END */
 function toggleViewMode(){
   var b=document.body, btn=document.querySelector('.view-toggle');
   if(b.classList.contains('mode-phone')){
     b.classList.replace('mode-phone','mode-desktop');
     btn.textContent='Phone';
-    localStorage.setItem('bible-view-mode','desktop');
+    localStorage.setItem(LS_PREFIX+'bible-view-mode','desktop');
   } else {
     b.classList.replace('mode-desktop','mode-phone');
     btn.textContent='Desktop';
-    localStorage.setItem('bible-view-mode','phone');
+    localStorage.setItem(LS_PREFIX+'bible-view-mode','phone');
   }
 }
 (function(){
@@ -117,7 +125,7 @@ function toggleViewMode(){
     document.body.classList.replace('mode-phone','mode-desktop');
     document.querySelector('.view-toggle').style.display='none';
   } else {
-    var m=localStorage.getItem('bible-view-mode');
+    var m=localStorage.getItem(LS_PREFIX+'bible-view-mode');
     if(m==='desktop'){
       document.body.classList.replace('mode-phone','mode-desktop');
       document.querySelector('.view-toggle').textContent='Phone';
@@ -131,10 +139,50 @@ const APP_VERSION = '1.10.66b';
 const APP_DATE = '09.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
+// ─── Instanz-Konfiguration ──────────────────────────────
+// Erlaubt eine zweite, parallele App-Instanz (z.B. Spanisch→Englisch unter
+// /es/) mit demselben index.html: alle Datenpfade, die TTS-Sprache, der
+// Leveltest, die Übersetzungs-Editionen und der localStorage-Präfix laufen
+// über dieses Objekt statt über verstreute Literale. Die Root-Instanz
+// (Englisch→Deutsch) hat hier exakt die bisherigen Werte — Verhalten bleibt
+// unverändert. Ein Sync-Skript ersetzt diesen Block für abgeleitete
+// Instanzen (Marker: INSTANCE-CONFIG-START/END).
+/* INSTANCE-CONFIG-START */
+const INSTANCE = {
+  lsPrefix: '',
+  bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
+  annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
+  wordsPath: 'data/words.json', examplesPath: 'data/examples.json',
+  transPaths: {
+    sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
+    l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
+    web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
+  },
+  transDefault: 'sch1951',
+  transOptions: [{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}],
+  // Remap-Shim: benennt Felder aus den geladenen JSON-Daten (words.json,
+  // Annotationen) auf die intern überall genutzten Rollennamen `en`
+  // (Quellwort) / `de`/`deForm` (Übersetzung) um. Für die Root-Instanz
+  // identisch (No-Op).
+  srcKey: 'en', glossKey: 'de', glossFormKey: 'deForm',
+  ttsLang: 'en-US', ttsLangPrefix: 'en',
+  ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
+  bookAbbr: null, // null = Standard-BOOK_ABBR (unten) verwenden
+  i18nOverrides: {},
+  defaultUiLang: 'de',
+};
+/* INSTANCE-CONFIG-END */
+function remapWordFields(w){
+  if(INSTANCE.srcKey!=='en'&&w[INSTANCE.srcKey]!==undefined)w.en=w[INSTANCE.srcKey];
+  if(INSTANCE.glossKey!=='de'&&w[INSTANCE.glossKey]!==undefined)w.de=w[INSTANCE.glossKey];
+  if(INSTANCE.glossFormKey!=='deForm'&&w[INSTANCE.glossFormKey]!==undefined)w.deForm=w[INSTANCE.glossFormKey];
+  return w;
+}
+
 const LS = {
-  get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}},
-  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
-  remove(k){try{localStorage.removeItem(k)}catch(e){}}
+  get(k){try{const v=localStorage.getItem(INSTANCE.lsPrefix+k);return v?JSON.parse(v):null}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(INSTANCE.lsPrefix+k,JSON.stringify(v))}catch(e){}},
+  remove(k){try{localStorage.removeItem(INSTANCE.lsPrefix+k)}catch(e){}}
 };
 // Beschleunigter Test-Modus (Entwickler-Einstellungen): alle Lern-Fristen ÷96
 // (24h→15min, 2d→30min, 7d→105min, 60d→15h) und nur ¼ bzw. ⅛ des Wortpools (pro
@@ -395,8 +443,9 @@ const I18N={
   // Footer
   publicDomain:{de:'Public Domain',en:'Public Domain'},
 };
+Object.assign(I18N,INSTANCE.i18nOverrides);
 
-let _lang=LS.get('bible-ui-lang')||'de';
+let _lang=LS.get('bible-ui-lang')||INSTANCE.defaultUiLang;
 function t(key){const e=I18N[key];if(!e)return key;return e[_lang]||e.de||key;}
 function setLang(l){_lang=l;LS.set('bible-ui-lang',l);}
 function getLang(){return _lang;}
@@ -1620,7 +1669,7 @@ const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline
 let EXAMPLES=null;
 async function loadExamples(){
   if(EXAMPLES)return EXAMPLES;
-  try{const r=await fetch('data/examples.json'+CB);if(r.ok)EXAMPLES=await r.json();}catch(e){}
+  try{const r=await fetch(INSTANCE.examplesPath+CB);if(r.ok)EXAMPLES=await r.json();}catch(e){}
   if(!EXAMPLES)EXAMPLES={};
   return EXAMPLES;
 }
@@ -1630,32 +1679,35 @@ const _annoCache={};
 
 async function fetchBook(nr){
   if(_bookCache[nr])return _bookCache[nr];
-  const r=await fetch('bibles/eng/web/'+nr+'_web.json'+CB);
+  const r=await fetch(INSTANCE.bibleDir+nr+INSTANCE.bibleSuffix+CB);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
   _bookCache[nr]=d;
   return d;
 }
 
+// Annotationsdatei enthält pro Wort {pos, form, lemma, level, [glossKey]} —
+// remapWordFields hebt [glossKey] auf die intern erwartete `.de`-Rolle.
+function remapAnnoDoc(d){
+  if(INSTANCE.glossKey==='de'||!d||!d.chapters)return d;
+  for(const ch in d.chapters)for(const v in d.chapters[ch])d.chapters[ch][v].forEach(remapWordFields);
+  return d;
+}
 async function fetchAnno(nr){
   if(_annoCache[nr])return _annoCache[nr];
   try{
-    const r=await fetch('bibles/eng/web/anno/'+nr+'_web_deu.json'+CB);
-    if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
+    const r=await fetch(INSTANCE.annoDir+nr+INSTANCE.annoSuffix+CB);
+    if(r.ok){const d=remapAnnoDoc(await r.json());_annoCache[nr]=d;return d;}
   }catch(e){}
   return null;
 }
 
 const _deCache={};
-const DE_TRANS_PATHS={
-  sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
-  l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
-  web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
-};
+const DE_TRANS_PATHS=INSTANCE.transPaths;
 async function fetchDe(nr,trans){
   const key=nr+'_'+trans;
   if(_deCache[key])return _deCache[key];
-  const cfg=DE_TRANS_PATHS[trans]||DE_TRANS_PATHS.sch1951;
+  const cfg=DE_TRANS_PATHS[trans]||DE_TRANS_PATHS[INSTANCE.transDefault];
   try{
     const r=await fetch(cfg.dir+nr+cfg.suffix+CB);
     if(r.ok){
@@ -1696,9 +1748,10 @@ async function loadData(){
   }catch(e){en.available=false;}
   try{
     // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten
-    const wr=await fetch('data/words.json'+CB);
+    const wr=await fetch(INSTANCE.wordsPath+CB);
     if(wr.ok){
       const words=await wr.json();
+      for(const lvl in words)words[lvl].forEach(remapWordFields);
       if(TEST_ACCEL){
         // Beschleunigter Test: ¼ bzw. ⅛ des Pools, pro Level+Sublevel jedes n-te Wort —
         // die Level-Verhältnisse bleiben dadurch exakt erhalten
@@ -1755,7 +1808,7 @@ const BOOK_ABBR={
   'Hebrews':'Heb','James':'Jas','1 Peter':'1 Pet','2 Peter':'2 Pet',
   '1 John':'1 John','2 John':'2 John','3 John':'3 John','Jude':'Jude','Revelation':'Rev'
 };
-const bookAbbr=name=>BOOK_ABBR[name]||name;
+const bookAbbr=name=>(INSTANCE.bookAbbr&&INSTANCE.bookAbbr[name])||BOOK_ABBR[name]||name;
 
 function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
@@ -1829,11 +1882,11 @@ function useTTS(){
   const [activeVerse,setActiveVerse]=useState(null);
   const [activeWordIdx,setActiveWordIdx]=useState(-1);
   const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.65);
-  const [voices,setVoices]=useState({en:[]});
-  const langRef=useRef('en');
+  const [voices,setVoices]=useState({[INSTANCE.ttsLangPrefix]:[]});
+  const langRef=useRef(INSTANCE.ttsLangPrefix);
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const queueRef=useRef([]);const stoppedRef=useRef(false);const speedRef=useRef(speed);
-  const lastSentenceRef=useRef({text:'',lang:'en'});
+  const lastSentenceRef=useRef({text:'',lang:INSTANCE.ttsLangPrefix});
   const currentVerseRef=useRef(null);const currentCallbackRef=useRef(null);const currentCharIdx=useRef(0);const currentWordIdx=useRef(0);const speedChangeRef=useRef(false);
   const setSpeed=useCallback(v=>{
     speedRef.current=v;setSpeedState(v);LS.set('tts-speed',v);
@@ -1850,22 +1903,22 @@ function useTTS(){
   useEffect(()=>{
     const lv=()=>{
       const all=speechSynthesis.getVoices();
-      const en=all.filter(v=>v.lang.startsWith('en'));
-      if(en.length)setVoices({en});
+      const en=all.filter(v=>v.lang.startsWith(INSTANCE.ttsLangPrefix));
+      if(en.length)setVoices({[INSTANCE.ttsLangPrefix]:en});
     };
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
     return()=>{speechSynthesis.cancel()};
   },[]);
   const getVoice=useCallback((langOverride)=>{
-    const ev=voices.en;
-    for(const n of['Samantha','Alex','Daniel','Karen','Moira']){const v=ev.find(v=>v.name.includes(n));if(v)return v}
+    const ev=voices[INSTANCE.ttsLangPrefix]||[];
+    for(const n of INSTANCE.ttsVoiceNames){const v=ev.find(v=>v.name.includes(n));if(v)return v}
     return ev[0]||null;
   },[voices]);
   const speakText=useCallback((text,langOverride,rate)=>{
     return new Promise(resolve=>{
       speechSynthesis.cancel(); // iOS fix: prevent repeat bug
       const u=new SpeechSynthesisUtterance(text);
-      u.lang='en-US';
+      u.lang=INSTANCE.ttsLang;
       u.rate=rate??speedRef.current;
       const v=getVoice(langOverride);if(v)u.voice=v;
       let done=false;
@@ -1880,7 +1933,7 @@ function useTTS(){
   const speakVerseRef=useRef(null);
   const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
-    const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=speedRef.current;
+    const u=new SpeechSynthesisUtterance(text);u.lang=INSTANCE.ttsLang;u.rate=speedRef.current;
     const v=getVoice();if(v)u.voice=v;
     currentVerseRef.current={vN,text};currentCallbackRef.current=onDone;currentCharIdx.current=0;currentWordIdx.current=wordOffset;
     setActiveVerse(vN);setActiveWordIdx(wordOffset);setSpeaking(true);
@@ -1916,7 +1969,7 @@ function useTTS(){
   },[speakVerse,activeVerse]);
   const lastStoppedVerse=useRef(null);
   const stop=useCallback(()=>{lastStoppedVerse.current=activeVerse;stoppedRef.current=true;queueRef.current=[];speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)},[activeVerse]);
-  const hasVoices=voices.en.length>0;
+  const hasVoices=(voices[INSTANCE.ttsLangPrefix]||[]).length>0;
   return{speaking,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang,lastStoppedVerse,skipVerse};
 }
 
@@ -1924,7 +1977,7 @@ function useTTS(){
 function App({data}){
   const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
   const ntStartIndex=data.en.ntStartIndex||0;
-  const lang='en';
+  const lang=INSTANCE.ttsLangPrefix; // Sprachkürzel des Studientexts, u.a. Teil der unk-/rev-Keys
   const [uiLang,setUiLang]=useState(getLang);
   const changeUiLang=useCallback(l=>{setLang(l);setUiLang(l);},[]);
   const levelTested=LS.get('bible-level-tested');
@@ -2012,7 +2065,7 @@ function App({data}){
   const [autoTranslate,setAutoTranslate]=useState(LS.get('bible-auto-translate')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
-  const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||'sch1951');
+  const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||INSTANCE.transDefault);
   const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
   const [clozeCtx,setClozeCtxState]=useState(LS.get('bible-cloze-ctx')||'sentence');
   const changeClozeCtx=useCallback(v=>{setClozeCtxState(v);LS.set('bible-cloze-ctx',v)},[]);
@@ -2067,7 +2120,7 @@ function App({data}){
   const [levelSuggestion,setLevelSuggestion]=useState(null);
   const skipBackTapRef=useRef(0);
 
-  useEffect(()=>{tts.setLang('en')},[tts]);
+  useEffect(()=>{tts.setLang(INSTANCE.ttsLangPrefix)},[tts]);
 
   useEffect(()=>{
     if(phase!=='reading')return;
@@ -2645,7 +2698,11 @@ function App({data}){
   // Liste lesen; alten Einzel-Slot (falls vorhanden) als „Früheres Backup" voranstellen
   const readBackups=()=>{const l=LS.get('bible-word-data-backups');const arr=Array.isArray(l)?l:[];const old=LS.get('bible-word-data-backup');return old?[{ts:null,data:old},...arr]:arr;};
   // Quota-sicher speichern (LS.set schluckt Fehler): direkt setItem, bei Überlauf ältestes (am Ende) fallenlassen
-  const persistBackups=list=>{let arr=list.slice(0,12);for(;;){try{localStorage.setItem('bible-word-data-backups',JSON.stringify(arr));break;}catch(e){if(!arr.length)break;arr=arr.slice(0,-1);}}LS.remove('bible-word-data-backup');return arr;};
+  const persistBackups=list=>{let arr=list.slice(0,12);for(;;){try{localStorage.setItem(INSTANCE.lsPrefix+'bible-word-data-backups',JSON.stringify(arr));break;}catch(e){if(!arr.length)break;arr=arr.slice(0,-1);}}LS.remove('bible-word-data-backup');return arr;};
+  // Rohe localStorage-Keys sind bereits präfixiert (INSTANCE.lsPrefix); für den
+  // LS-Wrapper (der selbst präfixiert) muss der Präfix vor der Weitergabe entfernt werden.
+  const CHAP_KEY_RE=new RegExp('^'+INSTANCE.lsPrefix.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(unk|rev)-');
+  const stripLsPrefix=k=>k.slice(INSTANCE.lsPrefix.length);
   // Vollständiger Lernstand-Snapshot (zusätzlich zu den Wortdaten): Lese-Level,
   // Trainingsstufen, Lernfokus, Übungsart, Trainingshistorie und Kapitel-Markierungen
   // (unk-*/rev-*). Einstellungen (Schrift, Theme, TTS) und Leseposition bewusst nicht —
@@ -2653,7 +2710,7 @@ function App({data}){
   const SNAP_LS_KEYS=['bible-train-step','bible-freq-step','bible-train-focus','bible-ex-mode','bible-training-history'];
   const makeSnapshot=()=>{
     const chap={};
-    try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^(unk|rev)-/.test(k))chap[k]=LS.get(k);}}catch(e){}
+    try{for(let i=0;i<localStorage.length;i++){const rawK=localStorage.key(i);if(CHAP_KEY_RE.test(rawK)){const k=stripLsPrefix(rawK);chap[k]=LS.get(k);}}}catch(e){}
     const ls={};SNAP_LS_KEYS.forEach(k=>{ls[k]=LS.get(k);});
     return {userStep,unknownWords:[...unknownWords],learnedWords:[...learnedWords],tappedWords:[...tappedWords],ls,chap};
   };
@@ -2669,7 +2726,7 @@ function App({data}){
       SNAP_LS_KEYS.forEach(k=>{const v=(s.ls||{})[k];v==null?LS.remove(k):LS.set(k,v);});
       if(s.ls&&s.ls['bible-ex-mode'])setExMode(s.ls['bible-ex-mode']);
       // Kapitel-Markierungen: im Test entstandene Keys entfernen, dann Snapshot zurückschreiben
-      try{const del=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^(unk|rev)-/.test(k))del.push(k);}del.forEach(k=>LS.remove(k));}catch(e){}
+      try{const del=[];for(let i=0;i<localStorage.length;i++){const rawK=localStorage.key(i);if(CHAP_KEY_RE.test(rawK))del.push(stripLsPrefix(rawK));}del.forEach(k=>LS.remove(k));}catch(e){}
       Object.entries(s.chap||{}).forEach(([k,v])=>LS.set(k,v));
     }
     setPhase('nav');
@@ -2711,7 +2768,7 @@ function App({data}){
     setUserStep(devStartStep);
     setUnknownWords(new Set());setLearnedWords(new Set());setTappedWords(new Set());
     LS.remove('bible-training-history');
-    try{const del=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^(unk|rev)-/.test(k))del.push(k);}del.forEach(k=>LS.remove(k));}catch(e){}
+    try{const del=[];for(let i=0;i<localStorage.length;i++){const rawK=localStorage.key(i);if(CHAP_KEY_RE.test(rawK))del.push(stripLsPrefix(rawK));}del.forEach(k=>LS.remove(k));}catch(e){}
     setPhase('training');
   };
 
@@ -2898,7 +2955,7 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
-          <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{INSTANCE.transOptions.map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
           <label style={{...S.toggleRow,marginTop:8}}>
             <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
@@ -3311,7 +3368,7 @@ function App({data}){
         </div>
         <div>
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
-          <div style={S.levelBtns}>{[{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}].map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{INSTANCE.transOptions.map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <label style={{...S.toggleRow,marginTop:8}}>
             <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
             <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
