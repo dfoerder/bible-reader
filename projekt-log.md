@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.67b (12.07.2026)
+
+- NT-Wortübersetzungen komplett
+
 ## v1.10.66b (09.07.2026)
 
 - Texteinstellungen: Schriftgröße der Inline-Wortübersetzungen jetzt getrennt von englischem Text und deutscher Bibel einstellbar — neue Sektion „Wortübersetzung"; die bisherige „Übersetzungen" heißt jetzt „Deutsche Bibel".
