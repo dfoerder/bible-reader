@@ -1,0 +1,4465 @@
+{
+  "name": "Judas",
+  "chapters": {
+    "1": {
+      "1": [
+        {
+          "pos": 0,
+          "form": "Judas,",
+          "lemma": "Judas",
+          "level": "A1",
+          "en": "Jude"
+        },
+        {
+          "pos": 1,
+          "form": "siervo",
+          "lemma": "siervo",
+          "level": "A2",
+          "en": "servant"
+        },
+        {
+          "pos": 2,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 3,
+          "form": "Jesucristo",
+          "lemma": "Jesucristo",
+          "level": "A1",
+          "en": "Jesus Christ"
+        },
+        {
+          "pos": 4,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 5,
+          "form": "hermano",
+          "lemma": "hermano",
+          "level": "A1",
+          "en": "brother"
+        },
+        {
+          "pos": 6,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 7,
+          "form": "Jacobo,",
+          "lemma": "Jacobo",
+          "level": "A1",
+          "en": "James"
+        },
+        {
+          "pos": 8,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 9,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "those"
+        },
+        {
+          "pos": 10,
+          "form": "llamados",
+          "lemma": "llamar",
+          "level": "B1",
+          "en": "called"
+        },
+        {
+          "pos": 11,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 12,
+          "form": "son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "are"
+        },
+        {
+          "pos": 13,
+          "form": "santificados",
+          "lemma": "santificar",
+          "level": "B2",
+          "en": "sanctified"
+        },
+        {
+          "pos": 14,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 15,
+          "form": "Dios",
+          "lemma": "Dios",
+          "level": "A1",
+          "en": "God"
+        },
+        {
+          "pos": 16,
+          "form": "Padre",
+          "lemma": "Padre",
+          "level": "A1",
+          "en": "Father"
+        },
+        {
+          "pos": 17,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 18,
+          "form": "guardados",
+          "lemma": "guardar",
+          "level": "B1",
+          "en": "kept"
+        },
+        {
+          "pos": 19,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 20,
+          "form": "Jesucristo:",
+          "lemma": "Jesucristo",
+          "level": "A1",
+          "en": "Jesus Christ"
+        }
+      ],
+      "2": [
+        {
+          "pos": 0,
+          "form": "Que",
+          "lemma": "que",
+          "level": "A2",
+          "en": "May"
+        },
+        {
+          "pos": 1,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 2,
+          "form": "misericordia,",
+          "lemma": "misericordia",
+          "level": "B1",
+          "en": "mercy"
+        },
+        {
+          "pos": 3,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 4,
+          "form": "paz",
+          "lemma": "paz",
+          "level": "A1",
+          "en": "peace"
+        },
+        {
+          "pos": 5,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 6,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 7,
+          "form": "amor",
+          "lemma": "amor",
+          "level": "A1",
+          "en": "love"
+        },
+        {
+          "pos": 8,
+          "form": "se",
+          "lemma": "se",
+          "level": "A1",
+          "en": "(passive marker)"
+        },
+        {
+          "pos": 9,
+          "form": "multipliquen",
+          "lemma": "multiplicar",
+          "level": "B1",
+          "en": "be multiplied"
+        },
+        {
+          "pos": 10,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 11,
+          "form": "ustedes.",
+          "lemma": "usted",
+          "level": "A1",
+          "en": "you"
+        }
+      ],
+      "3": [
+        {
+          "pos": 0,
+          "form": "Amados,",
+          "lemma": "amado",
+          "level": "B1",
+          "en": "Beloved"
+        },
+        {
+          "pos": 1,
+          "form": "aunque",
+          "lemma": "aunque",
+          "level": "A2",
+          "en": "although"
+        },
+        {
+          "pos": 2,
+          "form": "tenía",
+          "lemma": "tener",
+          "level": "A1",
+          "en": "had"
+        },
+        {
+          "pos": 3,
+          "form": "mucho",
+          "lemma": "mucho",
+          "level": "A1",
+          "en": "much"
+        },
+        {
+          "pos": 4,
+          "form": "interés",
+          "lemma": "interés",
+          "level": "A2",
+          "en": "interest"
+        },
+        {
+          "pos": 5,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 6,
+          "form": "escribirles",
+          "lemma": "escribir",
+          "level": "A2",
+          "en": "to write to them"
+        },
+        {
+          "pos": 7,
+          "form": "sobre",
+          "lemma": "sobre",
+          "level": "A1",
+          "en": "about"
+        },
+        {
+          "pos": 8,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 9,
+          "form": "salvación",
+          "lemma": "salvación",
+          "level": "B1",
+          "en": "salvation"
+        },
+        {
+          "pos": 10,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 11,
+          "form": "compartimos,",
+          "lemma": "compartir",
+          "level": "A2",
+          "en": "we share"
+        },
+        {
+          "pos": 12,
+          "form": "me",
+          "lemma": "yo",
+          "level": "A1",
+          "en": "myself"
+        },
+        {
+          "pos": 13,
+          "form": "vi",
+          "lemma": "ver",
+          "level": "A1",
+          "en": "found"
+        },
+        {
+          "pos": 14,
+          "form": "obligado",
+          "lemma": "obligado",
+          "level": "B1",
+          "en": "obliged"
+        },
+        {
+          "pos": 15,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 16,
+          "form": "escribirles",
+          "lemma": "escribir",
+          "level": "A2",
+          "en": "to write to them"
+        },
+        {
+          "pos": 17,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 18,
+          "form": "exhortarlos",
+          "lemma": "exhortar",
+          "level": "B2",
+          "en": "to exhort them"
+        },
+        {
+          "pos": 19,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 20,
+          "form": "luchar",
+          "lemma": "luchar",
+          "level": "A2",
+          "en": "fight"
+        },
+        {
+          "pos": 21,
+          "form": "firmemente",
+          "lemma": "firme",
+          "level": "B1",
+          "en": "firmly"
+        },
+        {
+          "pos": 22,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 23,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 24,
+          "form": "fe",
+          "lemma": "fe",
+          "level": "A2",
+          "en": "faith"
+        },
+        {
+          "pos": 25,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 26,
+          "pos_end": 27,
+          "form": "una vez",
+          "lemma": "una vez",
+          "level": "A2",
+          "en": "once"
+        },
+        {
+          "pos": 26,
+          "form": "una",
+          "lemma": "uno",
+          "level": "A1",
+          "en": "a"
+        },
+        {
+          "pos": 27,
+          "form": "vez",
+          "lemma": "vez",
+          "level": "A1",
+          "en": "time"
+        },
+        {
+          "pos": 28,
+          "form": "fue",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "was"
+        },
+        {
+          "pos": 29,
+          "form": "entregada",
+          "lemma": "entregar",
+          "level": "B1",
+          "en": "entrusted"
+        },
+        {
+          "pos": 30,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 31,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 32,
+          "form": "santos.",
+          "lemma": "santo",
+          "level": "B1",
+          "en": "saints"
+        }
+      ],
+      "4": [
+        {
+          "pos": 0,
+          "form": "Porque",
+          "lemma": "porque",
+          "level": "A1",
+          "en": "Because"
+        },
+        {
+          "pos": 1,
+          "pos_end": 3,
+          "form": "se han infiltrado",
+          "lemma": "infiltrarse",
+          "level": "B2",
+          "en": "have infiltrated"
+        },
+        {
+          "pos": 1,
+          "form": "se",
+          "lemma": "se",
+          "level": "A1",
+          "en": "(reflexive)"
+        },
+        {
+          "pos": 2,
+          "form": "han",
+          "lemma": "haber",
+          "level": "A1",
+          "en": "have"
+        },
+        {
+          "pos": 3,
+          "form": "infiltrado",
+          "lemma": "infiltrar",
+          "level": "B2",
+          "en": "infiltrated"
+        },
+        {
+          "pos": 4,
+          "form": "ciertos",
+          "lemma": "cierto",
+          "level": "A2",
+          "en": "certain"
+        },
+        {
+          "pos": 5,
+          "form": "hombres",
+          "lemma": "hombre",
+          "level": "A1",
+          "en": "men"
+        },
+        {
+          "pos": 6,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 7,
+          "pos_end": 9,
+          "form": "desde hace tiempo",
+          "lemma": "desde hace tiempo",
+          "level": "B1",
+          "en": "for a long time"
+        },
+        {
+          "pos": 7,
+          "form": "desde",
+          "lemma": "desde",
+          "level": "A2",
+          "en": "since"
+        },
+        {
+          "pos": 8,
+          "form": "hace",
+          "lemma": "hacer",
+          "level": "A2",
+          "en": "ago"
+        },
+        {
+          "pos": 9,
+          "form": "tiempo",
+          "lemma": "tiempo",
+          "level": "A1",
+          "en": "time"
+        },
+        {
+          "pos": 10,
+          "form": "estaban",
+          "lemma": "estar",
+          "level": "A1",
+          "en": "were"
+        },
+        {
+          "pos": 11,
+          "form": "destinados",
+          "lemma": "destinar",
+          "level": "B1",
+          "en": "destined"
+        },
+        {
+          "pos": 12,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 13,
+          "form": "esta",
+          "lemma": "este",
+          "level": "A1",
+          "en": "this"
+        },
+        {
+          "pos": 14,
+          "form": "condenación:",
+          "lemma": "condenación",
+          "level": "B2",
+          "en": "condemnation"
+        },
+        {
+          "pos": 15,
+          "form": "hombres",
+          "lemma": "hombre",
+          "level": "A1",
+          "en": "men"
+        },
+        {
+          "pos": 16,
+          "form": "impíos",
+          "lemma": "impío",
+          "level": "C1",
+          "en": "ungodly"
+        },
+        {
+          "pos": 17,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 18,
+          "form": "convierten",
+          "lemma": "convertir",
+          "level": "A2",
+          "en": "turn"
+        },
+        {
+          "pos": 19,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 20,
+          "form": "gracia",
+          "lemma": "gracia",
+          "level": "B1",
+          "en": "grace"
+        },
+        {
+          "pos": 21,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 22,
+          "form": "nuestro",
+          "lemma": "nuestro",
+          "level": "A1",
+          "en": "our"
+        },
+        {
+          "pos": 23,
+          "form": "Dios",
+          "lemma": "Dios",
+          "level": "A1",
+          "en": "God"
+        },
+        {
+          "pos": 24,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "into"
+        },
+        {
+          "pos": 25,
+          "form": "libertinaje,",
+          "lemma": "libertinaje",
+          "level": "C1",
+          "en": "licentiousness"
+        },
+        {
+          "pos": 26,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 27,
+          "form": "niegan",
+          "lemma": "negar",
+          "level": "A2",
+          "en": "deny"
+        },
+        {
+          "pos": 28,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 29,
+          "form": "Dios,",
+          "lemma": "Dios",
+          "level": "A1",
+          "en": "God"
+        },
+        {
+          "pos": 30,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 31,
+          "form": "es",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "is"
+        },
+        {
+          "pos": 32,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 33,
+          "form": "único",
+          "lemma": "único",
+          "level": "A2",
+          "en": "only"
+        },
+        {
+          "pos": 34,
+          "form": "soberano,",
+          "lemma": "soberano",
+          "level": "B2",
+          "en": "sovereign"
+        },
+        {
+          "pos": 35,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 36,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 37,
+          "form": "nuestro",
+          "lemma": "nuestro",
+          "level": "A1",
+          "en": "our"
+        },
+        {
+          "pos": 38,
+          "form": "Señor",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 39,
+          "form": "Jesucristo.",
+          "lemma": "Jesucristo",
+          "level": "A1",
+          "en": "Jesus Christ"
+        }
+      ],
+      "5": [
+        {
+          "pos": 0,
+          "form": "Quiero",
+          "lemma": "querer",
+          "level": "A1",
+          "en": "I want"
+        },
+        {
+          "pos": 1,
+          "form": "recordarles,",
+          "lemma": "recordar",
+          "level": "A2",
+          "en": "to remind them"
+        },
+        {
+          "pos": 2,
+          "form": "aunque",
+          "lemma": "aunque",
+          "level": "A2",
+          "en": "although"
+        },
+        {
+          "pos": 3,
+          "form": "ya",
+          "lemma": "ya",
+          "level": "A1",
+          "en": "already"
+        },
+        {
+          "pos": 4,
+          "form": "conocen",
+          "lemma": "conocer",
+          "level": "A1",
+          "en": "they know"
+        },
+        {
+          "pos": 5,
+          "form": "todo",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "all"
+        },
+        {
+          "pos": 6,
+          "form": "esto,",
+          "lemma": "esto",
+          "level": "A1",
+          "en": "this"
+        },
+        {
+          "pos": 7,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 8,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 9,
+          "form": "Señor,",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 10,
+          "pos_end": 11,
+          "form": "después de",
+          "lemma": "después de",
+          "level": "A1",
+          "en": "after"
+        },
+        {
+          "pos": 10,
+          "form": "después",
+          "lemma": "después",
+          "level": "A1",
+          "en": "after"
+        },
+        {
+          "pos": 11,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 12,
+          "form": "salvar",
+          "lemma": "salvar",
+          "level": "A1",
+          "en": "saving"
+        },
+        {
+          "pos": 13,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 14,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "his"
+        },
+        {
+          "pos": 15,
+          "form": "pueblo",
+          "lemma": "pueblo",
+          "level": "A1",
+          "en": "people"
+        },
+        {
+          "pos": 16,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "from"
+        },
+        {
+          "pos": 17,
+          "form": "Egipto,",
+          "lemma": "Egipto",
+          "level": "A1",
+          "en": "Egypt"
+        },
+        {
+          "pos": 18,
+          "form": "destruyó",
+          "lemma": "destruir",
+          "level": "A2",
+          "en": "destroyed"
+        },
+        {
+          "pos": 19,
+          "form": "después",
+          "lemma": "después",
+          "level": "A1",
+          "en": "afterward"
+        },
+        {
+          "pos": 20,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 21,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "those"
+        },
+        {
+          "pos": 22,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 23,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "en": "not"
+        },
+        {
+          "pos": 24,
+          "form": "creyeron.",
+          "lemma": "creer",
+          "level": "A1",
+          "en": "believed"
+        }
+      ],
+      "6": [
+        {
+          "pos": 0,
+          "form": "A",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 1,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 2,
+          "form": "ángeles",
+          "lemma": "ángel",
+          "level": "A1",
+          "en": "angels"
+        },
+        {
+          "pos": 3,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 4,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "en": "not"
+        },
+        {
+          "pos": 5,
+          "form": "mantuvieron",
+          "lemma": "mantener",
+          "level": "A2",
+          "en": "kept"
+        },
+        {
+          "pos": 6,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 7,
+          "form": "posición",
+          "lemma": "posición",
+          "level": "A2",
+          "en": "position"
+        },
+        {
+          "pos": 8,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 9,
+          "form": "autoridad,",
+          "lemma": "autoridad",
+          "level": "B1",
+          "en": "authority"
+        },
+        {
+          "pos": 10,
+          "pos_end": 11,
+          "form": "sino que",
+          "lemma": "sino que",
+          "level": "B1",
+          "en": "but rather"
+        },
+        {
+          "pos": 10,
+          "form": "sino",
+          "lemma": "sino",
+          "level": "A2",
+          "en": "but"
+        },
+        {
+          "pos": 11,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 12,
+          "form": "abandonaron",
+          "lemma": "abandonar",
+          "level": "A2",
+          "en": "abandoned"
+        },
+        {
+          "pos": 13,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 14,
+          "form": "morada,",
+          "lemma": "morada",
+          "level": "B1",
+          "en": "dwelling"
+        },
+        {
+          "pos": 15,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "them"
+        },
+        {
+          "pos": 16,
+          "form": "ha",
+          "lemma": "haber",
+          "level": "A1",
+          "en": "has"
+        },
+        {
+          "pos": 17,
+          "form": "guardado",
+          "lemma": "guardar",
+          "level": "A2",
+          "en": "kept"
+        },
+        {
+          "pos": 18,
+          "form": "bajo",
+          "lemma": "bajo",
+          "level": "A1",
+          "en": "under"
+        },
+        {
+          "pos": 19,
+          "form": "oscuridad,",
+          "lemma": "oscuridad",
+          "level": "A2",
+          "en": "darkness"
+        },
+        {
+          "pos": 20,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 21,
+          "form": "prisiones",
+          "lemma": "prisión",
+          "level": "A1",
+          "en": "prisons"
+        },
+        {
+          "pos": 22,
+          "form": "eternas,",
+          "lemma": "eterno",
+          "level": "B1",
+          "en": "eternal"
+        },
+        {
+          "pos": 23,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 24,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 25,
+          "form": "juicio",
+          "lemma": "juicio",
+          "level": "A2",
+          "en": "judgment"
+        },
+        {
+          "pos": 26,
+          "form": "del",
+          "lemma": "del",
+          "level": "A1",
+          "en": "of the"
+        },
+        {
+          "pos": 27,
+          "form": "gran",
+          "lemma": "gran",
+          "level": "A1",
+          "en": "great"
+        },
+        {
+          "pos": 28,
+          "form": "día.",
+          "lemma": "día",
+          "level": "A1",
+          "en": "day"
+        }
+      ],
+      "7": [
+        {
+          "pos": 0,
+          "pos_end": 3,
+          "form": "De la misma manera,",
+          "lemma": "de la misma manera",
+          "level": "B1",
+          "en": "In the same way"
+        },
+        {
+          "pos": 0,
+          "form": "De",
+          "lemma": "de",
+          "level": "A1",
+          "en": "In"
+        },
+        {
+          "pos": 1,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 2,
+          "form": "misma",
+          "lemma": "mismo",
+          "level": "A2",
+          "en": "same"
+        },
+        {
+          "pos": 3,
+          "form": "manera,",
+          "lemma": "manera",
+          "level": "A2",
+          "en": "way"
+        },
+        {
+          "pos": 4,
+          "form": "Sodoma",
+          "lemma": "Sodoma",
+          "level": "A1",
+          "en": "Sodom"
+        },
+        {
+          "pos": 5,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 6,
+          "form": "Gomorra",
+          "lemma": "Gomorra",
+          "level": "A1",
+          "en": "Gomorrah"
+        },
+        {
+          "pos": 7,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 8,
+          "form": "las",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 9,
+          "form": "ciudades",
+          "lemma": "ciudad",
+          "level": "A1",
+          "en": "cities"
+        },
+        {
+          "pos": 10,
+          "form": "vecinas,",
+          "lemma": "vecino",
+          "level": "B1",
+          "en": "neighboring"
+        },
+        {
+          "pos": 11,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "which"
+        },
+        {
+          "pos": 12,
+          "form": "también",
+          "lemma": "también",
+          "level": "A1",
+          "en": "also"
+        },
+        {
+          "pos": 13,
+          "pos_end": 14,
+          "form": "se entregaron",
+          "lemma": "entregarse",
+          "level": "B1",
+          "en": "gave themselves over"
+        },
+        {
+          "pos": 13,
+          "form": "se",
+          "lemma": "se",
+          "level": "A1",
+          "en": "(reflexive)"
+        },
+        {
+          "pos": 14,
+          "form": "entregaron",
+          "lemma": "entregar",
+          "level": "B1",
+          "en": "gave"
+        },
+        {
+          "pos": 15,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 16,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 17,
+          "form": "inmoralidad",
+          "lemma": "inmoralidad",
+          "level": "B2",
+          "en": "immorality"
+        },
+        {
+          "pos": 18,
+          "form": "sexual",
+          "lemma": "sexual",
+          "level": "B1",
+          "en": "sexual"
+        },
+        {
+          "pos": 19,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 20,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 21,
+          "form": "prácticas",
+          "lemma": "práctica",
+          "level": "B1",
+          "en": "practices"
+        },
+        {
+          "pos": 22,
+          "form": "contra",
+          "lemma": "contra",
+          "level": "A2",
+          "en": "against"
+        },
+        {
+          "pos": 23,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 24,
+          "form": "naturaleza,",
+          "lemma": "naturaleza",
+          "level": "A2",
+          "en": "nature"
+        },
+        {
+          "pos": 25,
+          "pos_end": 27,
+          "form": "sirven de ejemplo",
+          "lemma": "servir de ejemplo",
+          "level": "B1",
+          "en": "serve as an example"
+        },
+        {
+          "pos": 25,
+          "form": "sirven",
+          "lemma": "servir",
+          "level": "A2",
+          "en": "serve"
+        },
+        {
+          "pos": 26,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "as"
+        },
+        {
+          "pos": 27,
+          "form": "ejemplo",
+          "lemma": "ejemplo",
+          "level": "A2",
+          "en": "example"
+        },
+        {
+          "pos": 28,
+          "pos_end": 29,
+          "form": "al sufrir",
+          "lemma": "al sufrir",
+          "level": "B1",
+          "en": "as they suffer"
+        },
+        {
+          "pos": 28,
+          "form": "al",
+          "lemma": "al",
+          "level": "A1",
+          "en": "upon"
+        },
+        {
+          "pos": 29,
+          "form": "sufrir",
+          "lemma": "sufrir",
+          "level": "A2",
+          "en": "suffering"
+        },
+        {
+          "pos": 30,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 31,
+          "form": "castigo",
+          "lemma": "castigo",
+          "level": "B1",
+          "en": "punishment"
+        },
+        {
+          "pos": 32,
+          "form": "del",
+          "lemma": "del",
+          "level": "A1",
+          "en": "of the"
+        },
+        {
+          "pos": 33,
+          "form": "fuego",
+          "lemma": "fuego",
+          "level": "A1",
+          "en": "fire"
+        },
+        {
+          "pos": 34,
+          "form": "eterno.",
+          "lemma": "eterno",
+          "level": "B1",
+          "en": "eternal"
+        }
+      ],
+      "8": [
+        {
+          "pos": 0,
+          "pos_end": 2,
+          "form": "De igual manera,",
+          "lemma": "de igual manera",
+          "level": "B1",
+          "en": "Likewise"
+        },
+        {
+          "pos": 0,
+          "form": "De",
+          "lemma": "de",
+          "level": "A1",
+          "en": "In"
+        },
+        {
+          "pos": 1,
+          "form": "igual",
+          "lemma": "igual",
+          "level": "A2",
+          "en": "equal"
+        },
+        {
+          "pos": 2,
+          "form": "manera,",
+          "lemma": "manera",
+          "level": "A2",
+          "en": "way"
+        },
+        {
+          "pos": 3,
+          "form": "estos",
+          "lemma": "este",
+          "level": "A1",
+          "en": "these"
+        },
+        {
+          "pos": 4,
+          "form": "individuos,",
+          "lemma": "individuo",
+          "level": "B1",
+          "en": "individuals"
+        },
+        {
+          "pos": 5,
+          "form": "llevados",
+          "lemma": "llevar",
+          "level": "B1",
+          "en": "carried away"
+        },
+        {
+          "pos": 6,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 7,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 8,
+          "form": "sueños,",
+          "lemma": "sueño",
+          "level": "A2",
+          "en": "dreams"
+        },
+        {
+          "pos": 9,
+          "form": "contaminan",
+          "lemma": "contaminar",
+          "level": "B1",
+          "en": "contaminate"
+        },
+        {
+          "pos": 10,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 11,
+          "form": "cuerpo,",
+          "lemma": "cuerpo",
+          "level": "A1",
+          "en": "body"
+        },
+        {
+          "pos": 12,
+          "form": "desprecian",
+          "lemma": "despreciar",
+          "level": "B1",
+          "en": "despise"
+        },
+        {
+          "pos": 13,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 14,
+          "form": "autoridad",
+          "lemma": "autoridad",
+          "level": "B1",
+          "en": "authority"
+        },
+        {
+          "pos": 15,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 16,
+          "pos_end": 17,
+          "form": "hablan mal",
+          "lemma": "hablar mal",
+          "level": "B1",
+          "en": "speak evil"
+        },
+        {
+          "pos": 16,
+          "form": "hablan",
+          "lemma": "hablar",
+          "level": "A1",
+          "en": "speak"
+        },
+        {
+          "pos": 17,
+          "form": "mal",
+          "lemma": "mal",
+          "level": "A2",
+          "en": "badly"
+        },
+        {
+          "pos": 18,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 19,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 20,
+          "form": "seres",
+          "lemma": "ser",
+          "level": "B1",
+          "en": "beings"
+        },
+        {
+          "pos": 21,
+          "form": "celestiales.",
+          "lemma": "celestial",
+          "level": "B2",
+          "en": "celestial"
+        }
+      ],
+      "9": [
+        {
+          "pos": 0,
+          "pos_end": 1,
+          "form": "Sin embargo,",
+          "lemma": "sin embargo",
+          "level": "A2",
+          "en": "However"
+        },
+        {
+          "pos": 0,
+          "form": "Sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 1,
+          "form": "embargo,",
+          "lemma": "embargo",
+          "level": "C1",
+          "en": "hindrance"
+        },
+        {
+          "pos": 2,
+          "form": "cuando",
+          "lemma": "cuando",
+          "level": "A1",
+          "en": "when"
+        },
+        {
+          "pos": 3,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 4,
+          "form": "arcángel",
+          "lemma": "arcángel",
+          "level": "B2",
+          "en": "archangel"
+        },
+        {
+          "pos": 5,
+          "form": "Miguel",
+          "lemma": "Miguel",
+          "level": "A1",
+          "en": "Michael"
+        },
+        {
+          "pos": 6,
+          "form": "disputaba",
+          "lemma": "disputar",
+          "level": "B1",
+          "en": "disputed"
+        },
+        {
+          "pos": 7,
+          "form": "con",
+          "lemma": "con",
+          "level": "A1",
+          "en": "with"
+        },
+        {
+          "pos": 8,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 9,
+          "form": "diablo",
+          "lemma": "diablo",
+          "level": "A2",
+          "en": "devil"
+        },
+        {
+          "pos": 10,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "over"
+        },
+        {
+          "pos": 11,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 12,
+          "form": "cuerpo",
+          "lemma": "cuerpo",
+          "level": "A1",
+          "en": "body"
+        },
+        {
+          "pos": 13,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 14,
+          "form": "Moisés,",
+          "lemma": "Moisés",
+          "level": "A1",
+          "en": "Moses"
+        },
+        {
+          "pos": 15,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "en": "not"
+        },
+        {
+          "pos": 16,
+          "pos_end": 17,
+          "form": "se atrevió",
+          "lemma": "atreverse",
+          "level": "B1",
+          "en": "dared"
+        },
+        {
+          "pos": 16,
+          "form": "se",
+          "lemma": "se",
+          "level": "A1",
+          "en": "(reflexive)"
+        },
+        {
+          "pos": 17,
+          "form": "atrevió",
+          "lemma": "atrever",
+          "level": "B1",
+          "en": "dared"
+        },
+        {
+          "pos": 18,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 19,
+          "form": "lanzar",
+          "lemma": "lanzar",
+          "level": "B1",
+          "en": "bring"
+        },
+        {
+          "pos": 20,
+          "form": "contra",
+          "lemma": "contra",
+          "level": "A2",
+          "en": "against"
+        },
+        {
+          "pos": 21,
+          "form": "él",
+          "lemma": "él",
+          "level": "A1",
+          "en": "him"
+        },
+        {
+          "pos": 22,
+          "form": "un",
+          "lemma": "uno",
+          "level": "A1",
+          "en": "a"
+        },
+        {
+          "pos": 23,
+          "form": "juicio",
+          "lemma": "juicio",
+          "level": "A2",
+          "en": "judgment"
+        },
+        {
+          "pos": 24,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 25,
+          "form": "condenación,",
+          "lemma": "condenación",
+          "level": "B2",
+          "en": "condemnation"
+        },
+        {
+          "pos": 26,
+          "pos_end": 27,
+          "form": "sino que",
+          "lemma": "sino que",
+          "level": "B1",
+          "en": "but"
+        },
+        {
+          "pos": 26,
+          "form": "sino",
+          "lemma": "sino",
+          "level": "A2",
+          "en": "but"
+        },
+        {
+          "pos": 27,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 28,
+          "form": "dijo:",
+          "lemma": "decir",
+          "level": "A1",
+          "en": "said"
+        },
+        {
+          "pos": 29,
+          "form": "«Que",
+          "lemma": "que",
+          "level": "A2",
+          "en": "May"
+        },
+        {
+          "pos": 30,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 31,
+          "form": "Señor",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 32,
+          "form": "te",
+          "lemma": "tú",
+          "level": "A1",
+          "en": "you"
+        },
+        {
+          "pos": 33,
+          "form": "reprenda».",
+          "lemma": "reprender",
+          "level": "B1",
+          "en": "rebuke"
+        }
+      ],
+      "10": [
+        {
+          "pos": 0,
+          "form": "Pero",
+          "lemma": "pero",
+          "level": "A1",
+          "en": "But"
+        },
+        {
+          "pos": 1,
+          "form": "estos",
+          "lemma": "este",
+          "level": "A1",
+          "en": "these"
+        },
+        {
+          "pos": 2,
+          "pos_end": 3,
+          "form": "hablan mal",
+          "lemma": "hablar mal",
+          "level": "B1",
+          "en": "speak evil"
+        },
+        {
+          "pos": 2,
+          "form": "hablan",
+          "lemma": "hablar",
+          "level": "A1",
+          "en": "speak"
+        },
+        {
+          "pos": 3,
+          "form": "mal",
+          "lemma": "mal",
+          "level": "A2",
+          "en": "badly"
+        },
+        {
+          "pos": 4,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "about"
+        },
+        {
+          "pos": 5,
+          "pos_end": 6,
+          "form": "lo que",
+          "lemma": "lo que",
+          "level": "A2",
+          "en": "what"
+        },
+        {
+          "pos": 5,
+          "form": "lo",
+          "lemma": "lo",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 6,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 7,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "en": "not"
+        },
+        {
+          "pos": 8,
+          "form": "conocen,",
+          "lemma": "conocer",
+          "level": "A1",
+          "en": "they know"
+        },
+        {
+          "pos": 9,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 10,
+          "pos_end": 12,
+          "form": "lo poco que",
+          "lemma": "lo poco que",
+          "level": "B1",
+          "en": "the little that"
+        },
+        {
+          "pos": 10,
+          "form": "lo",
+          "lemma": "lo",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 11,
+          "form": "poco",
+          "lemma": "poco",
+          "level": "A1",
+          "en": "little"
+        },
+        {
+          "pos": 12,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 13,
+          "form": "entienden",
+          "lemma": "entender",
+          "level": "A1",
+          "en": "they understand"
+        },
+        {
+          "pos": 14,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 15,
+          "form": "instinto,",
+          "lemma": "instinto",
+          "level": "B1",
+          "en": "instinct"
+        },
+        {
+          "pos": 16,
+          "form": "como",
+          "lemma": "como",
+          "level": "A1",
+          "en": "like"
+        },
+        {
+          "pos": 17,
+          "form": "animales",
+          "lemma": "animal",
+          "level": "A1",
+          "en": "animals"
+        },
+        {
+          "pos": 18,
+          "form": "irracionales,",
+          "lemma": "irracional",
+          "level": "B2",
+          "en": "irrational"
+        },
+        {
+          "pos": 19,
+          "form": "eso",
+          "lemma": "eso",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 20,
+          "form": "mismo",
+          "lemma": "mismo",
+          "level": "A2",
+          "en": "very"
+        },
+        {
+          "pos": 21,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "them"
+        },
+        {
+          "pos": 22,
+          "form": "corrompe.",
+          "lemma": "corromper",
+          "level": "B1",
+          "en": "corrupts"
+        }
+      ],
+      "11": [
+        {
+          "pos": 0,
+          "pos_end": 1,
+          "form": "¡Ay de",
+          "lemma": "ay de",
+          "level": "B2",
+          "en": "Woe to"
+        },
+        {
+          "pos": 0,
+          "form": "¡Ay",
+          "lemma": "ay",
+          "level": "B2",
+          "en": "Woe"
+        },
+        {
+          "pos": 1,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 2,
+          "form": "ellos!",
+          "lemma": "ellos",
+          "level": "A1",
+          "en": "them"
+        },
+        {
+          "pos": 3,
+          "form": "Porque",
+          "lemma": "porque",
+          "level": "A1",
+          "en": "Because"
+        },
+        {
+          "pos": 4,
+          "form": "han",
+          "lemma": "haber",
+          "level": "A1",
+          "en": "have"
+        },
+        {
+          "pos": 5,
+          "form": "seguido",
+          "lemma": "seguir",
+          "level": "A1",
+          "en": "followed"
+        },
+        {
+          "pos": 6,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 7,
+          "form": "camino",
+          "lemma": "camino",
+          "level": "A1",
+          "en": "way"
+        },
+        {
+          "pos": 8,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 9,
+          "form": "Caín,",
+          "lemma": "Caín",
+          "level": "A1",
+          "en": "Cain"
+        },
+        {
+          "pos": 10,
+          "pos_end": 11,
+          "form": "se lanzaron",
+          "lemma": "lanzarse",
+          "level": "B1",
+          "en": "rushed"
+        },
+        {
+          "pos": 10,
+          "form": "se",
+          "lemma": "se",
+          "level": "A1",
+          "en": "(reflexive)"
+        },
+        {
+          "pos": 11,
+          "form": "lanzaron",
+          "lemma": "lanzar",
+          "level": "B1",
+          "en": "threw themselves"
+        },
+        {
+          "pos": 12,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 13,
+          "form": "dinero",
+          "lemma": "dinero",
+          "level": "A1",
+          "en": "money"
+        },
+        {
+          "pos": 14,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "into"
+        },
+        {
+          "pos": 15,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 16,
+          "form": "error",
+          "lemma": "error",
+          "level": "A2",
+          "en": "error"
+        },
+        {
+          "pos": 17,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 18,
+          "form": "Balaam,",
+          "lemma": "Balaam",
+          "level": "A1",
+          "en": "Balaam"
+        },
+        {
+          "pos": 19,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 20,
+          "form": "perecieron",
+          "lemma": "perecer",
+          "level": "B1",
+          "en": "perished"
+        },
+        {
+          "pos": 21,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 22,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 23,
+          "form": "rebelión",
+          "lemma": "rebelión",
+          "level": "B1",
+          "en": "rebellion"
+        },
+        {
+          "pos": 24,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 25,
+          "form": "Coré.",
+          "lemma": "Coré",
+          "level": "A1",
+          "en": "Korah"
+        }
+      ],
+      "12": [
+        {
+          "pos": 0,
+          "form": "Estos",
+          "lemma": "este",
+          "level": "A1",
+          "en": "These"
+        },
+        {
+          "pos": 1,
+          "form": "son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "are"
+        },
+        {
+          "pos": 2,
+          "form": "manchas",
+          "lemma": "mancha",
+          "level": "B1",
+          "en": "blemishes"
+        },
+        {
+          "pos": 3,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "at"
+        },
+        {
+          "pos": 4,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 5,
+          "form": "comidas",
+          "lemma": "comida",
+          "level": "A2",
+          "en": "meals"
+        },
+        {
+          "pos": 6,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 7,
+          "form": "compañerismo,",
+          "lemma": "compañerismo",
+          "level": "B2",
+          "en": "fellowship"
+        },
+        {
+          "pos": 8,
+          "form": "donde",
+          "lemma": "donde",
+          "level": "A1",
+          "en": "where"
+        },
+        {
+          "pos": 9,
+          "form": "banquetean",
+          "lemma": "banquetear",
+          "level": "B2",
+          "en": "they feast"
+        },
+        {
+          "pos": 10,
+          "form": "sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 11,
+          "form": "ningún",
+          "lemma": "ninguno",
+          "level": "A1",
+          "en": "any"
+        },
+        {
+          "pos": 12,
+          "form": "temor,",
+          "lemma": "temor",
+          "level": "A1",
+          "en": "fear"
+        },
+        {
+          "pos": 13,
+          "form": "buscando",
+          "lemma": "buscar",
+          "level": "A1",
+          "en": "seeking"
+        },
+        {
+          "pos": 14,
+          "form": "solo",
+          "lemma": "solo",
+          "level": "A1",
+          "en": "only"
+        },
+        {
+          "pos": 15,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 16,
+          "form": "propio",
+          "lemma": "propio",
+          "level": "A1",
+          "en": "own"
+        },
+        {
+          "pos": 17,
+          "form": "provecho.",
+          "lemma": "provecho",
+          "level": "B1",
+          "en": "benefit"
+        },
+        {
+          "pos": 18,
+          "form": "Son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "They are"
+        },
+        {
+          "pos": 19,
+          "form": "nubes",
+          "lemma": "nube",
+          "level": "A1",
+          "en": "clouds"
+        },
+        {
+          "pos": 20,
+          "form": "sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 21,
+          "form": "agua,",
+          "lemma": "agua",
+          "level": "A1",
+          "en": "water"
+        },
+        {
+          "pos": 22,
+          "form": "arrastradas",
+          "lemma": "arrastrar",
+          "level": "B1",
+          "en": "driven"
+        },
+        {
+          "pos": 23,
+          "pos_end": 27,
+          "form": "de un lado a otro",
+          "lemma": "de un lado a otro",
+          "level": "B1",
+          "en": "from side to side"
+        },
+        {
+          "pos": 23,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "from"
+        },
+        {
+          "pos": 24,
+          "form": "un",
+          "lemma": "uno",
+          "level": "A1",
+          "en": "a"
+        },
+        {
+          "pos": 25,
+          "form": "lado",
+          "lemma": "lado",
+          "level": "A2",
+          "en": "side"
+        },
+        {
+          "pos": 26,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 27,
+          "form": "otro",
+          "lemma": "otro",
+          "level": "A1",
+          "en": "other"
+        },
+        {
+          "pos": 28,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 29,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 30,
+          "form": "viento;",
+          "lemma": "viento",
+          "level": "A1",
+          "en": "wind"
+        },
+        {
+          "pos": 31,
+          "form": "árboles",
+          "lemma": "árbol",
+          "level": "A1",
+          "en": "trees"
+        },
+        {
+          "pos": 32,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 33,
+          "form": "otoño",
+          "lemma": "otoño",
+          "level": "A2",
+          "en": "autumn"
+        },
+        {
+          "pos": 34,
+          "form": "sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 35,
+          "form": "fruto,",
+          "lemma": "fruto",
+          "level": "A1",
+          "en": "fruit"
+        },
+        {
+          "pos": 36,
+          "pos_end": 37,
+          "form": "dos veces",
+          "lemma": "dos veces",
+          "level": "A2",
+          "en": "twice"
+        },
+        {
+          "pos": 36,
+          "form": "dos",
+          "lemma": "dos",
+          "level": "A1",
+          "en": "two"
+        },
+        {
+          "pos": 37,
+          "form": "veces",
+          "lemma": "vez",
+          "level": "A1",
+          "en": "times"
+        },
+        {
+          "pos": 38,
+          "form": "muertos,",
+          "lemma": "muerto",
+          "level": "A1",
+          "en": "dead"
+        },
+        {
+          "pos": 39,
+          "form": "arrancados",
+          "lemma": "arrancar",
+          "level": "B1",
+          "en": "uprooted"
+        },
+        {
+          "pos": 40,
+          "pos_end": 41,
+          "form": "de raíz;",
+          "lemma": "de raíz",
+          "level": "B1",
+          "en": "by the root"
+        },
+        {
+          "pos": 40,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 41,
+          "form": "raíz;",
+          "lemma": "raíz",
+          "level": "A2",
+          "en": "root"
+        }
+      ],
+      "13": [
+        {
+          "pos": 0,
+          "form": "olas",
+          "lemma": "ola",
+          "level": "A1",
+          "en": "waves"
+        },
+        {
+          "pos": 1,
+          "form": "violentas",
+          "lemma": "violento",
+          "level": "A2",
+          "en": "violent"
+        },
+        {
+          "pos": 2,
+          "form": "del",
+          "lemma": "del",
+          "level": "A1",
+          "en": "of the"
+        },
+        {
+          "pos": 3,
+          "form": "mar,",
+          "lemma": "mar",
+          "level": "A1",
+          "en": "sea"
+        },
+        {
+          "pos": 4,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "which"
+        },
+        {
+          "pos": 5,
+          "form": "arrojan",
+          "lemma": "arrojar",
+          "level": "B1",
+          "en": "cast up"
+        },
+        {
+          "pos": 6,
+          "form": "como",
+          "lemma": "como",
+          "level": "A1",
+          "en": "as"
+        },
+        {
+          "pos": 7,
+          "form": "espuma",
+          "lemma": "espuma",
+          "level": "B1",
+          "en": "foam"
+        },
+        {
+          "pos": 8,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 9,
+          "form": "propias",
+          "lemma": "propio",
+          "level": "A1",
+          "en": "own"
+        },
+        {
+          "pos": 10,
+          "form": "vergüenzas;",
+          "lemma": "vergüenza",
+          "level": "B1",
+          "en": "shameful deeds"
+        },
+        {
+          "pos": 11,
+          "form": "estrellas",
+          "lemma": "estrella",
+          "level": "A1",
+          "en": "stars"
+        },
+        {
+          "pos": 12,
+          "form": "errantes,",
+          "lemma": "errante",
+          "level": "B2",
+          "en": "wandering"
+        },
+        {
+          "pos": 13,
+          "pos_end": 15,
+          "form": "para las cuales",
+          "lemma": "para el cual",
+          "level": "B1",
+          "en": "for whom"
+        },
+        {
+          "pos": 13,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 14,
+          "form": "las",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 15,
+          "form": "cuales",
+          "lemma": "cual",
+          "level": "A2",
+          "en": "which"
+        },
+        {
+          "pos": 16,
+          "form": "está",
+          "lemma": "estar",
+          "level": "A1",
+          "en": "is"
+        },
+        {
+          "pos": 17,
+          "form": "reservada",
+          "lemma": "reservar",
+          "level": "B1",
+          "en": "reserved"
+        },
+        {
+          "pos": 18,
+          "pos_end": 19,
+          "form": "para siempre",
+          "lemma": "para siempre",
+          "level": "A1",
+          "en": "forever"
+        },
+        {
+          "pos": 18,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 19,
+          "form": "siempre",
+          "lemma": "siempre",
+          "level": "A1",
+          "en": "always"
+        },
+        {
+          "pos": 20,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 21,
+          "form": "más",
+          "lemma": "más",
+          "level": "A1",
+          "en": "most"
+        },
+        {
+          "pos": 22,
+          "form": "densa",
+          "lemma": "denso",
+          "level": "B1",
+          "en": "deepest"
+        },
+        {
+          "pos": 23,
+          "form": "oscuridad.",
+          "lemma": "oscuridad",
+          "level": "A2",
+          "en": "darkness"
+        }
+      ],
+      "14": [
+        {
+          "pos": 0,
+          "form": "También",
+          "lemma": "también",
+          "level": "A1",
+          "en": "Also"
+        },
+        {
+          "pos": 1,
+          "form": "Enoc,",
+          "lemma": "Enoc",
+          "level": "A1",
+          "en": "Enoch"
+        },
+        {
+          "pos": 2,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 3,
+          "form": "séptimo",
+          "lemma": "séptimo",
+          "level": "A2",
+          "en": "seventh"
+        },
+        {
+          "pos": 4,
+          "form": "descendiente",
+          "lemma": "descendiente",
+          "level": "B1",
+          "en": "descendant"
+        },
+        {
+          "pos": 5,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 6,
+          "form": "Adán,",
+          "lemma": "Adán",
+          "level": "A1",
+          "en": "Adam"
+        },
+        {
+          "pos": 7,
+          "form": "profetizó",
+          "lemma": "profetizar",
+          "level": "B1",
+          "en": "prophesied"
+        },
+        {
+          "pos": 8,
+          "pos_end": 9,
+          "form": "acerca de",
+          "lemma": "acerca de",
+          "level": "A2",
+          "en": "about"
+        },
+        {
+          "pos": 8,
+          "form": "acerca",
+          "lemma": "acerca",
+          "level": "A2",
+          "en": "about"
+        },
+        {
+          "pos": 9,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 10,
+          "form": "ellos,",
+          "lemma": "ellos",
+          "level": "A1",
+          "en": "them"
+        },
+        {
+          "pos": 11,
+          "form": "diciendo:",
+          "lemma": "decir",
+          "level": "A1",
+          "en": "saying"
+        },
+        {
+          "pos": 12,
+          "form": "«El",
+          "lemma": "el",
+          "level": "A1",
+          "en": "The"
+        },
+        {
+          "pos": 13,
+          "form": "Señor",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 14,
+          "form": "viene",
+          "lemma": "venir",
+          "level": "A1",
+          "en": "comes"
+        },
+        {
+          "pos": 15,
+          "form": "con",
+          "lemma": "con",
+          "level": "A1",
+          "en": "with"
+        },
+        {
+          "pos": 16,
+          "form": "millares",
+          "lemma": "millar",
+          "level": "B1",
+          "en": "thousands"
+        },
+        {
+          "pos": 17,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 18,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "his"
+        },
+        {
+          "pos": 19,
+          "form": "santos,",
+          "lemma": "santo",
+          "level": "B1",
+          "en": "holy ones"
+        }
+      ],
+      "15": [
+        {
+          "pos": 0,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 1,
+          "form": "juzgar",
+          "lemma": "juzgar",
+          "level": "A2",
+          "en": "judge"
+        },
+        {
+          "pos": 2,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 3,
+          "form": "todos",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "everyone"
+        },
+        {
+          "pos": 4,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 5,
+          "pos_end": 7,
+          "form": "dejar en evidencia",
+          "lemma": "dejar en evidencia",
+          "level": "B2",
+          "en": "to expose"
+        },
+        {
+          "pos": 5,
+          "form": "dejar",
+          "lemma": "dejar",
+          "level": "A1",
+          "en": "leave"
+        },
+        {
+          "pos": 6,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 7,
+          "form": "evidencia",
+          "lemma": "evidencia",
+          "level": "B1",
+          "en": "evidence"
+        },
+        {
+          "pos": 8,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 9,
+          "form": "todos",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "all"
+        },
+        {
+          "pos": 10,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 11,
+          "form": "impíos",
+          "lemma": "impío",
+          "level": "C1",
+          "en": "ungodly"
+        },
+        {
+          "pos": 12,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 13,
+          "form": "todas",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "all"
+        },
+        {
+          "pos": 14,
+          "form": "las",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 15,
+          "form": "obras",
+          "lemma": "obra",
+          "level": "A2",
+          "en": "works"
+        },
+        {
+          "pos": 16,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 17,
+          "form": "impiedad",
+          "lemma": "impiedad",
+          "level": "C1",
+          "en": "ungodliness"
+        },
+        {
+          "pos": 18,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 19,
+          "form": "han",
+          "lemma": "haber",
+          "level": "A1",
+          "en": "have"
+        },
+        {
+          "pos": 20,
+          "form": "cometido,",
+          "lemma": "cometer",
+          "level": "B1",
+          "en": "committed"
+        },
+        {
+          "pos": 21,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 22,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 23,
+          "form": "todas",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "all"
+        },
+        {
+          "pos": 24,
+          "form": "las",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 25,
+          "form": "palabras",
+          "lemma": "palabra",
+          "level": "A1",
+          "en": "words"
+        },
+        {
+          "pos": 26,
+          "form": "ofensivas",
+          "lemma": "ofensivo",
+          "level": "B2",
+          "en": "offensive"
+        },
+        {
+          "pos": 27,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 28,
+          "form": "esos",
+          "lemma": "ese",
+          "level": "A1",
+          "en": "those"
+        },
+        {
+          "pos": 29,
+          "form": "pecadores",
+          "lemma": "pecador",
+          "level": "B1",
+          "en": "sinners"
+        },
+        {
+          "pos": 30,
+          "form": "impíos",
+          "lemma": "impío",
+          "level": "C1",
+          "en": "ungodly"
+        },
+        {
+          "pos": 31,
+          "form": "han",
+          "lemma": "haber",
+          "level": "A1",
+          "en": "have"
+        },
+        {
+          "pos": 32,
+          "form": "hablado",
+          "lemma": "hablar",
+          "level": "A1",
+          "en": "spoken"
+        },
+        {
+          "pos": 33,
+          "form": "contra",
+          "lemma": "contra",
+          "level": "A2",
+          "en": "against"
+        },
+        {
+          "pos": 34,
+          "form": "él».",
+          "lemma": "él",
+          "level": "A1",
+          "en": "him"
+        }
+      ],
+      "16": [
+        {
+          "pos": 0,
+          "form": "Estos",
+          "lemma": "este",
+          "level": "A1",
+          "en": "These"
+        },
+        {
+          "pos": 1,
+          "form": "son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "are"
+        },
+        {
+          "pos": 2,
+          "form": "quejumbrosos",
+          "lemma": "quejumbroso",
+          "level": "C1",
+          "en": "complainers"
+        },
+        {
+          "pos": 3,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 4,
+          "form": "descontentos,",
+          "lemma": "descontento",
+          "level": "B2",
+          "en": "malcontents"
+        },
+        {
+          "pos": 5,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 6,
+          "form": "viven",
+          "lemma": "vivir",
+          "level": "A1",
+          "en": "live"
+        },
+        {
+          "pos": 7,
+          "form": "según",
+          "lemma": "según",
+          "level": "A2",
+          "en": "according to"
+        },
+        {
+          "pos": 8,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 9,
+          "form": "propios",
+          "lemma": "propio",
+          "level": "A1",
+          "en": "own"
+        },
+        {
+          "pos": 10,
+          "form": "deseos;",
+          "lemma": "deseo",
+          "level": "A2",
+          "en": "desires"
+        },
+        {
+          "pos": 11,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 12,
+          "form": "boca",
+          "lemma": "boca",
+          "level": "A1",
+          "en": "mouth"
+        },
+        {
+          "pos": 13,
+          "form": "habla",
+          "lemma": "hablar",
+          "level": "A1",
+          "en": "speaks"
+        },
+        {
+          "pos": 14,
+          "form": "con",
+          "lemma": "con",
+          "level": "A1",
+          "en": "with"
+        },
+        {
+          "pos": 15,
+          "form": "arrogancia,",
+          "lemma": "arrogancia",
+          "level": "B2",
+          "en": "arrogance"
+        },
+        {
+          "pos": 16,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 17,
+          "form": "adulan",
+          "lemma": "adular",
+          "level": "C1",
+          "en": "flatter"
+        },
+        {
+          "pos": 18,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 19,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 20,
+          "form": "demás",
+          "lemma": "demás",
+          "level": "A2",
+          "en": "others"
+        },
+        {
+          "pos": 21,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 22,
+          "pos_end": 23,
+          "form": "sacar provecho.",
+          "lemma": "sacar provecho",
+          "level": "B1",
+          "en": "gain advantage"
+        },
+        {
+          "pos": 22,
+          "form": "sacar",
+          "lemma": "sacar",
+          "level": "A2",
+          "en": "gain"
+        },
+        {
+          "pos": 23,
+          "form": "provecho.",
+          "lemma": "provecho",
+          "level": "B1",
+          "en": "benefit"
+        }
+      ],
+      "17": [
+        {
+          "pos": 0,
+          "form": "Pero",
+          "lemma": "pero",
+          "level": "A1",
+          "en": "But"
+        },
+        {
+          "pos": 1,
+          "form": "ustedes,",
+          "lemma": "usted",
+          "level": "A1",
+          "en": "you"
+        },
+        {
+          "pos": 2,
+          "form": "amados,",
+          "lemma": "amado",
+          "level": "B1",
+          "en": "beloved"
+        },
+        {
+          "pos": 3,
+          "form": "recuerden",
+          "lemma": "recordar",
+          "level": "A1",
+          "en": "remember"
+        },
+        {
+          "pos": 4,
+          "form": "las",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 5,
+          "form": "palabras",
+          "lemma": "palabra",
+          "level": "A1",
+          "en": "words"
+        },
+        {
+          "pos": 6,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 7,
+          "form": "antes",
+          "lemma": "antes",
+          "level": "A1",
+          "en": "before"
+        },
+        {
+          "pos": 8,
+          "form": "dijeron",
+          "lemma": "decir",
+          "level": "A1",
+          "en": "said"
+        },
+        {
+          "pos": 9,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 10,
+          "form": "apóstoles",
+          "lemma": "apóstol",
+          "level": "B1",
+          "en": "apostles"
+        },
+        {
+          "pos": 11,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 12,
+          "form": "nuestro",
+          "lemma": "nuestro",
+          "level": "A1",
+          "en": "our"
+        },
+        {
+          "pos": 13,
+          "form": "Señor",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 14,
+          "form": "Jesucristo,",
+          "lemma": "Jesucristo",
+          "level": "A1",
+          "en": "Jesus Christ"
+        }
+      ],
+      "18": [
+        {
+          "pos": 0,
+          "form": "quienes",
+          "lemma": "quien",
+          "level": "A2",
+          "en": "who"
+        },
+        {
+          "pos": 1,
+          "form": "les",
+          "lemma": "les",
+          "level": "A1",
+          "en": "to them"
+        },
+        {
+          "pos": 2,
+          "form": "decían",
+          "lemma": "decir",
+          "level": "A1",
+          "en": "told"
+        },
+        {
+          "pos": 3,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "that"
+        },
+        {
+          "pos": 4,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 5,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 6,
+          "form": "últimos",
+          "lemma": "último",
+          "level": "A2",
+          "en": "last"
+        },
+        {
+          "pos": 7,
+          "form": "tiempos",
+          "lemma": "tiempo",
+          "level": "A1",
+          "en": "times"
+        },
+        {
+          "pos": 8,
+          "form": "habría",
+          "lemma": "haber",
+          "level": "A2",
+          "en": "there would be"
+        },
+        {
+          "pos": 9,
+          "form": "burladores",
+          "lemma": "burlador",
+          "level": "C1",
+          "en": "scoffers"
+        },
+        {
+          "pos": 10,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 11,
+          "form": "vivirían",
+          "lemma": "vivir",
+          "level": "A1",
+          "en": "would live"
+        },
+        {
+          "pos": 12,
+          "form": "según",
+          "lemma": "según",
+          "level": "A2",
+          "en": "according to"
+        },
+        {
+          "pos": 13,
+          "form": "sus",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 14,
+          "form": "propios",
+          "lemma": "propio",
+          "level": "A1",
+          "en": "own"
+        },
+        {
+          "pos": 15,
+          "form": "deseos",
+          "lemma": "deseo",
+          "level": "A2",
+          "en": "desires"
+        },
+        {
+          "pos": 16,
+          "form": "malvados.",
+          "lemma": "malvado",
+          "level": "B1",
+          "en": "wicked"
+        }
+      ],
+      "19": [
+        {
+          "pos": 0,
+          "form": "Estos",
+          "lemma": "este",
+          "level": "A1",
+          "en": "These"
+        },
+        {
+          "pos": 1,
+          "form": "son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "are"
+        },
+        {
+          "pos": 2,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the ones"
+        },
+        {
+          "pos": 3,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 4,
+          "form": "provocan",
+          "lemma": "provocar",
+          "level": "A2",
+          "en": "cause"
+        },
+        {
+          "pos": 5,
+          "form": "divisiones;",
+          "lemma": "división",
+          "level": "B1",
+          "en": "divisions"
+        },
+        {
+          "pos": 6,
+          "form": "son",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "are"
+        },
+        {
+          "pos": 7,
+          "form": "personas",
+          "lemma": "persona",
+          "level": "A1",
+          "en": "people"
+        },
+        {
+          "pos": 8,
+          "form": "del",
+          "lemma": "del",
+          "level": "A1",
+          "en": "of the"
+        },
+        {
+          "pos": 9,
+          "form": "mundo",
+          "lemma": "mundo",
+          "level": "A1",
+          "en": "world"
+        },
+        {
+          "pos": 10,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 11,
+          "form": "no",
+          "lemma": "no",
+          "level": "A1",
+          "en": "not"
+        },
+        {
+          "pos": 12,
+          "form": "tienen",
+          "lemma": "tener",
+          "level": "A1",
+          "en": "have"
+        },
+        {
+          "pos": 13,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 14,
+          "form": "Espíritu.",
+          "lemma": "espíritu",
+          "level": "A1",
+          "en": "Spirit"
+        }
+      ],
+      "20": [
+        {
+          "pos": 0,
+          "form": "Pero",
+          "lemma": "pero",
+          "level": "A1",
+          "en": "But"
+        },
+        {
+          "pos": 1,
+          "form": "ustedes,",
+          "lemma": "usted",
+          "level": "A1",
+          "en": "you"
+        },
+        {
+          "pos": 2,
+          "form": "amados,",
+          "lemma": "amado",
+          "level": "B1",
+          "en": "beloved"
+        },
+        {
+          "pos": 3,
+          "form": "edifíquense",
+          "lemma": "edificar",
+          "level": "B1",
+          "en": "build yourselves up"
+        },
+        {
+          "pos": 4,
+          "form": "sobre",
+          "lemma": "sobre",
+          "level": "A1",
+          "en": "on"
+        },
+        {
+          "pos": 5,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "your"
+        },
+        {
+          "pos": 6,
+          "form": "fe",
+          "lemma": "fe",
+          "level": "A2",
+          "en": "faith"
+        },
+        {
+          "pos": 7,
+          "form": "santísima",
+          "lemma": "santísimo",
+          "level": "B2",
+          "en": "most holy"
+        },
+        {
+          "pos": 8,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 9,
+          "form": "oren",
+          "lemma": "orar",
+          "level": "A1",
+          "en": "pray"
+        },
+        {
+          "pos": 10,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 11,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 12,
+          "form": "Espíritu",
+          "lemma": "espíritu",
+          "level": "A1",
+          "en": "Spirit"
+        },
+        {
+          "pos": 13,
+          "form": "Santo,",
+          "lemma": "santo",
+          "level": "A1",
+          "en": "Holy"
+        }
+      ],
+      "21": [
+        {
+          "pos": 0,
+          "form": "manténganse",
+          "lemma": "mantenerse",
+          "level": "B1",
+          "en": "keep yourselves"
+        },
+        {
+          "pos": 1,
+          "form": "en",
+          "lemma": "en",
+          "level": "A1",
+          "en": "in"
+        },
+        {
+          "pos": 2,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 3,
+          "form": "amor",
+          "lemma": "amor",
+          "level": "A1",
+          "en": "love"
+        },
+        {
+          "pos": 4,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 5,
+          "form": "Dios,",
+          "lemma": "Dios",
+          "level": "A1",
+          "en": "God"
+        },
+        {
+          "pos": 6,
+          "form": "esperando",
+          "lemma": "esperar",
+          "level": "A2",
+          "en": "waiting for"
+        },
+        {
+          "pos": 7,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 8,
+          "form": "misericordia",
+          "lemma": "misericordia",
+          "level": "B1",
+          "en": "mercy"
+        },
+        {
+          "pos": 9,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 10,
+          "form": "nuestro",
+          "lemma": "nuestro",
+          "level": "A1",
+          "en": "our"
+        },
+        {
+          "pos": 11,
+          "form": "Señor",
+          "lemma": "Señor",
+          "level": "A1",
+          "en": "Lord"
+        },
+        {
+          "pos": 12,
+          "form": "Jesucristo",
+          "lemma": "Jesucristo",
+          "level": "A1",
+          "en": "Jesus Christ"
+        },
+        {
+          "pos": 13,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "unto"
+        },
+        {
+          "pos": 14,
+          "form": "vida",
+          "lemma": "vida",
+          "level": "A1",
+          "en": "life"
+        },
+        {
+          "pos": 15,
+          "form": "eterna.",
+          "lemma": "eterno",
+          "level": "B1",
+          "en": "eternal"
+        }
+      ],
+      "22": [
+        {
+          "pos": 0,
+          "form": "Compadézcanse",
+          "lemma": "compadecerse",
+          "level": "B2",
+          "en": "Have compassion"
+        },
+        {
+          "pos": 1,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "on"
+        },
+        {
+          "pos": 2,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "those"
+        },
+        {
+          "pos": 3,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 4,
+          "form": "dudan;",
+          "lemma": "dudar",
+          "level": "A2",
+          "en": "doubt"
+        }
+      ],
+      "23": [
+        {
+          "pos": 0,
+          "form": "salven",
+          "lemma": "salvar",
+          "level": "A2",
+          "en": "save"
+        },
+        {
+          "pos": 1,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 2,
+          "form": "otros,",
+          "lemma": "otro",
+          "level": "A1",
+          "en": "others"
+        },
+        {
+          "pos": 3,
+          "form": "arrebatándolos",
+          "lemma": "arrebatar",
+          "level": "B1",
+          "en": "snatching them"
+        },
+        {
+          "pos": 4,
+          "form": "del",
+          "lemma": "del",
+          "level": "A1",
+          "en": "from the"
+        },
+        {
+          "pos": 5,
+          "form": "fuego;",
+          "lemma": "fuego",
+          "level": "A1",
+          "en": "fire"
+        },
+        {
+          "pos": 6,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 7,
+          "form": "a",
+          "lemma": "a",
+          "level": "A1",
+          "en": "(marker)"
+        },
+        {
+          "pos": 8,
+          "form": "otros",
+          "lemma": "otro",
+          "level": "A1",
+          "en": "others"
+        },
+        {
+          "pos": 9,
+          "form": "muéstrenles",
+          "lemma": "mostrar",
+          "level": "A2",
+          "en": "show them"
+        },
+        {
+          "pos": 10,
+          "form": "compasión,",
+          "lemma": "compasión",
+          "level": "B1",
+          "en": "compassion"
+        },
+        {
+          "pos": 11,
+          "form": "pero",
+          "lemma": "pero",
+          "level": "A1",
+          "en": "but"
+        },
+        {
+          "pos": 12,
+          "pos_end": 13,
+          "form": "con cuidado,",
+          "lemma": "con cuidado",
+          "level": "A2",
+          "en": "carefully"
+        },
+        {
+          "pos": 12,
+          "form": "con",
+          "lemma": "con",
+          "level": "A1",
+          "en": "with"
+        },
+        {
+          "pos": 13,
+          "form": "cuidado,",
+          "lemma": "cuidado",
+          "level": "A1",
+          "en": "care"
+        },
+        {
+          "pos": 14,
+          "form": "aborreciendo",
+          "lemma": "aborrecer",
+          "level": "C1",
+          "en": "abhorring"
+        },
+        {
+          "pos": 15,
+          "form": "incluso",
+          "lemma": "incluso",
+          "level": "A2",
+          "en": "even"
+        },
+        {
+          "pos": 16,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 17,
+          "form": "ropa",
+          "lemma": "ropa",
+          "level": "A1",
+          "en": "clothing"
+        },
+        {
+          "pos": 18,
+          "form": "contaminada",
+          "lemma": "contaminar",
+          "level": "B1",
+          "en": "contaminated"
+        },
+        {
+          "pos": 19,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "by"
+        },
+        {
+          "pos": 20,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "their"
+        },
+        {
+          "pos": 21,
+          "form": "conducta",
+          "lemma": "conducta",
+          "level": "B1",
+          "en": "conduct"
+        },
+        {
+          "pos": 22,
+          "form": "pecaminosa.",
+          "lemma": "pecaminoso",
+          "level": "B2",
+          "en": "sinful"
+        }
+      ],
+      "24": [
+        {
+          "pos": 0,
+          "pos_end": 1,
+          "form": "Al que",
+          "lemma": "al que",
+          "level": "A2",
+          "en": "To him who"
+        },
+        {
+          "pos": 0,
+          "form": "Al",
+          "lemma": "al",
+          "level": "A1",
+          "en": "To the"
+        },
+        {
+          "pos": 1,
+          "form": "que",
+          "lemma": "que",
+          "level": "A1",
+          "en": "who"
+        },
+        {
+          "pos": 2,
+          "form": "es",
+          "lemma": "ser",
+          "level": "A1",
+          "en": "is"
+        },
+        {
+          "pos": 3,
+          "form": "poderoso",
+          "lemma": "poderoso",
+          "level": "B1",
+          "en": "powerful"
+        },
+        {
+          "pos": 4,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 5,
+          "form": "guardarlos",
+          "lemma": "guardar",
+          "level": "A2",
+          "en": "keep them"
+        },
+        {
+          "pos": 6,
+          "pos_end": 7,
+          "form": "sin caer",
+          "lemma": "sin caer",
+          "level": "A2",
+          "en": "from stumbling"
+        },
+        {
+          "pos": 6,
+          "form": "sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 7,
+          "form": "caer",
+          "lemma": "caer",
+          "level": "A1",
+          "en": "falling"
+        },
+        {
+          "pos": 8,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 9,
+          "form": "para",
+          "lemma": "para",
+          "level": "A1",
+          "en": "to"
+        },
+        {
+          "pos": 10,
+          "form": "presentarlos",
+          "lemma": "presentar",
+          "level": "B1",
+          "en": "present them"
+        },
+        {
+          "pos": 11,
+          "pos_end": 12,
+          "form": "sin mancha",
+          "lemma": "sin mancha",
+          "level": "B1",
+          "en": "without blemish"
+        },
+        {
+          "pos": 11,
+          "form": "sin",
+          "lemma": "sin",
+          "level": "A1",
+          "en": "without"
+        },
+        {
+          "pos": 12,
+          "form": "mancha",
+          "lemma": "mancha",
+          "level": "B1",
+          "en": "blemish"
+        },
+        {
+          "pos": 13,
+          "pos_end": 14,
+          "form": "delante de",
+          "lemma": "delante de",
+          "level": "A2",
+          "en": "before"
+        },
+        {
+          "pos": 13,
+          "form": "delante",
+          "lemma": "delante",
+          "level": "A2",
+          "en": "before"
+        },
+        {
+          "pos": 14,
+          "form": "de",
+          "lemma": "de",
+          "level": "A1",
+          "en": "of"
+        },
+        {
+          "pos": 15,
+          "form": "su",
+          "lemma": "su",
+          "level": "A1",
+          "en": "his"
+        },
+        {
+          "pos": 16,
+          "form": "gloria,",
+          "lemma": "gloria",
+          "level": "A2",
+          "en": "glory"
+        },
+        {
+          "pos": 17,
+          "form": "con",
+          "lemma": "con",
+          "level": "A1",
+          "en": "with"
+        },
+        {
+          "pos": 18,
+          "form": "gran",
+          "lemma": "gran",
+          "level": "A1",
+          "en": "great"
+        },
+        {
+          "pos": 19,
+          "form": "alegría,",
+          "lemma": "alegría",
+          "level": "A1",
+          "en": "joy"
+        }
+      ],
+      "25": [
+        {
+          "pos": 0,
+          "form": "al",
+          "lemma": "al",
+          "level": "A1",
+          "en": "to the"
+        },
+        {
+          "pos": 1,
+          "form": "único",
+          "lemma": "único",
+          "level": "A2",
+          "en": "only"
+        },
+        {
+          "pos": 2,
+          "form": "Dios,",
+          "lemma": "Dios",
+          "level": "A1",
+          "en": "God"
+        },
+        {
+          "pos": 3,
+          "form": "nuestro",
+          "lemma": "nuestro",
+          "level": "A1",
+          "en": "our"
+        },
+        {
+          "pos": 4,
+          "form": "Salvador,",
+          "lemma": "salvador",
+          "level": "A1",
+          "en": "Savior"
+        },
+        {
+          "pos": 5,
+          "form": "sea",
+          "lemma": "ser",
+          "level": "A2",
+          "en": "be"
+        },
+        {
+          "pos": 6,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 7,
+          "form": "gloria,",
+          "lemma": "gloria",
+          "level": "A2",
+          "en": "glory"
+        },
+        {
+          "pos": 8,
+          "form": "la",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 9,
+          "form": "majestad,",
+          "lemma": "majestad",
+          "level": "B1",
+          "en": "majesty"
+        },
+        {
+          "pos": 10,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 11,
+          "form": "dominio",
+          "lemma": "dominio",
+          "level": "B1",
+          "en": "dominion"
+        },
+        {
+          "pos": 12,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 13,
+          "form": "el",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 14,
+          "form": "poder,",
+          "lemma": "poder",
+          "level": "A1",
+          "en": "power"
+        },
+        {
+          "pos": 15,
+          "form": "ahora",
+          "lemma": "ahora",
+          "level": "A1",
+          "en": "now"
+        },
+        {
+          "pos": 16,
+          "form": "y",
+          "lemma": "y",
+          "level": "A1",
+          "en": "and"
+        },
+        {
+          "pos": 17,
+          "pos_end": 20,
+          "form": "por todos los siglos.",
+          "lemma": "por todos los siglos",
+          "level": "B1",
+          "en": "forever and ever"
+        },
+        {
+          "pos": 17,
+          "form": "por",
+          "lemma": "por",
+          "level": "A1",
+          "en": "for"
+        },
+        {
+          "pos": 18,
+          "form": "todos",
+          "lemma": "todo",
+          "level": "A1",
+          "en": "all"
+        },
+        {
+          "pos": 19,
+          "form": "los",
+          "lemma": "el",
+          "level": "A1",
+          "en": "the"
+        },
+        {
+          "pos": 20,
+          "form": "siglos.",
+          "lemma": "siglo",
+          "level": "A2",
+          "en": "ages"
+        },
+        {
+          "pos": 21,
+          "form": "Amén.",
+          "lemma": "amén",
+          "level": "A1",
+          "en": "Amen"
+        }
+      ]
+    }
+  }
+}
