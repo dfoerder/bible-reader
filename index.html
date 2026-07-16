@@ -139,38 +139,47 @@ const APP_VERSION = '1.10.67b';
 const APP_DATE = '12.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
-// ─── Instanz-Konfiguration ──────────────────────────────
-// Erlaubt eine zweite, parallele App-Instanz (z.B. Spanisch→Englisch unter
-// /es/) mit demselben index.html: alle Datenpfade, die TTS-Sprache, der
-// Leveltest, die Übersetzungs-Editionen und der localStorage-Präfix laufen
-// über dieses Objekt statt über verstreute Literale. Die Root-Instanz
-// (Englisch→Deutsch) hat hier exakt die bisherigen Werte — Verhalten bleibt
-// unverändert. Ein Sync-Skript ersetzt diesen Block für abgeleitete
-// Instanzen (Marker: INSTANCE-CONFIG-START/END).
+// ─── Hauptbibel-Registry ────────────────────────────────
+// BIBLES ist die Registry der wählbaren Hauptbibeln (Studientexte). Jeder
+// Eintrag kapselt alle Datenpfade, die Annotations-/Gloss-Konfiguration, die
+// TTS-Sprache, die parallelen Übersetzungs-Editionen (Hilfsbibel) und den
+// localStorage-Präfix — statt verstreuter Literale. Der aktuell aktive Eintrag
+// wird als INSTANCE referenziert; alle bestehenden INSTANCE.*-Zugriffe lesen
+// daraus. Phase 1: fix Englisch, Verhalten unverändert. Phase 2 macht die
+// Auswahl (Hauptbibel/Hilfsbibel) zur Laufzeit umschaltbar.
+//   hasAnno    — Inline-Wortglossen im Text (setzt Annotationsdateien voraus)
+//   hasTraining— Vokabeltraining (setzt kuratierten Wortpool voraus)
 /* INSTANCE-CONFIG-START */
-const INSTANCE = {
-  lsPrefix: '',
-  bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
-  annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
-  wordsPath: 'data/words.json', examplesPath: 'data/examples.json',
-  transPaths: {
-    sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
-    l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
-    web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
+const BIBLES = {
+  'eng-web': {
+    id: 'eng-web',
+    lsPrefix: '',
+    bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
+    annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
+    wordsPath: 'data/words.json', examplesPath: 'data/examples.json',
+    hasAnno: true, hasTraining: true,
+    transPaths: {
+      sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
+      l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
+      web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
+    },
+    transDefault: 'sch1951',
+    transOptions: [{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}],
+    // Remap-Shim: benennt Felder aus den geladenen JSON-Daten (words.json,
+    // Annotationen) auf die intern überall genutzten Rollennamen `en`
+    // (Quellwort) / `de`/`deForm` (Übersetzung) um. Für die EN-Bibel
+    // identisch (No-Op).
+    srcKey: 'en', glossKey: 'de', glossFormKey: 'deForm',
+    ttsLang: 'en-US', ttsLangPrefix: 'en',
+    ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
+    bookAbbr: null, // null = Standard-BOOK_ABBR (unten) verwenden
+    i18nOverrides: {},
+    defaultUiLang: 'de',
   },
-  transDefault: 'sch1951',
-  transOptions: [{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}],
-  // Remap-Shim: benennt Felder aus den geladenen JSON-Daten (words.json,
-  // Annotationen) auf die intern überall genutzten Rollennamen `en`
-  // (Quellwort) / `de`/`deForm` (Übersetzung) um. Für die Root-Instanz
-  // identisch (No-Op).
-  srcKey: 'en', glossKey: 'de', glossFormKey: 'deForm',
-  ttsLang: 'en-US', ttsLangPrefix: 'en',
-  ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
-  bookAbbr: null, // null = Standard-BOOK_ABBR (unten) verwenden
-  i18nOverrides: {},
-  defaultUiLang: 'de',
 };
+const DEFAULT_BIBLE_ID = 'eng-web';
+// Aktiver Hauptbibel-Eintrag. Phase 1: fix EN. Phase 2: zur Laufzeit umschaltbar.
+let INSTANCE = BIBLES[DEFAULT_BIBLE_ID];
 /* INSTANCE-CONFIG-END */
 function remapWordFields(w){
   if(INSTANCE.srcKey!=='en'&&w[INSTANCE.srcKey]!==undefined)w.en=w[INSTANCE.srcKey];
