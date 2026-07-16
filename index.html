@@ -139,54 +139,84 @@ const APP_VERSION = '1.10.67b';
 const APP_DATE = '12.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
-// ─── Hauptbibel-Registry ────────────────────────────────
-// BIBLES ist die Registry der wählbaren Hauptbibeln (Studientexte). Jeder
-// Eintrag kapselt alle Datenpfade, die Annotations-/Gloss-Konfiguration, die
-// TTS-Sprache, die parallelen Übersetzungs-Editionen (Hilfsbibel) und den
-// localStorage-Präfix — statt verstreuter Literale. Der aktuell aktive Eintrag
-// wird als INSTANCE referenziert; alle bestehenden INSTANCE.*-Zugriffe lesen
-// daraus. Phase 1: fix Englisch, Verhalten unverändert. Phase 2 macht die
-// Auswahl (Hauptbibel/Hilfsbibel) zur Laufzeit umschaltbar.
-//   hasAnno    — Inline-Wortglossen im Text (setzt Annotationsdateien voraus)
-//   hasTraining— Vokabeltraining (setzt kuratierten Wortpool voraus)
+// ─── Bibel-Registry ─────────────────────────────────────
+// BIBLES ist die Registry aller Editionen. Jede kann Haupt- ODER Hilfsbibel
+// sein. Als HAUPTBIBEL liefert eine Edition den Studientext + (falls hasAnno)
+// Inline-Glossen + (falls hasTraining) Vokabeltraining. Als HILFSBIBEL liefert
+// sie nur den parallelen Verstext.
+// Wichtig: Die Gloss-SPRACHE folgt der Hilfsbibel — im Annotations-Doc wird das
+// Feld [hilfsLangCode] als Gloss angezeigt (fehlt es, keine Gloss). Siehe
+// deriveAnnoChapters. Der aktive Hauptbibel-Eintrag wird als INSTANCE
+// referenziert; alle INSTANCE.*-Zugriffe lesen daraus.
+//   langCode    — Sprachkürzel (bestimmt als Hilfsbibel das Gloss-Feld)
+//   format      — 'array' (eng/web) | 'dict' (alle anderen) → Normalisierung
+//   hasAnno     — Annotationsdateien vorhanden (Voraussetzung für Glossen)
+//   hasTraining — kuratierter Wortpool vorhanden (Voraussetzung für Training)
+//   defaultHilfs— Vorgabe-Hilfsbibel, wenn diese Edition Hauptbibel ist
+//   names       — 66 Buchnamen (null = aus bibles/index.json, englisch)
+const BOOK_NAMES_ES=["Génesis","Éxodo","Levítico","Números","Deuteronomio","Josué","Jueces","Rut","1 Samuel","2 Samuel","1 Reyes","2 Reyes","1 Crónicas","2 Crónicas","Esdras","Nehemías","Ester","Job","Salmos","Proverbios","Eclesiastés","Cantares","Isaías","Jeremías","Lamentaciones","Ezequiel","Daniel","Oseas","Joel","Amós","Abdías","Jonás","Miqueas","Nahúm","Habacuc","Sofonías","Hageo","Zacarías","Malaquías","Mateo","Marcos","Lucas","Juan","Hechos","Romanos","1 Corintios","2 Corintios","Gálatas","Efesios","Filipenses","Colosenses","1 Tesalonicenses","2 Tesalonicenses","1 Timoteo","2 Timoteo","Tito","Filemón","Hebreos","Santiago","1 Pedro","2 Pedro","1 Juan","2 Juan","3 Juan","Judas","Apocalipsis"];
+const BOOK_NAMES_DE=["1. Mose","2. Mose","3. Mose","4. Mose","5. Mose","Josua","Richter","Rut","1. Samuel","2. Samuel","1. Könige","2. Könige","1. Chronik","2. Chronik","Esra","Nehemia","Ester","Hiob","Psalmen","Sprüche","Prediger","Hohes Lied","Jesaja","Jeremia","Klagelieder","Hesekiel","Daniel","Hosea","Joel","Amos","Obadja","Jona","Micha","Nahum","Habakuk","Zefanja","Haggai","Sacharja","Maleachi","Matthäus","Markus","Lukas","Johannes","Apostelgeschichte","Römer","1. Korinther","2. Korinther","Galater","Epheser","Philipper","Kolosser","1. Thessalonicher","2. Thessalonicher","1. Timotheus","2. Timotheus","Titus","Philemon","Hebräer","Jakobus","1. Petrus","2. Petrus","1. Johannes","2. Johannes","3. Johannes","Judas","Offenbarung"];
 /* INSTANCE-CONFIG-START */
 const BIBLES = {
   'eng-web': {
-    id: 'eng-web',
-    lsPrefix: '',
-    bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
+    id: 'eng-web', label: 'English (WEB)', langCode: 'en', lsPrefix: '',
+    bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json', format: 'array',
     annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
     wordsPath: 'data/words.json', examplesPath: 'data/examples.json',
     hasAnno: true, hasTraining: true,
-    transPaths: {
-      sch1951:{dir:'bibles/deu/sch1951/',suffix:'_sch1951.json',format:'dict'},
-      l1912mod:{dir:'bibles/deu/l1912mod/',suffix:'_l1912mod.json',format:'dict'},
-      web_deu:{dir:'bibles/eng/web/web_deu/',suffix:'_web_deu.json',format:'array'},
-    },
-    transDefault: 'sch1951',
-    transOptions: [{k:'sch1951',i:'deSch1951'},{k:'l1912mod',i:'deL1912mod'},{k:'web_deu',i:'deWebDeu'}],
-    // Remap-Shim: benennt Felder aus den geladenen JSON-Daten (words.json,
-    // Annotationen) auf die intern überall genutzten Rollennamen `en`
-    // (Quellwort) / `de`/`deForm` (Übersetzung) um. Für die EN-Bibel
-    // identisch (No-Op).
-    srcKey: 'en', glossKey: 'de', glossFormKey: 'deForm',
+    defaultHilfs: 'deu-sch1951mod',
     ttsLang: 'en-US', ttsLangPrefix: 'en',
     ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
+    names: null, // aus bibles/index.json (englisch)
     bookAbbr: null, // null = Standard-BOOK_ABBR (unten) verwenden
-    i18nOverrides: {},
-    defaultUiLang: 'de',
+    i18nOverrides: {}, defaultUiLang: 'de',
+  },
+  'spa-rv1909mod': {
+    id: 'spa-rv1909mod', label: 'Español (RV1909)', langCode: 'es', lsPrefix: 'es:',
+    bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json', format: 'dict',
+    annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json',
+    wordsPath: null, examplesPath: null,
+    hasAnno: true, hasTraining: false,
+    defaultHilfs: 'eng-web',
+    ttsLang: 'es-ES', ttsLangPrefix: 'es',
+    ttsVoiceNames: ['Monica','Paulina','Jorge'],
+    names: BOOK_NAMES_ES, bookAbbr: null,
+    i18nOverrides: {navTitle:{de:'Spanisch mit der Bibel',en:'Spanish with the Bible'}}, defaultUiLang: 'de',
+  },
+  'deu-l1912mod': {
+    id: 'deu-l1912mod', label: 'Luther 1912', langCode: 'de', lsPrefix: 'l1912:',
+    bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json', format: 'dict',
+    annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
+    hasAnno: false, hasTraining: false,
+    defaultHilfs: 'deu-sch1951mod',
+    ttsLang: 'de-DE', ttsLangPrefix: 'de',
+    ttsVoiceNames: ['Anna','Petra','Markus'],
+    names: BOOK_NAMES_DE, bookAbbr: null,
+    i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible'}}, defaultUiLang: 'de',
+  },
+  'deu-sch1951mod': {
+    id: 'deu-sch1951mod', label: 'Schlachter 1951', langCode: 'de', lsPrefix: 'sch:',
+    bibleDir: 'bibles/deu/sch1951mod/', bibleSuffix: '_sch1951mod.json', format: 'dict',
+    annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
+    hasAnno: false, hasTraining: false,
+    defaultHilfs: 'deu-l1912mod',
+    ttsLang: 'de-DE', ttsLangPrefix: 'de',
+    ttsVoiceNames: ['Anna','Petra','Markus'],
+    names: BOOK_NAMES_DE, bookAbbr: null,
+    i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible'}}, defaultUiLang: 'de',
   },
 };
 const DEFAULT_BIBLE_ID = 'eng-web';
-// Aktiver Hauptbibel-Eintrag. Phase 1: fix EN. Phase 2: zur Laufzeit umschaltbar.
-let INSTANCE = BIBLES[DEFAULT_BIBLE_ID];
 /* INSTANCE-CONFIG-END */
-function remapWordFields(w){
-  if(INSTANCE.srcKey!=='en'&&w[INSTANCE.srcKey]!==undefined)w.en=w[INSTANCE.srcKey];
-  if(INSTANCE.glossKey!=='de'&&w[INSTANCE.glossKey]!==undefined)w.de=w[INSTANCE.glossKey];
-  if(INSTANCE.glossFormKey!=='deForm'&&w[INSTANCE.glossFormKey]!==undefined)w.deForm=w[INSTANCE.glossFormKey];
-  return w;
-}
+// Roh-Zugriff (unpräfixiert) für die Auswahl-Keys selbst — die dürfen NICHT
+// über den präfixierten LS-Wrapper laufen (Henne-Ei: der Präfix hängt an der
+// aktiven Hauptbibel).
+function rawLSget(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}}
+function rawLSset(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+// Aktive Hauptbibel: einmal auf Modulebene festgelegt (vor dem ersten Render,
+// damit die präfixierten useState-Initializer den richtigen Nutzerstand lesen).
+// Ein Hauptbibel-Wechsel persistiert + lädt die Seite neu (siehe switchHaupt).
+let INSTANCE = BIBLES[rawLSget('bible-haupt')] || BIBLES[DEFAULT_BIBLE_ID];
 
 const LS = {
   get(k){try{const v=localStorage.getItem(INSTANCE.lsPrefix+k);return v?JSON.parse(v):null}catch(e){return null}},
@@ -250,6 +280,8 @@ const I18N={
   fontSizeEx:{de:'Schriftgröße Übungen',en:'Exercise font size'},
   fsBibleText:{de:'Bibeltext',en:'Bible text'},
   fsTranslations:{de:'Deutsche Bibel',en:'German Bible'},
+  mainBible:{de:'Hauptbibel',en:'Main Bible'},
+  helperBible:{de:'Hilfsbibel',en:'Helper Bible'},
   fsWordGloss:{de:'Wortübersetzung',en:'Word translation'},
   fsExercises:{de:'Übungen',en:'Exercises'},
   fontPreview:{de:'Am Anfang war das Wort, und das Wort war bei Gott.',en:'In the beginning was the Word, and the Word was with God.'},
@@ -1678,7 +1710,7 @@ const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline
 let EXAMPLES=null;
 async function loadExamples(){
   if(EXAMPLES)return EXAMPLES;
-  try{const r=await fetch(INSTANCE.examplesPath+CB);if(r.ok)EXAMPLES=await r.json();}catch(e){}
+  try{if(INSTANCE.examplesPath){const r=await fetch(INSTANCE.examplesPath+CB);if(r.ok)EXAMPLES=await r.json();}}catch(e){}
   if(!EXAMPLES)EXAMPLES={};
   return EXAMPLES;
 }
@@ -1686,43 +1718,74 @@ async function loadExamples(){
 const _bookCache={};
 const _annoCache={};
 
+// dict-Format ({chapters:{"1":{"1":"text"}}}) → array-Format wie eng/web
+// ({chapters:[{number,verses:[{n,text}]}]}), das der Reader-Render erwartet.
+function normalizeDictBook(d,nr){
+  const chapters=Object.keys(d.chapters).sort((a,b)=>(+a)-(+b)).map(cNum=>({
+    number:+cNum,
+    verses:Object.keys(d.chapters[cNum]).sort((a,b)=>(+a)-(+b)).map(vNum=>({n:+vNum,text:d.chapters[cNum][vNum]}))
+  }));
+  return {nr,name:d.name,chapters};
+}
 async function fetchBook(nr){
   if(_bookCache[nr])return _bookCache[nr];
   const r=await fetch(INSTANCE.bibleDir+nr+INSTANCE.bibleSuffix+CB);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
-  _bookCache[nr]=d;
-  return d;
+  const book=INSTANCE.format==='dict'?normalizeDictBook(d,nr):d;
+  _bookCache[nr]=book;
+  return book;
 }
 
-// Annotationsdatei enthält pro Wort {pos, form, lemma, level, [glossKey]} —
-// remapWordFields hebt [glossKey] auf die intern erwartete `.de`-Rolle.
-function remapAnnoDoc(d){
-  if(INSTANCE.glossKey==='de'||!d||!d.chapters)return d;
-  for(const ch in d.chapters)for(const v in d.chapters[ch])d.chapters[ch][v].forEach(remapWordFields);
-  return d;
-}
+// Annotationen werden ROH gecacht (native Gloss-Felder erhalten). Die
+// anzeigbare Gloss wird erst in deriveAnnoChapters nach der Hilfsbibel-Sprache
+// abgeleitet — so schaltet ein Hilfsbibel-Wechsel die Glossen korrekt um.
 async function fetchAnno(nr){
+  if(!INSTANCE.annoDir)return null;
   if(_annoCache[nr])return _annoCache[nr];
   try{
     const r=await fetch(INSTANCE.annoDir+nr+INSTANCE.annoSuffix+CB);
-    if(r.ok){const d=remapAnnoDoc(await r.json());_annoCache[nr]=d;return d;}
+    if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
   }catch(e){}
   return null;
 }
+// Rohe Annotations-Kapitel → Anzeige-Glossen: pro Wort wird das Feld
+// [glossField] (= langCode der Hilfsbibel) als interne `.de`-Rolle übernommen.
+// Wörter ohne Gloss in dieser Sprache entfallen (→ unannotiert, reines Lesen).
+function deriveAnnoChapters(chapters, glossField){
+  const out={};
+  for(const ch in chapters){
+    const vo={};
+    for(const v in chapters[ch]){
+      const arr=[];
+      for(const w of chapters[ch][v]){
+        const g=w[glossField];
+        if(g==null)continue;
+        const nw={...w,de:g}; // alle Felder erhalten, nur Gloss-Rolle (.de) setzen
+        const gf=w[glossField+'Form']; if(gf!=null)nw.deForm=gf;
+        arr.push(nw);
+      }
+      if(arr.length)vo[v]=arr;
+    }
+    if(Object.keys(vo).length)out[ch]=vo;
+  }
+  return out;
+}
 
+// Hilfsbibel (parallele Verstexte). hilfsId ist eine BIBLES-Registry-ID; das
+// Ergebnis ist einheitlich {name, chapters:{ch:{v:text}}}.
 const _deCache={};
-const DE_TRANS_PATHS=INSTANCE.transPaths;
-async function fetchDe(nr,trans){
-  const key=nr+'_'+trans;
+async function fetchDe(nr,hilfsId){
+  const b=BIBLES[hilfsId];
+  if(!b)return null;
+  const key=nr+'_'+hilfsId;
   if(_deCache[key])return _deCache[key];
-  const cfg=DE_TRANS_PATHS[trans]||DE_TRANS_PATHS[INSTANCE.transDefault];
   try{
-    const r=await fetch(cfg.dir+nr+cfg.suffix+CB);
+    const r=await fetch(b.bibleDir+nr+b.bibleSuffix+CB);
     if(r.ok){
       const d=await r.json();
       let chapters;
-      if(cfg.format==='array'){
+      if(b.format==='array'){
         chapters={};
         for(const ch of d.chapters){
           const vs={};
@@ -1748,7 +1811,10 @@ async function loadData(){
     const idx=await r.json();
     const otBooks=idx.books.filter(b=>b.testament==='ot');
     const ntBooks=idx.books.filter(b=>b.testament==='nt');
-    en.bible={books:[...otBooks,...ntBooks]};
+    const books=[...otBooks,...ntBooks];
+    // Buchnamen der aktiven Hauptbibel (null = englische Namen aus index.json).
+    if(INSTANCE.names)books.forEach((b,i)=>{if(INSTANCE.names[i])b.name=INSTANCE.names[i]});
+    en.bible={books};
     en.ntStartIndex=otBooks.length;
     en.stats=idx.stats;
     en.vocab={};
@@ -1756,11 +1822,11 @@ async function loadData(){
     en.available=true;
   }catch(e){en.available=false;}
   try{
-    // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten
-    const wr=await fetch(INSTANCE.wordsPath+CB);
-    if(wr.ok){
+    // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten.
+    // Nur Hauptbibeln mit Wortpool (hasTraining); words.json ist EN-nativ (Felder en/de/deForm).
+    const wr=INSTANCE.wordsPath?await fetch(INSTANCE.wordsPath+CB):null;
+    if(wr&&wr.ok){
       const words=await wr.json();
-      for(const lvl in words)words[lvl].forEach(remapWordFields);
       if(TEST_ACCEL){
         // Beschleunigter Test: ¼ bzw. ⅛ des Pools, pro Level+Sublevel jedes n-te Wort —
         // die Level-Verhältnisse bleiben dadurch exakt erhalten
@@ -1990,7 +2056,8 @@ function App({data}){
   const [uiLang,setUiLang]=useState(getLang);
   const changeUiLang=useCallback(l=>{setLang(l);setUiLang(l);},[]);
   const levelTested=LS.get('bible-level-tested');
-  const [phase,setPhase]=useState(()=>levelTested?saved.phase||'nav':'leveltest');
+  // Level-Test nur bei Hauptbibeln mit Wortpool (hasTraining) erzwingen.
+  const [phase,setPhase]=useState(()=>(INSTANCE.hasTraining&&!levelTested)?'leveltest':(saved.phase||'nav'));
   const prevPhaseRef=useRef('nav');
   // Lese-Level als 18-Stufen-Wert (0–17); grobes userLevel nur noch abgeleitet.
   // Migration: alter grober saved.userLevel → Band-Anfang (.1).
@@ -2074,8 +2141,15 @@ function App({data}){
   const [autoTranslate,setAutoTranslate]=useState(LS.get('bible-auto-translate')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
-  const [deTrans,setDeTransState]=useState(LS.get('bible-de-trans')||INSTANCE.transDefault);
+  // deTrans hält die HILFSBIBEL (BIBLES-Registry-ID). Migration/Fallback: alte
+  // oder ungültige Werte (z.B. 'sch1951') → Default-Hilfsbibel der Hauptbibel.
+  const [deTrans,setDeTransState]=useState(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;});
   const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
+  const hilfsLang=BIBLES[deTrans]?.langCode; // bestimmt das angezeigte Gloss-Feld
+  // Hauptbibel-Wechsel: persistieren (unpräfixiert) + Seite neu laden. Der
+  // komplette Nutzerstand wird beim Mount aus dem lsPrefix der neuen Bibel
+  // gelesen — Reload ist die saubere, kollisionsfreie Umschaltung.
+  const switchHaupt=useCallback(id=>{if(id===INSTANCE.id||!BIBLES[id])return;tts.stop();rawLSset('bible-haupt',id);location.reload()},[tts]);
   const [clozeCtx,setClozeCtxState]=useState(LS.get('bible-cloze-ctx')||'sentence');
   const changeClozeCtx=useCallback(v=>{setClozeCtxState(v);LS.set('bible-cloze-ctx',v)},[]);
   useEffect(()=>{const b=document.body;b.classList.toggle('theme-icf',layout==='icf');b.classList.toggle('theme-icf-light',layout==='icf-light');const tc=layout==='icf'?'#0f0f0f':layout==='icf-light'?'#f5f5f5':'#5a4a32';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',tc)},[layout]);
@@ -2196,8 +2270,11 @@ function App({data}){
   const currentBook=books[bookIdx];
   const bookName=currentBook?.name||'';
   const bookNr=currentBook?.nr;
-  const hasAnno=!!bookAnnotations;
-  const annotations=useMemo(()=>bookAnnotations?{[bookName]:bookAnnotations.chapters}:{},[bookAnnotations,bookName]);
+  // Glossen werden aus den rohen Annotationen in der Sprache der Hilfsbibel
+  // abgeleitet (deriveAnnoChapters). Gibt es dafür kein Gloss-Feld, ist das
+  // Ergebnis leer → hasAnno=false → reines Lesen ohne Glossen/Quiz.
+  const annotations=useMemo(()=>(bookAnnotations&&hilfsLang)?{[bookName]:deriveAnnoChapters(bookAnnotations.chapters,hilfsLang)}:{},[bookAnnotations,bookName,hilfsLang]);
+  const hasAnno=useMemo(()=>{const a=annotations[bookName];return !!(a&&Object.keys(a).length)},[annotations,bookName]);
   const hasAnnotations=hasAnno;
 
   const currentChapter=loadedBook?.chapters?.[chapIdx]||null;
@@ -2647,10 +2724,10 @@ function App({data}){
               <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>{t('statVerses')}</span></div>
               <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>{t('statWords')}</span></div>
             </div>
-            <p style={S.settingsHint}>{t('annotatedHint').replace('{n}',stats.annotatedBooks).replace('{t}',books.length)}</p>
+            {INSTANCE.hasTraining&&<p style={S.settingsHint}>{t('annotatedHint').replace('{n}',stats.annotatedBooks).replace('{t}',books.length)}</p>}
           </div>}
         </div>}
-        {statsVisible.vocabulary&&<>
+        {INSTANCE.hasTraining&&statsVisible.vocabulary&&<>
           <div style={S.settingsGroup}>
             <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
               <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
@@ -2925,7 +3002,7 @@ function App({data}){
             </div>
           </div>
           <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('helperBible')}</span>
             <div style={{...S.fontSizeRow,marginTop:6}}>
               <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
               <span style={S.fontSizePreview}>{fontSizeTr}px</span>
@@ -2964,7 +3041,7 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
-          <div style={S.levelBtns}>{INSTANCE.transOptions.map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{Object.values(BIBLES).filter(b=>b.id!==INSTANCE.id).map(b=>(<button key={b.id} onClick={()=>changeDeTrans(b.id)} style={{...S.lvlBtn,...(deTrans===b.id?S.lvlActive:{})}}>{b.label}</button>))}</div>
           <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
           <label style={{...S.toggleRow,marginTop:8}}>
             <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
@@ -3008,14 +3085,28 @@ function App({data}){
     return(<div>
       <header style={S.header}>
         {!fromReading&&<h1 style={S.title}>{t('navTitle')}</h1>}
-        {!fromReading&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>}
+        {!fromReading&&INSTANCE.hasTraining&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>}
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           {fromReading&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>}
-          {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:36,height:36,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
+          {!fromReading&&INSTANCE.hasTraining&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:36,height:36,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={{...S.gearBtn,fontSize:32}} title={t('settings')}>⚙</button>}
         </div>
       </header>
+      {!fromReading&&<div style={{display:'flex',gap:10,justifyContent:'center',flexWrap:'wrap',margin:'4px 0 14px'}}>
+        <label style={{display:'flex',flexDirection:'column',gap:3,fontFamily:sans}}>
+          <span style={{fontSize:11,color:'var(--t-muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:.4}}>{t('mainBible')}</span>
+          <select value={INSTANCE.id} onChange={e=>switchHaupt(e.target.value)} style={{fontFamily:sans,fontSize:14,padding:'6px 8px',borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-bg2)',color:'var(--t-title)',cursor:'pointer'}}>
+            {Object.values(BIBLES).map(b=>(<option key={b.id} value={b.id}>{b.label}</option>))}
+          </select>
+        </label>
+        <label style={{display:'flex',flexDirection:'column',gap:3,fontFamily:sans}}>
+          <span style={{fontSize:11,color:'var(--t-muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:.4}}>{t('helperBible')}</span>
+          <select value={deTrans} onChange={e=>changeDeTrans(e.target.value)} style={{fontFamily:sans,fontSize:14,padding:'6px 8px',borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-bg2)',color:'var(--t-title)',cursor:'pointer'}}>
+            {Object.values(BIBLES).filter(b=>b.id!==INSTANCE.id).map(b=>(<option key={b.id} value={b.id}>{b.label}</option>))}
+          </select>
+        </label>
+      </div>}
       {otBooks.length>0&&<div style={S.bookList}>
         <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='ot'?null:'ot');setExpandedBook(null)}}>
           <span style={S.bookArrow}>{expandedTestament==='ot'?'▾':'▸'}</span>
@@ -3274,7 +3365,7 @@ function App({data}){
         <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={{...S.gearBtn,fontSize:28}} title={t('settings')}>⚙</button>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:28,height:28,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>
+          {INSTANCE.hasTraining&&<button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:28,height:28,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
         </div>
       </div>}
       {tts.speaking&&<div style={{padding:'6px 0 8px',borderTop:'1px solid var(--t-border)'}} onClick={e=>e.stopPropagation()}>
@@ -3301,7 +3392,7 @@ function App({data}){
 
     {!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
       <div style={{display:'flex',alignItems:'stretch',borderBottom:chapTab?'1px solid var(--t-border)':'none'}}>
-        {[{k:'stats',ic:'📊',lb:t('statistics')},{k:'training',ic:null,lb:t('training')},{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
+        {[{k:'stats',ic:'📊',lb:t('statistics')},...(INSTANCE.hasTraining?[{k:'training',ic:null,lb:t('training')}]:[]),{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
           const active=chapTab===tab.k;
           return(<button key={tab.k} onClick={()=>setChapTab(c=>c===tab.k?null:tab.k)} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:3,padding:'9px 4px',border:'none',borderBottom:active?'2px solid var(--t-accent)':'2px solid transparent',background:active?'var(--t-bg)':'transparent',cursor:'pointer',color:active?'var(--t-accent)':'var(--t-muted)',fontFamily:sans}}>
             {tab.k==='training'?<img src="files/kopf2.jpg" style={{width:22,height:22,objectFit:'cover',borderRadius:'50%',...(active?{}:{filter:'grayscale(0.5) opacity(0.7)'})}}/>:<span style={{fontSize:20,lineHeight:1}}>{tab.ic}</span>}
@@ -3341,7 +3432,7 @@ function App({data}){
             </div>
           </div>
           <div style={{marginTop:12}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsTranslations')}</span>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('helperBible')}</span>
             <div style={{...S.fontSizeRow,marginTop:6}}>
               <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
               <span style={S.fontSizePreview}>{fontSizeTr}px</span>
@@ -3377,7 +3468,7 @@ function App({data}){
         </div>
         <div>
           <span style={S.settingsLabel}>{t('germanTranslation')}</span>
-          <div style={S.levelBtns}>{INSTANCE.transOptions.map(o=>(<button key={o.k} onClick={()=>changeDeTrans(o.k)} style={{...S.lvlBtn,...(deTrans===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{Object.values(BIBLES).filter(b=>b.id!==INSTANCE.id).map(b=>(<button key={b.id} onClick={()=>changeDeTrans(b.id)} style={{...S.lvlBtn,...(deTrans===b.id?S.lvlActive:{})}}>{b.label}</button>))}</div>
           <label style={{...S.toggleRow,marginTop:8}}>
             <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
             <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
