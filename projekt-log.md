@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.68b (16.07.2026)
+
+- Mehrsprachig: Haupt- und Hilfsbibel jetzt oben auf der Startseite wählbar. Neu integriert: spanische Bibel (Reina-Valera 1909 modernisiert) — spanischer Text mit englischer Wort-Hilfe. Jede Edition kann Haupt- oder Hilfsbibel sein (Englisch, Spanisch, Luther 1912, Schlachter 1951). Die eingeblendeten Wort-Übersetzungen richten sich nach der gewählten Hilfsbibel; Vokabeltraining nur bei Bibeln mit Wortpool (aktuell Englisch).
+
 ## v1.10.67b (12.07.2026)
 
 - NT-Wortübersetzungen komplett
