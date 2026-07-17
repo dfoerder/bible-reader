@@ -2,7 +2,7 @@
 """Generate part-of-speech (POS) tags for every cloze lemma via the Opus Batch API.
 
 Approach A (bundled): ~150 words per request, one batch job, 50% Batch-API discount.
-Writes a `pos` field into data/words.json and saves the raw map to
+Writes a `pos` field into bibles/eng/web/train/words.json and saves the raw map to
 opus_pos_levels.json.
 
 Run:  python3 generate_pos.py          (submit + poll + write, ~minutes)
@@ -10,7 +10,7 @@ Run:  python3 generate_pos.py          (submit + poll + write, ~minutes)
 """
 import json, os, sys, time, re
 
-WORDS_PATH = "data/words.json"
+WORDS_PATH = "bibles/eng/web/train/words.json"
 MAP_PATH = "opus_pos_levels.json"
 MODEL = "claude-opus-4-8"
 CHUNK = 150

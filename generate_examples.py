@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Erzeugt data/examples.json: pro Lemma ein schlanker Index von Vers-Referenzen
+"""Erzeugt bibles/eng/web/train/examples.json: pro Lemma ein schlanker Index von Vers-Referenzen
 (ohne Verstext), damit der Nutzer bei einer falsch beantworteten Kontext-Übung
 über "Weitere Beispiele" das Wort in weiteren Sätzen sehen kann. Der Verstext
 wird in der App on-the-fly aus den Bibeltext-Dateien geholt (fetchBook/_bookCache).
@@ -14,8 +14,8 @@ import json, os
 
 ANNO_DIR = "bibles/eng/web/anno"
 TEXT_DIR = "bibles/eng/web"
-OUT = "data/examples.json"
-WORDS = "data/words.json"
+OUT = "bibles/eng/web/train/examples.json"
+WORDS = "bibles/eng/web/train/words.json"
 
 MAX_PER_LEMMA = 5
 MIN_WORDS, MAX_WORDS = 5, 30
@@ -39,10 +39,10 @@ def main():
         text = json.load(open(tp))
         name = text.get("name") or anno.get("name") or f"Book {nr}"
         # Vers-Text-Lookup: chapter(str) -> verse(str) -> text
+        # Quellformat einheitlich dict: {chapters:{cn:{vn:text}}}
         vtext = {}
-        for ch in text["chapters"]:
-            cn = str(ch["number"])
-            vtext[cn] = {str(v["n"]): v["text"] for v in ch["verses"]}
+        for cn, verses in text["chapters"].items():
+            vtext[str(cn)] = {str(vn): t for vn, t in verses.items()}
         for cn, verses in anno["chapters"].items():
             for vn, anns in verses.items():
                 vt = vtext.get(cn, {}).get(vn)

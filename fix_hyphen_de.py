@@ -11,7 +11,7 @@ Run:  python3 fix_hyphen_de.py
 """
 import json
 
-PATH = "data/words.json"
+PATH = "bibles/eng/web/train/words.json"
 
 # en-Lemma -> (de = Grundform, deForm = Form passend zur Wortform im Satz)
 OVERRIDES = {

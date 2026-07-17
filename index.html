@@ -149,7 +149,7 @@ const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 // deriveAnnoChapters. Der aktive Hauptbibel-Eintrag wird als INSTANCE
 // referenziert; alle INSTANCE.*-Zugriffe lesen daraus.
 //   langCode    — Sprachkürzel (bestimmt als Hilfsbibel das Gloss-Feld)
-//   format      — 'array' (eng/web) | 'dict' (alle anderen) → Normalisierung
+//   (Quellformat einheitlich dict: {name, chapters:{ch:{v:text}}} — siehe normalizeDictBook)
 //   hasAnno     — Annotationsdateien vorhanden (Voraussetzung für Glossen)
 //   hasTraining — kuratierter Wortpool vorhanden (Voraussetzung für Training)
 //   defaultHilfs— Vorgabe-Hilfsbibel, wenn diese Edition Hauptbibel ist
@@ -162,9 +162,9 @@ const BOOK_NAMES_IT=["Genesi","Esodo","Levitico","Numeri","Deuteronomio","Giosu�
 const BIBLES = {
   'eng-web': {
     id: 'eng-web', label: 'English (WEB)', langCode: 'en', lsPrefix: '',
-    bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json', format: 'array',
+    bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
     annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
-    wordsPath: 'data/words.json', examplesPath: 'data/examples.json',
+    wordsPath: 'bibles/eng/web/train/words.json', examplesPath: 'bibles/eng/web/train/examples.json',
     hasAnno: true, hasTraining: true,
     defaultHilfs: 'deu-sch1951mod',
     ttsLang: 'en-US', ttsLangPrefix: 'en',
@@ -175,7 +175,7 @@ const BIBLES = {
   },
   'spa-rv1909mod': {
     id: 'spa-rv1909mod', label: 'Español (RV1909)', langCode: 'es', lsPrefix: 'es:',
-    bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json', format: 'dict',
+    bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json',
     wordsPath: null, examplesPath: null,
     hasAnno: true, hasTraining: false,
@@ -187,7 +187,7 @@ const BIBLES = {
   },
   'fra-lsg1910mod': {
     id: 'fra-lsg1910mod', label: 'Français (LSG 1910)', langCode: 'fr', lsPrefix: 'fr:',
-    bibleDir: 'bibles/fra/lsg1910mod/', bibleSuffix: '_lsg1910mod.json', format: 'dict',
+    bibleDir: 'bibles/fra/lsg1910mod/', bibleSuffix: '_lsg1910mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
     defaultHilfs: 'eng-web',
@@ -198,7 +198,7 @@ const BIBLES = {
   },
   'ita-riv1927mod': {
     id: 'ita-riv1927mod', label: 'Italiano (Riveduta 1927)', langCode: 'it', lsPrefix: 'it:',
-    bibleDir: 'bibles/ita/riv1927mod/', bibleSuffix: '_riv1927mod.json', format: 'dict',
+    bibleDir: 'bibles/ita/riv1927mod/', bibleSuffix: '_riv1927mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
     defaultHilfs: 'eng-web',
@@ -209,7 +209,7 @@ const BIBLES = {
   },
   'deu-l1912mod': {
     id: 'deu-l1912mod', label: 'Luther 1912', langCode: 'de', lsPrefix: 'l1912:',
-    bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json', format: 'dict',
+    bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
     defaultHilfs: 'deu-sch1951mod',
@@ -220,7 +220,7 @@ const BIBLES = {
   },
   'deu-sch1951mod': {
     id: 'deu-sch1951mod', label: 'Schlachter 1951', langCode: 'de', lsPrefix: 'sch:',
-    bibleDir: 'bibles/deu/sch1951mod/', bibleSuffix: '_sch1951mod.json', format: 'dict',
+    bibleDir: 'bibles/deu/sch1951mod/', bibleSuffix: '_sch1951mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
     defaultHilfs: 'deu-l1912mod',
@@ -2510,8 +2510,9 @@ async function loadExamples(){
 const _bookCache={};
 const _annoCache={};
 
-// dict-Format ({chapters:{"1":{"1":"text"}}}) → array-Format wie eng/web
-// ({chapters:[{number,verses:[{n,text}]}]}), das der Reader-Render erwartet.
+// Einheitliches Quell-dict-Format ({chapters:{"1":{"1":"text"}}}) → internes
+// array-Format ({chapters:[{number,verses:[{n,text}]}]}), das der Reader-Render
+// erwartet. Alle Editionen liegen als dict vor; dies ist der einzige Adapter.
 function normalizeDictBook(d,nr){
   const chapters=Object.keys(d.chapters).sort((a,b)=>(+a)-(+b)).map(cNum=>({
     number:+cNum,
@@ -2524,7 +2525,7 @@ async function fetchBook(nr){
   const r=await fetch(INSTANCE.bibleDir+nr+INSTANCE.bibleSuffix+CB);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
-  const book=INSTANCE.format==='dict'?normalizeDictBook(d,nr):d;
+  const book=normalizeDictBook(d,nr);
   _bookCache[nr]=book;
   return book;
 }
@@ -2576,18 +2577,7 @@ async function fetchDe(nr,hilfsId){
     const r=await fetch(b.bibleDir+nr+b.bibleSuffix+CB);
     if(r.ok){
       const d=await r.json();
-      let chapters;
-      if(b.format==='array'){
-        chapters={};
-        for(const ch of d.chapters){
-          const vs={};
-          for(const v of ch.verses) vs[String(v.n)]=v.text;
-          chapters[String(ch.number)]=vs;
-        }
-      } else {
-        chapters=d.chapters;
-      }
-      const result={name:d.name,chapters};
+      const result={name:d.name,chapters:d.chapters};
       _deCache[key]=result;
       return result;
     }

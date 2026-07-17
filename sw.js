@@ -3,7 +3,7 @@ const ASSETS = [
   './',
   './index.html',
   './bibles/index.json',
-  './data/words.json',
+  './bibles/eng/web/train/words.json',
   'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'

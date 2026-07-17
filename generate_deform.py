@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Erzeugt für jedes Wort in data/words.json drei deutsche Felder über die Opus Batch API:
+"""Erzeugt für jedes Wort in bibles/eng/web/train/words.json drei deutsche Felder über die Opus Batch API:
   de     = saubere Grundform/Lemma-Übersetzung   (Vokabel-Quiz)
   deForm = an die Wortform im Satz angepasste Übersetzung (Numerus/Tempus) (Lückentext)
   form   = Merkmal-Tag für Distraktor-Matching: sg|pl (Substantive),
@@ -11,7 +11,7 @@ Run:  python3 generate_deform.py            (submit + poll + write)
 """
 import json, os, sys, time, re
 
-WORDS_PATH = "data/words.json"
+WORDS_PATH = "bibles/eng/web/train/words.json"
 MAP_PATH = "opus_deform.json"
 MODEL = "claude-opus-4-8"
 CHUNK = 120

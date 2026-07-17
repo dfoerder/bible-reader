@@ -3,6 +3,7 @@ const path = require('path');
 
 const ANNO_DIR = 'bibles/eng/web/anno';
 const TEXT_DIR = 'bibles/eng/web';
+const TRAIN_DIR = 'bibles/eng/web/train'; // Trainingsdaten gehören zur WEB-Bibel
 const INDEX_FILE = 'bibles/index.json';
 const LEVELS = ['A1','A2','B1','B2','C1','C2'];
 
@@ -412,8 +413,8 @@ function generateExercises(wordList) {
 // ── Phase 2: Generate exercises ──
 console.log('\nPhase 2: Generating context exercises...');
 const { exercises, noExercise } = generateExercises(unified);
-fs.writeFileSync('data/context_exercises.json', JSON.stringify(exercises));
-console.log('  Written: data/context_exercises.json');
+fs.writeFileSync(`${TRAIN_DIR}/context_exercises.json`, JSON.stringify(exercises));
+console.log(`  Written: ${TRAIN_DIR}/context_exercises.json`);
 
 // ── Phase 3: Generate vocab pool ──
 console.log('\nPhase 3: Generating vocab pool...');
@@ -422,8 +423,8 @@ for (const lvl of LEVELS) {
   vocabPool[lvl] = byLevel[lvl]
     .map(w => ({ en: w.lemma, de: w.de, sub: w.sub, occ: w.freq }));
 }
-fs.writeFileSync('data/vocab_pool.json', JSON.stringify(vocabPool));
-console.log('  Written: data/vocab_pool.json (Build-Intermediate, gitignored)');
+fs.writeFileSync(`${TRAIN_DIR}/vocab_pool.json`, JSON.stringify(vocabPool));
+console.log(`  Written: ${TRAIN_DIR}/vocab_pool.json (Build-Intermediate, gitignored)`);
 
 // ── Phase 4: Merge zu words.json (Single Source of Truth, von der App geladen) ──
 // Alle Wörter kommen in words.json. Wörter mit Lückentext-Übung haben zusätzlich
@@ -441,8 +442,8 @@ for (const lvl of LEVELS) {
       : { en: v.en, de: v.de, sub: v.sub, occ: v.occ };
   });
 }
-fs.writeFileSync('data/words.json', JSON.stringify(words));
-console.log('  Written: data/words.json');
+fs.writeFileSync(`${TRAIN_DIR}/words.json`, JSON.stringify(words));
+console.log(`  Written: ${TRAIN_DIR}/words.json`);
 
 // ── Final stats ──
 console.log('\n=== Final statistics ===');

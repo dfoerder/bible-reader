@@ -16,7 +16,7 @@ for (const line of oxLines) {
 console.log(`Oxford 5000: ${Object.keys(oxMap).length} unique words loaded\n`);
 
 // Load our vocab pool
-const vp = JSON.parse(fs.readFileSync('data/vocab_pool.json', 'utf8'));
+const vp = JSON.parse(fs.readFileSync('bibles/eng/web/train/vocab_pool.json', 'utf8'));
 const LEVELS = ['A1','A2','B1','B2','C1','C2'];
 const ourWords = [];
 for (const lvl of LEVELS) {

@@ -62,11 +62,26 @@ Multi-word phrase — include the phrase AND individual annotations for each wor
 CEFR levels: A1, A2, B1, B2, C1, C2"""
 
 
+def _chapters_as_array(book):
+    """Quellformat ist einheitlich dict ({chapters:{cn:{vn:text}}}). Für die
+    Review-Logik in die array-Form ({number, verses:[{n,text}]}) bringen —
+    numerisch sortiert. (Alt-array wird rückwärtskompatibel durchgereicht.)"""
+    raw = book["chapters"]
+    if isinstance(raw, list):
+        return raw
+    out = []
+    for cn in sorted(raw.keys(), key=int):
+        verses = [{"n": int(vn), "text": t}
+                  for vn, t in sorted(raw[cn].items(), key=lambda x: int(x[0]))]
+        out.append({"number": int(cn), "verses": verses})
+    return out
+
+
 def load_bible_chapter(book_nr, chap_nr):
     path = os.path.join(BIBLE_DIR, f"{book_nr}_web.json")
     with open(path, "r", encoding="utf-8") as f:
         book = json.load(f)
-    for ch in book["chapters"]:
+    for ch in _chapters_as_array(book):
         if ch["number"] == chap_nr:
             return book["name"], ch
     raise ValueError(f"Chapter {chap_nr} not found in book {book_nr}")
@@ -76,7 +91,7 @@ def load_book(book_nr):
     path = os.path.join(BIBLE_DIR, f"{book_nr}_web.json")
     with open(path, "r", encoding="utf-8") as f:
         book = json.load(f)
-    return book["name"], book["chapters"]
+    return book["name"], _chapters_as_array(book)
 
 
 def load_annotations(book_nr, chap_nr=None):

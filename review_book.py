@@ -9,7 +9,12 @@ with open(f"bibles/eng/web/{BOOK_NR}_web.json") as f:
     book = json.load(f)
 
 book_name = book["name"]
-total_ch = len(book["chapters"])
+# Quellformat einheitlich dict ({chapters:{cn:{vn:text}}}); Kapitelnummern
+# numerisch sortiert herausziehen (alt-array bleibt rückwärtskompatibel).
+_raw = book["chapters"]
+chapter_numbers = ([c["number"] for c in _raw] if isinstance(_raw, list)
+                   else sorted(int(k) for k in _raw))
+total_ch = len(chapter_numbers)
 
 model = os.environ.get("REVIEW_MODEL", "claude-sonnet-4-20250514")
 env = {**os.environ, "REVIEW_MODEL": model}
@@ -22,8 +27,7 @@ print(f"{'=' * 58}\n")
 
 failed = []
 
-for ch in book["chapters"]:
-    ch_num = ch["number"]
+for ch_num in chapter_numbers:
     if ch_num < START_CH:
         continue
 
