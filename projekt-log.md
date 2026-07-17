@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.69b (17.07.2026)
+
+- Mehrsprachiges Onboarding: Beim ersten Start wird jetzt die App-Sprache gewählt (Englisch, Deutsch, Spanisch, Italienisch, Französisch) statt direkt der Einstufungstest. Die Oberfläche ist vollständig in allen fünf Sprachen verfügbar und bleibt global gewählt (unabhängig von der Hauptbibel). Die App-Sprache wählt automatisch eine gleichsprachige Hilfsbibel vor; Standard-Hauptbibel bleibt die Web-Bibel. Neu integriert: Französisch (Louis Segond 1910) und Italienisch (Riveduta 1927) als Lesebibeln.
+
 ## v1.10.68b (16.07.2026)
 
 - Mehrsprachig: Haupt- und Hilfsbibel jetzt oben auf der Startseite wählbar. Neu integriert: spanische Bibel (Reina-Valera 1909 modernisiert) — spanischer Text mit englischer Wort-Hilfe. Jede Edition kann Haupt- oder Hilfsbibel sein (Englisch, Spanisch, Luther 1912, Schlachter 1951). Die eingeblendeten Wort-Übersetzungen richten sich nach der gewählten Hilfsbibel; Vokabeltraining nur bei Bibeln mit Wortpool (aktuell Englisch).
