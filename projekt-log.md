@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.70b (17.07.2026)
+
+- Interne Vereinheitlichung der Datenstruktur: alle Bibel-Editionen liegen nun im selben JSON-Format vor; die Trainingsdaten gehören jetzt zur jeweiligen Bibel (bibles/<edition>/train/). Zusätzlich eine vereinheitlichte, sprachparametrisierte Annotations-Pipeline (annotate.py) als Grundlage für weitere Sprachen. Keine sichtbaren Änderungen für Nutzer.
+
 ## v1.10.69b (17.07.2026)
 
 - Mehrsprachiges Onboarding: Beim ersten Start wird jetzt die App-Sprache gewählt (Englisch, Deutsch, Spanisch, Italienisch, Französisch) statt direkt der Einstufungstest. Die Oberfläche ist vollständig in allen fünf Sprachen verfügbar und bleibt global gewählt (unabhängig von der Hauptbibel). Die App-Sprache wählt automatisch eine gleichsprachige Hilfsbibel vor; Standard-Hauptbibel bleibt die Web-Bibel. Neu integriert: Französisch (Louis Segond 1910) und Italienisch (Riveduta 1927) als Lesebibeln.
