@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.71b (17.07.2026)
+
+- Spanisch lernen mit der Bibel: Die spanische Bibel (Reina-Valera 1909) hat jetzt vollwertiges Vokabeltraining — Quiz und Lückentext-Übungen im Kontext mit englischen Übersetzungen (6846 Wörter nach CEFR-Level A1–C2, mit Häufigkeits- und Kontextlernen wie bei Englisch). Neu auch „Weitere Beispiele" für spanische Wörter.
+
 ## v1.10.70b (17.07.2026)
 
 - Interne Vereinheitlichung der Datenstruktur: alle Bibel-Editionen liegen nun im selben JSON-Format vor; die Trainingsdaten gehören jetzt zur jeweiligen Bibel (bibles/<edition>/train/). Zusätzlich eine vereinheitlichte, sprachparametrisierte Annotations-Pipeline (annotate.py) als Grundlage für weitere Sprachen. Keine sichtbaren Änderungen für Nutzer.
