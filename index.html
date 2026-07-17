@@ -165,7 +165,7 @@ const BIBLES = {
     bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
     annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json',
     wordsPath: 'bibles/eng/web/train/words.json', examplesPath: 'bibles/eng/web/train/examples.json',
-    hasAnno: true, hasTraining: true,
+    hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'deu-sch1951mod',
     ttsLang: 'en-US', ttsLangPrefix: 'en',
     ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
@@ -177,13 +177,16 @@ const BIBLES = {
     id: 'spa-rv1909mod', label: 'Español (RV1909)', langCode: 'es', lsPrefix: 'es:',
     bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json',
-    wordsPath: null, examplesPath: null,
-    hasAnno: true, hasTraining: false,
+    wordsPath: 'bibles/spa/rv1909mod/train/words.json', examplesPath: 'bibles/spa/rv1909mod/train/examples.json',
+    hasAnno: true, hasTraining: true,
     defaultHilfs: 'eng-web',
     ttsLang: 'es-ES', ttsLangPrefix: 'es',
     ttsVoiceNames: ['Monica','Paulina','Jorge'],
     names: BOOK_NAMES_ES, bookAbbr: null,
-    i18nOverrides: {navTitle:{de:'Spanisch mit der Bibel',en:'Spanish with the Bible',es:'Español con la Biblia',it:'Lo spagnolo con la Bibbia',fr:'L\'espagnol avec la Bible'}}, defaultUiLang: 'de',
+    i18nOverrides: {
+      navTitle:{de:'Spanisch mit der Bibel',en:'Spanish with the Bible',es:'Español con la Biblia',it:'Lo spagnolo con la Bibbia',fr:'L\'espagnol avec la Bible'},
+      navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Spanisch.',en:'Deepen your faith and improve your Spanish through God\'s Word.',es:'Profundiza tu fe y mejora tu español con la Palabra de Dios.',it:'Approfondisci la tua fede e migliora il tuo spagnolo con la Parola di Dio.',fr:'Approfondis ta foi et améliore ton espagnol avec la Parole de Dieu.'},
+    }, defaultUiLang: 'de',
   },
   'fra-lsg1910mod': {
     id: 'fra-lsg1910mod', label: 'Français (LSG 1910)', langCode: 'fr', lsPrefix: 'fr:',
@@ -3675,9 +3678,9 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('trainingSection')}</span>
-          <div style={{marginTop:8}}>
+          {INSTANCE.hasLevelTest&&<div style={{marginTop:8}}>
             <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
-          </div>
+          </div>}
           <div style={{marginTop:16}}>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('reviewSettings')}</span>
             <label style={{...S.toggleRow,marginTop:6}}>

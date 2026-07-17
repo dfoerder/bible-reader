@@ -21,6 +21,9 @@ data/*_backup.json
 # Trainingsdaten liegen pro Bibel unter bibles/<edition>/train/.
 bibles/*/*/train/vocab_pool.json
 bibles/*/*/train/context_exercises.json
+bibles/*/*/train/lemmas_raw.json
+bibles/*/*/train/enrich_input.json
+bibles/*/*/train/_*.json
 
 # Claude-Harness
 .claude/
