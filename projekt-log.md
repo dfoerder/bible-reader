@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.72b (17.07.2026)
+
+- Spanischer Einstufungstest: Beim spanischen Vokabeltraining gibt es jetzt einen eigenen Einstufungstest (30 spanische Wörter mit englischen Antwortoptionen, gestaffelt A1–C2), abrufbar über die Einstellungen. Der Test stuft das Startlevel passend ein.
+
 ## v1.10.71b (17.07.2026)
 
 - Spanisch lernen mit der Bibel: Die spanische Bibel (Reina-Valera 1909) hat jetzt vollwertiges Vokabeltraining — Quiz und Lückentext-Übungen im Kontext mit englischen Übersetzungen (6846 Wörter nach CEFR-Level A1–C2, mit Häufigkeits- und Kontextlernen wie bei Englisch). Neu auch „Weitere Beispiele" für spanische Wörter.

@@ -135,7 +135,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.71b';
+const APP_VERSION = '1.10.72b';
 const APP_DATE = '17.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -178,7 +178,7 @@ const BIBLES = {
     bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json',
     wordsPath: 'bibles/spa/rv1909mod/train/words.json', examplesPath: 'bibles/spa/rv1909mod/train/examples.json',
-    hasAnno: true, hasTraining: true,
+    hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'eng-web',
     ttsLang: 'es-ES', ttsLangPrefix: 'es',
     ttsVoiceNames: ['Monica','Paulina','Jorge'],
@@ -1287,7 +1287,11 @@ function setLang(l){_lang=l;rawLSset('bible-ui-lang',l);}
 function getLang(){return _lang;}
 
 // ─── Level Test ─────────────────────────────────────────
-const LEVEL_TEST=[
+// Pro Studiensprache ein eigener Test: `en` = angezeigtes Wort (Studiensprache),
+// `de` = korrekte Antwort (Hilfssprache), `wrong` = 2 Distraktoren (Hilfssprache).
+// Der aktive Test wird nach INSTANCE.langCode gewählt (nur Editionen mit
+// hasLevelTest). EN-Test: Englisch→Deutsch. ES-Test: Spanisch→Englisch.
+const LEVEL_TEST_EN=[
   {en:'water',de:'Wasser',wrong:['Feuer','Stein'],level:'A1'},
   {en:'bread',de:'Brot',wrong:['Milch','Fleisch'],level:'A1'},
   {en:'house',de:'Haus',wrong:['Stadt','Straße'],level:'A1'},
@@ -1319,6 +1323,40 @@ const LEVEL_TEST=[
   {en:'abhor',de:'verabscheuen',wrong:['verehren','fürchten'],level:'C2'},
   {en:'blaspheme',de:'lästern',wrong:['beten','schweigen'],level:'C2'},
 ];
+// Spanisch → Englisch (angezeigtes Wort spanisch, Optionen englisch)
+const LEVEL_TEST_ES=[
+  {en:'hijo',de:'son',wrong:['father','servant'],level:'A1'},
+  {en:'tierra',de:'earth',wrong:['sky','sea'],level:'A1'},
+  {en:'rey',de:'king',wrong:['soldier','judge'],level:'A1'},
+  {en:'casa',de:'house',wrong:['city','road'],level:'A1'},
+  {en:'día',de:'day',wrong:['night','week'],level:'A1'},
+  {en:'siervo',de:'servant',wrong:['master','guest'],level:'A2'},
+  {en:'nación',de:'nation',wrong:['village','crowd'],level:'A2'},
+  {en:'monte',de:'mountain',wrong:['river','valley'],level:'A2'},
+  {en:'ley',de:'law',wrong:['gift','story'],level:'A2'},
+  {en:'ejército',de:'army',wrong:['crowd','council'],level:'A2'},
+  {en:'pecado',de:'sin',wrong:['virtue','debt'],level:'B1'},
+  {en:'pacto',de:'covenant',wrong:['quarrel','journey'],level:'B1'},
+  {en:'misericordia',de:'mercy',wrong:['anger','pride'],level:'B1'},
+  {en:'profeta',de:'prophet',wrong:['priest','servant'],level:'B1'},
+  {en:'altar',de:'altar',wrong:['throne','tomb'],level:'B1'},
+  {en:'heredad',de:'inheritance',wrong:['reward','ruin'],level:'B2'},
+  {en:'abominación',de:'abomination',wrong:['blessing','wonder'],level:'B2'},
+  {en:'ungir',de:'to anoint',wrong:['to bless','to bathe'],level:'B2'},
+  {en:'aborrecer',de:'to hate',wrong:['to forgive','to envy'],level:'B2'},
+  {en:'iniquidad',de:'iniquity',wrong:['righteousness','grief'],level:'B2'},
+  {en:'primogénito',de:'firstborn',wrong:['heir','orphan'],level:'C1'},
+  {en:'expiación',de:'atonement',wrong:['rebellion','punishment'],level:'C1'},
+  {en:'degollar',de:'to slaughter',wrong:['to bury','to seize'],level:'C1'},
+  {en:'querubín',de:'cherub',wrong:['idol','scribe'],level:'C1'},
+  {en:'eunuco',de:'eunuch',wrong:['prisoner','steward'],level:'C1'},
+  {en:'efod',de:'ephod',wrong:['altar','scroll'],level:'C2'},
+  {en:'prepucio',de:'foreskin',wrong:['sinew','forehead'],level:'C2'},
+  {en:'propiciatorio',de:'mercy seat',wrong:['altar step','incense pan'],level:'C2'},
+  {en:'agorero',de:'soothsayer',wrong:['shepherd','craftsman'],level:'C2'},
+  {en:'aventador',de:'winnowing fork',wrong:['plow','sickle'],level:'C2'},
+];
+const LEVEL_TEST=({en:LEVEL_TEST_EN,es:LEVEL_TEST_ES})[INSTANCE.langCode]||LEVEL_TEST_EN;
 
 function scoreLevelTest(answers){
   const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
