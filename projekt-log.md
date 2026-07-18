@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.81b (18.07.2026)
+
+- Italienische Bibel: korrekte, durchgängig modernisierte Fassung der Riveduta 1927 eingespielt (vorher war nur eine leicht überarbeitete Version aktiv).
+
 ## v1.10.80b (18.07.2026)
 
 - Wortübersetzungen/Übungen unabhängig von der Hilfsbibel wählbar: Beim ersten Start wird nach der Bibelwahl gefragt, in welcher Sprache Inline-Wortübersetzungen und Übungen erscheinen sollen — gibt es sie nicht in der App-Sprache, kann man Englisch wählen (z.B. englische Wort-Hilfe mit deutscher Hilfsbibel). Der Einstufungstest ist dann in dieser Sprache. In den Einstellungen umschaltbar.
