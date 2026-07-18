@@ -178,6 +178,7 @@ const BIBLES = {
     bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json',
     wordsPath: 'bibles/spa/rv1909mod/train/words.json', examplesPath: 'bibles/spa/rv1909mod/train/examples.json',
+    keepNamesPath: 'bibles/spa/rv1909mod/train/keepnames.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'eng-web',
     ttsLang: 'es-ES', ttsLangPrefix: 'es',
@@ -1439,6 +1440,10 @@ function levelToStep(lvl){const i=SUBSTEPS.findIndex(s=>s.startsWith(lvl));retur
 function stepToLevel(step){return SUBSTEPS[step].split('.')[0];}
 function stepLabel(step){return SUBSTEPS[step]||'B1.1';}
 let FREQ_POOL=[];
+// Wichtige Eigennamen (Personen/Orte), die in Übungen VORKOMMEN dürfen. Alle
+// übrigen großgeschriebenen Lemmata (Genealogie-/Nebennamen) werden gefiltert.
+// Leer = kein Filter (Editionen ohne Eigennamen-Annotation, z.B. eng-web).
+let KEEP_NAMES=new Set();
 let DE_POS={},EN_POS={};
 function buildFreqPool(){
   FREQ_POOL=Object.values(VOCAB_POOL).flat().sort((a,b)=>(b.occ||0)-(a.occ||0));
@@ -2594,6 +2599,7 @@ async function loadData(){
   try{
     // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten.
     // Nur Hauptbibeln mit Wortpool (hasTraining); words.json ist EN-nativ (Felder en/de/deForm).
+    try{if(INSTANCE.keepNamesPath){const kr=await fetch(INSTANCE.keepNamesPath+CB);if(kr.ok)KEEP_NAMES=new Set(await kr.json());}}catch(e){}
     const wr=INSTANCE.wordsPath?await fetch(INSTANCE.wordsPath+CB):null;
     if(wr&&wr.ok){
       const words=await wr.json();
@@ -2689,6 +2695,12 @@ function annoStep(level,lemma){
   const li=LEVELS.indexOf(level);
   return li<0?0:li*3+2;
 }
+// Eigennamen-Erkennung: großgeschriebenes Lemma (Grundformen gewöhnlicher Wörter
+// sind kleingeschrieben; Eigennamen wie „David", „Jerusalén" beginnen groß).
+function isProperNounLemma(lemma){
+  const c = lemma && lemma[0];
+  return !!c && c === c.toUpperCase() && c !== c.toLowerCase();
+}
 function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedWords) {
   const book = annotations[bookName];
   if (!book) return [];
@@ -2700,6 +2712,9 @@ function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedW
   Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
       const isPhrase = a.pos_end != null;
+      // Eigennamen (großgeschriebenes Lemma) aus den Übungen nehmen, außer sie
+      // stehen in KEEP_NAMES (wichtige Personen/Orte). KEEP_NAMES leer → kein Filter.
+      if (KEEP_NAMES.size && isProperNounLemma(a.lemma) && !KEEP_NAMES.has(a.lemma)) return;
       if ((annoStep(a.level,a.lemma) > userStep || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
         seen.add(a.lemma);
         result.push(a);

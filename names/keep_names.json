@@ -1,0 +1,745 @@
+{
+ "description": "Zentrale, mehrsprachige Keep-Liste wichtiger biblischer Eigennamen (Personen, Orte, Voelker, Gottheiten, Wesen u.a.). Pro Zeile: en=kanonischer englischer Name, type, + Formen je Studiensprache (es, fr, it, ...). Beim Einfuehren einer neuen Sprache via build_keepnames.py <edition> ergaenzt. Nur diese Namen erscheinen in den Uebungen; uebrige Eigennamen werden gefiltert.",
+ "entries": [
+  {
+   "en": "Aaron",
+   "type": "person",
+   "es": "Aarón"
+  },
+  {
+   "en": "Abel",
+   "type": "person",
+   "es": "Abel"
+  },
+  {
+   "en": "Abraham",
+   "type": "person",
+   "es": "Abraham"
+  },
+  {
+   "en": "Abram",
+   "type": "person",
+   "es": "Abram"
+  },
+  {
+   "en": "Adam",
+   "type": "person",
+   "es": "Adán"
+  },
+  {
+   "en": "Ahab",
+   "type": "person",
+   "es": "Acab"
+  },
+  {
+   "en": "Amos",
+   "type": "person",
+   "es": "Amós"
+  },
+  {
+   "en": "Andrew",
+   "type": "person",
+   "es": "Andrés"
+  },
+  {
+   "en": "Baptist",
+   "type": "person",
+   "es": "Bautista"
+  },
+  {
+   "en": "Cain",
+   "type": "person",
+   "es": "Caín"
+  },
+  {
+   "en": "Cephas",
+   "type": "person",
+   "es": "Cefas"
+  },
+  {
+   "en": "Daniel",
+   "type": "person",
+   "es": "Daniel"
+  },
+  {
+   "en": "David",
+   "type": "person",
+   "es": "David"
+  },
+  {
+   "en": "Deborah",
+   "type": "person",
+   "es": "Débora"
+  },
+  {
+   "en": "Elijah",
+   "type": "person",
+   "es": "Elías"
+  },
+  {
+   "en": "Elisha",
+   "type": "person",
+   "es": "Eliseo"
+  },
+  {
+   "en": "Esther",
+   "type": "person",
+   "es": "Ester"
+  },
+  {
+   "en": "Eve",
+   "type": "person",
+   "es": "Eva"
+  },
+  {
+   "en": "Ezekiel",
+   "type": "person",
+   "es": "Ezequiel"
+  },
+  {
+   "en": "Ezra",
+   "type": "person",
+   "es": "Ezra"
+  },
+  {
+   "en": "Gideon",
+   "type": "person",
+   "es": "Gedeón"
+  },
+  {
+   "en": "Goliath",
+   "type": "person",
+   "es": "Goliat"
+  },
+  {
+   "en": "Habakkuk",
+   "type": "person",
+   "es": "Habacuc"
+  },
+  {
+   "en": "Haggai",
+   "type": "person",
+   "es": "Hageo"
+  },
+  {
+   "en": "Herod",
+   "type": "person",
+   "es": "Herodes"
+  },
+  {
+   "en": "Hezekiah",
+   "type": "person",
+   "es": "Ezequías"
+  },
+  {
+   "en": "Hoshea",
+   "type": "person",
+   "es": "Oseas"
+  },
+  {
+   "en": "Isaac",
+   "type": "person",
+   "es": "Isaac"
+  },
+  {
+   "en": "Isaiah",
+   "type": "person",
+   "es": "Isaías"
+  },
+  {
+   "en": "Iscariot",
+   "type": "person",
+   "es": "Iscariote"
+  },
+  {
+   "en": "Jacob",
+   "type": "person",
+   "es": "Jacob"
+  },
+  {
+   "en": "James",
+   "type": "person",
+   "es": "Jacobo"
+  },
+  {
+   "en": "James",
+   "type": "person",
+   "es": "Santiago"
+  },
+  {
+   "en": "Jeremiah",
+   "type": "person",
+   "es": "Jeremías"
+  },
+  {
+   "en": "Jeroboam",
+   "type": "person",
+   "es": "Jeroboam"
+  },
+  {
+   "en": "Jesus",
+   "type": "person",
+   "es": "Jesús"
+  },
+  {
+   "en": "Job",
+   "type": "person",
+   "es": "Job"
+  },
+  {
+   "en": "Joel",
+   "type": "person",
+   "es": "Joel"
+  },
+  {
+   "en": "John",
+   "type": "person",
+   "es": "Juan"
+  },
+  {
+   "en": "Jonah",
+   "type": "person",
+   "es": "Jonás"
+  },
+  {
+   "en": "Joseph",
+   "type": "person",
+   "es": "José"
+  },
+  {
+   "en": "Joshua",
+   "type": "person",
+   "es": "Josué"
+  },
+  {
+   "en": "Josiah",
+   "type": "person",
+   "es": "Josías"
+  },
+  {
+   "en": "Judas",
+   "type": "person",
+   "es": "Judas"
+  },
+  {
+   "en": "Leah",
+   "type": "person",
+   "es": "Lea"
+  },
+  {
+   "en": "Luke",
+   "type": "person",
+   "es": "Lucas"
+  },
+  {
+   "en": "Malchijah",
+   "type": "person",
+   "es": "Malquías"
+  },
+  {
+   "en": "Mark",
+   "type": "person",
+   "es": "Marcos"
+  },
+  {
+   "en": "Mary",
+   "type": "person",
+   "es": "María"
+  },
+  {
+   "en": "Matthew",
+   "type": "person",
+   "es": "Mateo"
+  },
+  {
+   "en": "Micah",
+   "type": "person",
+   "es": "Micaía"
+  },
+  {
+   "en": "Miriam",
+   "type": "person",
+   "es": "Miriam"
+  },
+  {
+   "en": "Moses",
+   "type": "person",
+   "es": "Moisés"
+  },
+  {
+   "en": "Nahum",
+   "type": "person",
+   "es": "Nahúm"
+  },
+  {
+   "en": "Nathan",
+   "type": "person",
+   "es": "Natán"
+  },
+  {
+   "en": "Nebuchadnezzar",
+   "type": "person",
+   "es": "Nabucodonosor"
+  },
+  {
+   "en": "Nehemiah",
+   "type": "person",
+   "es": "Nehemías"
+  },
+  {
+   "en": "Noah",
+   "type": "person",
+   "es": "Noé"
+  },
+  {
+   "en": "Obadiah",
+   "type": "person",
+   "es": "Abdías"
+  },
+  {
+   "en": "Paul",
+   "type": "person",
+   "es": "Pablo"
+  },
+  {
+   "en": "Peter",
+   "type": "person",
+   "es": "Pedro"
+  },
+  {
+   "en": "Pharaoh",
+   "type": "person",
+   "es": "Faraón"
+  },
+  {
+   "en": "Pilate",
+   "type": "person",
+   "es": "Pilato"
+  },
+  {
+   "en": "Rachel",
+   "type": "person",
+   "es": "Raquel"
+  },
+  {
+   "en": "Rebekah",
+   "type": "person",
+   "es": "Rebeca"
+  },
+  {
+   "en": "Ruth",
+   "type": "person",
+   "es": "Rut"
+  },
+  {
+   "en": "Samson",
+   "type": "person",
+   "es": "Sansón"
+  },
+  {
+   "en": "Samuel",
+   "type": "person",
+   "es": "Samuel"
+  },
+  {
+   "en": "Sarah",
+   "type": "person",
+   "es": "Sara"
+  },
+  {
+   "en": "Sarah",
+   "type": "person",
+   "es": "Sarai"
+  },
+  {
+   "en": "Saul",
+   "type": "person",
+   "es": "Saúl"
+  },
+  {
+   "en": "Saul",
+   "type": "person",
+   "es": "Saulo"
+  },
+  {
+   "en": "Solomon",
+   "type": "person",
+   "es": "Salomón"
+  },
+  {
+   "en": "Thomas",
+   "type": "person",
+   "es": "Tomás"
+  },
+  {
+   "en": "Timothy",
+   "type": "person",
+   "es": "Timoteo"
+  },
+  {
+   "en": "Titus",
+   "type": "person",
+   "es": "Tito"
+  },
+  {
+   "en": "Zechariah",
+   "type": "person",
+   "es": "Zacarías"
+  },
+  {
+   "en": "Zephaniah",
+   "type": "person",
+   "es": "Sofonías"
+  },
+  {
+   "en": "Assyria",
+   "type": "place",
+   "es": "Asiria"
+  },
+  {
+   "en": "Babylon",
+   "type": "place",
+   "es": "Babilonia"
+  },
+  {
+   "en": "Bethlehem",
+   "type": "place",
+   "es": "Belén"
+  },
+  {
+   "en": "Canaan",
+   "type": "place",
+   "es": "Canaán"
+  },
+  {
+   "en": "Damascus",
+   "type": "place",
+   "es": "Damasco"
+  },
+  {
+   "en": "Eden",
+   "type": "place",
+   "es": "Edén"
+  },
+  {
+   "en": "Edom",
+   "type": "place",
+   "es": "Edom"
+  },
+  {
+   "en": "Egypt",
+   "type": "place",
+   "es": "Egipto"
+  },
+  {
+   "en": "Galilee",
+   "type": "place",
+   "es": "Galilea"
+  },
+  {
+   "en": "Gomorrah",
+   "type": "place",
+   "es": "Gomorra"
+  },
+  {
+   "en": "Jericho",
+   "type": "place",
+   "es": "Jericó"
+  },
+  {
+   "en": "Jerusalem",
+   "type": "place",
+   "es": "Jerusalén"
+  },
+  {
+   "en": "Jordan",
+   "type": "place",
+   "es": "Jordán"
+  },
+  {
+   "en": "Judea",
+   "type": "place",
+   "es": "Judea"
+  },
+  {
+   "en": "Nazareth",
+   "type": "place",
+   "es": "Nazaret"
+  },
+  {
+   "en": "Nineveh",
+   "type": "place",
+   "es": "Nínive"
+  },
+  {
+   "en": "Persia",
+   "type": "place",
+   "es": "Persia"
+  },
+  {
+   "en": "Rome",
+   "type": "place",
+   "es": "Roma"
+  },
+  {
+   "en": "Samaria",
+   "type": "place",
+   "es": "Samaria"
+  },
+  {
+   "en": "Sinai",
+   "type": "place",
+   "es": "Sinaí"
+  },
+  {
+   "en": "Sodom",
+   "type": "place",
+   "es": "Sodoma"
+  },
+  {
+   "en": "Zion",
+   "type": "place",
+   "es": "Sión"
+  },
+  {
+   "en": "Zion",
+   "type": "place",
+   "es": "Sion"
+  },
+  {
+   "en": "Amalek",
+   "type": "people",
+   "es": "Amalec"
+  },
+  {
+   "en": "Ammon",
+   "type": "people",
+   "es": "Amón"
+  },
+  {
+   "en": "Asher",
+   "type": "people",
+   "es": "Aser"
+  },
+  {
+   "en": "Benjamin",
+   "type": "people",
+   "es": "Benjamín"
+  },
+  {
+   "en": "Dan",
+   "type": "people",
+   "es": "Dan"
+  },
+  {
+   "en": "Ephraim",
+   "type": "people",
+   "es": "Efraín"
+  },
+  {
+   "en": "Gad",
+   "type": "people",
+   "es": "Gad"
+  },
+  {
+   "en": "Israel",
+   "type": "people",
+   "es": "Israel"
+  },
+  {
+   "en": "Issachar",
+   "type": "people",
+   "es": "Isacar"
+  },
+  {
+   "en": "Judah",
+   "type": "people",
+   "es": "Judá"
+  },
+  {
+   "en": "Levi",
+   "type": "people",
+   "es": "Leví"
+  },
+  {
+   "en": "Midian",
+   "type": "people",
+   "es": "Madián"
+  },
+  {
+   "en": "Moab",
+   "type": "people",
+   "es": "Moab"
+  },
+  {
+   "en": "Naphtali",
+   "type": "people",
+   "es": "Neftalí"
+  },
+  {
+   "en": "Reuben",
+   "type": "people",
+   "es": "Rubén"
+  },
+  {
+   "en": "Simeon",
+   "type": "people",
+   "es": "Simeón"
+  },
+  {
+   "en": "Zebulun",
+   "type": "people",
+   "es": "Zabulón"
+  },
+  {
+   "en": "Almighty",
+   "type": "deity",
+   "es": "Todopoderoso"
+  },
+  {
+   "en": "Almighty",
+   "type": "deity",
+   "es": "Omnipotente"
+  },
+  {
+   "en": "Asherah",
+   "type": "deity",
+   "es": "Asera"
+  },
+  {
+   "en": "Asherah",
+   "type": "deity",
+   "es": "Aserá"
+  },
+  {
+   "en": "Astarte",
+   "type": "deity",
+   "es": "Astarot"
+  },
+  {
+   "en": "Baal",
+   "type": "deity",
+   "es": "Baal"
+  },
+  {
+   "en": "Christ",
+   "type": "deity",
+   "es": "Cristo"
+  },
+  {
+   "en": "Dagon",
+   "type": "deity",
+   "es": "Dagón"
+  },
+  {
+   "en": "Emmanuel",
+   "type": "deity",
+   "es": "Emanuel"
+  },
+  {
+   "en": "Father",
+   "type": "deity",
+   "es": "Padre"
+  },
+  {
+   "en": "God",
+   "type": "deity",
+   "es": "Dios"
+  },
+  {
+   "en": "Jah",
+   "type": "deity",
+   "es": "Jah"
+  },
+  {
+   "en": "Jehovah",
+   "type": "deity",
+   "es": "Jehová"
+  },
+  {
+   "en": "Jesus Christ",
+   "type": "deity",
+   "es": "Jesucristo"
+  },
+  {
+   "en": "Lord",
+   "type": "deity",
+   "es": "Jehová"
+  },
+  {
+   "en": "Messiah",
+   "type": "deity",
+   "es": "Mesías"
+  },
+  {
+   "en": "Most High",
+   "type": "deity",
+   "es": "Altísimo"
+  },
+  {
+   "en": "Omega",
+   "type": "deity",
+   "es": "Omega"
+  },
+  {
+   "en": "Redeemer",
+   "type": "deity",
+   "es": "Redentor"
+  },
+  {
+   "en": "Savior",
+   "type": "deity",
+   "es": "Salvador"
+  },
+  {
+   "en": "Spirit",
+   "type": "deity",
+   "es": "Espíritu"
+  },
+  {
+   "en": "the LORD",
+   "type": "deity",
+   "es": "Jah"
+  },
+  {
+   "en": "the Lord",
+   "type": "deity",
+   "es": "Adonai"
+  },
+  {
+   "en": "Word",
+   "type": "deity",
+   "es": "Verbo"
+  },
+  {
+   "en": "Beelzebul",
+   "type": "being",
+   "es": "Beelzebú"
+  },
+  {
+   "en": "Gabriel",
+   "type": "being",
+   "es": "Gabriel"
+  },
+  {
+   "en": "Michael",
+   "type": "being",
+   "es": "Micael"
+  },
+  {
+   "en": "Satan",
+   "type": "being",
+   "es": "Satanás"
+  },
+  {
+   "en": "Passover",
+   "type": "other",
+   "es": "Pascua"
+  },
+  {
+   "en": "Pentecost",
+   "type": "other",
+   "es": "Pentecostés"
+  }
+ ]
+}
