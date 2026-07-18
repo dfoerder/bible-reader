@@ -135,8 +135,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.81b';
-const APP_DATE = '18.07.2026';
+const APP_VERSION = '1.10.82b';
+const APP_DATE = '19.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -166,7 +166,7 @@ const BIBLES = {
     annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json', annoGlossLangs: ['de'],
     wordsPath: 'bibles/eng/web/train/words.json', examplesPath: 'bibles/eng/web/train/examples.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
-    defaultHilfs: 'deu-sch1951mod',
+    defaultHilfs: 'deu-l1912mod',
     ttsLang: 'en-US', ttsLangPrefix: 'en',
     ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
     names: null, // aus bibles/index.json (englisch)
@@ -216,18 +216,7 @@ const BIBLES = {
     bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
-    defaultHilfs: 'deu-sch1951mod',
-    ttsLang: 'de-DE', ttsLangPrefix: 'de',
-    ttsVoiceNames: ['Anna','Petra','Markus'],
-    names: BOOK_NAMES_DE, bookAbbr: null,
-    i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible',es:'Leer la Biblia',it:'Leggere la Bibbia',fr:'Lire la Bible'}}, defaultUiLang: 'de',
-  },
-  'deu-sch1951mod': {
-    id: 'deu-sch1951mod', label: 'Schlachter 1951', langCode: 'de', lsPrefix: 'sch:',
-    bibleDir: 'bibles/deu/sch1951mod/', bibleSuffix: '_sch1951mod.json',
-    annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
-    hasAnno: false, hasTraining: false,
-    defaultHilfs: 'deu-l1912mod',
+    defaultHilfs: 'eng-web',
     ttsLang: 'de-DE', ttsLangPrefix: 'de',
     ttsVoiceNames: ['Anna','Petra','Markus'],
     names: BOOK_NAMES_DE, bookAbbr: null,
@@ -257,7 +246,7 @@ const APP_LANGS=[
   {code:'fr',label:'Français'},
 ];
 // Bevorzugte gleichsprachige Hilfsbibel je App-Sprache.
-const HELPER_BY_LANG={en:'eng-web',de:'deu-sch1951mod',es:'spa-rv1909mod',it:'ita-riv1927mod',fr:'fra-lsg1910mod'};
+const HELPER_BY_LANG={en:'eng-web',de:'deu-l1912mod',es:'spa-rv1909mod',it:'ita-riv1927mod',fr:'fra-lsg1910mod'};
 // Gleichsprachige Hilfsbibel zu einer gegebenen Hauptbibel + App-Sprache; fällt
 // auf die Default-Hilfsbibel der Hauptbibel zurück, wenn keine existiert oder sie
 // mit der Hauptbibel kollidiert (z.B. App-Sprache Englisch + Web-Bibel als Haupt).
@@ -374,7 +363,6 @@ const I18N={
   wordTranslations:{de:'Wortübersetzungen',en:'Word translations'},
   autoShowTranslations:{de:'Übersetzungen automatisch anzeigen',en:'Show translations automatically'},
   autoShowTranslationsHint:{de:'Aus: Übersetzungen erscheinen nur, wenn man ein Wort antippt.',en:'Off: translations appear only when you tap a word.'},
-  deSch1951:{de:'Schlachter 1951',en:'Schlachter 1951'},
   deL1912mod:{de:'Luther 1912 (mod.)',en:'Luther 1912 (mod.)'},
   deWebDeu:{de:'Wörtlich (WEB→DE)',en:'Literal (WEB→DE)'},
   clozeContext:{de:'Kontext im Lückentext',en:'Cloze context'},
@@ -627,7 +615,6 @@ const I18N_ES = {
   wordTranslations: 'Traducciones de palabras',
   autoShowTranslations: 'Mostrar traducciones automáticamente',
   autoShowTranslationsHint: 'Desactivado: las traducciones aparecen solo al tocar una palabra.',
-  deSch1951: 'Schlachter 1951',
   deL1912mod: 'Luther 1912 (mod.)',
   deWebDeu: 'Literal (WEB→DE)',
   clozeContext: 'Contexto en el ejercicio de huecos',
@@ -875,7 +862,6 @@ const I18N_IT = {
   wordTranslations: 'Traduzioni delle parole',
   autoShowTranslations: 'Mostra le traduzioni automaticamente',
   autoShowTranslationsHint: 'Off: le traduzioni appaiono solo quando tocchi una parola.',
-  deSch1951: 'Schlachter 1951',
   deL1912mod: 'Luther 1912 (mod.)',
   deWebDeu: 'Letterale (WEB→DE)',
   clozeContext: 'Contesto nel testo a completamento',
@@ -1114,7 +1100,6 @@ const I18N_FR = {
   wordTranslations: 'Traductions des mots',
   autoShowTranslations: 'Afficher les traductions automatiquement',
   autoShowTranslationsHint: 'Désactivé : les traductions n\'apparaissent qu\'en touchant un mot.',
-  deSch1951: 'Schlachter 1951',
   deL1912mod: 'Luther 1912 (mod.)',
   deWebDeu: 'Littérale (WEB→DE)',
   clozeContext: 'Contexte du texte à trous',
@@ -3831,13 +3816,15 @@ function App({data}){
           <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--t-border)'}}>
             <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
             <div style={{marginTop:8}}>
-              <button onClick={()=>{
+              <button onClick={async()=>{
                 if(!confirmFullReset){setConfirmFullReset(true);return;}
                 try{localStorage.clear()}catch(e){}
+                try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}}catch(e){}
+                try{if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}}catch(e){}
                 location.reload();
               }} style={confirmFullReset?{...S.resetBtn}:{...S.navBtn}}>{confirmFullReset?'Wirklich? ALLES löschen (inkl. Lerndaten)':'Kompletter Reset (Test)'}</button>
               {confirmFullReset&&<button onClick={()=>setConfirmFullReset(false)} style={{...S.navBtn,marginLeft:8}}>Abbrechen</button>}
-              <p style={{...S.settingsHint,margin:'4px 0 0'}}>Setzt ALLES zurück wie eine Neuinstallation: App-Sprache, Haupt-/Hilfsbibel, Onboarding UND den kompletten Lern-/Vokabel-Fortschritt. Danach erscheint wieder die Sprachauswahl.</p>
+              <p style={{...S.settingsHint,margin:'4px 0 0'}}>Setzt ALLES zurück wie eine Neuinstallation: App-Sprache, Haupt-/Hilfsbibel, Onboarding, Lern-/Vokabel-Fortschritt UND den Offline-Cache (Service Worker). Behebt auch veraltete gecachte Bibeltexte. Danach erscheint wieder die Sprachauswahl.</p>
             </div>
             <label style={{...S.toggleRow,marginTop:8}}>
               <input type="checkbox" checked={TEST_ACCEL} onChange={()=>{TEST_ACCEL?LS.remove('bible-test-accel'):LS.set('bible-test-accel',true);location.reload();}}/>

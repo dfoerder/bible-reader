@@ -4,10 +4,10 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.81b (18.07.2026)
+- **Aktuelle Version:** 1.10.82b (19.07.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
-- **Deutsche Übersetzungen:** Schlachter 1951, Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
+- **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
 - **Zielgruppe:** Deutschsprachige mit Englisch-Niveau ab A2
 - **Hosting:** GitHub Pages
 
@@ -23,7 +23,7 @@
 - Wörter oberhalb des Benutzerniveaus werden automatisch mit Übersetzung angezeigt — das Lese-Level ist sublevel-genau (18 Stufen A1.1…C2.3), sodass sich Text-Hervorhebung und schwierige Wörter feinstufig anpassen
 - Tippen auf ein Wort zeigt die deutsche Übersetzung
 - Deutsche Parallelübersetzung ein-/ausblendbar pro Vers
-- Wahl zwischen 3 deutschen Übersetzungen: Schlachter 1951, Luther 1912 (modernisiert), Wörtlich (WEB→DE)
+- Wahl zwischen 2 deutschen Übersetzungen: Luther 1912 (modernisiert), Wörtlich (WEB→DE)
 - Eigennamen mit deutschen Entsprechungen annotiert (Christ→Christus, Moses→Mose, Egypt→Ägypten)
 - Automatische Lesezeichen (merkt sich Position pro Buch)
 - Volltextsuche über alle 66 Bücher
@@ -149,8 +149,6 @@ bible-reader/
 │   │   └── web_deu/
 │   │       └── {nr}_web_deu.json      Wörtliche DE-Übersetzung (66 Dateien)
 │   ├── deu/
-│   │   ├── sch1951/                   Schlachter 1951 (66 Dateien)
-│   │   ├── sch1951mod/                Schlachter modernisiert (vorbereitet für v2)
 │   │   └── l1912mod/                  Luther 1912 modernisiert (66 Dateien)
 │   └── fra/ · ita/ · spa/             lsg1910, riv1927, rv1909 (+ mod-Varianten) —
 │                                      vorbereitet für Version 2, von der App noch nicht genutzt
@@ -228,7 +226,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-layout` | Theme/Layout (classic/icf/icf-light) |
-| `bible-de-trans` | Gewählte deutsche Übersetzung (sch1951/l1912mod/web_deu) |
+| `bible-de-trans` | Gewählte deutsche Übersetzung (l1912mod/web_deu) |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
 | `bible-word-data-backups` | Liste zeitgestempelter Lernstand-Backups (Entwickler-Werkzeug „Test-Daten laden"; max. 12, ältestes wird bei Speicherüberlauf verworfen). Jedes Backup ist ein vollständiger Snapshot: Wortdaten, Lese-Level (`userStep`) samt Wortlisten, Trainingsstufen, Lernfokus, Übungsart, Trainingshistorie und Kapitel-Markierungen (`unk-*`/`rev-*`). Migriert den früheren Einzel-Slot `bible-word-data-backup` (nur Wortdaten). |
 | `bible-test-accel` | Beschleunigter Test-Modus (Entwickler-Einstellungen): alle Lern-Fristen ÷96 (unbekannt 15 min · gelernt 30 min · gefestigt 105 min · sicher 15 h) und nur ¼ des Wortpools (pro Level/Sublevel jedes 4. Wort — Level-Verhältnisse bleiben erhalten). Wirkt beim App-Laden; ⚡-Hinweis im Training. |
@@ -249,12 +247,11 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 
 ### Deutsche Übersetzungen
 
-Drei deutsche Parallelübersetzungen stehen zur Auswahl (einstellbar unter Einstellungen):
+Zwei deutsche Parallelübersetzungen stehen zur Auswahl (einstellbar unter Einstellungen):
 
 | Übersetzung | Pfad | Format |
 |-------------|------|--------|
-| **Schlachter 1951** (Standard) | `bibles/deu/sch1951/` | Dict (`{"chapters":{"1":{"1":"Text",...},...}}`) |
-| **Luther 1912 (modernisiert)** | `bibles/deu/l1912mod/` | Dict (wie Schlachter) |
+| **Luther 1912 (modernisiert)** (Standard) | `bibles/deu/l1912mod/` | Dict (`{"chapters":{"1":{"1":"Text",...},...}}`) |
 | **Wörtlich WEB→DE** | `bibles/eng/web/web_deu/` | Array (`{"chapters":[{"number":1,"verses":[{"n":1,"text":"..."}]}]}`) — wird zur Laufzeit normalisiert |
 
 Die wörtliche Übersetzung (`web_deu`) wird automatisch aus den Annotationen generiert: Phrase-Übersetzungen werden bevorzugt, Einzelwort-Übersetzungen als Fallback, Satzzeichen aus dem englischen Quelltext übernommen.
@@ -334,4 +331,4 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **5.087 einzigartige Lemmata** (nach Filterung und Zusammenführung)
 - **Einheitlicher Vokabelpool:** 5.684 Wörter (A1: 1.063, A2: 548, B1: 798, B2: 1.503, C1: 1.208, C2: 564) — Eigennamen auf die wichtigsten mit Lernwert kuratiert (obskure entfernt, fehlende wichtige wie Moses/Jeremiah/Elia ergänzt)
 - **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488); Rest: Eigennamen und Pool-Erweiterungen (v1.9.53b–58b)
-- **3 deutsche Übersetzungen:** Schlachter 1951, Luther 1912 mod, Wörtlich WEB→DE
+- **2 deutsche Übersetzungen:** Luther 1912 mod, Wörtlich WEB→DE

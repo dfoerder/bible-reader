@@ -24,7 +24,7 @@ Eine ios App, die deutschsprachigen Christen hilft, durch das Lesen der Bibel in
 - Wort-für-Wort-Annotationen mit deutschen Übersetzungen
 - Schwierige Wörter nach CEFR-Level (A1–C1) farblich markiert
 - Antippen eines Wortes zeigt die deutsche Übersetzung
-- Deutsche Parallelübersetzung (Schlachter 1951) versweise einblendbar
+- Deutsche Parallelübersetzung (Luther 1912, modernisiert) versweise einblendbar
 - Lesezeichen pro Buch — merkt sich automatisch Kapitel und Vers
 
 ### Vorlesen (Text-to-Speech)
@@ -80,5 +80,4 @@ Jedes Wort trägt einen numerischen `familiarity`-Wert (−1 = noch nie gesehen 
 ## 2. Version (Multilingual)
 ### Weitere Sprachen (Bibeltexte)
 - Spanisch: Reina-Valera 1909 (Original + modernisierte Version)
-- Deutsch: Schlachter 1951 (Original + modernisierte Version)
 - Modernisierung: archaische Wörter durch verständlichere ersetzt, per Skript reproduzierbar
