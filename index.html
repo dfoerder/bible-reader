@@ -2998,6 +2998,7 @@ function App({data}){
   const changeShowAllDe=useCallback(v=>{setShowAllDe(v);LS.set('bible-show-all-de',v);if(!v)setExpandedVerses(new Set())},[]);
   const [dePrompt,setDePrompt]=useState(null);
   const [showResetDialog,setShowResetDialog]=useState(false);
+  const [confirmFullReset,setConfirmFullReset]=useState(false);
   const [showRetakeDialog,setShowRetakeDialog]=useState(false);
   const [showProgressPanel,setShowProgressPanel]=useState(false);
   const [loading,setLoading]=useState(false);
@@ -3761,6 +3762,15 @@ function App({data}){
           </div>
           <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--t-border)'}}>
             <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
+            <div style={{marginTop:8}}>
+              <button onClick={()=>{
+                if(!confirmFullReset){setConfirmFullReset(true);return;}
+                try{localStorage.clear()}catch(e){}
+                location.reload();
+              }} style={confirmFullReset?{...S.resetBtn}:{...S.navBtn}}>{confirmFullReset?'Wirklich? ALLES löschen (inkl. Lerndaten)':'Kompletter Reset (Test)'}</button>
+              {confirmFullReset&&<button onClick={()=>setConfirmFullReset(false)} style={{...S.navBtn,marginLeft:8}}>Abbrechen</button>}
+              <p style={{...S.settingsHint,margin:'4px 0 0'}}>Setzt ALLES zurück wie eine Neuinstallation: App-Sprache, Haupt-/Hilfsbibel, Onboarding UND den kompletten Lern-/Vokabel-Fortschritt. Danach erscheint wieder die Sprachauswahl.</p>
+            </div>
             <label style={{...S.toggleRow,marginTop:8}}>
               <input type="checkbox" checked={TEST_ACCEL} onChange={()=>{TEST_ACCEL?LS.remove('bible-test-accel'):LS.set('bible-test-accel',true);location.reload();}}/>
               <span style={S.toggleLabel}>Beschleunigter Test — Fristen ÷96, reduzierter Wortpool (lädt App neu)</span>
