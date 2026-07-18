@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.75b (18.07.2026)
+
+- Übungen ohne Namensflut: In den Vokabelübungen (z.B. spanisches Matthäus 1) erscheinen nur noch wichtige Eigennamen — bedeutende Personen (Abraham, Moses, David, Propheten, Apostel), große Orte (Jerusalem, Ägypten, Babylon) und Gottesnamen. Unwichtige Genealogie- und Nebennamen werden aus den Übungen herausgefiltert.
+
 ## v1.10.74b (18.07.2026)
 
 - Einstufungstest in der Hilfssprache: Die Antwortoptionen im Einstufungstest erscheinen jetzt in der Sprache der gewählten Hilfsbibel (z.B. spanisches Wort mit deutschen Optionen, wenn die Hilfsbibel deutsch ist) statt immer auf Englisch bzw. Deutsch. Das abgefragte Wort bleibt in der Lernsprache.
