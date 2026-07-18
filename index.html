@@ -304,7 +304,7 @@ const I18N={
   newTestament:{de:'Neues Testament',en:'New Testament'},
   nBooks:{de:'{n} Bücher',en:'{n} books'},
   nCh:{de:'{n} Kap.',en:'{n} ch.'},
-  chooseLanguage:{de:'Sprache wählen',en:'Choose your language',es:'Elige tu idioma',it:'Scegli la lingua',fr:'Choisis ta langue'},
+  chooseLanguage:{de:'App-Sprache wählen',en:'Choose your app language',es:'Elige el idioma de la app',it:'Scegli la lingua dell\'app',fr:'Choisis la langue de l\'app'},
   chooseBible:{de:'Welche Bibel möchtest du lesen?',en:'Which Bible would you like to read?',es:'¿Qué Biblia quieres leer?',it:'Quale Bibbia vuoi leggere?',fr:'Quelle Bible veux-tu lire ?'},
   chooseBibleHint:{de:'Die Sprache, die du lernen möchtest. Änderbar in den Einstellungen.',en:'The language you want to learn. Changeable in settings.',es:'El idioma que quieres aprender. Se puede cambiar en los ajustes.',it:'La lingua che vuoi imparare. Modificabile nelle impostazioni.',fr:'La langue que tu veux apprendre. Modifiable dans les réglages.'},
   glossHintTitle:{de:'Keine Wort-Hilfe für diese Kombination',en:'No word help for this combination',es:'Sin ayuda de vocabulario para esta combinación',it:'Nessun aiuto lessicale per questa combinazione',fr:'Pas d\'aide lexicale pour cette combinaison'},
@@ -863,7 +863,6 @@ const I18N_IT = {
   statsVocab: 'Vocabolario (forme base per livello)',
   statsProgress: 'I tuoi progressi',
   appLanguage: 'Lingua dell\'app',
-  chooseLanguage: 'Scegli la lingua',
   germanTranslation: 'Traduzione tedesca',
   germanTranslationHint: 'Mostrata quando si espandono i versetti.',
   showAllDeVerses: 'Mostra tutti i versetti tedeschi',
@@ -3503,11 +3502,10 @@ function App({data}){
   // ── LEVEL TEST ──
   if(phase==='langselect'){
     return(<div>
-      <header style={S.header}>
-        <div style={{fontSize:44,marginBottom:8}}>🌍</div>
-        <h1 style={{...S.title,margin:0}}>Bible</h1>
+      <header style={{...S.header,paddingBottom:12}}>
+        <div style={{fontSize:44}}>🌍</div>
       </header>
-      <p style={{textAlign:'center',fontSize:14,color:'var(--t-med)',fontFamily:sans,margin:'0 0 28px',lineHeight:1.8}}>
+      <p style={{textAlign:'center',fontSize:15,color:'var(--t-text2)',fontFamily:sans,fontWeight:600,margin:'0 0 24px',lineHeight:1.8}}>
         {APP_LANGS.map(l=>I18N.chooseLanguage[l.code]).join(' · ')}
       </p>
       <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:320,margin:'0 auto'}}>
