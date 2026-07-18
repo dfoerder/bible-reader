@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.74b (18.07.2026)
+
+- Einstufungstest in der Hilfssprache: Die Antwortoptionen im Einstufungstest erscheinen jetzt in der Sprache der gewählten Hilfsbibel (z.B. spanisches Wort mit deutschen Optionen, wenn die Hilfsbibel deutsch ist) statt immer auf Englisch bzw. Deutsch. Das abgefragte Wort bleibt in der Lernsprache.
+
 ## v1.10.73b (18.07.2026)
 
 - Neuer Einstieg beim ersten Start: zuerst App-Sprache wählen, dann die Bibel, die man lesen möchte. Wählt man die englische (WEB) oder spanische (RV1909) Bibel, folgt direkt der passende Einstufungstest; bei den reinen Lesebibeln (Französisch, Italienisch, Luther, Schlachter) geht es direkt zur Startseite. Die Hilfsbibel wird automatisch passend zur App-Sprache vorgewählt.

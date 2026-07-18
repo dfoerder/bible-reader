@@ -135,7 +135,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.73b';
+const APP_VERSION = '1.10.74b';
 const APP_DATE = '18.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -1289,76 +1289,21 @@ function setLang(l){_lang=l;rawLSset('bible-ui-lang',l);}
 function getLang(){return _lang;}
 
 // ─── Level Test ─────────────────────────────────────────
-// Pro Studiensprache ein eigener Test: `en` = angezeigtes Wort (Studiensprache),
-// `de` = korrekte Antwort (Hilfssprache), `wrong` = 2 Distraktoren (Hilfssprache).
-// Der aktive Test wird nach INSTANCE.langCode gewählt (nur Editionen mit
-// hasLevelTest). EN-Test: Englisch→Deutsch. ES-Test: Spanisch→Englisch.
-const LEVEL_TEST_EN=[
-  {en:'water',de:'Wasser',wrong:['Feuer','Stein'],level:'A1'},
-  {en:'bread',de:'Brot',wrong:['Milch','Fleisch'],level:'A1'},
-  {en:'house',de:'Haus',wrong:['Stadt','Straße'],level:'A1'},
-  {en:'night',de:'Nacht',wrong:['Morgen','Abend'],level:'A1'},
-  {en:'brother',de:'Bruder',wrong:['Schwester','Vater'],level:'A1'},
-  {en:'voice',de:'Stimme',wrong:['Klang','Schrei'],level:'A2'},
-  {en:'wrong',de:'Unrecht',wrong:['Recht','Gericht'],level:'A2'},
-  {en:'clothes',de:'Kleider',wrong:['Schuhe','Stoffe'],level:'A2'},
-  {en:'field',de:'Feld',wrong:['Garten','Hügel'],level:'A2'},
-  {en:'promise',de:'Versprechen',wrong:['Geschenk','Geheimnis'],level:'A2'},
-  {en:'earth',de:'Erde',wrong:['Himmel','Meer'],level:'B1'},
-  {en:'battle',de:'Schlacht',wrong:['Frieden','Reise'],level:'B1'},
-  {en:'escape',de:'entkommen',wrong:['ankommen','verstecken'],level:'B1'},
-  {en:'praise',de:'loben',wrong:['bitten','flüstern'],level:'B1'},
-  {en:'gather',de:'sammeln',wrong:['streuen','trennen'],level:'B1'},
-  {en:'flee',de:'fliehen',wrong:['kämpfen','verfolgen'],level:'B2'},
-  {en:'mourn',de:'trauern',wrong:['feiern','schweigen'],level:'B2'},
-  {en:'likewise',de:'ebenso',wrong:['trotzdem','niemals'],level:'B2'},
-  {en:'wilderness',de:'Wildnis',wrong:['Festung','Siedlung'],level:'B2'},
-  {en:'wrath',de:'Zorn',wrong:['Gnade','Stolz'],level:'B2'},
-  {en:'anointed',de:'Gesalbter',wrong:['Verbannter','Gelehrter'],level:'C1'},
-  {en:'valiant',de:'tapfer',wrong:['feige','listig'],level:'C1'},
-  {en:'lament',de:'klagen',wrong:['jubeln','flüstern'],level:'C1'},
-  {en:'anguish',de:'Qual',wrong:['Trost','Ruhe'],level:'C1'},
-  {en:'slaughter',de:'Gemetzel',wrong:['Ernte','Festmahl'],level:'C1'},
-  {en:'iniquity',de:'Missetat',wrong:['Tugend','Schuld'],level:'C2'},
-  {en:'tabernacle',de:'Stiftshütte',wrong:['Tempel','Zelt'],level:'C2'},
-  {en:'supplication',de:'Flehen',wrong:['Gebet','Klage'],level:'C2'},
-  {en:'abhor',de:'verabscheuen',wrong:['verehren','fürchten'],level:'C2'},
-  {en:'blaspheme',de:'lästern',wrong:['beten','schweigen'],level:'C2'},
-];
-// Spanisch → Englisch (angezeigtes Wort spanisch, Optionen englisch)
-const LEVEL_TEST_ES=[
-  {en:'hijo',de:'son',wrong:['father','servant'],level:'A1'},
-  {en:'tierra',de:'earth',wrong:['sky','sea'],level:'A1'},
-  {en:'rey',de:'king',wrong:['soldier','judge'],level:'A1'},
-  {en:'casa',de:'house',wrong:['city','road'],level:'A1'},
-  {en:'día',de:'day',wrong:['night','week'],level:'A1'},
-  {en:'siervo',de:'servant',wrong:['master','guest'],level:'A2'},
-  {en:'nación',de:'nation',wrong:['village','crowd'],level:'A2'},
-  {en:'monte',de:'mountain',wrong:['river','valley'],level:'A2'},
-  {en:'ley',de:'law',wrong:['gift','story'],level:'A2'},
-  {en:'ejército',de:'army',wrong:['crowd','council'],level:'A2'},
-  {en:'pecado',de:'sin',wrong:['virtue','debt'],level:'B1'},
-  {en:'pacto',de:'covenant',wrong:['quarrel','journey'],level:'B1'},
-  {en:'misericordia',de:'mercy',wrong:['anger','pride'],level:'B1'},
-  {en:'profeta',de:'prophet',wrong:['priest','servant'],level:'B1'},
-  {en:'altar',de:'altar',wrong:['throne','tomb'],level:'B1'},
-  {en:'heredad',de:'inheritance',wrong:['reward','ruin'],level:'B2'},
-  {en:'abominación',de:'abomination',wrong:['blessing','wonder'],level:'B2'},
-  {en:'ungir',de:'to anoint',wrong:['to bless','to bathe'],level:'B2'},
-  {en:'aborrecer',de:'to hate',wrong:['to forgive','to envy'],level:'B2'},
-  {en:'iniquidad',de:'iniquity',wrong:['righteousness','grief'],level:'B2'},
-  {en:'primogénito',de:'firstborn',wrong:['heir','orphan'],level:'C1'},
-  {en:'expiación',de:'atonement',wrong:['rebellion','punishment'],level:'C1'},
-  {en:'degollar',de:'to slaughter',wrong:['to bury','to seize'],level:'C1'},
-  {en:'querubín',de:'cherub',wrong:['idol','scribe'],level:'C1'},
-  {en:'eunuco',de:'eunuch',wrong:['prisoner','steward'],level:'C1'},
-  {en:'efod',de:'ephod',wrong:['altar','scroll'],level:'C2'},
-  {en:'prepucio',de:'foreskin',wrong:['sinew','forehead'],level:'C2'},
-  {en:'propiciatorio',de:'mercy seat',wrong:['altar step','incense pan'],level:'C2'},
-  {en:'agorero',de:'soothsayer',wrong:['shepherd','craftsman'],level:'C2'},
-  {en:'aventador',de:'winnowing fork',wrong:['plow','sickle'],level:'C2'},
-];
-const LEVEL_TEST=({en:LEVEL_TEST_EN,es:LEVEL_TEST_ES})[INSTANCE.langCode]||LEVEL_TEST_EN;
+// Pro Studiensprache eigene Test-Items; `opt` enthält die Optionen je Gloss-Sprache.
+// `word` = angezeigtes Wort (Studiensprache); die Optionen erscheinen in der Sprache
+// der aktiven Hilfsbibel. Nur Editionen mit hasLevelTest (WEB=en, rv1909mod=es).
+const LEVEL_TEST_DATA={"en":[{"word":"water","level":"A1","opt":{"de":["Wasser","Feuer","Stein"],"es":["agua","fuego","piedra"],"it":["acqua","fuoco","pietra"],"fr":["eau","feu","pierre"]}},{"word":"bread","level":"A1","opt":{"de":["Brot","Milch","Fleisch"],"es":["pan","leche","carne"],"it":["pane","latte","carne"],"fr":["pain","lait","viande"]}},{"word":"house","level":"A1","opt":{"de":["Haus","Stadt","Straße"],"es":["casa","ciudad","calle"],"it":["casa","città","strada"],"fr":["maison","ville","rue"]}},{"word":"night","level":"A1","opt":{"de":["Nacht","Morgen","Abend"],"es":["noche","mañana","tarde"],"it":["notte","mattino","sera"],"fr":["nuit","matin","soir"]}},{"word":"brother","level":"A1","opt":{"de":["Bruder","Schwester","Vater"],"es":["hermano","hermana","padre"],"it":["fratello","sorella","padre"],"fr":["frère","sœur","père"]}},{"word":"voice","level":"A2","opt":{"de":["Stimme","Klang","Schrei"],"es":["voz","sonido","grito"],"it":["voce","suono","grido"],"fr":["voix","son","cri"]}},{"word":"wrong","level":"A2","opt":{"de":["Unrecht","Recht","Gericht"],"es":["injusticia","derecho","juicio"],"it":["ingiustizia","diritto","giudizio"],"fr":["injustice","droit","jugement"]}},{"word":"clothes","level":"A2","opt":{"de":["Kleider","Schuhe","Stoffe"],"es":["vestiduras","zapatos","telas"],"it":["vesti","scarpe","stoffe"],"fr":["vêtements","chaussures","étoffes"]}},{"word":"field","level":"A2","opt":{"de":["Feld","Garten","Hügel"],"es":["campo","jardín","colina"],"it":["campo","giardino","collina"],"fr":["champ","jardin","colline"]}},{"word":"promise","level":"A2","opt":{"de":["Versprechen","Geschenk","Geheimnis"],"es":["promesa","regalo","secreto"],"it":["promessa","dono","segreto"],"fr":["promesse","cadeau","secret"]}},{"word":"earth","level":"B1","opt":{"de":["Erde","Himmel","Meer"],"es":["tierra","cielo","mar"],"it":["terra","cielo","mare"],"fr":["terre","ciel","mer"]}},{"word":"battle","level":"B1","opt":{"de":["Schlacht","Frieden","Reise"],"es":["batalla","paz","viaje"],"it":["battaglia","pace","viaggio"],"fr":["bataille","paix","voyage"]}},{"word":"escape","level":"B1","opt":{"de":["entkommen","ankommen","verstecken"],"es":["escapar","llegar","esconder"],"it":["fuggire","arrivare","nascondere"],"fr":["échapper","arriver","cacher"]}},{"word":"praise","level":"B1","opt":{"de":["loben","bitten","flüstern"],"es":["alabar","pedir","susurrar"],"it":["lodare","chiedere","sussurrare"],"fr":["louer","demander","chuchoter"]}},{"word":"gather","level":"B1","opt":{"de":["sammeln","streuen","trennen"],"es":["recoger","esparcir","separar"],"it":["radunare","spargere","separare"],"fr":["rassembler","disperser","séparer"]}},{"word":"flee","level":"B2","opt":{"de":["fliehen","kämpfen","verfolgen"],"es":["huir","luchar","perseguir"],"it":["fuggire","combattere","inseguire"],"fr":["fuir","combattre","poursuivre"]}},{"word":"mourn","level":"B2","opt":{"de":["trauern","feiern","schweigen"],"es":["lamentar","celebrar","callar"],"it":["piangere","festeggiare","tacere"],"fr":["pleurer","célébrer","se taire"]}},{"word":"likewise","level":"B2","opt":{"de":["ebenso","trotzdem","niemals"],"es":["asimismo","sin embargo","nunca"],"it":["ugualmente","tuttavia","mai"],"fr":["de même","cependant","jamais"]}},{"word":"wilderness","level":"B2","opt":{"de":["Wildnis","Festung","Siedlung"],"es":["desierto","fortaleza","poblado"],"it":["deserto","fortezza","villaggio"],"fr":["désert","forteresse","village"]}},{"word":"wrath","level":"B2","opt":{"de":["Zorn","Gnade","Stolz"],"es":["ira","gracia","orgullo"],"it":["ira","grazia","orgoglio"],"fr":["colère","grâce","orgueil"]}},{"word":"anointed","level":"C1","opt":{"de":["Gesalbter","Verbannter","Gelehrter"],"es":["ungido","desterrado","erudito"],"it":["unto","esiliato","erudito"],"fr":["oint","banni","érudit"]}},{"word":"valiant","level":"C1","opt":{"de":["tapfer","feige","listig"],"es":["valiente","cobarde","astuto"],"it":["valoroso","codardo","astuto"],"fr":["vaillant","lâche","rusé"]}},{"word":"lament","level":"C1","opt":{"de":["klagen","jubeln","flüstern"],"es":["lamentar","regocijarse","susurrar"],"it":["lamentarsi","esultare","sussurrare"],"fr":["se lamenter","jubiler","chuchoter"]}},{"word":"anguish","level":"C1","opt":{"de":["Qual","Trost","Ruhe"],"es":["angustia","consuelo","reposo"],"it":["angoscia","conforto","riposo"],"fr":["angoisse","réconfort","repos"]}},{"word":"slaughter","level":"C1","opt":{"de":["Gemetzel","Ernte","Festmahl"],"es":["matanza","cosecha","banquete"],"it":["strage","raccolto","banchetto"],"fr":["carnage","moisson","festin"]}},{"word":"iniquity","level":"C2","opt":{"de":["Missetat","Tugend","Schuld"],"es":["iniquidad","virtud","deuda"],"it":["iniquità","virtù","colpa"],"fr":["iniquité","vertu","faute"]}},{"word":"tabernacle","level":"C2","opt":{"de":["Stiftshütte","Tempel","Zelt"],"es":["tabernáculo","templo","tienda"],"it":["tabernacolo","tempio","tenda"],"fr":["tabernacle","temple","tente"]}},{"word":"supplication","level":"C2","opt":{"de":["Flehen","Gebet","Klage"],"es":["súplica","oración","lamento"],"it":["supplica","preghiera","lamento"],"fr":["supplication","prière","lamentation"]}},{"word":"abhor","level":"C2","opt":{"de":["verabscheuen","verehren","fürchten"],"es":["abominar","venerar","temer"],"it":["aborrire","venerare","temere"],"fr":["abhorrer","vénérer","craindre"]}},{"word":"blaspheme","level":"C2","opt":{"de":["lästern","beten","schweigen"],"es":["blasfemar","orar","callar"],"it":["bestemmiare","pregare","tacere"],"fr":["blasphémer","prier","se taire"]}}],"es":[{"word":"hijo","level":"A1","opt":{"en":["son","father","servant"],"de":["Sohn","Vater","Diener"],"it":["figlio","padre","servo"],"fr":["fils","père","serviteur"]}},{"word":"tierra","level":"A1","opt":{"en":["earth","sky","sea"],"de":["Erde","Himmel","Meer"],"it":["terra","cielo","mare"],"fr":["terre","ciel","mer"]}},{"word":"rey","level":"A1","opt":{"en":["king","soldier","judge"],"de":["König","Soldat","Richter"],"it":["re","soldato","giudice"],"fr":["roi","soldat","juge"]}},{"word":"casa","level":"A1","opt":{"en":["house","city","road"],"de":["Haus","Stadt","Straße"],"it":["casa","città","strada"],"fr":["maison","ville","route"]}},{"word":"día","level":"A1","opt":{"en":["day","night","week"],"de":["Tag","Nacht","Woche"],"it":["giorno","notte","settimana"],"fr":["jour","nuit","semaine"]}},{"word":"siervo","level":"A2","opt":{"en":["servant","master","guest"],"de":["Diener","Herr","Gast"],"it":["servo","padrone","ospite"],"fr":["serviteur","maître","invité"]}},{"word":"nación","level":"A2","opt":{"en":["nation","village","crowd"],"de":["Nation","Dorf","Menge"],"it":["nazione","villaggio","folla"],"fr":["nation","village","foule"]}},{"word":"monte","level":"A2","opt":{"en":["mountain","river","valley"],"de":["Berg","Fluss","Tal"],"it":["monte","fiume","valle"],"fr":["montagne","fleuve","vallée"]}},{"word":"ley","level":"A2","opt":{"en":["law","gift","story"],"de":["Gesetz","Gabe","Geschichte"],"it":["legge","dono","storia"],"fr":["loi","don","histoire"]}},{"word":"ejército","level":"A2","opt":{"en":["army","crowd","council"],"de":["Heer","Menge","Rat"],"it":["esercito","folla","consiglio"],"fr":["armée","foule","conseil"]}},{"word":"pecado","level":"B1","opt":{"en":["sin","virtue","debt"],"de":["Sünde","Tugend","Schuld"],"it":["peccato","virtù","debito"],"fr":["péché","vertu","dette"]}},{"word":"pacto","level":"B1","opt":{"en":["covenant","quarrel","journey"],"de":["Bund","Streit","Reise"],"it":["patto","litigio","viaggio"],"fr":["alliance","querelle","voyage"]}},{"word":"misericordia","level":"B1","opt":{"en":["mercy","anger","pride"],"de":["Barmherzigkeit","Zorn","Stolz"],"it":["misericordia","ira","orgoglio"],"fr":["miséricorde","colère","orgueil"]}},{"word":"profeta","level":"B1","opt":{"en":["prophet","priest","servant"],"de":["Prophet","Priester","Diener"],"it":["profeta","sacerdote","servo"],"fr":["prophète","prêtre","serviteur"]}},{"word":"altar","level":"B1","opt":{"en":["altar","throne","tomb"],"de":["Altar","Thron","Grab"],"it":["altare","trono","tomba"],"fr":["autel","trône","tombeau"]}},{"word":"heredad","level":"B2","opt":{"en":["inheritance","reward","ruin"],"de":["Erbe","Lohn","Verderben"],"it":["eredità","ricompensa","rovina"],"fr":["héritage","récompense","ruine"]}},{"word":"abominación","level":"B2","opt":{"en":["abomination","blessing","wonder"],"de":["Gräuel","Segen","Wunder"],"it":["abominio","benedizione","prodigio"],"fr":["abomination","bénédiction","prodige"]}},{"word":"ungir","level":"B2","opt":{"en":["to anoint","to bless","to bathe"],"de":["salben","segnen","baden"],"it":["ungere","benedire","bagnare"],"fr":["oindre","bénir","baigner"]}},{"word":"aborrecer","level":"B2","opt":{"en":["to hate","to forgive","to envy"],"de":["hassen","vergeben","beneiden"],"it":["odiare","perdonare","invidiare"],"fr":["haïr","pardonner","envier"]}},{"word":"iniquidad","level":"B2","opt":{"en":["iniquity","righteousness","grief"],"de":["Missetat","Gerechtigkeit","Trauer"],"it":["iniquità","giustizia","dolore"],"fr":["iniquité","justice","chagrin"]}},{"word":"primogénito","level":"C1","opt":{"en":["firstborn","heir","orphan"],"de":["Erstgeborener","Erbe","Waise"],"it":["primogenito","erede","orfano"],"fr":["premier-né","héritier","orphelin"]}},{"word":"expiación","level":"C1","opt":{"en":["atonement","rebellion","punishment"],"de":["Sühne","Aufruhr","Strafe"],"it":["espiazione","ribellione","punizione"],"fr":["expiation","rébellion","châtiment"]}},{"word":"degollar","level":"C1","opt":{"en":["to slaughter","to bury","to seize"],"de":["schlachten","begraben","ergreifen"],"it":["sgozzare","seppellire","afferrare"],"fr":["égorger","enterrer","saisir"]}},{"word":"querubín","level":"C1","opt":{"en":["cherub","idol","scribe"],"de":["Cherub","Götze","Schriftgelehrter"],"it":["cherubino","idolo","scriba"],"fr":["chérubin","idole","scribe"]}},{"word":"eunuco","level":"C1","opt":{"en":["eunuch","prisoner","steward"],"de":["Eunuch","Gefangener","Verwalter"],"it":["eunuco","prigioniero","amministratore"],"fr":["eunuque","prisonnier","intendant"]}},{"word":"efod","level":"C2","opt":{"en":["ephod","altar","scroll"],"de":["Ephod","Altar","Schriftrolle"],"it":["efod","altare","rotolo"],"fr":["éphod","autel","rouleau"]}},{"word":"prepucio","level":"C2","opt":{"en":["foreskin","sinew","forehead"],"de":["Vorhaut","Sehne","Stirn"],"it":["prepuzio","tendine","fronte"],"fr":["prépuce","tendon","front"]}},{"word":"propiciatorio","level":"C2","opt":{"en":["mercy seat","altar step","incense pan"],"de":["Gnadenstuhl","Altarstufe","Räucherpfanne"],"it":["propiziatorio","gradino dell'altare","incensiere"],"fr":["propitiatoire","marche de l'autel","encensoir"]}},{"word":"agorero","level":"C2","opt":{"en":["soothsayer","shepherd","craftsman"],"de":["Wahrsager","Hirte","Handwerker"],"it":["indovino","pastore","artigiano"],"fr":["devin","berger","artisan"]}},{"word":"aventador","level":"C2","opt":{"en":["winnowing fork","plow","sickle"],"de":["Wurfschaufel","Pflug","Sichel"],"it":["ventilabro","aratro","falce"],"fr":["van","charrue","faucille"]}}]};
+// Optionssprache = langCode der aktiven Hilfsbibel (Fallback wie deTrans-Init).
+const _ltHelper=(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;})();
+const LT_GLOSS_LANG=BIBLES[_ltHelper]?.langCode||'de';
+// Studiensprache (INSTANCE.langCode) → Test; Optionen in Gloss-Sprache
+// (Fallback: EN-Test→Deutsch, ES-Test→Englisch). Felder wie bisher: en=Wort, de=korrekt, wrong=2.
+function buildLevelTest(studyLang,glossLang){
+  const items=LEVEL_TEST_DATA[studyLang]||LEVEL_TEST_DATA.en;
+  const fb=studyLang==='es'?'en':'de';
+  return items.map(it=>{const o=it.opt[glossLang]||it.opt[fb];return {en:it.word,de:o[0],wrong:o.slice(1),level:it.level};});
+}
+const LEVEL_TEST=buildLevelTest(INSTANCE.langCode,LT_GLOSS_LANG);
 
 function scoreLevelTest(answers){
   const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
