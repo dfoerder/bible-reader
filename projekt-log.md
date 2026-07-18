@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.80b (18.07.2026)
+
+- Wortübersetzungen/Übungen unabhängig von der Hilfsbibel wählbar: Beim ersten Start wird nach der Bibelwahl gefragt, in welcher Sprache Inline-Wortübersetzungen und Übungen erscheinen sollen — gibt es sie nicht in der App-Sprache, kann man Englisch wählen (z.B. englische Wort-Hilfe mit deutscher Hilfsbibel). Der Einstufungstest ist dann in dieser Sprache. In den Einstellungen umschaltbar.
+
 ## v1.10.79b (18.07.2026)
 
 - Sprachauswahl beim ersten Start klarer: Der irreführende Titel 'Bible' ist weg und der Text lautet nun 'App-Sprache wählen' (statt 'Sprache wählen') — es geht um die Anzeigesprache der App, nicht um die Bibelsprache.
