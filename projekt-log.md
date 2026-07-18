@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.77b (18.07.2026)
+
+- Test-Hilfe (Entwickler): Neuer Button in den Einstellungen zum kompletten Zurücksetzen der App wie bei einer Neuinstallation — inkl. Lernfortschritt; danach startet wieder die Sprach- und Bibelauswahl.
+
 ## v1.10.76b (18.07.2026)
 
 - Interne Regel dokumentiert: Der Einstufungstest enthält ausschließlich gewöhnliche Vokabeln, keine Eigennamen. Keine sichtbaren Änderungen für Nutzer.
