@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.83b (19.07.2026)
+
+- KI-Modernisierungshinweis an den Namen der modernisierten Übersetzungen angehängt (ES: Actualizado por IA, FR: Actualisé par IA, IT: Aggiornato dall'IA, DE: Aktualisiert von KI).
+
 ## v1.10.82b (19.07.2026)
 
 - Schlachter 1951 aus der App entfernt (nicht 100% gemeinfrei) — Luther 1912 (modernisiert) ist jetzt die einzige deutsche Parallelübersetzung/Hauptbibel; Kompletter-Reset-Button löscht jetzt zusätzlich Service-Worker-Cache und -Registrierung (behebt veraltete gecachte Bibeltexte).

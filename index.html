@@ -135,7 +135,7 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.82b';
+const APP_VERSION = '1.10.83b';
 const APP_DATE = '19.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -174,7 +174,7 @@ const BIBLES = {
     i18nOverrides: {}, defaultUiLang: 'de',
   },
   'spa-rv1909mod': {
-    id: 'spa-rv1909mod', label: 'Español (RV1909)', langCode: 'es', lsPrefix: 'es:',
+    id: 'spa-rv1909mod', label: 'Español (RV1909) – Actualizado por IA', langCode: 'es', lsPrefix: 'es:',
     bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json', annoGlossLangs: ['en'],
     wordsPath: 'bibles/spa/rv1909mod/train/words.json', examplesPath: 'bibles/spa/rv1909mod/train/examples.json',
@@ -190,7 +190,7 @@ const BIBLES = {
     }, defaultUiLang: 'de',
   },
   'fra-lsg1910mod': {
-    id: 'fra-lsg1910mod', label: 'Français (LSG 1910)', langCode: 'fr', lsPrefix: 'fr:',
+    id: 'fra-lsg1910mod', label: 'Français (LSG 1910) – Actualisé par IA', langCode: 'fr', lsPrefix: 'fr:',
     bibleDir: 'bibles/fra/lsg1910mod/', bibleSuffix: '_lsg1910mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
@@ -201,7 +201,7 @@ const BIBLES = {
     i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible',es:'Leer la Biblia',it:'Leggere la Bibbia',fr:'Lire la Bible'}}, defaultUiLang: 'fr',
   },
   'ita-riv1927mod': {
-    id: 'ita-riv1927mod', label: 'Italiano (Riveduta 1927)', langCode: 'it', lsPrefix: 'it:',
+    id: 'ita-riv1927mod', label: 'Italiano (Riveduta 1927) – Aggiornato dall’IA', langCode: 'it', lsPrefix: 'it:',
     bibleDir: 'bibles/ita/riv1927mod/', bibleSuffix: '_riv1927mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
@@ -212,7 +212,7 @@ const BIBLES = {
     i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible',es:'Leer la Biblia',it:'Leggere la Bibbia',fr:'Lire la Bible'}}, defaultUiLang: 'it',
   },
   'deu-l1912mod': {
-    id: 'deu-l1912mod', label: 'Luther 1912', langCode: 'de', lsPrefix: 'l1912:',
+    id: 'deu-l1912mod', label: 'Luther 1912 – Aktualisiert von KI', langCode: 'de', lsPrefix: 'l1912:',
     bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json',
     annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
     hasAnno: false, hasTraining: false,
