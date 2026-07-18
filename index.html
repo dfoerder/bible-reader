@@ -308,9 +308,15 @@ const I18N={
   chooseBible:{de:'Welche Bibel möchtest du lesen?',en:'Which Bible would you like to read?',es:'¿Qué Biblia quieres leer?',it:'Quale Bibbia vuoi leggere?',fr:'Quelle Bible veux-tu lire ?'},
   chooseBibleHint:{de:'Die Sprache, die du lernen möchtest. Änderbar in den Einstellungen.',en:'The language you want to learn. Changeable in settings.',es:'El idioma que quieres aprender. Se puede cambiar en los ajustes.',it:'La lingua che vuoi imparare. Modificabile nelle impostazioni.',fr:'La langue que tu veux apprendre. Modifiable dans les réglages.'},
   glossHintTitle:{de:'Keine Wort-Hilfe für diese Kombination',en:'No word help for this combination',es:'Sin ayuda de vocabulario para esta combinación',it:'Nessun aiuto lessicale per questa combinazione',fr:'Pas d\'aide lexicale pour cette combinaison'},
-  glossHintBody:{de:'Für die gewählte Haupt- und Hilfsbibel gibt es noch keine Inline-Wortübersetzungen und Übungen. Mit einer englischen Hilfsbibel sind sie verfügbar.',en:'The chosen main and helper Bible don\'t yet have inline word translations or exercises. They are available with an English helper Bible.',es:'La combinación de Biblia principal y auxiliar elegida aún no tiene traducciones de palabras ni ejercicios. Están disponibles con una Biblia auxiliar en inglés.',it:'La combinazione di Bibbia principale e ausiliaria scelta non ha ancora traduzioni di parole né esercizi. Sono disponibili con una Bibbia ausiliaria in inglese.',fr:'La combinaison de Bible principale et auxiliaire choisie n\'a pas encore de traductions de mots ni d\'exercices. Elles sont disponibles avec une Bible auxiliaire anglaise.'},
-  glossHintUseEn:{de:'Englische Hilfsbibel verwenden',en:'Use English helper Bible',es:'Usar Biblia auxiliar en inglés',it:'Usa la Bibbia ausiliaria in inglese',fr:'Utiliser la Bible auxiliaire anglaise'},
+  glossHintBody:{de:'Für die gewählte Kombination gibt es noch keine Inline-Wortübersetzungen und Übungen. Auf Englisch sind sie verfügbar (die Hilfsbibel bleibt unverändert).',en:'This combination has no inline word translations or exercises yet. They are available in English (your helper Bible stays unchanged).',es:'Esta combinación aún no tiene traducciones de palabras ni ejercicios. Están disponibles en inglés (la Biblia auxiliar no cambia).',it:'Questa combinazione non ha ancora traduzioni di parole né esercizi. Sono disponibili in inglese (la Bibbia ausiliaria resta invariata).',fr:'Cette combinaison n\'a pas encore de traductions de mots ni d\'exercices. Elles sont disponibles en anglais (ta Bible auxiliaire reste inchangée).'},
+  glossHintUseEn:{de:'Englische Übersetzungen verwenden',en:'Use English translations',es:'Usar traducciones en inglés',it:'Usa traduzioni in inglese',fr:'Utiliser les traductions anglaises'},
   glossHintDismiss:{de:'Nein, nur lesen',en:'No, just read',es:'No, solo leer',it:'No, solo leggere',fr:'Non, juste lire'},
+  glossChooseTitle:{de:'Wortübersetzungen & Übungen',en:'Word translations & exercises',es:'Traducciones de palabras y ejercicios',it:'Traduzioni di parole ed esercizi',fr:'Traductions de mots et exercices'},
+  glossChooseBody:{de:'Für diese Lesesprache gibt es in deiner App-Sprache noch keine Inline-Wortübersetzungen und Übungen. Auf Englisch sind sie verfügbar. Möchtest du sie auf Englisch verwenden? Deine Hilfsbibel bleibt unverändert.',en:'For this reading language there are no inline word translations or exercises in your app language yet. They are available in English. Would you like to use them in English? Your helper Bible stays unchanged.',es:'Para este idioma de lectura aún no hay traducciones de palabras ni ejercicios en el idioma de tu app. Están disponibles en inglés. ¿Quieres usarlos en inglés? Tu Biblia auxiliar no cambia.',it:'Per questa lingua di lettura non ci sono ancora traduzioni di parole né esercizi nella lingua della tua app. Sono disponibili in inglese. Vuoi usarli in inglese? La tua Bibbia ausiliaria resta invariata.',fr:'Pour cette langue de lecture, il n\'y a pas encore de traductions de mots ni d\'exercices dans la langue de ton app. Elles sont disponibles en anglais. Veux-tu les utiliser en anglais ? Ta Bible auxiliaire reste inchangée.'},
+  glossChooseUseEn:{de:'Ja, auf Englisch lernen',en:'Yes, learn in English',es:'Sí, aprender en inglés',it:'Sì, impara in inglese',fr:'Oui, apprendre en anglais'},
+  glossChooseNone:{de:'Nein, nur lesen',en:'No, just read',es:'No, solo leer',it:'No, solo leggere',fr:'Non, juste lire'},
+  glossSetting:{de:'Inline-Übersetzungen & Übungen',en:'Inline translations & exercises',es:'Traducciones y ejercicios',it:'Traduzioni ed esercizi',fr:'Traductions et exercices'},
+  glossNone:{de:'keine (nur lesen)',en:'none (read only)',es:'ninguna (solo leer)',it:'nessuna (solo lettura)',fr:'aucune (lecture seule)'},
 
   // Settings
   settings:{de:'Einstellungen',en:'Settings'},
@@ -1300,22 +1306,19 @@ function getLang(){return _lang;}
 // Eigennamen (Personen/Orte/…), weder als abgefragtes `word` noch als Option. Beim
 // Ergänzen/Übersetzen neuer Test-Items strikt einhalten.
 const LEVEL_TEST_DATA={"en":[{"word":"water","level":"A1","opt":{"de":["Wasser","Feuer","Stein"],"es":["agua","fuego","piedra"],"it":["acqua","fuoco","pietra"],"fr":["eau","feu","pierre"]}},{"word":"bread","level":"A1","opt":{"de":["Brot","Milch","Fleisch"],"es":["pan","leche","carne"],"it":["pane","latte","carne"],"fr":["pain","lait","viande"]}},{"word":"house","level":"A1","opt":{"de":["Haus","Stadt","Straße"],"es":["casa","ciudad","calle"],"it":["casa","città","strada"],"fr":["maison","ville","rue"]}},{"word":"night","level":"A1","opt":{"de":["Nacht","Morgen","Abend"],"es":["noche","mañana","tarde"],"it":["notte","mattino","sera"],"fr":["nuit","matin","soir"]}},{"word":"brother","level":"A1","opt":{"de":["Bruder","Schwester","Vater"],"es":["hermano","hermana","padre"],"it":["fratello","sorella","padre"],"fr":["frère","sœur","père"]}},{"word":"voice","level":"A2","opt":{"de":["Stimme","Klang","Schrei"],"es":["voz","sonido","grito"],"it":["voce","suono","grido"],"fr":["voix","son","cri"]}},{"word":"wrong","level":"A2","opt":{"de":["Unrecht","Recht","Gericht"],"es":["injusticia","derecho","juicio"],"it":["ingiustizia","diritto","giudizio"],"fr":["injustice","droit","jugement"]}},{"word":"clothes","level":"A2","opt":{"de":["Kleider","Schuhe","Stoffe"],"es":["vestiduras","zapatos","telas"],"it":["vesti","scarpe","stoffe"],"fr":["vêtements","chaussures","étoffes"]}},{"word":"field","level":"A2","opt":{"de":["Feld","Garten","Hügel"],"es":["campo","jardín","colina"],"it":["campo","giardino","collina"],"fr":["champ","jardin","colline"]}},{"word":"promise","level":"A2","opt":{"de":["Versprechen","Geschenk","Geheimnis"],"es":["promesa","regalo","secreto"],"it":["promessa","dono","segreto"],"fr":["promesse","cadeau","secret"]}},{"word":"earth","level":"B1","opt":{"de":["Erde","Himmel","Meer"],"es":["tierra","cielo","mar"],"it":["terra","cielo","mare"],"fr":["terre","ciel","mer"]}},{"word":"battle","level":"B1","opt":{"de":["Schlacht","Frieden","Reise"],"es":["batalla","paz","viaje"],"it":["battaglia","pace","viaggio"],"fr":["bataille","paix","voyage"]}},{"word":"escape","level":"B1","opt":{"de":["entkommen","ankommen","verstecken"],"es":["escapar","llegar","esconder"],"it":["fuggire","arrivare","nascondere"],"fr":["échapper","arriver","cacher"]}},{"word":"praise","level":"B1","opt":{"de":["loben","bitten","flüstern"],"es":["alabar","pedir","susurrar"],"it":["lodare","chiedere","sussurrare"],"fr":["louer","demander","chuchoter"]}},{"word":"gather","level":"B1","opt":{"de":["sammeln","streuen","trennen"],"es":["recoger","esparcir","separar"],"it":["radunare","spargere","separare"],"fr":["rassembler","disperser","séparer"]}},{"word":"flee","level":"B2","opt":{"de":["fliehen","kämpfen","verfolgen"],"es":["huir","luchar","perseguir"],"it":["fuggire","combattere","inseguire"],"fr":["fuir","combattre","poursuivre"]}},{"word":"mourn","level":"B2","opt":{"de":["trauern","feiern","schweigen"],"es":["lamentar","celebrar","callar"],"it":["piangere","festeggiare","tacere"],"fr":["pleurer","célébrer","se taire"]}},{"word":"likewise","level":"B2","opt":{"de":["ebenso","trotzdem","niemals"],"es":["asimismo","sin embargo","nunca"],"it":["ugualmente","tuttavia","mai"],"fr":["de même","cependant","jamais"]}},{"word":"wilderness","level":"B2","opt":{"de":["Wildnis","Festung","Siedlung"],"es":["desierto","fortaleza","poblado"],"it":["deserto","fortezza","villaggio"],"fr":["désert","forteresse","village"]}},{"word":"wrath","level":"B2","opt":{"de":["Zorn","Gnade","Stolz"],"es":["ira","gracia","orgullo"],"it":["ira","grazia","orgoglio"],"fr":["colère","grâce","orgueil"]}},{"word":"anointed","level":"C1","opt":{"de":["Gesalbter","Verbannter","Gelehrter"],"es":["ungido","desterrado","erudito"],"it":["unto","esiliato","erudito"],"fr":["oint","banni","érudit"]}},{"word":"valiant","level":"C1","opt":{"de":["tapfer","feige","listig"],"es":["valiente","cobarde","astuto"],"it":["valoroso","codardo","astuto"],"fr":["vaillant","lâche","rusé"]}},{"word":"lament","level":"C1","opt":{"de":["klagen","jubeln","flüstern"],"es":["lamentar","regocijarse","susurrar"],"it":["lamentarsi","esultare","sussurrare"],"fr":["se lamenter","jubiler","chuchoter"]}},{"word":"anguish","level":"C1","opt":{"de":["Qual","Trost","Ruhe"],"es":["angustia","consuelo","reposo"],"it":["angoscia","conforto","riposo"],"fr":["angoisse","réconfort","repos"]}},{"word":"slaughter","level":"C1","opt":{"de":["Gemetzel","Ernte","Festmahl"],"es":["matanza","cosecha","banquete"],"it":["strage","raccolto","banchetto"],"fr":["carnage","moisson","festin"]}},{"word":"iniquity","level":"C2","opt":{"de":["Missetat","Tugend","Schuld"],"es":["iniquidad","virtud","deuda"],"it":["iniquità","virtù","colpa"],"fr":["iniquité","vertu","faute"]}},{"word":"tabernacle","level":"C2","opt":{"de":["Stiftshütte","Tempel","Zelt"],"es":["tabernáculo","templo","tienda"],"it":["tabernacolo","tempio","tenda"],"fr":["tabernacle","temple","tente"]}},{"word":"supplication","level":"C2","opt":{"de":["Flehen","Gebet","Klage"],"es":["súplica","oración","lamento"],"it":["supplica","preghiera","lamento"],"fr":["supplication","prière","lamentation"]}},{"word":"abhor","level":"C2","opt":{"de":["verabscheuen","verehren","fürchten"],"es":["abominar","venerar","temer"],"it":["aborrire","venerare","temere"],"fr":["abhorrer","vénérer","craindre"]}},{"word":"blaspheme","level":"C2","opt":{"de":["lästern","beten","schweigen"],"es":["blasfemar","orar","callar"],"it":["bestemmiare","pregare","tacere"],"fr":["blasphémer","prier","se taire"]}}],"es":[{"word":"hijo","level":"A1","opt":{"en":["son","father","servant"],"de":["Sohn","Vater","Diener"],"it":["figlio","padre","servo"],"fr":["fils","père","serviteur"]}},{"word":"tierra","level":"A1","opt":{"en":["earth","sky","sea"],"de":["Erde","Himmel","Meer"],"it":["terra","cielo","mare"],"fr":["terre","ciel","mer"]}},{"word":"rey","level":"A1","opt":{"en":["king","soldier","judge"],"de":["König","Soldat","Richter"],"it":["re","soldato","giudice"],"fr":["roi","soldat","juge"]}},{"word":"casa","level":"A1","opt":{"en":["house","city","road"],"de":["Haus","Stadt","Straße"],"it":["casa","città","strada"],"fr":["maison","ville","route"]}},{"word":"día","level":"A1","opt":{"en":["day","night","week"],"de":["Tag","Nacht","Woche"],"it":["giorno","notte","settimana"],"fr":["jour","nuit","semaine"]}},{"word":"siervo","level":"A2","opt":{"en":["servant","master","guest"],"de":["Diener","Herr","Gast"],"it":["servo","padrone","ospite"],"fr":["serviteur","maître","invité"]}},{"word":"nación","level":"A2","opt":{"en":["nation","village","crowd"],"de":["Nation","Dorf","Menge"],"it":["nazione","villaggio","folla"],"fr":["nation","village","foule"]}},{"word":"monte","level":"A2","opt":{"en":["mountain","river","valley"],"de":["Berg","Fluss","Tal"],"it":["monte","fiume","valle"],"fr":["montagne","fleuve","vallée"]}},{"word":"ley","level":"A2","opt":{"en":["law","gift","story"],"de":["Gesetz","Gabe","Geschichte"],"it":["legge","dono","storia"],"fr":["loi","don","histoire"]}},{"word":"ejército","level":"A2","opt":{"en":["army","crowd","council"],"de":["Heer","Menge","Rat"],"it":["esercito","folla","consiglio"],"fr":["armée","foule","conseil"]}},{"word":"pecado","level":"B1","opt":{"en":["sin","virtue","debt"],"de":["Sünde","Tugend","Schuld"],"it":["peccato","virtù","debito"],"fr":["péché","vertu","dette"]}},{"word":"pacto","level":"B1","opt":{"en":["covenant","quarrel","journey"],"de":["Bund","Streit","Reise"],"it":["patto","litigio","viaggio"],"fr":["alliance","querelle","voyage"]}},{"word":"misericordia","level":"B1","opt":{"en":["mercy","anger","pride"],"de":["Barmherzigkeit","Zorn","Stolz"],"it":["misericordia","ira","orgoglio"],"fr":["miséricorde","colère","orgueil"]}},{"word":"profeta","level":"B1","opt":{"en":["prophet","priest","servant"],"de":["Prophet","Priester","Diener"],"it":["profeta","sacerdote","servo"],"fr":["prophète","prêtre","serviteur"]}},{"word":"altar","level":"B1","opt":{"en":["altar","throne","tomb"],"de":["Altar","Thron","Grab"],"it":["altare","trono","tomba"],"fr":["autel","trône","tombeau"]}},{"word":"heredad","level":"B2","opt":{"en":["inheritance","reward","ruin"],"de":["Erbe","Lohn","Verderben"],"it":["eredità","ricompensa","rovina"],"fr":["héritage","récompense","ruine"]}},{"word":"abominación","level":"B2","opt":{"en":["abomination","blessing","wonder"],"de":["Gräuel","Segen","Wunder"],"it":["abominio","benedizione","prodigio"],"fr":["abomination","bénédiction","prodige"]}},{"word":"ungir","level":"B2","opt":{"en":["to anoint","to bless","to bathe"],"de":["salben","segnen","baden"],"it":["ungere","benedire","bagnare"],"fr":["oindre","bénir","baigner"]}},{"word":"aborrecer","level":"B2","opt":{"en":["to hate","to forgive","to envy"],"de":["hassen","vergeben","beneiden"],"it":["odiare","perdonare","invidiare"],"fr":["haïr","pardonner","envier"]}},{"word":"iniquidad","level":"B2","opt":{"en":["iniquity","righteousness","grief"],"de":["Missetat","Gerechtigkeit","Trauer"],"it":["iniquità","giustizia","dolore"],"fr":["iniquité","justice","chagrin"]}},{"word":"primogénito","level":"C1","opt":{"en":["firstborn","heir","orphan"],"de":["Erstgeborener","Erbe","Waise"],"it":["primogenito","erede","orfano"],"fr":["premier-né","héritier","orphelin"]}},{"word":"expiación","level":"C1","opt":{"en":["atonement","rebellion","punishment"],"de":["Sühne","Aufruhr","Strafe"],"it":["espiazione","ribellione","punizione"],"fr":["expiation","rébellion","châtiment"]}},{"word":"degollar","level":"C1","opt":{"en":["to slaughter","to bury","to seize"],"de":["schlachten","begraben","ergreifen"],"it":["sgozzare","seppellire","afferrare"],"fr":["égorger","enterrer","saisir"]}},{"word":"querubín","level":"C1","opt":{"en":["cherub","idol","scribe"],"de":["Cherub","Götze","Schriftgelehrter"],"it":["cherubino","idolo","scriba"],"fr":["chérubin","idole","scribe"]}},{"word":"eunuco","level":"C1","opt":{"en":["eunuch","prisoner","steward"],"de":["Eunuch","Gefangener","Verwalter"],"it":["eunuco","prigioniero","amministratore"],"fr":["eunuque","prisonnier","intendant"]}},{"word":"efod","level":"C2","opt":{"en":["ephod","altar","scroll"],"de":["Ephod","Altar","Schriftrolle"],"it":["efod","altare","rotolo"],"fr":["éphod","autel","rouleau"]}},{"word":"prepucio","level":"C2","opt":{"en":["foreskin","sinew","forehead"],"de":["Vorhaut","Sehne","Stirn"],"it":["prepuzio","tendine","fronte"],"fr":["prépuce","tendon","front"]}},{"word":"propiciatorio","level":"C2","opt":{"en":["mercy seat","altar step","incense pan"],"de":["Gnadenstuhl","Altarstufe","Räucherpfanne"],"it":["propiziatorio","gradino dell'altare","incensiere"],"fr":["propitiatoire","marche de l'autel","encensoir"]}},{"word":"agorero","level":"C2","opt":{"en":["soothsayer","shepherd","craftsman"],"de":["Wahrsager","Hirte","Handwerker"],"it":["indovino","pastore","artigiano"],"fr":["devin","berger","artisan"]}},{"word":"aventador","level":"C2","opt":{"en":["winnowing fork","plow","sickle"],"de":["Wurfschaufel","Pflug","Sichel"],"it":["ventilabro","aratro","falce"],"fr":["van","charrue","faucille"]}}]};
-// Optionssprache = langCode der aktiven Hilfsbibel (Fallback wie deTrans-Init).
-const _ltHelper=(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;})();
-const LT_GLOSS_LANG=BIBLES[_ltHelper]?.langCode||'de';
-// Studiensprache (INSTANCE.langCode) → Test; Optionen in Gloss-Sprache
-// (Fallback: EN-Test→Deutsch, ES-Test→Englisch). Felder wie bisher: en=Wort, de=korrekt, wrong=2.
+// Studiensprache (INSTANCE.langCode) → Test-Items; Optionen in der GLOSS-Sprache
+// (Fallback: EN-Test→Deutsch, ES-Test→Englisch). Felder: en=Wort, de=korrekt, wrong=2.
+// Der Test wird in der App aus dem aktuellen glossLang gebaut und als Prop übergeben.
 function buildLevelTest(studyLang,glossLang){
   const items=LEVEL_TEST_DATA[studyLang]||LEVEL_TEST_DATA.en;
   const fb=studyLang==='es'?'en':'de';
   return items.map(it=>{const o=it.opt[glossLang]||it.opt[fb];return {en:it.word,de:o[0],wrong:o.slice(1),level:it.level};});
 }
-const LEVEL_TEST=buildLevelTest(INSTANCE.langCode,LT_GLOSS_LANG);
 
-function scoreLevelTest(answers){
+function scoreLevelTest(answers, test){
   const byLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
   const maxByLevel={A1:0,A2:0,B1:0,B2:0,C1:0,C2:0};
-  LEVEL_TEST.forEach((q,i)=>{
+  test.forEach((q,i)=>{
     maxByLevel[q.level]++;
     if(answers[i]===q.de)byLevel[q.level]++;
   });
@@ -1329,10 +1332,10 @@ function scoreLevelTest(answers){
   return 'C2';
 }
 
-function LevelTest({onComplete}){
+function LevelTest({onComplete, test}){
   const [current,setCurrent]=useState(0);
   const [answers,setAnswers]=useState([]);
-  const [shuffled]=useState(()=>LEVEL_TEST.map(q=>{
+  const [shuffled]=useState(()=>test.map(q=>{
     const opts=[q.de,...q.wrong];
     for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}
     return opts;
@@ -1342,7 +1345,7 @@ function LevelTest({onComplete}){
   const [done,setDone]=useState(false);
   const [result,setResult]=useState(null);
 
-  const q=LEVEL_TEST[current];
+  const q=test[current];
   const opts=shuffled[current];
 
   const pick=useCallback(ans=>{
@@ -1352,19 +1355,19 @@ function LevelTest({onComplete}){
     const newAnswers=[...answers,ans];
     setAnswers(newAnswers);
     setTimeout(()=>{
-      if(current<LEVEL_TEST.length-1){
+      if(current<test.length-1){
         setCurrent(current+1);setSelected(null);setCorrect(null);
       } else {
-        const level=scoreLevelTest(newAnswers);
+        const level=scoreLevelTest(newAnswers, test);
         setResult(level);setDone(true);
       }
     },800);
   },[current,answers,q,selected]);
 
   if(done){
-    const total=answers.filter((a,i)=>a===LEVEL_TEST[i].de).length;
+    const total=answers.filter((a,i)=>a===test[i].de).length;
     const byLevel={};
-    LEVEL_TEST.forEach((q,i)=>{
+    test.forEach((q,i)=>{
       if(!byLevel[q.level])byLevel[q.level]={correct:0,total:0};
       byLevel[q.level].total++;
       if(answers[i]===q.de)byLevel[q.level].correct++;
@@ -1375,7 +1378,7 @@ function LevelTest({onComplete}){
       </header>
       <div style={{textAlign:'center',padding:'20px 0'}}>
         <div style={{fontSize:48,fontWeight:700,color:'var(--t-primary)',fontFamily:sans,margin:'16px 0'}}>{result}</div>
-        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{t('nOfTotal').replace('{n}',total).replace('{t}',LEVEL_TEST.length)}</p>
+        <p style={{fontSize:16,color:'var(--t-text2)',fontFamily:sans,margin:'8px 0'}}>{t('nOfTotal').replace('{n}',total).replace('{t}',test.length)}</p>
         <div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:340,margin:'16px auto',textAlign:'left'}}>
           {[
             {lvl:'A1',desc:{de:'Elementarste Grundlagen',en:'Most basic fundamentals'}},
@@ -1409,10 +1412,10 @@ function LevelTest({onComplete}){
   return(<div>
     <header style={S.header}>
       <h1 style={{...S.title,margin:0}}>{t('levelTest')}</h1>
-      <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('questionN').replace('{n}',current+1).replace('{t}',LEVEL_TEST.length)}</p>
+      <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0'}}>{t('questionN').replace('{n}',current+1).replace('{t}',test.length)}</p>
     </header>
     <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 24px',overflow:'hidden'}}>
-      <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((current)/LEVEL_TEST.length)*100}%`}}/>
+      <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((current)/test.length)*100}%`}}/>
     </div>
     <div style={{textAlign:'center',margin:'20px 0 32px'}}>
       <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('whatMeans')}</p>
@@ -2860,11 +2863,22 @@ function App({data}){
     if(onboarded)return saved.phase||'nav';
     if(!langChosen)return 'langselect';
     if(!bibleChosen)return 'biblechoose';
-    return (INSTANCE.hasLevelTest&&!levelTested)?'leveltest':'nav';
+    // Bibel gewählt, mitten im Onboarding → Gloss-/Übungssprache bestimmen.
+    const ag=INSTANCE.annoGlossLangs||[]; const appL=getLang(); const glP=LS.get('bible-gloss-lang');
+    let gl;
+    if(glP==='none')gl=null;
+    else if(glP&&ag.includes(glP))gl=glP;
+    else if(ag.includes(appL))gl=appL;         // App-Sprache annotiert → Glossen in App-Sprache
+    else gl=undefined;                          // noch nicht entschieden
+    if(gl===undefined){
+      if(INSTANCE.hasAnno&&ag.includes('en'))return 'glosschoose'; // Englisch anbieten
+      gl=null;                                  // keine Glossen möglich (reines Lesen)
+    }
+    return (gl&&INSTANCE.hasLevelTest&&!levelTested)?'leveltest':'nav';
   });
-  // Onboarding abschließen, wenn Sprache+Bibel gewählt sind und kein Test (mehr) ansteht.
+  // Onboarding abschließen, wenn weder Gloss-Wahl noch Test ansteht.
   useEffect(()=>{
-    if(!rawLSget('bible-onboarded')&&langChosen&&bibleChosen&&!(INSTANCE.hasLevelTest&&!levelTested))
+    if(!rawLSget('bible-onboarded')&&langChosen&&bibleChosen&&phase!=='glosschoose'&&phase!=='leveltest')
       rawLSset('bible-onboarded',true);
   },[]);// eslint-disable-line
   const prevPhaseRef=useRef('nav');
@@ -2954,6 +2968,29 @@ function App({data}){
   // oder ungültige Werte (z.B. 'sch1951') → Default-Hilfsbibel der Hauptbibel.
   const [deTrans,setDeTransState]=useState(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;});
   const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
+  const hilfsLang=BIBLES[deTrans]?.langCode; // Sprache der Parallel-Hilfsbibel (nur Verstext)
+  const _annoGloss=INSTANCE.annoGlossLangs||[];
+  // glossLang = Sprache der Inline-Wortübersetzungen + Übungen + Einstufungstest.
+  // ENTKOPPELT von der Hilfsbibel (z.B. englische Glossen + deutsche Hilfsbibel möglich).
+  // null = keine Glossen/Übungen (reines Lesen). Persistiert als 'none' | <langCode>.
+  // Default/Migration: App-Sprache wenn annotiert, sonst Hilfssprache wenn annotiert, sonst null.
+  const [glossLang,setGlossLangState]=useState(()=>{
+    const p=LS.get('bible-gloss-lang');
+    if(p==='none')return null;
+    if(p&&_annoGloss.includes(p))return p;
+    const appL=getLang();
+    if(_annoGloss.includes(appL))return appL;
+    if(hilfsLang&&_annoGloss.includes(hilfsLang))return hilfsLang;
+    return null;
+  });
+  const changeGlossLang=useCallback(v=>{setGlossLangState(v);LS.set('bible-gloss-lang',v||'none');},[]);
+  const glossAvailable=INSTANCE.hasAnno&&!!glossLang&&_annoGloss.includes(glossLang);
+  const trainingActive=INSTANCE.hasTraining&&!!glossLang;
+  // Hinweis: aktuell keine Glossen/Übungen (glossLang fehlt/null), aber Englisch verfügbar
+  // → englische Glossen/Übungen anbieten (Hilfsbibel bleibt UNverändert).
+  const suggestEnglishGloss=INSTANCE.hasAnno&&!glossAvailable&&_annoGloss.includes('en');
+  const [glossHintOff,setGlossHintOff]=useState(()=>!!LS.get('bible-glosshint-off'));
+  const levelTestItems=useMemo(()=>buildLevelTest(INSTANCE.langCode,glossLang||_annoGloss[0]||'en'),[glossLang]);// eslint-disable-line
   // Onboarding Schritt 1: App-Sprache setzt die UI-Sprache. Danach zur Bibel-Auswahl.
   const onLangSelect=useCallback(code=>{changeUiLang(code);rawLSset('bible-lang-chosen',true);setPhase('biblechoose');},[changeUiLang]);
   // Onboarding Schritt 2: Lese-/Studienbibel wählen. Hilfsbibel automatisch zur
@@ -2964,22 +3001,30 @@ function App({data}){
     const helper=helperForMainAndLang(id,getLang());
     if(id===INSTANCE.id){ // schon die aktive (Default-)Bibel → kein Reload nötig
       changeDeTrans(helper);
-      if(INSTANCE.hasLevelTest&&!levelTested){setPhase('leveltest');}
-      else{rawLSset('bible-onboarded',true);setPhase('nav');}
+      const ag=BIBLES[id].annoGlossLangs||[]; const appL=getLang();
+      if(ag.includes(appL)){                 // Glossen in App-Sprache verfügbar
+        changeGlossLang(appL);
+        if(BIBLES[id].hasLevelTest&&!levelTested)setPhase('leveltest');
+        else{rawLSset('bible-onboarded',true);setPhase('nav');}
+      }else if(BIBLES[id].hasAnno&&ag.includes('en')){ // App-Sprache fehlt, Englisch anbieten
+        setPhase('glosschoose');
+      }else{                                  // keine Glossen möglich
+        changeGlossLang(null);rawLSset('bible-onboarded',true);setPhase('nav');
+      }
       return;
     }
     tts.stop();
     rawLSset('bible-haupt',id);
     rawLSset(BIBLES[id].lsPrefix+'bible-de-trans',helper); // mit Ziel-Präfix schreiben
     location.reload();
-  },[tts,changeDeTrans,levelTested]);
-  const hilfsLang=BIBLES[deTrans]?.langCode; // bestimmt das angezeigte Gloss-Feld
-  // Glossen/Übungen brauchen im Annotations-Doc das Feld der Hilfsbibel-Sprache.
-  // Fehlt es für die aktuelle Kombination, aber gibt es die Annotationen mit
-  // englischer Glosse → englische Hilfsbibel vorschlagen (generelle Regel A+Englisch).
-  const _annoGloss=INSTANCE.annoGlossLangs||[];
-  const suggestEnglishHelper=INSTANCE.hasAnno&&!_annoGloss.includes(hilfsLang)&&_annoGloss.includes('en')&&deTrans!=='eng-web'&&INSTANCE.id!=='eng-web'&&!!BIBLES['eng-web'];
-  const [glossHintOff,setGlossHintOff]=useState(()=>!!LS.get('bible-glosshint-off'));
+  },[tts,changeDeTrans,changeGlossLang,levelTested]);
+  // Onboarding Schritt 3: Gloss-/Übungssprache wählen, wenn App-Sprache nicht verfügbar.
+  // Englisch → englische Glossen/Übungen (Hilfsbibel bleibt); sonst nur Lesen. Hilfsbibel unverändert.
+  const onGlossChoose=useCallback(useEn=>{
+    changeGlossLang(useEn?'en':null);
+    if(useEn&&INSTANCE.hasLevelTest&&!levelTested){setPhase('leveltest');}
+    else{rawLSset('bible-onboarded',true);setPhase('nav');}
+  },[changeGlossLang,levelTested]);
   // Hauptbibel-Wechsel: persistieren (unpräfixiert) + Seite neu laden. Der
   // komplette Nutzerstand wird beim Mount aus dem lsPrefix der neuen Bibel
   // gelesen — Reload ist die saubere, kollisionsfreie Umschaltung.
@@ -3109,7 +3154,7 @@ function App({data}){
   // Glossen werden aus den rohen Annotationen in der Sprache der Hilfsbibel
   // abgeleitet (deriveAnnoChapters). Gibt es dafür kein Gloss-Feld, ist das
   // Ergebnis leer → hasAnno=false → reines Lesen ohne Glossen/Quiz.
-  const annotations=useMemo(()=>(bookAnnotations&&hilfsLang)?{[bookName]:deriveAnnoChapters(bookAnnotations.chapters,hilfsLang)}:{},[bookAnnotations,bookName,hilfsLang]);
+  const annotations=useMemo(()=>(bookAnnotations&&glossLang)?{[bookName]:deriveAnnoChapters(bookAnnotations.chapters,glossLang)}:{},[bookAnnotations,bookName,glossLang]);
   const hasAnno=useMemo(()=>{const a=annotations[bookName];return !!(a&&Object.keys(a).length)},[annotations,bookName]);
   const hasAnnotations=hasAnno;
 
@@ -3531,8 +3576,23 @@ function App({data}){
       </div>
     </div>);
   }
+  if(phase==='glosschoose'){
+    return(<div>
+      <header style={S.header}>
+        <div style={{fontSize:44,marginBottom:8}}>💬</div>
+        <h1 style={{...S.title,margin:0}}>{t('glossChooseTitle')}</h1>
+      </header>
+      <p style={{textAlign:'center',fontSize:14,color:'var(--t-text2)',fontFamily:sans,margin:'0 auto 24px',lineHeight:1.6,maxWidth:420}}>
+        {t('glossChooseBody')}
+      </p>
+      <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:340,margin:'0 auto'}}>
+        <button onClick={()=>onGlossChoose(true)} style={{...S.startBtn,boxShadow:'none'}}>{t('glossChooseUseEn')}</button>
+        <button onClick={()=>onGlossChoose(false)} style={{padding:'12px 20px',border:'1.5px solid var(--t-border)',borderRadius:10,background:'transparent',color:'var(--t-text2)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('glossChooseNone')}</button>
+      </div>
+    </div>);
+  }
   if(phase==='leveltest'){
-    return <LevelTest onComplete={onLevelTestComplete}/>;
+    return <LevelTest test={levelTestItems} onComplete={onLevelTestComplete}/>;
   }
 
   // ── TRAINING ──
@@ -3591,10 +3651,10 @@ function App({data}){
               <div style={S.statCell}><span style={S.statCellN}>{stats.totalVerses.toLocaleString()}</span><span style={S.statCellL}>{t('statVerses')}</span></div>
               <div style={S.statCell}><span style={S.statCellN}>{stats.totalWords.toLocaleString()}</span><span style={S.statCellL}>{t('statWords')}</span></div>
             </div>
-            {INSTANCE.hasTraining&&<p style={S.settingsHint}>{t('annotatedHint').replace('{n}',stats.annotatedBooks).replace('{t}',books.length)}</p>}
+            {trainingActive&&<p style={S.settingsHint}>{t('annotatedHint').replace('{n}',stats.annotatedBooks).replace('{t}',books.length)}</p>}
           </div>}
         </div>}
-        {INSTANCE.hasTraining&&statsVisible.vocabulary&&<>
+        {trainingActive&&statsVisible.vocabulary&&<>
           <div style={S.settingsGroup}>
             <div style={S.statSectionRow} onClick={()=>setExpandedStatSection(expandedStatSection==='vocab'?null:'vocab')}>
               <span style={S.bookArrow}>{expandedStatSection==='vocab'?'▾':'▸'}</span>
@@ -3739,7 +3799,7 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('trainingSection')}</span>
-          {INSTANCE.hasLevelTest&&<div style={{marginTop:8}}>
+          {INSTANCE.hasLevelTest&&glossLang&&<div style={{marginTop:8}}>
             <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
           </div>}
           <div style={{marginTop:16}}>
@@ -3924,6 +3984,13 @@ function App({data}){
             <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
           </label>
         </div>
+        {INSTANCE.hasAnno&&<div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('glossSetting')}</span>
+          <div style={{...S.levelBtns,flexWrap:'wrap'}}>
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{({en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français'}[l]||l)}</button>))}
+            <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
+          </div>
+        </div>}
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('wordTranslations')}</span>
           <label style={{...S.toggleRow,marginTop:6}}>
@@ -3961,11 +4028,11 @@ function App({data}){
     return(<div>
       <header style={S.header}>
         {!fromReading&&<h1 style={S.title}>{t('navTitle')}</h1>}
-        {!fromReading&&INSTANCE.hasTraining&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>}
+        {!fromReading&&trainingActive&&<p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'8px 0 0',textAlign:'center'}}>{t('navSubtitle1')} {t('navSubtitle2')}</p>}
         <div style={{display:'flex',justifyContent:'center',gap:12,marginTop:8}}>
           {fromReading&&<button onClick={()=>setPhase(prevPhaseRef.current)} style={S.navBtn}>{t('back')}</button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>}
-          {!fromReading&&INSTANCE.hasTraining&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:36,height:36,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
+          {!fromReading&&trainingActive&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:36,height:36,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={{...S.gearBtn,fontSize:32}} title={t('settings')}>⚙</button>}
         </div>
       </header>
@@ -3983,11 +4050,11 @@ function App({data}){
           </select>
         </label>
       </div>}
-      {!fromReading&&suggestEnglishHelper&&!glossHintOff&&<div style={{maxWidth:520,margin:'0 auto 16px',padding:'12px 14px',borderRadius:10,border:'1px solid var(--t-accent)',background:'var(--t-accent-bg)'}}>
+      {!fromReading&&suggestEnglishGloss&&!glossHintOff&&<div style={{maxWidth:520,margin:'0 auto 16px',padding:'12px 14px',borderRadius:10,border:'1px solid var(--t-accent)',background:'var(--t-accent-bg)'}}>
         <p style={{margin:'0 0 4px',fontWeight:700,color:'var(--t-title)',fontFamily:sans,fontSize:14}}>{t('glossHintTitle')}</p>
         <p style={{margin:'0 0 10px',color:'var(--t-text2)',fontFamily:sans,fontSize:13,lineHeight:1.5}}>{t('glossHintBody')}</p>
         <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
-          <button onClick={()=>changeDeTrans('eng-web')} style={{...S.startBtn,padding:'8px 16px',fontSize:14,boxShadow:'none'}}>{t('glossHintUseEn')}</button>
+          <button onClick={()=>changeGlossLang('en')} style={{...S.startBtn,padding:'8px 16px',fontSize:14,boxShadow:'none'}}>{t('glossHintUseEn')}</button>
           <button onClick={()=>{setGlossHintOff(true);LS.set('bible-glosshint-off',true)}} style={S.navBtn}>{t('glossHintDismiss')}</button>
         </div>
       </div>}
@@ -4249,7 +4316,7 @@ function App({data}){
         <div style={{display:'flex',justifyContent:'center',gap:12,marginBottom:10}}>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('settings')}} style={{...S.gearBtn,fontSize:28}} title={t('settings')}>⚙</button>
           <button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('stats')}} style={S.gearBtn} title={t('statistics')}>📊</button>
-          {INSTANCE.hasTraining&&<button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:28,height:28,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
+          {trainingActive&&<button onClick={()=>{const el=document.querySelector('.phone-screen');savedScrollRef.current=el?el.scrollTop:window.scrollY;setReadingMenu(false);prevPhaseRef.current=phase;setPhase('training')}} style={S.gearBtn} title={t('training')}><img src="files/kopf2.jpg" style={{width:28,height:28,objectFit:'cover',borderRadius:'50%',verticalAlign:'middle'}}/></button>}
         </div>
       </div>}
       {tts.speaking&&<div style={{padding:'6px 0 8px',borderTop:'1px solid var(--t-border)'}} onClick={e=>e.stopPropagation()}>
@@ -4276,7 +4343,7 @@ function App({data}){
 
     {!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
       <div style={{display:'flex',alignItems:'stretch',borderBottom:chapTab?'1px solid var(--t-border)':'none'}}>
-        {[{k:'stats',ic:'📊',lb:t('statistics')},...(INSTANCE.hasTraining?[{k:'training',ic:null,lb:t('training')}]:[]),{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
+        {[{k:'stats',ic:'📊',lb:t('statistics')},...(trainingActive?[{k:'training',ic:null,lb:t('training')}]:[]),{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
           const active=chapTab===tab.k;
           return(<button key={tab.k} onClick={()=>setChapTab(c=>c===tab.k?null:tab.k)} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:3,padding:'9px 4px',border:'none',borderBottom:active?'2px solid var(--t-accent)':'2px solid transparent',background:active?'var(--t-bg)':'transparent',cursor:'pointer',color:active?'var(--t-accent)':'var(--t-muted)',fontFamily:sans}}>
             {tab.k==='training'?<img src="files/kopf2.jpg" style={{width:22,height:22,objectFit:'cover',borderRadius:'50%',...(active?{}:{filter:'grayscale(0.5) opacity(0.7)'})}}/>:<span style={{fontSize:20,lineHeight:1}}>{tab.ic}</span>}
