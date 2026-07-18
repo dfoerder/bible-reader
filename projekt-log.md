@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.76b (18.07.2026)
+
+- Interne Regel dokumentiert: Der Einstufungstest enthält ausschließlich gewöhnliche Vokabeln, keine Eigennamen. Keine sichtbaren Änderungen für Nutzer.
+
 ## v1.10.75b (18.07.2026)
 
 - Übungen ohne Namensflut: In den Vokabelübungen (z.B. spanisches Matthäus 1) erscheinen nur noch wichtige Eigennamen — bedeutende Personen (Abraham, Moses, David, Propheten, Apostel), große Orte (Jerusalem, Ägypten, Babylon) und Gottesnamen. Unwichtige Genealogie- und Nebennamen werden aus den Übungen herausgefiltert.
