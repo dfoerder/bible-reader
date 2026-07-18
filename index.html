@@ -135,8 +135,8 @@ function toggleViewMode(){
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.10.72b';
-const APP_DATE = '17.07.2026';
+const APP_VERSION = '1.10.73b';
+const APP_DATE = '18.07.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -257,12 +257,12 @@ const APP_LANGS=[
 ];
 // Bevorzugte gleichsprachige Hilfsbibel je App-Sprache.
 const HELPER_BY_LANG={en:'eng-web',de:'deu-sch1951mod',es:'spa-rv1909mod',it:'ita-riv1927mod',fr:'fra-lsg1910mod'};
-// Gleichsprachige Hilfsbibel; fällt auf die Default-Hilfsbibel der Hauptbibel
-// zurück, wenn keine existiert oder sie mit der Hauptbibel kollidiert (z.B.
-// App-Sprache Englisch + Web-Bibel als Hauptbibel).
-function helperForLang(appLang){
+// Gleichsprachige Hilfsbibel zu einer gegebenen Hauptbibel + App-Sprache; fällt
+// auf die Default-Hilfsbibel der Hauptbibel zurück, wenn keine existiert oder sie
+// mit der Hauptbibel kollidiert (z.B. App-Sprache Englisch + Web-Bibel als Haupt).
+function helperForMainAndLang(mainId, appLang){
   const id=HELPER_BY_LANG[appLang];
-  return (id && BIBLES[id] && id!==INSTANCE.id) ? id : INSTANCE.defaultHilfs;
+  return (id && BIBLES[id] && id!==mainId) ? id : BIBLES[mainId].defaultHilfs;
 }
 
 const LS = {
@@ -304,6 +304,8 @@ const I18N={
   nBooks:{de:'{n} Bücher',en:'{n} books'},
   nCh:{de:'{n} Kap.',en:'{n} ch.'},
   chooseLanguage:{de:'Sprache wählen',en:'Choose your language',es:'Elige tu idioma',it:'Scegli la lingua',fr:'Choisis ta langue'},
+  chooseBible:{de:'Welche Bibel möchtest du lesen?',en:'Which Bible would you like to read?',es:'¿Qué Biblia quieres leer?',it:'Quale Bibbia vuoi leggere?',fr:'Quelle Bible veux-tu lire ?'},
+  chooseBibleHint:{de:'Die Sprache, die du lernen möchtest. Änderbar in den Einstellungen.',en:'The language you want to learn. Changeable in settings.',es:'El idioma que quieres aprender. Se puede cambiar en los ajustes.',it:'La lingua che vuoi imparare. Modificabile nelle impostazioni.',fr:'La langue que tu veux apprendre. Modifiable dans les réglages.'},
 
   // Settings
   settings:{de:'Einstellungen',en:'Settings'},
@@ -2879,10 +2881,26 @@ function App({data}){
   const [uiLang,setUiLang]=useState(getLang);
   const changeUiLang=useCallback(l=>{setLang(l);setUiLang(l);},[]);
   const levelTested=LS.get('bible-level-tested');
-  // Erster App-Start: App-Sprache wählen (statt wie früher direkt Einstufungstest).
-  // Bestandsnutzer (haben schon Lesestand/Level-Test) überspringen die Auswahl.
-  const isFirstLaunch=!rawLSget('bible-lang-chosen')&&!levelTested&&!LS.get('bible-reader-state')&&!LS.get('nt-reader-state');
-  const [phase,setPhase]=useState(()=>isFirstLaunch?'langselect':(saved.phase||'nav'));
+  // Onboarding-Flow (erster Start):
+  //   1) App-Sprache wählen (langselect)
+  //   2) Lese-/Studienbibel wählen (biblechoose) → persistiert bible-haupt + Reload
+  //   3) nach Reload: bei Bibeln mit Einstufungstest (hasLevelTest = WEB/rv1909mod)
+  //      der Test, sonst direkt zur Startseite.
+  // Bestandsnutzer (Lesestand/Level-Test vorhanden) gelten als fertig onboardet.
+  const onboarded=rawLSget('bible-onboarded')||levelTested||LS.get('bible-reader-state')||LS.get('nt-reader-state');
+  const langChosen=rawLSget('bible-lang-chosen');
+  const bibleChosen=rawLSget('bible-haupt')!=null;
+  const [phase,setPhase]=useState(()=>{
+    if(onboarded)return saved.phase||'nav';
+    if(!langChosen)return 'langselect';
+    if(!bibleChosen)return 'biblechoose';
+    return (INSTANCE.hasLevelTest&&!levelTested)?'leveltest':'nav';
+  });
+  // Onboarding abschließen, wenn Sprache+Bibel gewählt sind und kein Test (mehr) ansteht.
+  useEffect(()=>{
+    if(!rawLSget('bible-onboarded')&&langChosen&&bibleChosen&&!(INSTANCE.hasLevelTest&&!levelTested))
+      rawLSset('bible-onboarded',true);
+  },[]);// eslint-disable-line
   const prevPhaseRef=useRef('nav');
   // Lese-Level als 18-Stufen-Wert (0–17); grobes userLevel nur noch abgeleitet.
   // Migration: alter grober saved.userLevel → Band-Anfang (.1).
@@ -2970,9 +2988,25 @@ function App({data}){
   // oder ungültige Werte (z.B. 'sch1951') → Default-Hilfsbibel der Hauptbibel.
   const [deTrans,setDeTransState]=useState(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;});
   const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
-  // Onboarding: App-Sprache setzt UI-Sprache + gleichsprachige Hilfsbibel-Vorwahl.
-  // Hauptbibel bleibt die Default-Web-Bibel. Danach direkt zur Startseite.
-  const onLangSelect=useCallback(code=>{changeUiLang(code);changeDeTrans(helperForLang(code));rawLSset('bible-lang-chosen',true);setPhase('nav');},[changeUiLang,changeDeTrans]);
+  // Onboarding Schritt 1: App-Sprache setzt die UI-Sprache. Danach zur Bibel-Auswahl.
+  const onLangSelect=useCallback(code=>{changeUiLang(code);rawLSset('bible-lang-chosen',true);setPhase('biblechoose');},[changeUiLang]);
+  // Onboarding Schritt 2: Lese-/Studienbibel wählen. Hilfsbibel automatisch zur
+  // App-Sprache vorwählen. Bibelwechsel braucht Reload (INSTANCE wird beim Laden
+  // festgelegt); danach führt die phase-Init den Flow fort (Test bzw. Startseite).
+  const onBibleChoose=useCallback(id=>{
+    if(!BIBLES[id])return;
+    const helper=helperForMainAndLang(id,getLang());
+    if(id===INSTANCE.id){ // schon die aktive (Default-)Bibel → kein Reload nötig
+      changeDeTrans(helper);
+      if(INSTANCE.hasLevelTest&&!levelTested){setPhase('leveltest');}
+      else{rawLSset('bible-onboarded',true);setPhase('nav');}
+      return;
+    }
+    tts.stop();
+    rawLSset('bible-haupt',id);
+    rawLSset(BIBLES[id].lsPrefix+'bible-de-trans',helper); // mit Ziel-Präfix schreiben
+    location.reload();
+  },[tts,changeDeTrans,levelTested]);
   const hilfsLang=BIBLES[deTrans]?.langCode; // bestimmt das angezeigte Gloss-Feld
   // Hauptbibel-Wechsel: persistieren (unpräfixiert) + Seite neu laden. Der
   // komplette Nutzerstand wird beim Mount aus dem lsPrefix der neuen Bibel
@@ -3067,7 +3101,8 @@ function App({data}){
 
   const onLevelTestComplete=useCallback(level=>{
     const step=levelToStep(level);
-    setUserStep(step);LS.set('bible-level-tested',true);LS.set('bible-train-step',step);LS.set('bible-freq-step',step);setPhase('nav');
+    setUserStep(step);LS.set('bible-level-tested',true);LS.set('bible-train-step',step);LS.set('bible-freq-step',step);
+    rawLSset('bible-onboarded',true);setPhase('nav');
   },[]);
 
   const savedScrollRef=useRef(null);
@@ -3504,6 +3539,22 @@ function App({data}){
       <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:320,margin:'0 auto'}}>
         {APP_LANGS.map(l=>(
           <button key={l.code} onClick={()=>onLangSelect(l.code)} style={{padding:'16px 20px',border:'1.5px solid var(--t-border)',borderRadius:12,background:'var(--t-card-solid)',color:'var(--t-text)',fontSize:18,fontWeight:600,cursor:'pointer',fontFamily:sans,textAlign:'center',transition:'all 0.2s'}}>{l.label}</button>
+        ))}
+      </div>
+    </div>);
+  }
+  if(phase==='biblechoose'){
+    return(<div>
+      <header style={S.header}>
+        <div style={{fontSize:44,marginBottom:8}}>📖</div>
+        <h1 style={{...S.title,margin:0}}>{t('chooseBible')}</h1>
+      </header>
+      <p style={{textAlign:'center',fontSize:14,color:'var(--t-med)',fontFamily:sans,margin:'0 0 24px',lineHeight:1.6}}>
+        {t('chooseBibleHint')}
+      </p>
+      <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:320,margin:'0 auto'}}>
+        {Object.values(BIBLES).map(b=>(
+          <button key={b.id} onClick={()=>onBibleChoose(b.id)} style={{padding:'16px 20px',border:'1.5px solid var(--t-border)',borderRadius:12,background:'var(--t-card-solid)',color:'var(--t-text)',fontSize:17,fontWeight:600,cursor:'pointer',fontFamily:sans,textAlign:'center',transition:'all 0.2s'}}>{b.label}</button>
         ))}
       </div>
     </div>);
