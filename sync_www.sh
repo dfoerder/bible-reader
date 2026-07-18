@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 
 # Runtime-Assets, die die Web-App braucht (vgl. www/-Top-Level)
 FILES=(index.html sw.js manifest.json icon-192.png icon-512.png)
-DIRS=(data bibles lib)
+DIRS=(bibles lib)
 
 # Build-Intermediates, die NICHT ins Bundle gehören (Single Source ist words.json)
 EXCLUDES=(--exclude=vocab_pool.json --exclude=context_exercises.json --exclude='*_backup.json')
