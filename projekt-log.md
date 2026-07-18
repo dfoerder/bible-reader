@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.78b (18.07.2026)
+
+- Hinweis bei fehlender Wort-Hilfe: Wenn für die gewählte Haupt- und Hilfsbibel (z.B. Spanisch–Deutsch) noch keine Inline-Wortübersetzungen und Übungen existieren, weist die App darauf hin und bietet an, die englische Hilfsbibel zu verwenden, für die es sie gibt (z.B. Spanisch–Englisch).
+
 ## v1.10.77b (18.07.2026)
 
 - Test-Hilfe (Entwickler): Neuer Button in den Einstellungen zum kompletten Zurücksetzen der App wie bei einer Neuinstallation — inkl. Lernfortschritt; danach startet wieder die Sprach- und Bibelauswahl.
