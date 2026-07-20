@@ -163,7 +163,7 @@ const BIBLES = {
   'eng-web': {
     id: 'eng-web', label: 'English (WEB)', langCode: 'en', lsPrefix: '',
     bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json',
-    annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json', annoGlossLangs: ['de'],
+    annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json', annoGlossLangs: ['de','es','fr','it'],
     wordsPath: 'bibles/eng/web/train/words.json', examplesPath: 'bibles/eng/web/train/examples.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'deu-l1912mod',
@@ -4412,6 +4412,13 @@ function App({data}){
             <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
           </label>
         </div>
+        {INSTANCE.hasAnno&&<div>
+          <span style={S.settingsLabel}>{t('glossSetting')}</span>
+          <div style={{...S.levelBtns,flexWrap:'wrap'}}>
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{({en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français'}[l]||l)}</button>))}
+            <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
+          </div>
+        </div>}
         <div>
           <span style={S.settingsLabel}>{t('wordTranslations')}</span>
           <label style={{...S.toggleRow,marginTop:6}}>
