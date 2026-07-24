@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.86b (24.07.2026)
+
+- Sprachlogik für Haupt-/Hilfsbibel neu geordnet: Wortübersetzungen und Training folgen jetzt standardmäßig der App-Sprache (statt der Hilfsbibel); Hilfsbibel-Default richtet sich nach der App-Sprache mit Englisch-Fallback; neuer Sprachauswähler für Wortübersetzungen direkt auf der Startseite; beim späteren Wechsel der Hilfsbibel in eine andere Sprache fragt die App, ob diese auch für Wortübersetzungen/Training übernommen werden soll.
+
 ## v1.10.85b (24.07.2026)
 
 - Zwei neue Bugs in der deutschen Wortübersetzung (Hauptbibel-Glosse) gefunden und behoben: 6.194 nie übersetzte Wörter (Feld war auf das englische Wort zurückgefallen, z.B. „wilderness“ statt „Wüste“) sowie 166 Platzhalter/Klammer-Grammatiknotizen (z.B. „(Hilfsverb)“) durch echte deutsche Wörter ersetzt.
