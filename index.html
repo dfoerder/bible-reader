@@ -246,6 +246,12 @@ const APP_LANGS=[
   {code:'fr',label:'Français'},
 ];
 const LANG_LABELS={en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français'};
+// Beschriftung für eine Gloss-Sprachoption: zeigt die volle Sprachkombination
+// (Hauptbibel-Sprache → Gloss-Sprache), z.B. "English-Español", nicht nur das Ziel.
+function glossPairLabel(l){
+  const src=LANG_LABELS[INSTANCE.langCode]||INSTANCE.langCode;
+  return `${src}-${LANG_LABELS[l]||l}`;
+}
 // Hilfsbibel-Auflösung: (1) Bibeln in der App-Sprache (außer der Hauptbibel
 // selbst) — genau eine → automatisch übernehmen; mehrere → Nutzer muss wählen
 // (candidates, resolved=null); keine → (2) englische Bibeln (außer Hauptbibel);
@@ -4027,7 +4033,7 @@ function App({data}){
         {INSTANCE.hasAnno&&<div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('glossSetting')}</span>
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>
-            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{LANG_LABELS[l]||l}</button>))}
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
             <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
           </div>
         </div>}
@@ -4095,7 +4101,7 @@ function App({data}){
         <label style={{display:'flex',flexDirection:'column',gap:3,fontFamily:sans}}>
           <span style={{fontSize:11,color:'var(--t-muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:.4}}>{t('glossSetting')}</span>
           <select value={glossLang||'none'} onChange={e=>changeGlossLang(e.target.value==='none'?null:e.target.value)} style={{fontFamily:sans,fontSize:14,padding:'6px 8px',borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-bg2)',color:'var(--t-title)',cursor:'pointer'}}>
-            {_annoGloss.map(l=>(<option key={l} value={l}>{LANG_LABELS[l]||l}</option>))}
+            {_annoGloss.map(l=>(<option key={l} value={l}>{glossPairLabel(l)}</option>))}
             <option value="none">{t('glossNone')}</option>
           </select>
         </label>
@@ -4479,7 +4485,7 @@ function App({data}){
         {INSTANCE.hasAnno&&<div>
           <span style={S.settingsLabel}>{t('glossSetting')}</span>
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>
-            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{LANG_LABELS[l]||l}</button>))}
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
             <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
           </div>
         </div>}
