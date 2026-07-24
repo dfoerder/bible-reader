@@ -3016,14 +3016,17 @@ function App({data}){
     </div>
   );
   // Hilfsbibel-Wechsel (Startseite/Einstellungen): setzt die Hilfsbibel sofort;
-  // weicht die neue Hilfssprache von der App-Sprache ab UND gibt es dafür
-  // Glossen, wird gefragt, ob diese Sprache auch für Wortübersetzungen/Training
-  // übernommen werden soll (siehe hilfsGlossAsk-Dialog in den Phase-Renderern).
+  // weicht die neue Hilfssprache von der AKTUELLEN Gloss-Sprache ab (nicht nur
+  // von der App-Sprache — sonst würde z.B. ein Rückwechsel auf die Hilfsbibel
+  // in App-Sprache nicht mehr nachfragen, obwohl die Gloss-Sprache zuvor per Ja
+  // auf eine andere Sprache umgestellt wurde) UND gibt es dafür Glossen, wird
+  // gefragt, ob diese Sprache auch für Wortübersetzungen/Training übernommen
+  // werden soll (siehe hilfsGlossAsk-Dialog in den Phase-Renderern).
   const changeDeTrans=useCallback(v=>{
     if(!BIBLES[v])return;
     setHilfsbibel(v);
-    const newLang=BIBLES[v].langCode; const appL=getLang();
-    if(newLang&&newLang!==appL&&_annoGloss.includes(newLang)&&glossLang!==newLang)setHilfsGlossAsk(newLang);
+    const newLang=BIBLES[v].langCode;
+    if(newLang&&_annoGloss.includes(newLang)&&glossLang!==newLang)setHilfsGlossAsk(newLang);
   },[setHilfsbibel,_annoGloss,glossLang]);
   const glossAvailable=INSTANCE.hasAnno&&!!glossLang&&_annoGloss.includes(glossLang);
   const trainingActive=INSTANCE.hasTraining&&!!glossLang;
