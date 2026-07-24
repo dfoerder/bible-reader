@@ -254,16 +254,20 @@ function glossPairLabel(l){
 }
 // Hilfsbibel-Auflösung: (1) Bibeln in der App-Sprache (außer der Hauptbibel
 // selbst) — genau eine → automatisch übernehmen; mehrere → Nutzer muss wählen
-// (candidates, resolved=null); keine → (2) englische Bibeln (außer Hauptbibel);
-// (3) letzter Rückfall: die fest konfigurierte defaultHilfs der Hauptbibel
-// (z.B. wenn die Hauptbibel selbst die einzige Bibel in App- UND Englisch-
-// Sprache ist).
+// (candidates, resolved=null). (2) Keine Bibel in der App-Sprache (typischer
+// Fall: die Hauptbibel selbst ist die einzige Bibel in der App-Sprache, z.B.
+// App-Sprache Englisch + Web-Bibel als Hauptbibel) → NICHT still auf Englisch
+// zurückfallen, sondern den Nutzer aus allen übrigen Bibeln wählen lassen
+// (genau eine übrige Bibel → automatisch übernehmen, sonst Auswahl).
+// (3) Letzter Rückfall (sollte mit der aktuellen Registry nie eintreten): die
+// fest konfigurierte defaultHilfs der Hauptbibel.
 function resolveHilfsbibel(mainId, appLang){
   const sameLang=Object.values(BIBLES).filter(b=>b.id!==mainId&&b.langCode===appLang);
   if(sameLang.length===1)return{resolved:sameLang[0].id};
   if(sameLang.length>1)return{resolved:null,candidates:sameLang};
-  const enCands=Object.values(BIBLES).filter(b=>b.id!==mainId&&b.langCode==='en');
-  if(enCands.length>=1)return{resolved:enCands[0].id};
+  const others=Object.values(BIBLES).filter(b=>b.id!==mainId);
+  if(others.length===1)return{resolved:others[0].id};
+  if(others.length>1)return{resolved:null,candidates:others};
   return{resolved:BIBLES[mainId].defaultHilfs};
 }
 // Gloss-/Trainingssprache: App-Sprache wenn annotiert, sonst Englisch wenn
