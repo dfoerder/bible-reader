@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.89b (24.07.2026)
+
+- Bugfix: Fällt die App-Sprache mit der Sprache der gewählten Hauptbibel zusammen (z.B. Englisch + WEB-Bibel), fragt die App jetzt, welche Hilfsbibel verwendet werden soll, statt still auf eine Sprache zurückzufallen.
+
 ## v1.10.88b (24.07.2026)
 
 - Bugfix: Beim Zurückwechseln der Hilfsbibel auf die App-Sprache wurde nicht mehr gefragt, ob die Wortübersetzungen ebenfalls zurückgestellt werden sollen, falls diese zuvor auf eine andere Sprache umgestellt worden waren.
