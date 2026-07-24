@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.85b (24.07.2026)
+
+- Zwei neue Bugs in der deutschen Wortübersetzung (Hauptbibel-Glosse) gefunden und behoben: 6.194 nie übersetzte Wörter (Feld war auf das englische Wort zurückgefallen, z.B. „wilderness“ statt „Wüste“) sowie 166 Platzhalter/Klammer-Grammatiknotizen (z.B. „(Hilfsverb)“) durch echte deutsche Wörter ersetzt.
+
 ## v1.10.84b (24.07.2026)
 
 - Spanische, französische und italienische Wort-für-Wort-Übersetzungen jetzt für die komplette Bibel (alle 66 Bücher) verfügbar; mehrere Nachkorrektur-Runden (fehlende Platzhalter, Rotationsfehler in Lukas/Johannes behoben); Wortübersetzungen folgen jetzt automatisch der gewählten Hilfsbibel statt der App-Sprache.
