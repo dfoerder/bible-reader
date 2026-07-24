@@ -2952,23 +2952,32 @@ function App({data}){
   // deTrans hält die HILFSBIBEL (BIBLES-Registry-ID). Migration/Fallback: alte
   // oder ungültige Werte (z.B. 'sch1951') → Default-Hilfsbibel der Hauptbibel.
   const [deTrans,setDeTransState]=useState(()=>{const s=LS.get('bible-de-trans');return (s&&BIBLES[s]&&s!==INSTANCE.id)?s:INSTANCE.defaultHilfs;});
-  const changeDeTrans=useCallback(v=>{setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);Object.keys(_deCache).forEach(k=>delete _deCache[k])},[]);
   const hilfsLang=BIBLES[deTrans]?.langCode; // Sprache der Parallel-Hilfsbibel (nur Verstext)
   const _annoGloss=INSTANCE.annoGlossLangs||[];
   // glossLang = Sprache der Inline-Wortübersetzungen + Übungen + Einstufungstest.
-  // ENTKOPPELT von der Hilfsbibel (z.B. englische Glossen + deutsche Hilfsbibel möglich).
+  // Default folgt der Hilfsbibel (mit Englisch-Fallback, wenn die Hilfsbibel-Sprache
+  // keine Glossen hat); Nutzer kann in den Einstellungen weiterhin manuell überschreiben.
   // null = keine Glossen/Übungen (reines Lesen). Persistiert als 'none' | <langCode>.
-  // Default/Migration: App-Sprache wenn annotiert, sonst Hilfssprache wenn annotiert, sonst null.
+  // Default/Migration: Hilfssprache wenn annotiert, sonst Englisch wenn annotiert, sonst null.
   const [glossLang,setGlossLangState]=useState(()=>{
     const p=LS.get('bible-gloss-lang');
     if(p==='none')return null;
     if(p&&_annoGloss.includes(p))return p;
-    const appL=getLang();
-    if(_annoGloss.includes(appL))return appL;
     if(hilfsLang&&_annoGloss.includes(hilfsLang))return hilfsLang;
+    if(_annoGloss.includes('en'))return 'en';
     return null;
   });
   const changeGlossLang=useCallback(v=>{setGlossLangState(v);LS.set('bible-gloss-lang',v||'none');},[]);
+  // Hilfsbibel-Wechsel setzt die Gloss-Sprache automatisch auf die neue Hilfssprache
+  // (mit Englisch-Fallback), damit die Wortübersetzungen der Hilfsbibel folgen.
+  const changeDeTrans=useCallback(v=>{
+    setDeTransState(v);LS.set('bible-de-trans',v);setDeBook(null);
+    Object.keys(_deCache).forEach(k=>delete _deCache[k]);
+    const newHilfsLang=BIBLES[v]?.langCode;
+    if(newHilfsLang&&_annoGloss.includes(newHilfsLang))changeGlossLang(newHilfsLang);
+    else if(_annoGloss.includes('en'))changeGlossLang('en');
+    else changeGlossLang(null);
+  },[changeGlossLang,_annoGloss]);
   const glossAvailable=INSTANCE.hasAnno&&!!glossLang&&_annoGloss.includes(glossLang);
   const trainingActive=INSTANCE.hasTraining&&!!glossLang;
   // Hinweis: aktuell keine Glossen/Übungen (glossLang fehlt/null), aber Englisch verfügbar
