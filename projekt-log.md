@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.88b (24.07.2026)
+
+- Bugfix: Beim Zurückwechseln der Hilfsbibel auf die App-Sprache wurde nicht mehr gefragt, ob die Wortübersetzungen ebenfalls zurückgestellt werden sollen, falls diese zuvor auf eine andere Sprache umgestellt worden waren.
+
 ## v1.10.87b (24.07.2026)
 
 - Wortübersetzungs-Auswahl (Startseite, Einstellungen) zeigt jetzt die volle Sprachkombination (z.B. "English-Español") statt nur der Zielsprache.
