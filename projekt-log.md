@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.84b (24.07.2026)
+
+- Spanische, französische und italienische Wort-für-Wort-Übersetzungen jetzt für die komplette Bibel (alle 66 Bücher) verfügbar; mehrere Nachkorrektur-Runden (fehlende Platzhalter, Rotationsfehler in Lukas/Johannes behoben); Wortübersetzungen folgen jetzt automatisch der gewählten Hilfsbibel statt der App-Sprache.
+
 ## v1.10.83b (19.07.2026)
 
 - KI-Modernisierungshinweis an den Namen der modernisierten Übersetzungen angehängt (ES: Actualizado por IA, FR: Actualisé par IA, IT: Aggiornato dall'IA, DE: Aktualisiert von KI).
