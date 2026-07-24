@@ -323,6 +323,8 @@ const I18N={
   chooseHilfsbibelHint:{de:'Für deine App-Sprache gibt es mehrere Übersetzungen. Die Hilfsbibel zeigt dir den Vers parallel in dieser Sprache.',en:'There are several translations for your app language. The helper Bible shows the verse in parallel in that language.',es:'Hay varias traducciones para el idioma de tu app. La Biblia auxiliar muestra el versículo en paralelo en ese idioma.',it:'Per la lingua della tua app ci sono più traduzioni. La Bibbia ausiliaria mostra il versetto in parallelo in quella lingua.',fr:'Il existe plusieurs traductions pour la langue de ton app. La Bible auxiliaire affiche le verset en parallèle dans cette langue.'},
   hilfsGlossAskTitle:{de:'Wortübersetzungen umstellen?',en:'Switch word translations?',es:'¿Cambiar las traducciones de palabras?',it:'Cambiare le traduzioni delle parole?',fr:'Changer les traductions de mots ?'},
   hilfsGlossAskBody:{de:'Möchtest du {lang} auch als Sprache für die Wortübersetzungen und das Training verwenden?',en:'Would you like to also use {lang} for word translations and training?',es:'¿Quieres usar también {lang} para las traducciones de palabras y el entrenamiento?',it:'Vuoi usare anche {lang} per le traduzioni di parole e l\'allenamento?',fr:'Veux-tu aussi utiliser {lang} pour les traductions de mots et l\'entraînement ?'},
+  glossHilfsAskTitle:{de:'Hilfsbibel umstellen?',en:'Switch helper Bible?',es:'¿Cambiar la Biblia auxiliar?',it:'Cambiare la Bibbia ausiliaria?',fr:'Changer la Bible auxiliaire ?'},
+  glossHilfsAskBody:{de:'Möchtest du auch eine Hilfsbibel in {lang} verwenden?',en:'Would you like to also use a helper Bible in {lang}?',es:'¿Quieres usar también una Biblia auxiliar en {lang}?',it:'Vuoi usare anche una Bibbia ausiliaria in {lang}?',fr:'Veux-tu aussi utiliser une Bible auxiliaire en {lang} ?'},
   glossHintTitle:{de:'Keine Wort-Hilfe für diese Kombination',en:'No word help for this combination',es:'Sin ayuda de vocabulario para esta combinación',it:'Nessun aiuto lessicale per questa combinazione',fr:'Pas d\'aide lexicale pour cette combinaison'},
   glossHintBody:{de:'Für die gewählte Kombination gibt es noch keine Inline-Wortübersetzungen und Übungen. Auf Englisch sind sie verfügbar (die Hilfsbibel bleibt unverändert).',en:'This combination has no inline word translations or exercises yet. They are available in English (your helper Bible stays unchanged).',es:'Esta combinación aún no tiene traducciones de palabras ni ejercicios. Están disponibles en inglés (la Biblia auxiliar no cambia).',it:'Questa combinazione non ha ancora traduzioni di parole né esercizi. Sono disponibili in inglese (la Bibbia ausiliaria resta invariata).',fr:'Cette combinaison n\'a pas encore de traductions de mots ni d\'exercices. Elles sont disponibles en anglais (ta Bible auxiliaire reste inchangée).'},
   glossHintUseEn:{de:'Englische Übersetzungen verwenden',en:'Use English translations',es:'Usar traducciones en inglés',it:'Usa traduzioni in inglese',fr:'Utiliser les traductions anglaises'},
@@ -3032,6 +3034,35 @@ function App({data}){
     const newLang=BIBLES[v].langCode;
     if(newLang&&_annoGloss.includes(newLang)&&glossLang!==newLang)setHilfsGlossAsk(newLang);
   },[setHilfsbibel,_annoGloss,glossLang]);
+  // glossHilfsAsk hält die BIBLES-ID einer passenden Hilfsbibel, solange der
+  // Ja/Nein-Dialog "Auch als Hilfsbibel verwenden?" offen ist — Gegenstück zu
+  // hilfsGlossAsk für die umgekehrte Richtung (Gloss-Sprache ändert sich zuerst).
+  const [glossHilfsAsk,setGlossHilfsAsk]=useState(null);
+  const glossHilfsAskDialog=glossHilfsAsk&&(
+    <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}} onClick={()=>setGlossHilfsAsk(null)}>
+      <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'24px 28px',maxWidth:340,textAlign:'center',fontFamily:sans}}>
+        <p style={{margin:'0 0 8px',fontWeight:700,color:'var(--t-title)',fontSize:16}}>{t('glossHilfsAskTitle')}</p>
+        <p style={{margin:'0 0 18px',color:'var(--t-text2)',fontSize:14,lineHeight:1.5}}>{t('glossHilfsAskBody').replace('{lang}',LANG_LABELS[BIBLES[glossHilfsAsk]?.langCode]||'')}</p>
+        <div style={{display:'flex',gap:10,justifyContent:'center'}}>
+          <button onClick={()=>{setHilfsbibel(glossHilfsAsk);setGlossHilfsAsk(null)}} style={S.startBtn}>{t('yes')}</button>
+          <button onClick={()=>setGlossHilfsAsk(null)} style={{padding:'12px 20px',border:'1.5px solid var(--t-border)',borderRadius:10,background:'transparent',color:'var(--t-text2)',fontSize:15,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
+        </div>
+      </div>
+    </div>
+  );
+  // Direkte Gloss-Sprachauswahl (Startseite/Einstellungen) — NICHT für interne
+  // changeGlossLang-Aufrufe (Onboarding-Automatik, Ja-Antwort im anderen
+  // Dialog, Englisch-Hinweis-Banner, der explizit "Hilfsbibel bleibt
+  // unverändert" verspricht). Weicht die neue Sprache von der aktuellen
+  // Hilfsbibel ab UND gibt es dafür eine passende Hilfsbibel, wird gefragt,
+  // ob diese auch übernommen werden soll.
+  const changeGlossLangUI=useCallback(v=>{
+    changeGlossLang(v);
+    if(v){
+      const b=Object.values(BIBLES).find(x=>x.id!==INSTANCE.id&&x.langCode===v);
+      if(b&&b.id!==deTrans)setGlossHilfsAsk(b.id);
+    }
+  },[changeGlossLang,deTrans]);
   const glossAvailable=INSTANCE.hasAnno&&!!glossLang&&_annoGloss.includes(glossLang);
   const trainingActive=INSTANCE.hasTraining&&!!glossLang;
   // Hinweis: aktuell keine Glossen/Übungen (glossLang fehlt/null), aber Englisch verfügbar
@@ -4045,8 +4076,8 @@ function App({data}){
         {INSTANCE.hasAnno&&<div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('glossSetting')}</span>
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>
-            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
-            <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLangUI(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
+            <button onClick={()=>changeGlossLangUI(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
           </div>
         </div>}
         <div style={S.settingsGroup}>
@@ -4067,6 +4098,7 @@ function App({data}){
           </div>
         </div>}
         {hilfsGlossAskDialog}
+        {glossHilfsAskDialog}
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('statsPage')}</span>
           {[{key:'text',i:'statsText'},{key:'vocabulary',i:'statsVocab'}].map(s=>(
@@ -4112,7 +4144,7 @@ function App({data}){
       {!fromReading&&INSTANCE.hasAnno&&<div style={{display:'flex',justifyContent:'center',margin:'0 0 14px'}}>
         <label style={{display:'flex',flexDirection:'column',gap:3,fontFamily:sans}}>
           <span style={{fontSize:11,color:'var(--t-muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:.4}}>{t('glossSetting')}</span>
-          <select value={glossLang||'none'} onChange={e=>changeGlossLang(e.target.value==='none'?null:e.target.value)} style={{fontFamily:sans,fontSize:14,padding:'6px 8px',borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-bg2)',color:'var(--t-title)',cursor:'pointer'}}>
+          <select value={glossLang||'none'} onChange={e=>changeGlossLangUI(e.target.value==='none'?null:e.target.value)} style={{fontFamily:sans,fontSize:14,padding:'6px 8px',borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-bg2)',color:'var(--t-title)',cursor:'pointer'}}>
             {_annoGloss.map(l=>(<option key={l} value={l}>{glossPairLabel(l)}</option>))}
             <option value="none">{t('glossNone')}</option>
           </select>
@@ -4127,6 +4159,7 @@ function App({data}){
         </div>
       </div>}
       {hilfsGlossAskDialog}
+      {glossHilfsAskDialog}
       {otBooks.length>0&&<div style={S.bookList}>
         <h2 style={{...S.testamentHeader,cursor:'pointer',display:'flex',alignItems:'center',gap:8}} onClick={()=>{setExpandedTestament(expandedTestament==='ot'?null:'ot');setExpandedBook(null)}}>
           <span style={S.bookArrow}>{expandedTestament==='ot'?'▾':'▸'}</span>
@@ -4497,11 +4530,12 @@ function App({data}){
         {INSTANCE.hasAnno&&<div>
           <span style={S.settingsLabel}>{t('glossSetting')}</span>
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>
-            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLang(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
-            <button onClick={()=>changeGlossLang(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
+            {_annoGloss.map(l=>(<button key={l} onClick={()=>changeGlossLangUI(l)} style={{...S.lvlBtn,...(glossLang===l?S.lvlActive:{})}}>{glossPairLabel(l)}</button>))}
+            <button onClick={()=>changeGlossLangUI(null)} style={{...S.lvlBtn,...(!glossLang?S.lvlActive:{})}}>{t('glossNone')}</button>
           </div>
         </div>}
         {hilfsGlossAskDialog}
+        {glossHilfsAskDialog}
         <div>
           <span style={S.settingsLabel}>{t('wordTranslations')}</span>
           <label style={{...S.toggleRow,marginTop:6}}>
