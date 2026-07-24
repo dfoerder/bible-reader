@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.90b (24.07.2026)
+
+- Wählt man bei der Ersteinrichtung explizit eine Hilfsbibel aus (z.B. weil App-Sprache und Hauptbibel-Sprache übereinstimmen), wird deren Sprache jetzt auch automatisch für die Wortübersetzungen und das Training übernommen, statt bei der App-Sprache zu bleiben.
+
 ## v1.10.89b (24.07.2026)
 
 - Bugfix: Fällt die App-Sprache mit der Sprache der gewählten Hauptbibel zusammen (z.B. Englisch + WEB-Bibel), fragt die App jetzt, welche Hilfsbibel verwendet werden soll, statt still auf eine Sprache zurückzufallen.
