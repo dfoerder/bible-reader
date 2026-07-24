@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.87b (24.07.2026)
+
+- Wortübersetzungs-Auswahl (Startseite, Einstellungen) zeigt jetzt die volle Sprachkombination (z.B. "English-Español") statt nur der Zielsprache.
+
 ## v1.10.86b (24.07.2026)
 
 - Sprachlogik für Haupt-/Hilfsbibel neu geordnet: Wortübersetzungen und Training folgen jetzt standardmäßig der App-Sprache (statt der Hilfsbibel); Hilfsbibel-Default richtet sich nach der App-Sprache mit Englisch-Fallback; neuer Sprachauswähler für Wortübersetzungen direkt auf der Startseite; beim späteren Wechsel der Hilfsbibel in eine andere Sprache fragt die App, ob diese auch für Wortübersetzungen/Training übernommen werden soll.
