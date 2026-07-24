@@ -3041,12 +3041,16 @@ function App({data}){
   const levelTestItems=useMemo(()=>buildLevelTest(INSTANCE.langCode,glossLang||_annoGloss[0]||'en'),[glossLang]);// eslint-disable-line
   // Onboarding Schritt 1: App-Sprache setzt die UI-Sprache. Danach zur Bibel-Auswahl.
   const onLangSelect=useCallback(code=>{changeUiLang(code);rawLSset('bible-lang-chosen',true);setPhase('biblechoose');},[changeUiLang]);
-  // Nach Hauptbibel+Hilfsbibel-Wahl: Gloss-/Trainingssprache automatisch nach
-  // Regel 5 setzen (App-Sprache, sonst Englisch, sonst keine) und weiter zu
-  // Einstufungstest bzw. Startseite. Reine Automatik, kein Nachfragen.
-  const advanceAfterHilfsbibel=useCallback(()=>{
+  // Nach Hauptbibel+Hilfsbibel-Wahl: Gloss-/Trainingssprache setzen und weiter
+  // zu Einstufungstest bzw. Startseite. Reine Automatik, kein Nachfragen.
+  // preferredLang = Sprache der gerade (automatisch oder explizit) gewählten
+  // Hilfsbibel; hat Vorrang vor Regel 5 (App-Sprache), falls dafür Glossen
+  // existieren — insbesondere nach der hilfschoose-Auswahl soll die gewählte
+  // Hilfsbibel-Sprache auch die Gloss-Sprache werden, nicht die App-Sprache.
+  const advanceAfterHilfsbibel=useCallback((preferredLang)=>{
     if(!INSTANCE.hasAnno){changeGlossLang(null);rawLSset('bible-onboarded',true);setPhase('nav');return;}
-    const gl=resolveGlossLang(INSTANCE.annoGlossLangs||[],getLang());
+    const ag=INSTANCE.annoGlossLangs||[];
+    const gl=(preferredLang&&ag.includes(preferredLang))?preferredLang:resolveGlossLang(ag,getLang());
     changeGlossLang(gl);
     if(gl&&INSTANCE.hasLevelTest&&!levelTested)setPhase('leveltest');
     else{rawLSset('bible-onboarded',true);setPhase('nav');}
@@ -3059,7 +3063,7 @@ function App({data}){
     if(!BIBLES[id])return;
     const{resolved}=resolveHilfsbibel(id,getLang());
     if(id===INSTANCE.id){ // schon die aktive (Default-)Bibel → kein Reload nötig
-      if(resolved){setHilfsbibel(resolved);advanceAfterHilfsbibel();}
+      if(resolved){setHilfsbibel(resolved);advanceAfterHilfsbibel(BIBLES[resolved]?.langCode);}
       else setPhase('hilfschoose');
       return;
     }
@@ -3068,11 +3072,12 @@ function App({data}){
     if(resolved)rawLSset(BIBLES[id].lsPrefix+'bible-de-trans',resolved); // mit Ziel-Präfix schreiben
     location.reload();
   },[tts,setHilfsbibel,advanceAfterHilfsbibel]);
-  // Onboarding Schritt 3 (nur bei mehreren gleichsprachigen Hilfsbibeln): Nutzer
-  // wählt explizit.
+  // Onboarding Schritt 3 (nur bei mehreren gleichsprachigen Hilfsbibeln oder
+  // keiner Hilfsbibel in der App-Sprache): Nutzer wählt explizit — die gewählte
+  // Sprache wird dann auch für die Wortübersetzungen/Training übernommen.
   const onHilfsChoose=useCallback(id=>{
     if(!BIBLES[id])return;
-    setHilfsbibel(id);advanceAfterHilfsbibel();
+    setHilfsbibel(id);advanceAfterHilfsbibel(BIBLES[id].langCode);
   },[setHilfsbibel,advanceAfterHilfsbibel]);
   // Hauptbibel-Wechsel: persistieren (unpräfixiert) + Seite neu laden. Der
   // komplette Nutzerstand wird beim Mount aus dem lsPrefix der neuen Bibel
