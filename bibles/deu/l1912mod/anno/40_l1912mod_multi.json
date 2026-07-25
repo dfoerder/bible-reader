@@ -71158,6 +71158,6599 @@
      "it": "perdere"
     }
    ]
+  },
+  "11": {
+   "1": [
+    {
+     "pos": 0,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 1,
+     "pos_end": 2,
+     "form": "es geschah",
+     "lemma": "es geschehen",
+     "level": "B2",
+     "en": "it came to pass",
+     "es": "aconteció",
+     "fr": "il arriva",
+     "it": "avvenne"
+    },
+    {
+     "pos": 1,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "ello",
+     "fr": "il",
+     "it": "esso"
+    },
+    {
+     "pos": 2,
+     "form": "geschah",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedió",
+     "fr": "arriva",
+     "it": "avvenne"
+    },
+    {
+     "pos": 3,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "when",
+     "es": "cuando",
+     "fr": "quand",
+     "it": "quando"
+    },
+    {
+     "pos": 4,
+     "form": "Jesus",
+     "lemma": "Jesus",
+     "level": "A1",
+     "en": "Jesus",
+     "es": "Jesús",
+     "fr": "Jésus",
+     "it": "Gesù"
+    },
+    {
+     "pos": 5,
+     "form": "seinen",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "his",
+     "es": "a sus",
+     "fr": "à ses",
+     "it": "ai suoi"
+    },
+    {
+     "pos": 6,
+     "form": "zwölf",
+     "lemma": "zwölf",
+     "level": "A1",
+     "en": "twelve",
+     "es": "doce",
+     "fr": "douze",
+     "it": "dodici"
+    },
+    {
+     "pos": 7,
+     "form": "Jüngern",
+     "lemma": "Jünger",
+     "level": "B2",
+     "en": "disciples",
+     "es": "discípulos",
+     "fr": "disciples",
+     "it": "discepoli"
+    },
+    {
+     "pos": 8,
+     "form": "diese",
+     "lemma": "dieser",
+     "level": "A1",
+     "en": "these",
+     "es": "estas",
+     "fr": "ces",
+     "it": "queste"
+    },
+    {
+     "pos": 9,
+     "form": "Anweisungen",
+     "lemma": "Anweisung",
+     "level": "B1",
+     "en": "instructions",
+     "es": "instrucciones",
+     "fr": "instructions",
+     "it": "istruzioni"
+    },
+    {
+     "pos": 10,
+     "form": "gegeben",
+     "lemma": "geben",
+     "level": "A1",
+     "en": "given",
+     "es": "dado",
+     "fr": "donné",
+     "it": "dato"
+    },
+    {
+     "pos": 11,
+     "form": "hatte",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "had",
+     "es": "había",
+     "fr": "avait",
+     "it": "aveva"
+    },
+    {
+     "pos": 12,
+     "parts": [
+      12,
+      16
+     ],
+     "form": "zog weiter",
+     "lemma": "weiterziehen",
+     "level": "B2",
+     "en": "moved on",
+     "es": "siguió su camino",
+     "fr": "poursuivit sa route",
+     "it": "proseguì il cammino"
+    },
+    {
+     "pos": 12,
+     "form": "zog",
+     "lemma": "ziehen",
+     "level": "A2",
+     "en": "went",
+     "es": "se fue",
+     "fr": "s'en alla",
+     "it": "andò"
+    },
+    {
+     "pos": 13,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "il",
+     "it": "egli"
+    },
+    {
+     "pos": 14,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "from",
+     "es": "de",
+     "fr": "de",
+     "it": "da"
+    },
+    {
+     "pos": 15,
+     "form": "dort",
+     "lemma": "dort",
+     "level": "A1",
+     "en": "there",
+     "es": "allí",
+     "fr": "là",
+     "it": "lì"
+    },
+    {
+     "pos": 16,
+     "form": "weiter",
+     "lemma": "weiter",
+     "level": "A2",
+     "en": "on",
+     "es": "adelante",
+     "fr": "plus loin",
+     "it": "oltre"
+    },
+    {
+     "pos": 17,
+     "form": "um",
+     "lemma": "um",
+     "level": "A1",
+     "en": "in order",
+     "es": "para",
+     "fr": "pour",
+     "it": "per"
+    },
+    {
+     "pos": 18,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "dans",
+     "it": "nelle"
+    },
+    {
+     "pos": 19,
+     "form": "ihren",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "their",
+     "es": "sus",
+     "fr": "leurs",
+     "it": "loro"
+    },
+    {
+     "pos": 20,
+     "form": "Städten",
+     "lemma": "Stadt",
+     "level": "A1",
+     "en": "cities",
+     "es": "ciudades",
+     "fr": "villes",
+     "it": "città"
+    },
+    {
+     "pos": 21,
+     "pos_end": 22,
+     "form": "zu lehren",
+     "lemma": "lehren",
+     "level": "B1",
+     "en": "to teach",
+     "es": "a enseñar",
+     "fr": "à enseigner",
+     "it": "a insegnare"
+    },
+    {
+     "pos": 21,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 22,
+     "form": "lehren",
+     "lemma": "lehren",
+     "level": "B1",
+     "en": "teach",
+     "es": "enseñar",
+     "fr": "enseigner",
+     "it": "insegnare"
+    },
+    {
+     "pos": 23,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 24,
+     "pos_end": 25,
+     "form": "zu verkünden",
+     "lemma": "verkünden",
+     "level": "B2",
+     "en": "to proclaim",
+     "es": "a anunciar",
+     "fr": "à annoncer",
+     "it": "a annunciare"
+    },
+    {
+     "pos": 24,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 25,
+     "form": "verkünden",
+     "lemma": "verkünden",
+     "level": "B2",
+     "en": "proclaim",
+     "es": "anunciar",
+     "fr": "annoncer",
+     "it": "annunciare"
+    }
+   ],
+   "2": [
+    {
+     "pos": 0,
+     "form": "Als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "When",
+     "es": "Cuando",
+     "fr": "Quand",
+     "it": "Quando"
+    },
+    {
+     "pos": 1,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 2,
+     "form": "im",
+     "lemma": "im",
+     "level": "A1",
+     "en": "in the",
+     "es": "en la",
+     "fr": "dans la",
+     "it": "nella"
+    },
+    {
+     "pos": 3,
+     "form": "Gefängnis",
+     "lemma": "Gefängnis",
+     "level": "B1",
+     "en": "prison",
+     "es": "cárcel",
+     "fr": "prison",
+     "it": "prigione"
+    },
+    {
+     "pos": 4,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "about",
+     "es": "de",
+     "fr": "de",
+     "it": "di"
+    },
+    {
+     "pos": 5,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "las",
+     "fr": "les",
+     "it": "le"
+    },
+    {
+     "pos": 6,
+     "form": "Taten",
+     "lemma": "Tat",
+     "level": "B1",
+     "en": "deeds",
+     "es": "obras",
+     "fr": "œuvres",
+     "it": "opere"
+    },
+    {
+     "pos": 7,
+     "form": "des",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "del",
+     "fr": "du",
+     "it": "del"
+    },
+    {
+     "pos": 8,
+     "form": "Christus",
+     "lemma": "Christus",
+     "level": "A1",
+     "en": "Christ",
+     "es": "Cristo",
+     "fr": "Christ",
+     "it": "Cristo"
+    },
+    {
+     "pos": 9,
+     "form": "hörte",
+     "lemma": "hören",
+     "level": "A1",
+     "en": "heard",
+     "es": "oyó",
+     "fr": "entendit",
+     "it": "udì"
+    },
+    {
+     "pos": 10,
+     "form": "schickte",
+     "lemma": "schicken",
+     "level": "A2",
+     "en": "sent",
+     "es": "envió",
+     "fr": "envoya",
+     "it": "mandò"
+    },
+    {
+     "pos": 11,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "il",
+     "it": "egli"
+    },
+    {
+     "pos": 12,
+     "form": "zwei",
+     "lemma": "zwei",
+     "level": "A1",
+     "en": "two",
+     "es": "dos",
+     "fr": "deux",
+     "it": "due"
+    },
+    {
+     "pos": 13,
+     "form": "seiner",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "of his",
+     "es": "de sus",
+     "fr": "de ses",
+     "it": "dei suoi"
+    },
+    {
+     "pos": 14,
+     "form": "Jünger",
+     "lemma": "Jünger",
+     "level": "B2",
+     "en": "disciples",
+     "es": "discípulos",
+     "fr": "disciples",
+     "it": "discepoli"
+    },
+    {
+     "pos": 15,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 16,
+     "form": "ihm",
+     "lemma": "er",
+     "level": "A1",
+     "en": "him",
+     "es": "él",
+     "fr": "lui",
+     "it": "lui"
+    }
+   ],
+   "3": [
+    {
+     "pos": 0,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 1,
+     "parts": [
+      1,
+      3
+     ],
+     "form": "ließ fragen",
+     "lemma": "fragen lassen",
+     "level": "B2",
+     "en": "had him ask",
+     "es": "mandó preguntar",
+     "fr": "fit demander",
+     "it": "fece chiedere"
+    },
+    {
+     "pos": 1,
+     "form": "ließ",
+     "lemma": "lassen",
+     "level": "A2",
+     "en": "had",
+     "es": "hizo",
+     "fr": "fit",
+     "it": "fece"
+    },
+    {
+     "pos": 2,
+     "form": "ihn",
+     "lemma": "er",
+     "level": "A1",
+     "en": "him",
+     "es": "lo",
+     "fr": "le",
+     "it": "lo"
+    },
+    {
+     "pos": 3,
+     "form": "fragen",
+     "lemma": "fragen",
+     "level": "A1",
+     "en": "ask",
+     "es": "preguntar",
+     "fr": "demander",
+     "it": "chiedere"
+    },
+    {
+     "pos": 4,
+     "form": "Bist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "Are",
+     "es": "Eres",
+     "fr": "Es",
+     "it": "Sei"
+    },
+    {
+     "pos": 5,
+     "form": "du",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "tú",
+     "fr": "tu",
+     "it": "tu"
+    },
+    {
+     "pos": 6,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "the one",
+     "es": "el",
+     "fr": "celui",
+     "it": "colui"
+    },
+    {
+     "pos": 7,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 8,
+     "form": "kommen",
+     "lemma": "kommen",
+     "level": "A1",
+     "en": "come",
+     "es": "venir",
+     "fr": "venir",
+     "it": "venire"
+    },
+    {
+     "pos": 9,
+     "form": "soll",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "shall",
+     "es": "ha de",
+     "fr": "doit",
+     "it": "deve"
+    },
+    {
+     "pos": 10,
+     "form": "oder",
+     "lemma": "oder",
+     "level": "A1",
+     "en": "or",
+     "es": "o",
+     "fr": "ou",
+     "it": "o"
+    },
+    {
+     "pos": 11,
+     "form": "sollen",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "shall",
+     "es": "hemos de",
+     "fr": "devons",
+     "it": "dobbiamo"
+    },
+    {
+     "pos": 12,
+     "form": "wir",
+     "lemma": "wir",
+     "level": "A1",
+     "en": "we",
+     "es": "nosotros",
+     "fr": "nous",
+     "it": "noi"
+    },
+    {
+     "pos": 13,
+     "parts": [
+      13,
+      16
+     ],
+     "form": "auf warten",
+     "lemma": "warten auf",
+     "level": "A2",
+     "en": "wait for",
+     "es": "esperar a",
+     "fr": "attendre",
+     "it": "aspettare"
+    },
+    {
+     "pos": 13,
+     "form": "auf",
+     "lemma": "auf",
+     "level": "A1",
+     "en": "for",
+     "es": "a",
+     "fr": "après",
+     "it": "per"
+    },
+    {
+     "pos": 14,
+     "form": "einen",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "an",
+     "es": "un",
+     "fr": "un",
+     "it": "un"
+    },
+    {
+     "pos": 15,
+     "form": "anderen",
+     "lemma": "ander",
+     "level": "A1",
+     "en": "other",
+     "es": "otro",
+     "fr": "autre",
+     "it": "altro"
+    },
+    {
+     "pos": 16,
+     "form": "warten",
+     "lemma": "warten",
+     "level": "A1",
+     "en": "wait",
+     "es": "esperar",
+     "fr": "attendre",
+     "it": "aspettare"
+    }
+   ],
+   "4": [
+    {
+     "pos": 0,
+     "form": "Jesus",
+     "lemma": "Jesus",
+     "level": "A1",
+     "en": "Jesus",
+     "es": "Jesús",
+     "fr": "Jésus",
+     "it": "Gesù"
+    },
+    {
+     "pos": 1,
+     "form": "antwortete",
+     "lemma": "antworten",
+     "level": "A1",
+     "en": "answered",
+     "es": "respondió",
+     "fr": "répondit",
+     "it": "rispose"
+    },
+    {
+     "pos": 2,
+     "form": "ihnen",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "them",
+     "es": "les",
+     "fr": "leur",
+     "it": "loro"
+    },
+    {
+     "pos": 3,
+     "form": "Geht",
+     "lemma": "gehen",
+     "level": "A1",
+     "en": "Go",
+     "es": "Id",
+     "fr": "Allez",
+     "it": "Andate"
+    },
+    {
+     "pos": 4,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 5,
+     "form": "berichtet",
+     "lemma": "berichten",
+     "level": "B1",
+     "en": "tell",
+     "es": "contad",
+     "fr": "rapportez",
+     "it": "riferite"
+    },
+    {
+     "pos": 6,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 7,
+     "form": "was",
+     "lemma": "was",
+     "level": "A1",
+     "en": "what",
+     "es": "lo que",
+     "fr": "ce que",
+     "it": "ciò che"
+    },
+    {
+     "pos": 8,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 9,
+     "form": "hört",
+     "lemma": "hören",
+     "level": "A1",
+     "en": "hear",
+     "es": "oís",
+     "fr": "entendez",
+     "it": "udite"
+    },
+    {
+     "pos": 10,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 11,
+     "form": "seht",
+     "lemma": "sehen",
+     "level": "A1",
+     "en": "see",
+     "es": "veis",
+     "fr": "voyez",
+     "it": "vedete"
+    }
+   ],
+   "5": [
+    {
+     "pos": 0,
+     "form": "Blinde",
+     "lemma": "Blinder",
+     "level": "B1",
+     "en": "blind men",
+     "es": "ciegos",
+     "fr": "aveugles",
+     "it": "ciechi"
+    },
+    {
+     "pos": 1,
+     "form": "sehen",
+     "lemma": "sehen",
+     "level": "A1",
+     "en": "see",
+     "es": "ven",
+     "fr": "voient",
+     "it": "vedono"
+    },
+    {
+     "pos": 2,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 3,
+     "form": "Lahme",
+     "lemma": "Lahmer",
+     "level": "B2",
+     "en": "lame people",
+     "es": "cojos",
+     "fr": "boiteux",
+     "it": "zoppi"
+    },
+    {
+     "pos": 4,
+     "form": "gehen",
+     "lemma": "gehen",
+     "level": "A1",
+     "en": "walk",
+     "es": "andan",
+     "fr": "marchent",
+     "it": "camminano"
+    },
+    {
+     "pos": 5,
+     "form": "Aussätzige",
+     "lemma": "Aussätziger",
+     "level": "C1",
+     "en": "lepers",
+     "es": "leprosos",
+     "fr": "lépreux",
+     "it": "lebbrosi"
+    },
+    {
+     "pos": 6,
+     "pos_end": 7,
+     "form": "werden rein",
+     "lemma": "rein werden",
+     "level": "B1",
+     "en": "are cleansed",
+     "es": "quedan limpios",
+     "fr": "sont purifiés",
+     "it": "sono purificati"
+    },
+    {
+     "pos": 6,
+     "form": "werden",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "are",
+     "es": "son",
+     "fr": "sont",
+     "it": "sono"
+    },
+    {
+     "pos": 7,
+     "form": "rein",
+     "lemma": "rein",
+     "level": "B1",
+     "en": "clean",
+     "es": "limpios",
+     "fr": "purs",
+     "it": "puri"
+    },
+    {
+     "pos": 8,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 9,
+     "form": "Taube",
+     "lemma": "Tauber",
+     "level": "B2",
+     "en": "deaf people",
+     "es": "sordos",
+     "fr": "sourds",
+     "it": "sordi"
+    },
+    {
+     "pos": 10,
+     "form": "hören",
+     "lemma": "hören",
+     "level": "A1",
+     "en": "hear",
+     "es": "oyen",
+     "fr": "entendent",
+     "it": "odono"
+    },
+    {
+     "pos": 11,
+     "form": "Tote",
+     "lemma": "Toter",
+     "level": "A2",
+     "en": "the dead",
+     "es": "muertos",
+     "fr": "morts",
+     "it": "morti"
+    },
+    {
+     "pos": 12,
+     "form": "werden",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "are",
+     "es": "son",
+     "fr": "sont",
+     "it": "sono"
+    },
+    {
+     "pos": 13,
+     "form": "auferweckt",
+     "lemma": "auferwecken",
+     "level": "B2",
+     "en": "raised",
+     "es": "resucitados",
+     "fr": "ressuscités",
+     "it": "risuscitati"
+    },
+    {
+     "pos": 14,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 15,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "to the",
+     "es": "a los",
+     "fr": "aux",
+     "it": "ai"
+    },
+    {
+     "pos": 16,
+     "form": "Armen",
+     "lemma": "arm",
+     "level": "A2",
+     "en": "poor",
+     "es": "pobres",
+     "fr": "pauvres",
+     "it": "poveri"
+    },
+    {
+     "pos": 17,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 18,
+     "pos_end": 20,
+     "form": "die gute Botschaft",
+     "lemma": "gute Botschaft",
+     "level": "B2",
+     "en": "the gospel",
+     "es": "el evangelio",
+     "fr": "l'évangile",
+     "it": "l'evangelo"
+    },
+    {
+     "pos": 18,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 19,
+     "form": "gute",
+     "lemma": "gut",
+     "level": "A1",
+     "en": "good",
+     "es": "buena",
+     "fr": "bonne",
+     "it": "buona"
+    },
+    {
+     "pos": 20,
+     "form": "Botschaft",
+     "lemma": "Botschaft",
+     "level": "B2",
+     "en": "news",
+     "es": "noticia",
+     "fr": "nouvelle",
+     "it": "notizia"
+    },
+    {
+     "pos": 21,
+     "form": "verkündet",
+     "lemma": "verkünden",
+     "level": "B2",
+     "en": "proclaimed",
+     "es": "anunciada",
+     "fr": "annoncée",
+     "it": "annunciata"
+    }
+   ],
+   "6": [
+    {
+     "pos": 0,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 1,
+     "form": "glücklich",
+     "lemma": "glücklich",
+     "level": "A2",
+     "en": "happy",
+     "es": "feliz",
+     "fr": "heureux",
+     "it": "felice"
+    },
+    {
+     "pos": 2,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 3,
+     "form": "wer",
+     "lemma": "wer",
+     "level": "A1",
+     "en": "whoever",
+     "es": "el que",
+     "fr": "celui qui",
+     "it": "chi"
+    },
+    {
+     "pos": 4,
+     "form": "an",
+     "lemma": "an",
+     "level": "A1",
+     "en": "at",
+     "es": "de",
+     "fr": "à",
+     "it": "di"
+    },
+    {
+     "pos": 5,
+     "form": "mir",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "me",
+     "es": "mí",
+     "fr": "moi",
+     "it": "me"
+    },
+    {
+     "pos": 6,
+     "form": "keinen",
+     "lemma": "kein",
+     "level": "A1",
+     "en": "no",
+     "es": "ningún",
+     "fr": "aucun",
+     "it": "nessun"
+    },
+    {
+     "pos": 7,
+     "pos_end": 8,
+     "form": "Anstoß nimmt",
+     "lemma": "Anstoß nehmen",
+     "level": "B2",
+     "en": "takes offense",
+     "es": "se escandaliza",
+     "fr": "se scandalise",
+     "it": "si scandalizza"
+    },
+    {
+     "pos": 7,
+     "form": "Anstoß",
+     "lemma": "Anstoß",
+     "level": "C1",
+     "en": "offense",
+     "es": "tropiezo",
+     "fr": "scandale",
+     "it": "scandalo"
+    },
+    {
+     "pos": 8,
+     "form": "nimmt",
+     "lemma": "nehmen",
+     "level": "A1",
+     "en": "takes",
+     "es": "toma",
+     "fr": "prend",
+     "it": "prende"
+    }
+   ],
+   "7": [
+    {
+     "pos": 0,
+     "form": "Als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "When",
+     "es": "Cuando",
+     "fr": "Quand",
+     "it": "Quando"
+    },
+    {
+     "pos": 1,
+     "form": "sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "they",
+     "es": "ellos",
+     "fr": "ils",
+     "it": "essi"
+    },
+    {
+     "pos": 2,
+     "form": "weggingen",
+     "lemma": "weggehen",
+     "level": "A2",
+     "en": "went away",
+     "es": "se fueron",
+     "fr": "s'en allèrent",
+     "it": "se ne andarono"
+    },
+    {
+     "pos": 3,
+     "parts": [
+      3,
+      5
+     ],
+     "form": "fing an",
+     "lemma": "anfangen",
+     "level": "A2",
+     "en": "began",
+     "es": "comenzó",
+     "fr": "commença",
+     "it": "cominciò"
+    },
+    {
+     "pos": 3,
+     "form": "fing",
+     "lemma": "fangen",
+     "level": "A2",
+     "en": "started",
+     "es": "empezó",
+     "fr": "se mit",
+     "it": "iniziò"
+    },
+    {
+     "pos": 4,
+     "form": "Jesus",
+     "lemma": "Jesus",
+     "level": "A1",
+     "en": "Jesus",
+     "es": "Jesús",
+     "fr": "Jésus",
+     "it": "Gesù"
+    },
+    {
+     "pos": 5,
+     "form": "an",
+     "lemma": "an",
+     "level": "A1",
+     "en": "at",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 6,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 7,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 8,
+     "form": "Menge",
+     "lemma": "Menge",
+     "level": "B1",
+     "en": "crowd",
+     "es": "multitud",
+     "fr": "foule",
+     "it": "folla"
+    },
+    {
+     "pos": 9,
+     "form": "über",
+     "lemma": "über",
+     "level": "A2",
+     "en": "about",
+     "es": "sobre",
+     "fr": "au sujet de",
+     "it": "riguardo a"
+    },
+    {
+     "pos": 10,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 11,
+     "pos_end": 12,
+     "form": "zu reden",
+     "lemma": "reden",
+     "level": "B1",
+     "en": "to speak",
+     "es": "a hablar",
+     "fr": "à parler",
+     "it": "a parlare"
+    },
+    {
+     "pos": 11,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 12,
+     "form": "reden",
+     "lemma": "reden",
+     "level": "B1",
+     "en": "speak",
+     "es": "hablar",
+     "fr": "parler",
+     "it": "parlare"
+    },
+    {
+     "pos": 13,
+     "form": "Was",
+     "lemma": "was",
+     "level": "A1",
+     "en": "What",
+     "es": "Qué",
+     "fr": "Que",
+     "it": "Che cosa"
+    },
+    {
+     "pos": 14,
+     "form": "wolltet",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "wanted",
+     "es": "queríais",
+     "fr": "vouliez",
+     "it": "volevate"
+    },
+    {
+     "pos": 15,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 16,
+     "form": "sehen",
+     "lemma": "sehen",
+     "level": "A1",
+     "en": "to see",
+     "es": "ver",
+     "fr": "voir",
+     "it": "vedere"
+    },
+    {
+     "pos": 17,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "when",
+     "es": "cuando",
+     "fr": "quand",
+     "it": "quando"
+    },
+    {
+     "pos": 18,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 19,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "into",
+     "es": "al",
+     "fr": "dans",
+     "it": "nel"
+    },
+    {
+     "pos": 20,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 21,
+     "form": "Wüste",
+     "lemma": "Wüste",
+     "level": "B1",
+     "en": "desert",
+     "es": "desierto",
+     "fr": "désert",
+     "it": "deserto"
+    },
+    {
+     "pos": 22,
+     "form": "hinausgegangen",
+     "lemma": "hinausgehen",
+     "level": "B1",
+     "en": "gone out",
+     "es": "salido",
+     "fr": "sortis",
+     "it": "usciti"
+    },
+    {
+     "pos": 23,
+     "form": "seid",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "have",
+     "es": "habéis",
+     "fr": "êtes",
+     "it": "siete"
+    },
+    {
+     "pos": 24,
+     "form": "Ein",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "A",
+     "es": "Una",
+     "fr": "Un",
+     "it": "Una"
+    },
+    {
+     "pos": 25,
+     "form": "Schilfrohr",
+     "lemma": "Schilfrohr",
+     "level": "C1",
+     "en": "reed",
+     "es": "caña",
+     "fr": "roseau",
+     "it": "canna"
+    },
+    {
+     "pos": 26,
+     "form": "das",
+     "lemma": "der",
+     "level": "A2",
+     "en": "that",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 27,
+     "form": "vom",
+     "lemma": "vom",
+     "level": "A1",
+     "en": "by the",
+     "es": "por el",
+     "fr": "par le",
+     "it": "dal"
+    },
+    {
+     "pos": 28,
+     "form": "Wind",
+     "lemma": "Wind",
+     "level": "A2",
+     "en": "wind",
+     "es": "viento",
+     "fr": "vent",
+     "it": "vento"
+    },
+    {
+     "pos": 29,
+     "pos_end": 31,
+     "form": "hin und her",
+     "lemma": "hin und her",
+     "level": "B1",
+     "en": "back and forth",
+     "es": "de un lado a otro",
+     "fr": "de-ci de-là",
+     "it": "qua e là"
+    },
+    {
+     "pos": 29,
+     "form": "hin",
+     "lemma": "hin",
+     "level": "A2",
+     "en": "there",
+     "es": "allá",
+     "fr": "là",
+     "it": "là"
+    },
+    {
+     "pos": 30,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 31,
+     "form": "her",
+     "lemma": "her",
+     "level": "B2",
+     "en": "back",
+     "es": "acá",
+     "fr": "ici",
+     "it": "qua"
+    },
+    {
+     "pos": 32,
+     "form": "bewegt",
+     "lemma": "bewegen",
+     "level": "B1",
+     "en": "moved",
+     "es": "movida",
+     "fr": "agité",
+     "it": "agitata"
+    },
+    {
+     "pos": 33,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    }
+   ],
+   "8": [
+    {
+     "pos": 0,
+     "form": "Oder",
+     "lemma": "oder",
+     "level": "A1",
+     "en": "Or",
+     "es": "O",
+     "fr": "Ou",
+     "it": "Oppure"
+    },
+    {
+     "pos": 1,
+     "form": "was",
+     "lemma": "was",
+     "level": "A1",
+     "en": "what",
+     "es": "qué",
+     "fr": "que",
+     "it": "che cosa"
+    },
+    {
+     "pos": 2,
+     "form": "wolltet",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "wanted",
+     "es": "queríais",
+     "fr": "vouliez",
+     "it": "volevate"
+    },
+    {
+     "pos": 3,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 4,
+     "form": "sehen",
+     "lemma": "sehen",
+     "level": "A1",
+     "en": "to see",
+     "es": "ver",
+     "fr": "voir",
+     "it": "vedere"
+    },
+    {
+     "pos": 5,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "when",
+     "es": "cuando",
+     "fr": "quand",
+     "it": "quando"
+    },
+    {
+     "pos": 6,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 7,
+     "form": "hinausgegangen",
+     "lemma": "hinausgehen",
+     "level": "B1",
+     "en": "gone out",
+     "es": "salido",
+     "fr": "sortis",
+     "it": "usciti"
+    },
+    {
+     "pos": 8,
+     "form": "seid",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "have",
+     "es": "habéis",
+     "fr": "êtes",
+     "it": "siete"
+    },
+    {
+     "pos": 9,
+     "form": "Einen",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "A",
+     "es": "Un",
+     "fr": "Un",
+     "it": "Un"
+    },
+    {
+     "pos": 10,
+     "form": "Mann",
+     "lemma": "Mann",
+     "level": "A1",
+     "en": "man",
+     "es": "hombre",
+     "fr": "homme",
+     "it": "uomo"
+    },
+    {
+     "pos": 11,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "con",
+     "fr": "en",
+     "it": "con"
+    },
+    {
+     "pos": 12,
+     "form": "feiner",
+     "lemma": "fein",
+     "level": "B2",
+     "en": "fine",
+     "es": "fina",
+     "fr": "fin",
+     "it": "elegante"
+    },
+    {
+     "pos": 13,
+     "form": "Kleidung",
+     "lemma": "Kleidung",
+     "level": "A2",
+     "en": "clothing",
+     "es": "ropa",
+     "fr": "vêtement",
+     "it": "vestito"
+    },
+    {
+     "pos": 14,
+     "form": "Nein",
+     "lemma": "nein",
+     "level": "A1",
+     "en": "No",
+     "es": "No",
+     "fr": "Non",
+     "it": "No"
+    },
+    {
+     "pos": 15,
+     "form": "Leute",
+     "lemma": "Leute",
+     "level": "A2",
+     "en": "people",
+     "es": "gente",
+     "fr": "gens",
+     "it": "gente"
+    },
+    {
+     "pos": 16,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "con",
+     "fr": "en",
+     "it": "con"
+    },
+    {
+     "pos": 17,
+     "form": "feiner",
+     "lemma": "fein",
+     "level": "B2",
+     "en": "fine",
+     "es": "fina",
+     "fr": "fin",
+     "it": "elegante"
+    },
+    {
+     "pos": 18,
+     "form": "Kleidung",
+     "lemma": "Kleidung",
+     "level": "A2",
+     "en": "clothing",
+     "es": "ropa",
+     "fr": "vêtement",
+     "it": "vestito"
+    },
+    {
+     "pos": 19,
+     "form": "findet",
+     "lemma": "finden",
+     "level": "A1",
+     "en": "finds",
+     "es": "encuentra",
+     "fr": "trouve",
+     "it": "trova"
+    },
+    {
+     "pos": 20,
+     "form": "man",
+     "lemma": "man",
+     "level": "A1",
+     "en": "one",
+     "es": "se",
+     "fr": "on",
+     "it": "si"
+    },
+    {
+     "pos": 21,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "dans",
+     "it": "nei"
+    },
+    {
+     "pos": 22,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "los",
+     "fr": "les",
+     "it": "i"
+    },
+    {
+     "pos": 23,
+     "form": "Palästen",
+     "lemma": "Palast",
+     "level": "B2",
+     "en": "palaces",
+     "es": "palacios",
+     "fr": "palais",
+     "it": "palazzi"
+    },
+    {
+     "pos": 24,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "de los",
+     "fr": "des",
+     "it": "dei"
+    },
+    {
+     "pos": 25,
+     "form": "Könige",
+     "lemma": "König",
+     "level": "A2",
+     "en": "kings",
+     "es": "reyes",
+     "fr": "rois",
+     "it": "re"
+    }
+   ],
+   "9": [
+    {
+     "pos": 0,
+     "form": "Oder",
+     "lemma": "oder",
+     "level": "A1",
+     "en": "Or",
+     "es": "O",
+     "fr": "Ou",
+     "it": "Oppure"
+    },
+    {
+     "pos": 1,
+     "form": "was",
+     "lemma": "was",
+     "level": "A1",
+     "en": "what",
+     "es": "qué",
+     "fr": "que",
+     "it": "che cosa"
+    },
+    {
+     "pos": 2,
+     "form": "wolltet",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "wanted",
+     "es": "queríais",
+     "fr": "vouliez",
+     "it": "volevate"
+    },
+    {
+     "pos": 3,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 4,
+     "form": "sehen",
+     "lemma": "sehen",
+     "level": "A1",
+     "en": "to see",
+     "es": "ver",
+     "fr": "voir",
+     "it": "vedere"
+    },
+    {
+     "pos": 5,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "when",
+     "es": "cuando",
+     "fr": "quand",
+     "it": "quando"
+    },
+    {
+     "pos": 6,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 7,
+     "form": "hinausgegangen",
+     "lemma": "hinausgehen",
+     "level": "B1",
+     "en": "gone out",
+     "es": "salido",
+     "fr": "sortis",
+     "it": "usciti"
+    },
+    {
+     "pos": 8,
+     "form": "seid",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "have",
+     "es": "habéis",
+     "fr": "êtes",
+     "it": "siete"
+    },
+    {
+     "pos": 9,
+     "form": "Einen",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "A",
+     "es": "Un",
+     "fr": "Un",
+     "it": "Un"
+    },
+    {
+     "pos": 10,
+     "form": "Propheten",
+     "lemma": "Prophet",
+     "level": "B2",
+     "en": "prophet",
+     "es": "profeta",
+     "fr": "prophète",
+     "it": "profeta"
+    },
+    {
+     "pos": 11,
+     "form": "Ja",
+     "lemma": "ja",
+     "level": "A1",
+     "en": "Yes",
+     "es": "Sí",
+     "fr": "Oui",
+     "it": "Sì"
+    },
+    {
+     "pos": 12,
+     "form": "ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "yo",
+     "fr": "je",
+     "it": "io"
+    },
+    {
+     "pos": 13,
+     "form": "sage",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "say",
+     "es": "digo",
+     "fr": "dis",
+     "it": "dico"
+    },
+    {
+     "pos": 14,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 15,
+     "form": "Er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "He",
+     "es": "Él",
+     "fr": "Il",
+     "it": "Egli"
+    },
+    {
+     "pos": 16,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 17,
+     "form": "sogar",
+     "lemma": "sogar",
+     "level": "B1",
+     "en": "even",
+     "es": "incluso",
+     "fr": "même",
+     "it": "perfino"
+    },
+    {
+     "pos": 18,
+     "form": "mehr",
+     "lemma": "mehr",
+     "level": "A1",
+     "en": "more",
+     "es": "más",
+     "fr": "plus",
+     "it": "più"
+    },
+    {
+     "pos": 19,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "than",
+     "es": "que",
+     "fr": "que",
+     "it": "di"
+    },
+    {
+     "pos": 20,
+     "form": "ein",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "a",
+     "es": "un",
+     "fr": "un",
+     "it": "un"
+    },
+    {
+     "pos": 21,
+     "form": "Prophet",
+     "lemma": "Prophet",
+     "level": "B2",
+     "en": "prophet",
+     "es": "profeta",
+     "fr": "prophète",
+     "it": "profeta"
+    }
+   ],
+   "10": [
+    {
+     "pos": 0,
+     "form": "Er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "He",
+     "es": "Él",
+     "fr": "Il",
+     "it": "Egli"
+    },
+    {
+     "pos": 1,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 2,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "the one",
+     "es": "aquel",
+     "fr": "celui",
+     "it": "colui"
+    },
+    {
+     "pos": 3,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "about",
+     "es": "de",
+     "fr": "de",
+     "it": "di"
+    },
+    {
+     "pos": 4,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A2",
+     "en": "whom",
+     "es": "quien",
+     "fr": "qui",
+     "it": "cui"
+    },
+    {
+     "pos": 5,
+     "pos_end": 6,
+     "form": "geschrieben steht",
+     "lemma": "geschrieben stehen",
+     "level": "B1",
+     "en": "it is written",
+     "es": "está escrito",
+     "fr": "il est écrit",
+     "it": "sta scritto"
+    },
+    {
+     "pos": 5,
+     "form": "geschrieben",
+     "lemma": "schreiben",
+     "level": "A1",
+     "en": "written",
+     "es": "escrito",
+     "fr": "écrit",
+     "it": "scritto"
+    },
+    {
+     "pos": 6,
+     "form": "steht",
+     "lemma": "stehen",
+     "level": "A1",
+     "en": "stands",
+     "es": "está",
+     "fr": "est",
+     "it": "sta"
+    },
+    {
+     "pos": 7,
+     "form": "Ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "Yo",
+     "fr": "Je",
+     "it": "Io"
+    },
+    {
+     "pos": 8,
+     "form": "sende",
+     "lemma": "senden",
+     "level": "B1",
+     "en": "send",
+     "es": "envío",
+     "fr": "envoie",
+     "it": "mando"
+    },
+    {
+     "pos": 9,
+     "form": "meinen",
+     "lemma": "mein",
+     "level": "A1",
+     "en": "my",
+     "es": "mi",
+     "fr": "mon",
+     "it": "il mio"
+    },
+    {
+     "pos": 10,
+     "form": "Boten",
+     "lemma": "Bote",
+     "level": "B2",
+     "en": "messenger",
+     "es": "mensajero",
+     "fr": "messager",
+     "it": "messaggero"
+    },
+    {
+     "pos": 11,
+     "pos_end": 13,
+     "form": "vor dir her",
+     "lemma": "vor jemandem her",
+     "level": "B2",
+     "en": "ahead of you",
+     "es": "delante de ti",
+     "fr": "devant toi",
+     "it": "davanti a te"
+    },
+    {
+     "pos": 11,
+     "form": "vor",
+     "lemma": "vor",
+     "level": "A2",
+     "en": "before",
+     "es": "delante de",
+     "fr": "devant",
+     "it": "davanti a"
+    },
+    {
+     "pos": 12,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "ti",
+     "fr": "toi",
+     "it": "te"
+    },
+    {
+     "pos": 13,
+     "form": "her",
+     "lemma": "her",
+     "level": "B2",
+     "en": "ahead",
+     "es": "hacia delante",
+     "fr": "en avant",
+     "it": "avanti"
+    },
+    {
+     "pos": 14,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 15,
+     "form": "deinen",
+     "lemma": "dein",
+     "level": "A1",
+     "en": "your",
+     "es": "tu",
+     "fr": "ton",
+     "it": "la tua"
+    },
+    {
+     "pos": 16,
+     "form": "Weg",
+     "lemma": "Weg",
+     "level": "A2",
+     "en": "road",
+     "es": "camino",
+     "fr": "chemin",
+     "it": "via"
+    },
+    {
+     "pos": 17,
+     "form": "vor",
+     "lemma": "vor",
+     "level": "A2",
+     "en": "before",
+     "es": "delante de",
+     "fr": "devant",
+     "it": "davanti a"
+    },
+    {
+     "pos": 18,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "ti",
+     "fr": "toi",
+     "it": "te"
+    },
+    {
+     "pos": 19,
+     "form": "bereiten",
+     "lemma": "bereiten",
+     "level": "B1",
+     "en": "prepare",
+     "es": "preparar",
+     "fr": "préparer",
+     "it": "preparare"
+    },
+    {
+     "pos": 20,
+     "form": "soll",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "shall",
+     "es": "ha de",
+     "fr": "doit",
+     "it": "deve"
+    }
+   ],
+   "11": [
+    {
+     "pos": 0,
+     "form": "Ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "Yo",
+     "fr": "Je",
+     "it": "Io"
+    },
+    {
+     "pos": 1,
+     "form": "versichere",
+     "lemma": "versichern",
+     "level": "B2",
+     "en": "assure",
+     "es": "aseguro",
+     "fr": "assure",
+     "it": "assicuro"
+    },
+    {
+     "pos": 2,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 3,
+     "form": "Unter",
+     "lemma": "unter",
+     "level": "A2",
+     "en": "Among",
+     "es": "Entre",
+     "fr": "Parmi",
+     "it": "Tra"
+    },
+    {
+     "pos": 4,
+     "form": "allen",
+     "lemma": "all",
+     "level": "A1",
+     "en": "all",
+     "es": "todos",
+     "fr": "tous",
+     "it": "tutti"
+    },
+    {
+     "pos": 5,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 6,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "of",
+     "es": "de",
+     "fr": "de",
+     "it": "da"
+    },
+    {
+     "pos": 7,
+     "form": "Frauen",
+     "lemma": "Frau",
+     "level": "A1",
+     "en": "women",
+     "es": "mujeres",
+     "fr": "femmes",
+     "it": "donne"
+    },
+    {
+     "pos": 8,
+     "pos_end": 9,
+     "form": "geboren sind",
+     "lemma": "geboren werden",
+     "level": "A2",
+     "en": "were born",
+     "es": "han nacido",
+     "fr": "sont nés",
+     "it": "sono nati"
+    },
+    {
+     "pos": 8,
+     "form": "geboren",
+     "lemma": "gebären",
+     "level": "A2",
+     "en": "born",
+     "es": "nacidos",
+     "fr": "nés",
+     "it": "nati"
+    },
+    {
+     "pos": 9,
+     "form": "sind",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "are",
+     "es": "son",
+     "fr": "sont",
+     "it": "sono"
+    },
+    {
+     "pos": 10,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "has",
+     "es": "ha",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 11,
+     "form": "keiner",
+     "lemma": "keiner",
+     "level": "A2",
+     "en": "no one",
+     "es": "ninguno",
+     "fr": "aucun",
+     "it": "nessuno"
+    },
+    {
+     "pos": 12,
+     "form": "aufgetreten",
+     "lemma": "auftreten",
+     "level": "B2",
+     "en": "appeared",
+     "es": "aparecido",
+     "fr": "paru",
+     "it": "comparso"
+    },
+    {
+     "pos": 13,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 14,
+     "form": "größer",
+     "lemma": "groß",
+     "level": "A1",
+     "en": "greater",
+     "es": "mayor",
+     "fr": "plus grand",
+     "it": "più grande"
+    },
+    {
+     "pos": 15,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 16,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "than",
+     "es": "que",
+     "fr": "que",
+     "it": "di"
+    },
+    {
+     "pos": 17,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 18,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 19,
+     "form": "Täufer",
+     "lemma": "Täufer",
+     "level": "C1",
+     "en": "Baptist",
+     "es": "Bautista",
+     "fr": "Baptiste",
+     "it": "Battista"
+    },
+    {
+     "pos": 20,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 21,
+     "form": "doch",
+     "lemma": "doch",
+     "level": "A2",
+     "en": "yet",
+     "es": "sin embargo",
+     "fr": "pourtant",
+     "it": "eppure"
+    },
+    {
+     "pos": 22,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 23,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 24,
+     "form": "Kleinste",
+     "lemma": "klein",
+     "level": "A1",
+     "en": "smallest",
+     "es": "más pequeño",
+     "fr": "plus petit",
+     "it": "più piccolo"
+    },
+    {
+     "pos": 25,
+     "form": "im",
+     "lemma": "im",
+     "level": "A1",
+     "en": "in the",
+     "es": "en el",
+     "fr": "dans le",
+     "it": "nel"
+    },
+    {
+     "pos": 26,
+     "form": "Himmelreich",
+     "lemma": "Himmelreich",
+     "level": "B2",
+     "en": "kingdom of heaven",
+     "es": "reino de los cielos",
+     "fr": "royaume des cieux",
+     "it": "regno dei cieli"
+    },
+    {
+     "pos": 27,
+     "form": "größer",
+     "lemma": "groß",
+     "level": "A1",
+     "en": "greater",
+     "es": "mayor",
+     "fr": "plus grand",
+     "it": "più grande"
+    },
+    {
+     "pos": 28,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "than",
+     "es": "que",
+     "fr": "que",
+     "it": "di"
+    },
+    {
+     "pos": 29,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "lui",
+     "it": "lui"
+    }
+   ],
+   "12": [
+    {
+     "pos": 0,
+     "form": "Seit",
+     "lemma": "seit",
+     "level": "A2",
+     "en": "Since",
+     "es": "Desde",
+     "fr": "Depuis",
+     "it": "Da"
+    },
+    {
+     "pos": 1,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "los",
+     "fr": "les",
+     "it": "i"
+    },
+    {
+     "pos": 2,
+     "form": "Tagen",
+     "lemma": "Tag",
+     "level": "A1",
+     "en": "days",
+     "es": "días",
+     "fr": "jours",
+     "it": "giorni"
+    },
+    {
+     "pos": 3,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 4,
+     "form": "des",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 5,
+     "form": "Täufers",
+     "lemma": "Täufer",
+     "level": "C1",
+     "en": "Baptist",
+     "es": "Bautista",
+     "fr": "Baptiste",
+     "it": "Battista"
+    },
+    {
+     "pos": 6,
+     "form": "bis",
+     "lemma": "bis",
+     "level": "A1",
+     "en": "until",
+     "es": "hasta",
+     "fr": "jusqu'à",
+     "it": "fino a"
+    },
+    {
+     "pos": 7,
+     "form": "heute",
+     "lemma": "heute",
+     "level": "A1",
+     "en": "today",
+     "es": "hoy",
+     "fr": "aujourd'hui",
+     "it": "oggi"
+    },
+    {
+     "pos": 8,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 9,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A1",
+     "en": "to the",
+     "es": "al",
+     "fr": "au",
+     "it": "al"
+    },
+    {
+     "pos": 10,
+     "form": "Himmelreich",
+     "lemma": "Himmelreich",
+     "level": "B2",
+     "en": "kingdom of heaven",
+     "es": "reino de los cielos",
+     "fr": "royaume des cieux",
+     "it": "regno dei cieli"
+    },
+    {
+     "pos": 11,
+     "pos_end": 12,
+     "form": "Gewalt angetan",
+     "lemma": "Gewalt antun",
+     "level": "B2",
+     "en": "violence is done",
+     "es": "se hace violencia",
+     "fr": "on fait violence",
+     "it": "si fa violenza"
+    },
+    {
+     "pos": 11,
+     "form": "Gewalt",
+     "lemma": "Gewalt",
+     "level": "B2",
+     "en": "violence",
+     "es": "violencia",
+     "fr": "violence",
+     "it": "violenza"
+    },
+    {
+     "pos": 12,
+     "form": "angetan",
+     "lemma": "antun",
+     "level": "C1",
+     "en": "done",
+     "es": "hecha",
+     "fr": "faite",
+     "it": "fatta"
+    },
+    {
+     "pos": 13,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 14,
+     "form": "Gewalttätige",
+     "lemma": "Gewalttätiger",
+     "level": "C1",
+     "en": "violent people",
+     "es": "violentos",
+     "fr": "violents",
+     "it": "violenti"
+    },
+    {
+     "pos": 15,
+     "parts": [
+      15,
+      17,
+      18
+     ],
+     "form": "reißen an sich",
+     "lemma": "an sich reißen",
+     "level": "C1",
+     "en": "seize it",
+     "es": "se apoderan de él",
+     "fr": "s'en emparent",
+     "it": "se ne impadroniscono"
+    },
+    {
+     "pos": 15,
+     "form": "reißen",
+     "lemma": "reißen",
+     "level": "B2",
+     "en": "tear",
+     "es": "arrebatan",
+     "fr": "arrachent",
+     "it": "strappano"
+    },
+    {
+     "pos": 16,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "lo",
+     "fr": "le",
+     "it": "lo"
+    },
+    {
+     "pos": 17,
+     "form": "an",
+     "lemma": "an",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 18,
+     "form": "sich",
+     "lemma": "sich",
+     "level": "A1",
+     "en": "themselves",
+     "es": "sí",
+     "fr": "eux",
+     "it": "sé"
+    }
+   ],
+   "13": [
+    {
+     "pos": 0,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 1,
+     "form": "alle",
+     "lemma": "all",
+     "level": "A1",
+     "en": "all",
+     "es": "todos",
+     "fr": "tous",
+     "it": "tutti"
+    },
+    {
+     "pos": 2,
+     "form": "Propheten",
+     "lemma": "Prophet",
+     "level": "B2",
+     "en": "prophets",
+     "es": "profetas",
+     "fr": "prophètes",
+     "it": "profeti"
+    },
+    {
+     "pos": 3,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 4,
+     "form": "das",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 5,
+     "form": "Gesetz",
+     "lemma": "Gesetz",
+     "level": "B1",
+     "en": "law",
+     "es": "ley",
+     "fr": "loi",
+     "it": "legge"
+    },
+    {
+     "pos": 6,
+     "form": "haben",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "han",
+     "fr": "ont",
+     "it": "hanno"
+    },
+    {
+     "pos": 7,
+     "form": "bis",
+     "lemma": "bis",
+     "level": "A1",
+     "en": "until",
+     "es": "hasta",
+     "fr": "jusqu'à",
+     "it": "fino a"
+    },
+    {
+     "pos": 8,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 9,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 10,
+     "form": "geweissagt",
+     "lemma": "weissagen",
+     "level": "C1",
+     "en": "prophesied",
+     "es": "profetizado",
+     "fr": "prophétisé",
+     "it": "profetizzato"
+    }
+   ],
+   "14": [
+    {
+     "pos": 0,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 1,
+     "form": "wenn",
+     "lemma": "wenn",
+     "level": "A1",
+     "en": "if",
+     "es": "si",
+     "fr": "si",
+     "it": "se"
+    },
+    {
+     "pos": 2,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 3,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "lo",
+     "fr": "le",
+     "it": "lo"
+    },
+    {
+     "pos": 4,
+     "form": "annehmen",
+     "lemma": "annehmen",
+     "level": "B1",
+     "en": "accept",
+     "es": "aceptar",
+     "fr": "accepter",
+     "it": "accettare"
+    },
+    {
+     "pos": 5,
+     "form": "wollt",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "want",
+     "es": "queréis",
+     "fr": "voulez",
+     "it": "volete"
+    },
+    {
+     "pos": 6,
+     "form": "Er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "He",
+     "es": "Él",
+     "fr": "Il",
+     "it": "Egli"
+    },
+    {
+     "pos": 7,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 8,
+     "form": "Elia",
+     "lemma": "Elia",
+     "level": "A1",
+     "en": "Elijah",
+     "es": "Elías",
+     "fr": "Élie",
+     "it": "Elia"
+    },
+    {
+     "pos": 9,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 10,
+     "form": "kommen",
+     "lemma": "kommen",
+     "level": "A1",
+     "en": "come",
+     "es": "venir",
+     "fr": "venir",
+     "it": "venire"
+    },
+    {
+     "pos": 11,
+     "form": "soll",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "shall",
+     "es": "ha de",
+     "fr": "doit",
+     "it": "deve"
+    }
+   ],
+   "15": [
+    {
+     "pos": 0,
+     "form": "Wer",
+     "lemma": "wer",
+     "level": "A1",
+     "en": "Whoever",
+     "es": "El que",
+     "fr": "Celui qui",
+     "it": "Chi"
+    },
+    {
+     "pos": 1,
+     "form": "Ohren",
+     "lemma": "Ohr",
+     "level": "A1",
+     "en": "ears",
+     "es": "oídos",
+     "fr": "oreilles",
+     "it": "orecchie"
+    },
+    {
+     "pos": 2,
+     "form": "hat",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "has",
+     "es": "tiene",
+     "fr": "a",
+     "it": "ha"
+    },
+    {
+     "pos": 3,
+     "form": "der",
+     "lemma": "der",
+     "level": "A2",
+     "en": "he",
+     "es": "ese",
+     "fr": "celui-là",
+     "it": "quello"
+    },
+    {
+     "pos": 4,
+     "form": "soll",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "should",
+     "es": "debe",
+     "fr": "doit",
+     "it": "deve"
+    },
+    {
+     "pos": 5,
+     "form": "hören",
+     "lemma": "hören",
+     "level": "A1",
+     "en": "hear",
+     "es": "oír",
+     "fr": "entendre",
+     "it": "ascoltare"
+    }
+   ],
+   "16": [
+    {
+     "pos": 0,
+     "form": "Womit",
+     "lemma": "womit",
+     "level": "B1",
+     "en": "With what",
+     "es": "Con qué",
+     "fr": "Avec quoi",
+     "it": "Con che cosa"
+    },
+    {
+     "pos": 1,
+     "form": "soll",
+     "lemma": "sollen",
+     "level": "A2",
+     "en": "shall",
+     "es": "he de",
+     "fr": "dois",
+     "it": "devo"
+    },
+    {
+     "pos": 2,
+     "form": "ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "yo",
+     "fr": "je",
+     "it": "io"
+    },
+    {
+     "pos": 3,
+     "form": "diese",
+     "lemma": "dieser",
+     "level": "A1",
+     "en": "this",
+     "es": "esta",
+     "fr": "cette",
+     "it": "questa"
+    },
+    {
+     "pos": 4,
+     "form": "Generation",
+     "lemma": "Generation",
+     "level": "B1",
+     "en": "generation",
+     "es": "generación",
+     "fr": "génération",
+     "it": "generazione"
+    },
+    {
+     "pos": 5,
+     "form": "vergleichen",
+     "lemma": "vergleichen",
+     "level": "B1",
+     "en": "compare",
+     "es": "comparar",
+     "fr": "comparer",
+     "it": "paragonare"
+    },
+    {
+     "pos": 6,
+     "form": "Sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "It",
+     "es": "Es",
+     "fr": "Elle",
+     "it": "Essa"
+    },
+    {
+     "pos": 7,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 8,
+     "form": "wie",
+     "lemma": "wie",
+     "level": "A1",
+     "en": "like",
+     "es": "como",
+     "fr": "comme",
+     "it": "come"
+    },
+    {
+     "pos": 9,
+     "form": "Kinder",
+     "lemma": "Kind",
+     "level": "A1",
+     "en": "children",
+     "es": "niños",
+     "fr": "enfants",
+     "it": "bambini"
+    },
+    {
+     "pos": 10,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 11,
+     "form": "auf",
+     "lemma": "auf",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "sur",
+     "it": "in"
+    },
+    {
+     "pos": 12,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 13,
+     "form": "Marktplatz",
+     "lemma": "Marktplatz",
+     "level": "B1",
+     "en": "marketplace",
+     "es": "plaza",
+     "fr": "place",
+     "it": "piazza"
+    },
+    {
+     "pos": 14,
+     "form": "sitzen",
+     "lemma": "sitzen",
+     "level": "A1",
+     "en": "are sitting",
+     "es": "están sentados",
+     "fr": "sont assis",
+     "it": "stanno seduti"
+    },
+    {
+     "pos": 15,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 16,
+     "form": "ihren",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "their",
+     "es": "a sus",
+     "fr": "à leurs",
+     "it": "ai loro"
+    },
+    {
+     "pos": 17,
+     "form": "Gefährten",
+     "lemma": "Gefährte",
+     "level": "B2",
+     "en": "companions",
+     "es": "compañeros",
+     "fr": "compagnons",
+     "it": "compagni"
+    },
+    {
+     "pos": 18,
+     "form": "zurufen",
+     "lemma": "zurufen",
+     "level": "B2",
+     "en": "call out",
+     "es": "gritan",
+     "fr": "crient",
+     "it": "gridano"
+    }
+   ],
+   "17": [
+    {
+     "pos": 0,
+     "form": "Wir",
+     "lemma": "wir",
+     "level": "A1",
+     "en": "We",
+     "es": "Nosotros",
+     "fr": "Nous",
+     "it": "Noi"
+    },
+    {
+     "pos": 1,
+     "form": "haben",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "hemos",
+     "fr": "avons",
+     "it": "abbiamo"
+    },
+    {
+     "pos": 2,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 3,
+     "pos_end": 6,
+     "form": "auf der Flöte gespielt",
+     "lemma": "auf der Flöte spielen",
+     "level": "B1",
+     "en": "played the flute",
+     "es": "tocado la flauta",
+     "fr": "joué de la flûte",
+     "it": "suonato il flauto"
+    },
+    {
+     "pos": 3,
+     "form": "auf",
+     "lemma": "auf",
+     "level": "A1",
+     "en": "on",
+     "es": "con",
+     "fr": "de",
+     "it": "con"
+    },
+    {
+     "pos": 4,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "il"
+    },
+    {
+     "pos": 5,
+     "form": "Flöte",
+     "lemma": "Flöte",
+     "level": "B1",
+     "en": "flute",
+     "es": "flauta",
+     "fr": "flûte",
+     "it": "flauto"
+    },
+    {
+     "pos": 6,
+     "form": "gespielt",
+     "lemma": "spielen",
+     "level": "A1",
+     "en": "played",
+     "es": "tocado",
+     "fr": "joué",
+     "it": "suonato"
+    },
+    {
+     "pos": 7,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 8,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 9,
+     "form": "habt",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "habéis",
+     "fr": "avez",
+     "it": "avete"
+    },
+    {
+     "pos": 10,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 11,
+     "form": "getanzt",
+     "lemma": "tanzen",
+     "level": "A2",
+     "en": "danced",
+     "es": "bailado",
+     "fr": "dansé",
+     "it": "ballato"
+    },
+    {
+     "pos": 12,
+     "form": "Wir",
+     "lemma": "wir",
+     "level": "A1",
+     "en": "We",
+     "es": "Nosotros",
+     "fr": "Nous",
+     "it": "Noi"
+    },
+    {
+     "pos": 13,
+     "form": "haben",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "hemos",
+     "fr": "avons",
+     "it": "abbiamo"
+    },
+    {
+     "pos": 14,
+     "pos_end": 15,
+     "form": "Klagelieder angestimmt",
+     "lemma": "Klagelieder anstimmen",
+     "level": "C1",
+     "en": "sung dirges",
+     "es": "entonado cantos fúnebres",
+     "fr": "entonné des chants funèbres",
+     "it": "intonato lamenti"
+    },
+    {
+     "pos": 14,
+     "form": "Klagelieder",
+     "lemma": "Klagelied",
+     "level": "C1",
+     "en": "laments",
+     "es": "cantos fúnebres",
+     "fr": "chants funèbres",
+     "it": "lamenti"
+    },
+    {
+     "pos": 15,
+     "form": "angestimmt",
+     "lemma": "anstimmen",
+     "level": "C1",
+     "en": "struck up",
+     "es": "entonado",
+     "fr": "entonné",
+     "it": "intonato"
+    },
+    {
+     "pos": 16,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 17,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 18,
+     "form": "habt",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "habéis",
+     "fr": "avez",
+     "it": "avete"
+    },
+    {
+     "pos": 19,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 20,
+     "form": "geweint",
+     "lemma": "weinen",
+     "level": "A2",
+     "en": "wept",
+     "es": "llorado",
+     "fr": "pleuré",
+     "it": "pianto"
+    }
+   ],
+   "18": [
+    {
+     "pos": 0,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 1,
+     "form": "Johannes",
+     "lemma": "Johannes",
+     "level": "A1",
+     "en": "John",
+     "es": "Juan",
+     "fr": "Jean",
+     "it": "Giovanni"
+    },
+    {
+     "pos": 2,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "has",
+     "es": "ha",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 3,
+     "form": "gekommen",
+     "lemma": "kommen",
+     "level": "A1",
+     "en": "come",
+     "es": "venido",
+     "fr": "venu",
+     "it": "venuto"
+    },
+    {
+     "pos": 4,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "il",
+     "it": "egli"
+    },
+    {
+     "pos": 5,
+     "form": "aß",
+     "lemma": "essen",
+     "level": "A1",
+     "en": "ate",
+     "es": "comía",
+     "fr": "mangeait",
+     "it": "mangiava"
+    },
+    {
+     "pos": 6,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 7,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 8,
+     "form": "trank",
+     "lemma": "trinken",
+     "level": "A1",
+     "en": "drank",
+     "es": "bebía",
+     "fr": "buvait",
+     "it": "beveva"
+    },
+    {
+     "pos": 9,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 10,
+     "form": "Da",
+     "lemma": "da",
+     "level": "A2",
+     "en": "Then",
+     "es": "Entonces",
+     "fr": "Alors",
+     "it": "Allora"
+    },
+    {
+     "pos": 11,
+     "form": "sagen",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "say",
+     "es": "dicen",
+     "fr": "disent",
+     "it": "dicono"
+    },
+    {
+     "pos": 12,
+     "form": "sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "they",
+     "es": "ellos",
+     "fr": "ils",
+     "it": "essi"
+    },
+    {
+     "pos": 13,
+     "form": "Er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "He",
+     "es": "Él",
+     "fr": "Il",
+     "it": "Egli"
+    },
+    {
+     "pos": 14,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "está",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 15,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "by",
+     "es": "por",
+     "fr": "par",
+     "it": "da"
+    },
+    {
+     "pos": 16,
+     "form": "einem",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "a",
+     "es": "un",
+     "fr": "un",
+     "it": "un"
+    },
+    {
+     "pos": 17,
+     "form": "Dämon",
+     "lemma": "Dämon",
+     "level": "B2",
+     "en": "demon",
+     "es": "demonio",
+     "fr": "démon",
+     "it": "demone"
+    },
+    {
+     "pos": 18,
+     "form": "besessen",
+     "lemma": "besessen",
+     "level": "C1",
+     "en": "possessed",
+     "es": "endemoniado",
+     "fr": "possédé",
+     "it": "indemoniato"
+    }
+   ],
+   "19": [
+    {
+     "pos": 0,
+     "form": "Der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "The",
+     "es": "El",
+     "fr": "Le",
+     "it": "Il"
+    },
+    {
+     "pos": 1,
+     "form": "Menschensohn",
+     "lemma": "Menschensohn",
+     "level": "B2",
+     "en": "Son of Man",
+     "es": "Hijo del Hombre",
+     "fr": "Fils de l'homme",
+     "it": "Figlio dell'uomo"
+    },
+    {
+     "pos": 2,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "has",
+     "es": "ha",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 3,
+     "form": "gekommen",
+     "lemma": "kommen",
+     "level": "A1",
+     "en": "come",
+     "es": "venido",
+     "fr": "venu",
+     "it": "venuto"
+    },
+    {
+     "pos": 4,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "il",
+     "it": "egli"
+    },
+    {
+     "pos": 5,
+     "form": "isst",
+     "lemma": "essen",
+     "level": "A1",
+     "en": "eats",
+     "es": "come",
+     "fr": "mange",
+     "it": "mangia"
+    },
+    {
+     "pos": 6,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 7,
+     "form": "trinkt",
+     "lemma": "trinken",
+     "level": "A1",
+     "en": "drinks",
+     "es": "bebe",
+     "fr": "boit",
+     "it": "beve"
+    },
+    {
+     "pos": 8,
+     "form": "Da",
+     "lemma": "da",
+     "level": "A2",
+     "en": "Then",
+     "es": "Entonces",
+     "fr": "Alors",
+     "it": "Allora"
+    },
+    {
+     "pos": 9,
+     "form": "sagen",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "say",
+     "es": "dicen",
+     "fr": "disent",
+     "it": "dicono"
+    },
+    {
+     "pos": 10,
+     "form": "sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "they",
+     "es": "ellos",
+     "fr": "ils",
+     "it": "essi"
+    },
+    {
+     "pos": 11,
+     "pos_end": 13,
+     "form": "Was für ein",
+     "lemma": "was für ein",
+     "level": "A2",
+     "en": "What kind of",
+     "es": "Qué clase de",
+     "fr": "Quel genre de",
+     "it": "Che sorta di"
+    },
+    {
+     "pos": 11,
+     "form": "Was",
+     "lemma": "was",
+     "level": "A1",
+     "en": "What",
+     "es": "Qué",
+     "fr": "Quel",
+     "it": "Che"
+    },
+    {
+     "pos": 12,
+     "form": "für",
+     "lemma": "für",
+     "level": "A1",
+     "en": "for",
+     "es": "por",
+     "fr": "pour",
+     "it": "per"
+    },
+    {
+     "pos": 13,
+     "form": "ein",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "a",
+     "es": "un",
+     "fr": "un",
+     "it": "un"
+    },
+    {
+     "pos": 14,
+     "form": "Fresser",
+     "lemma": "Fresser",
+     "level": "C1",
+     "en": "glutton",
+     "es": "glotón",
+     "fr": "glouton",
+     "it": "mangione"
+    },
+    {
+     "pos": 15,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 16,
+     "form": "Säufer",
+     "lemma": "Säufer",
+     "level": "C1",
+     "en": "drunkard",
+     "es": "borracho",
+     "fr": "ivrogne",
+     "it": "ubriacone"
+    },
+    {
+     "pos": 17,
+     "form": "ein",
+     "lemma": "ein",
+     "level": "A1",
+     "en": "a",
+     "es": "un",
+     "fr": "un",
+     "it": "un"
+    },
+    {
+     "pos": 18,
+     "form": "Freund",
+     "lemma": "Freund",
+     "level": "A1",
+     "en": "friend",
+     "es": "amigo",
+     "fr": "ami",
+     "it": "amico"
+    },
+    {
+     "pos": 19,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "of",
+     "es": "de",
+     "fr": "de",
+     "it": "di"
+    },
+    {
+     "pos": 20,
+     "form": "Zöllnern",
+     "lemma": "Zöllner",
+     "level": "C1",
+     "en": "tax collectors",
+     "es": "recaudadores de impuestos",
+     "fr": "publicains",
+     "it": "pubblicani"
+    },
+    {
+     "pos": 21,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 22,
+     "form": "Sündern",
+     "lemma": "Sünder",
+     "level": "B2",
+     "en": "sinners",
+     "es": "pecadores",
+     "fr": "pécheurs",
+     "it": "peccatori"
+    },
+    {
+     "pos": 23,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 24,
+     "form": "doch",
+     "lemma": "doch",
+     "level": "A2",
+     "en": "yet",
+     "es": "sin embargo",
+     "fr": "pourtant",
+     "it": "eppure"
+    },
+    {
+     "pos": 25,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 26,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 27,
+     "form": "Weisheit",
+     "lemma": "Weisheit",
+     "level": "B2",
+     "en": "wisdom",
+     "es": "sabiduría",
+     "fr": "sagesse",
+     "it": "sapienza"
+    },
+    {
+     "pos": 28,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "by",
+     "es": "por",
+     "fr": "par",
+     "it": "da"
+    },
+    {
+     "pos": 29,
+     "form": "ihren",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "her",
+     "es": "sus",
+     "fr": "ses",
+     "it": "i suoi"
+    },
+    {
+     "pos": 30,
+     "form": "Kindern",
+     "lemma": "Kind",
+     "level": "A1",
+     "en": "children",
+     "es": "hijos",
+     "fr": "enfants",
+     "it": "figli"
+    },
+    {
+     "pos": 31,
+     "form": "gerechtfertigt",
+     "lemma": "rechtfertigen",
+     "level": "C1",
+     "en": "justified",
+     "es": "justificada",
+     "fr": "justifiée",
+     "it": "giustificata"
+    }
+   ],
+   "20": [
+    {
+     "pos": 0,
+     "form": "Dann",
+     "lemma": "dann",
+     "level": "A1",
+     "en": "Then",
+     "es": "Entonces",
+     "fr": "Alors",
+     "it": "Allora"
+    },
+    {
+     "pos": 1,
+     "form": "begann",
+     "lemma": "beginnen",
+     "level": "A2",
+     "en": "began",
+     "es": "comenzó",
+     "fr": "commença",
+     "it": "cominciò"
+    },
+    {
+     "pos": 2,
+     "form": "er",
+     "lemma": "er",
+     "level": "A1",
+     "en": "he",
+     "es": "él",
+     "fr": "il",
+     "it": "egli"
+    },
+    {
+     "pos": 3,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "las",
+     "fr": "les",
+     "it": "le"
+    },
+    {
+     "pos": 4,
+     "form": "Städte",
+     "lemma": "Stadt",
+     "level": "A1",
+     "en": "cities",
+     "es": "ciudades",
+     "fr": "villes",
+     "it": "città"
+    },
+    {
+     "pos": 5,
+     "pos_end": 6,
+     "form": "zu tadeln",
+     "lemma": "tadeln",
+     "level": "C1",
+     "en": "to rebuke",
+     "es": "a reprender",
+     "fr": "à reprocher",
+     "it": "a rimproverare"
+    },
+    {
+     "pos": 5,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 6,
+     "form": "tadeln",
+     "lemma": "tadeln",
+     "level": "C1",
+     "en": "rebuke",
+     "es": "reprender",
+     "fr": "reprocher",
+     "it": "rimproverare"
+    },
+    {
+     "pos": 7,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "dans",
+     "it": "in"
+    },
+    {
+     "pos": 8,
+     "form": "denen",
+     "lemma": "der",
+     "level": "A2",
+     "en": "which",
+     "es": "las que",
+     "fr": "lesquelles",
+     "it": "le quali"
+    },
+    {
+     "pos": 9,
+     "pos_end": 10,
+     "form": "die meisten",
+     "lemma": "die meisten",
+     "level": "B1",
+     "en": "most",
+     "es": "la mayoría",
+     "fr": "la plupart",
+     "it": "la maggior parte"
+    },
+    {
+     "pos": 9,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "la",
+     "fr": "la",
+     "it": "la"
+    },
+    {
+     "pos": 10,
+     "form": "meisten",
+     "lemma": "meist",
+     "level": "B1",
+     "en": "most",
+     "es": "mayoría",
+     "fr": "plupart",
+     "it": "maggior parte"
+    },
+    {
+     "pos": 11,
+     "form": "seiner",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "his",
+     "es": "de sus",
+     "fr": "de ses",
+     "it": "dei suoi"
+    },
+    {
+     "pos": 12,
+     "form": "Wundertaten",
+     "lemma": "Wundertat",
+     "level": "C1",
+     "en": "miracles",
+     "es": "milagros",
+     "fr": "miracles",
+     "it": "miracoli"
+    },
+    {
+     "pos": 13,
+     "form": "geschehen",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedido",
+     "fr": "arrivés",
+     "it": "accaduti"
+    },
+    {
+     "pos": 14,
+     "form": "waren",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "had",
+     "es": "habían",
+     "fr": "étaient",
+     "it": "erano"
+    },
+    {
+     "pos": 15,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 16,
+     "form": "sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "they",
+     "es": "ellos",
+     "fr": "ils",
+     "it": "essi"
+    },
+    {
+     "pos": 17,
+     "form": "waren",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "had",
+     "es": "habían",
+     "fr": "s'étaient",
+     "it": "si erano"
+    },
+    {
+     "pos": 18,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 19,
+     "form": "umgekehrt",
+     "lemma": "umkehren",
+     "level": "B1",
+     "en": "repented",
+     "es": "arrepentido",
+     "fr": "repentis",
+     "it": "ravveduti"
+    }
+   ],
+   "21": [
+    {
+     "pos": 0,
+     "pos_end": 1,
+     "form": "Weh dir",
+     "lemma": "Weh dir",
+     "level": "B2",
+     "en": "Woe to you",
+     "es": "Ay de ti",
+     "fr": "Malheur à toi",
+     "it": "Guai a te"
+    },
+    {
+     "pos": 0,
+     "form": "Weh",
+     "lemma": "Weh",
+     "level": "C1",
+     "en": "Woe",
+     "es": "Ay",
+     "fr": "Malheur",
+     "it": "Guai"
+    },
+    {
+     "pos": 1,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "to you",
+     "es": "de ti",
+     "fr": "à toi",
+     "it": "a te"
+    },
+    {
+     "pos": 2,
+     "form": "Chorazin",
+     "lemma": "Chorazin",
+     "level": "A1",
+     "en": "Chorazin",
+     "es": "Corazín",
+     "fr": "Chorazin",
+     "it": "Corazin"
+    },
+    {
+     "pos": 3,
+     "pos_end": 4,
+     "form": "Weh dir",
+     "lemma": "Weh dir",
+     "level": "B2",
+     "en": "Woe to you",
+     "es": "Ay de ti",
+     "fr": "Malheur à toi",
+     "it": "Guai a te"
+    },
+    {
+     "pos": 3,
+     "form": "Weh",
+     "lemma": "Weh",
+     "level": "C1",
+     "en": "Woe",
+     "es": "Ay",
+     "fr": "Malheur",
+     "it": "Guai"
+    },
+    {
+     "pos": 4,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "to you",
+     "es": "de ti",
+     "fr": "à toi",
+     "it": "a te"
+    },
+    {
+     "pos": 5,
+     "form": "Betsaida",
+     "lemma": "Betsaida",
+     "level": "A1",
+     "en": "Bethsaida",
+     "es": "Betsaida",
+     "fr": "Bethsaïda",
+     "it": "Betsaida"
+    },
+    {
+     "pos": 6,
+     "form": "Wenn",
+     "lemma": "wenn",
+     "level": "A1",
+     "en": "If",
+     "es": "Si",
+     "fr": "Si",
+     "it": "Se"
+    },
+    {
+     "pos": 7,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 8,
+     "form": "Tyrus",
+     "lemma": "Tyrus",
+     "level": "A1",
+     "en": "Tyre",
+     "es": "Tiro",
+     "fr": "Tyr",
+     "it": "Tiro"
+    },
+    {
+     "pos": 9,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 10,
+     "form": "Sidon",
+     "lemma": "Sidon",
+     "level": "A1",
+     "en": "Sidon",
+     "es": "Sidón",
+     "fr": "Sidon",
+     "it": "Sidone"
+    },
+    {
+     "pos": 11,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "los",
+     "fr": "les",
+     "it": "i"
+    },
+    {
+     "pos": 12,
+     "form": "Wunder",
+     "lemma": "Wunder",
+     "level": "B1",
+     "en": "miracles",
+     "es": "milagros",
+     "fr": "miracles",
+     "it": "miracoli"
+    },
+    {
+     "pos": 13,
+     "form": "geschehen",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedido",
+     "fr": "arrivés",
+     "it": "accaduti"
+    },
+    {
+     "pos": 14,
+     "form": "wären",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "had",
+     "es": "hubieran",
+     "fr": "étaient",
+     "it": "fossero"
+    },
+    {
+     "pos": 15,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "that",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 16,
+     "form": "bei",
+     "lemma": "bei",
+     "level": "A2",
+     "en": "among",
+     "es": "entre",
+     "fr": "chez",
+     "it": "presso"
+    },
+    {
+     "pos": 17,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 18,
+     "form": "geschehen",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedido",
+     "fr": "arrivés",
+     "it": "accaduti"
+    },
+    {
+     "pos": 19,
+     "form": "sind",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "have",
+     "es": "han",
+     "fr": "sont",
+     "it": "sono"
+    },
+    {
+     "pos": 20,
+     "form": "sie",
+     "lemma": "sie",
+     "level": "A1",
+     "en": "they",
+     "es": "ellos",
+     "fr": "ils",
+     "it": "essi"
+    },
+    {
+     "pos": 21,
+     "form": "hätten",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "would have",
+     "es": "habrían",
+     "fr": "auraient",
+     "it": "avrebbero"
+    },
+    {
+     "pos": 22,
+     "form": "längst",
+     "lemma": "längst",
+     "level": "B2",
+     "en": "long ago",
+     "es": "hace mucho",
+     "fr": "depuis longtemps",
+     "it": "da tempo"
+    },
+    {
+     "pos": 23,
+     "pos_end": 26,
+     "form": "in Sack und Asche",
+     "lemma": "in Sack und Asche",
+     "level": "C1",
+     "en": "in sackcloth and ashes",
+     "es": "en saco y ceniza",
+     "fr": "avec le sac et la cendre",
+     "it": "in sacco e cenere"
+    },
+    {
+     "pos": 23,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "dans",
+     "it": "in"
+    },
+    {
+     "pos": 24,
+     "form": "Sack",
+     "lemma": "Sack",
+     "level": "B1",
+     "en": "sackcloth",
+     "es": "saco",
+     "fr": "sac",
+     "it": "sacco"
+    },
+    {
+     "pos": 25,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 26,
+     "form": "Asche",
+     "lemma": "Asche",
+     "level": "B2",
+     "en": "ashes",
+     "es": "ceniza",
+     "fr": "cendre",
+     "it": "cenere"
+    },
+    {
+     "pos": 27,
+     "form": "umgekehrt",
+     "lemma": "umkehren",
+     "level": "B1",
+     "en": "repented",
+     "es": "arrepentido",
+     "fr": "repentis",
+     "it": "ravveduti"
+    }
+   ],
+   "22": [
+    {
+     "pos": 0,
+     "form": "Doch",
+     "lemma": "doch",
+     "level": "A2",
+     "en": "But",
+     "es": "Pero",
+     "fr": "Mais",
+     "it": "Ma"
+    },
+    {
+     "pos": 1,
+     "form": "ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "yo",
+     "fr": "je",
+     "it": "io"
+    },
+    {
+     "pos": 2,
+     "form": "sage",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "say",
+     "es": "digo",
+     "fr": "dis",
+     "it": "dico"
+    },
+    {
+     "pos": 3,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 4,
+     "form": "Tyrus",
+     "lemma": "Tyrus",
+     "level": "A1",
+     "en": "Tyre",
+     "es": "a Tiro",
+     "fr": "à Tyr",
+     "it": "a Tiro"
+    },
+    {
+     "pos": 5,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 6,
+     "form": "Sidon",
+     "lemma": "Sidon",
+     "level": "A1",
+     "en": "Sidon",
+     "es": "a Sidón",
+     "fr": "à Sidon",
+     "it": "a Sidone"
+    },
+    {
+     "pos": 7,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "will",
+     "es": "va a",
+     "fr": "va",
+     "it": "sta per"
+    },
+    {
+     "pos": 8,
+     "parts": [
+      8,
+      14
+     ],
+     "form": "es ergehen",
+     "lemma": "es ergehen",
+     "level": "C1",
+     "en": "it will go",
+     "es": "les irá",
+     "fr": "il en ira",
+     "it": "andrà"
+    },
+    {
+     "pos": 8,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "ello",
+     "fr": "il",
+     "it": "esso"
+    },
+    {
+     "pos": 9,
+     "form": "am",
+     "lemma": "am",
+     "level": "A1",
+     "en": "on the",
+     "es": "en el",
+     "fr": "au",
+     "it": "nel"
+    },
+    {
+     "pos": 10,
+     "form": "Tag",
+     "lemma": "Tag",
+     "level": "A1",
+     "en": "day",
+     "es": "día",
+     "fr": "jour",
+     "it": "giorno"
+    },
+    {
+     "pos": 11,
+     "form": "des",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "del",
+     "fr": "du",
+     "it": "del"
+    },
+    {
+     "pos": 12,
+     "form": "Gerichts",
+     "lemma": "Gericht",
+     "level": "B2",
+     "en": "judgment",
+     "es": "juicio",
+     "fr": "jugement",
+     "it": "giudizio"
+    },
+    {
+     "pos": 13,
+     "form": "erträglicher",
+     "lemma": "erträglich",
+     "level": "C1",
+     "en": "more bearable",
+     "es": "más tolerable",
+     "fr": "plus supportable",
+     "it": "più tollerabile"
+    },
+    {
+     "pos": 14,
+     "form": "ergehen",
+     "lemma": "ergehen",
+     "level": "C1",
+     "en": "fare",
+     "es": "ir",
+     "fr": "aller",
+     "it": "andare"
+    },
+    {
+     "pos": 15,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "than",
+     "es": "que",
+     "fr": "que",
+     "it": "di"
+    },
+    {
+     "pos": 16,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    }
+   ],
+   "23": [
+    {
+     "pos": 0,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 1,
+     "form": "du",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "tú",
+     "fr": "toi",
+     "it": "tu"
+    },
+    {
+     "pos": 2,
+     "form": "Kapernaum",
+     "lemma": "Kapernaum",
+     "level": "A1",
+     "en": "Capernaum",
+     "es": "Capernaúm",
+     "fr": "Capernaüm",
+     "it": "Capernaum"
+    },
+    {
+     "pos": 3,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "which",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 4,
+     "form": "du",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "tú",
+     "fr": "tu",
+     "it": "tu"
+    },
+    {
+     "pos": 5,
+     "form": "bis",
+     "lemma": "bis",
+     "level": "A1",
+     "en": "up to",
+     "es": "hasta",
+     "fr": "jusqu'",
+     "it": "fino"
+    },
+    {
+     "pos": 6,
+     "form": "zum",
+     "lemma": "zum",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "au",
+     "it": "al"
+    },
+    {
+     "pos": 7,
+     "form": "Himmel",
+     "lemma": "Himmel",
+     "level": "A2",
+     "en": "heaven",
+     "es": "cielo",
+     "fr": "ciel",
+     "it": "cielo"
+    },
+    {
+     "pos": 8,
+     "form": "erhoben",
+     "lemma": "erheben",
+     "level": "B2",
+     "en": "exalted",
+     "es": "exaltada",
+     "fr": "élevée",
+     "it": "innalzata"
+    },
+    {
+     "pos": 9,
+     "form": "warst",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "were",
+     "es": "fuiste",
+     "fr": "as été",
+     "it": "sei stata"
+    },
+    {
+     "pos": 10,
+     "form": "Bis",
+     "lemma": "bis",
+     "level": "A1",
+     "en": "Down to",
+     "es": "Hasta",
+     "fr": "Jusque",
+     "it": "Fino"
+    },
+    {
+     "pos": 11,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "into",
+     "es": "en",
+     "fr": "dans",
+     "it": "in"
+    },
+    {
+     "pos": 12,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "l'",
+     "it": "l'"
+    },
+    {
+     "pos": 13,
+     "form": "Hölle",
+     "lemma": "Hölle",
+     "level": "B2",
+     "en": "hell",
+     "es": "infierno",
+     "fr": "enfer",
+     "it": "inferno"
+    },
+    {
+     "pos": 14,
+     "form": "wirst",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "will",
+     "es": "vas a",
+     "fr": "vas",
+     "it": "stai per"
+    },
+    {
+     "pos": 15,
+     "form": "du",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "tú",
+     "fr": "tu",
+     "it": "tu"
+    },
+    {
+     "pos": 16,
+     "form": "hinabgestoßen",
+     "lemma": "hinabstoßen",
+     "level": "C1",
+     "en": "thrown down",
+     "es": "derribada",
+     "fr": "précipitée",
+     "it": "precipitata"
+    },
+    {
+     "pos": 17,
+     "form": "werden",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "be",
+     "es": "ser",
+     "fr": "être",
+     "it": "essere"
+    },
+    {
+     "pos": 18,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 19,
+     "form": "wenn",
+     "lemma": "wenn",
+     "level": "A1",
+     "en": "if",
+     "es": "si",
+     "fr": "si",
+     "it": "se"
+    },
+    {
+     "pos": 20,
+     "form": "in",
+     "lemma": "in",
+     "level": "A1",
+     "en": "in",
+     "es": "en",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 21,
+     "form": "Sodom",
+     "lemma": "Sodom",
+     "level": "A1",
+     "en": "Sodom",
+     "es": "Sodoma",
+     "fr": "Sodome",
+     "it": "Sodoma"
+    },
+    {
+     "pos": 22,
+     "form": "die",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "los",
+     "fr": "les",
+     "it": "i"
+    },
+    {
+     "pos": 23,
+     "form": "Wunder",
+     "lemma": "Wunder",
+     "level": "B1",
+     "en": "miracles",
+     "es": "milagros",
+     "fr": "miracles",
+     "it": "miracoli"
+    },
+    {
+     "pos": 24,
+     "form": "geschehen",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedido",
+     "fr": "arrivés",
+     "it": "accaduti"
+    },
+    {
+     "pos": 25,
+     "form": "wären",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "had",
+     "es": "hubieran",
+     "fr": "étaient",
+     "it": "fossero"
+    },
+    {
+     "pos": 26,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "that",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 27,
+     "form": "bei",
+     "lemma": "bei",
+     "level": "A2",
+     "en": "in",
+     "es": "en",
+     "fr": "chez",
+     "it": "presso"
+    },
+    {
+     "pos": 28,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "ti",
+     "fr": "toi",
+     "it": "te"
+    },
+    {
+     "pos": 29,
+     "form": "geschehen",
+     "lemma": "geschehen",
+     "level": "B1",
+     "en": "happened",
+     "es": "sucedido",
+     "fr": "arrivés",
+     "it": "accaduti"
+    },
+    {
+     "pos": 30,
+     "form": "sind",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "have",
+     "es": "han",
+     "fr": "sont",
+     "it": "sono"
+    },
+    {
+     "pos": 31,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "ella",
+     "fr": "elle",
+     "it": "essa"
+    },
+    {
+     "pos": 32,
+     "form": "stünde",
+     "lemma": "stehen",
+     "level": "A1",
+     "en": "would stand",
+     "es": "estaría en pie",
+     "fr": "subsisterait",
+     "it": "sarebbe in piedi"
+    },
+    {
+     "pos": 33,
+     "form": "noch",
+     "lemma": "noch",
+     "level": "A1",
+     "en": "still",
+     "es": "todavía",
+     "fr": "encore",
+     "it": "ancora"
+    },
+    {
+     "pos": 34,
+     "form": "heute",
+     "lemma": "heute",
+     "level": "A1",
+     "en": "today",
+     "es": "hoy",
+     "fr": "aujourd'hui",
+     "it": "oggi"
+    }
+   ],
+   "24": [
+    {
+     "pos": 0,
+     "form": "Doch",
+     "lemma": "doch",
+     "level": "A2",
+     "en": "But",
+     "es": "Pero",
+     "fr": "Mais",
+     "it": "Ma"
+    },
+    {
+     "pos": 1,
+     "form": "ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "yo",
+     "fr": "je",
+     "it": "io"
+    },
+    {
+     "pos": 2,
+     "form": "sage",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "say",
+     "es": "digo",
+     "fr": "dis",
+     "it": "dico"
+    },
+    {
+     "pos": 3,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 4,
+     "form": "Dem",
+     "lemma": "der",
+     "level": "A1",
+     "en": "For the",
+     "es": "Para la",
+     "fr": "Pour la",
+     "it": "Per la"
+    },
+    {
+     "pos": 5,
+     "form": "Gebiet",
+     "lemma": "Gebiet",
+     "level": "B1",
+     "en": "region",
+     "es": "región",
+     "fr": "région",
+     "it": "regione"
+    },
+    {
+     "pos": 6,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "of",
+     "es": "de",
+     "fr": "de",
+     "it": "di"
+    },
+    {
+     "pos": 7,
+     "form": "Sodom",
+     "lemma": "Sodom",
+     "level": "A1",
+     "en": "Sodom",
+     "es": "Sodoma",
+     "fr": "Sodome",
+     "it": "Sodoma"
+    },
+    {
+     "pos": 8,
+     "form": "wird",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "will",
+     "es": "va a",
+     "fr": "va",
+     "it": "sta per"
+    },
+    {
+     "pos": 9,
+     "parts": [
+      9,
+      15
+     ],
+     "form": "es ergehen",
+     "lemma": "es ergehen",
+     "level": "C1",
+     "en": "it will go",
+     "es": "le irá",
+     "fr": "il en ira",
+     "it": "andrà"
+    },
+    {
+     "pos": 9,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "ello",
+     "fr": "il",
+     "it": "esso"
+    },
+    {
+     "pos": 10,
+     "form": "am",
+     "lemma": "am",
+     "level": "A1",
+     "en": "on the",
+     "es": "en el",
+     "fr": "au",
+     "it": "nel"
+    },
+    {
+     "pos": 11,
+     "form": "Tag",
+     "lemma": "Tag",
+     "level": "A1",
+     "en": "day",
+     "es": "día",
+     "fr": "jour",
+     "it": "giorno"
+    },
+    {
+     "pos": 12,
+     "form": "des",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "del",
+     "fr": "du",
+     "it": "del"
+    },
+    {
+     "pos": 13,
+     "form": "Gerichts",
+     "lemma": "Gericht",
+     "level": "B2",
+     "en": "judgment",
+     "es": "juicio",
+     "fr": "jugement",
+     "it": "giudizio"
+    },
+    {
+     "pos": 14,
+     "form": "erträglicher",
+     "lemma": "erträglich",
+     "level": "C1",
+     "en": "more bearable",
+     "es": "más tolerable",
+     "fr": "plus supportable",
+     "it": "più tollerabile"
+    },
+    {
+     "pos": 15,
+     "form": "ergehen",
+     "lemma": "ergehen",
+     "level": "C1",
+     "en": "fare",
+     "es": "ir",
+     "fr": "aller",
+     "it": "andare"
+    },
+    {
+     "pos": 16,
+     "form": "als",
+     "lemma": "als",
+     "level": "A2",
+     "en": "than",
+     "es": "que",
+     "fr": "que",
+     "it": "di"
+    },
+    {
+     "pos": 17,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "ti",
+     "fr": "toi",
+     "it": "te"
+    }
+   ],
+   "25": [
+    {
+     "pos": 0,
+     "pos_end": 2,
+     "form": "Zu jener Zeit",
+     "lemma": "zu jener Zeit",
+     "level": "B1",
+     "en": "At that time",
+     "es": "En aquel tiempo",
+     "fr": "En ce temps-là",
+     "it": "In quel tempo"
+    },
+    {
+     "pos": 0,
+     "form": "Zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "At",
+     "es": "En",
+     "fr": "En",
+     "it": "In"
+    },
+    {
+     "pos": 1,
+     "form": "jener",
+     "lemma": "jener",
+     "level": "B1",
+     "en": "that",
+     "es": "aquel",
+     "fr": "ce",
+     "it": "quel"
+    },
+    {
+     "pos": 2,
+     "form": "Zeit",
+     "lemma": "Zeit",
+     "level": "A1",
+     "en": "time",
+     "es": "tiempo",
+     "fr": "temps",
+     "it": "tempo"
+    },
+    {
+     "pos": 3,
+     "form": "sagte",
+     "lemma": "sagen",
+     "level": "A1",
+     "en": "said",
+     "es": "dijo",
+     "fr": "dit",
+     "it": "disse"
+    },
+    {
+     "pos": 4,
+     "form": "Jesus",
+     "lemma": "Jesus",
+     "level": "A1",
+     "en": "Jesus",
+     "es": "Jesús",
+     "fr": "Jésus",
+     "it": "Gesù"
+    },
+    {
+     "pos": 5,
+     "form": "Ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "Yo",
+     "fr": "Je",
+     "it": "Io"
+    },
+    {
+     "pos": 6,
+     "form": "preise",
+     "lemma": "preisen",
+     "level": "C1",
+     "en": "praise",
+     "es": "alabo",
+     "fr": "loue",
+     "it": "lodo"
+    },
+    {
+     "pos": 7,
+     "form": "dich",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "te",
+     "fr": "te",
+     "it": "ti"
+    },
+    {
+     "pos": 8,
+     "form": "Vater",
+     "lemma": "Vater",
+     "level": "A1",
+     "en": "Father",
+     "es": "Padre",
+     "fr": "Père",
+     "it": "Padre"
+    },
+    {
+     "pos": 9,
+     "form": "Herr",
+     "lemma": "Herr",
+     "level": "A1",
+     "en": "Lord",
+     "es": "Señor",
+     "fr": "Seigneur",
+     "it": "Signore"
+    },
+    {
+     "pos": 10,
+     "form": "des",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "del",
+     "fr": "du",
+     "it": "del"
+    },
+    {
+     "pos": 11,
+     "form": "Himmels",
+     "lemma": "Himmel",
+     "level": "A2",
+     "en": "heaven",
+     "es": "cielo",
+     "fr": "ciel",
+     "it": "cielo"
+    },
+    {
+     "pos": 12,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 13,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "of the",
+     "es": "de la",
+     "fr": "de la",
+     "it": "della"
+    },
+    {
+     "pos": 14,
+     "form": "Erde",
+     "lemma": "Erde",
+     "level": "A2",
+     "en": "earth",
+     "es": "tierra",
+     "fr": "terre",
+     "it": "terra"
+    },
+    {
+     "pos": 15,
+     "form": "dass",
+     "lemma": "dass",
+     "level": "A1",
+     "en": "that",
+     "es": "que",
+     "fr": "que",
+     "it": "che"
+    },
+    {
+     "pos": 16,
+     "form": "du",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "tú",
+     "fr": "tu",
+     "it": "tu"
+    },
+    {
+     "pos": 17,
+     "pos_end": 18,
+     "form": "das alles",
+     "lemma": "das alles",
+     "level": "A2",
+     "en": "all this",
+     "es": "todo esto",
+     "fr": "tout cela",
+     "it": "tutto questo"
+    },
+    {
+     "pos": 17,
+     "form": "das",
+     "lemma": "der",
+     "level": "A1",
+     "en": "this",
+     "es": "esto",
+     "fr": "cela",
+     "it": "questo"
+    },
+    {
+     "pos": 18,
+     "form": "alles",
+     "lemma": "alles",
+     "level": "A1",
+     "en": "all",
+     "es": "todo",
+     "fr": "tout",
+     "it": "tutto"
+    },
+    {
+     "pos": 19,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "from the",
+     "es": "a los",
+     "fr": "aux",
+     "it": "ai"
+    },
+    {
+     "pos": 20,
+     "form": "Weisen",
+     "lemma": "Weiser",
+     "level": "B2",
+     "en": "wise",
+     "es": "sabios",
+     "fr": "sages",
+     "it": "saggi"
+    },
+    {
+     "pos": 21,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 22,
+     "form": "Klugen",
+     "lemma": "Kluger",
+     "level": "B1",
+     "en": "clever",
+     "es": "entendidos",
+     "fr": "intelligents",
+     "it": "intelligenti"
+    },
+    {
+     "pos": 23,
+     "form": "verborgen",
+     "lemma": "verbergen",
+     "level": "C1",
+     "en": "hidden",
+     "es": "escondido",
+     "fr": "caché",
+     "it": "nascosto"
+    },
+    {
+     "pos": 24,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 25,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "lo",
+     "fr": "le",
+     "it": "lo"
+    },
+    {
+     "pos": 26,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "to the",
+     "es": "a los",
+     "fr": "aux",
+     "it": "ai"
+    },
+    {
+     "pos": 27,
+     "form": "Unmündigen",
+     "lemma": "Unmündiger",
+     "level": "C1",
+     "en": "little ones",
+     "es": "pequeños",
+     "fr": "petits",
+     "it": "piccoli"
+    },
+    {
+     "pos": 28,
+     "form": "offenbart",
+     "lemma": "offenbaren",
+     "level": "B2",
+     "en": "revealed",
+     "es": "revelado",
+     "fr": "révélé",
+     "it": "rivelato"
+    },
+    {
+     "pos": 29,
+     "form": "hast",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "have",
+     "es": "has",
+     "fr": "as",
+     "it": "hai"
+    }
+   ],
+   "26": [
+    {
+     "pos": 0,
+     "form": "Ja",
+     "lemma": "ja",
+     "level": "A1",
+     "en": "Yes",
+     "es": "Sí",
+     "fr": "Oui",
+     "it": "Sì"
+    },
+    {
+     "pos": 1,
+     "form": "Vater",
+     "lemma": "Vater",
+     "level": "A1",
+     "en": "Father",
+     "es": "Padre",
+     "fr": "Père",
+     "it": "Padre"
+    },
+    {
+     "pos": 2,
+     "form": "so",
+     "lemma": "so",
+     "level": "A1",
+     "en": "so",
+     "es": "así",
+     "fr": "ainsi",
+     "it": "così"
+    },
+    {
+     "pos": 3,
+     "form": "hat",
+     "lemma": "haben",
+     "level": "A1",
+     "en": "has",
+     "es": "ha",
+     "fr": "a",
+     "it": "ha"
+    },
+    {
+     "pos": 4,
+     "pos_end": 6,
+     "form": "es dir gefallen",
+     "lemma": "jemandem gefallen",
+     "level": "B1",
+     "en": "it pleased you",
+     "es": "te ha parecido bien",
+     "fr": "il t'a plu",
+     "it": "ti è piaciuto"
+    },
+    {
+     "pos": 4,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "ello",
+     "fr": "il",
+     "it": "esso"
+    },
+    {
+     "pos": 5,
+     "form": "dir",
+     "lemma": "du",
+     "level": "A1",
+     "en": "you",
+     "es": "te",
+     "fr": "te",
+     "it": "ti"
+    },
+    {
+     "pos": 6,
+     "form": "gefallen",
+     "lemma": "gefallen",
+     "level": "B1",
+     "en": "pleased",
+     "es": "agradado",
+     "fr": "plu",
+     "it": "piaciuto"
+    }
+   ],
+   "27": [
+    {
+     "pos": 0,
+     "form": "Alles",
+     "lemma": "alles",
+     "level": "A1",
+     "en": "Everything",
+     "es": "Todo",
+     "fr": "Tout",
+     "it": "Tutto"
+    },
+    {
+     "pos": 1,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "has",
+     "es": "ha",
+     "fr": "a",
+     "it": "è"
+    },
+    {
+     "pos": 2,
+     "form": "mir",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "to me",
+     "es": "me",
+     "fr": "m'",
+     "it": "mi"
+    },
+    {
+     "pos": 3,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "by",
+     "es": "por",
+     "fr": "par",
+     "it": "da"
+    },
+    {
+     "pos": 4,
+     "form": "meinem",
+     "lemma": "mein",
+     "level": "A1",
+     "en": "my",
+     "es": "mi",
+     "fr": "mon",
+     "it": "mio"
+    },
+    {
+     "pos": 5,
+     "form": "Vater",
+     "lemma": "Vater",
+     "level": "A1",
+     "en": "Father",
+     "es": "Padre",
+     "fr": "Père",
+     "it": "Padre"
+    },
+    {
+     "pos": 6,
+     "form": "übergeben",
+     "lemma": "übergeben",
+     "level": "B2",
+     "en": "handed over",
+     "es": "entregado",
+     "fr": "remis",
+     "it": "consegnato"
+    },
+    {
+     "pos": 7,
+     "form": "worden",
+     "lemma": "werden",
+     "level": "A2",
+     "en": "been",
+     "es": "sido",
+     "fr": "été",
+     "it": "stato"
+    },
+    {
+     "pos": 8,
+     "form": "Niemand",
+     "lemma": "niemand",
+     "level": "A2",
+     "en": "Nobody",
+     "es": "Nadie",
+     "fr": "Personne",
+     "it": "Nessuno"
+    },
+    {
+     "pos": 9,
+     "form": "kennt",
+     "lemma": "kennen",
+     "level": "A1",
+     "en": "knows",
+     "es": "conoce",
+     "fr": "connaît",
+     "it": "conosce"
+    },
+    {
+     "pos": 10,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "al",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 11,
+     "form": "Sohn",
+     "lemma": "Sohn",
+     "level": "A1",
+     "en": "Son",
+     "es": "Hijo",
+     "fr": "Fils",
+     "it": "Figlio"
+    },
+    {
+     "pos": 12,
+     "form": "außer",
+     "lemma": "außer",
+     "level": "B1",
+     "en": "except",
+     "es": "excepto",
+     "fr": "sauf",
+     "it": "eccetto"
+    },
+    {
+     "pos": 13,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 14,
+     "form": "Vater",
+     "lemma": "Vater",
+     "level": "A1",
+     "en": "Father",
+     "es": "Padre",
+     "fr": "Père",
+     "it": "Padre"
+    },
+    {
+     "pos": 15,
+     "form": "Und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "And",
+     "es": "Y",
+     "fr": "Et",
+     "it": "E"
+    },
+    {
+     "pos": 16,
+     "form": "niemand",
+     "lemma": "niemand",
+     "level": "A2",
+     "en": "nobody",
+     "es": "nadie",
+     "fr": "personne",
+     "it": "nessuno"
+    },
+    {
+     "pos": 17,
+     "form": "kennt",
+     "lemma": "kennen",
+     "level": "A1",
+     "en": "knows",
+     "es": "conoce",
+     "fr": "connaît",
+     "it": "conosce"
+    },
+    {
+     "pos": 18,
+     "form": "den",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "al",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 19,
+     "form": "Vater",
+     "lemma": "Vater",
+     "level": "A1",
+     "en": "Father",
+     "es": "Padre",
+     "fr": "Père",
+     "it": "Padre"
+    },
+    {
+     "pos": 20,
+     "form": "außer",
+     "lemma": "außer",
+     "level": "B1",
+     "en": "except",
+     "es": "excepto",
+     "fr": "sauf",
+     "it": "eccetto"
+    },
+    {
+     "pos": 21,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 22,
+     "form": "Sohn",
+     "lemma": "Sohn",
+     "level": "A1",
+     "en": "Son",
+     "es": "Hijo",
+     "fr": "Fils",
+     "it": "Figlio"
+    },
+    {
+     "pos": 23,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 24,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A2",
+     "en": "the one",
+     "es": "aquel",
+     "fr": "celui",
+     "it": "colui"
+    },
+    {
+     "pos": 25,
+     "form": "dem",
+     "lemma": "der",
+     "level": "A2",
+     "en": "to whom",
+     "es": "a quien",
+     "fr": "à qui",
+     "it": "a cui"
+    },
+    {
+     "pos": 26,
+     "form": "der",
+     "lemma": "der",
+     "level": "A1",
+     "en": "the",
+     "es": "el",
+     "fr": "le",
+     "it": "il"
+    },
+    {
+     "pos": 27,
+     "form": "Sohn",
+     "lemma": "Sohn",
+     "level": "A1",
+     "en": "Son",
+     "es": "Hijo",
+     "fr": "Fils",
+     "it": "Figlio"
+    },
+    {
+     "pos": 28,
+     "form": "es",
+     "lemma": "es",
+     "level": "A1",
+     "en": "it",
+     "es": "lo",
+     "fr": "le",
+     "it": "lo"
+    },
+    {
+     "pos": 29,
+     "form": "offenbaren",
+     "lemma": "offenbaren",
+     "level": "B2",
+     "en": "reveal",
+     "es": "revelar",
+     "fr": "révéler",
+     "it": "rivelare"
+    },
+    {
+     "pos": 30,
+     "form": "will",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "wants",
+     "es": "quiere",
+     "fr": "veut",
+     "it": "vuole"
+    }
+   ],
+   "28": [
+    {
+     "pos": 0,
+     "form": "Kommt",
+     "lemma": "kommen",
+     "level": "A1",
+     "en": "Come",
+     "es": "Venid",
+     "fr": "Venez",
+     "it": "Venite"
+    },
+    {
+     "pos": 1,
+     "form": "alle",
+     "lemma": "all",
+     "level": "A1",
+     "en": "all",
+     "es": "todos",
+     "fr": "tous",
+     "it": "tutti"
+    },
+    {
+     "pos": 2,
+     "form": "zu",
+     "lemma": "zu",
+     "level": "A1",
+     "en": "to",
+     "es": "a",
+     "fr": "à",
+     "it": "a"
+    },
+    {
+     "pos": 3,
+     "form": "mir",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "me",
+     "es": "mí",
+     "fr": "moi",
+     "it": "me"
+    },
+    {
+     "pos": 4,
+     "form": "die",
+     "lemma": "der",
+     "level": "A2",
+     "en": "who",
+     "es": "que",
+     "fr": "qui",
+     "it": "che"
+    },
+    {
+     "pos": 5,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 6,
+     "pos_end": 7,
+     "form": "euch abmüht",
+     "lemma": "sich abmühen",
+     "level": "C1",
+     "en": "labor",
+     "es": "os fatigáis",
+     "fr": "vous peinez",
+     "it": "vi affaticate"
+    },
+    {
+     "pos": 6,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A2",
+     "en": "yourselves",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 7,
+     "form": "abmüht",
+     "lemma": "abmühen",
+     "level": "C1",
+     "en": "toil",
+     "es": "fatigáis",
+     "fr": "peinez",
+     "it": "affaticate"
+    },
+    {
+     "pos": 8,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 9,
+     "form": "belastet",
+     "lemma": "belasten",
+     "level": "B2",
+     "en": "burdened",
+     "es": "cargados",
+     "fr": "chargés",
+     "it": "aggravati"
+    },
+    {
+     "pos": 10,
+     "form": "seid",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "are",
+     "es": "estáis",
+     "fr": "êtes",
+     "it": "siete"
+    },
+    {
+     "pos": 11,
+     "form": "Ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "Yo",
+     "fr": "Je",
+     "it": "Io"
+    },
+    {
+     "pos": 12,
+     "form": "will",
+     "lemma": "wollen",
+     "level": "A1",
+     "en": "will",
+     "es": "voy a",
+     "fr": "vais",
+     "it": "voglio"
+    },
+    {
+     "pos": 13,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "os",
+     "fr": "vous",
+     "it": "vi"
+    },
+    {
+     "pos": 14,
+     "pos_end": 15,
+     "form": "Ruhe schenken",
+     "lemma": "Ruhe schenken",
+     "level": "B1",
+     "en": "give rest",
+     "es": "dar descanso",
+     "fr": "donner du repos",
+     "it": "dare riposo"
+    },
+    {
+     "pos": 14,
+     "form": "Ruhe",
+     "lemma": "Ruhe",
+     "level": "A2",
+     "en": "rest",
+     "es": "descanso",
+     "fr": "repos",
+     "it": "riposo"
+    },
+    {
+     "pos": 15,
+     "form": "schenken",
+     "lemma": "schenken",
+     "level": "A2",
+     "en": "give",
+     "es": "dar",
+     "fr": "donner",
+     "it": "dare"
+    }
+   ],
+   "29": [
+    {
+     "pos": 0,
+     "parts": [
+      0,
+      3,
+      4
+     ],
+     "form": "Nehmt auf euch",
+     "lemma": "auf sich nehmen",
+     "level": "B2",
+     "en": "Take upon yourselves",
+     "es": "Tomad sobre vosotros",
+     "fr": "Prenez sur vous",
+     "it": "Prendete su di voi"
+    },
+    {
+     "pos": 0,
+     "form": "Nehmt",
+     "lemma": "nehmen",
+     "level": "A1",
+     "en": "Take",
+     "es": "Tomad",
+     "fr": "Prenez",
+     "it": "Prendete"
+    },
+    {
+     "pos": 1,
+     "form": "mein",
+     "lemma": "mein",
+     "level": "A1",
+     "en": "my",
+     "es": "mi",
+     "fr": "mon",
+     "it": "il mio"
+    },
+    {
+     "pos": 2,
+     "form": "Joch",
+     "lemma": "Joch",
+     "level": "C1",
+     "en": "yoke",
+     "es": "yugo",
+     "fr": "joug",
+     "it": "giogo"
+    },
+    {
+     "pos": 3,
+     "form": "auf",
+     "lemma": "auf",
+     "level": "A1",
+     "en": "on",
+     "es": "sobre",
+     "fr": "sur",
+     "it": "su"
+    },
+    {
+     "pos": 4,
+     "form": "euch",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 5,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 6,
+     "form": "lernt",
+     "lemma": "lernen",
+     "level": "A1",
+     "en": "learn",
+     "es": "aprended",
+     "fr": "apprenez",
+     "it": "imparate"
+    },
+    {
+     "pos": 7,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "from",
+     "es": "de",
+     "fr": "de",
+     "it": "da"
+    },
+    {
+     "pos": 8,
+     "form": "mir",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "me",
+     "es": "mí",
+     "fr": "moi",
+     "it": "me"
+    },
+    {
+     "pos": 9,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 10,
+     "form": "ich",
+     "lemma": "ich",
+     "level": "A1",
+     "en": "I",
+     "es": "yo",
+     "fr": "je",
+     "it": "io"
+    },
+    {
+     "pos": 11,
+     "form": "bin",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "am",
+     "es": "soy",
+     "fr": "suis",
+     "it": "sono"
+    },
+    {
+     "pos": 12,
+     "form": "sanftmütig",
+     "lemma": "sanftmütig",
+     "level": "C1",
+     "en": "gentle",
+     "es": "manso",
+     "fr": "doux",
+     "it": "mite"
+    },
+    {
+     "pos": 13,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 14,
+     "pos_end": 15,
+     "form": "von Herzen",
+     "lemma": "von Herzen",
+     "level": "B2",
+     "en": "in heart",
+     "es": "de corazón",
+     "fr": "de cœur",
+     "it": "di cuore"
+    },
+    {
+     "pos": 14,
+     "form": "von",
+     "lemma": "von",
+     "level": "A1",
+     "en": "in",
+     "es": "de",
+     "fr": "de",
+     "it": "di"
+    },
+    {
+     "pos": 15,
+     "form": "Herzen",
+     "lemma": "Herz",
+     "level": "A2",
+     "en": "heart",
+     "es": "corazón",
+     "fr": "cœur",
+     "it": "cuore"
+    },
+    {
+     "pos": 16,
+     "form": "demütig",
+     "lemma": "demütig",
+     "level": "B2",
+     "en": "humble",
+     "es": "humilde",
+     "fr": "humble",
+     "it": "umile"
+    },
+    {
+     "pos": 17,
+     "form": "So",
+     "lemma": "so",
+     "level": "A1",
+     "en": "Then",
+     "es": "Así",
+     "fr": "Ainsi",
+     "it": "Così"
+    },
+    {
+     "pos": 18,
+     "form": "werdet",
+     "lemma": "werden",
+     "level": "A1",
+     "en": "will",
+     "es": "vais a",
+     "fr": "allez",
+     "it": "state per"
+    },
+    {
+     "pos": 19,
+     "form": "ihr",
+     "lemma": "ihr",
+     "level": "A1",
+     "en": "you",
+     "es": "vosotros",
+     "fr": "vous",
+     "it": "voi"
+    },
+    {
+     "pos": 20,
+     "pos_end": 21,
+     "form": "Ruhe finden",
+     "lemma": "Ruhe finden",
+     "level": "B1",
+     "en": "find rest",
+     "es": "encontrar descanso",
+     "fr": "trouver le repos",
+     "it": "trovare riposo"
+    },
+    {
+     "pos": 20,
+     "form": "Ruhe",
+     "lemma": "Ruhe",
+     "level": "A2",
+     "en": "rest",
+     "es": "descanso",
+     "fr": "repos",
+     "it": "riposo"
+    },
+    {
+     "pos": 21,
+     "form": "finden",
+     "lemma": "finden",
+     "level": "A1",
+     "en": "find",
+     "es": "encontrar",
+     "fr": "trouver",
+     "it": "trovare"
+    },
+    {
+     "pos": 22,
+     "form": "für",
+     "lemma": "für",
+     "level": "A1",
+     "en": "for",
+     "es": "para",
+     "fr": "pour",
+     "it": "per"
+    },
+    {
+     "pos": 23,
+     "form": "eure",
+     "lemma": "euer",
+     "level": "A1",
+     "en": "your",
+     "es": "vuestras",
+     "fr": "vos",
+     "it": "le vostre"
+    },
+    {
+     "pos": 24,
+     "form": "Seelen",
+     "lemma": "Seele",
+     "level": "B1",
+     "en": "souls",
+     "es": "almas",
+     "fr": "âmes",
+     "it": "anime"
+    }
+   ],
+   "30": [
+    {
+     "pos": 0,
+     "form": "Denn",
+     "lemma": "denn",
+     "level": "A2",
+     "en": "For",
+     "es": "Porque",
+     "fr": "Car",
+     "it": "Poiché"
+    },
+    {
+     "pos": 1,
+     "form": "mein",
+     "lemma": "mein",
+     "level": "A1",
+     "en": "my",
+     "es": "mi",
+     "fr": "mon",
+     "it": "il mio"
+    },
+    {
+     "pos": 2,
+     "form": "Joch",
+     "lemma": "Joch",
+     "level": "C1",
+     "en": "yoke",
+     "es": "yugo",
+     "fr": "joug",
+     "it": "giogo"
+    },
+    {
+     "pos": 3,
+     "form": "drückt",
+     "lemma": "drücken",
+     "level": "B1",
+     "en": "presses",
+     "es": "aprieta",
+     "fr": "pèse",
+     "it": "opprime"
+    },
+    {
+     "pos": 4,
+     "form": "nicht",
+     "lemma": "nicht",
+     "level": "A1",
+     "en": "not",
+     "es": "no",
+     "fr": "pas",
+     "it": "non"
+    },
+    {
+     "pos": 5,
+     "form": "und",
+     "lemma": "und",
+     "level": "A1",
+     "en": "and",
+     "es": "y",
+     "fr": "et",
+     "it": "e"
+    },
+    {
+     "pos": 6,
+     "form": "meine",
+     "lemma": "mein",
+     "level": "A1",
+     "en": "my",
+     "es": "mi",
+     "fr": "mon",
+     "it": "il mio"
+    },
+    {
+     "pos": 7,
+     "form": "Last",
+     "lemma": "Last",
+     "level": "B1",
+     "en": "burden",
+     "es": "carga",
+     "fr": "fardeau",
+     "it": "carico"
+    },
+    {
+     "pos": 8,
+     "form": "ist",
+     "lemma": "sein",
+     "level": "A1",
+     "en": "is",
+     "es": "es",
+     "fr": "est",
+     "it": "è"
+    },
+    {
+     "pos": 9,
+     "form": "leicht",
+     "lemma": "leicht",
+     "level": "A2",
+     "en": "light",
+     "es": "ligera",
+     "fr": "léger",
+     "it": "leggero"
+    }
+   ]
   }
  }
 }
