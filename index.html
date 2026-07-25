@@ -214,8 +214,10 @@ const BIBLES = {
   'deu-l1912mod': {
     id: 'deu-l1912mod', label: 'Luther 1912 – Aktualisiert von KI', langCode: 'de', lsPrefix: 'l1912:',
     bibleDir: 'bibles/deu/l1912mod/', bibleSuffix: '_l1912mod.json',
-    annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
-    hasAnno: false, hasTraining: false,
+    annoDir: 'bibles/deu/l1912mod/anno/', annoSuffix: '_l1912mod_multi.json',
+    annoGlossLangs: ['en','es','fr','it'],
+    wordsPath: null, examplesPath: null,
+    hasAnno: true, hasTraining: false,
     defaultHilfs: 'eng-web',
     ttsLang: 'de-DE', ttsLangPrefix: 'de',
     ttsVoiceNames: ['Anna','Petra','Markus'],
@@ -2688,6 +2690,22 @@ function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
 }
 
+// Mehrwort-Einträge kennen zwei Formen:
+//   `pos_end` — zusammenhängende Spanne (pos..pos_end), z.B. „zur Welt bringen".
+//   `parts`   — getrennte Positionen, z.B. die deutsche Satzklammer „stand … auf".
+//               Wörter ZWISCHEN den parts gehören nicht zum Eintrag und behalten
+//               ihre eigenen Glossen. parts[0] muss gleich pos sein.
+function annoIsMulti(a){return a.pos_end!=null||a.parts!=null}
+function annoCovers(a,p){
+  if(a.parts)return a.parts.includes(p);
+  if(a.pos_end!=null)return p>=a.pos&&p<=a.pos_end;
+  return p===a.pos;
+}
+function annoLast(a){
+  if(a.parts)return a.parts[a.parts.length-1];
+  return a.pos_end!=null?a.pos_end:a.pos;
+}
+
 // Get annotation for a specific word position in a verse
 // Returns {anno, role} where role is 'single', 'start', 'middle', or 'end'
 function getAnnotation(annotations, bookName, chapNum, verseNum, wordPos) {
@@ -2697,10 +2715,10 @@ function getAnnotation(annotations, bookName, chapNum, verseNum, wordPos) {
   if (!chap) return null;
   const verse = chap[String(verseNum)];
   if (!verse) return null;
-  const exact = verse.find(a => a.pos === wordPos && !a.pos_end);
-  const multi = verse.find(a => a.pos_end != null && wordPos >= a.pos && wordPos <= a.pos_end);
+  const exact = verse.find(a => a.pos === wordPos && !annoIsMulti(a));
+  const multi = verse.find(a => annoIsMulti(a) && annoCovers(a, wordPos));
   if (multi) {
-    const role = wordPos === multi.pos ? 'start' : wordPos === multi.pos_end ? 'end' : 'middle';
+    const role = wordPos === multi.pos ? 'start' : wordPos === annoLast(multi) ? 'end' : 'middle';
     return {anno: multi, single: exact || null, role};
   }
   if (exact) return {anno: exact, single: null, role: 'single'};
@@ -2734,7 +2752,7 @@ function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedW
   const result = [];
   Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
-      const isPhrase = a.pos_end != null;
+      const isPhrase = annoIsMulti(a);
       // Eigennamen (großgeschriebenes Lemma) aus den Übungen nehmen, außer sie
       // stehen in KEEP_NAMES (wichtige Personen/Orte). KEEP_NAMES leer → kein Filter.
       if (KEEP_NAMES.size && isProperNounLemma(a.lemma) && !KEEP_NAMES.has(a.lemma)) return;
@@ -3331,7 +3349,9 @@ function App({data}){
       const va=chap[String(v.n)];if(!va)continue;
       const wds=v.text.split(/\s+/);
       for(const a of va){
-        if(map.has(a.lemma)||!targetLemmas.has(a.lemma)||a.phrase!=null)continue;
+        // `parts`-Einträge (getrennte Satzklammer) liefern keine Lücke am Stück —
+        // als Cloze-Vorlage übersprungen.
+        if(map.has(a.lemma)||!targetLemmas.has(a.lemma)||a.phrase!=null||a.parts!=null)continue;
         const sp=a.pos,ep=a.pos_end!=null?a.pos_end:a.pos;
         if(sp>=wds.length)continue;
         let tSent,lsp,lep;
@@ -3503,7 +3523,7 @@ function App({data}){
         const va=chap?.[String(v.n)];
         if(va){
           for(let p=0;p<allWords.length;p++){
-            if(va.some(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos)&&(a.pos_end!=null||annoStep(a.level,a.lemma)>userStep||tappedWords.has(a.lemma))&&(unknownWords.has(a.lemma)||a.pos_end!=null)&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
+            if(va.some(a=>a.pos!=null&&annoCovers(a,p)&&(annoIsMulti(a)||annoStep(a.level,a.lemma)>userStep||tappedWords.has(a.lemma))&&(unknownWords.has(a.lemma)||annoIsMulti(a))&&!learnedWords.has(a.lemma)))unknownPositions.push(p);
           }
         }
       } else {
@@ -3524,7 +3544,7 @@ function App({data}){
             const chap=annotations[bookName]?.[String(chapNum)];
             const va=chap?.[String(v.n)];
             if(!va)return[];
-            return positions.map(p=>{const a=va.find(a=>a.pos!=null&&p>=a.pos&&p<=(a.pos_end??a.pos));return a?{form:a.form,lemma:a.lemma,de:a.de}:null}).filter(Boolean);
+            return positions.map(p=>{const a=va.find(a=>a.pos!=null&&annoCovers(a,p));return a?{form:a.form,lemma:a.lemma,de:a.de}:null}).filter(Boolean);
           }
           return positions.map(p=>{const c=normalize(allWords[p]);const e=vocab[c];return e?{form:allWords[p],lemma:c,de:e.de}:{form:allWords[p],lemma:c,de:''}}).filter(w=>w.de);
         };
@@ -4639,7 +4659,7 @@ function App({data}){
               const anno=result.anno;
               const role=result.role; // 'single','start','middle','end'
               const key=anno.lemma;
-              const isPhrase=anno.pos_end!=null;
+              const isPhrase=annoIsMulti(anno);
               const isAboveLevel=annoStep(anno.level,anno.lemma)>userStep;
               const isTapped=tappedWords.has(key);
               if(isAboveLevel||isTapped){
