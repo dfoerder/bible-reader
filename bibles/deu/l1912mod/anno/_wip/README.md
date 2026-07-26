@@ -26,6 +26,5 @@ und die Datei hier kann gelöscht werden.
 
 | Datei | Buch | Kapitel | Verse | Einträge | fehlt noch |
 |---|---|---|---|---|---|
-| `ch12_verse1-28.json` | Lukas (42) | 12 | 1–28 von 59 | 687 | 29–59 |
 | `ch22_verse1-8.json` | Lukas (42) | 22 | 1–8 von 71 | 136 | 9–71 |
-| `ch9_verse1-16.json` | Lukas (42) | 9 | 1–16 von 62 | 386 | 17–62 |
+| `ch9_verse1-40.json` | Lukas (42) | 9 | 1–40 von 62 | 908 | 41–62 |
