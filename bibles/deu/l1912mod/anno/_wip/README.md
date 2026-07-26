@@ -24,7 +24,4 @@ und die Datei hier kann gelöscht werden.
 
 ## Aktueller Inhalt
 
-| Datei | Buch | Kapitel | Verse | Einträge | fehlt noch |
-|---|---|---|---|---|---|
-| `ch22_verse1-8.json` | Lukas (42) | 22 | 1–8 von 71 | 136 | 9–71 |
-| `ch9_verse1-40.json` | Lukas (42) | 9 | 1–40 von 62 | 908 | 41–62 |
+Zurzeit leer — alle geretteten Fragmente sind in fertige Kapitel eingegangen.
