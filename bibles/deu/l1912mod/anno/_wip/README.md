@@ -29,3 +29,4 @@ und die Datei hier kann gelöscht werden.
 | `ch1_verse1-30.json` | Lukas (42) | 1 | 1–30 von 80 | 604 | 31–80 |
 | `ch12_verse1-20.json` | Lukas (42) | 12 | 1–20 von 59 | 486 | 21–59 |
 | `ch22_verse1-8.json` | Lukas (42) | 22 | 1–8 von 71 | 136 | 9–71 |
+| `ch9_verse1-8.json` | Lukas (42) | 9 | 1–8 von 62 | 158 | 9–62 |
