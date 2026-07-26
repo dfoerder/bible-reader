@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Projekt-Dokumentation
 
-Immer alle fünf verlinkten Dateien lesen wenn `projekt.md` geöffnet wird:
+Immer alle sechs verlinkten Dateien lesen wenn `projekt.md` geöffnet wird:
 - `projekt-ziele.md` — Funktionsspezifikation und Kernlogik
 - `projekt-regeln.md` — Deployment-Regeln
 - `projekt-log.md` — Änderungshistorie
 - `projekt-arbeitspakete.md` — Offene Aufgaben / App-Store-Checkliste
 - `projekt-json-konsolidierung.md` — Datei-Architektur
+- `projekt-annotation-deutsch.md` — Deutsche Annotation (l1912mod → en/es/fr/it)
 
 ## Deployment
 
