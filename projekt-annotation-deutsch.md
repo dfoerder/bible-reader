@@ -273,6 +273,12 @@ Restverse und liest die fertigen Teildateien als Vorlage.
 **Kapitel über ~55 Verse** gehen von vornherein an zwei Agenten mit halber
 Verszahl, nicht erst nach einem Abbruch.
 
+**Ziffern als Token.** Johannes 2,20 („46 Jahre") enthält das einzige
+Ziffern-Token im bisher bearbeiteten Text. Es bekommt einen regulären Eintrag
+mit „46" in allen vier Sprachen — anders als der Gedankenstrich, der
+übersprungen wird: eine Zahl ist Inhalt, kein Satzzeichen, und ausgeschriebene
+Zahlwörter (`vierzehn` → *fourteen*) werden ebenfalls glossiert.
+
 **Commit-Nachrichten gegen die Build-Ausgabe prüfen.** Dreimal habe ich den
 Inhalt zu niedrig angegeben, weil beim Bauen bereits ein weiteres fertiges
 Kapitel vorlag, dessen Agent sich noch nicht gemeldet hatte. Inhaltlich war nie
