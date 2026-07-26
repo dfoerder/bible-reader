@@ -146,6 +146,12 @@ Unsinn. Heuristiken:
   mehrwortiges Inhaltswort bekommen. Positivliste für echte periphrastische
   Entsprechungen (frz. Spaltsatz-Verneinung, agentivisches „von").
 - **Platzhalter und Klammer-Tags**: `-`, leer, `(futuro)`.
+- **Fremdsprachige Zeichen**: ein französisches `à` im spanischen Feld, ein `ñ`
+  im französischen. Zweimal ist einem Agenten eine Glosse in der falschen
+  Sprachspalte gelandet (Joh 8,26 und 13,37) — strukturell unauffällig,
+  inhaltlich falsch. Die Prüfung vergleicht gegen den Zeichenvorrat der
+  jeweiligen Sprache; der ganze Bestand ist darunter sauber, einziger legitimer
+  Treffer war das englische Lehnwort *fiancée* (Positivliste).
 
 **3. Gegenrechnung pro Buch** — Tokens im Quelltext gegen Einzelwort-Einträge;
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
