@@ -14,10 +14,11 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 |---|---|---|---|---|---|
 | Matthäus (40) | 28/28 | 1071 | 22 780 | 629 | 464 |
 | Markus (41) | 16/16 | 678 | 14 235 | 434 | 346 |
-| Lukas (42) | in Arbeit | — | — | — | — |
+| Lukas (42) | 24/24 | 1151 | 24 552 | 609 | 521 |
+| Johannes (43) | in Arbeit | — | — | — | — |
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
-README dort. Die App lädt diesen Ordner nie.
+README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
 
 ## Datenformat
 
@@ -103,6 +104,20 @@ einer neuen Sitzung neu anzulegen. Die Kernstücke:
 | `gen_mt1.validate()` | Struktur-Validator (Vollständigkeit, Formen, Spannen) |
 | `qa.py [pfad]` | inhaltliche Heuristiken gegen verrutschte Zuordnungen |
 | `levels.py` | Level-Vereinheitlichung, wird vom Build aufgerufen |
+| `lexicon.py <nr> <kap> <von> <bis> <ziel>` | gefilterter Lexikon-Extrakt für einen Versbereich |
+| `selfcheck.py <nr> <kap> <datei> [von bis]` | Validator als Kommandozeilenaufruf für die Agenten |
+| `crosscheck.py <datei> <grenze…>` | Abschnittsgrenzen: welche Inhaltswörter weichen links und rechts ab |
+
+`lexicon.py` und `selfcheck.py` sind entstanden, weil sonst jeder Agent beides
+selbst erfindet — der Extrakt wurde mal vollständig gebaut (siehe Fehlerfälle),
+mal falsch gefiltert. Zentral gelöst ist es ein Aufruf im Prompt. `lexicon.py`
+zieht aus **allen** vorhandenen Anno-Dateien, aufsteigend nach Buchnummer, und
+nimmt neue Bücher von selbst auf.
+
+`crosscheck.py` prüft, was bei einem in Hälften geteilten Kapitel
+auseinanderlaufen kann. Funktionswörter blendet es aus: Artikel, Pronomen und
+Präpositionen weichen legitim ständig ab (Genus der Zielsprache, syntaktische
+Rolle) und würden die echten Fälle zudecken.
 
 `buildbook.py` nimmt ein Kapitel **nur** auf, wenn es vollständig ist und der
 Validator es durchwinkt; unvollständige Stände (laufender Agent) werden mit
@@ -134,7 +149,19 @@ Unsinn. Heuristiken:
 
 **3. Gegenrechnung pro Buch** — Tokens im Quelltext gegen Einzelwort-Einträge;
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
-Matthäus: 21 699 − 21 687 = 12. Markus: 13 461 − 13 455 = 6. Beide stimmen.
+Matthäus: 21 699 − 21 687 = 12. Markus: 13 461 − 13 455 = 6. Lukas:
+23 423 − 23 422 = 1 (der Gedankenstrich in 6,9). Alle drei stimmen.
+
+**4. Abschnittsgrenzen** (`crosscheck.py`) — nur bei Kapiteln, die zwei Agenten
+in Hälften bearbeitet haben. Es findet keine Fehler, sondern Divergenzen, die
+man ansehen muss: In Lukas waren es zwischen 2 und 32 Inhaltswörter je Kapitel,
+durchweg berechtigte Kontextvarianten (`hören` als *hear* vs. *listen*, `redete`
+punktuell vs. durativ). Kein einziger Fall war eine verrutschte Zuordnung.
+
+**5. Vollständigkeit gegen den Quelltext** — beim Abschluss eines Buches
+zusätzlich prüfen, dass jedes Kapitel und jeder Vers des Quelltextes in der
+Anno-Datei steht. Der Validator prüft nur, was da ist; ein komplett fehlendes
+Kapitel fällt ihm nicht auf.
 
 ### Level-Abgleich
 
@@ -181,7 +208,14 @@ den nur die Vollständigkeitsprüfung gegen den Quelltext aufgedeckt hat.
 Matthäus ist der Maßstab fürs ganze NT. Ein Markus-Agent zieht sein Lexikon aus
 Matthäus, nicht aus dem eigenen Buch — sonst bekäme dieselbe Perikope in zwei
 Evangelien verschiedene Glossen. Die Abdeckung lag über alle Markus-Kapitel
-zwischen 91 % und 98 %.
+zwischen 91 % und 98 %, in Lukas zwischen 75 % (Kapitel 3 mit dem Stammbaum)
+und 92 %, im ersten Johannes-Kapitel bei 90 %.
+
+Jedem Agenten gehört im Prompt gesagt, **welche Parallelstellen** sein Kapitel
+hat („Lukas 20 ist parallel zu Markus 12 und Matthäus 22"). Das Lexikon liefert
+nur Wortformen; welche Perikope schon einmal übersetzt wurde, sieht ein Agent
+daran nicht. Mit dem Hinweis übernehmen die Agenten ganze Verse wörtlich, ohne
+ihn erfinden sie neben dem Bestand her.
 
 Entscheidend ist die Grenze: **Die Vorgabe gilt für dieselbe Bedeutung, nicht
 für dieselbe Buchstabenfolge.** Beispiele, die Agenten korrekt abweichend
@@ -195,6 +229,26 @@ gelöst haben:
 | `vergeben` | *forgive* | *zuteilen* (Mt 20,23) |
 | `Arme` | Adjektiv *poor* | Körperteil *arm* (Mk 10,16) |
 | `Gadarener` | Mt hat „Gergesener" | anderer Name im Markus-Text |
+| `Leib` | *body* | Mutterleib *womb* (Lk 1,41) |
+| `erließ` | Schulderlass *canceled* | eine Anordnung erlassen *issued* (Lk 2,1) |
+| `Geist` | *spirit* | Gespenst *ghost* (Lk 24,37) |
+| `Kraft` | *power* | Körperkraft *strength* (Lk 10,27) |
+| `sieben` | Zahlwort *seven* | Verb *sift* (Lk 22,31) |
+| `Flut` | Überschwemmung | Sintflut *deluge* (Lk 17,27) |
+
+### Uneinheitlichkeiten im Bestand
+
+Zweimal hat ein Agent nicht bei sich, sondern **im Bestand** etwas gefunden,
+das zweigleisig lief. Beides ist korpusweit korrigiert worden:
+
+| Wort | Befund | Auflösung |
+|---|---|---|
+| `Bund` | Lk 1,72 es *alianza*, Mt 26,28 und Mk 14,24 *pacto* | auf Matthäus vereinheitlicht |
+| `Schuhe` | Mt 3,11 und Mk 1,7 fr *souliers* / it *calzari*, vier andere Stellen *sandales* / *sandali* | auf die Mehrheitsform (4:2) vereinheitlicht |
+
+Beim zweiten Fall waren auch die **Kapitelquellen im Scratchpad** zu ändern,
+nicht nur die gebauten Dateien — sonst wäre die Korrektur beim nächsten Neubau
+von Matthäus und Markus wieder verschwunden.
 
 ## Gelernte Fehlerfälle
 
@@ -222,7 +276,17 @@ Verszahl, nicht erst nach einem Abbruch.
 **Commit-Nachrichten gegen die Build-Ausgabe prüfen.** Dreimal habe ich den
 Inhalt zu niedrig angegeben, weil beim Bauen bereits ein weiteres fertiges
 Kapitel vorlag, dessen Agent sich noch nicht gemeldet hatte. Inhaltlich war nie
-etwas falsch, aber die Beschreibung hinkte hinterher.
+etwas falsch, aber die Beschreibung hinkte hinterher. In Lukas ist es zweimal
+anders passiert: Zahl in die Commit-Nachricht geschrieben, **bevor** das
+Zählskript gelaufen war. Erst rechnen, dann schreiben — sonst steht eine
+erfundene Zahl im Log.
+
+**Das Prüfskript kann selbst falsch liegen.** `qa.py` hat bei Lukas 16,15
+angeschlagen („das ist Gott ein Gräuel", fr *pour Dieu*). Die Glosse war als
+Dativ richtig; die Präfix-Liste des Eigennamen-Kanarienvogels kannte nur `à/au/
+de`, nicht `pour`, während en `to`, es `para` und it `per` längst drin waren.
+Bei einem Treffer also erst die Stelle ansehen, dann entscheiden, wer den
+Fehler hat.
 
 ## Commit-Schema
 
@@ -232,7 +296,7 @@ Deployment. Committet wird nur, was der Validator durchgewunken hat.
 
 ## Offen
 
-- Lukas fertigstellen, dann Johannes, Apostelgeschichte, Offenbarung, Briefe
+- Johannes fertigstellen, dann Apostelgeschichte, Offenbarung, Briefe
 - Sehr kurze Bücher (Philemon, 2./3. Johannes, Judas — je unter 600 Wörter)
   kann je ein Agent komplett übernehmen statt kapitelweise
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
