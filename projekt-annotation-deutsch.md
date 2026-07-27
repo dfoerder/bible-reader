@@ -78,6 +78,15 @@ mindestens zwei Positionen, nie zusammenhängend (dann `pos_end`). `form` sind
 die Tokens an genau diesen Positionen — also „stand auf", nicht „stand Joseph
 auf". Wörter dazwischen gehören nicht dazu und behalten ihre eigenen Glossen.
 
+**Zwei Klammern an derselben Position.** Ein Kausativ kann zwei Infinitive
+regieren: „Er **ließ** die Wächter **verhören** und **hinrichten**" (Apg 12,19)
+ergibt `ließ verhören` [10,13] und `ließ hinrichten` [10,15]. Beide Einträge
+sind richtig, aber `getAnnotation` nimmt mit `verse.find` die **erste**
+zutreffende Mehrwort-Annotation — an Position 10 ist also nur eine erreichbar,
+die andere über ihre eigene zweite Position. Der Fall ist selten (viermal im
+ganzen Bestand, zuerst Mt 23,7 „lassen sich grüßen / nennen") und verliert
+keine Daten; er ist nur an der geteilten Position nicht vollständig auflösbar.
+
 Mehrwort-Einträge nur, wenn sich die Bedeutung nicht aus den Teilen ergibt:
 trennbare Verben mit Bedeutungsverschiebung (`fing … an`), Funktionsverbgefüge
 (`hatte … Angst`, `steht geschrieben`), feste Wendungen (`auf die Probe
