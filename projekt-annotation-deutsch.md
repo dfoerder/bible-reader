@@ -156,6 +156,10 @@ Unsinn. Heuristiken:
   inhaltlich falsch. Die Prüfung vergleicht gegen den Zeichenvorrat der
   jeweiligen Sprache; der ganze Bestand ist darunter sauber, einziger legitimer
   Treffer war das englische Lehnwort *fiancée* (Positivliste).
+- **Mehrwort-Lemma in finiter Form**: `ließen gehen` statt `gehen lassen`.
+  Die Spezifikation verlangt den Infinitiv; ein Agent hat es in
+  Apostelgeschichte 4 dreimal übersehen, ein nachfolgender es gemeldet. Sonst
+  war der Bestand sauber. `form` bleibt davon unberührt — die ist der Text.
 
 **3. Gegenrechnung pro Buch** — Tokens im Quelltext gegen Einzelwort-Einträge;
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
