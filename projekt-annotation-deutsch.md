@@ -17,10 +17,11 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 | Lukas (42) | 24/24 | 1151 | 24 552 | 609 | 521 |
 | Johannes (43) | 21/21 | 879 | 18 751 | 379 | 273 |
 | Apostelgeschichte (44) | 28/28 | 1006 | 22 361 | 442 | 523 |
-| **Summe** | **117** | **4785** | **102 679** | **2493** | **2127** |
+| Offenbarung (66) | 22/22 | 405 | 10 627 | 169 | 98 |
+| **Summe** | **139** | **5190** | **113 306** | **2662** | **2225** |
 
-Damit sind die vier Evangelien und die Apostelgeschichte vollständig.
-Als Nächstes die Offenbarung oder die Briefe.
+Damit sind die vier Evangelien, die Apostelgeschichte und die Offenbarung
+vollständig. Es fehlen die 21 Briefe (45–65): 121 Kapitel, 2764 Verse.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
@@ -119,6 +120,8 @@ Repo — beim Fortsetzen in einer neuen Sitzung neu anzulegen. Die Kernstücke:
 | `qa.py [pfad]` | inhaltliche Heuristiken gegen verrutschte Zuordnungen |
 | `levels.py` | Level-Vereinheitlichung, wird vom Build aufgerufen |
 | `lexicon.py <nr> <kap> <von> <bis> <ziel>` | gefilterter Lexikon-Extrakt für einen Versbereich |
+| `BINDUNGEN_OFFB.md` | Glossen-Bindungen der Offenbarung, gegen den Bestand geprüft |
+| `BINDUNGEN_BRIEFE.md` | dasselbe für die Briefe, mit vorab gemessenen Kollisionen |
 | `selfcheck.py <nr> <kap> <datei> [von bis]` | Validator als Kommandozeilenaufruf für die Agenten |
 | `crosscheck.py <datei> <grenze…>` | Abschnittsgrenzen: welche Inhaltswörter weichen links und rechts ab |
 
@@ -175,14 +178,87 @@ Unsinn. Heuristiken:
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
 Matthäus: 21 699 − 21 687 = 12. Markus: 13 461 − 13 455 = 6. Lukas:
 23 423 − 23 422 = 1 (der Gedankenstrich in 6,9). Johannes: 18 109 − 18 099 = 10.
-Apostelgeschichte: 21 396 − 21 396 = 0 — sie enthält als einziges bisher
-bearbeitetes Buch kein alleinstehendes Satzzeichen. Alle fünf stimmen.
+Apostelgeschichte: 21 396 − 21 396 = 0 — sie enthält als einziges Buch kein
+alleinstehendes Satzzeichen. Offenbarung: 10 360 − 10 349 = 11. Alle sechs
+stimmen.
 
 **4. Abschnittsgrenzen** (`crosscheck.py`) — nur bei Kapiteln, die zwei Agenten
 in Hälften bearbeitet haben. Es findet keine Fehler, sondern Divergenzen, die
 man ansehen muss: In Lukas waren es zwischen 2 und 32 Inhaltswörter je Kapitel,
 durchweg berechtigte Kontextvarianten (`hören` als *hear* vs. *listen*, `redete`
 punktuell vs. durativ). Kein einziger Fall war eine verrutschte Zuordnung.
+
+### Kollisionen: der Hauptfehlertyp der Offenbarung
+
+In den Evangelien war der typische Fehler die **verrutschte Zuordnung**. In der
+Offenbarung war es etwas anderes: **zwei verschiedene deutsche Wörter, die
+dieselbe Glosse bekommen** und im Lesefluss ununterscheidbar werden. Das Buch
+häuft Synonyme in Doxologien, Viererformeln und Ständelisten, während der
+Bestand aus den Evangelien sie oft gleich übersetzt.
+
+Vierzehn Fälle sind aufgetreten. Sie zerfallen in zwei Klassen:
+
+**Die Kollision entsteht durch das neue Buch** — dann wird sie dort aufgelöst:
+
+| Paar | Grund | Auflösung |
+|---|---|---|
+| `Schale` ↔ `Kelch` | Schale war *platter* (Mt 23), wird als Zornschale *copa/coupe* | Kelch → *cáliz/calice* |
+| `Herrschaft` ↔ `Reich` | beide it *regno* | Herrschaft → *dominio* |
+| `Unterwelt` ↔ `Totenreich` | die Offenbarung hat **drei** Wörter für den Hades (dazu `Hölle` 1,18) | Unterwelt → *underworld/inframundo* |
+| `siegen` ↔ `überwinden` | beide *vencer/vaincre/vincere* | siegen → *triumph/triunfar* |
+| `Völker` ↔ `Nationen` | Bestandsmehrheit gab beiden *nations* | Völker → *peoples/pueblos* |
+| `Plage` ↔ `Geschwür` | beide it *piaghe* | Geschwür → *ulcere* |
+| `Mühle` ↔ `Mühlstein` | beide fr *meule*, in 18,21 f. nacheinander | Mühle → *moulin* |
+
+**Die Kollision steckt schon im Bestand** — dann wird sie korpusweit korrigiert,
+inklusive der Kapitelquellen im Scratchpad:
+
+| Paar | Befund | Auflösung |
+|---|---|---|
+| `Ehre` ↔ `Herrlichkeit` | beide *glory*; fünf NT-Verse stellen sie nebeneinander (Röm 2,7 · 2,10 · 1Petr 1,7 · 2Petr 1,17 · Offb 21,26) | Ehre → *honor/honra/honneur/onore*, 50 Einträge in vier Büchern |
+| `Becher` ↔ `Kelch` ↔ `Schale` | Becher war 5:3 gespalten | Becher → *goblet/vaso/gobelet/bicchiere* |
+
+Der `Ehre`-Fall ist der lehrreichste. In der Offenbarung hatte ich ihn mit der
+Bestandsmehrheit 14:1 **falsch** entschieden — die Mehrheit stammt aus den
+Evangelien, wo `Herrlichkeit` selten danebensteht. Erst die Vorbereitung der
+Briefe hat es aufgedeckt. **Eine Bestandsmehrheit ist nur dann ein Argument,
+wenn die Belege aus vergleichbaren Kontexten stammen.**
+
+Nicht aufgelöst wurden Paare, die **nirgends im NT im selben Vers stehen**:
+`Gericht` ↔ `Urteil` (null Verse), `Knecht` ↔ `Diener` (im Französischen beide
+*serviteur*, aber korpusweit so und nie zusammen). Eine buchlokale Sonderlösung
+hätte das Buch gegen die anderen inkonsistent gemacht.
+
+**Für die Briefe ist der Test vorgezogen worden**: statt die Kollisionen
+einzusammeln, habe ich für 30 Synonymgruppen ausgezählt, welche Wörter in den
+21 Briefen tatsächlich im selben Vers vorkommen. Ergebnis: 34 Paare mit
+Belegstelle, alle vorab aufgelöst in `BINDUNGEN_BRIEFE.md`. Die aufwendigsten
+sind `Kraft`/`Macht`/`Stärke` (Kol 1,11 · Eph 1,19 · 2Petr 2,11) und
+`Weisheit`/`Erkenntnis`/`Einsicht`/`Verstand`/`Klugheit` (Röm 11,33 · Kol 1,9 ·
+1Kor 1,19).
+
+### Prompt-Hinweise sind Hypothesen, keine Vorgaben
+
+In der Offenbarung lagen meine Hinweise **über dreißigmal** daneben, weil sie
+aus der Bibelkenntnis stammen und nicht aus dem modernisierten Text: der
+l1912mod kennt kein `Malzeichen` (überall `Zeichen`), keine `Sichel` in 14,17 ff.
+(`Winzermesser`), kein `Büchlein` (`Schriftrolle`), keinen `Ankläger` (`Verkläger`),
+keinen `Adler` in 8,13 (`Engel`), kein `Sardis` unter den Edelsteinen (`Karneol`);
+die Warenliste in 18,12 f. wich zur Hälfte ab, und 11,9 und 13,7 haben nur drei
+statt vier Gliedern. Jeder dieser Fälle wurde von einem Agenten gemeldet, nicht
+von mir gefunden. Der Satz **„Der Quelltext hat immer recht"** gehört deshalb in
+jeden Prompt, zusammen mit der Aufforderung, Abweichungen zu melden statt ihnen
+zu folgen.
+
+### Listen sind die riskanteste Stelle
+
+Aufzählungen gleicher Bauart — zwölf Stämme (7,5–8), dreißig Waren (18,12 f.),
+zwölf Edelsteine (21,19 f.) — sind der wahrscheinlichste Ort für eine um eine
+Position verrutschte Zuordnung, und strukturell fällt das nicht auf. Bewährt
+hat sich, was drei Agenten unabhängig entwickelt haben: ein **eigenes
+Prüfskript mit neu getippter Erwartungsliste**, das die Position jedes
+Listenglieds aus dem Quelltext ableitet und den Eintrag dort dagegenhält. In
+allen drei Fällen null Abweichungen.
 
 Dasselbe Verfahren trägt auch **zwischen zwei parallel bearbeiteten Kapiteln**,
 wenn sie ein gemeinsames Sachfeld haben. Apostelgeschichte 27 und 28 teilen das
@@ -394,7 +470,11 @@ auf.
 
 ## Offen
 
-- Offenbarung und Briefe (45–66)
+- Die 21 Briefe (45–65): 121 Kapitel, 2764 Verse. Römer ist für sie der
+  Maßstab, so wie Matthäus für die Evangelien — sein Vokabular tragen alle
+  weiteren Briefe. Die Abdeckung durch den vorhandenen Bestand liegt bei nur
+  53 % (Offenbarung: 70 %), weil argumentative Prosa einen anderen Wortschatz
+  hat als Erzählung.
 - Sehr kurze Bücher (Philemon, 2./3. Johannes, Judas — je unter 600 Wörter)
   kann je ein Agent komplett übernehmen statt kapitelweise
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
