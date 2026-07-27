@@ -16,10 +16,11 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 | Markus (41) | 16/16 | 678 | 14 235 | 434 | 346 |
 | Lukas (42) | 24/24 | 1151 | 24 552 | 609 | 521 |
 | Johannes (43) | 21/21 | 879 | 18 751 | 379 | 273 |
-| **Summe** | **89** | **3779** | **80 318** | **2051** | **1604** |
+| Apostelgeschichte (44) | 28/28 | 1006 | 22 361 | 442 | 523 |
+| **Summe** | **117** | **4785** | **102 679** | **2493** | **2127** |
 
-Damit sind die vier Evangelien vollständig. Als Nächstes die
-Apostelgeschichte (44).
+Damit sind die vier Evangelien und die Apostelgeschichte vollständig.
+Als Nächstes die Offenbarung oder die Briefe.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
@@ -107,8 +108,8 @@ die funktionieren Wort für Wort.
 
 ## Werkzeugkette
 
-Liegt im Scratchpad (`scratchpad/mt1/`), **nicht** im Repo — beim Fortsetzen in
-einer neuen Sitzung neu anzulegen. Die Kernstücke:
+Liegt im Scratchpad (`scratchpad/anno/`, früher `scratchpad/mt1/`), **nicht** im
+Repo — beim Fortsetzen in einer neuen Sitzung neu anzulegen. Die Kernstücke:
 
 | Datei | Zweck |
 |---|---|
@@ -174,13 +175,22 @@ Unsinn. Heuristiken:
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
 Matthäus: 21 699 − 21 687 = 12. Markus: 13 461 − 13 455 = 6. Lukas:
 23 423 − 23 422 = 1 (der Gedankenstrich in 6,9). Johannes: 18 109 − 18 099 = 10.
-Alle vier stimmen.
+Apostelgeschichte: 21 396 − 21 396 = 0 — sie enthält als einziges bisher
+bearbeitetes Buch kein alleinstehendes Satzzeichen. Alle fünf stimmen.
 
 **4. Abschnittsgrenzen** (`crosscheck.py`) — nur bei Kapiteln, die zwei Agenten
 in Hälften bearbeitet haben. Es findet keine Fehler, sondern Divergenzen, die
 man ansehen muss: In Lukas waren es zwischen 2 und 32 Inhaltswörter je Kapitel,
 durchweg berechtigte Kontextvarianten (`hören` als *hear* vs. *listen*, `redete`
 punktuell vs. durativ). Kein einziger Fall war eine verrutschte Zuordnung.
+
+Dasselbe Verfahren trägt auch **zwischen zwei parallel bearbeiteten Kapiteln**,
+wenn sie ein gemeinsames Sachfeld haben. Apostelgeschichte 27 und 28 teilen das
+Seefahrtsvokabular; der Vergleich der geteilten Inhaltswörter ergab 42
+Divergenzen, davon 39 legitime Kontextvarianten (Person, Numerus, Tempus,
+`heftig` als Sturm vs. als Streitgespräch) und drei echte Angleichungen. Die
+Funktionswörter müssen dabei ausgeblendet bleiben, sonst verschwinden die drei
+Fälle im Rauschen.
 
 Wirksamer als die Nachkontrolle ist die Vorsorge: Seit Johannes 4 liefert jeder
 Agent einer geteilten Bearbeitung eine **Wortfeld-Liste der Schnittstelle** mit
@@ -304,17 +314,25 @@ Hilfen, keine Vorgaben; der Quelltext hat immer recht.**
 
 ### Uneinheitlichkeiten im Bestand
 
-Zweimal hat ein Agent nicht bei sich, sondern **im Bestand** etwas gefunden,
-das zweigleisig lief. Beides ist korpusweit korrigiert worden:
+Mehrfach hat ein Agent nicht bei sich, sondern **im Bestand** etwas gefunden,
+das zweigleisig lief. Alles ist korpusweit korrigiert worden:
 
 | Wort | Befund | Auflösung |
 |---|---|---|
 | `Bund` | Lk 1,72 es *alianza*, Mt 26,28 und Mk 14,24 *pacto* | auf Matthäus vereinheitlicht |
 | `Schuhe` | Mt 3,11 und Mk 1,7 fr *souliers* / it *calzari*, vier andere Stellen *sandales* / *sandali* | auf die Mehrheitsform (4:2) vereinheitlicht |
+| `Schiff` | Apg 20,13 und 20,38 fr *bateau*, vier andere Stellen *navire* | auf die Mehrheitsform vereinheitlicht |
+| `Gefangener` | Lk 21,24 es *prisioneros*, elf andere Stellen *preso/presos* | auf die Mehrheitsform (11:1) vereinheitlicht |
 
-Beim zweiten Fall waren auch die **Kapitelquellen im Scratchpad** zu ändern,
+Beim `Schuhe`-Fall waren auch die **Kapitelquellen im Scratchpad** zu ändern,
 nicht nur die gebauten Dateien — sonst wäre die Korrektur beim nächsten Neubau
-von Matthäus und Markus wieder verschwunden.
+von Matthäus und Markus wieder verschwunden. Das gilt für jede solche Korrektur.
+
+Der `Gefangener`-Fall ist zusätzlich lehrreich, weil ich ihn selbst ausgelöst
+habe: Ich hatte die Bindung für den Prompt aus der Form `Gefangene` gezogen —
+einem einzigen Beleg, der die Ausnahme war — statt aus dem Lemma über alle
+Formen. Eine Bindung für einen Prompt gehört über das **Lemma** ausgezählt,
+sonst schreibt man einen Ausreißer fort.
 
 ## Gelernte Fehlerfälle
 
@@ -376,7 +394,7 @@ auf.
 
 ## Offen
 
-- Apostelgeschichte (44), dann Offenbarung, Briefe
+- Offenbarung und Briefe (45–66)
 - Sehr kurze Bücher (Philemon, 2./3. Johannes, Judas — je unter 600 Wörter)
   kann je ein Agent komplett übernehmen statt kapitelweise
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
