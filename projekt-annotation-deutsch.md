@@ -15,7 +15,11 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 | Matthäus (40) | 28/28 | 1071 | 22 780 | 629 | 464 |
 | Markus (41) | 16/16 | 678 | 14 235 | 434 | 346 |
 | Lukas (42) | 24/24 | 1151 | 24 552 | 609 | 521 |
-| Johannes (43) | in Arbeit | — | — | — | — |
+| Johannes (43) | 21/21 | 879 | 18 751 | 379 | 273 |
+| **Summe** | **89** | **3779** | **80 318** | **2051** | **1604** |
+
+Damit sind die vier Evangelien vollständig. Als Nächstes die
+Apostelgeschichte (44).
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
@@ -156,13 +160,25 @@ Unsinn. Heuristiken:
 **3. Gegenrechnung pro Buch** — Tokens im Quelltext gegen Einzelwort-Einträge;
 die Differenz muss exakt der Zahl der alleinstehenden Satzzeichen entsprechen.
 Matthäus: 21 699 − 21 687 = 12. Markus: 13 461 − 13 455 = 6. Lukas:
-23 423 − 23 422 = 1 (der Gedankenstrich in 6,9). Alle drei stimmen.
+23 423 − 23 422 = 1 (der Gedankenstrich in 6,9). Johannes: 18 109 − 18 099 = 10.
+Alle vier stimmen.
 
 **4. Abschnittsgrenzen** (`crosscheck.py`) — nur bei Kapiteln, die zwei Agenten
 in Hälften bearbeitet haben. Es findet keine Fehler, sondern Divergenzen, die
 man ansehen muss: In Lukas waren es zwischen 2 und 32 Inhaltswörter je Kapitel,
 durchweg berechtigte Kontextvarianten (`hören` als *hear* vs. *listen*, `redete`
 punktuell vs. durativ). Kein einziger Fall war eine verrutschte Zuordnung.
+
+Wirksamer als die Nachkontrolle ist die Vorsorge: Seit Johannes 4 liefert jeder
+Agent einer geteilten Bearbeitung eine **Wortfeld-Liste der Schnittstelle** mit
+— die Begriffe, die über die Grenze laufen, samt gewählter Glosse und Level.
+Das steht so im Prompt. Ein Agent hat von sich aus dazugeschrieben, dass Joh
+12,23 „Zeit" und 12,27 „Stunde" sagt und beides **nicht** angeglichen werden
+darf; genau die Art Fehler, die eine geteilte Bearbeitung sonst erzeugt.
+
+Wo eine Festlegung über Kapitelgrenzen hinweg gilt, gehört sie in den nächsten
+Prompt: Kapitel 14 hat `Tröster` bestimmt, die Kapitel 15 und 16 haben es
+wörtlich übernommen — die Abschiedsreden sind dadurch durchgehend einheitlich.
 
 **5. Vollständigkeit gegen den Quelltext** — beim Abschluss eines Buches
 zusätzlich prüfen, dass jedes Kapitel und jeder Vers des Quelltextes in der
@@ -241,6 +257,37 @@ gelöst haben:
 | `Kraft` | *power* | Körperkraft *strength* (Lk 10,27) |
 | `sieben` | Zahlwort *seven* | Verb *sift* (Lk 22,31) |
 | `Flut` | Überschwemmung | Sintflut *deluge* (Lk 17,27) |
+| `Acht` | *in Acht nehmen* | Zahlwort *eight* (Joh 20,26) |
+| `weiß` | Form von *wissen* | Farbe *white* (Joh 20,12) |
+| `Weide` | Substantiv *pasture* (Joh 10,9) | Imperativ von *weiden* (Joh 21,15) |
+
+### Dasselbe Wort an zwei Stellen desselben Kapitels
+
+Der Bestandsabgleich hilft nicht, wenn dieselbe Buchstabenfolge **innerhalb**
+eines Kapitels verschieden zu lesen ist. Johannes 18 hat das zweimal: `Ich bin
+es` (18,5, Selbstbezeichnung Jesu) bekommt `es` → *he/él/lui/lui* wie in
+Johannes 8, Petrus' Verleugnung `Ich bin es nicht` (18,17) dagegen *it/lo/le/lo*.
+Solche Fälle findet nur die Handstichprobe.
+
+### Anderes deutsches Wort, gleiche Perikope
+
+**Die App glossiert das deutsche Wort, nicht die Perikope.** Wo Johannes einen
+anderen Ausdruck wählt als die Synoptiker, bekommt er die Glossen der
+bedeutungsgleichen Bestandsstelle, aber ein **eigenes Lemma**:
+
+| Johannes | Synoptiker |
+|---|---|
+| `Palast` (18,28) | `Amtsgebäude` (Mt 27,27), `Amtssitz` (Mk 15,16) |
+| `Brauch` (18,39) | `Gewohnheit` (Mt 27,15) |
+| `stritt ab` (18,25) | `verleugnen` |
+| `Mörder` (18,40) | `Räuber` |
+| `Tröster` (14,16) | — (kein synoptisches Gegenstück) |
+| `Herrscher dieser Welt` (14,30) | `Fürst` wäre die geläufige Wendung |
+
+Die letzten beiden sind lehrreich: Ich hatte einem Agenten „Beistand" und
+„Fürst dieser Welt" in den Prompt geschrieben — beides steht nicht im Text. Er
+hat es geprüft, korrigiert und gemeldet. **Perikopen-Hinweise im Prompt sind
+Hilfen, keine Vorgaben; der Quelltext hat immer recht.**
 
 ### Uneinheitlichkeiten im Bestand
 
@@ -306,9 +353,17 @@ Ein Commit je validiertem Kapitel oder Kapitelpaar, ausschließlich auf `dev`,
 **nicht gepusht** — Push und Merge nach `main` macht `deploy.sh` und wäre ein
 Deployment. Committet wird nur, was der Validator durchgewunken hat.
 
+## Neues Buch anfangen
+
+Es ist **kein Eingriff in `index.html` nötig**. Die App lädt Anno-Dateien per
+Buchnummer (`index.html:2555`) und behandelt eine fehlende Datei als „keine
+Glossen"; ein neues Buch erscheint, sobald seine Datei da ist. `lexicon.py`
+zieht ebenfalls über alle vorhandenen Anno-Dateien und nimmt neue von selbst
+auf.
+
 ## Offen
 
-- Johannes fertigstellen, dann Apostelgeschichte, Offenbarung, Briefe
+- Apostelgeschichte (44), dann Offenbarung, Briefe
 - Sehr kurze Bücher (Philemon, 2./3. Johannes, Judas — je unter 600 Wörter)
   kann je ein Agent komplett übernehmen statt kapitelweise
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
