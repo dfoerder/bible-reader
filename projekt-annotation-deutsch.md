@@ -224,6 +224,11 @@ Unsinn. Heuristiken:
 - **Eigennamen-Kanarienvogel**: steht bei „Jesus" etwas anderes als
   *Jesus/Jesús/Jésus/Gesù*, ist die Zuordnung verschoben. Vorangestellte
   Kasus-Präpositionen werden abgestreift („des Hauses Israel" → *of Israel*).
+  **Zwei bekannte Fehltreffer**, beide richtig annotiert: Apg 28,6 („er sei ein
+  Gott" — ein heidnischer Gott) und 2Kor 4,4 („der Gott dieser Welt") tragen im
+  Spanischen und Italienischen bewusst *dios*/*dio* klein. Der Kanarienvogel
+  erwartet dort die Großschreibung. Über den gesamten NT-Bestand sind das die
+  einzigen beiden Treffer.
 - **Wiederholungsläufe**: drei oder mehr aufeinanderfolgende Positionen mit
   identischem Wert.
 - **Funktionswörter mit langer Glosse**: „der"/„und"/„von" dürfen kein
