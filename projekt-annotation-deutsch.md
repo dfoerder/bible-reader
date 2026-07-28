@@ -596,37 +596,26 @@ Glossen"; ein neues Buch erscheint, sobald seine Datei da ist. `lexicon.py`
 zieht ebenfalls über alle vorhandenen Anno-Dateien und nimmt neue von selbst
 auf.
 
+## Kapitelquellen
+
+Die gebauten `<buchNr>_l1912mod_multi.json` entstehen bei jedem Build aus
+Kapiteldateien, die **nicht in diesem Repository** liegen, sondern in
+`../bibles-translations/anno-quellen/deu/l1912mod/<buchNr>/ch<N>.json`
+(Bücher 42–66, rund 20 MB, siehe den README dort).
+
+Sie liegen dort und nicht hier, weil `sync_www.sh` das ganze
+`bibles/`-Verzeichnis ins iOS-Bundle spiegelt — hier wären sie toter
+Ballast, den die App nie lädt. Zum Bauen kopiert man sie nach
+`out/<buchNr>/` im Scratchpad neben `buildbook.py`.
+
+**Matthäus (40) und Markus (41) haben keine Quellen mehr.** Ihr Scratchpad
+existiert nicht mehr; die beiden Bücher lassen sich nicht neu bauen. Was das
+praktisch heißt: der buchübergreifende Level-Abgleich erreicht sie nicht,
+und korpusweite Glossen-Korrekturen (`fixgloss.py`, `remap.py`) treffen bei
+ihnen nur die gebaute Datei — sie halten, solange niemand `buildbook.py 40`
+aufruft, und das darf niemand.
+
 ## Offen
-
-**Die Kapitelquellen liegen nicht im Repository.** Die gebauten
-`<buchNr>_l1912mod_multi.json` entstehen bei jedem Build aus Kapiteldateien im
-Scratchpad des jeweiligen Agentenlaufs. Für **Matthäus und Markus sind sie
-verloren** — die beiden Bücher lassen sich nicht mehr neu bauen, und
-korpusweite Korrekturen müssen dort direkt in der gebauten Datei erfolgen
-(`fixgloss.py`/`remap.py` tun das automatisch, melden für 40/41 aber nur die
-Anno-Datei). Für die Bücher 42–66 existieren die Quellen zurzeit noch, rund
-23 MB, aber nur in einem temporären Verzeichnis.
-
-**Das ist eine offene Entscheidung**, keine Empfehlung: ins Repository
-aufgenommen verdoppeln sie die Datenmenge unter `bibles/deu/l1912mod/`,
-sichern aber die Fähigkeit, das ganze NT neu zu bauen. Solange sie draußen
-bleiben, ist jedes Buch nach dem Verschwinden seines Scratchpads in demselben
-Zustand wie heute Matthäus und Markus.
-
-**Nachzuziehen aus den Agenten-Rückmeldungen** (in
-`BEFUNDE_BRIEFE.md` gesammelt, geprüft, aber bewusst nicht ausgeführt):
-`Lieber` war korpusweit 11:12 gespalten und ist auf die Bindung gezogen;
-offen bleiben kleinere Streuungen bei `Leiden`, `Verwalter`, `Herrscher` und
-`Vorbild`, die jeweils zwei legitime Kontexte haben und nirgends im selben
-Vers stehen.
-
-**Zwei Befunde am Quelltext**, nicht an der Annotation — beide in
-`BEFUNDE_BRIEFE.md` beschrieben: **2Tim 2,17** sagt `Krebs`, wo im
-Griechischen Wundbrand steht (Luther meinte das alte „um sich fressendes
-Geschwür"; heute liest sich das als die Krankheit). **Phlm 2** sagt „an Appia,
-die Liebe" — gemeint ist das substantivierte Adjektiv. Beides ist regelkonform
-glossiert; wenn der Text geändert wird, müssen die betroffenen Kapitel neu
-annotiert werden.
 
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
   `examples.json` analog zur ES-Pipeline (`build_training.py` → Opus-Enrichment

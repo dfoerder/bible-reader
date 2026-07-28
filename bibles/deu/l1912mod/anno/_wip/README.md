@@ -30,13 +30,8 @@ Zurzeit leer — alle geretteten Fragmente sind in fertige Kapitel eingegangen.
 
 ## Wo die Kapitelquellen liegen
 
-Die gebauten `<buchNr>_l1912mod_multi.json` entstehen bei jedem Build aus
-Kapiteldateien, die **nicht im Repository** liegen, sondern im Scratchpad des
-jeweiligen Agentenlaufs. Für **Matthäus und Markus sind sie verloren** — die
-beiden Bücher lassen sich nicht mehr neu bauen, korpusweite Korrekturen müssen
-dort direkt in der gebauten Datei erfolgen. Für die Bücher 42–66 existieren sie
-zurzeit noch (rund 23 MB), aber nur in einem temporären Verzeichnis.
-
-Ob sie ins Repository sollen, ist eine offene Entscheidung: sie verdoppeln die
-Datenmenge unter `bibles/deu/l1912mod/`, sichern aber die Fähigkeit, das ganze
-NT neu zu bauen. Siehe `projekt-annotation-deutsch.md`, Abschnitt „Offen".
+Nicht hier und nicht in diesem Repository, sondern in
+`../bibles-translations/anno-quellen/deu/l1912mod/`. Der Grund steht im README
+dort: `sync_www.sh` spiegelt `bibles/` vollständig ins iOS-Bundle, die Quellen
+wären hier toter Ballast. Matthäus und Markus haben keine Quellen mehr und
+lassen sich nicht neu bauen.
