@@ -1,8 +1,8 @@
 # Deutsche Annotation (l1912mod → en/es/fr/it)
 
 Wort-für-Wort-Annotation der deutschen Bibel mit Übersetzungen nach Englisch,
-Spanisch, Französisch und Italienisch. Begonnen 25.07.2026. Ziel ist das
-vollständige Neue Testament (Bücher 40–66).
+Spanisch, Französisch und Italienisch. Begonnen 25.07.2026, **das Neue
+Testament (Bücher 40–66) ist seit 28.07.2026 vollständig**.
 
 Das ist die **Gegenrichtung** zu den bestehenden Annotationen: Bisher war
 Deutsch immer Gloss-Sprache (WEB-Bibel mit `de`-Feld), hier ist Deutsch der
@@ -10,18 +10,37 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 
 ## Stand
 
-| Buch | Kapitel | Verse | Einträge | Phrasen | Klammern |
-|---|---|---|---|---|---|
-| Matthäus (40) | 28/28 | 1071 | 22 780 | 629 | 464 |
-| Markus (41) | 16/16 | 678 | 14 235 | 434 | 346 |
-| Lukas (42) | 24/24 | 1151 | 24 552 | 609 | 521 |
-| Johannes (43) | 21/21 | 879 | 18 751 | 379 | 273 |
-| Apostelgeschichte (44) | 28/28 | 1006 | 22 361 | 442 | 523 |
-| Offenbarung (66) | 22/22 | 405 | 10 627 | 169 | 98 |
-| **Summe** | **139** | **5190** | **113 306** | **2662** | **2225** |
+**Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
+172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
-Damit sind die vier Evangelien, die Apostelgeschichte und die Offenbarung
-vollständig. Es fehlen die 21 Briefe (45–65): 121 Kapitel, 2764 Verse.
+| Buch | Kapitel | Verse | Einträge |
+|---|---|---|---|
+| Matthäus (40) | 28 | 1071 | 22 780 |
+| Markus (41) | 16 | 678 | 14 235 |
+| Lukas (42) | 24 | 1151 | 24 552 |
+| Johannes (43) | 21 | 879 | 18 751 |
+| Apostelgeschichte (44) | 28 | 1006 | 22 361 |
+| Römer bis Kolosser (45–51) | 71 | 1517 | 32 512 |
+| 1. Thessalonicher (52) | 5 | 89 | 1 806 |
+| 2. Thessalonicher (53) | 3 | 47 | 1 011 |
+| 1. Timotheus (54) | 6 | 113 | 2 212 |
+| 2. Timotheus (55) | 4 | 83 | 1 662 |
+| Titus (56) | 3 | 46 | 935 |
+| Philemon (57) | 1 | 25 | 454 |
+| Hebräer (58) | 13 | 303 | 6 543 |
+| Jakobus (59) | 5 | 108 | 2 270 |
+| 1. Petrus (60) | 5 | 105 | 2 354 |
+| 2. Petrus (61) | 3 | 61 | 1 562 |
+| 1. Johannes (62) | 5 | 105 | 2 386 |
+| 2. Johannes (63) | 1 | 13 | 304 |
+| 3. Johannes (64) | 1 | 15 | 310 |
+| Judas (65) | 1 | 25 | 578 |
+| Offenbarung (66) | 22 | 405 | 10 627 |
+| **Summe** | **269** | **7957** | **172 517** |
+
+Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
+stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
+Satzzeichen). `qa.py` meldet über den gesamten Bestand keine Auffälligkeiten.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
@@ -124,6 +143,54 @@ Repo — beim Fortsetzen in einer neuen Sitzung neu anzulegen. Die Kernstücke:
 | `BINDUNGEN_BRIEFE.md` | dasselbe für die Briefe, mit vorab gemessenen Kollisionen |
 | `selfcheck.py <nr> <kap> <datei> [von bis]` | Validator als Kommandozeilenaufruf für die Agenten |
 | `crosscheck.py <datei> <grenze…>` | Abschnittsgrenzen: welche Inhaltswörter weichen links und rechts ab |
+| `hints.py <nr> [kap]` | Prompt-Hinweise aus dem **Quelltext** statt aus Bibelkenntnis |
+| `konsistenz.py <nr>` | ein Lemma, zwei Lesarten — innerhalb eines Buches und gegen den Bestand |
+| `fixgloss.py show\|showform <lemma>` | alle Lesarten eines Lemmas mit Belegstellen |
+| `remap.py <lemma> <feld> alt=neu …` | korpusweite Korrektur, numerus-erhaltend |
+
+`hints.py`, `konsistenz.py`, `fixgloss.py` und `remap.py` sind für die Bücher
+52–65 entstanden. Sie schließen vier Lücken:
+
+**`hints.py` liest den Text, nicht die Bibelkenntnis.** Es vergleicht die
+Wortformen eines Kapitels gegen den gesamten annotierten Bestand und meldet,
+was dort noch nirgends vorkommt, plus die Verse, in denen zwei Wörter derselben
+Bedeutungsgruppe zusammenstehen. Genau das war in der Offenbarung über
+dreißigmal schiefgegangen. Es hat sofort geliefert: der Text sagt `Wiederkunft`,
+nicht „Ankunft"; Titus benutzt durchgehend `Heiland`, nie `Retter`; `Gnadenthron`
+steht in Hebräer an zwei Stellen in zwei verschiedenen Bedeutungen.
+
+**Achtung, zwei Fallen des Werkzeugs selbst.** Erstens ist die Kollisionsprüfung
+anfangs über Präfixe gelaufen — `Heil` schlug in `Heiligung` an und erfand eine
+Kollision in 2Thess 2,13, die es nicht gibt. Ein Agent hat es gemeldet; die
+Liste ist mit exakter Wortformprüfung neu ausgezählt worden, und dabei kamen
+drei echte Fälle dazu, darunter **1Petr 4,11 als vierter Vers der
+`Macht`-Ausnahme**. Zweitens ist die „noch nicht belegt"-Liste **formbasiert**:
+das Lemma kann über eine andere Form längst im Bestand stehen. Sieben Agenten
+sind darauf hereingefallen, bis der Hinweis im Prompt stand. Beides gehört in
+jeden Prompt, der `hints.py` benutzt.
+
+**`konsistenz.py` schließt die Lücke von `crosscheck.py`.** Das prüft nur zwei
+Hälften **eines** Kapitels; `konsistenz.py` prüft ein ganzes Buch — Abschnitt A
+findet Lemmata mit zwei Lesarten innerhalb des Buches, Abschnitt B Abweichungen
+von der Korpusmehrheit. Numerus, Genus und vorangestellte Kasuspräpositionen
+werden zusammengefasst, sonst besteht der Bericht nur aus Singular/Plural-Paaren.
+Abschnitt B ist auf Substantive und auf Bestandslesarten mit mindestens drei
+Belegen beschränkt: bei Verben und Adjektiven überwiegen Person-, Numerus- und
+Tempusvarianten so stark, dass die echten Fälle im Rauschen verschwinden.
+
+Es hat in jedem Buch etwas gefunden, das kein Agent hätte sehen können, weil
+es zwischen Kapiteln liegt: `Mensch` in 1Tim 4,2 mit der Ausweichglosse aus
+1,10, obwohl das kollidierende `Mann` in dem Vers gar nicht steht · `erkennen`
+in 1Joh 3 mit der `kennen`-Glosse, während der Rest des Buchs sie meidet ·
+`Plan` und `Fundament`, die zwischen Epheser, 2. Timotheus und Hebräer
+auseinandergelaufen waren.
+
+**`fixgloss.py` und `remap.py` machen korpusweite Korrekturen durchführbar.**
+Beide schreiben immer in **beides** — die gebaute Anno-Datei und die
+`out/`-Kapitelquelle. Ohne das ist jede Korrektur beim nächsten Build wieder
+weg; das war vorher Handarbeit und die häufigste Fehlerquelle beim Nachziehen.
+`remap.py` ersetzt feldweise nur exakte Werte und lässt Singular und Plural
+dadurch getrennt.
 
 `lexicon.py` und `selfcheck.py` sind entstanden, weil sonst jeder Agent beides
 selbst erfindet — der Extrakt wurde mal vollständig gebaut (siehe Fehlerfälle),
@@ -250,6 +317,27 @@ von mir gefunden. Der Satz **„Der Quelltext hat immer recht"** gehört deshalb
 jeden Prompt, zusammen mit der Aufforderung, Abweichungen zu melden statt ihnen
 zu folgen.
 
+Bei den Büchern 52–65 ist das trotz `hints.py` weitergegangen — das Werkzeug
+findet unbelegte Wortformen, aber nicht, ob eine Perikope so heißt, wie ich sie
+im Prompt beschreibe. Ein Dutzend Fälle, alle von Agenten gemeldet:
+2Petr 1,5 ff. hat `Geduld` und `Gottesfurcht`, nicht „Ausdauer" und
+„Frömmigkeit" · 1Joh 2,16 sagt `Lust`, nicht „Begierde" (womit die von mir
+befürchtete Kollision gar nicht entsteht) · Jak 3,17 hat **fünf** Tugenden,
+nicht vier · 1Thess 4 kennt weder `Unzucht` noch `Gefäß` noch `entrückt`,
+sondern `sexuelle Unmoral`, `Körper`, `emporgehoben` · 2Tim 4,2 hat den
+Imperativ `Predige`, kein Substantiv `Predigt` · Hebr 12,24 sagt `Mittler`,
+nicht `Vermittler`, und hat keine „Festversammlung" · 3Joh 9 enthält nur zwei
+der fünf Diotrephes-Vorwürfe, die übrigen stehen in V10 · 2Petr 2,16 hat ein
+`Lasttier`, keine „Eselin" · Phlm 11 spielt `unnütz` gegen `Nutzen` aus, nicht
+gegen „nützlich".
+
+Zwei davon waren keine Bibelkenntnis-Fehler, sondern **Fehler meines eigenen
+Werkzeugs**: die Präfix-Kollisionsprüfung erfand `Heil ↔ Rettung` in 2Thess 2,13
+und `Erlösung ↔ Heil` in Hebr 9,12, weil `Heil` in `Heiligung` und `Heiligtum`
+anschlägt. Beide Male hat ein Agent am Vers nachgesehen und widersprochen. Die
+Lehre bleibt dieselbe und gilt auch für automatisch erzeugte Hinweise: **ein
+Prompt-Hinweis ist eine Hypothese, auch wenn ein Skript ihn erzeugt hat.**
+
 ### Listen sind die riskanteste Stelle
 
 Aufzählungen gleicher Bauart — zwölf Stämme (7,5–8), dreißig Waren (18,12 f.),
@@ -323,6 +411,41 @@ Danach validiere ich jedes Kapitel **unabhängig** gegen den Quelltext, baue,
 lasse QA laufen und committe. Die Selbstauskunft eines Agenten reicht nie —
 zweimal war ein als „fertig" gemeldeter Stand in Wahrheit ein Zwischenstand,
 den nur die Vollständigkeitsprüfung gegen den Quelltext aufgedeckt hat.
+
+### Nachrücken statt in Blöcken arbeiten
+
+Bei den Büchern 52–65 hat sich bewährt, die Parallelität **konstant** zu halten:
+sobald ein Agent fertig ist, startet sofort der nächste, statt auf einen ganzen
+Viererblock zu warten. Das kostet nichts und spart bei 51 Kapiteln viel
+Leerlauf, weil ein 40-Verse-Kapitel dreimal so lange braucht wie ein
+14-Verse-Kapitel.
+
+Wichtiger ist der Nebeneffekt: der nächste Agent bekommt die Festlegungen
+seines Vorgängers als **fertige Kapiteldatei** in den Prompt, nicht nur die
+Wortfeld-Liste. Die Reihenfolge ist deshalb kein Detail — ein Buch beginnt mit
+seinem Kapitel 1 („dein Kapitel ist der Maßstab für dieses Buch"), und dessen
+Ergebnis wandert wörtlich in die folgenden Prompts.
+
+Der Bestand wächst dabei sichtbar mit: die Lexikon-Abdeckung lag bei den ersten
+Kapiteln der Thessalonicherbriefe schon bei 92–99 % statt der 53 %, die für die
+Briefe vorhergesagt waren — weil Römer bis Kolosser inzwischen im Lexikon
+stehen.
+
+### Wenn ein Agent mitten im Kapitel stirbt
+
+Vier gleichzeitig laufende Agenten sind an einem Wochen-Nutzungslimit
+abgebrochen. Das abschnittsweise Wegschreiben hat genau das getan, wofür es da
+ist: ein Kapitel war bereits vollständig, von einem zweiten waren elf von
+22 Versen gerettet. Beides ging nach `anno/_wip/`; ein frischer Agent hat das
+Fragment als **Vorlage** gelesen (Terminologie, Level und Namensformen des
+Kapitels standen darin schon fest) und nur die fehlenden Verse ergänzt.
+
+Die Lehre ist nicht neu, aber sie ist erstmals unter Last geprüft: **das
+Wegschreiben nach jedem Abschnitt ist der einzige Schutz**, und `_wip/` ist der
+Ort, an dem ein Fragment auf seinen Nachfolger wartet. Wer den Nachfolger
+ansetzt, muss ihm die Fragmentdatei ausdrücklich zu lesen geben und die
+Selbstprüfung über das **ganze** Kapitel verlangen, nicht nur über die
+Ergänzung.
 
 ### Anschluss an den Bestand
 
@@ -470,13 +593,36 @@ auf.
 
 ## Offen
 
-- Die 21 Briefe (45–65): 121 Kapitel, 2764 Verse. Römer ist für sie der
-  Maßstab, so wie Matthäus für die Evangelien — sein Vokabular tragen alle
-  weiteren Briefe. Die Abdeckung durch den vorhandenen Bestand liegt bei nur
-  53 % (Offenbarung: 70 %), weil argumentative Prosa einen anderen Wortschatz
-  hat als Erzählung.
-- Sehr kurze Bücher (Philemon, 2./3. Johannes, Judas — je unter 600 Wörter)
-  kann je ein Agent komplett übernehmen statt kapitelweise
+**Die Kapitelquellen liegen nicht im Repository.** Die gebauten
+`<buchNr>_l1912mod_multi.json` entstehen bei jedem Build aus Kapiteldateien im
+Scratchpad des jeweiligen Agentenlaufs. Für **Matthäus und Markus sind sie
+verloren** — die beiden Bücher lassen sich nicht mehr neu bauen, und
+korpusweite Korrekturen müssen dort direkt in der gebauten Datei erfolgen
+(`fixgloss.py`/`remap.py` tun das automatisch, melden für 40/41 aber nur die
+Anno-Datei). Für die Bücher 42–66 existieren die Quellen zurzeit noch, rund
+23 MB, aber nur in einem temporären Verzeichnis.
+
+**Das ist eine offene Entscheidung**, keine Empfehlung: ins Repository
+aufgenommen verdoppeln sie die Datenmenge unter `bibles/deu/l1912mod/`,
+sichern aber die Fähigkeit, das ganze NT neu zu bauen. Solange sie draußen
+bleiben, ist jedes Buch nach dem Verschwinden seines Scratchpads in demselben
+Zustand wie heute Matthäus und Markus.
+
+**Nachzuziehen aus den Agenten-Rückmeldungen** (in
+`BEFUNDE_BRIEFE.md` gesammelt, geprüft, aber bewusst nicht ausgeführt):
+`Lieber` war korpusweit 11:12 gespalten und ist auf die Bindung gezogen;
+offen bleiben kleinere Streuungen bei `Leiden`, `Verwalter`, `Herrscher` und
+`Vorbild`, die jeweils zwei legitime Kontexte haben und nirgends im selben
+Vers stehen.
+
+**Zwei Befunde am Quelltext**, nicht an der Annotation — beide in
+`BEFUNDE_BRIEFE.md` beschrieben: **2Tim 2,17** sagt `Krebs`, wo im
+Griechischen Wundbrand steht (Luther meinte das alte „um sich fressendes
+Geschwür"; heute liest sich das als die Krankheit). **Phlm 2** sagt „an Appia,
+die Liebe" — gemeint ist das substantivierte Adjektiv. Beides ist regelkonform
+glossiert; wenn der Text geändert wird, müssen die betroffenen Kapitel neu
+annotiert werden.
+
 - Kein Vokabeltraining für Deutsch: dafür bräuchte es `words.json` +
   `examples.json` analog zur ES-Pipeline (`build_training.py` → Opus-Enrichment
   → `finalize_training.py`) und `build_keepnames.py` für die Eigennamen-Liste
