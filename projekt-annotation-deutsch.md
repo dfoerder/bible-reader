@@ -13,14 +13,18 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 **Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
-**Vom Alten Testament ist 1. Mose vollständig** — 50 Kapitel, 1533 Verse,
-33 780 Einträge (361 Phrasen, 508 Klammern). Abgeschlossen am 29.07.2026.
-Damit sind **28 von 66 Büchern** fertig: 319 Kapitel, 9490 Verse,
-206 297 Einträge. Es fehlen die Bücher 2–39 (877 Kapitel).
+**Vom Alten Testament sind 1. und 2. Mose vollständig.** 1. Mose am 29.07.2026
+(50 Kapitel, 1533 Verse, 33 780 Einträge), 2. Mose am selben Tag (40 Kapitel,
+1213 Verse, 26 318 Einträge). 3. Mose ist begonnen.
+
+Damit sind **29 von 66 Büchern** fertig: 359 Kapitel, 10 703 Verse,
+232 615 Einträge. Es fehlen die Bücher 3–39 (837 Kapitel, rund 20 000 Verse) —
+**mehr als der gesamte bisherige Bestand.**
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 780** |
+| **2. Mose (2)** | **40** | **1213** | **26 318** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -43,7 +47,7 @@ Damit sind **28 von 66 Büchern** fertig: 319 Kapitel, 9490 Verse,
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **269** | **7957** | **172 517** |
-| **Summe gesamt** | **319** | **9490** | **206 297** |
+| **Summe gesamt** | **359** | **10 703** | **232 615** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -52,8 +56,12 @@ Satzzeichen). `qa.py` meldet über den gesamten Bestand keine Auffälligkeiten.
 ## Werkzeuge und Regeln, die aus dem Alten Testament entstanden sind
 
 Die verbindliche Bindungsliste für das AT ist `BINDUNGEN_AT.md` im Werkzeugordner
-— sechzig Abschnitte, einer je Kapitelgruppe. Sie ist beim Annotieren der Genesis
-gewachsen und enthält jetzt:
+— inzwischen **über hundert Abschnitte**, einer je Kapitel. Daneben steht seit
+2. Mose 32 ein `AUFTRAG_AT.md`, das AT-Gegenstück zu `AUFTRAG_BRIEFE.md`: der
+gesamte verbindliche Ablauf an einer Stelle, damit ihn nicht jeder Prompt
+wiederholen muss. Der Prompt enthält dann nur noch, was am Kapitel besonders ist.
+
+Die Datei ist beim Annotieren der Genesis gewachsen und enthält jetzt:
 
 - **Die Kollisionsregel.** Zwei deutsche Wörter, die dieselbe Glosse tragen, sind
   im Lesefluss nicht zu unterscheiden. Aufgelöst wird aber **nur, wo sie
@@ -92,6 +100,45 @@ Neue Prüfskripte im Werkzeugordner:
   nicht nur über die Wortform. Ohne ihn wären mehrfach Wörter neu erfunden worden,
   die längst im Bestand standen. **In Namenskapiteln liefert er allerdings mehr
   Rauschen als Signal** (`Gosen`→`gießen`, `jüngerer`→`Jünger`).
+- **`hilfsverb.py`** — findet Hilfsverben, deren Glosse das Vollverb des
+  Nachbartokens verschluckt. „ich **würde** **sterben**" trug an `würde` die
+  volle Verbform *moriría/mourrais/morirei*, und im Lesefluss stand an beiden
+  Tokens dasselbe Verb. `qa.py` sieht das nicht: strukturell ist der Eintrag
+  perfekt, und die Glossen sind nicht identisch, sondern nur **stammgleich**.
+  Erster Lauf über den gesamten Bestand: vier Verdachtsfälle, **zwei echte
+  Fehler** (1Mo 19,19 · 1Kor 14,25), beide nach dem SPEC-Muster periphrastisch
+  korrigiert (*iba a / allais / stavo per*).
+
+### Die Dubletten von 2. Mose sind Neuformulierungen
+
+Der wichtigste Einzelbefund des zweiten Buches, **von sieben Agenten unabhängig
+vermessen**: die große Dublette 25–31 ↔ 35–40 wiederholt nicht, sie formuliert
+neu. Kapitel 34 weicht an über zwanzig Stellen von seiner Vorlage ab, 35 an 24,
+36 an 22, 37 an 28, 38 an über zwanzig, 39 an über zwanzig — und **Kapitel 40
+weicht innerhalb seiner selbst ab**, Befehl (V1–15) gegen Vollzug (V16–33) an
+elf Stellen.
+
+`Bronze`/`Erz` · `Purpurstoff`/`Purpur` · `Gerät`/`Zubehör` · `Vorhof`/`Hof` ·
+`Pflöcke`/`Pfähle` · `Becken`/`Waschbecken` · `Ständer`/`Fuß` ·
+`Deckplatte`/`Oberseite` · `rundherum` (ein Token) / `rund herum` (zwei) — und
+in 35,31 stehen Adjektive, wo 31,3 Substantive hat. **Wer abschreibt,
+glossiert falsch.**
+
+In 3. Mose 3 hat dasselbe Verfahren in einem Kapitel mit drei Fassungen
+**45 Abweichungsblöcke** gefunden und genau **einen** Vers, der wörtlich
+dreimal identisch dasteht.
+
+### `Fuß` und `Kopf` tragen im Stiftshüttenblock die Bauteillesart
+
+`Fuß` = *sockets/basas/bases/basamenti* (der Sockel), `Kopf` =
+*capitals/capiteles/chapiteaux/capitelli* (das Säulenkapitell). **Zwei
+A1-Körperteilwörter, die im ganzen Bauabschnitt etwas anderes bedeuten** — und
+drei Verse weiter steht „pro Kopf" und meint wieder den Kopf, und 2Mo 40,31
+wäscht Hände und Füße. Beide behalten ihr A1-Level, weil das Level am Lemma
+hängt: eine Anhebung zöge 57 bzw. 66 Körperteil-Einträge mit.
+
+Der Lexikonextrakt bietet für 2. Mose fast nur die Sockel-Lesart an. Wer sie
+übernimmt, macht aus Tischfüßen Sockel, und strukturell fällt nichts auf.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
@@ -192,6 +239,10 @@ Repo — beim Fortsetzen in einer neuen Sitzung neu anzulegen. Die Kernstücke:
 | `lexicon.py <nr> <kap> <von> <bis> <ziel>` | gefilterter Lexikon-Extrakt für einen Versbereich |
 | `BINDUNGEN_OFFB.md` | Glossen-Bindungen der Offenbarung, gegen den Bestand geprüft |
 | `BINDUNGEN_BRIEFE.md` | dasselbe für die Briefe, mit vorab gemessenen Kollisionen |
+| `BINDUNGEN_AT.md` | dasselbe für die Bücher 1–39, ein Abschnitt je Kapitel |
+| `AUFTRAG_AT.md` | der verbindliche Ablauf für ein AT-Kapitel, einmal statt in jedem Prompt |
+| `ausreisser.py [nr …]` | drei Sprachen einig, die vierte weicht ab |
+| `hilfsverb.py [datei …]` | Hilfsverb, dessen Glosse das Vollverb des Nachbartokens verschluckt |
 | `selfcheck.py <nr> <kap> <datei> [von bis]` | Validator als Kommandozeilenaufruf für die Agenten |
 | `crosscheck.py <datei> <grenze…>` | Abschnittsgrenzen: welche Inhaltswörter weichen links und rechts ab |
 | `hints.py <nr> [kap]` | Prompt-Hinweise aus dem **Quelltext** statt aus Bibelkenntnis |
