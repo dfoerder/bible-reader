@@ -13,8 +13,14 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 **Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
+**Vom Alten Testament ist 1. Mose vollständig** — 50 Kapitel, 1533 Verse,
+33 780 Einträge (361 Phrasen, 508 Klammern). Abgeschlossen am 29.07.2026.
+Damit sind **28 von 66 Büchern** fertig: 319 Kapitel, 9490 Verse,
+206 297 Einträge. Es fehlen die Bücher 2–39 (877 Kapitel).
+
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
+| **1. Mose (1)** | **50** | **1533** | **33 780** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -36,11 +42,56 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 | 3. Johannes (64) | 1 | 15 | 310 |
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
-| **Summe** | **269** | **7957** | **172 517** |
+| **Summe NT** | **269** | **7957** | **172 517** |
+| **Summe gesamt** | **319** | **9490** | **206 297** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
 Satzzeichen). `qa.py` meldet über den gesamten Bestand keine Auffälligkeiten.
+
+## Werkzeuge und Regeln, die aus dem Alten Testament entstanden sind
+
+Die verbindliche Bindungsliste für das AT ist `BINDUNGEN_AT.md` im Werkzeugordner
+— sechzig Abschnitte, einer je Kapitelgruppe. Sie ist beim Annotieren der Genesis
+gewachsen und enthält jetzt:
+
+- **Die Kollisionsregel.** Zwei deutsche Wörter, die dieselbe Glosse tragen, sind
+  im Lesefluss nicht zu unterscheiden. Aufgelöst wird aber **nur, wo sie
+  tatsächlich in einem Vers zusammenstehen** — und die Zahl wird über alle 39
+  AT-Bücher ausgezählt, nie geschätzt. Eine Auflösung ohne Kollisionsstelle macht
+  den Bestand nur inkonsistent.
+- **Die Lexikonfalle.** Der Formextrakt zeigt dem nächsten Agenten die
+  Korpusmehrheit. Wo eine Handvoll NT-Belege gegen eine Bindung steht, zieht die
+  Mehrheit den Agenten auf die falsche Seite. Rund vierzig Wörter sind so
+  gefunden und korpusweit korrigiert worden — `HERR`, `Land`, `Knecht`, `Magd`,
+  `Dienerin`, `Mädchen`, `Hütte`, `Vieh`, `Not`, `Kummer`, `Grimm` und andere.
+- **Die Gegenprobe dazu.** Manche Spaltung *sieht aus* wie eine Falle und ist
+  richtig: `Herde` = *herd* sind die Schweine von Gadara, `weiden` = *rule* ist
+  die Hirtenmetapher der Offenbarung, `Ziegenbock` = *young goat* ist das Zicklein
+  aus Lukas 15. **Vor jedem korpusweiten Zug die Belegverse lesen.**
+- **Der Dublettenabgleich.** Wo der Text sich wiederholt (1Mo 20/26, 42/43/44,
+  35/48), deckt der Vergleich Fehler auf, die keine Prüfung findet. Er hat
+  1Mo 20,11 korrigiert und zwei vertauschte Farbwörter zwischen Nachbarkapiteln
+  gefunden.
+- **Homographen.** Achtzehn Fälle, in denen dieselbe deutsche Form zwei
+  Bedeutungen trägt — `Assur`, `Ham`, `Lot`, `Seba`, `Leiter`, `Warte`, `Junges`,
+  `Groschen`, `Mal`, `darum`, `Judas`, `Wagen`, `Serah`, `Becher`, `Lager`,
+  `Füllen`, `weiß`, `Würde`. Jede ist positionsgebunden gelöst.
+- **Keine Namensdeutung ohne hörbare Ableitung.** Siebenundzwanzig Namensstellen
+  von Babel bis Abel-Mizrajim, **keine einzige Ausnahme** — der l1912mod deutet
+  nirgends, und wo Luther transliterierte, übersetzt er (`Machpela` →
+  `Doppelhöhle`, `Mizpa` → `Warte`, `Silo` → `Held`, `Schekel` → `Lot`).
+
+Neue Prüfskripte im Werkzeugordner:
+
+- **`ausreisser.py`** — sucht Fälle, in denen drei Sprachen sich einig sind und
+  die vierte abweicht. Findet Positionsverschiebungen und mechanisch angewandte
+  Grammatikregeln, die `konsistenz.py` prinzipiell nicht sehen kann. Erster Lauf:
+  862 Verdachtsfälle, 44 echte Fehler.
+- **`lexicon.py` mit `"verwandt"`-Abschnitt** — schlägt auch über das Lemma nach,
+  nicht nur über die Wortform. Ohne ihn wären mehrfach Wörter neu erfunden worden,
+  die längst im Bestand standen. **In Namenskapiteln liefert er allerdings mehr
+  Rauschen als Signal** (`Gosen`→`gießen`, `jüngerer`→`Jünger`).
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
