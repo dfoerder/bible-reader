@@ -226,29 +226,57 @@ die funktionieren Wort für Wort.
 
 ## Werkzeugkette
 
-Liegt im Scratchpad (`scratchpad/anno/`, früher `scratchpad/mt1/`), **nicht** im
-Repo — beim Fortsetzen in einer neuen Sitzung neu anzulegen. Die Kernstücke:
+Liegt seit dem 11.08.2026 in **`../bibles-translations/anno-tools/`** und ist
+damit dauerhaft. Vorher lag sie im Scratchpad und war „beim Fortsetzen in einer
+neuen Sitzung neu anzulegen" — genau das ist eingetreten: die gesamte Kette und
+die handgepflegte `BINDUNGEN_AT.md` mit über hundert Kapitelabschnitten sind mit
+dem Scratchpad verschwunden. Sie ist neu gebaut und gegen den vorhandenen
+Bestand geprüft (0 Befunde, alle 29 Bücher bauen byte-identisch neu).
+
+Was der Neubau nicht zurückbringen konnte, ist die handgeschriebene
+Bindungsliste. `bindungen.py` erzeugt sie jetzt **aus den Daten** — die
+Bindungen stecken ohnehin im fertigen Bestand. Der wertvollste Teil, die
+Lexikonfallen, fällt dabei automatisch an.
+
+Die Kernstücke:
 
 | Datei | Zweck |
 |---|---|
+| `common.py` | Pfade, Tokenisierung, Laden von Quelltext, Quellen und Anno-Dateien |
 | `SPEC.md` | verbindliche Spezifikation für die Agenten |
-| `buildbook.py <nr>` | baut die Anno-Datei eines Buches aus den Kapitel-JSONs |
-| `gen_mt1.validate()` | Struktur-Validator (Vollständigkeit, Formen, Spannen) |
-| `qa.py [pfad]` | inhaltliche Heuristiken gegen verrutschte Zuordnungen |
-| `levels.py` | Level-Vereinheitlichung, wird vom Build aufgerufen |
-| `lexicon.py <nr> <kap> <von> <bis> <ziel>` | gefilterter Lexikon-Extrakt für einen Versbereich |
-| `BINDUNGEN_OFFB.md` | Glossen-Bindungen der Offenbarung, gegen den Bestand geprüft |
-| `BINDUNGEN_BRIEFE.md` | dasselbe für die Briefe, mit vorab gemessenen Kollisionen |
-| `BINDUNGEN_AT.md` | dasselbe für die Bücher 1–39, ein Abschnitt je Kapitel |
 | `AUFTRAG_AT.md` | der verbindliche Ablauf für ein AT-Kapitel, einmal statt in jedem Prompt |
-| `ausreisser.py [nr …]` | drei Sprachen einig, die vierte weicht ab |
-| `hilfsverb.py [datei …]` | Hilfsverb, dessen Glosse das Vollverb des Nachbartokens verschluckt |
-| `selfcheck.py <nr> <kap> <datei> [von bis]` | Validator als Kommandozeilenaufruf für die Agenten |
-| `crosscheck.py <datei> <grenze…>` | Abschnittsgrenzen: welche Inhaltswörter weichen links und rechts ab |
+| `buildbook.py <nr>` | baut die Anno-Datei eines Buches aus den Kapitel-JSONs, samt Level-Abgleich |
+| `validate.py <nr>\|alle` | Struktur-Validator und Gegenrechnung über ganze Bücher |
+| `selfcheck.py <nr> <kap> <datei> [von bis]` | derselbe Validator als Agentenaufruf für ein Kapitel |
+| `qa.py <nr>\|alle`, `qa.py --kapitel …` | inhaltliche Heuristiken gegen verrutschte Zuordnungen |
+| `lexicon.py <nr> <kap> [von bis] -o <ziel>` | gefilterter Lexikon-Extrakt für einen Versbereich |
 | `hints.py <nr> [kap]` | Prompt-Hinweise aus dem **Quelltext** statt aus Bibelkenntnis |
 | `konsistenz.py <nr>` | ein Lemma, zwei Lesarten — innerhalb eines Buches und gegen den Bestand |
-| `fixgloss.py show\|showform <lemma>` | alle Lesarten eines Lemmas mit Belegstellen |
+| `fixgloss.py show\|showform <lemma>`, `verse <nr> <kap> <v>` | alle Lesarten eines Lemmas mit Belegstellen |
 | `remap.py <lemma> <feld> alt=neu …` | korpusweite Korrektur, numerus-erhaltend |
+| `bindungen.py` | erzeugt `BINDUNGEN_AT.md` aus dem Bestand, samt Lexikonfallen |
+| `quellen_sync.py <nr>\|alle` | gewinnt Kapitelquellen aus den gebauten Anno-Dateien zurück |
+| `BINDUNGEN_AT.md` | Glossen-Bindungen der Bücher 1–39, erzeugt |
+| `BINDUNGEN_3MOSE.md` | die Opfer- und Kultbegriffe von 3. Mose, von Hand gepflegt |
+
+Noch nicht wieder gebaut sind `crosscheck.py`, `ausreisser.py` und
+`hilfsverb.py`; sie werden erst bei geteilten Kapiteln und beim Buchabschluss
+gebraucht. `levels.py` ist in `buildbook.py` aufgegangen. Die
+`BINDUNGEN_OFFB.md` und `BINDUNGEN_BRIEFE.md` sind mit dem Scratchpad
+verloren — ihre Festlegungen stehen im fertigen Bestand und werden über
+`lexicon.py` und `fixgloss.py` erreicht.
+
+### Der Level-Abgleich hatte einen Aufschaukel-Fehler
+
+Die alte Kette glich Level in vier Durchgängen ab: gleiche Bedeutung, gleiches
+Lemma, gleiche Wortform, dann buchübergreifend. Der Wortform-Durchgang und der
+Lemma-Durchgang **widersprechen einander**, sobald eine Wortform zu zwei
+Lemmata gehört — zwei Läufe hintereinander gaben verschiedene Stände (in
+1. Mose 41 Einträge, in Lukas 37). Der Neubau hat nur noch zwei Durchgänge,
+und der letzte (gleiches Lemma, Korpusmehrheit) partitioniert alles; damit ist
+jedes gebaute Buch ein Fixpunkt. Wortformen mit uneinheitlichem Level werden
+nur noch **gemeldet** — das sind Homographen, und die soll niemand automatisch
+glätten.
 
 `hints.py`, `konsistenz.py`, `fixgloss.py` und `remap.py` sind für die Bücher
 52–65 entstanden. Sie schließen vier Lücken:
@@ -707,15 +735,18 @@ Kapiteldateien, die **nicht in diesem Repository** liegen, sondern in
 
 Sie liegen dort und nicht hier, weil `sync_www.sh` das ganze
 `bibles/`-Verzeichnis ins iOS-Bundle spiegelt — hier wären sie toter
-Ballast, den die App nie lädt. Zum Bauen kopiert man sie nach
-`out/<buchNr>/` im Scratchpad neben `buildbook.py`.
+Ballast, den die App nie lädt. `buildbook.py` liest sie direkt von dort;
+kopiert werden muss nichts mehr.
 
-**Matthäus (40) und Markus (41) haben keine Quellen mehr.** Ihr Scratchpad
-existiert nicht mehr; die beiden Bücher lassen sich nicht neu bauen. Was das
-praktisch heißt: der buchübergreifende Level-Abgleich erreicht sie nicht,
-und korpusweite Glossen-Korrekturen (`fixgloss.py`, `remap.py`) treffen bei
-ihnen nur die gebaute Datei — sie halten, solange niemand `buildbook.py 40`
-aufruft, und das darf niemand.
+**Alle Bücher sind wieder baubar, auch Matthäus und Markus.** Sie galten als
+eingefroren, weil ihre Quellen mit dem Scratchpad verschwunden waren — dasselbe
+war unbemerkt mit **2. Mose 30–40** passiert. Die gebaute Anno-Datei enthält
+aber alles, was die Quelle enthält: `quellen_sync.py` rechnet sie zurück.
+Verloren geht dabei nur, was der Build ohnehin verwirft (Satzzeichen-Einträge)
+oder überschreibt (Level). Seither entstehen alle 29 Bücher byte-identisch neu.
+
+**Nach jedem fertigen Kapitel die Quelle mitcommitten.** Der Verlust ist genau
+dadurch entstanden, dass zwischen Agentenlauf und Commit ein Schritt fehlte.
 
 ## Offen
 
