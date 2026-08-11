@@ -13,18 +13,19 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 **Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
-**Vom Alten Testament sind 1. und 2. Mose vollständig.** 1. Mose am 29.07.2026
-(50 Kapitel, 1533 Verse, 33 780 Einträge), 2. Mose am selben Tag (40 Kapitel,
-1213 Verse, 26 318 Einträge). 3. Mose ist begonnen.
+**Vom Alten Testament sind 1., 2. und 3. Mose vollständig.** 1. Mose am
+29.07.2026 (50 Kapitel, 1533 Verse, 33 780 Einträge), 2. Mose am selben Tag
+(40 Kapitel, 1213 Verse, 26 318 Einträge), **3. Mose am 11.08.2026**
+(27 Kapitel, 859 Verse, 19 644 Einträge). 4. Mose ist begonnen.
 
-Damit sind **29 von 66 Büchern** fertig: 359 Kapitel, 10 703 Verse,
-232 615 Einträge. Es fehlen die Bücher 3–39 (837 Kapitel, rund 20 000 Verse) —
-**mehr als der gesamte bisherige Bestand.**
+Damit sind **30 von 66 Büchern** fertig: 377 Kapitel, 11 562 Verse,
+252 261 Einträge. Es fehlen die Bücher 4–39 (812 Kapitel, rund 19 600 Verse).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 780** |
 | **2. Mose (2)** | **40** | **1213** | **26 318** |
+| **3. Mose (3)** | **27** | **859** | **19 644** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -108,6 +109,68 @@ Neue Prüfskripte im Werkzeugordner:
   Erster Lauf über den gesamten Bestand: vier Verdachtsfälle, **zwei echte
   Fehler** (1Mo 19,19 · 1Kor 14,25), beide nach dem SPEC-Muster periphrastisch
   korrigiert (*iba a / allais / stavo per*).
+
+### 3. Mose: der Prompt-Hinweis ist der unzuverlässigste Teil des Verfahrens
+
+Das dritte Buch hat den Befund aus der Offenbarung in einer Deutlichkeit
+bestätigt, die überrascht hat: **in fast jedem Kapitel lagen mehrere meiner
+Vokabelhinweise daneben** — und zwar nicht bei Randwörtern, sondern bei den
+Leitbegriffen des jeweiligen Kapitels.
+
+| Kapitel | ich schrieb | der Text sagt |
+|---|---|---|
+| 16 | `Sühneort`, `das Allerheiligste`, `sich kasteien`, `Kopfbund` | `Gnadenstuhl`, `das innere Heiligtum`, `fasten`, `Kopfschmuck` — **sieben von acht Hinweisen falsch** |
+| 18 | `Blöße aufdecken`, `Gräuel`, `Unzucht`, `ausspeien` | `mit … schlafen` (19 Satzklammern), `abscheulich`, `Frevel`, `ausstoßen` |
+| 25 | `Erbbesitz`, `einlösen`, `Loskauf`, `Nachlese`, `Kaufpreis` … | `Besitz`, `auslösen`, `Rückkauf`, `Preis` — **sieben Leitbegriffe kommen im ganzen Kapitel nicht vor** |
+| 27 | `Schekel`, `Bann`, `einlösen`, `Zehntel` | `Silberlinge`, `unwiderruflich geweiht`, `auslösen`, `Zehnter` |
+| 11 | `Huf`, `Aas` | `Klaue`, `Kadaver` |
+| 13 | `heller Fleck`, `Grind`, `wildes Fleisch`, `Einschlag`, `Leder` | `weißer Fleck`, `Ausschlag`, `offenes Fleisch`, `Schuss`, `Fell`/`Fellwerk` |
+| 20 | „soll getötet werden", „ihr Blut sei auf ihnen" | schlicht `sterben`, `ausrotten` |
+| 22 | die Mängelliste sei das Gegenstück zu 21,18–20 | die beiden Listen sind **fast disjunkt** |
+
+**Jeder dieser Fälle wurde vom Agenten gemeldet, keiner von mir gefunden.**
+Der Satz „Der Quelltext hat immer recht" ist deshalb kein Zierrat im Prompt,
+sondern die Bedingung dafür, dass Prompt-Hinweise überhaupt nützen dürfen.
+
+### Listen-Prüfskripte: acht Läufe, null Abweichungen
+
+Jedes listenhaltige Kapitel bekam die Auflage, ein **eigenes Prüfskript mit neu
+getippter Erwartungsliste** zu schreiben, das die Position jedes Glieds aus dem
+Quelltext ableitet. Bilanz für 3. Mose: 52 Glieder (Speisegesetze, 11) · 47
+(Verwandtschaftsgrade, 18) · 93 (Kalenderzahlen, 23) · 50 (Tariftafel, 27) ·
+18 (Gebrechen, 21) · 12 (Fettteile, 9) · 10 (Mängel, 22) · 4 (Talion, 24) —
+**keine einzige Abweichung**. Die Tariftafel von Kapitel 27 hatte zusätzlich
+eine Gegenprobe gegen Auslassung, damit die Tabelle nicht durch Weglassen
+sauber wird.
+
+### Was `crosscheck.py` an einer geteilten Kapitelgrenze findet
+
+Drei Kapitel gingen an zwei Agenten (13, 14, 25). Der Abschnittsvergleich
+meldete 28, 18 und 25 Divergenzen — **fast alle legitime Genus- und
+Numerusvarianten, und ein echter Fehler**: `verblasst` trug in 13,6/21/26/28
+maskuline Glossen, obwohl `marca`, `marque`, `quemadura` und `brûlure` feminin
+sind. Die zweite Kapitelhälfte hatte dieselbe Formel richtig. Ohne den
+Vergleich wäre das nicht aufgefallen — der Validator sieht Kongruenz nicht.
+
+### Sieben deutsche Wörter für „ein ewiges Gesetz"
+
+Der l1912mod wechselt in 3. Mose zwischen `Ordnung`, `Recht`, `Gesetz`,
+`Regel`, `Rechtsvorschrift` und — nur in Kapitel 18 — `Satzung` und
+`Rechtsbestimmung`. Alle sieben behalten ihre eigene Glosse. Dasselbe gilt für
+die vier Sühne-Wörter (`sühnen`, `Sühne leisten`, `entsündigen`, `entsühnen`),
+die in 14,52 f. sogar in **benachbarten Versen** verschieden gewählt sind.
+**Der Text unterscheidet, also unterscheidet die Annotation.**
+
+### Was zwei gleichzeitig laufende Agenten kostet
+
+Dreimal haben parallel laufende Kapitel dasselbe neue Wort verschieden
+geprägt: `Webebrust`/`Hebeschulter` (7 gegen 10), `Wahrsager` (19 gegen 20),
+`Feueropfer` und drei weitere Bindungen, die ich selbst falsch vorgegeben
+hatte. Alle drei Fälle waren mechanisch zu heilen, weil die Kapitelquellen
+vorliegen — aber sie sind der Preis der Parallelität und **müssen beim
+Einsammeln aktiv gesucht werden**; kein Werkzeug meldet sie von allein.
+Die Gegenprobe: `Webeopfer` haben zwei Agenten unabhängig **identisch**
+gewählt.
 
 ### Die Dubletten von 2. Mose sind Neuformulierungen
 
