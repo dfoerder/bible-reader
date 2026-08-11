@@ -13,19 +13,21 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 **Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
-**Vom Alten Testament sind 1., 2. und 3. Mose vollständig.** 1. Mose am
+**Vom Alten Testament sind 1. bis 4. Mose vollständig.** 1. Mose am
 29.07.2026 (50 Kapitel, 1533 Verse, 33 780 Einträge), 2. Mose am selben Tag
-(40 Kapitel, 1213 Verse, 26 318 Einträge), **3. Mose am 11.08.2026**
-(27 Kapitel, 859 Verse, 19 644 Einträge). 4. Mose ist begonnen.
+(40 Kapitel, 1213 Verse, 26 318 Einträge), **3. Mose und 4. Mose am
+11.08.2026** (27 Kapitel, 859 Verse, 19 644 Einträge bzw. 36 Kapitel,
+1288 Verse, 26 189 Einträge). 5. Mose ist begonnen.
 
-Damit sind **30 von 66 Büchern** fertig: 377 Kapitel, 11 562 Verse,
-252 261 Einträge. Es fehlen die Bücher 4–39 (812 Kapitel, rund 19 600 Verse).
+Damit sind **31 von 66 Büchern** fertig: 413 Kapitel, 12 850 Verse,
+278 450 Einträge. Es fehlen die Bücher 5–39 (776 Kapitel, rund 18 300 Verse).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 780** |
 | **2. Mose (2)** | **40** | **1213** | **26 318** |
 | **3. Mose (3)** | **27** | **859** | **19 644** |
+| **4. Mose (4)** | **36** | **1288** | **26 189** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -48,7 +50,7 @@ Damit sind **30 von 66 Büchern** fertig: 377 Kapitel, 11 562 Verse,
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **269** | **7957** | **172 517** |
-| **Summe gesamt** | **359** | **10 703** | **232 615** |
+| **Summe gesamt** | **413** | **12 850** | **278 450** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -171,6 +173,80 @@ vorliegen — aber sie sind der Preis der Parallelität und **müssen beim
 Einsammeln aktiv gesucht werden**; kein Werkzeug meldet sie von allein.
 Die Gegenprobe: `Webeopfer` haben zwei Agenten unabhängig **identisch**
 gewählt.
+
+### 4. Mose: die Rechenprobe ist die schärfste Prüfung
+
+Das vierte Buch besteht über weite Strecken aus Zahlen — zwei Musterungen,
+ein Opferkalender, eine Tariftafel, eine Beuteteilung. Jedes zahlenhaltige
+Kapitel bekam die Auflage, **die Rechnung selbst nachzuvollziehen**, nicht nur
+die Ziffern gegen den Quelltext zu halten. Das hat dreimal etwas gefunden, was
+keine Strukturprüfung sehen kann:
+
+- **4Mo 3:** 7500 + 8600 + 6200 = 22 300, aber V39 nennt 22 000. Der Agent hat
+  beide Seiten am Quelltext nachgelesen und **gemeldet statt korrigiert**.
+- **4Mo 7,88:** der Summenvers nennt sechzig Böcke, die zwölf Einzelverse
+  listen keinen. Gegen den Luther 1912 geprüft (die Lücke steht schon dort)
+  **und** gegen den Schlachter 1951 (der hat „fünf Böcke" je Vers, dort geht
+  die Summe auf). Also eine Eigenheit der Vorlage.
+- **4Mo 26 und 31:** beide Proben gehen vollständig auf — 601 730 wie in 26,51,
+  und alle sechzehn Teilrechnungen der Beuteteilung. Die zweite Kapitelhälfte
+  von 26 hat die Summe **unabhängig neu addiert**, statt die Zahlen des ersten
+  Agenten zu übernehmen.
+
+**Wo eine Probe nicht aufgeht, ist zuerst der Quelltext zu prüfen, nicht die
+Annotation.** Beide Male lag es am Text.
+
+### Wörtlich identische Verse sind die Ausnahme — bis 4. Mose 7
+
+Nach hunderten von Dublettenvergleichen in 3. und 4. Mose war das Ergebnis fast
+immer dasselbe: **kein Paar ist wörtlich gleich.** Die Ausnahmen ließen sich an
+einer Hand abzählen (3Mo 3,4 = 3,10 = 3,15 · 4Mo 4,35 = 4,39 = 4,43 ·
+4Mo 23,1 = 23,29).
+
+**4. Mose 7 kippt das Bild:** dort sind **48 Verse wörtlich identisch** — die
+vier Gabenverse jedes der zwölf Fürstenblöcke. Beide Agenten haben sie
+**maschinell kopiert** und jede Kopie einzeln gegen den Quelltext geprüft,
+statt sie zwölfmal zu tippen. Das ist bei dieser Textsorte der einzige Weg,
+weder Tipp- noch Ermüdungsfehler zu produzieren.
+
+Und die Ausnahme der Ausnahme: der Dankopfervers weicht in allen zwölf Blöcken
+an **genau zwei Positionen** ab, die Kopfverse haben **vier Bauarten**, und
+7,60 bricht sogar diese (eingeschobener Artikel, Vatername im Nominativ).
+Wer den Block abgeschrieben hätte, hätte genau dort gefehlt.
+
+### Namen: der Text entscheidet, ob übersetzt oder stehen gelassen wird
+
+Die Regel „keine Namensdeutung ohne hörbare Ableitung" hat sich in vier Fällen
+bewähren müssen, und das Kriterium hat jedes Mal getragen:
+
+| Stelle | Text | Behandlung |
+|---|---|---|
+| 4Mo 11,34 `Lustgräber` | Luther **verdeutscht selbst** | übersetzt (*graves of craving*) |
+| 4Mo 13,24 `Eskol` | nennt nur den **Grund** („wegen der Traube") | Eigenname |
+| 4Mo 20,13 `Haderwasser` | Luther **verdeutscht selbst** | übersetzt (*water of strife*) |
+| 4Mo 21,3 · 32,42 `Horma`, `Nobah` | berichten nur die **Benennung** | Eigenname |
+
+Dasselbe gilt für Gattungswörter in Ortsnamen: 4Mo 34 sagt `Steige Akrabbim`,
+`Dorf Adar`, `Meer Kinneret`, 4Mo 22 sagt `die Gassenstadt` und `die Höhe
+Baals` — **das Gattungswort wird übersetzt, der Name bleibt stehen.**
+
+### Textvarianten bleiben stehen
+
+Dreimal sah eine Stelle nach einem Fehler aus und war keiner. Jedes Mal hat der
+Vergleich mit dem **unmodernisierten Luther 1912** entschieden:
+
+- `Deguel` (1,14 · 7,42 · 10,20) gegen `Reguel` (2,14) — der Luther hat es
+  genauso, und er folgt dem hebräischen Text.
+- 4Mo 12,3 sagt nicht „demütig", sondern **`geplagt`** — Luther: „ein sehr
+  geplagter Mensch".
+- 4Mo 34,14 nennt den Stamm **Gad nicht**, obwohl der Folgevers mit zwei
+  Stämmen rechnet — die Lücke steht schon im Luther.
+
+Dazu die Schreibungsvarianten innerhalb des Buches, alle stehen gelassen:
+`Basan`/`Baschan`, `Eskol`/`Eschkol`, `Kades`/`Kadesch-Barnea`,
+`Ahieser`/`Ahi-Eser`, `Pinehas`/`Pinhas`, `Pihachiroth`/`Hachiroth`,
+`Ije-Abarim`/`Ijim` — und die fünf Töchter Zelophehads, die in 4Mo 36 in
+**anderer Reihenfolge** stehen als in 26,33 und 27,1.
 
 ### Die Dubletten von 2. Mose sind Neuformulierungen
 
