@@ -13,14 +13,14 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 **Das Neue Testament ist vollständig annotiert** — alle 27 Bücher, 7957 Verse,
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
-**Vom Alten Testament sind 1. bis 4. Mose vollständig.** 1. Mose am
-29.07.2026 (50 Kapitel, 1533 Verse, 33 780 Einträge), 2. Mose am selben Tag
-(40 Kapitel, 1213 Verse, 26 318 Einträge), **3. Mose und 4. Mose am
-11.08.2026** (27 Kapitel, 859 Verse, 19 644 Einträge bzw. 36 Kapitel,
-1288 Verse, 26 189 Einträge). 5. Mose ist begonnen.
+**Der Pentateuch ist vollständig.** 1. Mose am 29.07.2026 (50 Kapitel,
+1533 Verse, 33 780 Einträge), 2. Mose am selben Tag (40 Kapitel, 1213 Verse,
+26 318 Einträge), **3. Mose und 4. Mose am 11.08.2026** (27 Kapitel,
+859 Verse, 19 644 Einträge bzw. 36 Kapitel, 1288 Verse, 26 189 Einträge),
+**5. Mose am 12.08.2026** (34 Kapitel, 959 Verse, 25 278 Einträge).
 
-Damit sind **31 von 66 Büchern** fertig: 413 Kapitel, 12 850 Verse,
-278 450 Einträge. Es fehlen die Bücher 5–39 (776 Kapitel, rund 18 300 Verse).
+Damit sind **32 von 66 Büchern** fertig: 447 Kapitel, 13 809 Verse,
+303 728 Einträge. Es fehlen die Bücher 6–39 (742 Kapitel, rund 17 350 Verse).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -28,6 +28,7 @@ Damit sind **31 von 66 Büchern** fertig: 413 Kapitel, 12 850 Verse,
 | **2. Mose (2)** | **40** | **1213** | **26 318** |
 | **3. Mose (3)** | **27** | **859** | **19 644** |
 | **4. Mose (4)** | **36** | **1288** | **26 189** |
+| **5. Mose (5)** | **34** | **959** | **25 278** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -278,6 +279,111 @@ hängt: eine Anhebung zöge 57 bzw. 66 Körperteil-Einträge mit.
 
 Der Lexikonextrakt bietet für 2. Mose fast nur die Sockel-Lesart an. Wer sie
 übernimmt, macht aus Tischfüßen Sockel, und strukturell fällt nichts auf.
+
+### 5. Mose: das Buch erzählt nach, ohne zu zitieren
+
+Das fünfte Buch ist über weite Strecken Wiederholung — und **fast nirgends
+Wiederholung des Wortlauts**. Die Agenten haben jede Parallele Token für Token
+vermessen, und das Ergebnis ist über 34 Kapitel gleich:
+
+| Parallele | Ergebnis |
+|---|---|
+| 5Mo 2 ↔ 4Mo 20/21 | **kein Vers wörtlich gleich** (0,06–0,57) |
+| 5Mo 9 ↔ 2Mo 32/34 | **keiner** (max. 0,62) |
+| 5Mo 14 ↔ 3Mo 11 | **keiner** (0,11–0,64) |
+| 5Mo 19 ↔ 4Mo 35 | **keiner** (0,03–0,29) |
+| 5Mo 25 ↔ 2Mo 17 | **keiner**, zwei Paare mit **null** gemeinsamen Inhaltswörtern |
+| 5Mo 5 ↔ 2Mo 20 (Dekalog) | **4 von 16** wörtlich gleich |
+| 5Mo 11 ↔ 5Mo 6 | **1 von 9** (11,20 ↔ 6,9, Ähnlichkeit 0,87) |
+| 5Mo 31 ↔ 5Mo 1 | **1 Satz** (31,8 Schluss = 1,21 Schluss) |
+| 5Mo 15,23 ↔ 5Mo 12,16 | **0,93** — Unterschied ist ein Wort |
+
+Die Konsequenz für den Prompt: **die Parallelstelle liefert das Vokabular,
+nicht den Satz.** Wer sie als Vorlage nimmt, annotiert einen Text, der nicht
+dasteht. Bei 5Mo 9,12 sagt 2. Mose `ein gegossenes Kalb`, 5. Mose `ein
+gegossenes Bild`; bei 9,27 sagt 2. Mose `Abraham, Isaak und Israel`, 5. Mose
+`… und Jakob`.
+
+### Fünf Doppelschreibungen im selben Buch
+
+Der Quelltext ist bei Eigennamen und einem Gattungswort **in sich
+uneinheitlich**. Das ist kein Modernisierungsfehler, den man glätten dürfte —
+jede Stelle behält ihre Schreibung als Lemma, alle teilen die Glosse:
+
+| erste Form | zweite Form |
+|---|---|
+| `Hetiter`, `Perisiter`, `Hiwiter` (7,1) | `Hethiter`, `Pheresiter`, `Heviter` (20,17) |
+| `Gräuel` (Kap. 7 · 12 · 13 · 17 · 18) | `Greuel` (Kap. 22 · 23 · 24 · 25) |
+| `Hesbon`, `Basan` (2,24 · 3,1) | `Heschbon`, `Baschan` (29,6 · 33,22) |
+| `Naphthali` (27,13) | `Naphtali` (33,23 · 34,2) |
+| `Isaschar` (27,12) | `Issaschar` (33,18) |
+
+Bei den Völkerlisten ist **7,1 die Abweichung, nicht 20,17**: `Hethiter` steht
+17× im Bestand, `Hetiter` nirgends. Beim `Gräuel`/`Greuel`-Paar liegt ein
+sauberer Bruch in der Mitte des Buches.
+
+### Die Schema-Formel schrumpft von Kapitel zu Kapitel
+
+Nur **6,5** hat alle drei Glieder. Danach ist sie jedes Mal verkürzt, und die
+Präposition wechselt — das sind verschiedene Mehrwort-Einträge mit
+verschiedenen Levels (`von ganzem Herzen` B1 gegen `mit ganzem Herzen` B2):
+
+| Stelle | Wortlaut |
+|---|---|
+| 6,5 | `mit ganzem Herzen`, `mit ganzer Seele`, `mit aller Kraft` |
+| 10,12 · 11,13 | `von ganzem Herzen und ganzer Seele` — kein `Kraft`, `von` statt `mit` |
+| 13,4 | `von ganzem Herzen` — nur eines |
+| 26,16 · 30,2.6.10 | `mit ganzem Herzen und ganzer Seele` — vierte Variante |
+
+`Kraft` = *strength* gilt deshalb **nur** in der Formel; sonst ist es *power*.
+Ausnahme mit eigener Begründung: 21,17 („der Erste seiner Kraft" =
+Zeugungskraft) und 34,7 (Körperkraft des Greises), wo `Macht` = *power* im
+selben Kapitel steht.
+
+### Vorgegebene Wörter, die im Text nicht stehen
+
+Über die 34 Kapitel haben die Agenten **weit über zweihundert** Prompt-Hinweise
+widerlegt. Die Quote steigt mit der Textsorte: Gesetzesprosa etwa zehn bis
+fünfzehn je Kapitel, das Moselied (32) **19 von 34 geprüften Behauptungen**.
+
+Wiederkehrendes Muster: der Text **umschreibt**, wo Bibelkenntnis ein Kompositum
+erwartet. Statt `Mischsaat` „mit verschiedenen Samen bepflanzen", statt
+`Geldstrafe` „zu hundert Silberstücken verurteilen", statt `Gefangenschaft`
+„dein Schicksal wenden", statt der Bann-Formel `dem Untergang weihen`. Und er
+wählt andere Wörter: `Beamte` statt `Amtleute` (16,18, aber `Amtleute` in 20
+und 29), `Zelt der Begegnung` statt `Stiftshütte`, `Wasserträger` statt
+`Wasserschöpfer`, `junge Kuh` statt `Kalb`, `zurechtweisen` statt `züchtigen`,
+`Jesurun` statt `Jeschurun`, `Haderwasser` statt `Meriba`, `Südland` statt
+`Negeb`.
+
+**Auch Strukturannahmen sind Hypothesen.** Der Prompt zu 27 verlangte zu
+prüfen, ob die Rahmenformel der zwölf Fluchsprüche identisch ist — sie ist es
+nicht: 27,15 sagt `antworten`, die elf übrigen `sagen`. Der Prompt zu 28
+behauptete, die Segensreihe spiegle die Fluchreihe Glied für Glied — `Korb` und
+`Frucht` sind vertauscht, und 28,18 ist gegenüber 28,4 gekürzt. Der Prompt zu
+28 behauptete, 28,59–61 nehme die Krankheitsliste aus 28,21–28 auf — die
+Schnittmenge ist **leer**: fünfzehn spezifische Übel dort, drei Sammelbegriffe
+hier. Und einmal lag sogar die **Versgrenze** falsch (23,4–6 statt 23,5–6).
+
+### Ein Grammatikfehler im Bibeltext
+
+5Mo 23,10: „Wenn **du** gegen deine Feinde **auszieht**…" — Subjekt 2. Sg.,
+Verb 3. Sg. Das ist ein Modernisierungsfehler in `l1912mod`, kein
+Annotationsproblem. Die Annotation folgt dem Subjekt; **die Stelle gehört im
+Bibeltext korrigiert**, richtig wäre `ausziehst`.
+
+### Was buchweite Angleichungen kosten können
+
+Als `Völker` von *nations* auf *peoples* gezogen wurde, blieben die Artikel und
+Adjektive davor stehen — *naciones/nations/nazioni* sind feminin,
+*pueblos/peuples/popoli* maskulin. **27 Glossen in Kapitel 7 und eine in 6,14
+standen danach im falschen Genus** (`todas`, `toutes`, `tutte`, `muchas`,
+`estas`, `de las`). Gefunden hat es der Agent von Kapitel 14, nicht die
+Prüfskripte. Dasselbe Muster bei neun italienischen Artikeln vor `Weg` (*il*
+statt *la*, weil `Weg` mit *via* glossiert ist).
+
+**Konsequenz:** nach jeder buchweiten Glossenänderung die **Nachbarpositionen**
+mitprüfen, nicht nur das geänderte Wort.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
