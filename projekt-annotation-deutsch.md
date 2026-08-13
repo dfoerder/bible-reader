@@ -19,17 +19,16 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 859 Verse, 19 644 Einträge bzw. 36 Kapitel, 1288 Verse, 26 189 Einträge),
 **5. Mose am 12.08.2026** (34 Kapitel, 959 Verse, 25 278 Einträge).
 
-**Die Geschichtsbücher bis 1. Könige sind vollständig.** Josua, Richter und
+**Die Geschichtsbücher bis 2. Könige sind vollständig.** Josua, Richter und
 Ruth am 12.08.2026, **1. Samuel und 2. Samuel am 13.08.2026** (31 Kapitel,
 811 Verse, 22 011 Einträge bzw. 24 Kapitel, 695 Verse, 17 931 Einträge),
-**1. Könige am 13.08.2026** (22 Kapitel, 817 Verse, 21 132 Einträge).
+**1. Könige am 13.08.2026** (22 Kapitel, 817 Verse, 21 132 Einträge),
+**2. Könige am 14.08.2026** (25 Kapitel, 720 Verse, 20 422 Einträge).
 
-**2. Könige ist begonnen** — Kapitel 1–10 am 13.08.2026 (296 Verse,
-8709 Einträge), 15 Kapitel offen.
-
-Damit sind **39 von 66 Büchern** fertig oder begonnen: 583 Kapitel,
-17 789 Verse, 407 258 Einträge. Es fehlen 2. Könige 11–25 und die
-Bücher 13–39 (rund 600 Kapitel).
+Damit sind **39 von 66 Büchern fertig**: 598 Kapitel, 18 213 Verse,
+418 971 Einträge. `validate.py alle` gibt für alle 39 Bücher `[ok]` aus,
+`qa.py alle` meldet 0 Verdachtsfälle. Es fehlen die Bücher 13–39
+(rund 600 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -44,7 +43,7 @@ Bücher 13–39 (rund 600 Kapitel).
 | **1. Samuel (9)** | **31** | **811** | **22 011** |
 | **2. Samuel (10)** | **24** | **695** | **17 931** |
 | **1. Könige (11)** | **22** | **817** | **21 132** |
-| **2. Könige (12), 1–10** | **10 von 25** | **296** | **8 709** |
+| **2. Könige (12)** | **25** | **720** | **20 422** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -67,7 +66,7 @@ Bücher 13–39 (rund 600 Kapitel).
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **260** | **7957** | **172 518** |
-| **Summe gesamt** | **551** | **16 676** | **377 417** |
+| **Summe gesamt** | **598** | **18 213** | **418 971** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -517,6 +516,124 @@ keine Form von „rasten" ist, sondern von **`rasen`** (dieselbe Szene wie
 1Sam 18,10) — ein Agent, der die naheliegende Lesart nimmt, produziert einen
 strukturell tadellosen Eintrag mit der falschen Bedeutung.
 
+### Das Einzelwort schluckt seine Mehrwort-Einheit — der häufigste stille Fehler
+
+`hilfsverb.py` sucht Hilfsverben, deren Glosse das Vollverb des Nachbartokens
+verschluckt. Beim Abschluss von 2. Könige hat sich gezeigt, dass **derselbe
+Fehler auch bei Vollverben auftritt**, und dort meldet ihn kein Skript. Vier
+Fälle in zehn Kapiteln, jeder von einem anderen Agenten produziert:
+
+| Stelle | Mehrwort-Eintrag | Einzelwort trug | richtig ist |
+|---|---|---|---|
+| 17,17 | `gehen lassen` = *made pass* | `gehen` = *pasar · passer · passare* | *ir · aller · andare* |
+| 17,6 · 18,11 | `fortführen` = *emmena* | `führte` = fr *emmena* | fr *conduisit* |
+| 25,26 | `sich aufmachen` = *set out* | `machte` = *puso · mit · mise* | *hizo · fit · fece* |
+
+Die Spezifikation sagt es klar: **die Einzelwörter behalten ihre wörtliche
+Bedeutung, der Mehrwort-Eintrag trägt die Bedeutung der Einheit.** Strukturell
+ist jeder dieser Einträge tadellos, und `qa.py` sieht nichts — im Lesefluss
+steht aber an zwei Tokens dasselbe Wort. Gefunden wurden alle drei erst beim
+**paarweisen Abgleich der gleichzeitig gelaufenen Kapitel**; der Präzedenzfall
+steht jedes Mal schon im Bestand (5Mo 18,10 für `gehen`, 16,9 für `führte`).
+
+### Der Abgleich paralleler Kapitel, systematisch
+
+Die Warnung aus 3. Mose („die Divergenzen müssen beim Einsammeln aktiv gesucht
+werden") ist für 2. Könige 16–25 in ein festes Verfahren übersetzt worden:
+nach jedem Kapitel werden die **gemeinsamen Inhaltswortformen** gegen jedes
+gleichzeitig gelaufene und jedes schon fertige Nachbarkapitel gehalten,
+Funktionswörter ausgeblendet. Typisch sind 40 bis 98 gemeinsame Formen je Paar
+und 4 bis 21 abweichende Lesarten — davon fast alle legitim (Genus, Numerus,
+Kasus, Kontext), aber in jeder Welle ein bis zwei echte.
+
+Über ein Dutzend Korrekturen sind so entstanden, die meisten **korpusweit**:
+
+| Befund | Umfang |
+|---|---|
+| `an` in der Nachfolgeformel stand auf *in·en·à·al* statt *at·a·à·al* | 11 Einträge in 4 Büchern |
+| `le ÉTERNEL` statt `l'ÉTERNEL` — im Französischen schlicht falsch | 62 Einträge in 6 Büchern |
+| `Völker` auf *nations* statt *peoples*, samt Nachbarpositionen | 4 Stellen |
+| `spricht` in der Botenformel fr *dit* statt *parle* | 22 Einträge in 5 Büchern |
+| `ganz wie` mit drei verschiedenen Lesarten | 4 Stellen |
+| `Nebats` es *de Nabat* / fr *de Nebath* gegen 19 einheitliche Belege | 1 Eintrag |
+| `verstoßen`, `führte`, `heute`, `Kraft`, `Genauso` | je 1–3 Einträge |
+
+**Die Botenformel** ist der lehrreichste Fall, weil die Mehrheit allein die
+falsche Antwort gegeben hätte: `spricht der HERR` stand 26:19 zwischen *parle*
+und *dit*, in 2. Könige intern 4:4. Die Belege trennen sich aber sauber nach
+der **Stellung** — einleitend *parle*, nachgestellt nach Komma *dit*, genau wie
+in der LSG. Alle vier eindeutig nachgestellten Belege hatten es schon richtig.
+Die Regel steht jetzt in `BINDUNGEN_KOENIGE.md`.
+
+### Ein gemeinsamer Satz, vorab gebunden
+
+23,31 und 24,18 enthalten denselben Satz („Seine Mutter hieß Hamutal und war
+eine Tochter Jeremias aus Libna"), und beide Kapitel liefen **gleichzeitig**.
+Statt es hinterher zu reparieren, haben beide Prompts dasselbe Muster aus dem
+bereits fertigen 22,1 mitbekommen, mit der Auflage, die Positionen im eigenen
+Quelltext zu messen. Ergebnis: **Versatz 0, alle elf Tokens in allen sechs
+Feldern identisch** — zwei Agenten, kein Abgleich nötig.
+
+Dasselbe hat bei den Blöcken funktioniert, die *nicht* an gleicher Position
+stehen: 18,8 ↔ 17,9 mit Versatz −12, 18,11 ↔ 17,6 mit Versatz −7, 21,2 ↔ 16,3
+mit Versatz −10, 19,34 ↔ 20,6 mit Versatz −16. Jedes Mal hat der Agent ein
+eigenes Prüfskript geschrieben, das die Positionen aus **beiden** Quelltexten
+ableitet; jedes Mal habe ich es unabhängig nachgerechnet. Null Abweichungen.
+
+**Die Konsequenz für die Reihenfolge:** Kapitel mit einem wortgleichen Block
+gehören nicht in dieselbe Welle, wenn eines das andere als Vorlage braucht
+(17 vor 18 vor 19). Wo sich das nicht vermeiden lässt, ist die Vorab-Bindung
+im Prompt der Ersatz dafür — sie kostet nichts und hat hier vollständig
+getragen.
+
+### `ausreisser.py` beim Buchabschluss: 336 Verdachtsfälle, kein Fehler
+
+Der Lauf über das fertige Buch meldet 336 Stellen, an denen drei Sprachen sich
+einig sind und die vierte abweicht. Am Vers nachgesehen ist **keine davon ein
+Fehler**, und die Fehltreffer fallen in wiederkehrende Klassen, die das Skript
+prinzipiell nicht erkennen kann:
+
+- **Französische Elision** — `parce qu'`, `afin qu'`, `jusqu'` vor Vokal
+- **Genuskongruenz der Zielsprache** — `l'année suivante`, `ma colère`
+- **Großschreibung in Namen** — `King Hezekiah`, `Mount`, `Valley`
+- **Buchlokale Bindungen** — `in die Hand` ist in den Königsbüchern fr *mains*
+- **Bewusste Kollisionsauflösungen** — `denn` = *since* neben `für` = *for*
+
+Der einzige Treffer, den ich übernommen habe, war `Genauso` = *The same way*
+gegen zwölf von dreizehn Belegen *In the same way*. `hilfsverb.py` meldet über
+das ganze Buch 0 Verdachtsfälle.
+
+### Was 2. Könige an eigenen Formeln gebracht hat
+
+- **Drei Nachfolgeformeln in einem Kapitel.** 23,30 sagt `an der Stelle seines
+  Vaters` (eigenes Bestandslemma `an der Stelle`), 23,34 `anstelle` als **ein**
+  Token — und die Standardfassung `an seiner Stelle` kommt in Kapitel 23 gar
+  nicht vor.
+- **Die Schema-Formel außerhalb von 5. Mose.** 23,3 hat zwei Glieder mit
+  Präpositionswechsel (`von ganzem Herzen` B1 gegen `mit ganzer Seele` B2),
+  23,25 alle drei. `Kraft` = *strength* gilt nur dort — 17,36 („mit großer
+  Kraft und ausgestrecktem Arm") folgt seiner wörtlichen Parallele 5Mo 9,29
+  mit *power*.
+- **`geschrieben stehen`** greift dreimal in 23 und zweimal in 22. Wo das
+  zweite Token `geschrieben` dasteht, deckt die Spanne die Bedeutung ab und
+  `steht` bleibt wörtlich; nur in der Chronikformel trägt `steht` sie allein.
+- **Vier Wendungen fürs Wegführen in einem Kapitel** (24,12.14.15): `nahm
+  gefangen`, `in die Verbannung führen`, `führte weg` und `führte gefangen` —
+  die letzten beiden im selben Vers.
+- **`verstoßen` ist zweigleisig, aber nach der Bedeutung.** Mit „aus seinem
+  Angesicht" (17,18.20.23 · 24,3.20) ist es *cast out*, ohne den Zusatz
+  (13,23 · 21,14) *reject*. Die Agenten von 21 und 24 haben das **unabhängig
+  gleich** entschieden.
+
+### Ein Agentenbefund, der der Prüfung nicht standhielt
+
+Der Agent von Kapitel 25 meldete, in **Richter 15,5** trügen zwei Tokens keinen
+Einzelwort-Eintrag. Nachgesehen sind alle 28 Positionen belegt und
+`validate.py 7` läuft sauber durch. **Auch ein Agentenbefund ist eine
+Hypothese** — das gilt in beide Richtungen und ist der Grund, warum jeder
+gemeldete Bestandsfehler nachgezählt wird, bevor er korrigiert wird. Von den
+Befunden dieser zehn Kapitel haben sich zwölf bestätigt und einer nicht.
+
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
 
@@ -635,10 +752,15 @@ Die Kernstücke:
 | `quellen_sync.py <nr>\|alle` | gewinnt Kapitelquellen aus den gebauten Anno-Dateien zurück |
 | `BINDUNGEN_AT.md` | Glossen-Bindungen der Bücher 1–39, erzeugt |
 | `BINDUNGEN_3MOSE.md` | die Opfer- und Kultbegriffe von 3. Mose, von Hand gepflegt |
+| `BINDUNGEN_KOENIGE.md` | die Formeln der Bücher 11 und 12, von Hand gepflegt |
 
-Noch nicht wieder gebaut sind `crosscheck.py`, `ausreisser.py` und
-`hilfsverb.py`; sie werden erst bei geteilten Kapiteln und beim Buchabschluss
-gebraucht. `levels.py` ist in `buildbook.py` aufgegangen. Die
+`crosscheck.py`, `ausreisser.py` und `hilfsverb.py` sind wieder da und beim
+Abschluss von 2. Könige gelaufen. Was ihnen fehlt, ist der **paarweise
+Abgleich gleichzeitig bearbeiteter Kapitel** — den erledigt bislang ein
+Wegwerfskript beim Einsammeln (gemeinsame Inhaltswortformen, Funktionswörter
+ausgeblendet). Er hat in 2. Könige mehr echte Fehler gefunden als alle
+Prüfskripte zusammen und gehört als `parallelcheck.py` in die Kette.
+`levels.py` ist in `buildbook.py` aufgegangen. Die
 `BINDUNGEN_OFFB.md` und `BINDUNGEN_BRIEFE.md` sind mit dem Scratchpad
 verloren — ihre Festlegungen stehen im fertigen Bestand und werden über
 `lexicon.py` und `fixgloss.py` erreicht.
