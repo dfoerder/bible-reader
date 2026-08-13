@@ -14,21 +14,30 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 172 517 Einträge (3985 Phrasen, 3038 Klammern). Abgeschlossen am 28.07.2026.
 
 **Der Pentateuch ist vollständig.** 1. Mose am 29.07.2026 (50 Kapitel,
-1533 Verse, 33 780 Einträge), 2. Mose am selben Tag (40 Kapitel, 1213 Verse,
+1533 Verse, 33 781 Einträge), 2. Mose am selben Tag (40 Kapitel, 1213 Verse,
 26 318 Einträge), **3. Mose und 4. Mose am 11.08.2026** (27 Kapitel,
 859 Verse, 19 644 Einträge bzw. 36 Kapitel, 1288 Verse, 26 189 Einträge),
 **5. Mose am 12.08.2026** (34 Kapitel, 959 Verse, 25 278 Einträge).
 
-Damit sind **32 von 66 Büchern** fertig: 447 Kapitel, 13 809 Verse,
-303 728 Einträge. Es fehlen die Bücher 6–39 (742 Kapitel, rund 17 350 Verse).
+**Die Geschichtsbücher bis 2. Samuel sind vollständig.** Josua, Richter und
+Ruth am 12.08.2026, **1. Samuel und 2. Samuel am 13.08.2026** (31 Kapitel,
+811 Verse, 22 011 Einträge bzw. 24 Kapitel, 695 Verse, 17 931 Einträge).
+
+Damit sind **38 von 66 Büchern** fertig: 551 Kapitel, 16 676 Verse,
+377 417 Einträge. Es fehlen die Bücher 11–39 (rund 680 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
-| **1. Mose (1)** | **50** | **1533** | **33 780** |
+| **1. Mose (1)** | **50** | **1533** | **33 781** |
 | **2. Mose (2)** | **40** | **1213** | **26 318** |
 | **3. Mose (3)** | **27** | **859** | **19 644** |
 | **4. Mose (4)** | **36** | **1288** | **26 189** |
 | **5. Mose (5)** | **34** | **959** | **25 278** |
+| **Josua (6)** | **24** | **658** | **15 319** |
+| **Richter (7)** | **21** | **618** | **16 117** |
+| **Ruth (8)** | **4** | **85** | **2 311** |
+| **1. Samuel (9)** | **31** | **811** | **22 011** |
+| **2. Samuel (10)** | **24** | **695** | **17 931** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -50,8 +59,8 @@ Damit sind **32 von 66 Büchern** fertig: 447 Kapitel, 13 809 Verse,
 | 3. Johannes (64) | 1 | 15 | 310 |
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
-| **Summe NT** | **269** | **7957** | **172 517** |
-| **Summe gesamt** | **413** | **12 850** | **278 450** |
+| **Summe NT** | **260** | **7957** | **172 518** |
+| **Summe gesamt** | **551** | **16 676** | **377 417** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
