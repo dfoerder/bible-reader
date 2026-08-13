@@ -19,12 +19,17 @@ annotierte Text und die vier anderen Sprachen sind die Glossen.
 859 Verse, 19 644 Einträge bzw. 36 Kapitel, 1288 Verse, 26 189 Einträge),
 **5. Mose am 12.08.2026** (34 Kapitel, 959 Verse, 25 278 Einträge).
 
-**Die Geschichtsbücher bis 2. Samuel sind vollständig.** Josua, Richter und
+**Die Geschichtsbücher bis 1. Könige sind vollständig.** Josua, Richter und
 Ruth am 12.08.2026, **1. Samuel und 2. Samuel am 13.08.2026** (31 Kapitel,
-811 Verse, 22 011 Einträge bzw. 24 Kapitel, 695 Verse, 17 931 Einträge).
+811 Verse, 22 011 Einträge bzw. 24 Kapitel, 695 Verse, 17 931 Einträge),
+**1. Könige am 13.08.2026** (22 Kapitel, 817 Verse, 21 132 Einträge).
 
-Damit sind **38 von 66 Büchern** fertig: 551 Kapitel, 16 676 Verse,
-377 417 Einträge. Es fehlen die Bücher 11–39 (rund 680 Kapitel).
+**2. Könige ist begonnen** — Kapitel 1–10 am 13.08.2026 (296 Verse,
+8709 Einträge), 15 Kapitel offen.
+
+Damit sind **39 von 66 Büchern** fertig oder begonnen: 583 Kapitel,
+17 789 Verse, 407 258 Einträge. Es fehlen 2. Könige 11–25 und die
+Bücher 13–39 (rund 600 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -38,6 +43,8 @@ Damit sind **38 von 66 Büchern** fertig: 551 Kapitel, 16 676 Verse,
 | **Ruth (8)** | **4** | **85** | **2 311** |
 | **1. Samuel (9)** | **31** | **811** | **22 011** |
 | **2. Samuel (10)** | **24** | **695** | **17 931** |
+| **1. Könige (11)** | **22** | **817** | **21 132** |
+| **2. Könige (12), 1–10** | **10 von 25** | **296** | **8 709** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -393,6 +400,122 @@ statt *la*, weil `Weg` mit *via* glossiert ist).
 
 **Konsequenz:** nach jeder buchweiten Glossenänderung die **Nachbarpositionen**
 mitprüfen, nicht nur das geänderte Wort.
+
+### Die Königsbücher: der Versatz ist gefährlicher als die Abweichung
+
+In den bisherigen Büchern war die Regel „die Dublette formuliert neu" — man
+durfte nichts abschreiben, weil der Text fast nie wörtlich wiederholt. Die
+Königsbücher zeigen den **zweiten, schwereren Fall**: Blöcke, die *wirklich*
+wörtlich identisch sind, aber an **verschobener Position** stehen. Wer sie als
+Block überträgt, produziert einen strukturell tadellosen und inhaltlich um *n*
+Positionen verrutschten Eintrag, den kein Validator sieht.
+
+| Stelle | Befund |
+|---|---|
+| 2Kön 7,1 ↔ 7,18 | gleicher Wortlaut, **vertauschte Reihenfolge** der beiden Preisglieder — beide Verse 34 Tokens, `kosten` springt trotzdem von 26 auf 25 |
+| 2Kön 8,18 ↔ 8,27 | `tat, was dem HERRN missfiel` einmal am Versende, einmal vorn — **Versatz 15** |
+| 2Kön 9,18 ↔ 9,20 | identischer 7-Token-Block, **Versatz −30** |
+| 2Kön 11,4 ↔ 11,12 | `den Sohn des`, **Versatz −39** |
+| 2Kön 10,1–7 | im ganzen Briefwechsel liegt **kein einziger** identischer Block an gleicher Position (−18 bis +29) |
+| 2Kön 2,3 ↔ 2,5 | 30 von 32 Tokens gleich — ein zusätzliches `heraus` verschiebt **alles danach um eins** |
+
+Die Konsequenz für den Prompt: **messen, nicht annehmen.** Jedes Kapitel mit
+Wiederholungen bekommt ein eigenes Prüfskript, das den **Versatz** jedes
+identischen Blocks ausgibt und in jedem Block alle sechs Felder gegeneinander
+hält. Wo der Vergleich Gleichheit ausweist, ist Kopieren richtig (1Kön 19,10 =
+19,14 mit 45 von 45 Tokens, 1Kön 22,6 = 22,12 = 22,15); wo nicht, ist es der
+sicherste Weg in einen unsichtbaren Fehler.
+
+**Und der umgekehrte Fall.** In 2Kön 9,21 und 9,27 steht zweimal wörtlich
+`Sie trafen ihn` — einmal „begegnen", einmal „mit der Waffe treffen", nach dem
+Befehl „Erschlagt auch ihn!". **Ein identischer Block darf nicht automatisch
+dieselbe Glosse bekommen.** Gleichheit des Wortlauts ist ein Grund
+nachzusehen, kein Grund zu kopieren.
+
+### Was zwei gleichzeitig laufende Agenten in den Königsbüchern gekostet haben
+
+Zweimal ist eingetreten, wovor die Erfahrung aus 3. Mose warnt — und beide Male
+hat es **kein Prüfskript** gemeldet, weil beide Fassungen strukturell tadellos
+sind:
+
+- **Die Quellenformel.** „Was es sonst noch über X zu berichten gibt" steht
+  achtmal wortgleich im Text und war von vier parallel laufenden Agenten
+  **dreifach verschieden** geprägt: `berichten` als *tell* oder *report*, `über`
+  als *de/de/di* oder *sobre/sur/su*, `zu` als *a/à/a* oder *de/de/di*, und
+  `es gibt` einmal als Mehrwort-Eintrag, dreimal nicht. Vereinheitlicht auf die
+  Fassung von 1Kön 11,41, der drei der vier Kapitel bereits folgten.
+- **`Gehasi` im Italienischen** — elfmal *Giezi* in 2Kön 4, sechsmal *Ghiezi* in
+  2Kön 5, beide Kapitel gleichzeitig gelaufen. Mit `remap.py` auf die Mehrheit
+  gezogen.
+
+Die Gegenprobe gibt es auch: `Ahasja` haben der Agent von 1Kön 22 und der von
+2Kön 1 **unabhängig identisch** geprägt (*Ahaziah / Ocozías / Achazia /
+Acazia*).
+
+**Die Lehre bleibt dieselbe wie in 3. Mose:** Parallelität ist bezahlbar, weil
+die Kapitelquellen vorliegen und `remap.py` in beides schreibt — aber die
+Divergenzen **müssen beim Einsammeln aktiv gesucht werden**. Der einzige
+verlässliche Ort dafür ist ein Wort, das in mehreren Kapiteln neu entsteht.
+
+### Bei `steht` entscheidet der Text, nicht die Mehrheit
+
+Die Chronikformel endet in 1Kön 11,41 auf „das steht in der Chronik Salomos
+**geschrieben**", überall sonst nur auf „das steht in der Chronik". Nach dem
+Mehrheitsprinzip wäre alles auf eine Lesart zu ziehen — richtig ist das
+Gegenteil: Wo `geschrieben` als zweites Token dasteht, deckt ein
+`parts`-Eintrag `geschrieben stehen` die Bedeutung ab und das Einzelwort `steht`
+bleibt wörtlich (*stands*). Wo es fehlt, muss `steht` die Bedeutung **allein**
+tragen (*is written / está escrito / est écrit / è scritto*). Neun Einträge sind
+so korrigiert worden, und 11,41 bleibt bewusst anders.
+
+### Zwei Rechenfehler an der Lexikonfalle
+
+Vier Agenten haben unabhängig gemeldet, `BINDUNGEN_AT.md` widerspreche dem
+Lexikon-Extrakt bei `nämlich`. Nachgezählt stimmt die Tabelle: von 49 Belegen
+für *in fact* sind **41 aus dem NT**, im AT steht die Lesart nur achtmal.
+**`lexicon.py` und `fixgloss.py` trennen nicht nach Testamenten** — wer die
+Gesamtzahl gegen die Tabelle hält, hält die Falle gegen die Warnung davor.
+
+In der Sache hatten die Agenten trotzdem recht: im AT steht `nämlich` **14:14**
+zwischen der erklärenden Lesart (*namely*) und der kausalen (*in fact* / *for*).
+Die Tabelle nennt je Lemma die häufigste AT-Lesart, auch wo das Wort schlicht
+zwei Bedeutungen hat und es gar keine Bindung geben kann. Beides steht jetzt in
+`AUFTRAG_AT.md`.
+
+**Dazu eine Lücke im Hinweis-Skript:** `hints.py` blendet Funktionswörter aus
+der Kollisionsprüfung aus, sonst ersäuft der Bericht im Rauschen. Auf dieser
+Liste stehen aber `aus`, `an`, `auf`, `zu`, `nach`, `vor`, `über`, `um` — also
+die **Partikeln trennbarer Verben**, die eine eigene Bedeutung tragen. In
+2Kön 6,7 standen `aus` (von *ausstrecken*) und `heraus` im selben Vers mit
+identischer Glosse in allen vier Sprachen, ohne gemeldet zu werden; dasselbe in
+10,26 und 11,7. Kein Fehler im Skript, aber ein blinder Fleck, der in den
+Auftrag gehört.
+
+### Prompt-Hinweise: die Quote bleibt hoch
+
+Über die 32 Kapitel der Königsbücher haben die Agenten wieder **weit über
+hundert** Vorgaben widerlegt. Die auffälligsten:
+
+| ich schrieb | der Text sagt |
+|---|---|
+| Saba, Tarsis, Kue | `Reicharabien`, `Hochseeflotte`, schlicht `Waren` |
+| Talente, Minen, Schekel | `Zentner`, `Lot`, `Pfund`, `Silberling` |
+| „ein Maß Feinmehl für einen Schekel" | `ein Scheffel feines Mehl einen Silberling` |
+| Gottesmann | `Mann Gottes` (14× in einem Kapitel, nie anders) |
+| „schlief sich zu seinen Vätern" | `Dann starb X und wurde begraben` — die Wendung existiert nicht |
+| Säuseln, Wirbelwind | `ein leises, sanftes Flüstern`, `Sturm` |
+| Höhen, Tempelhurer | `Kulthöhen`/`Opferhöhen`, `Tempelprostituierte`, `Kultprostituierte` |
+| Adjutant, Beth-Eked, Baalstempel | `Offizier`, `Hirtenhaus`, `Tempel Baals` (zweiwortig) |
+| Astarte, Molech, Bascha, Nabot, Aphek, Ramoth | `Astoreth`, `Moloch`, `Baesa`, `Naboth`, `Afek`, `Ramot` |
+| zwölf Löwen auf sechs Stufen | **vierzehn** — zwei an den Armlehnen, „zwölf weitere" |
+| „viermal vier Krüge" | vier Krüge in **drei** Durchgängen |
+
+Zwei Fälle sind besonders lehrreich, weil sie keine Vokabelfrage sind:
+**2Kön 3,1** sagt „Im **achtzehnten** Jahr Joschafats", nicht im zwölften — die
+Zwölf gilt allein der Regierungsdauer. Und **1Kön 18,29** hat `rasten`, was
+keine Form von „rasten" ist, sondern von **`rasen`** (dieselbe Szene wie
+1Sam 18,10) — ein Agent, der die naheliegende Lesart nimmt, produziert einen
+strukturell tadellosen Eintrag mit der falschen Bedeutung.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
