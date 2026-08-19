@@ -25,10 +25,16 @@ Ruth am 12.08.2026, **1. Samuel und 2. Samuel am 13.08.2026** (31 Kapitel,
 **1. Könige am 13.08.2026** (22 Kapitel, 817 Verse, 21 132 Einträge),
 **2. Könige am 14.08.2026** (25 Kapitel, 720 Verse, 20 422 Einträge).
 
-Damit sind **39 von 66 Büchern fertig**: 598 Kapitel, 18 213 Verse,
-418 971 Einträge. `validate.py alle` gibt für alle 39 Bücher `[ok]` aus,
-`qa.py alle` meldet 0 Verdachtsfälle. Es fehlen die Bücher 13–39
-(rund 600 Kapitel).
+**1. Chronik am 19.08.2026** (29 Kapitel, 942 Verse, 17 062 Einträge) — das
+erste Buch der Chronik-Gruppe und das bisher schwierigste, weil fast jedes
+Kapitel eine schon annotierte Parallele in Genesis, Samuel, den Königsbüchern
+oder Josua hat, und zwar mit **verschobenen Blockpositionen** (gemessene
+Versätze von −49 bis +34).
+
+Damit sind **40 von 66 Büchern fertig**: 627 Kapitel, 19 155 Verse,
+436 041 Einträge. `validate.py alle` gibt für alle 40 Bücher `[ok]` aus,
+`qa.py alle` meldet 0 Verdachtsfälle. Es fehlen die Bücher 14–39
+(rund 570 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -44,6 +50,7 @@ Damit sind **39 von 66 Büchern fertig**: 598 Kapitel, 18 213 Verse,
 | **2. Samuel (10)** | **24** | **695** | **17 931** |
 | **1. Könige (11)** | **22** | **817** | **21 132** |
 | **2. Könige (12)** | **25** | **720** | **20 422** |
+| **1. Chronik (13)** | **29** | **942** | **17 062** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -633,6 +640,147 @@ Einzelwort-Eintrag. Nachgesehen sind alle 28 Positionen belegt und
 Hypothese** — das gilt in beide Richtungen und ist der Grund, warum jeder
 gemeldete Bestandsfehler nachgezählt wird, bevor er korrigiert wird. Von den
 Befunden dieser zehn Kapitel haben sich zwölf bestätigt und einer nicht.
+
+### 1. Chronik: der Kreuzabgleich schlägt jedes Prüfskript
+
+Über die letzten fünf Kapitel des Buches sind **zwölf Angleichungen** nötig
+geworden, und **keine einzige** davon hat ein Prüfskript gemeldet.
+`selfcheck.py`, `qa.py`, `validate.py` und `hilfsverb.py` liefen über alle
+fünf Kapitel ohne Befund; gefunden hat sie ausnahmslos der paarweise
+Formvergleich zwischen gleichzeitig gelaufenen Kapiteln. Alle zwölf sitzen in
+**wörtlich identischen Satzteilen**:
+
+| Satzteil | Stellen | was auseinanderlief |
+|---|---|---|
+| `die Obersten über tausend und über hundert` | 26,26 · 27,1 · 28,1 · 29,6 | *chiefs* gegen *leaders*, *a thousand* gegen *thousand* |
+| `den Jüngeren wie den Älteren` | 25,8 · 26,13 | *cadet/minore* gegen *plus jeune/più giovane* — **und A2 gegen B1** |
+| `Verwalter über das Vermögen des Königs` | 27,31 · 28,1 | *property* gegen *wealth* |
+| `die geweihten Schätze` | 26,20 · 26,26 · 28,12 | *dedicated* gegen *consecrated* |
+
+Die Wendung mit den Obersten ist der Lehrfall: sie steht **fünfmal im Buch**
+und danach weiter in 2. Chronik. Die Trennung ist ausgezählt worden, nicht
+geraten — *leaders* hat 11 Belege, alle vom Typ „die Obersten Israels / des
+Volkes", *chiefs* steht beim Truppenkommando, und **1Chr 15,25 („die Obersten
+über Tausend") ist die nächste Parallele**. In **28,1 stehen beide Lesarten im
+selben Vers**, elf Positionen auseinander.
+
+Das Muster ist inzwischen dreimal in Folge dasselbe (2. Könige, 1. Chronik
+Welle 3, 1. Chronik Welle 9): **wo zwei Agenten gleichzeitig an derselben
+Formel arbeiten, prägen sie sie verschieden**, und strukturell ist beides
+tadellos. Das vorherige Gegenmittel — den gemeinsamen Satz vorab in beide
+Prompts binden — hat dort gegriffen, wo ich die Überschneidung vorhergesehen
+habe. Vorhergesehen habe ich sie in vier von zwölf Fällen.
+
+### Zwei Wege, dieselbe Kollision aufzulösen — und nur einer ist der des Bestands
+
+`Gold`/`golden`, `Silber`/`silbern`, `Bronze`/`bronzen` und `Eisen`/`eisern`
+stehen in 28,14 · 28,16 · 29,2 paarweise im selben Vers und tragen im Bestand
+dieselbe Glosse. Zwei Agenten haben das unabhängig aufgelöst, und zwar
+entgegengesetzt:
+
+- **über das Substantiv** (Kapitel 28): `des Goldes` → *the gold*, `des
+  Silbers` → *the silver*, das Adjektiv bleibt *golden* / *silver*
+- **über das Adjektiv** (Kapitel 29): `silbernen` → *of silver*, `bronzenen` →
+  *of bronze*, `eisernen` → *of iron*, das Substantiv bleibt bloß
+
+Beide Fassungen trennen sauber in allen vier Sprachen. Entschieden hat der
+Bestand: **1Chr 18,8** hat genau diese Kollision (`Bronze` und `bronzenen` in
+einem Vers) und löst sie über das Adjektiv, und **4Mo 7,85 f.** — dieselbe
+Konstruktion „das Gewicht des Goldes / des Silbers" — lässt das Substantiv im
+Genitiv bloß. Kapitel 28 ist nachgezogen worden; damit verschwinden die
+Lesarten *the gold* und *the silver*, die es sonst **nirgends im Korpus** gibt.
+
+Die Auflösung bleibt dabei **lokal**: `bronzen` steht 36-mal auf *bronze* und
+nur in 18,8 auf *of bronze*. Eine Kollisionsauflösung zieht nie die anderen
+Belege mit.
+
+### Ein Agent hat meiner Vorgabe widersprochen und behalten recht
+
+Ich hatte dem Agenten von Kapitel 29 vorgegeben, `Gepriesen` (29,10) auf die
+Mehrheit *Praised · Bendito · Béni · Benedetto* zu setzen (7 Belege) und den
+einen Ausreißer *Blessed* in **1Chr 16,36** zu melden, damit ich ihn nachziehe.
+
+Er hat es nicht getan und begründet, warum: 16,36 ist der **einzige** Vers
+außer 29,10, in dem `Gepriesen` und `lobte` zusammenstehen — und `lobte` trägt
+die Bindung *praised*. Die Fassung *Blessed* löst dort die Kollision, die
+*Praised* gerade erzeugen würde. Die sieben Mehrheitsbelege haben kein `loben`
+im Vers. **Wer die Mehrheit nachzieht, baut die Kollision ein, die die
+Minderheit vermeidet.** 16,36 bleibt, wie es ist, und 29,10 folgt ihm.
+
+Das ist der zweite Fall dieser Art im Buch — in Welle 8 hatte mein
+Bindungsdokument selbst den `Oberhaupt`-Ausreißer aus 11,6 zur Regel erklärt.
+**Eine Minderheitslesart ist erst dann ein Ausreißer, wenn man nachgesehen
+hat, was sie im Vers leistet.**
+
+### `hints.py` ist umlautblind
+
+`Vorhöfe` (28,6) wurde als unbelegte Form gemeldet, mit den verwandten Formen
+`Vorhaben`, `Vorhalle`, `Vorhang`. Das Lemma `Vorhof` hat **30 Belege**, und
+einer davon steht fünf Kapitel vorher in **1Chr 23,28**. Der Stammfilter
+vergleicht Buchstabenfolgen ohne Umlaut-Normalisierung und findet `Vorhof`
+neben `Vorhöfe` nicht.
+
+Vier der neun in Kapitel 28 als „nur über den Stamm belegt" gemeldeten Formen
+waren so fälschlich in der Liste; in Kapitel 29 waren es acht von zehn, in
+Kapitel 27 siebenundzwanzig von siebenunddreißig. Die Agenten haben es jedes
+Mal selbst gemerkt, weil sie den Extrakt nach dem **Lemma** fragen statt der
+Form — aber die Liste treibt sie zum Neuprägen, und Neuprägen ist genau das,
+was den Bestand auseinandertreibt. Ein Normalisierungsschritt im Stammfilter
+würde das beheben.
+
+### Die Zählproben gehen dreimal nicht auf, und dreimal hat der Text recht
+
+- **25,9–31**: 24 Lose, jedes mit `zwölf` — aber das Wort steht nur
+  **23-mal**. Dem ersten Los fehlt die Zahl. Erst mit ihr ergibt sich die 288
+  aus 25,7. Die Lücke steht schon im Luther 1912 und im hebräischen Text.
+- **27,16–22**: die Stammesliste lässt **Gad und Asser** aus, schiebt mit den
+  Aaroniten eine Priestersippe ein und teilt Josef in Ephraim und zweimal
+  halb-Manasse — 13 Einträge statt 12.
+- **26,19**: der Vers, gegen den ich die Torwachen prüfen ließ, enthält gar
+  keine Zahl.
+
+Dazu **24,15 `Hefir`** — die Form steht genau einmal im ganzen `l1912mod`,
+während derselbe Name in Neh 10,21 `Hesir` lautet. Mit größter
+Wahrscheinlichkeit eine Lang-s-Verlesung der Modernisierung. Geglost ist
+*Hezir*, damit beide Stellen zusammenfinden; der Text bleibt unangetastet.
+
+**Gemeldet, nicht korrigiert** — wie in 3,22, 6,45 und 7,3.
+
+### Was der Prompt an Zahlen erfunden hat
+
+Für Kapitel 27 habe ich „1 alleinstehender Gedankenstrich" behauptet. Das
+Kapitel hat **keinen**, weder als Token noch im Fließtext — und die
+Verteilungstabelle in `BINDUNGEN_CHRONIK.md` führt Kapitel 27 gar nicht auf.
+Die Zahl stammt aus dem Prompt, nicht aus den Daten.
+
+Genauso: `vierundzwanzigtausend` steht in Kapitel 27 **dreizehnmal**, nicht
+zwölfmal — die dreizehnte ist die Rahmenangabe in 27,1. 28,1 hat weder
+`Aufseher` noch `Mächtige`, sondern `Verwalter`, `Kriegsleute` und `angesehene
+Männer`. In 25 gibt es keinen `Sänger`, keine `Anweisung des Königs`, keine
+`Trompete` und keine `Posaune`. In 27 keinen `Kanzler`, keinen `Schreiber`,
+keinen `Rat` und keinen `Aufseher`.
+
+Über das ganze Buch sind **mehr als vierzig** meiner Prompt-Vorgaben vom
+Quelltext widerlegt worden. Die Quote liegt damit dort, wo sie in der
+Offenbarung und in 3. Mose lag, und die Konsequenz bleibt dieselbe: **der
+Prompt-Hinweis ist der unzuverlässigste Teil des Verfahrens**, und der Satz
+„der Quelltext hat immer recht" gehört in jeden Auftrag.
+
+### Offen geblieben, jeweils ein eigener gezählter Zug
+
+- **`König` vor Eigennamen** — im Buch 5:5 zwischen *King* und *king*
+  („König David" mitten im Satz), korpusweit 1135:66 für klein. Kapitel 29 ist
+  in sich angeglichen, das Buch nicht.
+- **Die italienische Großschreibung der Gentilizia** gilt für die
+  **levitischen Sippennamen nicht**: `ghersoniti`, `ishariti`, `kehatiti`,
+  `merariti`, `ebroniti`, `amramiti`, `uzzieliti` stehen durchgehend klein,
+  `Korahiter` dagegen 3:1 auf `Coreiti`. In 26,19 steht deshalb `Coreiti`
+  neben `merariti`. Etwa zwanzig Einträge.
+- **`Herrschaft`** steht im Regierungs-Sinn it 10:4 zwischen *dominio* und
+  *regno*. Das Buch folgt der Mehrheit.
+- **71 italienische Glossen mit dem Digraph „Sh"**, den die italienische
+  Orthografie nicht kennt (Bestand 196:71 für die S-Form).
+- **`bauen`** 117 *construir* : 85 *edificar*.
 
 Angefangene, noch unvollständige Kapitel liegen unter `anno/_wip/` — siehe den
 README dort. Die App lädt diesen Ordner nie. Zurzeit ist der Ordner leer.
