@@ -31,16 +31,22 @@ Kapitel eine schon annotierte Parallele in Genesis, Samuel, den Königsbüchern
 oder Josua hat, und zwar mit **verschobenen Blockpositionen** (gemessene
 Versätze von −49 bis +34).
 
+**Esra ist am 24.08.2026 fertig geworden** — 10 Kapitel, 280 Verse,
+5997 Einträge, in vier Wellen zu je drei gleichzeitig laufenden Kapiteln
+(zuletzt eines allein). Die Vollständigkeitsprobe über alle **5833 Tokens**
+gegen den Quelltext läuft ohne Befund durch; die 16 Satzzeichen-Tokens stimmen
+auf den Token genau.
+
 **2. Chronik ist am 24.08.2026 fertig geworden** — 36 Kapitel, 822 Verse,
 22 607 Einträge, in zwölf Wellen zu je drei gleichzeitig laufenden Kapiteln.
 Die Vollständigkeitsprobe über alle **21 786 Tokens** gegen den Quelltext
 läuft ohne Befund durch; die 44 Satzzeichen-Tokens stimmen auf den Token
 genau.
 
-Damit sind **41 von 66 Büchern fertig**: 663 Kapitel, 19 977 Verse,
-458 648 Einträge. `validate.py alle` gibt für alle 41 Bücher `[ok]` aus,
+Damit sind **42 von 66 Büchern fertig**: 673 Kapitel, 20 257 Verse,
+464 645 Einträge. `validate.py alle` gibt für alle 42 Bücher `[ok]` aus,
 `qa.py alle` meldet 0 Verdachtsfälle, `hilfsverb.py` ebenfalls 0.
-Es fehlen die Bücher 15–39 (rund 535 Kapitel).
+Es fehlen die Bücher 16–39 (rund 525 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -58,6 +64,7 @@ Es fehlen die Bücher 15–39 (rund 535 Kapitel).
 | **2. Könige (12)** | **25** | **720** | **20 422** |
 | **1. Chronik (13)** | **29** | **942** | **17 062** |
 | **2. Chronik (14)** | **36** | **822** | **22 607** |
+| **Esra (15)** | **10** | **280** | **5 997** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -1495,3 +1502,188 @@ Ein Serverfehler und ein Ruhezustand des Rechners. Beide Kapitel ließen sich
 vollständig aus den Teildateien rekonstruieren, weil die Prompts
 **Schreiben nach jedem Abschnitt von 6–10 Versen** verlangen. Diese Regel
 gehört in jeden Prompt.
+
+## Esra: was das Buch gelehrt hat
+
+Vier Wellen zu je drei gleichzeitig laufenden Kapiteln, das letzte allein.
+Die Erfahrung ist wieder methodisch, und diesmal betrifft der wichtigste
+Befund **den Prompt-Ersteller, nicht die Agenten**.
+
+### Acht von 54 handgetippten Levels waren falsch
+
+Die Vorab-Bindungstabelle für Welle 1 hatte ich zur Hälfte von Hand gefüllt,
+weil mein Extraktionsskript beim ersten Lauf nur die Glossen ausgab. **Alle
+drei Agenten haben es unabhängig gemeldet** und sind richtigerweise dem
+Bestand gefolgt, der je Lemma zu 100 % einheitlich ist:
+
+| Lemma | Tabelle | Bestand |
+|---|---|---|
+| `Brandopfer` | B2 | **C1** (218 Belege) |
+| `Nachkomme` | B1 | **B2** (331) |
+| `Gemeinde` | B1 | **B2** (282) |
+| `Torhüter` | B1 | **C1** (18) |
+| `Gefangenschaft` | B2 | **C1** (17) |
+| `Statthalter` | B2 | **C1** (34) |
+| `Grundstein` | C1 | **B2** (5) |
+| `Tempeldiener` | C1 | **B2** (1) |
+
+Dasselbe bei der Blocktabelle: der Agent von Kapitel 1 fand einen zehnten
+Parallelblock zu 2Chr 36,22–23, den ich beim Abtippen verloren hatte
+(`sodass er`, Versatz +6).
+
+**Konsequenz — drei neue Skripte, und keine Tabelle mehr von Hand:**
+
+- **`vorab.py`** erzeugt die Bindungstabelle aus dem Bestand: für jede Form,
+  die in mehreren Kapiteln der Welle steht, Lemma, Level und Belegzahl.
+- **`bloecke.py`** erzeugt die Blocktabelle mit gemessenem Versatz.
+- **`tabellenpruefung.py`** hält jede Zeile einer fertigen Tabelle gegen den
+  Bestand — Level **und** Glossen.
+
+Und eine Formatentscheidung, die mehr getragen hat als erwartet: die
+Belegspalte unterscheidet **eine Zahl** (`27` — der Bestand kennt nur diese
+Lesart, übernehmen) von **einem Bruch** (`53/97` — Mehrheitsvorschlag, der
+Vers entscheidet). Die Agenten haben in genau diesen Zeilen begründet
+widersprochen.
+
+### Fünf bedeutungsblinde Bindungen in einem Buch
+
+`BINDUNGEN_AT.md` nennt je Lemma die häufigste AT-Lesart, auch wo das Wort zwei
+Bedeutungen trägt. Esra hat fünf solche Fälle aufgedeckt, jeder mit sauber
+getrennten Sachfeldern:
+
+| Lemma | Lesart A | Lesart B |
+|---|---|---|
+| `Gefäß` | Alltagsgefäß, *recipiente* (21) | **Tempel- und Prunkgerät**, *vasijas* (12) |
+| `Becken` | das eherne Meer, *pila · cuve* (12) | **Sprengschalen der Geräteliste**, *tazones · catini* (7) |
+| `Rat` | der Ratschlag, *advice* (30, AT) | **das Gremium**, *council* (29, NT) |
+| `Aufruhr` | der Menschenauflauf, *uproar* (14, NT) | **der politische Aufstand** |
+| `Gewalt` | *violence* | ***force*** (1Mo 31,31) |
+
+Bei `Gefäß` und `Becken` ist es **die Gegenprobe zur Lexikonfalle**: es sieht
+aus wie eine Inkonsistenz und ist eine echte Bedeutungsspaltung. Die
+Belegverse zu lesen war jedes Mal die Entscheidung.
+
+### Ein fehlender Mehrwort-Eintrag ist für jedes Prüfskript unsichtbar
+
+Kapitel 4 hat gemeldet, dass Esra 1–3 `um zu` und `so wie` **nicht** als
+Mehrwort-Einträge führt, obwohl der Bestand sie 267- bzw. 91-mal kennt.
+`selfcheck.py` und `qa.py` sehen das prinzipiell nicht: die Einzelwörter sind
+vollständig und richtig, strukturell fehlt nichts. Zehn Stellen nachgetragen.
+
+Daraus ist **`konvention.py`** entstanden — es sucht die Wortfolge im Quelltext
+und fragt, ob ein Eintrag darauf liegt. Und es produziert **richtigerweise
+Fehlalarme**: bei 8,22 (`den König **um** eine Eskorte **zu** bitten` =
+`bitten um` plus Infinitiv) und bei 8,27 (`**so** wertvoll **wie** Gold` = die
+Vergleichsklammer). Der Bestand führt `so wie` ausnahmslos zusammenhängend
+(95 Belege, alle `pos_end`). Beide Male hätte ein Eintrag den Satz falsch
+geklammert.
+
+### `levelcheck.py`: was der Build stillschweigend repariert
+
+`buildbook.py` zieht abweichende Level beim Bauen auf die Korpusmehrheit —
+die Quelle behauptet danach dauerhaft etwas anderes als das Ergebnis, und die
+Abweichung wandert durch jeden Neubau mit. In Esra waren es 3 Einträge in
+Welle 2, 10 in Kapitel 9, 3 in Kapitel 8, 9 in Kapitel 10. Das neue Skript
+prüft **vor** dem Build und meldet nur, wo der Bestand einheitlich ist.
+
+### Der Kreuzabgleich, dritte Bestätigung
+
+Über drei Wellen: 44 · 101 · 90 gemeinsame Inhaltswortformen, davon
+**19 echte Divergenzen** — und **keine einzige** hat ein Prüfskript gemeldet.
+Die lehrreichsten:
+
+- **Ein Einzelwort hatte den Plural seines Mehrwort-Eintrags übernommen.**
+  In 5,12 trägt `in die Hand geben` zu Recht das idiomatische französische
+  *entre les mains*; das Einzelwort `Hand` stand daneben ebenfalls auf *mains*,
+  obwohl der Text Singular hat und der Bestand 535 zu 589 auf *main* steht.
+- **`Fest der ungesäuerten Brote`** steht 15-mal im Bestand, ausnahmslos auf
+  *loaves · panes · pains · pani*. Esra 6,22 war das sechzehnte und stand auf
+  *bread*. Gefunden hat es `ausreisser.py`, nicht der Kreuzabgleich.
+- **`verlassen`** stand im selben theologischen Sinn dreifach (*forsake* ·
+  *abandoned* · *forsaken*), obwohl es/fr/it überall dieselbe Wortfamilie
+  tragen und nur Englisch spaltete.
+- **`Dies`** als Listeneinleiter stand auf *Ceci* und *Voici*. Entschieden hat
+  die LSG selbst: sie schreibt an beiden Stellen *voici*.
+
+### Ein wortgleicher Block, der nicht übertragbar ist
+
+`Esra 5,14` und `6,5` teilen einen **18-Token-Block bei Versatz 0**, der vorab
+gebunden war und deckungsgleich herauskam. Das Prüfskript von Kapitel 5 fand
+aber einen **dritten** gemeinsamen Block, den weder mein Prompt noch die
+Tabelle nannte: `aus dem Tempel`, Versatz **−17**. Er ist wortgleich und
+inhaltlich unübertragbar — in 6,5 nimmt Nebukadnezar die Gefäße *aus dem
+Tempel in Jerusalem*, in 5,14 holt Kores sie *aus dem Tempel von Babel*.
+**Zwei verschiedene Tempel.** Derselbe Fall wie 2Kön 9,21/9,27.
+
+### Sechs Fassungen einer Formel über zwei gleichzeitige Kapitel
+
+Die Hand-Formel steht sechsmal im Buch (7,6 · 7,9 · 7,28 · 8,18 · 8,22 ·
+8,31), **keine zwei gleich**: `gütige` steht nur zweimal, `des HERRN` in der
+Hälfte, die Stellung von `war` wechselt. Und der Unterschied ist nicht nur
+Stellung — in 7,6 und 7,28 ist das Possessiv Apposition zu `des HERRN`
+(*his*), in 7,9 Genitivattribut zu `Hand` (*of his*). Beide Agenten haben ihre
+drei Stellen einzeln vermessen; `Hand` trägt überall dieselbe Glosse, das
+Drumherum nicht.
+
+### Zwei Rechenproben gehen nicht auf — beide sind Erbe der Vorlage
+
+1,11 nennt 5400 gegen 2499 aufgezählte, 2,64 nennt 42 360 gegen rund 29 400.
+Der Agent von Kapitel 2 hat den **unmodernisierten Luther 1912** Zeile für
+Zeile gegengelesen: **alle 45 Zahlangaben identisch**. Dazu liest l1912mod in
+2,24 `240`, wo WEB, RV, LSG und RIV alle 42 haben. Gemeldet, nicht korrigiert.
+
+### Homographen: Lemma und Level werden geteilt, nur die Glosse trennt
+
+Vier neue Fälle — `Hagab` (Personenname gegen die Heuschrecke aus 3Mo 11,22),
+`Cherub` (Ortsname gegen den Engel, 44 Belege), `Ariel` (in 4Mo 26,17 ist
+Areli, der Sohn Gads, gemeint), `Sarai` (in 10,40 ein Mann der Sippenliste,
+im Bestand 16-mal Abrahams Frau). Alle vier nach der Konvention des Bestands
+gelöst, die `Becher` (B1 als Kelch **und** als Name), `Lot` (A1 als Gewicht
+**und** als Person) und `Mal` (A2 als Zeit **und** als Zeichen) schon
+vorgeben. `buildbook.py` erzwingt es ohnehin: es gleicht Level je Lemma
+korpusweit an.
+
+### Prompt-Hinweise: die Quote bleibt hoch
+
+Über zehn Kapitel wieder **weit über hundert** widerlegte Vorgaben. Die
+lehrreichsten sind die, bei denen ein Agent, der dem Hinweis folgt, einen
+strukturell tadellosen Eintrag mit der falschen Bedeutung produziert hätte:
+
+| ich schrieb | der Text sagt |
+|---|---|
+| `wachte` sei von `aufwachen` (5,5) | von **`wachen`** — der Extrakt bietet nur `aufwachen` an |
+| `riss … aus` sei ein trennbares Verb (9,3) | `aus` regiert `Kopf und Bart`, ist also **Präposition**; die Modernisierung hat das Objekt in eine PP umgebaut |
+| `wie es bis heute der Fall ist` stehe zweimal | 9,15 sagt es **ohne `bis`** — ab dort alles um eine Position versetzt |
+| 9,11–12 habe eine Parallele in 5Mo 7,3 / 23,7 | andere Konstruktion, andere Wortstellung; nur die **Lemma-Glossen** übernehmbar |
+| `sodass` stehe in 4,24 | 4,24 hat `So`; damit entfällt die angekündigte Kollision ganz |
+| `nannten` sei `benennen` (5,4) | heißt **mitteilen**, gegen die Bestandsmehrheit *named/llamaron* |
+| die Absenderformel stehe dreimal voll da | 4,8 ist gekürzt, 4,23 die Kurzform — **vier verschieden gebaute Fassungen** |
+
+### `des` vor `Euphrat` stand in drei Fassungen
+
+Kapitel 7 hat gemeldet, dass die schon **gebauten** Kapitel 4 und 6
+auseinanderlaufen — drei Lesarten in zwölf Einträgen. Sein grammatisches
+Argument war schlüssig, der Bestand entscheidet aber anders und mit einem
+direkten Präzedenzfall: 32 Belege nach `jenseits`, 5 nach `diesseits`,
+darunter **1Kön 5,4 mit exakt derselben Wendung `diesseits des Euphrat`**.
+
+**Offen und korpusweit zu entscheiden:** `diesseits` trägt die Präposition im
+Glossentext (*a este lado de · de ce côté-ci de · di qua da*), `jenseits`
+nicht (*al otro lado · au-delà · di là*). Im Lesefluss doppelt sich dadurch
+bei `diesseits` die Präposition — 17 Einträge im ganzen Bestand.
+
+### Nachzuziehende Bestandsbefunde
+
+- **1Mo 30,35:** das Einzelwort `sonderte` trägt `lemma='aussondern'` **und**
+  dieselbe Glosse wie sein Mehrwort-Eintrag. Fünfter Fall dieser Bauart.
+- **2Kön 12,14 · 25,15:** `Becken` in einer Geräteliste, aber mit der
+  Meer-Lesart. Nach dem Zug die **Nachbarpositionen** mitprüfen — das Genus
+  wechselt.
+- **`sodass`** steht 364 zu 3 auf en *so that*; die drei Ausreißer sind
+  2Chr 36,22, 5Mo 26,19 und Jos 20,9. Esra 1,1 folgt der Parallele 2Chr 36,22.
+- **`fragen nach`** existiert als zwei Lemmata (`fragen nach` 8, `nach fragen`
+  2) für dieselbe Konstruktion.
+- **`beistehen`** hat drei Lesarten nebeneinander (*stood by* · *support* ·
+  *assist*) bei identischem Lemma und Level.
+- **`aufschreiben`** verschluckt sein Einzelwort an fast allen Stellen; nur
+  Richter 8,14 unterscheidet.
