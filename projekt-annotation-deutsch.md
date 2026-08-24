@@ -31,10 +31,16 @@ Kapitel eine schon annotierte Parallele in Genesis, Samuel, den Königsbüchern
 oder Josua hat, und zwar mit **verschobenen Blockpositionen** (gemessene
 Versätze von −49 bis +34).
 
-Damit sind **40 von 66 Büchern fertig**: 627 Kapitel, 19 155 Verse,
-436 041 Einträge. `validate.py alle` gibt für alle 40 Bücher `[ok]` aus,
-`qa.py alle` meldet 0 Verdachtsfälle. Es fehlen die Bücher 14–39
-(rund 570 Kapitel).
+**2. Chronik ist am 24.08.2026 fertig geworden** — 36 Kapitel, 822 Verse,
+22 607 Einträge, in zwölf Wellen zu je drei gleichzeitig laufenden Kapiteln.
+Die Vollständigkeitsprobe über alle **21 786 Tokens** gegen den Quelltext
+läuft ohne Befund durch; die 44 Satzzeichen-Tokens stimmen auf den Token
+genau.
+
+Damit sind **41 von 66 Büchern fertig**: 663 Kapitel, 19 977 Verse,
+458 648 Einträge. `validate.py alle` gibt für alle 41 Bücher `[ok]` aus,
+`qa.py alle` meldet 0 Verdachtsfälle, `hilfsverb.py` ebenfalls 0.
+Es fehlen die Bücher 15–39 (rund 535 Kapitel).
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -51,6 +57,7 @@ Damit sind **40 von 66 Büchern fertig**: 627 Kapitel, 19 155 Verse,
 | **1. Könige (11)** | **22** | **817** | **21 132** |
 | **2. Könige (12)** | **25** | **720** | **20 422** |
 | **1. Chronik (13)** | **29** | **942** | **17 062** |
+| **2. Chronik (14)** | **36** | **822** | **22 607** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -1401,3 +1408,90 @@ dadurch entstanden, dass zwischen Agentenlauf und Commit ein Schritt fehlte.
   `examples.json` analog zur ES-Pipeline (`build_training.py` → Opus-Enrichment
   → `finalize_training.py`) und `build_keepnames.py` für die Eigennamen-Liste
 - `hasTraining`/`hasLevelTest` bleiben bis dahin `false`
+
+## 2. Chronik: was das Buch gelehrt hat
+
+Das Buch ist in **zwölf Wellen zu je drei gleichzeitig laufenden Kapiteln**
+entstanden. Die wichtigste Erfahrung ist nicht fachlich, sondern methodisch.
+
+### Der Kreuzabgleich schlägt jedes Prüfskript
+
+Zwischen den drei Kapiteln einer Welle wurden die **gemeinsamen Wortformen**
+gegeneinander gehalten (Funktionswörter und Mehrwort-Einträge ausgeschlossen).
+Über das ganze Buch hat das **mehr als vierzig echte Abweichungen** gefunden,
+und **keine einzige davon hat ein Prüfskript gemeldet** — es sind durchweg
+wortgleiche Wendungen mit auseinanderlaufenden Glossen. Beispiele aus den
+letzten beiden Wellen: `setzte Hauptleute` stand in 32,6 und 33,14 auf zwei
+verschiedenen Glossen; `ganzen` vor Femininum stand in 32,7/32,9 auf
+*entera · entière · intera*, während der Bestand **99 zu 8** auf
+*toda · toute · tutta* steht; `dazu` stand zweimal auf *en outre* — einer
+Lesart, die der Bestand **überhaupt nicht kennt** (Mehrheit *en plus*, 166
+Belege).
+
+### Die Agenten widerlegen mehr als sie fragen
+
+Über neunzig Vorgaben aus meinen Prompts sind vom Quelltext widerlegt worden,
+und **jede Widerlegung war richtig**. Die lehrreichsten:
+
+- Ich hatte für 2Chr 32 vier Zahlenfragen gestellt. **Das Kapitel nennt keine
+  einzige Zahl** — der Chronist streicht sogar die 185 000 aus 2Kön 19,35.
+- Ich hatte für 32,33 ein Begräbnis „auf der Anhöhe bei den Gräbern der Söhne
+  Davids" angekündigt. Der Text sagt „auf dem **Weg** zu den Gräbern der
+  **Nachkommen** Davids" — keine der neun bekannten Todesformeln.
+- Ich hatte 33,18–19 als „Geschichte der Könige" und „Geschichte Hosais"
+  beschrieben. Beides steht nicht da; es sind zwei verschiedene
+  Formelfassungen in einem Kapitel, und in 33,18 fehlt `geschrieben`, sodass
+  `steht` die Bedeutung allein trägt.
+- Meine Kollisionsauflösung für `all` ↔ `ganz` **trennt in 31,1 nur im
+  Englischen**, weil dort ein Neutrum steht. Der Agent hat das gemerkt und
+  eine andere belegte Lesart genommen.
+- Ich hatte 31,16 und 31,17 als konkurrierende Altersgrenzen beschrieben.
+  31,17 verzeichnet die Priester **ohne** Altersangabe.
+
+### Zwei meiner eigenen Messungen waren falsch
+
+**Das Satzzeichen-Skript.** `text.split().count('–')` sieht das Token `–,`
+nicht. Das Buch hat **44** Satzzeichen-Tokens, nicht 41; drei Kapitel waren
+betroffen. Gefunden hat es der Agent von Kapitel 10, nicht ich.
+
+**Die spanische Altersangabe.** Ich hatte **26 zu 12** für *tenía* gegen *era*
+gezählt und daraus geschlossen, `era` sei eine Buchkonvention von 2. Könige,
+und den Fix abgelehnt. Mein Skript zählte **jedes** `war` im Vers mit, auch
+„seine Mutter *war*…". Zählt man nur das `war` vor der Altersangabe, steht es
+**31 zu 1**. Es war kein Muster, sondern ein einzelner Ausreißer. Korrigiert
+sind jetzt 2Kön 14,2 und 2Sam 5,4; die Formel steht korpusweit lückenlos.
+
+### Die Parallelenkarte musste zweimal neu gebaut werden
+
+Die erste Fassung maß **Kapitel gegen Kapitel** und war damit blind für jede
+Parallele, die über eine Kapitelgrenze der Quelle läuft — 2Chr 5,1 galt als
+Sondergut und ist in Wahrheit die engste Parallele seines Kapitels. Die zweite
+Fassung hatte eine zu strenge Schwelle. Und die Tabelle in
+`BINDUNGEN_CHRONIK.md` führte bis zuletzt fünf Kapitel als „kein Vers mit
+Parallele" — eine Zeile aus der **ersten** Karte, die beim Neubau nicht
+nachgeführt worden war. Nachgezählt hat **kein einziges Kapitel des Buches**
+null Parallelverse.
+
+Die Karte bleibt außerdem prinzipiell blind für **innerbuchliche** Parallelen,
+weil sie 2. Chronik nur gegen *andere* Bücher misst. Gerade die Rahmenformeln
+wiederholen sich aber im Buch selbst, und dort oft enger: 36,8 ↔ 2Chr 27,7 hat
+**20 formgleiche Positionen und null Glossenabweichung** — enger als jede
+Königsbuch-Stelle. Diese Parallelen wurden pro Welle von Hand nachgemessen und
+den Prompts beigelegt.
+
+### Nachgezogene Bestandsbefunde
+
+- **`von ganzem Herzen` ↔ `mit ganzer Seele`**: sechs Verse führen beide
+  Spannen, **vier** trugen identische Einzelwort-Glossen. Jos 22,5, 2Kön 23,3
+  und 23,25 folgen jetzt dem Muster aus 2Chr 34,31.
+- **Die Thronbesteigungsformel**: 2Kön 14,2 und 2Sam 5,4 nachgezogen.
+- **`Obersten der Leviten`** ist *chiefs*, nicht *leaders* — bei Kultpersonal
+  entscheidet die Fügung, nicht der Kontext.
+- **`brachte` + Sachobjekt** ist französisch *emporta*, nicht *amena*.
+
+### Zwei Agenten sind gestorben, beide Kapitel waren gerettet
+
+Ein Serverfehler und ein Ruhezustand des Rechners. Beide Kapitel ließen sich
+vollständig aus den Teildateien rekonstruieren, weil die Prompts
+**Schreiben nach jedem Abschnitt von 6–10 Versen** verlangen. Diese Regel
+gehört in jeden Prompt.
