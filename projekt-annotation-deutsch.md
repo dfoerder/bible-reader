@@ -43,10 +43,23 @@ Die Vollständigkeitsprobe über alle **21 786 Tokens** gegen den Quelltext
 läuft ohne Befund durch; die 44 Satzzeichen-Tokens stimmen auf den Token
 genau.
 
-Damit sind **42 von 66 Büchern fertig**: 673 Kapitel, 20 257 Verse,
-464 645 Einträge. `validate.py alle` gibt für alle 42 Bücher `[ok]` aus,
-`qa.py alle` meldet 0 Verdachtsfälle, `hilfsverb.py` ebenfalls 0.
-Es fehlen die Bücher 16–39 (rund 525 Kapitel).
+**Nehemia ist am 25.08.2026 fertig geworden** — 13 Kapitel, 406 Verse,
+8758 Einträge, in fünf Wellen zu je drei gleichzeitig laufenden Kapiteln
+(Kapitel 7 auf zwei Agenten geteilt). Die Vollständigkeitsprobe über alle
+**8503 Tokens** gegen den Quelltext läuft ohne Befund durch; die 20
+Satzzeichen-Tokens stimmen auf den Token genau.
+
+Damit sind **43 von 66 Büchern fertig**: 686 Kapitel, 20 663 Verse,
+473 403 Einträge. `validate.py alle` gibt für alle 43 Bücher `[ok]` aus,
+`qa.py alle` meldet 0 Verdachtsfälle, `mehrwort.py alle` 0.
+Es fehlen die Bücher 17–39 (rund 512 Kapitel).
+
+**`hilfsverb.py alle` meldet allerdings 35 Fälle, nicht 0** — für Nehemia 0,
+alle 35 in älteren Büchern (Johannes 11, 1. Korinther 5, Matthäus 3,
+2. Korinther 3, Ruth/Lukas/Kolosser/Epheser/1. Mose/2. Mose je 2,
+Jakobus 1). Sie sind nicht neu entstanden, sondern beim Buchabschluss
+erstmals über den Gesamtbestand gemessen worden; mindestens 2. Mose 8,3 ist
+eindeutig echt. Siehe `BEFUNDE_NEHEMIA.md`, Abschnitt am Ende.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -65,6 +78,7 @@ Es fehlen die Bücher 16–39 (rund 525 Kapitel).
 | **1. Chronik (13)** | **29** | **942** | **17 062** |
 | **2. Chronik (14)** | **36** | **822** | **22 607** |
 | **Esra (15)** | **10** | **280** | **5 997** |
+| **Nehemia (16)** | **13** | **406** | **8 758** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -87,7 +101,7 @@ Es fehlen die Bücher 16–39 (rund 525 Kapitel).
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **260** | **7957** | **172 518** |
-| **Summe gesamt** | **598** | **18 213** | **418 971** |
+| **Summe gesamt** | **686** | **20 663** | **473 403** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -915,6 +929,16 @@ Die Kernstücke:
 | `BINDUNGEN_AT.md` | Glossen-Bindungen der Bücher 1–39, erzeugt |
 | `BINDUNGEN_3MOSE.md` | die Opfer- und Kultbegriffe von 3. Mose, von Hand gepflegt |
 | `BINDUNGEN_KOENIGE.md` | die Formeln der Bücher 11 und 12, von Hand gepflegt |
+| `vorlage.py <nrA> <kapA> <nrB> <kapB>` | Parallelkapitel als gemessene Vorlage, Vers für Vers, mit Versatz und Abweichungen |
+| `parallelen.py <nr> <kap> [minblock]` | Parallelstellen im **ganzen** Bestand, sortiert nach längstem gemeinsamen Block |
+| `mehrwort.py <nr…>\|alle [--nur=…] [--fix]` | Einzelwörter, die die Glosse ihres Mehrwort-Eintrags übernommen haben |
+| `BEFUNDE_NEHEMIA.md` | Bestandsbefunde aus Nehemia, gemeldet und noch nicht entschieden |
+
+**`konvention.py`, `levelcheck.py` und `kreuz.py` hatten den Scratchpad-Pfad
+der Esra-Sitzung fest eingebaut** und wären in jeder neuen Sitzung ins Leere
+gelaufen. Sie nehmen ihn seit Nehemia aus **`ANNO_OUT`** und brechen mit klarer
+Meldung ab, wenn er fehlt. Ein toter Pfad als Vorgabewert wäre beim nächsten
+Buch wieder stillschweigend falsch gewesen.
 
 `crosscheck.py`, `ausreisser.py` und `hilfsverb.py` sind wieder da und beim
 Abschluss von 2. Könige gelaufen. Was ihnen fehlt, ist der **paarweise
@@ -1379,6 +1403,27 @@ Ein Commit je validiertem Kapitel oder Kapitelpaar, ausschließlich auf `dev`,
 **nicht gepusht** — Push und Merge nach `main` macht `deploy.sh` und wäre ein
 Deployment. Committet wird nur, was der Validator durchgewunken hat.
 
+## Nachrücken statt Wellen — was Nehemia dazu sagt
+
+Nehemia ist in fünf Wellen zu je drei Kapiteln gelaufen, nicht im
+Nachrück-Verfahren der Briefe. Das hat einen Preis (Leerlauf, wenn ein Kapitel
+dreimal so lang ist wie die anderen) und einen Ertrag, der ihn aufwiegt: **die
+Übergabetabelle zwischen den Wellen entsteht maschinell.**
+
+Nach jeder Welle wird gebaut und committet; für die nächste erzeugt ein
+Zehnzeiler aus der gebauten Anno-Datei eine Tabelle „Was die fertigen Kapitel
+schon festgelegt haben", **gefiltert auf die Wortformen der neuen Kapitel** und
+mit `tabellenpruefung.py` gegen den Bestand geprüft. Sie wuchs von 389 Zeilen
+(Welle 2) über 491 und 724 auf 828 (Welle 5), lief jedes Mal mit 0 Abweichungen
+durch, und kein Agent musste eine Festlegung erraten, die ein Vorgänger schon
+getroffen hatte.
+
+Das ist der Grund, warum in Nehemia **keine einzige** buchinterne
+Terminologie-Divergenz nachzuziehen war — anders als in 2. Chronik und Esra,
+wo der Kreuzabgleich jedes Mal mehrere fand. Die Wellen-Struktur ist also kein
+Rückschritt gegenüber dem Nachrücken, sondern die Voraussetzung dafür, dass die
+Übergabe überhaupt maschinell prüfbar wird.
+
 ## Neues Buch anfangen
 
 Es ist **kein Eingriff in `index.html` nötig**. Die App lädt Anno-Dateien per
@@ -1687,3 +1732,235 @@ bei `diesseits` die Präposition — 17 Einträge im ganzen Bestand.
   *assist*) bei identischem Lemma und Level.
 - **`aufschreiben`** verschluckt sein Einzelwort an fast allen Stellen; nur
   Richter 8,14 unterscheidet.
+
+## Nehemia: was das Buch gelehrt hat
+
+Fünf Wellen zu je drei gleichzeitig laufenden Kapiteln; Kapitel 7 ging nach
+der 55-Verse-Regel von vornherein an zwei Agenten. Der Ertrag ist diesmal fast
+ausschließlich **methodisch**, und der rote Faden ist derselbe wie in Esra: die
+teuersten Fehler stehen im Prompt, nicht in der Arbeit.
+
+### Die Ähnlichkeit ist bei Listen das falsche Maß — zweimal gelernt
+
+`vorlage.py` suchte je Vers unabhängig den ähnlichsten Vers der Vorlage. Bei
+einer Liste gleichgebauter Zeilen (`die Nachkommen von X: Zahl;`) trägt das
+nicht: wenn Name **und** Zahl abweichen, ist der Rest der Zeile in **jeder**
+anderen Zeile genauso ähnlich. Nehemia 7,15 (Binnui/648) bekam so Esra 2,4
+(Sephatja/372) statt 2,10; ebenso 7,28. Gefunden hat es der Agent von 7,1–40.
+
+Die Antwort ist eine **ordnungserhaltende Gesamtzuordnung** (Needleman-Wunsch
+über die Ähnlichkeitsmatrix), die keine Zeile überspringen kann, um eine
+zufällig ähnlichere weiter hinten zu greifen. Wo beide Verfahren übereinstimmen,
+ist die Zuordnung belastbar; wo nicht, steht eine **WARNUNG** samt Wortlaut und
+Einträgen der Gegenkandidatin. In Nehemia 7 sind das genau sieben Stellen — die
+drei Fehlzuordnungen und die vier Verse der echten Umstellung
+(7,22 · 23 · 24 · 25 ↔ Esra 2,19 · 2,17 · 2,18 · 2,20). Entscheiden kann das
+kein Verfahren; das Skript benennt jetzt, **wo** entschieden werden muss.
+
+**Und dann bin ich selbst darauf hereingefallen** — nachdem der Fehler behoben
+war. Für den Prompt von Kapitel 11 hatte ich jeden Vers gegen den ganzen
+Bestand abgeglichen und nach Ähnlichkeit sortiert; der Agent hat zwei von acht
+Zuordnungen gemessen widerlegt. Nehemia 11,7 hat gegen 1Chr 5,14 die
+Ähnlichkeit **0,57**, teilt mit ihr aber nur `Dies sind die`. Gegen 1Chr 9,7
+liegt sie bei **0,44**, der gemeinsame Block ist aber
+`Benjamins: Sallu, der Sohn Mesullams, des Sohnes` — sieben Tokens, die es so
+nur dort gibt.
+
+**Bei Genealogien misst die Ähnlichkeit die Gattung, der lange Block die
+Stelle.** Daraus ist `parallelen.py` entstanden: es durchsucht den ganzen
+Bestand und sortiert nach der Länge des längsten gemeinsamen Blocks. Der erste
+Lauf über Kapitel 11 reproduziert unabhängig genau die zwei Korrekturen.
+
+### Ein Prüfskript, das an den bekannten Fällen nicht anschlägt, ist nicht geprüft
+
+Das Muster „**Einzelwort übernimmt den Numerus seines Mehrwort-Eintrags**" war
+seit Esra 5,12 bekannt und trat in Nehemia 9 dreimal wieder auf: `Hand` stand
+französisch im Plural (*mains*), weil daneben `in die Hand geben` =
+*livrer entre les mains* steht, während der deutsche Text Singular hat.
+Gefunden wurde es jedes Mal nur zufällig — `selfcheck.py` und `qa.py` sehen es
+prinzipiell nicht, `ausreisser.py` nur, wenn drei Sprachen sich einig sind.
+
+`mehrwort.py` sucht es gezielt. Der Weg dahin ist die Lehre:
+
+1. Die erste Fassung meldete **18 335** Stellen, fast alles Artikel und
+   Präpositionen, deren Zielsprachenform legitim nach Genus und Kasus wechselt.
+2. Auf Inhaltswörter und Flexionsvarianten der Korpusmehrheit eingeschränkt:
+   34 Stellen.
+3. **Gegenprobe:** die drei bekannten Nehemia-Fehler künstlich wiederhergestellt
+   — das Skript meldete **null**. Die Enthaltensein-Prüfung lief auf
+   Teilzeichenketten, und `main` ist eine Teilzeichenkette von `mains`; die
+   Mehrheitsform galt damit als in der Wendung enthalten und der Treffer fiel
+   weg. Seither prüft es auf Wortgrenzen.
+
+Der Lauf über den Gesamtbestand fand **34 Stellen in acht Büchern** — 31-mal
+`Hand`, dazu `Arm`, `Seite`, `Zeit`. Alle korrigiert, in Anno-Datei **und**
+Quelle; Neubau byte-identisch.
+
+**`--fix` gehört immer mit `--nur`.** Ein pauschaler Lauf korrigiert auch, was
+richtig ist: `Ufer` in Josua 3,15 ist im Deutschen wirklich Plural („trat über
+seine Ufer"), und `das Rechte` in 1. Johannes 2,29 ist ein anderes Wort als die
+`Rechte` im Sinne von Rechtsansprüchen.
+
+Was `mehrwort.py` **nicht** findet: den Fall, in dem die Wendung ein ganz
+anderes Wort einsetzt — `Rücken` stand italienisch auf *spalle* aus *voltare le
+spalle*, während die Mehrheit *schiena* ist. Das ist keine Flexionsvariante;
+dafür ist `ausreisser.py` zuständig. **Die beiden Skripte decken zusammen alle
+vier bekannten Fälle ab, einzeln keines.**
+
+### Der eigene Kollisionslauf schlägt `hints.py` um Größenordnungen
+
+`hints.py` blendet Funktionswörter aus, sonst ersäuft der Bericht im Rauschen.
+Die Kehrseite ist in Nehemia viermal vermessen worden:
+
+| Kapitel | `hints.py` | eigener Lauf des Agenten | davon echt |
+|---|---|---|---|
+| 8 | 0 | 3 | 3 |
+| 10 | 0 | 10 | 10 |
+| 11 | 0 | 18 | 3 |
+| 12 | 1 | 18 | 4 |
+| 13 | 4 | 49 | 4 |
+
+Seit Kapitel 9 steht in jedem Prompt: **selbst einen Lauf über jeden Vers und
+jede der vier Sprachen fahren.**
+
+**Aber der Hinweis allein macht es schlimmer.** Der Agent von Kapitel 11 bekam
+18 Meldungen und hätte fast alle aufgelöst — bis er sie gegen den Bestand
+nachzählte: `nach` und `zu` teilen sich englisch *to* in **200** fertigen
+Versen, `auf` und `in` teilen sich spanisch *en* in 181, `aus` und `von` teilen
+sich spanisch *de* in 208, `ihr` und `sein` teilen sich *su* in 129. Die
+Zielsprachen verschmelzen diese Präpositionen und Possessiva; eine Sonderlösung
+in einem Kapitel macht den Bestand nur inkonsistent.
+
+Seither steht die Zählregel im Prompt, und sie wirkt: Kapitel 12 ließ **alle
+18** Meldungen stehen (niedrigste Bestandszahl 13, höchste 571), Kapitel 13
+löste **4 von 49** auf — und zwar genau die, für die der Bestand **null oder
+eine** gemeinsame Stelle kennt.
+
+### Kollisionen werden verse-lokal aufgelöst, nicht lemma-weit
+
+`Winkel` und `Ecke` kollidieren in 3,24 echt. Der Agent löste es lemma-weit —
+das hätte `Ecke` gegen 23 Bestandseinträge gespalten. Umgedreht: `Winkel`
+bekommt als **eigenes Sachfeld** die Bauwinkel-Lesart (*angle · ángulo ·
+angle · angolo*), die zwei Bestandsbelege in 2Kön 10,21 und 19,23 meinen den
+*Nischen*-Winkel und bleiben; die Ausweichglosse für `Ecke` gilt nur im
+Kollisionsvers. Das ist die Regel aus 1Tim 4,2: eine Auflösung gehört an die
+Kollisionsstelle, nicht ans Lemma. Ebenso gehandhabt in 6,1, 6,9, 6,13, 7,3,
+10,32, 10,35, 12,37, 13,11, 13,17, 13,25.
+
+### Ein Negativbefund ist auch ein Befund
+
+Nehemia 9 erzählt die ganze Heilsgeschichte nach — Schöpfung, Abraham, Ägypten,
+Schilfmeer, Sinai, Manna, Wüste, Landnahme. Es liegt nahe anzunehmen, dass es
+den Pentateuch wörtlich aufgreift. Ein Abgleich **jedes** der 37 Verse gegen
+1.–5. Mose, Josua und Esra findet genau **einen** Treffer über 0,40: 9,18 gegen
+2Mo 32,4, das goldene Kalb. Das stand so im Prompt — und hat genau den Reflex
+verhindert, hier aus Bibelkenntnis abzuschreiben. Der Agent hat den Scan
+zusätzlich über den **gesamten** Bestand laufen lassen und einen zweiten
+Treffer gefunden, den meine Einschränkung nicht sehen konnte: 9,36 gegen
+2Chr 6,31.
+
+Dasselbe bei den Kapiteln 12 und 13: 18 Verse teilen einen Fünf-Token-Block mit
+irgendeiner Bestandsstelle, aber alle Ähnlichkeitswerte liegen zwischen 0,16
+und 0,38. Das sind wiederkehrende Wendungen, keine Parallelstellen — es gibt
+nichts abzuschreiben.
+
+### Die Dublette formuliert neu, und die Falle liegt daneben
+
+Der Agent von Kapitel 12 hat die zwei Dankchöre (12,31–37 und 12,38–39)
+vermessen: von fünf geprüften Verspaaren teilt genau eines einen Block (fünf
+Tokens der Mauerformel), alle übrigen keinen ab Länge drei. **Die Falle liegt
+eine Position vor dem Block:** in 12,31 steht `oben` zweimal mit zwei Lesarten
+— „oben auf die Mauer steigen" (*up*) und „oben auf der Mauer" (*on top*). Wer
+den gemeinsamen Block abschreibt, ohne die Verse zu lesen, setzt an der ersten
+Stelle die falsche.
+
+Ebenso die Schlussformel des Buches. `Denk mir zugute, mein Gott!` steht
+viermal (5,19 · 13,14 · 13,22 · 13,31) und ist viermal anders gebaut: 13,31
+gegen 5,19 teilt vier Tokens, 13,14 gegen 5,19 nur drei Zweierblöcke, und
+13,14 gegen 13,22 hat bei Ähnlichkeit **0,07** keinen Block. Vier verschiedene
+Mehrwort-Lemmata über vier Stellen — wer abgeschrieben hätte, hätte drei davon
+falsch.
+
+### Die Agenten bauen bessere Prüfskripte, als der Prompt verlangt
+
+Beide Hälften von Kapitel 7 haben unabhängig voneinander einen **Zahlwort-
+Parser** gebaut: er liest jedes deutsche Zahlwort in eine Zahl, **erzeugt**
+daraus die Zahlwörter der vier Zielsprachen und hält sie gegen die gelieferte
+Glosse — samt spanischer Genusprobe (*doscientas* Maultiere gegen *doscientos*
+Sänger), italienischer Elision (*centottantotto*) und Endbetonung
+(*settecentoquarantatré*). 55 Zahlwörter geprüft, davon 22 mit von Esra 2
+abweichender Summe. **Beide Skripte haben dabei je einen Fehler im eigenen
+Generator aufgedeckt, keinen in den Daten.**
+
+Das ist die Antwort auf ein Problem, das keine Strukturprüfung lösen kann: die
+abweichenden Summen stehen als **ausgeschriebene Zahlwörter** da
+(`zweitausendachthundertzwölf` gegen `zweitausendachthundertachtzehn`), und
+keine Ziffernprüfung fängt sie.
+
+### `um zu` fällt durch, wenn man es nicht ausdrücklich prüft
+
+In Welle 2 haben zwei von drei Agenten den Mehrwort-Eintrag `um zu` vergessen
+— viermal insgesamt. Ein fehlender Mehrwort-Eintrag ist für `selfcheck.py` und
+`qa.py` **prinzipiell unsichtbar**: die Einzelwörter sind vollständig und
+richtig, strukturell fehlt nichts. Der `konvention.py`-Lauf steht seither als
+Pflichtschritt in `AUFTRAG_AT.md`.
+
+Und `konvention.py` selbst hatte einen Fehler: bei zwei Vorkommen desselben
+Einleitworts paarte es das erste mit dem `zu` des **nächsten** Teilsatzes. In
+Neh 6,10 (`um dich umzubringen – nachts … um dich zu töten`) meldete es
+dadurch eine Lücke, die es nicht gab. Die Vorwärtssuche bricht jetzt an einem
+zweiten Einleitwort und an alleinstehenden Satzzeichen ab; Gegenprobe an
+entkernten Kontrolldateien: alle sieben echten Lücken werden weiterhin
+gefunden.
+
+### `hints.py` meldet Präfixverben falsch als unbelegt
+
+Viermal nachgewiesen: `herunterkommen` und `hinabziehen` (6,3), `dafür sorgen`
+(7,1), `sich absondern` (10,29). Der VERWANDT-Abschnitt führt bei trennbaren
+und Präfixverben auf `herum`, `hinab`, `Sorge` statt aufs Lemma. Aufgedeckt hat
+es jedes Mal **nur `levelcheck.py`**. Steht seit Welle 3 in jedem Prompt.
+
+### Prompt-Hinweise: die Quote bleibt hoch
+
+Wieder weit über hundert widerlegte Vorgaben. Die lehrreichsten:
+
+| ich schrieb | der Text sagt |
+|---|---|
+| `Rosstor` sei neu | steht im Bestand, C1 (Neh 3,28 hatte es aus einer anderen Form) |
+| `Ephraimtor` sei neu | steht in 2Kön 14,13 und 2Chr 25,23, B2 |
+| in 3,5 kollidierten `Vornehme`/`Vorgesetzte` | tragen längst drei verschiedene Glossen |
+| 1,8–9 habe keine Blöcke aus 5Mo 30 | **1,9 hat zwei** (`Ende des Himmels`, `von dort sammeln und`) |
+| 12,35 teile `des Sohnes Michas` mit 11,22 | 12,35 liest **`Michajas`** — anderer Name, andere Glosse |
+| 12,37 habe `Ophel` aus 3,26 | steht dort nicht; geteilt sind fünf Tokens |
+| `anstimmen` und `Dankgebet` gehörten zu Kapitel 12 | stehen in 11,17 |
+| 11,7 gehöre zu 1Chr 5,14 | gehört zu **1Chr 9,7** (Block 7 gegen Block 3) |
+| `Hebopfer` stehe in Kapitel 10 | der Text hat dort `Abgaben` |
+| die `und dass wir`-Formel stehe dreimal | zweimal; 10,33 beginnt anders |
+| 13,15 habe fünf Warenwörter | **acht** Sachwörter |
+| `Kaufleute` stehe in 13,20 | dort stehen `Händler und Verkäufer` |
+| `zugute` habe drei Belege | **vier** — Neh 5,19 gehört dazu |
+
+### Nachzuziehende Bestandsbefunde
+
+Alle gesammelt in **`BEFUNDE_NEHEMIA.md`** im Werkzeugordner. Die wichtigsten:
+
+- **`Tür` und `Tor` tragen im ganzen Bestand dieselbe romanische Glosse.** Eine
+  korpusweite Kollision, in Nehemia dreimal verse-lokal aufgelöst (3,6 · 6,1 ·
+  7,3). Eine saubere Lösung wäre die Trennung `Tor` = *portón/portail/portone*
+  gegen `Tür` = *puerta/porte/porta*.
+- **`Josabad` trägt in allen 12 Belegen englisch *Jehozabad*, romanisch aber
+  *Jozabad*.** Das Hebräische hat beide Namen, das Deutsche schreibt überall
+  `Josabad`. Entweder die englische Spalte auf die Mehrheit ziehen oder
+  positionsgebunden trennen wie bei `Assur` und `Lot`.
+- **`Hosea` trägt für Josuas Vorname und den Propheten dieselbe englische
+  Glosse.**
+- **`Rind` und `Vieh`** tragen beide *cattle/livestock · ganado · bétail ·
+  bestiame`; in 10,37 stehen sie im selben Vers.
+- **`Vorsteher` und `Oberhaupt`** sind in es/fr/it identisch (*jefe · chef ·
+  capo*) — latente Bindungsschwäche.
+- **Die spanischen Tornamen sind uneinheitlich großgeschrieben:** acht heißen
+  `puerta del …` klein, nur `Schaftor` heißt `Puerta de las Ovejas` groß (aus
+  der Bindung an Joh 5,2).
+- **`hilfsverb.py alle` meldet 35 Fälle**, alle in älteren Büchern; mindestens
+  2Mo 8,3 ist eindeutig echt (`ließen` und `machten` mit derselben Glosse in
+  drei Sprachen).
