@@ -43,16 +43,23 @@ Die Vollständigkeitsprobe über alle **21 786 Tokens** gegen den Quelltext
 läuft ohne Befund durch; die 44 Satzzeichen-Tokens stimmen auf den Token
 genau.
 
+**Ester ist am 27.08.2026 fertig geworden** — 10 Kapitel, 167 Verse,
+5041 Einträge, in drei Wellen. Die Vollständigkeitsprobe über alle **4864
+Tokens** gegen den Quelltext läuft ohne Befund durch; die 10 Satzzeichen-Tokens
+stimmen auf den Token genau. Das Buch steht praktisch allein: `parallelen.py`
+findet über 69 gescannte Verse sieben Treffer ab fünf Tokens, alle bei
+Ähnlichkeit 0,21 bis 0,47 — wiederkehrende Wendungen, keine Parallelstellen.
+
 **Nehemia ist am 25.08.2026 fertig geworden** — 13 Kapitel, 406 Verse,
 8758 Einträge, in fünf Wellen zu je drei gleichzeitig laufenden Kapiteln
 (Kapitel 7 auf zwei Agenten geteilt). Die Vollständigkeitsprobe über alle
 **8503 Tokens** gegen den Quelltext läuft ohne Befund durch; die 20
 Satzzeichen-Tokens stimmen auf den Token genau.
 
-Damit sind **43 von 66 Büchern fertig**: 686 Kapitel, 20 663 Verse,
-473 403 Einträge. `validate.py alle` gibt für alle 43 Bücher `[ok]` aus,
+Damit sind **44 von 66 Büchern fertig**: 696 Kapitel, 20 830 Verse,
+478 444 Einträge. `validate.py alle` gibt für alle 44 Bücher `[ok]` aus,
 `qa.py alle` meldet 0 Verdachtsfälle, `mehrwort.py alle` 0.
-Es fehlen die Bücher 17–39 (rund 512 Kapitel).
+Es fehlen die Bücher 18–39 (rund 495 Kapitel).
 
 **`hilfsverb.py alle` meldet allerdings 35 Fälle, nicht 0** — für Nehemia 0,
 alle 35 in älteren Büchern (Johannes 11, 1. Korinther 5, Matthäus 3,
@@ -79,6 +86,7 @@ eindeutig echt. Siehe `BEFUNDE_NEHEMIA.md`, Abschnitt am Ende.
 | **2. Chronik (14)** | **36** | **822** | **22 607** |
 | **Esra (15)** | **10** | **280** | **5 997** |
 | **Nehemia (16)** | **13** | **406** | **8 758** |
+| **Ester (17)** | **10** | **167** | **5 041** |
 | Matthäus (40) | 28 | 1071 | 22 780 |
 | Markus (41) | 16 | 678 | 14 235 |
 | Lukas (42) | 24 | 1151 | 24 552 |
@@ -101,7 +109,7 @@ eindeutig echt. Siehe `BEFUNDE_NEHEMIA.md`, Abschnitt am Ende.
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **260** | **7957** | **172 518** |
-| **Summe gesamt** | **686** | **20 663** | **473 403** |
+| **Summe gesamt** | **696** | **20 830** | **478 444** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -1964,3 +1972,156 @@ Alle gesammelt in **`BEFUNDE_NEHEMIA.md`** im Werkzeugordner. Die wichtigsten:
 - **`hilfsverb.py alle` meldet 35 Fälle**, alle in älteren Büchern; mindestens
   2Mo 8,3 ist eindeutig echt (`ließen` und `machten` mit derselben Glosse in
   drei Sprachen).
+
+## Ester: was das Buch gelehrt hat
+
+Drei Wellen, zehn Kapitel, 167 Verse. Ester ist das erste Buch, das **fast
+keine Parallelen** hat — und dadurch ist der Ertrag fast ganz methodisch. Zwei
+Regeln sind entstanden, zwei Werkzeugfehler behoben, und einer der beiden
+Fehler war meiner.
+
+### Die Glossen folgen den vier Referenzausgaben
+
+Diese Regel stand nirgends, obwohl sie 43 Bücher lang befolgt worden ist. Ein
+Agent hatte in Nehemia gemeldet, `Susa` trage englisch das archaische
+*Shushan* neben modernen romanischen Formen, und ich hatte das als
+Korrekturkandidaten notiert. Weil Ester `Susa` 17-mal führt und die
+Entscheidung vor dem Buch fallen musste, habe ich die Ausgaben aufgeschlagen:
+**WEB schreibt „Shushan the palace" (Est 1,2)**, LSG *Suse*, RIV *Susa*,
+RV1909mod *Susa*. Die Vierergruppe gibt jede Ausgabe korrekt wieder. Der
+Befund war ein Fehlalarm, und meine Notiz war falsch.
+
+Seither steht in `AUFTRAG_AT.md`: **die Glossen folgen WEB · RV1909mod ·
+LSG1910 · RIV1927, nicht einem einheitlichen Modernitätsgrad.** Eine Sprache,
+die altertümlich wirkt, ist kein Befund, solange ihre Ausgabe es so schreibt.
+Ein echter Befund ist nur, wo eine Sprache von **sich selbst** abweicht.
+
+Die Regel hat sofort getragen: **`Sethar` steht in Ester 1,10 und 1,14 und
+meint zwei verschiedene Personen.** WEB schreibt *Zethar* und *Shethar*, LSG
+*Zéthar* und *Schéresch*. Die Ausgaben lösen einen Homographen auf, den das
+Deutsche verschmilzt — ohne den Blick in die Quelle wäre der Name pauschal
+einmal geglost worden. Dasselbe bei `Seres` (Hamans Frau, *Zeresh*) gegen den
+`Seres` aus 1Chr 7,16 (der Bruder des Peres, *Sheresh*).
+
+**Zwei Ausnahmen gehören dazu.** Erstens: wo die Schreibung der Ausgabe mit
+einem Gemeinwort zusammenfällt und einen falschen Sinn setzt — WEB schreibt den
+Kämmerer in 1,10 „Carcass", im Lesefluss stünde an einem Personennamen das
+englische Wort für *Kadaver*. Dort gilt die Form der drei anderen Ausgaben.
+Zweitens: wo eine Ausgabe selbst schwankt, entscheidet ihre Mehrheit — WEB
+schreibt `Susa` im selben Buch teils *Shushan*, teils *Susa*; LSG schreibt
+`Hegai` zweierlei; RIV hat in Kapitel 2 zwei Setzfehler (*cimei* für Simei,
+*ettimo* für settimo) und schreibt `Bigthan` einmal *Bightan*.
+
+### Die Ausgabe liefert den Namen, der Bestand die Bedeutung
+
+Die neue Regel hatte eine offene Flanke, und drei Fälle haben sie erzwungen:
+`Tharsis` (die Ausgaben uneinheitlich, der Bestand gebunden), `Pracht` (WEB
+*glory* gegen die Ester-1,4-Festlegung *splendor*), `Zahl` (RV *cantidad* an
+dieser einen Zeile gegen 92:1 *número* im Bestand).
+
+Die Grenze steht jetzt in `AUFTRAG_AT.md`: **die Ausgabe entscheidet, wo der
+Bestand schweigt oder nicht antworten kann** — neuer Name, Homograph, Wendung
+ohne Beleg. **Der Bestand entscheidet, wo er für ein gewöhnliches Wort eine
+feste Bindung hat.** Eine Glosse ist ein Leseassistent, keine Zeilenwiedergabe:
+wer `Zahl` zweiundneunzigmal als *número* gelesen hat, soll es nicht einmal als
+*cantidad* sehen.
+
+### Der Block hört auf, wo er aufhört
+
+Der lehrreichste Fall des Buches steht in **7,2**: der Vers teilt mit 5,6 einen
+Zwölf-Token-Block, der **genau bei `Selbst` endet**. Danach sagt 7,2 `das halbe
+Königreich`, 5,6 `die Hälfte des Königreichs` — zwei deutsche Formulierungen
+für dieselbe Sache, romanisch sogar mit verschiedenem Genus. Das Prüfskript des
+Agenten hat deshalb nicht nur die Blockgleichheit geprüft, sondern ausdrücklich
+das **erste Token nach dem Blockende auf Verschiedenheit**. Das gehört in jedes
+Blockprüfskript.
+
+Die Gegenprobe steht in **7,4 gegen 3,13**: Ähnlichkeit **0,07**, kein Block ab
+drei Tokens, obwohl beide Verse dieselben drei Vernichtungswörter tragen.
+`vernichten, töten und umbringen` gegen `vernichtet, getötet und umgebracht` —
+nur die Lemma-Glossen sind übertragbar.
+
+Ebenso in Kapitel 6: die **Ehren-Formel steht in zwei Fassungen** (`den der
+König gerne ehren möchte` gegen `den der König ehren will`), innerhalb jedes
+Paars deckungsgleich, zwischen den Paaren nicht. Der Agent hat beim Nachzählen
+im Quelltext außerdem gefunden, dass die zweite Fassung **dreimal** steht —
+`bloecke.py` meldet nur Paare.
+
+### Mein eigener Prozessfehler
+
+Für die Wellenbriefings habe ich die Blöcke mit `bloecke.py` vermessen, aber
+die **Verspaare von Hand ausgewählt**. Für Ester 8 nannte meine Tabelle fünf
+Blöcke. Der Agent hat `parallelen_ch8.md` gelesen — die Datei, die ich selbst
+erzeugt hatte — und **siebzehn** gefunden, darunter den längsten des Kapitels:
+**8,13 ← 3,14, Länge 19, Ähnlichkeit 0,74**, der ganze Versanfang wörtlich.
+
+**Regel für kommende Bücher:** das Wellenbriefing wird aus `parallelen.py`
+**abgeschrieben**, nicht aus geratenen Verspaaren zusammengestellt.
+`bloecke.py` ist für die Nachmessung eines bereits bekannten Paares da, nicht
+für die Suche.
+
+### `vorab.py` führte bei Eigennamen aktiv in die Irre
+
+Die Tabelle schlägt die Bestandslesart einer **Wortform** nach und weiß nicht,
+ob derselbe Träger gemeint ist. Für `Seres` bot sie *Sheresh* mit einem Beleg
+an — der Beleg ist 1Chr 7,16, der Bruder des Peres. Jede großgeschriebene Zeile
+trägt jetzt einen Warnhinweis **mit Belegstelle**: `Seres | … | 1 ⚠ 1. Chronika
+7,16`. Die bloße Zahl ist bei einem Eigennamen wertlos.
+
+### Der Level-Abgleich las die Mehrheit aus dem falschen Stand
+
+Der schwerwiegendste Werkzeugfehler des Buches, aufgedeckt an einem Befund des
+Ester-9-Agenten: `vierzehnt` stand in allen 22 Belegen auf **B1**, während die
+ganze Zehnerklasse (`elft` bis `zwanzigst`) **A2** trägt. Uniform in sich und
+deshalb von `levelcheck.py` nicht zu finden — das meldet nur, wo ein *Kapitel*
+von einem einheitlichen Bestand abweicht.
+
+Der Versuch, es mit `remap.py` zu ziehen, blieb wirkungslos. **Durchgang 2 des
+Level-Abgleichs in `buildbook.py` bestimmte die Korpusmehrheit aus den
+gebauten Dateien der anderen Bücher.** Wer ein Level in allen 22 Quellen
+ändert, bekommt beim Bauen des ersten Buches die 42 noch nicht gebauten als
+alte Mehrheit entgegen — und die Änderung zurück. Bei jedem Buch, in jeder
+Reihenfolge, beliebig oft wiederholt. **Eine korpusweite Levelkorrektur über
+die Quellen war damit prinzipiell unmöglich.**
+
+Die Mehrheit kommt jetzt aus den **Kapitelquellen**. Die Quelle ist der
+bearbeitete Stand und damit die Autorität; die gebaute Datei ist ihr Ergebnis.
+
+Der Neubau aller 44 Bücher änderte 32 Einträge in 19 Dateien — und legte
+dabei eine **Regression** frei, die zu genau diesem Fehler gehört: `Kidron` in
+Johannes 18,1 stand italienisch in der Quelle auf *Kidron*, in der gebauten
+Datei auf *Cedron*. Eine Korrektur hatte also nur in der gebauten Datei gelebt.
+Beide Stände waren falsch: RIV schreibt an allen acht alttestamentlichen
+Stellen *Kidron* und in Johannes 18,1 ***Chedron***, weil es dort dem
+griechischen Κεδρών folgt — die Ausgabe unterscheidet selbst zwischen AT und
+NT.
+
+### Der eigene Kollisionslauf, vierte Bestätigung
+
+| Kapitel | `hints.py` | eigener Lauf | davon echt |
+|---|---|---|---|
+| 1 | 1 | 17 | 1 |
+| 2 | 2 | 58 | 4 |
+| 3 | 0 | 34 | 3 |
+| 4 | 1 | 25 | 2 |
+| 5 | 2 | 11 | 4 |
+| 6 | 1 | 10 | 0 |
+| 7 | 1 | 15 | 1 |
+| 8 | 1 | 33 | 5 |
+| 9 + 10 | 3 | 57 | 15 |
+
+**Echt sind durchweg die mit null bis sechs gemeinsamen Bestandsversen.** Die
+Zählregel trägt: kein Agent hat mehr eine korpusweite Konvention aufgelöst.
+
+### Nachzuziehende Bestandsbefunde
+
+Gesammelt in **`BEFUNDE_ESTER.md`**. Die wichtigsten:
+
+- **`herrschen` hat keine saubere „regieren"-Lesart.** Die romanische
+  Kombination *reinaba · régnait · regnava* hängt durchgehend an englisch
+  ***prevailed*** (10 Belege, alle „Hungersnot herrschte").
+- **`begehen`, `ausfallen`, `zutragen`, `bedrohen`, `lagern`, `wandeln` sind
+  bedeutungsverschoben** — der Bestand kennt jeweils nur die andere Lesart.
+- **Die niedrigen Ordinalia sind weiter uneinheitlich** (`sechst` A2 gegen
+  `siebt` und `acht` A1); dort mischen sich Kardinal- und Ordinalhomographen.
+- **`kleiden` steht auf B2, `sich kleiden` auf B1.**
