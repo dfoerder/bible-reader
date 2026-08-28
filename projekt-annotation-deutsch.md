@@ -56,17 +56,27 @@ findet über 69 gescannte Verse sieben Treffer ab fünf Tokens, alle bei
 **8503 Tokens** gegen den Quelltext läuft ohne Befund durch; die 20
 Satzzeichen-Tokens stimmen auf den Token genau.
 
-Damit sind **44 von 66 Büchern fertig**: 696 Kapitel, 20 830 Verse,
-478 444 Einträge. `validate.py alle` gibt für alle 44 Bücher `[ok]` aus,
-`qa.py alle` meldet 0 Verdachtsfälle, `mehrwort.py alle` 0.
-Es fehlen die Bücher 18–39 (rund 495 Kapitel).
+**Hiob ist am 29.08.2026 fertig geworden** — 42 Kapitel, 1070 Verse,
+16 617 Einträge, 782 Mehrwort-Einträge. Das erste Buch der Poesie und mit
+Abstand das schwierigste bisher: `parallelen.py` findet für die meisten
+Kapitel **null** Verse mit einem gemeinsamen Block ab fünf Tokens im gesamten
+übrigen Bestand. Es gab keine Vorlagen; alles kam aus dem Lexikon-Extrakt und
+aus der buchinternen Konsistenz. Was es gelehrt hat, steht unten im eigenen
+Abschnitt.
 
-**`hilfsverb.py alle` meldet allerdings 35 Fälle, nicht 0** — für Nehemia 0,
-alle 35 in älteren Büchern (Johannes 11, 1. Korinther 5, Matthäus 3,
-2. Korinther 3, Ruth/Lukas/Kolosser/Epheser/1. Mose/2. Mose je 2,
-Jakobus 1). Sie sind nicht neu entstanden, sondern beim Buchabschluss
-erstmals über den Gesamtbestand gemessen worden; mindestens 2. Mose 8,3 ist
-eindeutig echt. Siehe `BEFUNDE_NEHEMIA.md`, Abschnitt am Ende.
+Damit sind **45 von 66 Büchern fertig**: 738 Kapitel, 21 900 Verse,
+495 061 Einträge. `validate.py alle` gibt für alle 45 Bücher `[ok]` aus,
+`qa.py alle` meldet 0 Verdachtsfälle.
+Es fehlen die Bücher 19–39 (rund 453 Kapitel).
+
+`mehrwort.py alle` meldet 17 Fälle, davon 2 aus Hiob (40,23 `Ufer`) — beide
+sind der vom Werkzeug selbst beschriebene richtige Fall: das deutsche Wort
+steht im Plural, die Wendung enthält es im selben Numerus.
+
+**`hilfsverb.py` ist mit Hiob umgebaut worden** und meldet die
+`werden`-Treffer jetzt getrennt als erwartete Bauform. Der Grund steht unten
+unter „Der Konjunktiv II"; die 35 Altfälle aus `BEFUNDE_NEHEMIA.md` sind davon
+teilweise erfasst.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -109,7 +119,8 @@ eindeutig echt. Siehe `BEFUNDE_NEHEMIA.md`, Abschnitt am Ende.
 | Judas (65) | 1 | 25 | 578 |
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **260** | **7957** | **172 518** |
-| **Summe gesamt** | **696** | **20 830** | **478 444** |
+| **Hiob (18)** | **42** | **1070** | **16 617** |
+| **Summe gesamt** | **738** | **21 900** | **495 061** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -940,6 +951,7 @@ Die Kernstücke:
 | `vorlage.py <nrA> <kapA> <nrB> <kapB>` | Parallelkapitel als gemessene Vorlage, Vers für Vers, mit Versatz und Abweichungen |
 | `parallelen.py <nr> <kap> [minblock]` | Parallelstellen im **ganzen** Bestand, sortiert nach längstem gemeinsamen Block |
 | `mehrwort.py <nr…>\|alle [--nur=…] [--fix]` | Einzelwörter, die die Glosse ihres Mehrwort-Eintrags übernommen haben |
+| `zweigleisig.py <nr…>\|alle [--min 5] [--wieoft 2]` | Lesarten, die ein Kapitel erfunden und das nächste weitergereicht hat |
 | `BEFUNDE_NEHEMIA.md` | Bestandsbefunde aus Nehemia, gemeldet und noch nicht entschieden |
 
 **`konvention.py`, `levelcheck.py` und `kreuz.py` hatten den Scratchpad-Pfad
@@ -2125,3 +2137,185 @@ Gesammelt in **`BEFUNDE_ESTER.md`**. Die wichtigsten:
 - **Die niedrigen Ordinalia sind weiter uneinheitlich** (`sechst` A2 gegen
   `siebt` und `acht` A1); dort mischen sich Kardinal- und Ordinalhomographen.
 - **`kleiden` steht auf B2, `sich kleiden` auf B1.**
+
+
+## Hiob: was das Buch gelehrt hat
+
+42 Kapitel, 1070 Verse, das erste Buch der Poesie — und das erste, das **fast
+ohne Vorlagen** auskommen musste. `parallelen.py` findet für Kapitel 3, 4, 5,
+10, 14, 16, 17, 23, 24, 26, 27, 29, 30, 31, 35, 39 und 41 **null** Verse mit
+einem gemeinsamen Block ab fünf Tokens im gesamten übrigen Bestand. Der
+gesamte Ertrag kam aus dem Lexikon-Extrakt, den vier Referenzausgaben und der
+buchinternen Konsistenz.
+
+### Der teuerste Fehler: eine Ausweichlesart wandert weiter
+
+Das ist **sechsmal** passiert und musste jedes Mal zurückgezogen werden:
+
+| Wort | erfunden in | weitergereicht nach |
+|---|---|---|
+| `würde` (*starei per*) | 3,13, als Ausweichlesart gegen `hätte` | 5,8 · 6,10 · 6,27 · 6,28 |
+| `nur` (*Solamente · Soltanto*) | 1,15, gegen `allein` | zwölf Einträge in sieben Kapiteln |
+| `Grab` (*grave · sepultura*) | 5,26, ein Beleg im Gesamtbestand | 10,19 |
+| `sodass` (it *sicché*) | Kapitel 5 | 5,12 · 5,16 · 5,21 |
+| `doch` (*aun así · pure*) | zwei Belege | 9,31 · 10,16, von zwei verschiedenen Agenten |
+| `Seufzen` (*sighing*) | 23,2, ohne Kollisionsgrund | — rechtzeitig gemeldet |
+| `Unrecht` (en *injustice*) | 5,16, nur im Englischen | — |
+
+**Der Grund ist strukturell, nicht menschlich.** `lexicon.py` zieht aus *allen*
+vorhandenen Anno-Dateien, also auch aus den frisch gebauten Kapiteln des
+laufenden Buches. Was ein Kapitel entscheidet, sieht das nächste als Bestand —
+ohne zu sehen, dass es eine Auflösung für genau einen Vers war.
+
+Dagegen sind vier Maßnahmen entstanden, in dieser Reihenfolge:
+
+1. **Die Kollisionskarte** (`BUCHKOLLISIONEN.md`), vor dem ersten Kapitel über
+   den ganzen Quelltext ausgezählt: 17 Bedeutungsgruppen, 87 Kollisionsverse.
+   Sie sagt **vorher**, wo aufgelöst werden muss — und vor allem, wo nicht.
+2. **Die Prompt-Warnung** mit den gemessenen Zahlen.
+3. **`zweigleisig.py`**, das den Fehler hinterher findet.
+4. **Die Tabelle der versgebundenen Lesarten** am Ende der Wortfeld-Datei —
+   nachdem sich herausstellte, dass das Dokument selbst den Fehler enthielt.
+
+### Die Kollisionskarte hat sich bezahlt gemacht — und acht Fehlalarme produziert
+
+Der Ertrag ist, dass sie **begrenzt**: `Frevler` und `Gottloser` stehen zusammen
+in 31 Versen, berühren sich aber im ganzen Buch **genau einmal**, in 20,5. Die
+Löwenwörter kollidieren nur in 4,10 und 4,11, die Zorn-Gruppe **nie**. Vier
+Kapitel haben 20,5 bewusst offengelassen und die Auflösung dorthin verwiesen;
+als der Vers drankam, lagen beide Bindungen fertig da. Dasselbe bei 12,4
+(`rechtschaffen` ↔ `untadelig`) und bei 16,11 und 27,7, die ein Agent gefunden
+hat, **bevor** sie annotiert wurden.
+
+Der Preis: **acht formbasierte Fehlalarme** (11,8 · 12,13 · 13,22 · 21,28 ·
+23,5 · 24,1 · 29,3 · 29,14). Die Karte findet Wortformen, keine Wortarten —
+`Tiefer` ist in 11,8 der Komparativ des Adjektivs, `Gerichtszeiten` in 24,1 ein
+Kompositum. Jeder Treffer gehört am Vers angesehen.
+
+### Der Konjunktiv II — und ein Konflikt in der Werkzeugkette
+
+Der Bestand löst `würde` überwiegend periphrastisch (*iba a · allait · stava
+per*). Das ist Futur-im-Vergangenen und sagt beim Irrealis der Gegenwart das
+Falsche: *starei per mentire* heißt „ich bin im Begriff zu lügen".
+
+**Die geltende Regel** (aus 1. Mose 42,38, wo `würdet` = *llevaríais ·
+conduiriez · condurreste* neben `bringen` = *llevar · conduire · condurre*
+steht): bei echtem Irrealis trägt das Hilfsverb den **Konditional des
+Vollverbs**, das Vollverb bleibt Infinitiv, Englisch bleibt *would*. Bei echtem
+Futur bleibt die Periphrase richtig. Kapitel 11 hat die Regel präzisiert:
+innerhalb des Irrealis entscheidet **Vorder- gegen Nachsatz** — Protasis
+Imperfekt-Konjunktiv, Apodosis Konditional. Kapitel 13 lieferte den Prüffall:
+dasselbe Verb `schweigen` in beiden Rollen, in 13,5 und 13,19.
+
+**`hilfsverb.py` führte genau dieses Muster als Fehler** und hatte zwei Stellen
+in die Gegenrichtung korrigiert. Nachgeprüft war der Bestand von Anfang an
+gespalten: 1. Mose 42,38 und 44,34 tragen den Konditional und sind nie
+umgestellt worden — 42,38 nur deshalb nicht, weil der Abstand elf Tokens
+beträgt und das Suchfenster acht war. Aufgelöst zugunsten des Konditionals;
+1. Mose 19,19 und 1. Korinther 14,25 sind zurückgezogen, das Werkzeug trennt
+die `werden`-Treffer jetzt als erwartete Bauform ab.
+
+**Die Gegenprobe steht in 5,26**: dort stand `wirst` periphrastisch als *vas a*
+vor dem Passivpartizip `getragen` — „vas a llevado" ist kein Spanisch. Der
+Kapitel-22-Agent hat seinen eigenen Fall richtig gelöst und die ältere Stelle
+gemeldet, statt sie nachzuahmen.
+
+### Die Verszählung der Gottesreden läuft auseinander
+
+**Der gefährlichste Befund des Buches, weil er lautlos ist.** In den Kapiteln
+38 bis 41 zählen die vier Referenzausgaben **alle vier verschieden**:
+
+| Kapitel | l1912mod | WEB | RV1909mod | LSG1910 | RIV1927 |
+|---|---|---|---|---|---|
+| 38 | 41 | 41 | 38 | 38 | 41 |
+| 39 | 30 | 30 | 30 | 38 | 30 |
+| 40 | 32 | 24 | 19 | 28 | 24 |
+| 41 | 26 | 34 | 34 | 25 | 34 |
+
+Deutsch 39,N = RV/LSG 39,N+3 · deutsch 40,N = RV/LSG 40,N−5 · deutsch 41,N =
+WEB/RV/RIV 41,N−8 und LSG 41,N+1. **Deutsch 41,1 ist in keiner Ausgabe 41,1.**
+RV zieht am Ende von Kapitel 39 vier deutsche Verse in einen einzigen zusammen.
+
+Wer die Ausgabe über die Versnummer aufschlägt, bekommt einen versetzten Satz
+aus derselben Tierreihe — thematisch ähnlich genug, dass die falsche Glosse
+plausibel aussieht und durch jede Prüfung läuft. `VERSZAEHLUNG_38_41.md` hält
+die Messung fest und verlangt, in diesen vier Kapiteln **über den Inhalt**
+aufzuschlagen. RIV1927 druckt die alte Zählung übrigens selbst mit
+(`41,1 | (40:25)`) und ist damit der beste Anker.
+
+### Der Quelltext schlägt die Ausgabe — durchgehend
+
+Der l1912mod formuliert an über sechzig Stellen bewusst anders als alle vier
+Ausgaben, und die Linie ist ohne Ausnahme durchgehalten worden:
+
+- **Metaphern werden nicht wiedereingeschleppt.** `tiefes Dunkel` (3,5) gegen
+  „Schatten des Todes", `Verderben` und `Grab` (33,18 ff.) gegen „Grube",
+  `Nilpferd` und `Krokodil` (40,15 · 40,25) gegen Behemot und Leviatan — wobei
+  LSG und RIV dort **selbst** die Gemeinwörter schreiben.
+- **Das Idiom bleibt beim Deutschen.** 19,20 „dem Tod von der Schippe
+  gesprungen" ist unbelegt, und die vier Ausgaben lesen es *auch nicht*
+  wörtlich, sondern mit ihrem eigenen Idiom. Der Agent hat die Einzelwörter
+  wörtlich glossiert und die Wendung als Mehrwort geführt.
+- **Bei Eigennamen entscheidet die Ausgabe, bei gewöhnlichen Wörtern der
+  Bestand.** Die drei Töchternamen in 42,14 sind der `Carcass`-Fall in
+  Reinform: RIV *übersetzt* sie (*Colomba*, *Cassia*, *Cornustibia*), also gilt
+  die Form der drei anderen.
+
+### Homographen: dreimal gefährlich, dreimal abgefangen
+
+`Rahab` (9,13 · 26,12) ist das Meeresungeheuer, im Bestand aber neunmal die
+Frau aus Jericho, italienisch *Raab*. Die Ausgaben unterscheiden die beiden —
+nur nicht in 9,13, wo drei von vieren umschreiben; der Beleg steht in
+Jesaja 51,9. `Bus` (32,2) trug in der Bestandszeile die **Kasuspräposition
+schon in sich** (*of Buz*), während der l1912mod `von Bus` mit eigenem Token
+schreibt. Bei `Ram` wäre die Matthäus-Zeile (*Aram*) die Falle gewesen. Dazu
+`Tor` (Narr/Stadttor), `Falle` (Substantiv/Imperativ), `Würde`
+(Substantiv/Konjunktiv), `Freie`, `Keule`.
+
+### `lexicon.py` und `hints.py` melden zu viel — gemessen
+
+Die „unbelegt"-Liste war in **jedem** Kapitel überwiegend falsch: Hiob 24 elf
+von zwölf, Hiob 23 fünf von fünf, Hiob 38 zu 87 %, Hiob 39 zu 60 %, Hiob 40 zu
+55 %. Die Ursache im Sortieralgorithmus ist behoben (siehe `hints.py`), die
+Ablautlücke bleibt prinzipiell.
+
+**Zwei weitere Lücken sind erst in Hiob sichtbar geworden:**
+
+1. **Der Extrakt zeigt nur die Lesarten der im Kapitel vorkommenden Wortform.**
+   In Kapitel 15 bot er für `Schild` nur *breastpiece* an, obwohl der Bestand
+   38 Belege für *shield* hat; in Kapitel 20 für `Spitze` nur *forefront*.
+2. **Bei getrennt stehenden trennbaren Verben findet er das Mehrwort-Lemma
+   nicht.** `vordringen`, `heranreichen`, `gleichkommen`, `anhäufen`,
+   `losfahren` standen alle im Bestand und waren unsichtbar. **`levelcheck.py`
+   hat sie gefunden**, in den Kapiteln 32, 34 und 38 je eines.
+
+Die Kapitel 39 und 41 haben daraus die richtige Konsequenz gezogen und sich
+**Sweep-Skripte** geschrieben, die *jede* Mehrwort-Wendung des Bestands im
+Quelltext suchen — nicht nur die feste Liste von `konvention.py`. Sie fanden
+zusammen dreizehn echte Lücken. **Das gehört als `sweep.py` in die Kette**;
+diese Fehlerklasse ist für `selfcheck.py` und `qa.py` prinzipiell unsichtbar.
+
+### Wo die Kollisionsregel gegen sich selbst arbeitet
+
+Genau einmal: `Bedrängnis` und `Not` tragen im AT-Bestand **in allen vier
+Sprachen dieselbe Glosse**, und sie stehen in 36,15 · 36,16 · 36,19 in drei
+benachbarten, nie aber im selben Vers. Die strikte Regel hätte dort zweimal
+dieselbe Glosse für zwei verschiedene deutsche Wörter erzeugt. Die
+15,24-Ausweichlesart ist deshalb zur **Buchlesart** erhoben worden.
+
+Die Regel bleibt richtig — aber sie ist eine Regel über *Verse*, und wo ein
+Leser drei Verse am Stück liest, greift sie zu kurz.
+
+### Zahlen zum Verfahren
+
+Ein Agent pro Kapitel, zwei bis drei gleichzeitig, jedes Kapitel unabhängig
+validiert und einzeln committet. **Ein Ausfall** (Kapitel 31, Verbindungsabbruch
+vor dem ersten Vers, sauber neu angesetzt). Der **eigene Kollisionslauf** der
+Agenten fand in jedem Kapitel mehr als `hints.py` — zwischen zwei und acht
+Paare, in Kapitel 5 acht bei null gemeldeten. Er ist nicht optional.
+
+Und die Prompts selbst waren die häufigste Fehlerquelle: in mindestens zwölf
+Kapiteln hat ein Agent eine meiner Angaben am Quelltext widerlegt — falsche
+Verse, Verb statt Substantiv, Person statt Abstraktum, Wörter, die gar nicht
+vorkommen. **Der Hinweis „lies den Quelltext, nicht meine Aufzählung" gehört in
+jeden Prompt.**
