@@ -21,6 +21,19 @@ Kleiner verwandter Importartefakt: im italienischen Psalter stehen vereinzelt
 `}`-Zeichen mitten im Text (z. B. Ps 81,1 `Salmo di Asaf.} Cantate…`), dort wo
 die Überschrift in den ersten Vers gefaltet wurde.
 
+### Modernisierungsfehler: Psalm 37,36 wechselt das Subjekt
+`l1912` liest `Da **man** vorüberging, siehe, da war er dahin`; `l1912mod`
+schreibt `Doch als **ich** vorüberging, war er verschwunden`. Aus dem
+unpersönlichen „man" ist ein „ich" geworden — eine Bedeutungsverschiebung, die
+der Grundtext nicht hergibt und die auch keine der vier Referenzausgaben stützt
+(WEB `he passed away`, RV `Pero pasó`, LSG `Il a passé`, RIV `ma è passato
+via` — dort vergeht jeweils der Gottlose).
+
+Gefunden beim Annotieren von Psalm 37. Die Annotation folgt dem Quelltext, wie
+die Regel es verlangt; der Quelltext selbst wäre zu prüfen. Ob das ein
+Einzelfall ist oder ein Muster, ist nicht untersucht — ein gezielter Abgleich
+`l1912` gegen `l1912mod` auf Subjektwechsel wäre die passende Prüfung.
+
 ### Rückstand: fehlende Mehrwort-Wendungen in den fertigen Büchern
 `anno-tools/sweep.py alle` meldet rund 500 Verdachtsfälle — Wortfolgen, die der
 Bestand fast immer als Wendung führt und die an dieser Stelle keinen
