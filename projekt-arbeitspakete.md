@@ -152,6 +152,47 @@ der vier Referenzausgaben das stützt.
 Eine vollständige Prüfung bräuchte einen Abgleich je Teilsatz, nicht je Vers;
 das ist hier nicht geleistet.
 
+### Rückstand: Glossenkollisionen in den fertigen Büchern
+
+`anno-tools/glosskollision.py` ist am 29.08.2026 entstanden, nachdem in acht
+Psalter-Paketen acht Kollisionen durchgerutscht waren, die `hints.py`
+prinzipiell nicht finden kann. Es vergleicht die **tatsächlich gesetzten**
+Glossen Vers für Vers und Sprache für Sprache; `hints.py` schlägt dagegen den
+Quelltext im Bestand nach und sieht nichts, wenn eine Form unbelegt ist oder die
+Kollision erst durch die Entscheidung des schreibenden Agenten entsteht.
+
+Der erste Lauf über den Gesamtbestand:
+
+| | Paare | davon „1 von 4" |
+|---|---|---|
+| Psalmen (94 Kapitel, frisch geprüft) | 5 | 4 |
+| die übrigen 45 Bücher | 758 | 471 |
+
+„1 von 4" heißt: drei Sprachen unterscheiden die beiden Wörter, die vierte
+nicht — die Trennung ist also möglich und fehlt nur dort. Das ist der stärkste
+Verdacht, nicht der schwächste.
+
+**Eine Stichprobe von elf Fällen ergab etwa vier echte.** Beispiele:
+`Lk 2,20` `lobten`/`priesen` englisch beide *praised* · `Apg 13,11`
+`Dunkelheit`/`Finsternis` beide *darkness* · `Mt 7,2` `Maß`/`messt` beide
+*measure* · `1Mo 44,20` `geblieben`/`übrig` italienisch beide *rimasto*.
+
+Der Rest ist **Kopula-Rauschen**: `ist`, `steht`, `liegt`, `wird` sind
+französisch alle *est*. Das ließe sich unterdrücken, aber nicht ohne echte
+Fälle mitzunehmen — `liegen` ↔ `sein` ist im Psalter (102,8) eine gelistete
+echte Kollision. Die Filterliste im Skript ist deshalb bewusst bei den
+geschlossenen Wortarten stehengeblieben.
+
+**Ein eigener Befundtyp steckt mit drin:** wo ein trennbares Verb aufgeteilt
+ist und **beide** Teile die volle Verbglosse tragen (`1Kön 8,57` `ab` und
+`wende` spanisch beide *aparte*), fehlt in Wahrheit der Mehrwort-Eintrag. Das
+ist dieselbe Bauart, die `hilfsverb.py` für Hilfsverben sucht, und gehört zum
+Rückstand unten.
+
+Zu entscheiden: ob eine Durchgangswelle über die 471 „1 von 4"-Fälle der alten
+Bücher gefahren wird. Die Psalter-Erfahrung sagt, dass die Auflösung je Fall
+schnell geht, das Ansehen am Vers aber nicht delegierbar ist.
+
 ### Rückstand: fehlende Mehrwort-Wendungen in den fertigen Büchern
 `anno-tools/sweep.py alle` meldet rund 500 Verdachtsfälle — Wortfolgen, die der
 Bestand fast immer als Wendung führt und die an dieser Stelle keinen
