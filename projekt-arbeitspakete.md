@@ -21,6 +21,25 @@ Kleiner verwandter Importartefakt: im italienischen Psalter stehen vereinzelt
 `}`-Zeichen mitten im Text (z. B. Ps 81,1 `Salmo di Asaf.} Cantate…`), dort wo
 die Überschrift in den ersten Vers gefaltet wurde.
 
+### `di io` statt `di Dio` — 26 Verse im italienischen Grundtext
+`bibles/ita/riv1927` schreibt in 26 Versen `di io`, wo `di Dio` stehen muss —
+darunter `Figliuol di io` in Matthäus 14,33 und 26,63, Markus 3,11, Johannes
+5,25 und 1. Johannes 3,8, sowie `il Regno di io` in Lukas 6,20 und 18,25. Es
+ist dieselbe verlorene Majuskel wie bei den übrigen Importartefakten.
+
+**Die App ist nicht betroffen:** sie liefert `ita/riv1927mod` aus, und dort ist
+der Fehler in allen 26 Versen behoben (0 Treffer).
+
+Betroffen ist die **Werkzeugkette**: `anno-tools/ausgaben.py` liest als
+italienische Referenzausgabe `riv1927`, nicht `riv1927mod`. Damit vergleicht
+die Annotation gegen einen anderen italienischen Text als den, den Leser
+sehen — und zwar asymmetrisch, denn für das Spanische nimmt dieselbe Liste die
+modernisierte Fassung (`rv1909mod`), fürs Italienische die rohe.
+
+Zu entscheiden ist beides zusammen: ob `riv1927` repariert wird und ob die
+Werkzeugkette auf `riv1927mod` umgestellt wird. Eine Umstellung mitten im Buch
+wäre allerdings ein Bruch — 46 Bücher sind gegen `riv1927` annotiert.
+
 ### Modernisierungsfehler: Psalm 37,36 wechselt das Subjekt
 `l1912` liest `Da **man** vorüberging, siehe, da war er dahin`; `l1912mod`
 schreibt `Doch als **ich** vorüberging, war er verschwunden`. Aus dem
