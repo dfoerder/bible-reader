@@ -54,6 +54,10 @@ für einen Namen: das Vokabeltraining führt ihn zweimal, und der Leser sieht
 zwei Schreibungen. Die Annotation folgt dem Quelltext, wie die Regel es
 verlangt.
 
+**Ein zweiter Fall, gefunden beim Annotieren von Psalm 74:** `Leviathan` in
+Hiob 3,8 gegen `Leviatan` in Psalm 74,14 — wieder dieselbe Gestalt, zwei
+Schreibungen, zwei Lemmata. Beide Male steht im Luther-Grundtext dasselbe Wort.
+
 Ein systematischer Abgleich auf weitere umbenannte Eigennamen ist **nicht**
 geleistet. Der naheliegende Weg — großgeschriebene Wörter vergleichen —
 trägt im Deutschen nicht, weil dort jedes Substantiv großgeschrieben ist; ein
