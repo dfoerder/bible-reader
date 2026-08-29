@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.92b (29.08.2026)
+
+- Die deutsche Bibel (Luther 1912 – Aktualisiert von KI) hat jetzt Wort-für-Wort-Übersetzungen: Jedes Wort lässt sich auf Englisch, Spanisch, Französisch oder Italienisch anzeigen, feste Wendungen auch über getrennte Satzklammern hinweg. Fertig sind das gesamte Neue Testament, die Bücher 1. Mose bis Hiob und die ersten 78 Psalmen — noch nicht annotierte Bücher bleiben normal lesbar.
+
 ## v1.10.91b (24.07.2026)
 
 - Ändert man die Sprache der Wortübersetzungen/des Trainings direkt (Startseite, Einstellungen), fragt die App jetzt symmetrisch dazu, ob auch eine passende Hilfsbibel in dieser Sprache übernommen werden soll.
