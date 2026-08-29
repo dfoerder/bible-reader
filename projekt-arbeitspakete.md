@@ -40,6 +40,23 @@ Zu entscheiden ist beides zusammen: ob `riv1927` repariert wird und ob die
 Werkzeugkette auf `riv1927mod` umgestellt wird. Eine Umstellung mitten im Buch
 wäre allerdings ein Bruch — 46 Bücher sind gegen `riv1927` annotiert.
 
+### Modernisierungsfehler: `Korah` heißt im Psalter `Korach`
+`l1912` schreibt den Namen in allen Büchern `Korah` — 4. Mose 16-mal,
+1. Chronik 10-mal, Psalmen 11-mal. `l1912mod` schreibt ihn in 4. Mose und
+1. Chronik weiter `Korah`, im **Psalter aber durchgehend `Korachs`**. Dieselbe
+Person, zwei Schreibungen in derselben Bibel.
+
+Für die Annotation heißt das zwei verschiedene Lemmata (`Korah` und `Korach`)
+für einen Namen: das Vokabeltraining führt ihn zweimal, und der Leser sieht
+zwei Schreibungen. Die Annotation folgt dem Quelltext, wie die Regel es
+verlangt.
+
+Ein systematischer Abgleich auf weitere umbenannte Eigennamen ist **nicht**
+geleistet. Der naheliegende Weg — großgeschriebene Wörter vergleichen —
+trägt im Deutschen nicht, weil dort jedes Substantiv großgeschrieben ist; ein
+brauchbarer Test bräuchte eine Eigennamenliste. `anno-tools/qa.py` führt eine
+(„Kanarienvogel kennt 158 Eigennamen") und wäre der Ansatzpunkt.
+
 ### Modernisierungsfehler: Psalm 37,36 wechselt das Subjekt
 `l1912` liest `Da **man** vorüberging, siehe, da war er dahin`; `l1912mod`
 schreibt `Doch als **ich** vorüberging, war er verschwunden`. Aus dem
