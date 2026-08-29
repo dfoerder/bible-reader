@@ -152,6 +152,35 @@ der vier Referenzausgaben das stützt.
 Eine vollständige Prüfung bräuchte einen Abgleich je Teilsatz, nicht je Vers;
 das ist hier nicht geleistet.
 
+### Datenfehler: verschobene Satzgrenze in `rv1909mod`, die kein Werkzeug sieht
+
+Gefunden beim Annotieren von Psalm 137. Der spanische Vers 3 bricht mit
+`diciendo:` ab, und der Aufforderungssatz, der zum **deutschen** Vers 3 gehört
+(`Cántennos algunos de los himnos de Sión.`), steht am Anfang des spanischen
+Verses 4:
+
+| | Vers 3 | Vers 4 |
+|---|---|---|
+| de | … unsere Peiniger Freudengesang: **Singt uns eines der Lieder Zions!** | Wie könnten wir das Lied des HERRN singen … |
+| es | … nos pedían alegría, **diciendo:** | **Cántennos algunos de los himnos de Sión.** ¿Cómo cantaremos … |
+
+Das ist eine eigene Fehlerklasse — **kein fehlender Vers und kein Versatz**,
+sondern eine verschobene Satzgrenze bei korrekt nummerierten Versen.
+`ausgaben.py` misst über die Verslängen und meldet hier „Versatz +0, Abstand
+0,16", also unauffällig. Wer den spanischen Vers 4 abliest, hat einen halben
+Satz zu viel und übersieht einen halben im Vers davor.
+
+**Umfang ungeklärt.** Über alle Bücher enden **118 Verse** in `rv1909mod` auf
+`diciendo:` (roh `rv1909`: 321) — das sind Kandidaten, keine Fehler, denn viele
+Verse enden auch im Deutschen dort. Ein Abgleich gegen die deutschen
+Versgrenzen liefert im Psalter vier Treffer, von denen drei in Wahrheit die
+bekannten Versatz-Psalmen sind (Ps 22,7 · 52,6 · 89,3). **Verifiziert ist genau
+ein Fall: Ps 137,3/4.**
+
+Zu tun wäre ein Abgleich, der Versatz und Grenzverschiebung trennt — die
+naive Prüfung verwechselt beides. Gefunden hat den Fall ein Agent beim Lesen,
+kein Skript.
+
 ### Rückstand: Glossenkollisionen in den fertigen Büchern
 
 `anno-tools/glosskollision.py` ist am 29.08.2026 entstanden, nachdem in acht
