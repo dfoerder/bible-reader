@@ -17,11 +17,13 @@ Zum Beheben braucht es den RIV1927-Text dieser 63 Verse aus einer anderen
 Quelle. Betroffene Psalmen und die genaue Messung stehen in
 `../bibles-translations/anno-tools/VERSZAEHLUNG_PSALMEN.md`.
 
-Kleiner verwandter Importartefakt: im italienischen Psalter stehen vereinzelt
-`}`-Zeichen mitten im Text (z. B. Ps 81,1 `Salmo di Asaf.} Cantate…`), dort wo
-die Überschrift in den ersten Vers gefaltet wurde.
+Verwandter Importartefakt: im italienischen Psalter stehen `}`-Zeichen mitten
+im Text (z. B. Ps 81,1 `Salmo di Asaf.} Cantate…`), dort wo die Überschrift in
+den ersten Vers gefaltet wurde. Ausgezählt über alle Editionen und Bücher:
+**26 Verse, alle in `ita/riv1927/19_riv1927.json`** — kein anderes Buch, keine
+andere Ausgabe.
 
-### `di io` statt `di Dio` — 26 Verse im italienischen Grundtext
+### `di io` statt `di Dio` — 38 Verse im italienischen Grundtext
 `bibles/ita/riv1927` schreibt in **38 Versen** den Gottesnamen als `io` — `di
 io`, `del nostro io`, `al suo io`, `il tuo io`. Darunter `Figliuol di io` in
 Matthäus 14,33 und 26,63, Markus 3,11, Johannes 5,25 und 1. Johannes 3,8,
@@ -42,6 +44,69 @@ modernisierte Fassung (`rv1909mod`), fürs Italienische die rohe.
 Zu entscheiden ist beides zusammen: ob `riv1927` repariert wird und ob die
 Werkzeugkette auf `riv1927mod` umgestellt wird. Eine Umstellung mitten im Buch
 wäre allerdings ein Bruch — 46 Bücher sind gegen `riv1927` annotiert.
+
+**Die verlorene Majuskel ist kein Einzelfall, sondern der Normalfall.**
+Ausgelöst haben die Messung drei Funde beim Annotieren der Psalmen 81 und 86
+(`o terno` für `o Eterno`, `soggiorno de’ orti` für `de’ morti`, `acque di
+eriba` für `Meriba`). Ein Abgleich Vers für Vers gegen `riv1927mod` — nur
+Treffer gezählt, bei denen auch das linke Nachbarwort übereinstimmt, damit
+Umformulierungen der Modernisierung nicht mitzählen — ergibt:
+
+**652 Verse, 300 verschiedene Wörter.** Fast durchweg Eigennamen und
+Gottesbezeichnungen:
+
+| gemeint | Verse | wie es dasteht |
+|---|---|---|
+| `Dio` | 42 | `di io` |
+| `Gerusalemme` | 40 | `a erusalemme` |
+| `Signore` | 31 | `il ignore` |
+| `Giuda` | 22 | `di iuda` |
+| `Cristo` | 22 | `il risto` |
+| `Israele` · `Giacobbe` · `Gesù` | je 11 | `peccare sraele` · `in iacobbe` · `con esù` |
+| `Babilonia` · `Mosè` · `Davide` | 10 · 9 · 8 | `a abilonia` · `a osè` · `che avide` |
+| 288 weitere | 447 | `di alaad`, `lo pirito`, `dei aldei`, `di anaan`, … |
+
+Die frühere Notiz „26 Verse mit `di io`" war also nur die häufigste Zeile einer
+viel größeren Klasse.
+
+**Der Fehler ist auf das Italienische beschränkt:** dieselbe Messung über
+`spa/rv1909` gegen `rv1909mod` findet **einen** Vers.
+
+Wie bei `di io` ist die **App nicht betroffen** — sie liefert `riv1927mod` aus,
+und die Modernisierung hat die Namen wiederhergestellt. Betroffen ist allein die
+Werkzeugkette, die über `ausgaben.py` gegen `riv1927` liest: in 652 Versen
+steht dort ein verstümmelter Eigenname als Vorlage. Das erhöht das Gewicht der
+unten offenen Frage, ob `ausgaben.py` auf `riv1927mod` umgestellt wird.
+
+### Bestandsfehler: `um … willen` steht unter vier Lemmata
+
+Gefunden beim Annotieren von Psalm 79. Die **getrennte** Satzklammer („um
+seines Namens **willen**") trägt im ganzen Bestand immer dieselbe Form
+(`form: "um willen"`, `parts: [a, b]`) und dieselbe Glosse (*for the sake of*),
+ist aber unter vier verschiedenen Lemmata abgelegt:
+
+| Lemma | Einträge | Beispiel |
+|---|---|---|
+| `um willen` | 12 | 2Sam 7,21 · 1Kön 8,41 |
+| `um ... willen` (drei ASCII-Punkte) | 5 | Ps 6,5 · Ps 25,7 · Ps 44,27 |
+| `um … willen` (Auslassungszeichen) | 1 | Offb 2,3 |
+| `um etwas willen` | 1 | 1Kön 11,32 |
+
+Die beiden mittleren unterscheiden sich **nur im Zeichen**: `...` gegen `…`.
+
+Davon zu trennen ist die **zusammenhängende** Form (`pos_end`, form = ganze
+Wendung), die zu Recht eigene Lemmata hat: `um jemandes willen` 37× („um
+Jonathans willen"), `um etwas willen` für die übrigen („um der Gerechtigkeit
+willen"). Das bare `willen` (57×, *sake*) ist der normale Einzelworteintrag
+unter der Wendung und ebenfalls in Ordnung.
+
+Folge: das Vokabeltraining führt eine Wendung viermal, und `lexicon.py` zeigt
+dem nächsten Agenten je nach Schreibung einen anderen Ausschnitt der Belege.
+
+Zu tun: die vier Lemmata der getrennten Form auf eines vereinheitlichen und die
+Schreibung festlegen (`um … willen` mit Auslassungszeichen wäre konsequent zur
+`form`-Konvention, ist aber die seltenste). Danach `buildbook.py` über die
+betroffenen Bücher.
 
 ### Modernisierungsfehler: `Korah` heißt im Psalter `Korach`
 `l1912` schreibt den Namen in allen Büchern `Korah` — 4. Mose 16-mal,
