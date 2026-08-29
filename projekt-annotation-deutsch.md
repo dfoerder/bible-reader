@@ -64,10 +64,15 @@ Kapitel **null** Verse mit einem gemeinsamen Block ab fünf Tokens im gesamten
 aus der buchinternen Konsistenz. Was es gelehrt hat, steht unten im eigenen
 Abschnitt.
 
-Damit sind **45 von 66 Büchern fertig**: 738 Kapitel, 21 900 Verse,
-495 061 Einträge. `validate.py alle` gibt für alle 45 Bücher `[ok]` aus,
+**Der Psalter ist am 29.08.2026 fertig geworden** — 150 Kapitel, 2528 Verse,
+39 098 Einträge, 1756 Mehrwort-Einträge. Das grösste Einzelbuch des Bestands
+und mit Abstand das aufwendigste: 68 Pakete, jedes von einem eigenen Agenten.
+Psalm 119 (176 Verse) musste auf zwei Agenten geteilt werden.
+
+Damit sind **46 von 66 Büchern fertig**: 888 Kapitel, 24 428 Verse,
+534 181 Einträge. `validate.py alle` gibt für alle 46 Bücher `[ok]` aus,
 `qa.py alle` meldet 0 Verdachtsfälle.
-Es fehlen die Bücher 19–39 (rund 453 Kapitel).
+Es fehlen die Bücher 20–39 (rund 400 Kapitel).
 
 `mehrwort.py alle` meldet 17 Fälle, davon 2 aus Hiob (40,23 `Ufer`) — beide
 sind der vom Werkzeug selbst beschriebene richtige Fall: das deutsche Wort
@@ -120,7 +125,8 @@ teilweise erfasst.
 | Offenbarung (66) | 22 | 405 | 10 627 |
 | **Summe NT** | **260** | **7957** | **172 518** |
 | **Hiob (18)** | **42** | **1070** | **16 617** |
-| **Summe gesamt** | **738** | **21 900** | **495 061** |
+| **Psalmen (19)** | **150** | **2528** | **39 098** |
+| **Summe gesamt** | **888** | **24 428** | **534 181** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
