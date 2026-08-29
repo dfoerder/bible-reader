@@ -2,6 +2,35 @@
 - detailverbesserungen, debugging
 - Schwierige Wörter: nach Ablehnung eines Level-Vorschlags im selben Kapitel nicht erneut fragen (übernommen aus issues.md)
 
+### Datenfehler: der italienische Psalter hat in 63 Psalmen keinen Vers 1
+`bibles/ita/riv1927/19_riv1927.json` und `…/riv1927mod/19_riv1927mod.json`
+beginnen in 63 Psalmen bei Vers 2. Der Vers ist nicht zusammengezogen, er
+**fehlt**. In Psalm 23 fehlt damit `Il Signore è il mio pastore` — italienische
+Leser bekommen die bekannteste Zeile des Psalters gar nicht zu sehen.
+
+Der Fehler steht schon im importierten Grundtext `riv1927`, nicht erst in der
+modernisierten Fassung, und betrifft **nur** diese beiden Dateien: kein anderes
+Buch und keine andere Sprache hat ein Kapitel ohne Vers 1. Gemessen mit einem
+Durchlauf über alle Editionen.
+
+Zum Beheben braucht es den RIV1927-Text dieser 63 Verse aus einer anderen
+Quelle. Betroffene Psalmen und die genaue Messung stehen in
+`../bibles-translations/anno-tools/VERSZAEHLUNG_PSALMEN.md`.
+
+Kleiner verwandter Importartefakt: im italienischen Psalter stehen vereinzelt
+`}`-Zeichen mitten im Text (z. B. Ps 81,1 `Salmo di Asaf.} Cantate…`), dort wo
+die Überschrift in den ersten Vers gefaltet wurde.
+
+### Rückstand: fehlende Mehrwort-Wendungen in den fertigen Büchern
+`anno-tools/sweep.py alle` meldet rund 500 Verdachtsfälle — Wortfolgen, die der
+Bestand fast immer als Wendung führt und die an dieser Stelle keinen
+Mehrwort-Eintrag tragen. Eine Stichprobe von 14 ergab rund 43 % echte Lücken.
+
+Die harte Teilmenge (zusammenhängend, Deckung ≥ 93 %, ≥ 8 Belege) ist
+abgearbeitet: 28 Stellen geprüft, 16 ergänzt, 12 zu Recht wörtlich. Der Rest
+sind überwiegend Treffer mit Abstand zwischen den Wörtern, wo die Fehlalarmquote
+höher liegt — sie brauchen einen eigenen Durchgang.
+
 ## Lese-Level sublevel-genau (18 Stufen) · UMGESETZT (03.07.2026)
 Das Lese-Level ist jetzt ein 18-Stufen-Wert (`userStep` 0–17) statt der 6 groben CEFR-Stufen.
 Kapitel-„schwierige Wörter" und Text-Hervorhebung nutzen `annoStep` (Sublevel aus `words.json`,
