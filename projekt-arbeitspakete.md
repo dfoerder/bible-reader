@@ -30,9 +30,19 @@ der Grundtext nicht hergibt und die auch keine der vier Referenzausgaben stützt
 via` — dort vergeht jeweils der Gottlose).
 
 Gefunden beim Annotieren von Psalm 37. Die Annotation folgt dem Quelltext, wie
-die Regel es verlangt; der Quelltext selbst wäre zu prüfen. Ob das ein
-Einzelfall ist oder ein Muster, ist nicht untersucht — ein gezielter Abgleich
-`l1912` gegen `l1912mod` auf Subjektwechsel wäre die passende Prüfung.
+die Regel es verlangt; der Quelltext selbst wäre zu prüfen.
+
+**Es ist kein Muster.** Der Abgleich `l1912` gegen `l1912mod` über alle 66
+Bücher zeigt **424 Verse**, die das unpersönliche `man` verlieren — fast
+durchweg zu Recht, weil modernes Deutsch dort das Passiv setzt (`daß man mir
+viel Holz zubereite` → `damit reichlich Holz für mich vorbereitet wird`). In
+50 davon steht in der neuen Fassung ein `ich` oder `wir`, aber in aller Regel
+stand es schon im alten Vers. Psalm 37,36 ist der einzige gefundene Fall, in
+dem das `man` **derselben Teilaussage** durch ein `ich` ersetzt ist und keine
+der vier Referenzausgaben das stützt.
+
+Eine vollständige Prüfung bräuchte einen Abgleich je Teilsatz, nicht je Vers;
+das ist hier nicht geleistet.
 
 ### Rückstand: fehlende Mehrwort-Wendungen in den fertigen Büchern
 `anno-tools/sweep.py alle` meldet rund 500 Verdachtsfälle — Wortfolgen, die der
