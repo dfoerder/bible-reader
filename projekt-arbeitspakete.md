@@ -22,10 +22,13 @@ Kleiner verwandter Importartefakt: im italienischen Psalter stehen vereinzelt
 die Überschrift in den ersten Vers gefaltet wurde.
 
 ### `di io` statt `di Dio` — 26 Verse im italienischen Grundtext
-`bibles/ita/riv1927` schreibt in 26 Versen `di io`, wo `di Dio` stehen muss —
-darunter `Figliuol di io` in Matthäus 14,33 und 26,63, Markus 3,11, Johannes
-5,25 und 1. Johannes 3,8, sowie `il Regno di io` in Lukas 6,20 und 18,25. Es
-ist dieselbe verlorene Majuskel wie bei den übrigen Importartefakten.
+`bibles/ita/riv1927` schreibt in **38 Versen** den Gottesnamen als `io` — `di
+io`, `del nostro io`, `al suo io`, `il tuo io`. Darunter `Figliuol di io` in
+Matthäus 14,33 und 26,63, Markus 3,11, Johannes 5,25 und 1. Johannes 3,8,
+`il Regno di io` in Lukas 6,20 und 18,25, und `nella città del nostro io` in
+Psalm 48,8. Es ist dieselbe verlorene Majuskel wie bei den übrigen
+Importartefakten (`eccatori`, `alvami`, `uoi`, `icordati`, `igliuoli`), hier
+aber im Gottesnamen.
 
 **Die App ist nicht betroffen:** sie liefert `ita/riv1927mod` aus, und dort ist
 der Fehler in allen 26 Versen behoben (0 Treffer).
