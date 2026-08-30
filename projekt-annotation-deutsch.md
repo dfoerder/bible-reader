@@ -83,6 +83,15 @@ steht im Plural, die Wendung enthält es im selben Numerus.
 unter „Der Konjunktiv II"; die 35 Altfälle aus `BEFUNDE_NEHEMIA.md` sind davon
 teilweise erfasst.
 
+**Die Sprüche sind am 30.08.2026 fertig geworden** — 31 Kapitel, 915 Verse,
+14 019 Einträge, in elf Paketen (Kapitel 1 allein als Maßstab, danach
+Dreierwellen). Die unabhängige Vollständigkeitsprobe über alle **13 380 Tokens**
+läuft ohne Befund durch: jede Tokenposition trägt genau einen Eintrag, jede
+`form` stimmt mit dem Quelltext überein, und die 20 alleinstehenden Satzzeichen
+gehen auf den Token genau auf.
+
+Damit sind **47 von 66 Büchern** annotiert. Es fehlen die Bücher 21–39.
+
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
@@ -126,7 +135,8 @@ teilweise erfasst.
 | **Summe NT** | **260** | **7957** | **172 518** |
 | **Hiob (18)** | **42** | **1070** | **16 617** |
 | **Psalmen (19)** | **150** | **2528** | **39 098** |
-| **Summe gesamt** | **888** | **24 428** | **534 181** |
+| **Sprüche (20)** | **31** | **915** | **14 019** |
+| **Summe gesamt** | **919** | **25 343** | **548 200** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -2326,3 +2336,146 @@ Kapiteln hat ein Agent eine meiner Angaben am Quelltext widerlegt — falsche
 Verse, Verb statt Substantiv, Person statt Abstraktum, Wörter, die gar nicht
 vorkommen. **Der Hinweis „lies den Quelltext, nicht meine Aufzählung" gehört in
 jeden Prompt.**
+
+## Sprüche: was das Buch gelehrt hat
+
+Das Buch ist in **elf Paketen** entstanden — Kapitel 1 allein als Maßstab,
+danach zehn Dreierwellen. 915 Verse, 14 019 Einträge, 659 Mehrwort-Einträge.
+
+### Die Kollisionsliste von `hints.py` ist zu einem Fünftel falsch
+
+Erstmals ist die Meldung eines Werkzeugs über ein ganzes Buch hinweg
+ausgezählt worden. `hints.py` hatte **30 Kollisionspaare** gemeldet; **sechs
+davon sind Fehlalarme**, jeder von einem Agenten am Quelltext widerlegt:
+
+| Stelle | was `hints.py` sah | was dasteht |
+|---|---|---|
+| 4,16 | `Schlaf` / `schlafen` | Verb und Stammsubstantiv, Zusammenfall nur im Englischen |
+| 4,27 | `ab` / `fern` | `ab` ist die Partikel von `abweichen` |
+| 9,8 | `Weiser` / `weise` | zwei **Imperative von `weisen`** — die Klammerhälften von `zurechtweisen` |
+| 10,14 | `heran` / `nahe` | `heran` ist die Partikel von `heranbringen` |
+| 19,25 | `klug` / `weise` | wieder `weisen`, kein Adjektiv |
+| 22,29 | `Leute` / `Mensch` | `Mensch` steht im Singular |
+
+**Vier der sechs sind Partikeln trennbarer Verben oder Verbformen, die wie ein
+Adjektiv aussehen** — genau die Klasse, vor der `AUFTRAG_AT.md` unter
+„Partikeln selbst nachzählen" warnt. Das Werkzeug ist formbasiert und kann sie
+prinzipiell nicht sehen.
+
+Dem stehen **mindestens 25 echte Kollisionen** gegenüber, die `hints.py`
+prinzipiell **nicht** sehen konnte. In mehreren Kapiteln (11 · 23 · 24 · 26 ·
+28) meldete es **null** Paare, während `glosskollision.py` und die Handprüfung
+vier bis sechs echte fanden. Der eindrücklichste Fall steht in **23,29**, dem
+dichtesten Vers des Buches (sechs Substantive in sechs Fragen): der Bestand
+führt für `Leid` **auch** die Lesart *misery · miseria · misère · miseria* —
+wortgleich mit `Elend` in allen vier Sprachen. `hints.py` vergleicht nur die
+häufigste Lesart und konnte das nicht melden.
+
+**Regel daraus:** `hints.py` ist eine Hypothesenliste, kein Prüflauf. Der
+Prüflauf ist `glosskollision.py`, und er gehört an das **fertige** Kapitel.
+
+### `levelcheck.py` gehört in die Pflichtliste — aus einem anderen Grund als vermutet
+
+Es prüft Level, findet aber dreimal etwas, das kein anderer Lauf melden konnte:
+den Bestandsbeleg `Steinmauer` (Kap. 25), den der Lexikon-Extrakt formbasiert
+nicht zeigte; das zusammengeschriebene `guttun` (Kap. 22), belegt als
+`gut tun`; und in Kapitel 29 **drei Mehrwort-Lemmata**, die ein Agent als neu
+angesetzt hatte und die längst im Bestand stehen. An allen drei Stellen waren
+die fünf vorgeschriebenen Läufe mit 0 Treffern durchgelaufen.
+
+Der Agent von Kapitel 29 hat das selbst vorgeschlagen; `AUFTRAG_SPRUECHE.md`
+führt seither sechs Pflichtläufe.
+
+### `dubletten.py` — was `parallelen.py` prinzipiell nicht findet
+
+`parallelen.py` durchsucht den **fertigen Bestand**. Was sich innerhalb des
+gerade entstehenden Buches wiederholt, sieht es nicht, weil dort noch nichts
+annotiert ist. Die Sprüche haben **26 solcher Verspaare**, sechs davon wörtlich
+gleich, bis zu zwölf Kapitel auseinander und von verschiedenen Agenten zu
+schreiben. Das neue Werkzeug erzeugt die Karte vor dem ersten Kapitel; jede
+Übernahme ist danach programmatisch tiefkopiert und von mir feldweise
+nachgerechnet worden.
+
+**Ein Sonderfall war 14,12 ↔ 16,25**: beide Verse liefen **gleichzeitig** und
+konnten sich nicht abstimmen. Beide Agenten haben den Vers vollständig
+berichtet, die Fassungen unterschieden sich an drei Stellen, und die
+Entscheidung fiel danach am gebauten 12,15, das dieselbe Konstruktion trägt.
+**Das ist die Arbeitsteilung, die funktioniert:** der Agent berichtet
+vollständig, die Zusammenführung macht der Koordinator.
+
+### Die Prompt-Hinweise waren in jedem Paket falsch
+
+Über elf Pakete haben die Agenten **mehr als fünfzig** meiner Prompt-Hinweise
+am Quelltext widerlegt. Die schwersten:
+
+- Für die Schöpfungsrede in Kapitel 8 nannte ich `Urflut`, `Himmelsgewölbe` und
+  `Grundfeste`. Der Text sagt `Ozeane`, `Horizont` und `Fundamente`.
+- 12,11 sagt „Wer sein **Land bestellt**, wird satt **von** Brot" — nicht
+  `Acker bebaut`/`satt an`.
+- 18,10/18,11 stellen einen **starken** Turm gegen eine feste Stadt, nicht
+  „fester Turm" gegen „feste Stadt".
+- `Bedürftiger` kommt im ganzen Kapitel 28 nicht vor, obwohl ich ihn für sechs
+  Verse nannte.
+- **`Freude machen` war zweimal falsch** (17,21 · 23,24): dort steht „hat keine
+  Freude" bzw. „hat Freude an ihm", also `Freude haben`. Die Regel lautet:
+  `Freude machen` nur, wo der Text „macht … Freude" sagt.
+
+Das bestätigt, was seit 3. Mose in diesem Dokument steht — **der Prompt-Hinweis
+ist der unzuverlässigste Teil des Verfahrens**. Sein Wert liegt darin, die
+Aufmerksamkeit an die richtige Stelle zu lenken, nicht darin, recht zu haben.
+
+### Der Homograph des Buches, und wie er gelöst wurde
+
+`Toren` steht fünfmal und ist viermal das **Stadttor**, einmal der **Narr**
+(17,21) — und dort steht `Narren` in derselben Zeile. **Drei der vier Ausgaben
+trennen von selbst** (RV *necio/insensato*, LSG *insensé/fou*, RIV *stolto/uomo
+da nulla*); nur WEB schreibt zweimal *fool*. es, fr und it folgen den Ausgaben
+und decken sich mit der eigenen Narren-Lesart des Bestands aus Ps 14,1, deren
+Italienisch bereits trennt. **Nur die englische Glosse hatte keine Quelle** —
+*fool* ist `Narr`, *senseless one* ist `Unvernünftiger`; genommen ist *foolish
+man*.
+
+Dasselbe Muster in **18,15**: von den vier Ausgaben trennt **nur RV**, und zwar
+umgekehrt zur Bindung. Da `Erkenntnis` mit 18 Vorkommen die stärkere Bindung
+hat, weicht `Wissen` aus — und übernimmt dabei genau das Wort, das RV im Vers
+selbst anbietet.
+
+### Die Lexikonfalle in vier Varianten
+
+| Wort | Bestand | warum er nicht trägt |
+|---|---|---|
+| `Erziehung` | im AT **unbelegt**, 5 NT-Belege | trägt trotzdem — die NT-Lesart ist bedeutungsgleich |
+| `Besonnenheit` | 2 NT-Belege („Selbstbeherrschung") | in den Sprüchen ein Weisheitsbegriff; alle vier Ausgaben schreiben in allen drei Versen dasselbe |
+| `Geheimnis` | 22 Belege, **sämtlich NT** (*mystery*) | 25,9 meint das gehütete Geheimnis eines Dritten |
+| `Wohlgefallen` | 5 Belege, sämtlich NT (Gottes Ratschluss) | 8,35/18,22 meint „Gunst finden" |
+| `tüchtig` | 11 Belege *capable*, alle „diensttaugliche Männer" | 12,4/31,10 ist eine sittliche Qualität |
+| `Fremder` | 80 AT-Belege *extranjero* (Fremdling im Land) | 5,17/6,1 meint den Außenstehenden — hier trägt die **NT**-Lesart |
+
+Der letzte Fall ist der lehrreichste: **die Bindung gilt für dieselbe
+Bedeutung, nicht für dieselbe Buchstabenfolge**, und das kann auch heißen, dass
+im AT die NT-Lesart die richtige ist.
+
+### Was die Agenten an eigener Arbeit dazugelegt haben
+
+- Kapitel 7 hat `kreuz.py` von sich aus gegen das gleichzeitig laufende
+  Kapitel 5 gefahren und die wörtlich gleiche Zeile in 5,7 und 7,24 gefunden.
+- Kapitel 28 hat dasselbe getan, zwei Divergenzen bei sich selbst angeglichen
+  und zwei offen gemeldet statt eigenmächtig zu entscheiden.
+- Kapitel 30 hat für die fünf Zahlensprüche ein Listenskript geschrieben, 62
+  Glieder positionsgenau geprüft **und einen Mutationstest gefahren**: nach
+  programmatischem Vertauschen zweier Glossen meldet es acht Befunde.
+- Kapitel 9 hat den `hints.py`-Fehlalarm 9,8 nicht nur erkannt, sondern die
+  Alternative mitprotokolliert, die er nicht gegangen ist.
+
+### Acht Kollisionen bleiben bewusst stehen
+
+`glosskollision.py` meldet über das fertige Buch acht inhaltliche Paare, jedes
+am Vers geprüft: 4,16 und 14,5 (Verb und Stammsubstantiv, nur englisch), 18,20
+(synonymer Parallelismus — alle vier Ausgaben wiederholen ihr eigenes Wort),
+22,22 (figura etymologica; jede romanische Ausweichform wäre besetzt), 18,24
+und 29,20 (das Einzelwort des Mehrworts `es gibt`), 25,21 und 30,8 (der
+korpusweite `da'`-Befund).
+
+**Zwei Bestandsbefunde sind korpusweit zu entscheiden und nicht angefasst
+worden:** `gib` trägt italienisch `da'` (96 Belege) gegen `da` (4), und
+`widerspiegeln`/`spiegeln` kollidieren im gebauten 2Kor 3,18 in en/es/fr.
