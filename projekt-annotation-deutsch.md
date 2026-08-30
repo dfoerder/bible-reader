@@ -90,7 +90,11 @@ läuft ohne Befund durch: jede Tokenposition trägt genau einen Eintrag, jede
 `form` stimmt mit dem Quelltext überein, und die 20 alleinstehenden Satzzeichen
 gehen auf den Token genau auf.
 
-Damit sind **47 von 66 Büchern** annotiert. Es fehlen die Bücher 21–39.
+**Der Prediger ist am 30.08.2026 fertig geworden** — 12 Kapitel, 222 Verse,
+5217 Einträge, in fünf Paketen. Die unabhängige Vollständigkeitsprobe über alle
+**4991 Tokens** läuft ohne Befund durch.
+
+Damit sind **48 von 66 Büchern** annotiert. Es fehlen die Bücher 22–39.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -136,7 +140,8 @@ Damit sind **47 von 66 Büchern** annotiert. Es fehlen die Bücher 21–39.
 | **Hiob (18)** | **42** | **1070** | **16 617** |
 | **Psalmen (19)** | **150** | **2528** | **39 098** |
 | **Sprüche (20)** | **31** | **915** | **14 019** |
-| **Summe gesamt** | **919** | **25 343** | **548 200** |
+| **Prediger (21)** | **12** | **222** | **5 217** |
+| **Summe gesamt** | **931** | **25 565** | **553 417** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -2479,3 +2484,99 @@ korpusweite `da'`-Befund).
 **Zwei Bestandsbefunde sind korpusweit zu entscheiden und nicht angefasst
 worden:** `gib` trägt italienisch `da'` (96 Belege) gegen `da` (4), und
 `widerspiegeln`/`spiegeln` kollidieren im gebauten 2Kor 3,18 in en/es/fr.
+
+## Prediger: was das Buch gelehrt hat
+
+Zwölf Kapitel, 222 Verse, 5217 Einträge, fünf Pakete. Das erste Buch, das nach
+dem verallgemeinerten `AUFTRAG_BUCH.md` gelaufen ist.
+
+### Die Ausrichtung muss vor dem ersten Kapitel gemessen werden — und das Werkzeug dafür hat eine Grenze
+
+`verszaehlung.py` ist neu und hat für alle Bücher 21–39 die Karte erzeugt. Das
+Ergebnis: **die Sprüche waren der Sonderfall.** Dort stimmte die Verszahl in
+allen 31 Kapiteln mit allen vier Ausgaben überein; im Prediger wackeln vier von
+zwölf, und **Joel und Maleachi haben sogar eine abweichende Kapitelzahl**.
+
+Im Prediger sind es zwei verschobene **Kapitelgrenzen**, keine fehlenden Verse:
+
+| | wer verschiebt |
+|---|---|
+| **4 / 5** | de 4,17 = en/es/it 5,1, danach de 5,n = en/es/it 5,n+1. **LSG folgt dem Deutschen.** |
+| **11 / 12** | umgekehrt: de 11,9 = **fr** 12,1, danach de 12,n = fr 12,n+2. en, es, it folgen dem Deutschen. |
+
+Die vier Ausgaben laufen also **untereinander** auseinander, und für jeden Vers
+braucht man zwei Nummern.
+
+**`ausgaben.py` schätzt den Versatz global aus den Verslängen, und bei einer
+verschobenen Kapitelgrenze ist das falsch** — der Versatz ist am Kapitelanfang
+0 und kippt erst später. In Kapitel 4 meldete es `-1 UNSICHER`, zeigte aber die
+richtige Zeile; **in Kapitel 11 zeigte es die falsche** (für de 11,5 die
+französische Zeile 3). Das Skript warnt seither ausdrücklich: wenn ein Versatz
+`UNSICHER` ist, kann auch die Anzeige falsch sein.
+
+### Die Ausgaben helfen bei den Leitwörtern eines modernisierten Textes nicht
+
+Die drei Wörter, die das Buch tragen, sind im Bestand fast unbelegt —
+`vergänglich` steht 25× und hat einen einzigen AT-Beleg, `Haschen` 9× und
+keinen, `Prediger` 7× und keinen. Bei allen dreien versagen die Ausgaben:
+
+- Bei **`vergänglich`** schreiben alle vier ein **Substantiv** (*vanity ·
+  vanidad · vanité · vanità*), wo der Text ein prädikatives Adjektiv hat, und
+  bauen 1,2 völlig anders. Der Modernisierer hat Luthers „Es ist alles ganz
+  eitel" durch „Alles ist vergänglich" ersetzt und die Bedeutung damit bewusst
+  von *nichtig* auf *flüchtig* verschoben — die Glosse folgt dem einzigen
+  AT-Beleg (Ps 39,5), nicht der NT-Mehrheit 6:1.
+- Bei **`Haschen nach Wind`** schreibt RV an allen neun Stellen *aflicción de
+  espíritu*, die alte Vulgata-Lesart, und folgt dem deutschen Text nicht. Das
+  Spanische ist dort als einziges gebildet statt abgelesen.
+- Bei **`Prediger`** teilen sich die Ausgaben: *Preacher/Predicador* gegen
+  *Ecclésiaste/Ecclesiaste*. Jede bekommt ihre eigene.
+
+**Das ist die Lehre des Buches:** wo der modernisierte Text weiter von Luther
+weggeht als die Ausgaben von ihrer Vorlage, kann die Ausgabe die Glosse nicht
+liefern. Dann entscheidet der Bestand — und wo auch der schweigt, das deutsche
+Wort.
+
+### `glosskollision.py` gegen `hints.py`, zweites Buch in Folge
+
+`hints.py` meldete 22 Paare. Davon waren mehrere Fehlalarme (1,9 `neu`/`wieder`
+— es rechnete mit der adverbialen Lesart, im Text steht das Adjektiv; 5,11 und
+7,11), und mindestens ebenso viele echte hat es **nicht** gesehen. In den
+Kapiteln 6, 8 und 10 meldete es **null** Paare, während `glosskollision.py` und
+die Handprüfung je vier bis acht fanden.
+
+Die schwerste Stelle des Buches, **8,14**, hätte es gemeldet — aber die Lösung
+kam aus dem Bestand: `geschieht` und zweimal `ergeht` im selben Vers, beide
+Lemmata auf *happens · sucede · arrive · accade*, und **drei der vier Ausgaben
+schreiben genau die Kollisionswörter**. Gelöst mit der formgleichen Lesart aus
+Ps 49,14 und dem Mehrwort-Eintrag `es ergehen`, den Prediger 2,15 bereits führt.
+
+### Die Bindungstabelle muss nach jedem Buch neu erzeugt werden
+
+Der Agent von Kapitel 9 meldete, `BINDUNGEN_AT.md` führe für `Netz` das
+**Fettnetz des Opfertiers** als Bindung — wer ihr folgt, glossiert das
+Fischernetz als Bauchfell. Kein Fehler im Generator: der Eintrag lautete
+„(11/14)" und stammte aus einem Bestand von 14 AT-Belegen. Inzwischen sind es
+31, und die Mehrheit hat sich gedreht. `bindungen.py` war seit dem Abschluss
+von **Hiob** nicht mehr gelaufen, während Psalmen und Sprüche dazugekommen sind.
+
+Neu erzeugt: 1899 statt 1217 Lemmata, und von den 1127 gemeinsamen haben elf
+eine andere Lesart. Inhaltlich schwer sind `Netz` (*caul* → *net*) und `Mal`
+(*mark* → *time*). **Das gehört ab jetzt zum Buchabschluss.**
+
+### Elf Wörter, die als unbelegt gemeldet wurden und es nicht sind
+
+`verwöhnen`, `begehren`, `weitersagen`, `säen`, `süß`, `verbannen`,
+`wiederfinden` und vier weitere. `hints.py` und der `UNBELEGT`-Abschnitt von
+`lexicon.py` sind **formbasiert**; bei zusammengesetzten und präfigierten
+Verben zeigt der VERWANDT-Abschnitt oft nur Nominalableitungen. Es war in Buch
+20 dasselbe Muster und ist inzwischen im `AUFTRAG_BUCH.md` vermerkt.
+
+### Eine eigene Korrektur, die das Verfahren bestätigt
+
+Ich hatte 11,9 an die Bestandsbindung von „in den Tagen" angeglichen, nachdem
+Kapitel 12 sie belegt hatte — und damit die Kollision wiederhergestellt, die
+Kapitel 11 bewusst aufgelöst hatte (in 11,9 stehen `an deiner Jugend` und
+`in den Tagen` im selben Vers). Zurückgenommen. **Eine verse-lokale Auflösung
+darf eine Bindung an der Kollisionsstelle überschreiben — genau dafür ist sie
+da**, und 12,1 hat kein `an` daneben und behält die Bindung.
