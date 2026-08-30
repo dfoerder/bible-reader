@@ -94,7 +94,14 @@ gehen auf den Token genau auf.
 5217 Einträge, in fünf Paketen. Die unabhängige Vollständigkeitsprobe über alle
 **4991 Tokens** läuft ohne Befund durch.
 
-Damit sind **48 von 66 Büchern** annotiert. Es fehlen die Bücher 22–39.
+**Das Hohelied ist am 30.08.2026 fertig geworden** — 8 Kapitel, 117 Verse,
+2407 Einträge, in vier Paketen. Die unabhängige Vollständigkeitsprobe über alle
+**2351 Tokens** läuft ohne Befund durch. Das Buch hat die höchste
+Dublettendichte des Bestands (sieben Verspaare auf 117 Verse, drei davon
+wörtlich gleich), deshalb folgte die Paketreihenfolge den Dubletten statt der
+Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
+
+Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
@@ -141,7 +148,8 @@ Damit sind **48 von 66 Büchern** annotiert. Es fehlen die Bücher 22–39.
 | **Psalmen (19)** | **150** | **2528** | **39 098** |
 | **Sprüche (20)** | **31** | **915** | **14 019** |
 | **Prediger (21)** | **12** | **222** | **5 217** |
-| **Summe gesamt** | **931** | **25 565** | **553 417** |
+| **Hohelied (22)** | **8** | **117** | **2 407** |
+| **Summe gesamt** | **939** | **25 682** | **555 824** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
@@ -2580,3 +2588,146 @@ Kapitel 11 bewusst aufgelöst hatte (in 11,9 stehen `an deiner Jugend` und
 `in den Tagen` im selben Vers). Zurückgenommen. **Eine verse-lokale Auflösung
 darf eine Bindung an der Kollisionsstelle überschreiben — genau dafür ist sie
 da**, und 12,1 hat kein `an` daneben und behält die Bindung.
+
+
+## Hohelied: was das Buch gelehrt hat
+
+Acht Kapitel, 117 Verse — das kleinste bisher annotierte Buch, und dennoch das
+mit den meisten Werkzeugbefunden. Drei davon haben zu Änderungen an den
+Werkzeugen selbst geführt.
+
+### `ausgaben.py` hat lautlos falsch ausgerichtet
+
+Für Hohelied 6 meldete das Werkzeug **Versatz +1** für Englisch, Spanisch und
+Italienisch — ohne `UNSICHER`-Marke — und paarte damit **jede** deutsche Zeile
+mit der falschen fremdsprachigen. Nachgemessen: Versatz **0** bewertet
+0,09–0,14, der angezeigte +1 bewertet 0,24–0,29. Der Agent hat das gefunden,
+indem er die Kapiteldateien direkt aufschlug, statt der Anzeige zu glauben.
+
+Die Ursache ist strukturell und betraf jedes bisherige Buch. Der Versatz kommt
+aus dem letzten Vers. Hat eine Ausgabe **einen Vers mehr**, weil ihre
+Kapitelgrenze weiter hinten liegt, schiebt diese Rechnung den Überhang nach
+**vorn**. Die vorhandene Kontrolle (`len(de) + versatz == len(ausgabe)`) stimmt
+in **beiden** Fällen und greift deshalb nie.
+
+`ausgaben.py` bewertet jetzt die Nachbarversätze mit und meldet, wenn einer
+deutlich besser liegt. Der angewandte Versatz wird **nicht** stillschweigend
+ausgetauscht — genau das lag früher in Ps 9, 15 und 19 daneben. Die Schwelle
+ist an fünf Kapiteln geeicht; über alle 939 fertigen Kapitel melden **4,9 %**
+etwas, **17 Ausgabenzeilen davon wären vorher völlig stumm geblieben** —
+darunter **Prediger 4**, das denselben Fehler trägt.
+
+### Gleichzeitig laufende Kapitel kollidieren an Teilversen, die kein Werkzeug meldet
+
+Zweimal in vier Paketen: der Halbvers „Bis der Tag sich abkühlt und die
+Schatten fliehen" steht wörtlich gleich in **2,17 und 4,6**, der Block „ob der
+Weinstock ausschlägt, ob die Granatbäume blühen" in **6,11 und 7,13**. Beide
+Male liefen die Kapitel in derselben Welle und setzten verschieden.
+
+`dubletten.py` findet sie nicht — es misst **ganze Verse**, und die Verse gehen
+im Rest auseinander. `parallelen.py` findet sie, aber erst, wenn die Vorlage
+gebaut ist. Dazu kam ein dritter Fall, den erst der Kreuzvergleich zeigte:
+„zwischen den Lilien weiden" steht in **2,16 · 4,5 · 6,3**, und Kapitel 4 nahm
+die Bestandsmehrheit (*between*), wo Kapitel 2 die kontextrichtige zweite
+Lesart gesetzt hatte (*among*, weil es mehr als zwei Lilien sind).
+
+**Konsequenz: der Kreuzvergleich aller Kapitel eines Buches gegeneinander ist
+Pflicht, bevor gebaut wird** — Form plus Lemma als Schlüssel, Glossen als Wert.
+Über die sieben Kapitel der ersten drei Pakete zeigte er 21 Divergenzen, von
+denen drei echt waren; die übrigen 18 waren Numerus, Kasus oder bewusste
+Zweitlesarten.
+
+### `BINDUNGEN_AT.md` ist an zwei Stellen blind
+
+- **bedeutungsblind**: bei `Schale` (7,3) markiert die Tabelle *bowl* als
+  NT-Falle und bindet an *basin*. Hier ist es ein Trinkgefäß, und die
+  *bowl*-Lesart hat mit Richter 5,25 einen AT-Beleg.
+- **positionsblind**: bei `kaum` (3,4) nennt sie it *a malapena* (8/14) — die
+  **großgeschriebene** Form hat aber 10 Belege mit *Appena*.
+
+Dazu ein Randfall, der beim Neuerzeugen nach dem Buch sichtbar wurde: der
+Kopftext sagte „häufigste Lesart **über** die Hälfte", die Bedingung im Code
+lässt aber **genau** die Hälfte durch. Betroffen sind 91 Lemmata. Vor einer
+Änderung nachgemessen: von den 21 echten 50:50-Gleichständen unterscheidet sich
+**keiner** in der Bedeutung — alle sind Numerusvarianten. Eine Verschärfung
+hätte 91 brauchbare Zeilen für nichts gekostet. **Die Schwelle blieb, der
+Kopftext wurde berichtigt.**
+
+### Die Vorbereitung selbst war die Fehlerquelle
+
+Ich hatte ins Wortfeld geschrieben, `beschwören` sei im AT unbelegt — das war
+der Anlass, Kapitel 2 als Maßstab vorzuziehen. Das Lemma hat **13 Belege, neun
+davon im AT**, und die Bedeutung „feierlich bitten" ist dreimal alttestamentlich
+belegt. Gezählt worden war die *Form* `beschwöre`, nicht das *Lemma* — genau
+der Fehler, vor dem dasselbe Dokument die Kapitelagenten warnt.
+
+Zweite eigene Fehlerquelle: in den Aufträgen standen mehrfach Wörter, die im
+Quelltext gar nicht vorkommen (`Salböl`, `Nardenöl`, `Ketten`, `Wasserfluten`,
+`bewahren`, `in Blüte stehen` für 7,13) oder in anderer Form (`Küssen` statt
+`Küsse`, `ruhen lassen` statt `lagern`). **Prompt-Hinweise sind der
+unzuverlässigste Teil des Auftrags** — das gilt inzwischen für jedes Buch, und
+die Agenten prüfen sie richtigerweise am Quelltext nach.
+
+### Wieder bestätigt: formbasiert unbelegt heißt nicht unbelegt
+
+| Kapitel | von `hints.py` gemeldet | wirklich neu |
+|---|---|---|
+| 1 | 20 | 3 |
+| 3 | 6 | 2 |
+| 5 | 26 | 7 |
+| 7 | 18 | 12 |
+| 8 | 10 | 3 |
+
+Und zweimal zeigte der Lexikon-Auszug das Lemma **auch unter VERWANDT nicht** —
+nur `fixgloss.py show` fand es: `purpurn` und `Königsgewand` (7,2),
+`verstärken` und `bieten` (8,7 · 8,9; `Böte` stand sogar unter UNBELEGT).
+**Beide Werkzeuge fragen, nicht eines.**
+
+### Die Kollisionsbilanz
+
+`glosskollision.py` fand über das ganze Buch die üblichen Verschmelzungen. Die
+Agenten fanden durch **eigenes Nachzählen zehn weitere, sechs davon in allen
+vier Sprachen** — darunter `doch`/`aber` (5,6), `springend`/`hüpfend` (2,8),
+`vorüber`/`vorbei` (2,11), `führen`/`bringen` (8,2, spanisch beide *llevar*)
+und in 2,9 **drei** Wörter des Sehens im selben Vers (`Sieh`, `schaut`,
+`blickt`), die im Bestand alle drei auf *look · mira · regarde · guarda* liegen.
+
+Dazu eine feste Wendung, die **drei** Skripte übersahen: „priesen sie glücklich"
+(6,9) ist `glücklich preisen`, im Bestand mit drei Belegen geführt, und
+Sprüche 31,28 hat exakt dieselbe Konstellation.
+
+### Was das Buch inhaltlich verlangt hat
+
+Das Leitwort `Geliebter`/`Geliebte` (39 Vorkommen) ist **dasselbe Lemma in
+entgegengesetztem Genus**, weil die beiden Liebenden einander mit demselben
+deutschen Wort nennen. Alle vier Ausgaben trennen — jede anders. Nur das
+Englische kann nicht über das Genus trennen, und in 2,10 stehen beide Formen im
+selben Vers: dort ist WEBs eigenes Wort genommen (*my love* für die Frau,
+*beloved* für den Mann).
+
+Die folgenreichste Entscheidung war, **RIV nicht zu folgen**: die italienische
+Ausgabe liest maskulin *amico*, was an seiner eigenen Stelle richtig aussieht —
+aber in 5,16 steht `Geliebter` neben `Freund` (89 Belege, gebunden an
+*amico*) und in 5,2 neben `Freundin` (*amica*). Kapitel 1 hat diese Kollision
+drei Kapitel im Voraus gesehen. In 5,16 weicht RIV dann selbst aus („Tal è
+l'**amor** mio, tal è l'**amico** mio") — die Ausgabe bestätigt die Festlegung
+an genau der Stelle, für die sie getroffen wurde.
+
+Ein zweiter Fall derselben Art: in **8,11** bindet `BINDUNGEN_AT.md` `Wächter`
+an *watchman*, aber es sind Weinbergspächter, keine Stadtwächter. Die
+naheliegende Alternative *keeper · guardián · gardien · custode* ist die feste
+Bindung von `Hüter` — das im **Folgevers 8,12** steht.
+
+### Ausgabenbefunde
+
+- **WEB trägt die Sprecherangaben als Fließtext im Vers** („Beloved", „Lover",
+  „Friends"), in 1,4 und 5,1 sogar mitten im Satz. Betrifft alle Kapitel außer
+  **3**, das als einziges keine hat. Ein Importartefakt, das jeden verrutschen
+  lässt, der WEB Wort für Wort abzählt.
+- **RIV hat sechs Setzfehler** mit fehlenden Buchstaben: „alomone" (1,5),
+  „il iorno" (3,11), „’ho cercato" (5,6), „l'amico uo" (5,9), zweimal „e" statt
+  „è" (7,2 · 7,4).
+- **LSG 8,14 endet mit einer freistehenden Tilde.**
+- **RV1909mod benutzt im ganzen Buch *ustedes***, wo der Bestand die
+  *vosotros*-Konvention führt — Bestand gehalten, sonst liefe das Buch gegen
+  die übrigen 65.
