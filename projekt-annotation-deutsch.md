@@ -956,6 +956,7 @@ Die Kernstücke:
 | `BINDUNGEN_KOENIGE.md` | die Formeln der Bücher 11 und 12, von Hand gepflegt |
 | `vorlage.py <nrA> <kapA> <nrB> <kapB>` | Parallelkapitel als gemessene Vorlage, Vers für Vers, mit Versatz und Abweichungen |
 | `parallelen.py <nr> <kap> [minblock]` | Parallelstellen im **ganzen** Bestand, sortiert nach längstem gemeinsamen Block |
+| `dubletten.py <nr> [--anteil] [--min]` | Verspaare **innerhalb** eines Buches — was `parallelen.py` im noch leeren Buch prinzipiell nicht findet |
 | `mehrwort.py <nr…>\|alle [--nur=…] [--fix]` | Einzelwörter, die die Glosse ihres Mehrwort-Eintrags übernommen haben |
 | `zweigleisig.py <nr…>\|alle [--min 5] [--wieoft 2]` | Lesarten, die ein Kapitel erfunden und das nächste weitergereicht hat |
 | `BEFUNDE_NEHEMIA.md` | Bestandsbefunde aus Nehemia, gemeldet und noch nicht entschieden |
