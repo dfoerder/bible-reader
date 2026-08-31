@@ -4167,7 +4167,7 @@ function App({data}){
             </label>
           ))}
         </div>
-        <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',marginTop:24}}>v{APP_VERSION} ({APP_DATE})</p>
+        <VersionLine/>
       </div>
     </div>);
   }
@@ -4939,11 +4939,36 @@ const S={
    Ein-/ausschalten: URL-Parameter ?bugs=1 bzw. ?bugs=0 (siehe früher Script-
    Block); der Melder ist damit für normale Nutzer unsichtbar.
 */
+// Fünfmal auf die Versionszeile in den Einstellungen tippen schaltet den
+// Bug-Melder an oder aus. Nötig, weil eine vom Homescreen gestartete PWA unter
+// iOS einen eigenen localStorage hat und den ?bugs=1-Schalter aus Safari nicht
+// sieht — von innen ist der Melder so überall erreichbar.
+function VersionLine(){
+  const [taps,setTaps]=useState(0);
+  let on=false; try{on=localStorage.getItem('bible-bugmode')==='1'}catch(e){}
+  const tap=()=>{
+    const n=taps+1;
+    if(n>=5){
+      try{on?localStorage.removeItem('bible-bugmode'):localStorage.setItem('bible-bugmode','1')}catch(e){}
+      location.reload();
+      return;
+    }
+    setTaps(n);
+  };
+  return(<p onClick={tap} style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',
+    marginTop:24,cursor:'pointer',userSelect:'none',WebkitUserSelect:'none'}}>
+    v{APP_VERSION} ({APP_DATE})
+    {taps>=2&&<span style={{display:'block',marginTop:4}}>{on?'Bug-Melder aus':'Bug-Melder an'} in {5-taps} …</span>}
+    {on&&taps<2&&<span style={{display:'block',marginTop:4}}>🐞 Bug-Melder aktiv</span>}
+  </p>);
+}
+
 const BUGS_KEY='bible-bugs';
 const BUG_EP_KEY='bible-bug-endpoint';
 // Kommt die App vom Empfänger selbst (bugserver.py direkt im WLAN oder über den
 // cloudflared-Tunnel), genügt die eigene Herkunft als Ziel. Nur die Pages-
 // Auslieferung braucht eine eingetragene Adresse.
+const BUG_STANDALONE=!!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone);
 const BUG_SAME_ORIGIN=!/(^|\.)github\.io$/i.test(location.hostname);
 const BUG_SEVS=[{id:'blocker',dot:'🔴',label:'Blockiert'},{id:'major',dot:'🟠',label:'Stört'},{id:'minor',dot:'🟡',label:'Kosmetik'}];
 
@@ -5064,7 +5089,9 @@ function BugReporter(){
 
   if(!open)return(
     <button onClick={openPanel} aria-label="Bug melden" style={{position:'fixed',right:14,
-      bottom:'calc(14px + env(safe-area-inset-bottom))',width:44,height:44,borderRadius:'50%',
+      // Im Browser sitzt unten Safaris Adress-/Werkzeugleiste — dort höher hängen.
+      bottom:BUG_STANDALONE?'calc(16px + env(safe-area-inset-bottom))':'calc(68px + env(safe-area-inset-bottom))',
+      width:44,height:44,borderRadius:'50%',
       border:'1px solid var(--t-border2)',background:'var(--t-card-solid)',opacity:0.8,fontSize:20,
       lineHeight:'42px',textAlign:'center',padding:0,cursor:'pointer',zIndex:10000,
       boxShadow:'0 2px 10px rgba(0,0,0,0.25)'}}>
