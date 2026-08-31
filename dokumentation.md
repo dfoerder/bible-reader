@@ -139,6 +139,10 @@ bible-reader/
 ├── icon-192.png / icon-512.png        App-Icons
 ├── lib/                               React, ReactDOM, Babel (lokal gebündelt)
 ├── sync_www.sh                        Spiegelt root → www/ → ios/ (Capacitor), vor jedem iOS-Build
+├── bugserver.py                       Empfänger für die im Handy gemeldeten Bugs; serviert
+│                                      zugleich die App aus dem Repo-Root (--list / --done / --import)
+├── bugtunnel.sh                       bugserver.py + cloudflared-HTTPS-Tunnel für Tests unterwegs
+├── bugs/bugs.json                     Eingegangene Bug-Meldungen (gitignored)
 ├── www/ · ios/                        Capacitor-Ableitungen (gitignored, nie manuell bearbeiten)
 ├── bibles/
 │   ├── index.json                     Buch-Metadaten und Statistiken
@@ -237,13 +241,38 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-training-history` | Trainingshistorie (letzte 200) |
 | `bible-level-tested` | Einstufungstest absolviert |
 | `bible-bookmarks` | Lesezeichen pro Buch |
-| `bible-font-size` / `-tr` / `-ex` | Schriftgrößen (Bibeltext / Übersetzungen / Übungen) |
+| `bible-font-size` / `-tr` / `-pill` / `-ex` | Schriftgrößen (Bibeltext / Hilfsbibel / Wortübersetzung / Übungen). Das Minus/Plus in den Einstellungen skaliert alle vier proportional (10-%-Schritte, gesperrt sobald ein Wert seine Grenze erreicht); einzeln einstellbar unter „Details". |
+| `bible-line-height` / `-tr` | Zeilenabstände (Bibeltext / Hilfsbibel) — bewusst NICHT Teil der Sammelskalierung, da sie als Verhältniswerte mit der Schrift ohnehin mitwachsen |
 | `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
 | `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel + Häufigkeitsstufe (1–18) |
 | `bible-stats-visible` | Sichtbare Statistik-Abschnitte |
 | `unk-{lang}-{buch}-{kapitel}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
+| `bible-bugs` / `bible-bugmode` / `bible-bug-endpoint` | Bug-Melder: gemeldete Bugs, Ein/Aus-Schalter, Empfänger-Adresse. Ohne LS-Präfix, damit die Liste bibelübergreifend ist; der komplette Reset lässt diese drei Schlüssel als einzige stehen. Siehe `CLAUDE.md` → „Bug-Melder". |
+
+### Bug-Melder (Testwerkzeug)
+
+Zum Testen auf dem Gerät lässt sich auf jeder Ansicht ein 🐞-Knopf einblenden. Ein Tipp öffnet ein
+Formular für Schwere und Beschreibung; automatisch mitgeschrieben werden Ansicht, Buch/Kapitel,
+Bibel-Edition, Gloss-Sprache, Lese-Level, App-Version, Viewport, PWA-Modus und die letzten acht
+JavaScript-Fehler (Ringpuffer `window.__bugLog`, gesetzt vor dem Babel-Block, damit auch Ladefehler
+erfasst werden). Die Meldungen bleiben im Gerät (`localStorage['bible-bugs']`), bis sie übertragen
+sind — für normale Nutzer ist der Knopf unsichtbar.
+
+- **Einschalten:** App-URL einmal mit `?bugs=1` öffnen, oder fünfmal auf die Versionszeile in den
+  Einstellungen tippen (nötig in der vom Homescreen gestarteten PWA, die einen eigenen
+  localStorage hat). `?bugs=0` oder erneut fünf Tipps schalten wieder aus.
+- **Übertragen:** „Speichern & senden" schickt die offenen Bugs per POST an `{Empfänger}/bugs`.
+  Kommt die App vom Empfänger selbst (`bugserver.py` im WLAN oder über den `bugtunnel.sh`-Tunnel),
+  genügt die eigene Herkunft und es braucht keine Adresse; bei Auslieferung über GitHub Pages
+  blockiert der Browser den http-Empfänger (Mixed Content), dann Tunnel-Adresse eintragen oder
+  „Exportieren / Teilen" nutzen (Teilen-Sheet, sonst Zwischenablage/Datei).
+- **Auf dem Mac:** `python3 bugserver.py` nimmt entgegen und schreibt nach `bugs/bugs.json`;
+  `--list` zeigt die offenen, `--done <id>` hakt ab, `--import <datei>` liest eine geteilte Liste ein.
+
+Der Melder überlebt den kompletten Reset in den Entwickler-Einstellungen. Details zum Code und zum
+Arbeitsablauf stehen in `CLAUDE.md` → „Bug-Melder".
 
 ### Deutsche Übersetzungen
 

@@ -24,7 +24,11 @@ Beim Testen kann auf jeder Ansicht ein 🐞-Knopf eingeblendet werden: Bug tippe
 Ansicht/Buch/Kapitel/Version/letzte JS-Fehler werden automatisch mitgespeichert.
 Die Bugs liegen in `localStorage['bible-bugs']` und gehen per POST an `/bugs`.
 
-- **Einschalten am Gerät:** App-URL einmal mit `?bugs=1` öffnen (bleibt an), `?bugs=0` schaltet aus
+- **Einschalten am Gerät:** App-URL einmal mit `?bugs=1` öffnen (bleibt an), `?bugs=0` schaltet aus.
+  In einer vom Homescreen gestarteten PWA geht das nicht (eigener localStorage) — dort fünfmal auf
+  die Versionszeile unten in den Einstellungen tippen; dieselben fünf Tipps schalten ihn wieder aus
+- **Der komplette Reset (Entwickler-Einstellungen) lässt `bible-bugs`, `bible-bugmode` und
+  `bible-bug-endpoint` als einzige Schlüssel stehen** — die Bug-Liste überlebt ihn also
 - **Empfänger auf dem Mac:** `python3 bugserver.py` — serviert zugleich die App aus dem
   Repo-Root; auf dem iPhone `http://<mac-ip>:8765` öffnen, dann braucht der Sync keine Adresse
 - **Eingegangene Bugs:** `bugs/bugs.json` (gitignored) — `--list` zeigt sie, `--done <id>` hakt ab,
