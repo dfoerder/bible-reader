@@ -69,7 +69,7 @@ Jedes Wort hat einen numerischen `familiarity`-Wert (Leitner-Treppe, Wiederholun
 
 ### Vokabeltraining
 
-Einheitlicher Wortpool mit 5.684 Wörtern (A1–C2). Eigennamen (Level A1) sind auf die **wichtigsten mit Lernwert** kuratiert (englische Form ≠ deutsche): Bibelbuch-Autoren/Propheten, Erzväter, Könige, Apostel, Kernorte — obskure Namen (Genealogien) wurden entfernt (v1.9.53b: +710 Eigennamen ergänzt, später auf ~90 relevante reduziert):
+Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind auf die **wichtigsten mit Lernwert** kuratiert (englische Form ≠ deutsche): Bibelbuch-Autoren/Propheten, Erzväter, Könige, Apostel, Kernorte — obskure Namen (Genealogien) wurden entfernt (v1.9.53b: +710 Eigennamen ergänzt, später auf ~90 relevante reduziert):
 
 **CEFR-Level-Quellen** (Priorität):
 1. Oxford 5000 (2.654 Wörter, handkuratiert)
@@ -133,7 +133,7 @@ Einheitlicher Wortpool mit 5.684 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 
 ```
 bible-reader/
-├── index.html                         Haupt-App (React + Babel, ~3000 Zeilen)
+├── index.html                         Haupt-App (React + Babel, ~5.250 Zeilen)
 ├── sw.js                              Service Worker (Offline-Caching)
 ├── manifest.json                      PWA-Manifest
 ├── icon-192.png / icon-512.png        App-Icons
@@ -144,24 +144,23 @@ bible-reader/
 ├── bugtunnel.sh                       bugserver.py + cloudflared-HTTPS-Tunnel für Tests unterwegs
 ├── bugs/bugs.json                     Eingegangene Bug-Meldungen (gitignored)
 ├── www/ · ios/                        Capacitor-Ableitungen (gitignored, nie manuell bearbeiten)
-├── bibles/
+├── bibles/                            Alles zu einer Bibel-Edition liegt beisammen: Text,
+│   │                                  Annotationen und Trainingsdaten. Die Pfade stehen in der
+│   │                                  BIBLES-Registry in index.html (annoDir/wordsPath/examplesPath).
 │   ├── index.json                     Buch-Metadaten und Statistiken
-│   ├── eng/web/
+│   ├── eng/web/                       English (WEB) — Lesen, Glossen, Training, Einstufungstest
 │   │   ├── {nr}_web.json              Bibeltext (66 Dateien)
-│   │   ├── anno/
-│   │   │   └── {nr}_web_deu.json      Annotationen (66 Dateien)
-│   │   └── web_deu/
-│   │       └── {nr}_web_deu.json      Wörtliche DE-Übersetzung (66 Dateien)
-│   ├── deu/
-│   │   └── l1912mod/                  Luther 1912 modernisiert (66 Dateien)
-│   └── fra/ · ita/ · spa/             lsg1910, riv1927, rv1909 (+ mod-Varianten) —
-│                                      vorbereitet für Version 2, von der App noch nicht genutzt
-├── data/
-│   ├── words.json                     Single Source of Truth: Vokabel-Pool + Lückentext-
-│   │                                  Übungen (5.684 Wörter; VOCAB_POOL + CLOZE_EXERCISES
-│   │                                  werden daraus abgeleitet)
-│   ├── examples.json                  Beispielsätze-Index (Lemma → Vers-Referenzen, 207 KB, lazy)
-│   └── vocab_pool.json / context_exercises.json   Lokale Build-Intermediates (gitignored)
+│   │   ├── anno/{nr}_web_deu.json     Annotationen, Glossen in de/es/fr/it (66 Dateien)
+│   │   ├── web_deu/{nr}_web_deu.json  Wörtliche DE-Übersetzung (66 Dateien)
+│   │   └── train/
+│   │       ├── words.json             Single Source of Truth: Vokabel-Pool + Lückentext-Übungen
+│   │       │                          (5.615 Wörter über A1–C2; VOCAB_POOL + CLOZE_EXERCISES
+│   │       │                          werden daraus abgeleitet)
+│   │       ├── examples.json          Beispielsätze-Index (Lemma → Vers-Referenzen, 207 KB, lazy)
+│   │       └── vocab_pool.json · context_exercises.json   Build-Intermediates (gitignored)
+│   ├── spa/rv1909mod/                 Español — wie eng/web mit anno/ (Glossen en) und train/
+│   ├── spa/rv1909 · fra/lsg1910mod · ita/riv1927mod   Nur Lesen (keine Annotationen/Training)
+│   └── deu/l1912mod/                  Luther 1912 modernisiert, mit anno/ als Hilfsbibel
 ├── generate_training_data.js          Generiert words.json aus Annotationen
 │                                      (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
 ├── generate_pos.py / generate_deform.py / generate_examples.py
@@ -358,6 +357,6 @@ Die Version trägt bis auf Weiteres den Suffix `b` (Beta).
 - **755.526 Wörter** im Bibeltext
 - **~30.000 Eigennamen-Annotationen** mit deutschen Entsprechungen
 - **5.087 einzigartige Lemmata** (nach Filterung und Zusammenführung)
-- **Einheitlicher Vokabelpool:** 5.684 Wörter (A1: 1.063, A2: 548, B1: 798, B2: 1.503, C1: 1.208, C2: 564) — Eigennamen auf die wichtigsten mit Lernwert kuratiert (obskure entfernt, fehlende wichtige wie Moses/Jeremiah/Elia ergänzt)
+- **Einheitlicher Vokabelpool:** 5.615 Wörter (A1: 1.063, A2: 544, B1: 792, B2: 1.499, C1: 1.185, C2: 532) — Eigennamen auf die wichtigsten mit Lernwert kuratiert (obskure entfernt, fehlende wichtige wie Moses/Jeremiah/Elia ergänzt)
 - **CEFR-Quellen:** Oxford 5000 (2.654), Kaggle CEFR (945), Opus 4.7 (1.488); Rest: Eigennamen und Pool-Erweiterungen (v1.9.53b–58b)
 - **2 deutsche Übersetzungen:** Luther 1912 mod, Wörtlich WEB→DE
