@@ -4081,13 +4081,19 @@ function App({data}){
             <div style={{marginTop:8}}>
               <button onClick={async()=>{
                 if(!confirmFullReset){setConfirmFullReset(true);return;}
+                // Der Bug-Melder überlebt den Reset: gemeldete Bugs, sein Schalter
+                // und die Empfänger-Adresse sind Testdaten, keine Lerndaten — sonst
+                // wäre die Fehlerliste nach jedem Reset weg.
+                const keepBugs={};
+                BUG_KEEP_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!=null)keepBugs[k]=v}catch(e){}});
                 try{localStorage.clear()}catch(e){}
+                Object.keys(keepBugs).forEach(k=>{try{localStorage.setItem(k,keepBugs[k])}catch(e){}});
                 try{if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}}catch(e){}
                 try{if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}}catch(e){}
                 location.reload();
               }} style={confirmFullReset?{...S.resetBtn}:{...S.navBtn}}>{confirmFullReset?'Wirklich? ALLES löschen (inkl. Lerndaten)':'Kompletter Reset (Test)'}</button>
               {confirmFullReset&&<button onClick={()=>setConfirmFullReset(false)} style={{...S.navBtn,marginLeft:8}}>Abbrechen</button>}
-              <p style={{...S.settingsHint,margin:'4px 0 0'}}>Setzt ALLES zurück wie eine Neuinstallation: App-Sprache, Haupt-/Hilfsbibel, Onboarding, Lern-/Vokabel-Fortschritt UND den Offline-Cache (Service Worker). Behebt auch veraltete gecachte Bibeltexte. Danach erscheint wieder die Sprachauswahl.</p>
+              <p style={{...S.settingsHint,margin:'4px 0 0'}}>Setzt ALLES zurück wie eine Neuinstallation: App-Sprache, Haupt-/Hilfsbibel, Onboarding, Lern-/Vokabel-Fortschritt UND den Offline-Cache (Service Worker). Behebt auch veraltete gecachte Bibeltexte. Danach erscheint wieder die Sprachauswahl. Gemeldete Bugs bleiben erhalten.</p>
             </div>
             <label style={{...S.toggleRow,marginTop:8}}>
               <input type="checkbox" checked={TEST_ACCEL} onChange={()=>{TEST_ACCEL?LS.remove('bible-test-accel'):LS.set('bible-test-accel',true);location.reload();}}/>
@@ -4983,6 +4989,8 @@ function VersionLine(){
 
 const BUGS_KEY='bible-bugs';
 const BUG_EP_KEY='bible-bug-endpoint';
+// Was ein kompletter Reset stehen lässt — die Bug-Liste ist Testmaterial.
+const BUG_KEEP_KEYS=[BUGS_KEY,BUG_EP_KEY,'bible-bugmode'];
 // Kommt die App vom Empfänger selbst (bugserver.py direkt im WLAN oder über den
 // cloudflared-Tunnel), genügt die eigene Herkunft als Ziel. Nur die Pages-
 // Auslieferung braucht eine eingetragene Adresse.
