@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.96b (31.08.2026)
+
+- Schriftgröße: auf Einstellungsseite und in der Leseansicht nur noch ein Minus/Plus, das alle Werte proportional skaliert; Einzelwerte unter „Details"
+
 ## v1.10.95b (31.08.2026)
 
 - Bug-Melder auch ohne URL-Parameter aktivierbar: fünfmal auf die Versionszeile in den Einstellungen tippen; Knopf sitzt höher, damit die Browserleiste ihn nicht verdeckt
