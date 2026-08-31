@@ -4941,6 +4941,10 @@ const S={
 */
 const BUGS_KEY='bible-bugs';
 const BUG_EP_KEY='bible-bug-endpoint';
+// Kommt die App vom Empfänger selbst (bugserver.py direkt im WLAN oder über den
+// cloudflared-Tunnel), genügt die eigene Herkunft als Ziel. Nur die Pages-
+// Auslieferung braucht eine eingetragene Adresse.
+const BUG_SAME_ORIGIN=!/(^|\.)github\.io$/i.test(location.hostname);
 const BUG_SEVS=[{id:'blocker',dot:'🔴',label:'Blockiert'},{id:'major',dot:'🟠',label:'Stört'},{id:'minor',dot:'🟡',label:'Kosmetik'}];
 
 function bugLoad(){try{return JSON.parse(localStorage.getItem(BUGS_KEY)||'[]')}catch(e){return[]}}
@@ -4986,9 +4990,10 @@ function BugReporter(){
   const saveEndpoint=v=>{setEndpoint(v);try{v?localStorage.setItem(BUG_EP_KEY,v):localStorage.removeItem(BUG_EP_KEY)}catch(e){}};
 
   const send=async(arr)=>{
-    // Wird die App von bugserver.py ausgeliefert, ist der Empfänger dieselbe
-    // Adresse — dann braucht es gar keinen Eintrag.
-    const ep=(endpoint||'').trim()||(location.protocol==='http:'?location.origin:'');
+    // Wird die App von bugserver.py ausgeliefert (direkt im WLAN oder über den
+    // cloudflared-Tunnel), ist der Empfänger dieselbe Adresse — dann braucht es
+    // gar keinen Eintrag. Nur die GitHub-Pages-Auslieferung kann das nicht.
+    const ep=(endpoint||'').trim()||(BUG_SAME_ORIGIN?location.origin:'');
     if(!ep){setShowList(true);setMsg('Kein Empfänger eingetragen — unten eintragen, z. B. http://192.168.1.42:8765 (oder die App gleich von bugserver.py laden).');return arr}
     const pending=arr.filter(b=>!b.synced);
     if(!pending.length){setMsg('Alles schon übertragen.');return arr}
@@ -5141,9 +5146,9 @@ function BugReporter(){
           <div style={{fontSize:11,color:'var(--t-muted2)',marginTop:4,lineHeight:1.5}}>
             {endpoint.trim()
               ?'Ziel: '+endpoint.trim().replace(/\/+$/,'')+'/bugs'
-              :(location.protocol==='http:'
+              :(BUG_SAME_ORIGIN
                 ?'Leer lassen genügt — die App kam von '+location.origin+', dorthin gehen auch die Bugs.'
-                :'Pflichtfeld, solange die App über HTTPS läuft: ein http-Empfänger ist von hier aus nicht erreichbar.')}
+                :'Nötig, solange die App von GitHub Pages kommt: Tunnel-Adresse eintragen (bugtunnel.sh) oder unten exportieren.')}
           </div>
 
           <div style={{...B.row,flexWrap:'wrap',marginTop:12}}>

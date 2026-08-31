@@ -29,9 +29,13 @@ Die Bugs liegen in `localStorage['bible-bugs']` und gehen per POST an `/bugs`.
   Repo-Root; auf dem iPhone `http://<mac-ip>:8765` öffnen, dann braucht der Sync keine Adresse
 - **Eingegangene Bugs:** `bugs/bugs.json` (gitignored) — `--list` zeigt sie, `--done <id>` hakt ab,
   `--import <datei>` liest eine per AirDrop geteilte Liste ein
-- Läuft die App über HTTPS (GitHub Pages), blockiert Safari den http-Empfänger (Mixed Content):
-  dann entweder über `bugserver.py` testen, eine https-Tunnel-Adresse ins Empfänger-Feld
-  eintragen oder im Melder „Exportieren / Teilen" (AirDrop) nutzen
+- **Unterwegs / Pages-Version:** `./bugtunnel.sh` — startet den Empfänger und einen
+  cloudflared-Quick-Tunnel; die angezeigte `https://…trycloudflare.com/?bugs=1` auf dem iPhone
+  öffnen, dann kommen App und Empfänger wieder von derselben Adresse (Auto-Upload ohne Eintrag).
+  Die Tunnel-Adresse ist öffentlich und wechselt bei jedem Start.
+- Nur wenn die App wirklich von GitHub Pages geladen wird, blockiert Safari den Empfänger
+  (Mixed Content): dann Tunnel-Adresse ins Empfänger-Feld eintragen oder im Melder
+  „Exportieren / Teilen" (AirDrop) + `bugserver.py --import` nutzen
 
 Code: früher Script-Block (Fehler-Ringpuffer `window.__bugLog`, `?bugs=`-Schalter),
 `window.__bugCtx` (von `App` gepflegt) und die Komponente `BugReporter` in `index.html`.
