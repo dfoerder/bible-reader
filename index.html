@@ -388,6 +388,7 @@ const I18N={
   fontSize:{de:'Schriftgröße',en:'Font size'},
   fontSizeTr:{de:'Schriftgröße Übersetzungen',en:'Translation font size'},
   fontSizeEx:{de:'Schriftgröße Übungen',en:'Exercise font size'},
+  fsDetails:{de:'Details',en:'Details'},
   fsBibleText:{de:'Bibeltext',en:'Bible text'},
   fsTranslations:{de:'Deutsche Bibel',en:'German Bible'},
   mainBible:{de:'Hauptbibel',en:'Main Bible'},
@@ -638,6 +639,7 @@ const I18N_ES = {
   fast: 'Rápida',
   veryFast: 'Muy rápida',
   fontSize: 'Tamaño de letra',
+  fsDetails: 'Detalles',
   fontSizeTr: 'Tamaño de letra traducciones',
   fontSizeEx: 'Tamaño de letra ejercicios',
   fsBibleText: 'Texto bíblico',
@@ -885,6 +887,7 @@ const I18N_IT = {
   fast: 'Veloce',
   veryFast: 'Molto veloce',
   fontSize: 'Dimensione carattere',
+  fsDetails: 'Dettagli',
   fontSizeTr: 'Dimensione carattere traduzioni',
   fontSizeEx: 'Dimensione carattere esercizi',
   fsBibleText: 'Testo biblico',
@@ -1123,6 +1126,7 @@ const I18N_FR = {
   fast: 'Rapide',
   veryFast: 'Très rapide',
   fontSize: 'Taille de police',
+  fsDetails: 'Détails',
   fontSizeTr: 'Taille de police des traductions',
   fontSizeEx: 'Taille de police des exercices',
   fsBibleText: 'Texte biblique',
@@ -3021,6 +3025,8 @@ function App({data}){
   const [lineHeightTr,setLineHeightTr]=useState(parseFloat(LS.get('bible-line-height-tr'))||1.6);
   const [fontSizePill,setFontSizePill]=useState(parseInt(LS.get('bible-font-size-pill'))||parseInt(LS.get('bible-font-size-tr'))||14);
   const [fontSizeEx,setFontSizeEx]=useState(exFontSize());
+  const [fontDetails,setFontDetails]=useState(false);          // Detailseite der Schriftgrößen (Einstellungen)
+  const [fontDetailsRead,setFontDetailsRead]=useState(false);  // dito im Einstellungs-Reiter der Leseansicht
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [showExLevel,setShowExLevel]=useState(LS.get('bible-show-ex-level')===true);
@@ -3667,6 +3673,93 @@ function App({data}){
   const changeLineHeightTr=useCallback(v=>{const n=Math.round(v*10)/10;setLineHeightTr(n);LS.set('bible-line-height-tr',n)},[]);
   const changeFontSizePill=useCallback(v=>{setFontSizePill(v);LS.set('bible-font-size-pill',v)},[]);
 
+  // Schriftgrößen: Auf beiden Einstellungsflächen steht nur noch ein Minus/Plus,
+  // das alle sechs Werte proportional in 10-%-Schritten skaliert; die Einzelwerte
+  // stehen unter „Details". Erreicht einer der Werte seine Grenze, bleibt der
+  // ganze Schritt aus — sonst würden sich die Verhältnisse verschieben.
+  const FONT_RANGE={size:[12,30],tr:[10,26],pill:[10,26],ex:[12,30],lh:[1.2,3]};
+  const fontsAtLimit=up=>{
+    const at=(v,r)=>up?v>=r[1]:v<=r[0];
+    return at(fontSize,FONT_RANGE.size)||at(fontSizeTr,FONT_RANGE.tr)||at(fontSizePill,FONT_RANGE.pill)
+      ||at(fontSizeEx,FONT_RANGE.ex)||at(lineHeight,FONT_RANGE.lh)||at(lineHeightTr,FONT_RANGE.lh);
+  };
+  const scaleFonts=up=>{
+    if(fontsAtLimit(up))return;
+    const f=up?1.1:1/1.1;
+    const px=(v,r)=>Math.min(r[1],Math.max(r[0],Math.round(v*f)));
+    const lh=v=>Math.min(FONT_RANGE.lh[1],Math.max(FONT_RANGE.lh[0],Math.round(v*f*10)/10));
+    changeFontSize(px(fontSize,FONT_RANGE.size));
+    changeFontSizeTr(px(fontSizeTr,FONT_RANGE.tr));
+    changeFontSizePill(px(fontSizePill,FONT_RANGE.pill));
+    changeFontSizeEx(px(fontSizeEx,FONT_RANGE.ex));
+    changeLineHeight(lh(lineHeight));
+    changeLineHeightTr(lh(lineHeightTr));
+  };
+  const fontCompactRow=onDetails=>{
+    const minOff=fontsAtLimit(false), maxOff=fontsAtLimit(true);
+    return(<div style={{...S.fontSizeRow,marginTop:8,flexWrap:'wrap'}}>
+      <button disabled={minOff} onClick={()=>scaleFonts(false)} style={{...S.fontSizeBtn,opacity:minOff?0.35:1}}>A−</button>
+      <span style={S.fontSizePreview}>{fontSize}px</span>
+      <button disabled={maxOff} onClick={()=>scaleFonts(true)} style={{...S.fontSizeBtn,opacity:maxOff?0.35:1}}>A+</button>
+      <button onClick={onDetails} style={S.navBtn}>{t('fsDetails')}</button>
+    </div>);
+  };
+  const fontDetailControls=small=>{
+    const lab=mt=>({fontSize:small?13:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:mt});
+    const gap=small?12:16, sub=small?10:14;
+    return(<>
+      <div style={{marginTop:small?4:8}}>
+        <span style={lab(0)}>{t('fsBibleText')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
+          <span style={S.fontSizePreview}>{fontSize}px</span>
+          <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+        </div>
+        {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>}
+        <span style={lab(sub)}>{t('lineSpacing')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeLineHeight(Math.max(1.2,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
+          <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
+          <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
+        </div>
+      </div>
+      <div style={{marginTop:gap}}>
+        <span style={lab(0)}>{t('helperBible')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
+          <span style={S.fontSizePreview}>{fontSizeTr}px</span>
+          <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+        </div>
+        {!small&&<p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:lineHeightTr,color:'var(--t-muted)',marginTop:8}}>{t('fontPreview')}</p>}
+        <span style={lab(sub)}>{t('lineSpacing')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
+          <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
+          <button onClick={()=>changeLineHeightTr(Math.min(3.0,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
+        </div>
+      </div>
+      <div style={{marginTop:gap}}>
+        <span style={lab(0)}>{t('fsWordGloss')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeFontSizePill(Math.max(10,fontSizePill-2))} style={S.fontSizeBtn}>A−</button>
+          <span style={S.fontSizePreview}>{fontSizePill}px</span>
+          <button onClick={()=>changeFontSizePill(Math.min(26,fontSizePill+2))} style={S.fontSizeBtn}>A+</button>
+        </div>
+        {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>beginning <span style={{...S.tr,fontSize:fontSizePill}}>{t('fontPreviewTr')}</span></p>}
+      </div>
+      <div style={{marginTop:gap}}>
+        <span style={lab(0)}>{t('fsExercises')}</span>
+        <div style={{...S.fontSizeRow,marginTop:6}}>
+          <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
+          <span style={S.fontSizePreview}>{fontSizeEx}px</span>
+          <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+        </div>
+        {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>}
+      </div>
+    </>);
+  };
+
+
   const langFooter='World English Bible';
   const otBooks=books.slice(0,ntStartIndex);
   const ntBooks=books.slice(ntStartIndex);
@@ -3933,6 +4026,16 @@ function App({data}){
 
   // ── SETTINGS ──
   if(phase==='settings'){
+    // „Details" führt auf eine eigene Seite mit den Einzelwerten.
+    if(fontDetails)return(<div>
+      <header style={S.header}>
+        <h1 style={S.title}>{t('fontSize')}</h1>
+      </header>
+      <div style={S.navRow}><button onClick={()=>setFontDetails(false)} style={S.navBtn}>{t('back')}</button></div>
+      <div style={S.settingsSection}>
+        <div style={S.settingsGroup}>{fontDetailControls(false)}</div>
+      </div>
+    </div>);
     return(<div>
       <header style={S.header}>
         <h1 style={S.title}>{t('settings')}</h1>
@@ -4070,54 +4173,8 @@ function App({data}){
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('fontSize')}</span>
-          <div style={{marginTop:8}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsBibleText')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSize}px</span>
-              <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:14}}>{t('lineSpacing')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeight(Math.max(1.2,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
-              <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
-            </div>
-          </div>
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('helperBible')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizeTr}px</span>
-              <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:lineHeightTr,color:'var(--t-muted)',marginTop:8}}>{t('fontPreview')}</p>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:14}}>{t('lineSpacing')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
-              <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeightTr(Math.min(3.0,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
-            </div>
-          </div>
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsWordGloss')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizePill(Math.max(10,fontSizePill-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizePill}px</span>
-              <button onClick={()=>changeFontSizePill(Math.min(26,fontSizePill+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>beginning <span style={{...S.tr,fontSize:fontSizePill}}>{t('fontPreviewTr')}</span></p>
-          </div>
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsExercises')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizeEx}px</span>
-              <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
-          </div>
+          {fontCompactRow(()=>setFontDetails(true))}
+          <p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>
         </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('layout')}</span>
@@ -4528,52 +4585,13 @@ function App({data}){
       </div>}
       {chapTab==='settings'&&<div style={{padding:'12px',display:'flex',flexDirection:'column',gap:18}}>
         <div>
-          <span style={S.settingsLabel}>{t('fontSize')}</span>
-          <div style={{marginTop:4}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsBibleText')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSize}px</span>
-              <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:10}}>{t('lineSpacing')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeight(Math.max(1.2,lineHeight-0.2))} style={S.fontSizeBtn}>−</button>
-              <span style={S.fontSizePreview}>{lineHeight.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeight(Math.min(3.0,lineHeight+0.2))} style={S.fontSizeBtn}>+</button>
-            </div>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
+            <span style={S.settingsLabel}>{t('fontSize')}</span>
+            {fontDetailsRead&&<button onClick={()=>setFontDetailsRead(false)} style={S.navBtn}>{t('back')}</button>}
           </div>
-          <div style={{marginTop:12}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('helperBible')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizeTr}px</span>
-              <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginTop:10}}>{t('lineSpacing')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeLineHeightTr(Math.max(1.2,lineHeightTr-0.2))} style={S.fontSizeBtn}>−</button>
-              <span style={S.fontSizePreview}>{lineHeightTr.toFixed(1)}</span>
-              <button onClick={()=>changeLineHeightTr(Math.min(3.0,lineHeightTr+0.2))} style={S.fontSizeBtn}>+</button>
-            </div>
-          </div>
-          <div style={{marginTop:12}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsWordGloss')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizePill(Math.max(10,fontSizePill-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizePill}px</span>
-              <button onClick={()=>changeFontSizePill(Math.min(26,fontSizePill+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-          </div>
-          <div style={{marginTop:12}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('fsExercises')}</span>
-            <div style={{...S.fontSizeRow,marginTop:6}}>
-              <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
-              <span style={S.fontSizePreview}>{fontSizeEx}px</span>
-              <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
-            </div>
-          </div>
+          {fontDetailsRead?fontDetailControls(true):fontCompactRow(()=>setFontDetailsRead(true))}
         </div>
+        {!fontDetailsRead&&<>
         <div>
           <span style={S.settingsLabel}>{t('layout')}</span>
           <div style={S.levelBtns}>{[{k:'classic',i:'layoutClassic'},{k:'icf-light',i:'layoutModernLight'},{k:'icf',i:'layoutModernDark'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
@@ -4613,6 +4631,7 @@ function App({data}){
             <span style={S.speedValue}>{tts.speed.toFixed(2)}×</span>
           </div>
         </div>
+        </>}
       </div>}
       {chapTab==='training'&&(quizWords.length>0?<div style={{padding:'12px'}}>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
