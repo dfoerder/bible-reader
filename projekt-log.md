@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.93b (31.08.2026)
+
+- Bug-Melder für Tests auf dem iPhone: 🐞-Knopf auf jeder Ansicht (nur mit ?bugs=1 sichtbar), Bug-Liste im Gerät, Sync an lokalen bugserver.py
+
 ## v1.10.92b (29.08.2026)
 
 - Die deutsche Bibel (Luther 1912 – Aktualisiert von KI) hat jetzt Wort-für-Wort-Übersetzungen: Jedes Wort lässt sich auf Englisch, Spanisch, Französisch oder Italienisch anzeigen, feste Wendungen auch über getrennte Satzklammern hinweg. Fertig sind das gesamte Neue Testament, die Bücher 1. Mose bis Hiob und die ersten 78 Psalmen — noch nicht annotierte Bücher bleiben normal lesbar.
