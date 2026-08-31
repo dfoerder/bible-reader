@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.97b (31.08.2026)
+
+- Schriftgröße: Zeilenabstände werden vom Sammel-Minus/Plus nicht mehr mitskaliert, sie bleiben den Details vorbehalten
+
 ## v1.10.96b (31.08.2026)
 
 - Schriftgröße: auf Einstellungsseite und in der Leseansicht nur noch ein Minus/Plus, das alle Werte proportional skaliert; Einzelwerte unter „Details"
