@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.94b (31.08.2026)
+
+- Bug-Melder: Auto-Upload auch über HTTPS-Tunnel (bugtunnel.sh), Empfänger-Adresse nur noch bei GitHub-Pages-Auslieferung nötig
+
 ## v1.10.93b (31.08.2026)
 
 - Bug-Melder für Tests auf dem iPhone: 🐞-Knopf auf jeder Ansicht (nur mit ?bugs=1 sichtbar), Bug-Liste im Gerät, Sync an lokalen bugserver.py
