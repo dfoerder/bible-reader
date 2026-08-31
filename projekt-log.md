@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.98b (31.08.2026)
+
+- Kompletter Reset löscht die gemeldeten Bugs nicht mehr mit — Bug-Liste, Melder-Schalter und Empfänger-Adresse bleiben erhalten
+
 ## v1.10.97b (31.08.2026)
 
 - Schriftgröße: Zeilenabstände werden vom Sammel-Minus/Plus nicht mehr mitskaliert, sie bleiben den Details vorbehalten
