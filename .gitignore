@@ -44,3 +44,6 @@ alt/*.xml
 # Einmalige History-Bereinigung (Maintenance-Artefakte, nicht versionieren)
 rewrite_history.sh
 purge_paths.txt
+
+# Lokale Bug-Meldungen vom Test-iPhone (bugserver.py)
+bugs/

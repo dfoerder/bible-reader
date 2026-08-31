@@ -18,6 +18,24 @@ Deploy mit `./deploy.sh "Changelog-Zeile"` — bumpt Version/Cache, schreibt den
 
 Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacitor). `www/` und `ios/` nie manuell bearbeiten.
 
+## Bug-Melder (Testen auf dem iPhone)
+
+Beim Testen kann auf jeder Ansicht ein 🐞-Knopf eingeblendet werden: Bug tippen,
+Ansicht/Buch/Kapitel/Version/letzte JS-Fehler werden automatisch mitgespeichert.
+Die Bugs liegen in `localStorage['bible-bugs']` und gehen per POST an `/bugs`.
+
+- **Einschalten am Gerät:** App-URL einmal mit `?bugs=1` öffnen (bleibt an), `?bugs=0` schaltet aus
+- **Empfänger auf dem Mac:** `python3 bugserver.py` — serviert zugleich die App aus dem
+  Repo-Root; auf dem iPhone `http://<mac-ip>:8765` öffnen, dann braucht der Sync keine Adresse
+- **Eingegangene Bugs:** `bugs/bugs.json` (gitignored) — `--list` zeigt sie, `--done <id>` hakt ab,
+  `--import <datei>` liest eine per AirDrop geteilte Liste ein
+- Läuft die App über HTTPS (GitHub Pages), blockiert Safari den http-Empfänger (Mixed Content):
+  dann entweder über `bugserver.py` testen, eine https-Tunnel-Adresse ins Empfänger-Feld
+  eintragen oder im Melder „Exportieren / Teilen" (AirDrop) nutzen
+
+Code: früher Script-Block (Fehler-Ringpuffer `window.__bugLog`, `?bugs=`-Schalter),
+`window.__bugCtx` (von `App` gepflegt) und die Komponente `BugReporter` in `index.html`.
+
 ## Architektur
 
 **Eine einzige Datei:** `index.html` enthält die gesamte App (React via Babel-Standalone, kein Build-Schritt). Kein Framework-Overhead, kein npm run.

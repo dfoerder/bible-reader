@@ -132,6 +132,35 @@ function toggleViewMode(){
     }
   }
 })();
+
+/* ── Bug-Melder: Fehler-Mitschnitt + Sichtbarkeit ──────────────────────────
+   Läuft bewusst vor dem Babel-Block, damit auch Ladefehler erfasst werden.
+   Ringpuffer der letzten 20 Fehler; wird jedem Bug-Report angehängt.
+   Sichtbar wird der Melder nur mit ?bugs=1 (bleibt dann per localStorage an,
+   ?bugs=0 schaltet ihn wieder aus). */
+window.__bugLog=[];
+function __bugPush(kind,msg){
+  try{
+    window.__bugLog.push({t:new Date().toISOString(),kind:kind,msg:String(msg).slice(0,400)});
+    if(window.__bugLog.length>20)window.__bugLog.shift();
+  }catch(e){}
+}
+window.addEventListener('error',function(e){__bugPush('error',(e.message||'Fehler')+' @ '+(e.filename||'').split('/').pop()+':'+(e.lineno||''))});
+window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.reason&&e.reason.message)||e.reason)});
+(function(){
+  var ce=console.error;
+  console.error=function(){
+    try{__bugPush('console',Array.prototype.map.call(arguments,function(a){return (a&&a.message)?a.message:String(a)}).join(' '))}catch(e){}
+    ce.apply(console,arguments);
+  };
+})();
+(function(){
+  try{
+    var p=new URLSearchParams(location.search).get('bugs');
+    if(p==='1')localStorage.setItem('bible-bugmode','1');
+    if(p==='0')localStorage.removeItem('bible-bugmode');
+  }catch(e){}
+})();
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
@@ -3254,6 +3283,16 @@ function App({data}){
   const currentBook=books[bookIdx];
   const bookName=currentBook?.name||'';
   const bookNr=currentBook?.nr;
+  // Kontext für den Bug-Melder: welche Ansicht war offen, als der Bug auftrat.
+  // BugReporter läuft in einem eigenen React-Root und liest hier mit.
+  useEffect(()=>{
+    window.__bugCtx={
+      phase, bible:INSTANCE.id,
+      book:phase==='reading'||phase==='quiz'?bookName:null,
+      chapter:phase==='reading'||phase==='quiz'?chapIdx+1:null,
+      gloss:glossLang||null, uiLang, level:SUBSTEPS[userStep]||String(userStep),
+    };
+  },[phase,bookName,chapIdx,glossLang,uiLang,userStep]);
   // Glossen werden aus den rohen Annotationen in der Sprache der Hilfsbibel
   // abgeleitet (deriveAnnoChapters). Gibt es dafür kein Gloss-Feld, ist das
   // Ergebnis leer → hasAnno=false → reines Lesen ohne Glossen/Quiz.
@@ -4889,6 +4928,257 @@ const S={
   toggleRow:{display:'flex',alignItems:'center',gap:10,padding:'6px 0',cursor:'pointer'},
   toggleLabel:{fontSize:14,color:'var(--t-text2)',fontFamily:sans},
 };
+
+/* ══ Bug-Melder (Testwerkzeug) ═════════════════════════════════════════════
+   Auf jeder Ansicht ein 🐞-Knopf: Bug erfassen, ohne den Test zu unterbrechen.
+   Automatisch mitgeschrieben werden Ansicht/Buch/Kapitel/Bibel-Edition, Level,
+   App-Version, Viewport, PWA-Modus und die letzten JS-Fehler (__bugLog).
+   Speicher: localStorage['bible-bugs'] (bibelübergreifend, ohne LS-Präfix).
+   Übertragung: POST an {endpoint}/bugs (bugserver.py auf dem Mac) oder Export
+   per Teilen-Sheet/Zwischenablage.
+   Ein-/ausschalten: URL-Parameter ?bugs=1 bzw. ?bugs=0 (siehe früher Script-
+   Block); der Melder ist damit für normale Nutzer unsichtbar.
+*/
+const BUGS_KEY='bible-bugs';
+const BUG_EP_KEY='bible-bug-endpoint';
+const BUG_SEVS=[{id:'blocker',dot:'🔴',label:'Blockiert'},{id:'major',dot:'🟠',label:'Stört'},{id:'minor',dot:'🟡',label:'Kosmetik'}];
+
+function bugLoad(){try{return JSON.parse(localStorage.getItem(BUGS_KEY)||'[]')}catch(e){return[]}}
+function bugStore(l){try{localStorage.setItem(BUGS_KEY,JSON.stringify(l))}catch(e){}}
+function bugSnapshot(){
+  const c=window.__bugCtx||{};
+  return{...c,
+    version:APP_VERSION,
+    url:location.href,
+    viewport:window.innerWidth+'×'+window.innerHeight,
+    standalone:!!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone),
+    ua:navigator.userAgent,
+    errors:(window.__bugLog||[]).slice(-8)};
+}
+function bugCtxLine(c){
+  if(!c)return '';
+  const p=[c.phase||'?'];
+  if(c.book)p.push(c.book+' '+c.chapter);
+  if(c.bible)p.push(c.bible);
+  p.push('v'+(c.version||APP_VERSION));
+  return p.join(' · ');
+}
+
+function BugReporter(){
+  const [open,setOpen]=useState(false);
+  const [list,setList]=useState(bugLoad);
+  const [text,setText]=useState('');
+  const [sev,setSev]=useState('major');
+  const [ctx,setCtx]=useState(null);
+  const [showList,setShowList]=useState(false);
+  const [expanded,setExpanded]=useState(null);
+  const [endpoint,setEndpoint]=useState(()=>{try{return localStorage.getItem(BUG_EP_KEY)||''}catch(e){return''}});
+  const [msg,setMsg]=useState('');
+  const [busy,setBusy]=useState(false);
+  const [confirm,setConfirm]=useState(null); // 'clear' | 'hide' | {del:id}
+
+  const openCount=list.filter(b=>!b.synced).length;
+  const persist=l=>{setList(l);bugStore(l)};
+
+  const openPanel=()=>{setCtx(bugSnapshot());setMsg('');setConfirm(null);setOpen(true)};
+  const closePanel=()=>{setOpen(false);setText('');setShowList(false);setExpanded(null);setConfirm(null)};
+
+  const saveEndpoint=v=>{setEndpoint(v);try{v?localStorage.setItem(BUG_EP_KEY,v):localStorage.removeItem(BUG_EP_KEY)}catch(e){}};
+
+  const send=async(arr)=>{
+    // Wird die App von bugserver.py ausgeliefert, ist der Empfänger dieselbe
+    // Adresse — dann braucht es gar keinen Eintrag.
+    const ep=(endpoint||'').trim()||(location.protocol==='http:'?location.origin:'');
+    if(!ep){setShowList(true);setMsg('Kein Empfänger eingetragen — unten eintragen, z. B. http://192.168.1.42:8765 (oder die App gleich von bugserver.py laden).');return arr}
+    const pending=arr.filter(b=>!b.synced);
+    if(!pending.length){setMsg('Alles schon übertragen.');return arr}
+    setBusy(true);setMsg('Übertrage '+pending.length+' …');
+    try{
+      // text/plain vermeidet den CORS-Preflight; bugserver.py beantwortet OPTIONS trotzdem.
+      const res=await fetch(ep.replace(/\/+$/,'')+'/bugs',{method:'POST',
+        headers:{'Content-Type':'text/plain;charset=UTF-8'},
+        body:JSON.stringify({app:APP_VERSION,sent:new Date().toISOString(),bugs:pending})});
+      if(!res.ok)throw new Error('HTTP '+res.status);
+      const ids=new Set(pending.map(b=>b.id));
+      const next=arr.map(b=>ids.has(b.id)?{...b,synced:true}:b);
+      persist(next);
+      setMsg('✓ '+pending.length+' Bug(s) auf dem Mac angekommen.');
+      return next;
+    }catch(e){
+      const mixed=location.protocol==='https:'&&/^http:/.test(ep);
+      setMsg('✗ Nicht übertragen ('+e.message+'). '+(mixed
+        ?'Die Seite läuft über HTTPS und darf keinen http-Empfänger aufrufen. Zum Testen die App über http://<mac-ip>:8080 öffnen oder eine https-Tunnel-Adresse eintragen.'
+        :'Läuft bugserver.py, und ist das iPhone im selben WLAN? Die Bugs bleiben gespeichert.'));
+      return arr;
+    }finally{setBusy(false)}
+  };
+
+  const saveBug=async(alsoSend)=>{
+    const body=text.trim();
+    if(!body){setMsg('Bitte kurz beschreiben, was passiert ist.');return}
+    const bug={id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7),
+      ts:new Date().toISOString(),sev,text:body,ctx:ctx||bugSnapshot(),synced:false};
+    const next=[bug,...list];
+    persist(next);
+    setText('');
+    setMsg('✓ Gespeichert ('+next.filter(b=>!b.synced).length+' offen)');
+    if(alsoSend)await send(next);
+  };
+
+  const exportBugs=async()=>{
+    const json=JSON.stringify(list,null,2);
+    try{
+      const file=new File([json],'bugs.json',{type:'application/json'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:'Bug-Liste'});
+        setMsg('Geteilt.');return;
+      }
+    }catch(e){/* Teilen abgebrochen oder nicht unterstützt → Zwischenablage */}
+    try{await navigator.clipboard.writeText(json);setMsg('Liste in die Zwischenablage kopiert.');}
+    catch(e){
+      const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+      const a=document.createElement('a');a.href=url;a.download='bugs.json';a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),5000);
+      setMsg('Als Datei gespeichert.');
+    }
+  };
+
+  const B={
+    sheet:{background:'var(--t-card-solid)',color:'var(--t-text)',fontFamily:sans,width:'100%',maxWidth:460,
+      maxHeight:'88vh',overflowY:'auto',borderRadius:16,padding:'16px 16px calc(16px + env(safe-area-inset-bottom))',
+      boxShadow:'0 8px 40px rgba(0,0,0,0.35)'},
+    label:{fontSize:12,color:'var(--t-muted)',textTransform:'uppercase',letterSpacing:'0.06em',margin:'14px 0 6px'},
+    input:{width:'100%',boxSizing:'border-box',fontFamily:sans,fontSize:16,padding:'10px 12px',
+      borderRadius:8,border:'1px solid var(--t-border)',background:'var(--t-card)',color:'var(--t-text)'},
+    primary:{flex:1,padding:'12px 16px',borderRadius:10,border:'none',background:'var(--t-primary)',
+      color:'var(--t-primary-text)',fontSize:15,fontWeight:600,fontFamily:sans,cursor:'pointer'},
+    ghost:{padding:'10px 14px',borderRadius:10,border:'1px solid var(--t-border)',background:'transparent',
+      color:'var(--t-text2)',fontSize:14,fontFamily:sans,cursor:'pointer'},
+    row:{display:'flex',gap:8,alignItems:'center'},
+  };
+
+  if(!open)return(
+    <button onClick={openPanel} aria-label="Bug melden" style={{position:'fixed',right:14,
+      bottom:'calc(14px + env(safe-area-inset-bottom))',width:44,height:44,borderRadius:'50%',
+      border:'1px solid var(--t-border2)',background:'var(--t-card-solid)',opacity:0.8,fontSize:20,
+      lineHeight:'42px',textAlign:'center',padding:0,cursor:'pointer',zIndex:10000,
+      boxShadow:'0 2px 10px rgba(0,0,0,0.25)'}}>
+      🐞{openCount>0&&<span style={{position:'absolute',top:-4,right:-4,minWidth:18,height:18,borderRadius:9,
+        background:'var(--t-accent)',color:'#fff',fontSize:11,lineHeight:'18px',fontWeight:700,padding:'0 4px'}}>{openCount}</span>}
+    </button>);
+
+  return(
+    <div onClick={closePanel} style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',display:'flex',
+      alignItems:'flex-end',justifyContent:'center',zIndex:10000,padding:8}}>
+      <div onClick={e=>e.stopPropagation()} style={B.sheet}>
+
+        <div style={{...B.row,justifyContent:'space-between'}}>
+          <strong style={{fontSize:17,color:'var(--t-title)'}}>Bug melden</strong>
+          <button onClick={closePanel} style={{...B.ghost,padding:'4px 10px',fontSize:18}}>×</button>
+        </div>
+        <div style={{fontSize:12,color:'var(--t-muted)',marginTop:6}}>Ansicht: {bugCtxLine(ctx)}</div>
+
+        <div style={B.label}>Schwere</div>
+        <div style={B.row}>
+          {BUG_SEVS.map(s=>(
+            <button key={s.id} onClick={()=>setSev(s.id)} style={{...B.ghost,flex:1,
+              borderColor:sev===s.id?'var(--t-primary)':'var(--t-border)',
+              background:sev===s.id?'var(--t-card)':'transparent',
+              fontWeight:sev===s.id?600:400}}>{s.dot} {s.label}</button>
+          ))}
+        </div>
+
+        <div style={B.label}>Was ist passiert?</div>
+        <textarea value={text} onChange={e=>setText(e.target.value)} rows={4}
+          placeholder="z. B. Nach Tippen auf ein Wort bleibt das Gloss-Fenster leer"
+          style={{...B.input,resize:'vertical'}}/>
+
+        <div style={{...B.row,marginTop:12}}>
+          <button disabled={busy} onClick={()=>saveBug(false)} style={B.primary}>Speichern</button>
+          <button disabled={busy} onClick={()=>saveBug(true)} style={{...B.primary,background:'var(--t-card)',color:'var(--t-text)',border:'1px solid var(--t-border)'}}>Speichern &amp; senden</button>
+        </div>
+
+        {msg&&<div style={{fontSize:13,color:'var(--t-text2)',marginTop:10,lineHeight:1.5}}>{msg}</div>}
+
+        <div style={{...B.row,justifyContent:'space-between',marginTop:16,paddingTop:12,borderTop:'1px solid var(--t-border)'}}>
+          <button onClick={()=>setShowList(v=>!v)} style={{...B.ghost,border:'none',padding:'4px 0',fontWeight:600}}>
+            {showList?'▾':'▸'} Gemeldete Bugs ({list.length}{openCount?', '+openCount+' offen':''})
+          </button>
+          {list.length>0&&<button disabled={busy} onClick={()=>send(list)} style={{...B.ghost,padding:'6px 12px'}}>Alle senden</button>}
+        </div>
+
+        {showList&&<div style={{marginTop:8}}>
+          {list.length===0&&<div style={{fontSize:13,color:'var(--t-muted)'}}>Noch nichts gemeldet.</div>}
+          {list.map(b=>{
+            const s=BUG_SEVS.find(x=>x.id===b.sev)||BUG_SEVS[1];
+            const isOpen=expanded===b.id;
+            return(<div key={b.id} style={{borderBottom:'1px solid var(--t-border3)',padding:'8px 0'}}>
+              <div onClick={()=>setExpanded(isOpen?null:b.id)} style={{...B.row,cursor:'pointer',gap:8}}>
+                <span>{s.dot}</span>
+                <span style={{flex:1,fontSize:14,color:'var(--t-text2)',overflow:'hidden',textOverflow:'ellipsis',
+                  whiteSpace:isOpen?'normal':'nowrap'}}>{b.text}</span>
+                <span style={{fontSize:11,color:b.synced?'var(--t-green)':'var(--t-accent)'}}>{b.synced?'✓':'•'}</span>
+              </div>
+              {isOpen&&<div style={{fontSize:12,color:'var(--t-muted)',marginTop:6,lineHeight:1.6}}>
+                <div>{new Date(b.ts).toLocaleString('de-DE')} — {bugCtxLine(b.ctx)}</div>
+                {b.ctx&&b.ctx.errors&&b.ctx.errors.length>0&&<div style={{marginTop:4,color:'var(--t-accent)'}}>
+                  {b.ctx.errors.length} JS-Fehler mitgeschrieben: {b.ctx.errors[b.ctx.errors.length-1].msg}
+                </div>}
+                <div style={{marginTop:6}}>
+                  {confirm&&confirm.del===b.id
+                    ?<span>Wirklich löschen?
+                       <button onClick={()=>{persist(list.filter(x=>x.id!==b.id));setConfirm(null)}} style={{...B.ghost,padding:'2px 10px',marginLeft:8}}>Ja</button>
+                       <button onClick={()=>setConfirm(null)} style={{...B.ghost,padding:'2px 10px',marginLeft:6}}>Nein</button></span>
+                    :<button onClick={()=>setConfirm({del:b.id})} style={{...B.ghost,padding:'2px 10px'}}>Löschen</button>}
+                </div>
+              </div>}
+            </div>);
+          })}
+
+          <div style={B.label}>Empfänger auf dem Mac</div>
+          <input value={endpoint} onChange={e=>saveEndpoint(e.target.value)} placeholder="http://192.168.1.42:8765"
+            autoCapitalize="off" autoCorrect="off" spellCheck={false} style={B.input}/>
+          <div style={{fontSize:11,color:'var(--t-muted2)',marginTop:4,lineHeight:1.5}}>
+            {endpoint.trim()
+              ?'Ziel: '+endpoint.trim().replace(/\/+$/,'')+'/bugs'
+              :(location.protocol==='http:'
+                ?'Leer lassen genügt — die App kam von '+location.origin+', dorthin gehen auch die Bugs.'
+                :'Pflichtfeld, solange die App über HTTPS läuft: ein http-Empfänger ist von hier aus nicht erreichbar.')}
+          </div>
+
+          <div style={{...B.row,flexWrap:'wrap',marginTop:12}}>
+            <button onClick={exportBugs} style={B.ghost}>Exportieren / Teilen</button>
+            {confirm==='clear'
+              ?<span style={{fontSize:13}}>Übertragene löschen?
+                 <button onClick={()=>{persist(list.filter(b=>!b.synced));setConfirm(null)}} style={{...B.ghost,padding:'2px 10px',marginLeft:8}}>Ja</button>
+                 <button onClick={()=>setConfirm(null)} style={{...B.ghost,padding:'2px 10px',marginLeft:6}}>Nein</button></span>
+              :<button onClick={()=>setConfirm('clear')} style={B.ghost}>Übertragene löschen</button>}
+            {confirm==='hide'
+              ?<span style={{fontSize:13}}>Melder ausblenden?
+                 <button onClick={()=>{try{localStorage.removeItem('bible-bugmode')}catch(e){};location.reload()}} style={{...B.ghost,padding:'2px 10px',marginLeft:8}}>Ja</button>
+                 <button onClick={()=>setConfirm(null)} style={{...B.ghost,padding:'2px 10px',marginLeft:6}}>Nein</button></span>
+              :<button onClick={()=>setConfirm('hide')} style={B.ghost}>Melder ausblenden</button>}
+          </div>
+          <div style={{fontSize:11,color:'var(--t-muted2)',marginTop:8,lineHeight:1.5}}>
+            Wieder einschalten mit ?bugs=1 an der App-URL.
+          </div>
+        </div>}
+      </div>
+    </div>);
+}
+
+// Eigener React-Root direkt am body: so bleibt der Knopf über allen Phasen der
+// App sichtbar (App rendert je Phase ein eigenes Fragment) und überlebt auch,
+// wenn das Laden der Bibeldaten fehlschlägt.
+(function mountBugReporter(){
+  let on=false;
+  try{on=localStorage.getItem('bible-bugmode')==='1'}catch(e){}
+  if(!on)return;
+  const el=document.createElement('div');
+  el.id='bugroot';
+  document.body.appendChild(el);
+  ReactDOM.createRoot(el).render(<BugReporter/>);
+})();
 
 loadData().then(data=>{
   if(!data.en.available)throw new Error('No bible data found');
