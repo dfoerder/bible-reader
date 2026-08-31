@@ -3674,26 +3674,25 @@ function App({data}){
   const changeFontSizePill=useCallback(v=>{setFontSizePill(v);LS.set('bible-font-size-pill',v)},[]);
 
   // Schriftgrößen: Auf beiden Einstellungsflächen steht nur noch ein Minus/Plus,
-  // das alle sechs Werte proportional in 10-%-Schritten skaliert; die Einzelwerte
-  // stehen unter „Details". Erreicht einer der Werte seine Grenze, bleibt der
-  // ganze Schritt aus — sonst würden sich die Verhältnisse verschieben.
+  // das die vier Schriftgrößen proportional in 10-%-Schritten skaliert; die
+  // Einzelwerte stehen unter „Details". Die Zeilenabstände sind Verhältniswerte
+  // und wachsen mit der Schrift ohnehin mit — sie bleiben deshalb außen vor und
+  // werden nur in den Details verstellt. Erreicht eine der Größen ihre Grenze,
+  // bleibt der ganze Schritt aus, sonst verschöben sich die Verhältnisse.
   const FONT_RANGE={size:[12,30],tr:[10,26],pill:[10,26],ex:[12,30],lh:[1.2,3]};
   const fontsAtLimit=up=>{
     const at=(v,r)=>up?v>=r[1]:v<=r[0];
-    return at(fontSize,FONT_RANGE.size)||at(fontSizeTr,FONT_RANGE.tr)||at(fontSizePill,FONT_RANGE.pill)
-      ||at(fontSizeEx,FONT_RANGE.ex)||at(lineHeight,FONT_RANGE.lh)||at(lineHeightTr,FONT_RANGE.lh);
+    return at(fontSize,FONT_RANGE.size)||at(fontSizeTr,FONT_RANGE.tr)
+      ||at(fontSizePill,FONT_RANGE.pill)||at(fontSizeEx,FONT_RANGE.ex);
   };
   const scaleFonts=up=>{
     if(fontsAtLimit(up))return;
     const f=up?1.1:1/1.1;
     const px=(v,r)=>Math.min(r[1],Math.max(r[0],Math.round(v*f)));
-    const lh=v=>Math.min(FONT_RANGE.lh[1],Math.max(FONT_RANGE.lh[0],Math.round(v*f*10)/10));
     changeFontSize(px(fontSize,FONT_RANGE.size));
     changeFontSizeTr(px(fontSizeTr,FONT_RANGE.tr));
     changeFontSizePill(px(fontSizePill,FONT_RANGE.pill));
     changeFontSizeEx(px(fontSizeEx,FONT_RANGE.ex));
-    changeLineHeight(lh(lineHeight));
-    changeLineHeightTr(lh(lineHeightTr));
   };
   const fontCompactRow=onDetails=>{
     const minOff=fontsAtLimit(false), maxOff=fontsAtLimit(true);
