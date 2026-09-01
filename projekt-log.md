@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.1b (01.09.2026)
+
+- Audiomenü: auch den Rücksprung-Pfeil entfernt — nur noch Vers vor/zurück und Tempo
+
 ## v1.11.0b (01.09.2026)
 
 - Versionsschema: letzte Stelle rollt bei 99 über (1.10.100b → 1.11.0b)
