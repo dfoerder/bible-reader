@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.100b (01.09.2026)
+
+- Audio: Vorlesemarke bleibt auch am unteren Rand sichtbar, Kapitelwechsel in der Kopfleiste setzt das Vorlesen fort, Kapitelsprünge aus dem Audiomenü entfernt; Kapiteltitel exakt zentriert und Audio-Knopf bündig rechts
+
 ## v1.10.99b (01.09.2026)
 
 - Statistik-Icons aus Startseite und Leseansicht entfernt (Statistik nur noch über Training → Fortschritt), Menü-Knopf (☰) und 'Wörter üben' unten in der Leseansicht entfernt, Schriftgrößen gelten für alle Hauptbibeln gemeinsam, Audioleiste verdeckt den vorgelesenen Vers nicht mehr
