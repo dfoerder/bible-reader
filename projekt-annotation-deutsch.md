@@ -104,8 +104,8 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 8 (Kap. 19 · 20 · 21) am 01.09.2026: 21 von
-66 Kapiteln**, 398 Verse, 9240 Einträge. `validate.py 23`, `qa.py 23` und
+in Dreierwellen. Stand nach **Paket 9 (Kap. 22 · 23 · 24) am 01.09.2026: 24 von
+66 Kapiteln**, 464 Verse, 10 672 Einträge. `validate.py 23`, `qa.py 23` und
 `hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
 
 Was Jesaja bisher gelehrt hat, steht in `WORTFELD_JESAJA.md` (ein Abschnitt je
@@ -128,6 +128,18 @@ Paket). Die drei Funde mit Reichweite über das Buch hinaus:
   entscheidet nicht die Belegzahl, sondern was die Ausgaben an den beiden Versen
   selbst schreiben** (Paket 8, `Hüfte` in 20,2 gegen 21,3). `konsistenz.py` sieht
   zwei belegte Reihen und schweigt — dieser Fall ist nur beim Einsammeln zu finden.
+- **Dasselbe Kriterium sagt auch, wann eine Divergenz stehen bleiben muss.**
+  Paket 9 brauchte deshalb **keine einzige Angleichung**: `in der Höhe` trägt in
+  22,16 und 24,21 zwei verschiedene Reihen, und beide sind richtig — die Stellen
+  meinen die Felsgruft gegen den Himmelsbereich, der Bestand spaltet selbst so,
+  und die drei romanischen Ausgaben schreiben in 24,21 wörtlich, was dort steht.
+- **Ein gemeldeter „Bestandsbefund" ist erst dann ein Auftrag, wenn die
+  Auszählung zeigt, dass eine Seite *falsch* ist — nicht nur seltener.** Paket 9
+  brachte beides an einer einzigen Wendung: italienisch `dei eserciti` war
+  ungrammatisch (5 Stellen, alle Jesaja, korpusweit auf `degli` korrigiert —
+  die zweite Auflage der Nachbarfalle), englisch `of` gegen `of the` dagegen ist
+  eine offene Entscheidung über 62 Einträge in sieben Büchern und wurde
+  ausdrücklich **nicht** angefasst.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
