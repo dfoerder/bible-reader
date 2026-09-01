@@ -18,12 +18,20 @@ CURRENT_CACHE=$(grep -o 'bible-full-v[0-9]*' sw.js | grep -o '[0-9]*$')
 CURRENT_VER=$(grep -o "APP_VERSION = '[^']*'" index.html | grep -o "'[^']*'" | tr -d "'")
 NEW_CACHE=$((CURRENT_CACHE + 1))
 
-# Bump minor version number (e.g. 1.9.58b → 1.9.59b)
+# Bump minor version number (e.g. 1.9.58b → 1.9.59b).
+# Ab 99 rollt die Stelle über (1.11.99b → 1.12.0b), damit die Version zweistellig
+# bleibt und auch als Text richtig sortiert.
 BASE=$(echo "$CURRENT_VER" | sed "s/b$//")
-MAJOR=$(echo "$BASE" | cut -d. -f1-2)
+MAJOR=$(echo "$BASE" | cut -d. -f1)
+MID=$(echo "$BASE" | cut -d. -f2)
 MINOR=$(echo "$BASE" | cut -d. -f3)
+NEW_MID=$MID
 NEW_MINOR=$((MINOR + 1))
-NEW_VER="${MAJOR}.${NEW_MINOR}b"
+if [ "$NEW_MINOR" -ge 100 ]; then
+  NEW_MID=$((MID + 1))
+  NEW_MINOR=0
+fi
+NEW_VER="${MAJOR}.${NEW_MID}.${NEW_MINOR}b"
 
 TODAY=$(date +"%d.%m.%Y")
 
