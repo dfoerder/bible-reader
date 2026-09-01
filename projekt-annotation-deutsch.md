@@ -103,6 +103,32 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
+**Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
+in Dreierwellen. Stand nach **Paket 8 (Kap. 19 · 20 · 21) am 01.09.2026: 21 von
+66 Kapiteln**, 398 Verse, 9240 Einträge. `validate.py 23`, `qa.py 23` und
+`hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
+
+Was Jesaja bisher gelehrt hat, steht in `WORTFELD_JESAJA.md` (ein Abschnitt je
+Paket). Die drei Funde mit Reichweite über das Buch hinaus:
+
+- **Paket 7 fand 52 falsche italienische Artikel vor `HERR`** — der Bestand
+  stand 1420 : 25 für `il`, und alle 25 Ausreißer waren Jesaja. Ursache ist die
+  **Nachbarfalle**: RIV schreibt *l'Eterno*, die Elision wanderte beim Übertragen
+  mit, und das Nachbarwort wurde nicht angepasst. Französisch (`l' ÉTERNEL`) und
+  spanisch (`el SEÑOR`) sind richtig — **nur italienisch war es falsch**, weil
+  `SIGNORE` konsonantisch anlautet. **Paket 8 hat den Fehler nicht geerbt**
+  (21 von 21 Stellen richtig); die Korrektur hinter dem Einsammeln hat gehalten.
+- **Namen: `belegt.py` und `lexicon.py` schweigen zu Recht und trotzdem gibt es
+  eine Vorlage.** Der l1912mod schreibt Eigennamen nicht durchgehend gleich
+  (`Schinar`/`Sinear`, `Anatot`/`Anathoth`). Verfahren: Lemma folgt der
+  Jesaja-Schreibung, Glossenreihe kommt aus dem Bestand — aber **erst die vier
+  Ausgaben aufschlagen**, denn Lautähnlichkeit ist kein Beweis für denselben
+  Träger (`Lascha` gegen `Lasa` sind zwei verschiedene Orte).
+- **Wo zwei Kapitel einer Welle zwei Bestandsreihen desselben Lemmas wählen,
+  entscheidet nicht die Belegzahl, sondern was die Ausgaben an den beiden Versen
+  selbst schreiben** (Paket 8, `Hüfte` in 20,2 gegen 21,3). `konsistenz.py` sieht
+  zwei belegte Reihen und schweigt — dieser Fall ist nur beim Einsammeln zu finden.
+
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
