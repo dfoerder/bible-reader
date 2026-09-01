@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.0b (01.09.2026)
+
+- Versionsschema: letzte Stelle rollt bei 99 über (1.10.100b → 1.11.0b)
+
 ## v1.10.100b (01.09.2026)
 
 - Audio: Vorlesemarke bleibt auch am unteren Rand sichtbar, Kapitelwechsel in der Kopfleiste setzt das Vorlesen fort, Kapitelsprünge aus dem Audiomenü entfernt; Kapiteltitel exakt zentriert und Audio-Knopf bündig rechts
