@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.10.99b (01.09.2026)
+
+- Statistik-Icons aus Startseite und Leseansicht entfernt (Statistik nur noch über Training → Fortschritt), Menü-Knopf (☰) und 'Wörter üben' unten in der Leseansicht entfernt, Schriftgrößen gelten für alle Hauptbibeln gemeinsam, Audioleiste verdeckt den vorgelesenen Vers nicht mehr
+
 ## v1.10.98b (31.08.2026)
 
 - Kompletter Reset löscht die gemeldeten Bugs nicht mehr mit — Bug-Liste, Melder-Schalter und Empfänger-Adresse bleiben erhalten

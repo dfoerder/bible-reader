@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.10.98b (31.08.2026)
+- **Aktuelle Version:** 1.10.99b (01.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -123,7 +123,8 @@ Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 - CEFR-Verteilung der Vokabeln mit Sublevel-Aufschlüsselung (Oxford 5000 und Bibel-Vokabular getrennt)
 - Min–max Vorkommen pro Level in der Bibel (z.B. „1–56.635×")
 - Lernfortschritt: bekannte/unbekannte/nicht gesehene Wörter, gelernte und vergessene Wörter
-- **Wortstatistik pro Buch:** 📊-Icon neben jedem Buchnamen in der Navigation. Zeigt beim Klick: Kapitelanzahl, Wörter gesamt, noch nicht angeschaut, bekannte Wörter (davon neu gelernt), unbekannte Wörter (davon vergessen). Annotationen werden lazy geladen.
+- **Zugang:** Die Statistik-Seite wird nur noch über das Training geöffnet (📊 „Fortschritt" im Trainings-Kopf → „Statistik"). In der Startseite und in der Leseansicht erscheint kein Statistik-Icon mehr.
+- **Wortstatistik pro Buch:** In der Statistik-Seite unter „Wörter pro Buch" aufklappbar. Zeigt: Wörter gesamt, bekannte Wörter (davon neu gelernt), unbekannte Wörter (davon vergessen), noch nicht geübte. Annotationen werden lazy geladen.
 
 ---
 
@@ -240,8 +241,8 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-training-history` | Trainingshistorie (letzte 200) |
 | `bible-level-tested` | Einstufungstest absolviert |
 | `bible-bookmarks` | Lesezeichen pro Buch |
-| `bible-font-size` / `-tr` / `-pill` / `-ex` | Schriftgrößen (Bibeltext / Hilfsbibel / Wortübersetzung / Übungen). Das Minus/Plus in den Einstellungen skaliert alle vier proportional (10-%-Schritte, gesperrt sobald ein Wert seine Grenze erreicht); einzeln einstellbar unter „Details". |
-| `bible-line-height` / `-tr` | Zeilenabstände (Bibeltext / Hilfsbibel) — bewusst NICHT Teil der Sammelskalierung, da sie als Verhältniswerte mit der Schrift ohnehin mitwachsen |
+| `bible-font-size` / `-tr` / `-pill` / `-ex` | Schriftgrößen (Bibeltext / Hilfsbibel / Wortübersetzung / Übungen). Das Minus/Plus in den Einstellungen skaliert alle vier proportional (10-%-Schritte, gesperrt sobald ein Wert seine Grenze erreicht); einzeln einstellbar unter „Details". **Ohne Instanz-Präfix gespeichert** — die Schriftgrößen gelten für alle Hauptbibeln gemeinsam (`FONT_LS` in `index.html`; alte, pro Instanz abgelegte Werte werden als Fallback gelesen). |
+| `bible-line-height` / `-tr` | Zeilenabstände (Bibeltext / Hilfsbibel) — bewusst NICHT Teil der Sammelskalierung, da sie als Verhältniswerte mit der Schrift ohnehin mitwachsen; ebenfalls ohne Instanz-Präfix (gilt für alle Hauptbibeln) |
 | `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
 | `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel + Häufigkeitsstufe (1–18) |
