@@ -104,8 +104,8 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 15 (Kap. 40 · 41 · 42) am 02.09.2026:
-42 von 66 Kapiteln**, 851 Verse, 20 267 Einträge. `validate.py 23`, `qa.py 23`,
+in Dreierwellen. Stand nach **Paket 16 (Kap. 43 · 44 · 45) am 02.09.2026:
+45 von 66 Kapiteln**, 932 Verse, 22 400 Einträge. `validate.py 23`, `qa.py 23`,
 `hilfsverb.py 23` und `levelcheck.py` laufen über das gebaute Buch ohne Befund;
 `mehrwort.py 23` meldet zwei Stellen, beide der vom Werkzeug selbst beschriebene
 richtige Fall (8,7 `Ufer` im Plural).
@@ -125,7 +125,17 @@ Stelle **selbst widersprechen** (WEB und RV trennen die beiden Verse, LSG und
 RIV nicht): das Deutsche schreibt beide Male dasselbe Wort, also trägt es
 dieselbe Reihe.
 
-Zweimal hat dasselbe Paket gezeigt, dass `BINDUNGEN_AT.md` **bedeutungsblind**
+**Paket 16 ist die Gegenprobe** und das erste mit drei gleichzeitigen Agenten:
+diesmal standen die Formelwörter, die durch alle drei Kapitel laufen
+(`außer mir gibt es keinen Gott`, `es geben`, `Erlöser`, `der Heilige Israels`),
+**vor dem Start** fest und gingen allen drei Agenten wortgleich in den Prompt.
+`paketcheck.py` meldet für die drei Kapitel in Abschnitt A **null Fälle** — bei
+112 gemeinsamen Inhaltslemmata und 34 neuen. `Kyrus` haben zwei Agenten
+unabhängig identisch geprägt. Der Vergleich ist damit vom Fund zum Verfahren
+geworden: erst festlegen, was über die Kapitelgrenzen läuft, dann bauen, dann
+`paketcheck.py` vor dem Build.
+
+Zweimal hat Paket 15 gezeigt, dass `BINDUNGEN_AT.md` **bedeutungsblind**
 ist, und beide Male stand der Bestand fast genau auf Kante: `Lohn` 32:32
 (*reward* gegen *wages* — 40,10 ist ein Gottesrede-Beleg wie 1Mo 15,1) und
 `Rest` 20:20 (*remnant* gegen *rest* — in Jesaja mit 16 Belegen längst
