@@ -104,8 +104,8 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 16 (Kap. 43 · 44 · 45) am 02.09.2026:
-45 von 66 Kapiteln**, 932 Verse, 22 400 Einträge. `validate.py 23`, `qa.py 23`,
+in Dreierwellen. Stand nach **Paket 17 (Kap. 46 · 47 · 48) am 02.09.2026:
+48 von 66 Kapiteln**, 982 Verse, 23 730 Einträge. `validate.py 23`, `qa.py 23`,
 `hilfsverb.py 23` und `levelcheck.py` laufen über das gebaute Buch ohne Befund;
 `mehrwort.py 23` meldet zwei Stellen, beide der vom Werkzeug selbst beschriebene
 richtige Fall (8,7 `Ufer` im Plural).
@@ -131,7 +131,16 @@ diesmal standen die Formelwörter, die durch alle drei Kapitel laufen
 **vor dem Start** fest und gingen allen drei Agenten wortgleich in den Prompt.
 `paketcheck.py` meldet für die drei Kapitel in Abschnitt A **null Fälle** — bei
 112 gemeinsamen Inhaltslemmata und 34 neuen. `Kyrus` haben zwei Agenten
-unabhängig identisch geprägt. Der Vergleich ist damit vom Fund zum Verfahren
+unabhängig identisch geprägt. **Paket 17 hat das wiederholt** (wieder null
+Fälle) und dafür den ältesten Befund des Verfahrens auf die Spitze getrieben:
+die von mir ausgeschriebene „Formelstelle des Pakets" (`verkünden` ↔ `ansagen`)
+gab es nicht — **`ansagen` steht in keinem der drei Kapitel**, und alle drei
+Agenten haben es unabhängig gemeldet. Über vier Pakete zählt die Statistik
+46 · 12 · 28 · 29 widerlegte Prompt-Hinweise, fast immer derselbe Fehler: im
+Prompt stehen Wörter, die der Quelltext nicht hat. Seit diesem Paket ist das
+maschinell zu prüfen — `promptcheck.py <buchNr> <kapitel …> --datei <prompt.md>`
+hält die in Backticks gesetzten Wörter über einen Stammvergleich gegen die
+Tokens der Kapitel und hat zehn der elf erfundenen Wörter gefunden. Der Vergleich ist damit vom Fund zum Verfahren
 geworden: erst festlegen, was über die Kapitelgrenzen läuft, dann bauen, dann
 `paketcheck.py` vor dem Build.
 
