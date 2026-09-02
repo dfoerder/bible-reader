@@ -104,8 +104,8 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 11 (Kap. 28 · 29 · 30) am 02.09.2026: 30 von
-66 Kapiteln**, 596 Verse, 13 967 Einträge. `validate.py 23`, `qa.py 23` und
+in Dreierwellen. Stand nach **Paket 12 (Kap. 31 · 32 · 33) am 02.09.2026: 33 von
+66 Kapiteln** — die Hälfte —, 649 Verse, 15 153 Einträge. `validate.py 23`, `qa.py 23` und
 `hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
 
 Was Jesaja bisher gelehrt hat, steht in `WORTFELD_JESAJA.md` (ein Abschnitt je
