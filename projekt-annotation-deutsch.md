@@ -104,9 +104,17 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 13 (Kap. 34 · 35) am 02.09.2026: 35 von
-66 Kapiteln**, 676 Verse, 15 816 Einträge. `validate.py 23`, `qa.py 23` und
-`hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
+in Dreierwellen. Stand nach **Paket 14 (Kap. 36 · 37 · 38 · 39) am 02.09.2026:
+39 von 66 Kapiteln**, 766 Verse, 18 237 Einträge. `validate.py 23`, `qa.py 23`
+und `hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
+
+Paket 14 war der Parallelblock zu **2. Könige 18–20** und deshalb als Vierer
+gebaut: es zu teilen hätte geheißen, dieselbe Quelle zweimal zu entscheiden.
+Seine Lehre steht in einem Satz — **von den sieben Versen, die die
+Ähnlichkeitstabelle als „wörtlich" (≥ 0,90) führt, ist genau einer Feld für
+Feld identisch.** Die Einstufung sagt, wo nachzusehen ist, nicht wo kopiert
+werden darf. Kapitel 38 ist das Gegenstück: nur 38,1–8 stammen aus 2. Könige,
+**38,9–22 ist Hiskias Danklied**, das dort gar nicht steht.
 
 Was Jesaja bisher gelehrt hat, steht in `WORTFELD_JESAJA.md` (ein Abschnitt je
 Paket). Die drei Funde mit Reichweite über das Buch hinaus:
