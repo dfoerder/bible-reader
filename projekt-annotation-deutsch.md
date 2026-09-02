@@ -104,9 +104,35 @@ Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
 
 **Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 14 (Kap. 36 · 37 · 38 · 39) am 02.09.2026:
-39 von 66 Kapiteln**, 766 Verse, 18 237 Einträge. `validate.py 23`, `qa.py 23`
-und `hilfsverb.py 23` laufen über das gebaute Buch ohne Befund.
+in Dreierwellen. Stand nach **Paket 15 (Kap. 40 · 41 · 42) am 02.09.2026:
+42 von 66 Kapiteln**, 851 Verse, 20 267 Einträge. `validate.py 23`, `qa.py 23`,
+`hilfsverb.py 23` und `levelcheck.py` laufen über das gebaute Buch ohne Befund;
+`mehrwort.py 23` meldet zwei Stellen, beide der vom Werkzeug selbst beschriebene
+richtige Fall (8,7 `Ufer` im Plural).
+
+Paket 15 hat den teuersten Befund gebracht, den **kein Prüfskript melden kann**:
+`wackeln` steht in 40,20 und 41,7 im selben Sachfeld — der Götzenbauer, der sein
+Standbild befestigt — und **zwei gleichzeitig laufende Agenten haben das neue
+Wort verschieden geprägt** (*wobbles · se tambalea · branle · vacilla* gegen
+*totter · mueva · branle · smuova*). Alle sechs Pflichtprüfungen laufen über
+beide Kapitel sauber durch: strukturell fehlt nichts, und im Bestand gibt es
+keine Zeile, gegen die zu prüfen wäre. Gefunden wurde es erst beim Einsammeln,
+durch einen **Vergleich aller Lemmata, die in mindestens zwei Kapiteln des
+Pakets vorkommen** — 571 gemeinsame Inhaltslemmata, ein echter Fall. Dieser
+Vergleich gehört ab jetzt in jedes Einsammeln, solange mehrere Kapitel
+gleichzeitig laufen. Aufgelöst ist er über die Ausgaben, die sich an dieser
+Stelle **selbst widersprechen** (WEB und RV trennen die beiden Verse, LSG und
+RIV nicht): das Deutsche schreibt beide Male dasselbe Wort, also trägt es
+dieselbe Reihe.
+
+Zweimal hat dasselbe Paket gezeigt, dass `BINDUNGEN_AT.md` **bedeutungsblind**
+ist, und beide Male stand der Bestand fast genau auf Kante: `Lohn` 32:32
+(*reward* gegen *wages* — 40,10 ist ein Gottesrede-Beleg wie 1Mo 15,1) und
+`Rest` 20:20 (*remnant* gegen *rest* — in Jesaja mit 16 Belegen längst
+entschieden). Und eine Auflösung ist **zurückgenommen** worden: `wertlos` in
+41,24 war dem `nichtig` von 41,29 ausgewichen, obwohl die beiden nicht in einem
+Vers stehen — die Kollisionsregel löst nur in-Vers auf, und die ausgewichene
+Reihe stand in keiner der vier Ausgaben.
 
 Paket 14 war der Parallelblock zu **2. Könige 18–20** und deshalb als Vierer
 gebaut: es zu teilen hätte geheißen, dieselbe Quelle zweimal zu entscheiden.
