@@ -112,6 +112,20 @@ Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 Damit sind **50 von 66 Büchern** annotiert: 1005 Kapitel, 26 973 Verse,
 588 313 Einträge. Es fehlen die Bücher 24–39.
 
+**Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
+18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
+durch seine **261 buchinternen Dublettenpaare** (Jesaja hatte rund fünf): der
+größte Teil sind Botenformeln, und deshalb steht am Anfang keine
+Maßstabsentscheidung an einem Kapitel, sondern eine **Formelentscheidung**.
+Dafür ist `vorbereitung.py` entstanden — es baut die Vorbereitungsdatei jedes
+Pakets maschinell und teilt die Dubletten in die drei Richtungen auf, die
+etwas völlig Verschiedenes bedeuten (Vorlage in einem fertigen Kapitel · beide
+Verse im selben Paket · der eigene Vers ist die Vorlage für später).
+
+Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
+Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
+im selben Paket.
+
 Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
 - **`paketcheck.py`** vergleicht die gleichzeitig gebauten Kapitel
