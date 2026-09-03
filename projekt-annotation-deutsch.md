@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 3 (Kap. 7 · 8 · 9) am 03.09.2026: 9 von 52 Kapiteln**,
-255 Verse, 6511 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+Stand nach **Paket 4 (Kap. 10 · 11 · 12) am 03.09.2026: 12 von 52 Kapiteln**,
+320 Verse, 8222 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
 `levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
 
 Paket 3 hat die **einzige Verszählungsfalle des Buches** enthalten, und
@@ -141,6 +141,12 @@ Dazu der zweite `wackeln`-Fall, gefunden von `paketcheck.py` Abschnitt A:
 `Starrsinn` ist im Bestand unbelegt und stand in 7,24 und 9,13 verschieden,
 obwohl beide Verse dieselbe Buchformel tragen. Sieben Pflichtläufe melden dazu
 nichts — es gibt keine Zeile im Bestand, gegen die zu prüfen wäre.
+
+Paket 4 hat den größten Vorlagenblock des Buches eingesammelt: 10,12–16 sind
+mit 51,15–19 wörtlich gleich (bis auf ein `aber` in 10,12). Und es hat gezeigt,
+dass der Werkzeugbefund eine **untere Schranke** ist — die zweite Hälfte von
+10,13 steht fertig in Psalmen 135,7, was `parallelen.py` nicht gemeldet hat und
+der Agent selbst gefunden hat.
 
 Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
