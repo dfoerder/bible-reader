@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 12 (Kap. 34 · 35 · 36) am 03.09.2026: 36 von 52 Kapiteln**,
-928 Verse, 25 248 Einträge. Paket 11 war mit 110 Versen das größte des Buches
+Stand nach **Paket 13 (Kap. 37 · 38 · 39) am 03.09.2026: 39 von 52 Kapiteln**,
+995 Verse, 27 045 Einträge. Paket 11 war mit 110 Versen das größte des Buches
 und hatte **49 Dubletten mit fertiger Vorlage**; Paket 12 hat die Botenformel
 des Buches abgeschlossen — sieben Formelketten, jede Feld für Feld gegen ihre
 Vorlage nachgerechnet, null Abweichungen, und `34,12` und `35,12` kamen bei
@@ -142,7 +142,18 @@ außerhalb Jeremias steht dort **68 : 11 auf *main*** — das deutsche Wort ist
 Singular, nur die französische Wendung (*livrer entre les mains*) trägt den
 Plural; das Buch war abgedriftet, weil die Prompt-Vorgabe seit Paket 7 den
 Plural verlangte. 16 Einträge in acht Kapiteln angeglichen, `mehrwort.py` fällt
-von 13 auf 1. Paket 7 ist das erste des Buches, in dem
+von 13 auf 1.
+
+In Paket 13 hat ein Agent **die Vorbereitung an ihrer wichtigsten Stelle
+widerlegt**. Ich hatte in den Prompt geschrieben, 2. Könige 25 sei keine
+brauchbare Vorlage für Jeremia 39 — gestützt auf eine einzige
+Ähnlichkeitszahl für einen einzigen Vers. Der Agent hat das Kapitel trotzdem
+aufgeschlagen und **fünf Verse wörtlich** vorgefunden; alle fünf sind
+nachgeprüft. Für Paket 18 (Kap. 52) heißt das: 2. Könige 25 zuerst
+aufschlagen. Die Lehre für die Vorbereitung ist allgemein — **eine einzelne
+Ähnlichkeitszahl aus `parallelen.py` trägt keine Negativaussage**; wo
+`PAKETE_JEREMIA.txt` eine fremde Parallele nennt, gehört sie in den Prompt,
+auch wenn das Werkzeug schweigt. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
