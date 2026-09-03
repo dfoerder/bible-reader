@@ -2,7 +2,9 @@
 
 Wort-für-Wort-Annotation der deutschen Bibel mit Übersetzungen nach Englisch,
 Spanisch, Französisch und Italienisch. Begonnen 25.07.2026, **das Neue
-Testament (Bücher 40–66) ist seit 28.07.2026 vollständig**.
+Testament (Bücher 40–66) ist seit 28.07.2026 vollständig**, **Jesaja seit
+03.09.2026**. Stand: **50 von 66 Büchern**, 1005 Kapitel, 26 973 Verse,
+588 313 Einträge — es fehlen die Bücher 24–39.
 
 Das ist die **Gegenrichtung** zu den bestehenden Annotationen: Bisher war
 Deutsch immer Gloss-Sprache (WEB-Bibel mit `de`-Feld), hier ist Deutsch der
@@ -69,10 +71,8 @@ Abschnitt.
 und mit Abstand das aufwendigste: 68 Pakete, jedes von einem eigenen Agenten.
 Psalm 119 (176 Verse) musste auf zwei Agenten geteilt werden.
 
-Damit sind **46 von 66 Büchern fertig**: 888 Kapitel, 24 428 Verse,
-534 181 Einträge. `validate.py alle` gibt für alle 46 Bücher `[ok]` aus,
-`qa.py alle` meldet 0 Verdachtsfälle.
-Es fehlen die Bücher 20–39 (rund 400 Kapitel).
+Damit waren **46 von 66 Büchern fertig**: 888 Kapitel, 24 428 Verse,
+534 181 Einträge.
 
 `mehrwort.py alle` meldet 17 Fälle, davon 2 aus Hiob (40,23 `Ufer`) — beide
 sind der vom Werkzeug selbst beschriebene richtige Fall: das deutsche Wort
@@ -101,65 +101,58 @@ Dublettendichte des Bestands (sieben Verspaare auf 117 Verse, drei davon
 wörtlich gleich), deshalb folgte die Paketreihenfolge den Dubletten statt der
 Kapitelzahl: 1 / 2+4+5 / 3+6+7 / 8.
 
-Damit sind **49 von 66 Büchern** annotiert. Es fehlen die Bücher 23–39.
+**Jesaja (23) ist am 03.09.2026 fertig geworden** — 66 Kapitel, 1291 Verse,
+32 487 Einträge, in 24 Paketen. Das größte Buch nach dem Psalter und das mit
+der dichtesten Vorlagendecke: 21 Kapitel haben einen gemessenen Block von
+mindestens fünf Tokens in einem anderen Kapitel desselben Buches. Die
+unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
+Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
+`validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-**Jesaja (23) ist seit 31.08.2026 in Arbeit** — 24 Pakete nach `PAKETE_JESAJA.txt`,
-in Dreierwellen. Stand nach **Paket 23 (Kap. 63 · 64) am 03.09.2026:
-64 von 66 Kapiteln**, 1242 Verse, 31 010 Einträge. `validate.py 23`, `qa.py 23`,
-`hilfsverb.py 23` und `levelcheck.py` laufen über das gebaute Buch ohne Befund;
-`mehrwort.py 23` meldet zwei Stellen, beide der vom Werkzeug selbst beschriebene
-richtige Fall (8,7 `Ufer` im Plural).
+Damit sind **50 von 66 Büchern** annotiert: 1005 Kapitel, 26 973 Verse,
+588 313 Einträge. Es fehlen die Bücher 24–39.
 
-Paket 15 hat den teuersten Befund gebracht, den **kein Prüfskript melden kann**:
-`wackeln` steht in 40,20 und 41,7 im selben Sachfeld — der Götzenbauer, der sein
-Standbild befestigt — und **zwei gleichzeitig laufende Agenten haben das neue
-Wort verschieden geprägt** (*wobbles · se tambalea · branle · vacilla* gegen
-*totter · mueva · branle · smuova*). Alle sechs Pflichtprüfungen laufen über
-beide Kapitel sauber durch: strukturell fehlt nichts, und im Bestand gibt es
-keine Zeile, gegen die zu prüfen wäre. Gefunden wurde es erst beim Einsammeln,
-durch einen **Vergleich aller Lemmata, die in mindestens zwei Kapiteln des
-Pakets vorkommen** — 571 gemeinsame Inhaltslemmata, ein echter Fall. Dieser
-Vergleich gehört ab jetzt in jedes Einsammeln, solange mehrere Kapitel
-gleichzeitig laufen. Aufgelöst ist er über die Ausgaben, die sich an dieser
-Stelle **selbst widersprechen** (WEB und RV trennen die beiden Verse, LSG und
-RIV nicht): das Deutsche schreibt beide Male dasselbe Wort, also trägt es
-dieselbe Reihe.
+Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
-**Paket 16 ist die Gegenprobe** und das erste mit drei gleichzeitigen Agenten:
-diesmal standen die Formelwörter, die durch alle drei Kapitel laufen
-(`außer mir gibt es keinen Gott`, `es geben`, `Erlöser`, `der Heilige Israels`),
-**vor dem Start** fest und gingen allen drei Agenten wortgleich in den Prompt.
-`paketcheck.py` meldet für die drei Kapitel in Abschnitt A **null Fälle** — bei
-112 gemeinsamen Inhaltslemmata und 34 neuen. `Kyrus` haben zwei Agenten
-unabhängig identisch geprägt. **Paket 17 hat das wiederholt** (wieder null
-Fälle) und dafür den ältesten Befund des Verfahrens auf die Spitze getrieben:
-die von mir ausgeschriebene „Formelstelle des Pakets" (`verkünden` ↔ `ansagen`)
-gab es nicht — **`ansagen` steht in keinem der drei Kapitel**, und alle drei
-Agenten haben es unabhängig gemeldet. Über vier Pakete zählt die Statistik
-46 · 12 · 28 · 29 widerlegte Prompt-Hinweise, fast immer derselbe Fehler: im
-Prompt stehen Wörter, die der Quelltext nicht hat. Seit diesem Paket ist das
-maschinell zu prüfen — `promptcheck.py <buchNr> <kapitel …> --datei <prompt.md>`
-hält die in Backticks gesetzten Wörter über einen Stammvergleich gegen die
-Tokens der Kapitel und hat zehn der elf erfundenen Wörter gefunden. Der Vergleich ist damit vom Fund zum Verfahren
-geworden: erst festlegen, was über die Kapitelgrenzen läuft, dann bauen, dann
-`paketcheck.py` vor dem Build.
+- **`paketcheck.py`** vergleicht die gleichzeitig gebauten Kapitel
+  gegeneinander. Sein Abschnitt A meldet die Klasse, die keine Pflichtprüfung
+  sehen kann: **im Bestand unbelegte Lemmata, die zwei Agenten verschieden
+  geprägt haben.** Anlass war `wackeln` (40,20 gegen 41,7), gefunden erst beim
+  Einsammeln von Hand; im letzten Paket des Buches hat das Werkzeug denselben
+  Fall selbst gefunden (`Schweinefleisch`, 65,4 gegen 66,17).
+- **`promptcheck.py`** hält die in Backticks gesetzten Wörter eines Prompts
+  über einen Stammvergleich gegen den Quelltext. Anlass war der älteste Befund
+  des Verfahrens: die Agenten widerlegen in jedem Paket ein Dutzend meiner
+  Hinweise, fast immer, weil ich Wörter behaupte, die nicht dastehen. Seit
+  Paket 18 läuft es **vor** dem Abschicken; die Zahl der widerlegten Hinweise
+  ist von 28–29 auf 8–17 gefallen, und was übrig bleibt, sind Aussagen über
+  Wörter, die es gibt (Level, Numerus, Bedeutung).
+- **`levelcheck.py --fix`** behält jetzt die Schreibweise der Datei. Dabei sind
+  396 Levelrutscher in den Kapitelquellen über 28 Bücher bereinigt worden — am
+  gebauten Bestand ändert das nichts, aber die Quelle behauptete etwas anderes
+  als das Ergebnis.
 
-Zweimal hat Paket 15 gezeigt, dass `BINDUNGEN_AT.md` **bedeutungsblind**
-ist, und beide Male stand der Bestand fast genau auf Kante: `Lohn` 32:32
-(*reward* gegen *wages* — 40,10 ist ein Gottesrede-Beleg wie 1Mo 15,1) und
-`Rest` 20:20 (*remnant* gegen *rest* — in Jesaja mit 16 Belegen längst
-entschieden). Und eine Auflösung ist **zurückgenommen** worden: `wertlos` in
-41,24 war dem `nichtig` von 41,29 ausgewichen, obwohl die beiden nicht in einem
-Vers stehen — die Kollisionsregel löst nur in-Vers auf, und die ausgewichene
-Reihe stand in keiner der vier Ausgaben.
+Vier Regeln haben sich über die 24 Pakete herausgeschält:
 
-Paket 14 war der Parallelblock zu **2. Könige 18–20** und deshalb als Vierer
-gebaut: es zu teilen hätte geheißen, dieselbe Quelle zweimal zu entscheiden.
-Seine Lehre steht in einem Satz — **von den sieben Versen, die die
-Ähnlichkeitstabelle als „wörtlich" (≥ 0,90) führt, ist genau einer Feld für
-Feld identisch.** Die Einstufung sagt, wo nachzusehen ist, nicht wo kopiert
-werden darf. Kapitel 38 ist das Gegenstück: nur 38,1–8 stammen aus 2. Könige,
-**38,9–22 ist Hiskias Danklied**, das dort gar nicht steht.
+1. **Eine gemessene Ähnlichkeit sagt nichts, ein Block trägt bis zu der Stelle,
+   an der der deutsche Text ein anderes Wort schreibt.** Paket 14: von sieben
+   als „wörtlich" eingestuften Versen war genau einer identisch. Paket 18:
+   51,11 gegen 35,10, 22 Formen identisch, null abweichend. Paket 21: 60,16
+   gegen 49,26, 13 von 13.
+2. **Der Blockmesser misst eher zu wenig als zu viel.** Viermal getroffen:
+   61,1 gegen Lukas 4,18 (gemessen 21, wörtlich gleich 32), 65,25 gegen 11,9
+   (gemessen 11, gleich 24), 66,1 gegen Apg 7,49 (zwei Blöcke, getragen 19 von
+   20), 63,13 gegen Ps 106,9 (gemessen 4, getragen 8). Er findet nur
+   zusammenhängende Folgen, und Zitate sind zerstreut.
+3. **Eine Kollisionsauflösung gilt im Kollisionsvers, nicht im Wortfeld.**
+   `Gewand`/`Kleid` (63 gegen 64,5), `beschämt` (41,11 gegen 42,17),
+   `gemeinsam` (14 Stellen in Jesaja, ausgewichen in genau den vier mit
+   `zusammen`). Eine Entscheidung, die aus einer Kollision entstand, gilt
+   dagegen im **ganzen übernommenen Block**: 62,11 trägt `bei` = *beside*, weil
+   40,10 ein `mit` im Vers hatte, das 62,11 gar nicht hat.
+4. **Was über Kapitelgrenzen läuft, wird vor dem Start festgelegt.** Seit
+   Paket 16 gehen die paketweiten Reihen wortgleich in alle Prompts; seither
+   meldet `paketcheck.py` Abschnitt A neun Pakete lang null Fälle.
 
 Was Jesaja bisher gelehrt hat, steht in `WORTFELD_JESAJA.md` (ein Abschnitt je
 Paket). Die drei Funde mit Reichweite über das Buch hinaus:
@@ -240,7 +233,8 @@ Paket). Die drei Funde mit Reichweite über das Buch hinaus:
 | **Sprüche (20)** | **31** | **915** | **14 019** |
 | **Prediger (21)** | **12** | **222** | **5 217** |
 | **Hohelied (22)** | **8** | **117** | **2 407** |
-| **Summe gesamt** | **939** | **25 682** | **555 824** |
+| **Jesaja (23)** | **66** | **1291** | **32 487** |
+| **Summe gesamt** | **1005** | **26 973** | **588 313** |
 
 Jedes Buch ist gegen den Quelltext auf Vollständigkeit geprüft, und für jedes
 stimmt die Gegenrechnung (Tokens − Einzelworteinträge = alleinstehende
