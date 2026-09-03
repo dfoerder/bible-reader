@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 4 (Kap. 10 · 11 · 12) am 03.09.2026: 12 von 52 Kapiteln**,
-320 Verse, 8222 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+Stand nach **Paket 5 (Kap. 13 · 14 · 15) am 03.09.2026: 15 von 52 Kapiteln**,
+390 Verse, 10 116 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
 `levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
 
 Paket 3 hat die **einzige Verszählungsfalle des Buches** enthalten, und
@@ -147,6 +147,14 @@ mit 51,15–19 wörtlich gleich (bis auf ein `aber` in 10,12). Und es hat gezeig
 dass der Werkzeugbefund eine **untere Schranke** ist — die zweite Hälfte von
 10,13 steht fertig in Psalmen 135,7, was `parallelen.py` nicht gemeldet hat und
 der Agent selbst gefunden hat.
+
+Paket 5 hat die **Schwert-Hunger-Pest-Formel** entschieden, die das halbe Buch
+trägt, und einen Fehlertyp aufgedeckt, den kein Pflichtlauf sehen kann:
+`Gürtel` stand in 13,1 spanisch anders als in den sieben übrigen Vorkommen
+derselben Szene. `glosskollision.py` sieht nur innerhalb eines Verses,
+`paketcheck.py` nur zwischen Kapiteln — eine Uneinheitlichkeit **innerhalb**
+eines Kapitels fällt durch beide Netze und ist beim Einsammeln von Hand
+gefunden worden.
 
 Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
