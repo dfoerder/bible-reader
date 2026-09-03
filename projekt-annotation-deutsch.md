@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 16 (Kap. 46 · 47 · 48) am 03.09.2026: 48 von 52 Kapiteln**,
-1181 Verse, 32 291 Einträge. Mit 43,8 ist die Botenformel des Buches
+Stand nach **Paket 17 (Kap. 49 · 50 · 51) am 04.09.2026: 51 von 52 Kapiteln**,
+1330 Verse, 36 120 Einträge — nur der geschichtliche Anhang (Kap. 52) fehlt. Mit 43,8 ist die Botenformel des Buches
 vollständig entschieden — in allen drei Fassungen (mit `Da`, ohne `Da`
 verb-zweit, und mit Subjekt voran). Kapitel 48 hat sich als **Umarbeitung von
 Jesaja 15–16** bestätigt: die seltensten Ortsnamen des Moab-Spruchs haben je
@@ -185,7 +185,14 @@ Schleife läuft null Mal, und das Skript meldet unweigerlich „0 Abweichungen" 
 genau so stand der Aufruf in der Sammelkette. Der nachgeholte Lauf über alle
 48 Kapitel meldet ebenfalls null, es ist also kein Schaden entstanden; der
 erste *richtige* Aufruf fand aber sofort einen echten Fall. **Ein Pflichtlauf,
-der bei falschem Aufruf still „sauber" meldet, ist schlimmer als keiner.** Paket 7 ist das erste des Buches, in dem
+der bei falschem Aufruf still „sauber" meldet, ist schlimmer als keiner.**
+
+Was das wert war, zeigte das nächste Paket: mit korrigiertem Aufruf fand
+`levelcheck` in Paket 17 **23 echte Levelfehler** (6 in Kap. 50, 17 in
+Kap. 51) — von einem Lauf, der vorher immer „0 Abweichungen" gemeldet hatte.
+Ein zweiter Aufruf derselben Bauart kam dazu: `glosskollision.py --datei`
+verlangt die Datei als drittes Argument. Der stürzt allerdings laut ab und
+kann deshalb nichts verstecken. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
