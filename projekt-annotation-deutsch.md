@@ -126,10 +126,13 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 15 (Kap. 43 · 44 · 45) am 03.09.2026: 45 von 52 Kapiteln**,
-1099 Verse, 30 363 Einträge. Mit 43,8 ist die Botenformel des Buches
+Stand nach **Paket 16 (Kap. 46 · 47 · 48) am 03.09.2026: 48 von 52 Kapiteln**,
+1181 Verse, 32 291 Einträge. Mit 43,8 ist die Botenformel des Buches
 vollständig entschieden — in allen drei Fassungen (mit `Da`, ohne `Da`
-verb-zweit, und mit Subjekt voran). Paket 11 war mit 110 Versen das größte des Buches
+verb-zweit, und mit Subjekt voran). Kapitel 48 hat sich als **Umarbeitung von
+Jesaja 15–16** bestätigt: die seltensten Ortsnamen des Moab-Spruchs haben je
+einen einzigen Bestandsbeleg, und der steht jedes Mal in Jesaja 15,5/15,6 oder
+16,11. Paket 11 war mit 110 Versen das größte des Buches
 und hatte **49 Dubletten mit fertiger Vorlage**; Paket 12 hat die Botenformel
 des Buches abgeschlossen — sieben Formelketten, jede Feld für Feld gegen ihre
 Vorlage nachgerechnet, null Abweichungen, und `34,12` und `35,12` kamen bei
@@ -174,7 +177,15 @@ Vorbereitung** aufgedeckt: `belegt.py <Wort>` zählt die übergebene
 Prompts geschrieben (`Steinsäule` 1 statt 6, `Flüchtling` 1 statt 5,
 `Truppenführer` 1 statt 8). Eine zu niedrige Belegzahl lädt den Agenten dazu
 ein, eine feste Bindung für verhandelbar zu halten. Seither stehen in den
-Vorgabetabellen nur noch Zahlen, die über alle Flexionsformen geprüft sind. Paket 7 ist das erste des Buches, in dem
+Vorgabetabellen nur noch Zahlen, die über alle Flexionsformen geprüft sind.
+
+In Paket 16 kam ein schwererer Werkzeugbefund dazu: **`levelcheck.py 24` ohne
+Kapitelnummer prüft nichts.** Im Quelltext ist `kaps = argv[1:]` dann leer, die
+Schleife läuft null Mal, und das Skript meldet unweigerlich „0 Abweichungen" —
+genau so stand der Aufruf in der Sammelkette. Der nachgeholte Lauf über alle
+48 Kapitel meldet ebenfalls null, es ist also kein Schaden entstanden; der
+erste *richtige* Aufruf fand aber sofort einen echten Fall. **Ein Pflichtlauf,
+der bei falschem Aufruf still „sauber" meldet, ist schlimmer als keiner.** Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
