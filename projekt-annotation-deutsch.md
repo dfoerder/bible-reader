@@ -126,8 +126,10 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 14 (Kap. 40 · 41 · 42) am 03.09.2026: 42 von 52 Kapiteln**,
-1051 Verse, 28 830 Einträge. Paket 11 war mit 110 Versen das größte des Buches
+Stand nach **Paket 15 (Kap. 43 · 44 · 45) am 03.09.2026: 45 von 52 Kapiteln**,
+1099 Verse, 30 363 Einträge. Mit 43,8 ist die Botenformel des Buches
+vollständig entschieden — in allen drei Fassungen (mit `Da`, ohne `Da`
+verb-zweit, und mit Subjekt voran). Paket 11 war mit 110 Versen das größte des Buches
 und hatte **49 Dubletten mit fertiger Vorlage**; Paket 12 hat die Botenformel
 des Buches abgeschlossen — sieben Formelketten, jede Feld für Feld gegen ihre
 Vorlage nachgerechnet, null Abweichungen, und `34,12` und `35,12` kamen bei
@@ -164,7 +166,15 @@ Bestandsreihe). Umgekehrt hat ein Agent **sieben Vorlagen benutzt, die
 `vorbereitung.py` gar nicht meldet**, während vier der gemeldeten reines
 Rauschen waren. Beides zusammen ist das belastbarste Argument dafür, die
 Berichte der Agenten als Prüfinstanz für die Vorbereitung zu lesen und nicht
-umgekehrt. Paket 7 ist das erste des Buches, in dem
+umgekehrt.
+
+Paket 15 hat dabei einen **systematischen Fehler in meiner eigenen
+Vorbereitung** aufgedeckt: `belegt.py <Wort>` zählt die übergebene
+**Wortform**, nicht das Lemma, und ich hatte die Formzahl als Belegzahl in die
+Prompts geschrieben (`Steinsäule` 1 statt 6, `Flüchtling` 1 statt 5,
+`Truppenführer` 1 statt 8). Eine zu niedrige Belegzahl lädt den Agenten dazu
+ein, eine feste Bindung für verhandelbar zu halten. Seither stehen in den
+Vorgabetabellen nur noch Zahlen, die über alle Flexionsformen geprüft sind. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
