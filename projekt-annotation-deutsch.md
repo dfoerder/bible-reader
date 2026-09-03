@@ -126,8 +126,22 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 17 (Kap. 49 · 50 · 51) am 04.09.2026: 51 von 52 Kapiteln**,
-1330 Verse, 36 120 Einträge — nur der geschichtliche Anhang (Kap. 52) fehlt. Mit 43,8 ist die Botenformel des Buches
+**Jeremia ist vollständig (04.09.2026): 52 von 52 Kapiteln, 1364 Verse,
+36 972 Einträge, 3123 verschiedene Lemmata, 1452 Mehrwörter.** `validate.py`
+rechnet die 35 638 Tokens der Paketplanung Zeichen für Zeichen nach — 35 520
+Einzeleinträge plus 118 alleinstehende Satzzeichen, 0 Befunde. Alle Pflicht-
+läufe über das fertige Buch sind sauber; von den 16 verbliebenen Kollisions-
+paaren sind fünfzehn echte Verschmelzungen der Zielsprachen (romanisch deckt
+`tun` und `machen` mit einem Verb ab, *pecado*/*péché*/*peccato* sind zugleich
+Substantiv und Partizip), das sechzehnte ist aufgelöst.
+
+**Ein Befund für jedes weitere Buch:** der l1912mod modernisiert Eigennamen in
+Jeremia systematisch anders als in den älteren Büchern. Neun Fälle sind
+belegt — `Paschhur`/`Pashur`, `Betlehem`/`Bethlehem`, `Hananel`/`Hananeel`,
+`Kaftor`/`Kaphthor`, `Anakiter`/`Enakiter`, `Teman`/`Theman`,
+`Ben-Hadad`/`Benhadad`, `Aschkenas`/`Askenas`, `Ewil-Merodach`/`Evil-Merodach`.
+Sechs davon haben Agenten gegen den Prompt gefunden. Das gehört künftig in
+jede Vorbereitung. Mit 43,8 ist die Botenformel des Buches
 vollständig entschieden — in allen drei Fassungen (mit `Da`, ohne `Da`
 verb-zweit, und mit Subjekt voran). Kapitel 48 hat sich als **Umarbeitung von
 Jesaja 15–16** bestätigt: die seltensten Ortsnamen des Moab-Spruchs haben je
