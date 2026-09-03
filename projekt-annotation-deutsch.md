@@ -126,8 +126,9 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 6 (Kap. 16 · 17 · 18) am 03.09.2026: 18 von 52 Kapiteln**,
-461 Verse, 12 019 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+Stand nach **Paket 7 (Kap. 19 · 20 · 21) am 03.09.2026: 21 von 52 Kapiteln**,
+508 Verse, 13 452 Einträge. Paket 7 ist das erste des Buches, in dem
+`glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
 `levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
 
 Paket 3 hat die **einzige Verszählungsfalle des Buches** enthalten, und
