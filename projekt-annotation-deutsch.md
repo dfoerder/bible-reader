@@ -126,9 +126,16 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 7 (Kap. 19 · 20 · 21) am 03.09.2026: 21 von 52 Kapiteln**,
-508 Verse, 13 452 Einträge. Paket 7 ist das erste des Buches, in dem
-`glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+Stand nach **Paket 8 (Kap. 22 · 23 · 24) am 03.09.2026: 24 von 52 Kapiteln**,
+588 Verse, 15 621 Einträge. Paket 7 ist das erste des Buches, in dem
+`glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
+
+In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
+(HTTP 529) gestorben**, kurz nach dem Einlesen der Unterlagen. Von Kapitel 23
+lagen die Verse 1–8 als Teildatei da und liefen sauber durch; der Nachfolger hat
+sie als Vorlage gelesen, den Rest ergänzt und über das **ganze** Kapitel geprüft
+— dabei genau einen echten Fehler im übernommenen Teil gefunden. Zweite
+Bestätigung dafür, dass das abschnittsweise Wegschreiben der einzige Schutz ist. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
 `levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
 
 Paket 3 hat die **einzige Verszählungsfalle des Buches** enthalten, und
