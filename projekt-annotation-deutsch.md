@@ -126,10 +126,23 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 11 (Kap. 31 · 32 · 33) am 03.09.2026: 33 von 52 Kapiteln**,
-855 Verse, 23 018 Einträge. Paket 11 war mit 110 Versen das größte des Buches
-und hatte **49 Dubletten mit fertiger Vorlage** — die neun offenen Formelstellen
-des Buches sind damit vollständig vorbereitet. Paket 7 ist das erste des Buches, in dem
+Stand nach **Paket 12 (Kap. 34 · 35 · 36) am 03.09.2026: 36 von 52 Kapiteln**,
+928 Verse, 25 248 Einträge. Paket 11 war mit 110 Versen das größte des Buches
+und hatte **49 Dubletten mit fertiger Vorlage**; Paket 12 hat die Botenformel
+des Buches abgeschlossen — sieben Formelketten, jede Feld für Feld gegen ihre
+Vorlage nachgerechnet, null Abweichungen, und `34,12` und `35,12` kamen bei
+zwei Agenten **ohne Absprache identisch** zurück. In Paket 12 blieb
+`paketcheck.py` Abschnitt A erstmals im Buch **vollständig leer**: jedes neu
+geprägte Lemma trug in allen drei Kapiteln dieselbe Reihe.
+
+Beim Einsammeln von Paket 12 ist eine **buchweite Angleichung** fällig
+geworden. `mehrwort.py` meldete 13 Verdachtsfälle, zwölf davon `Hand`
+französisch *mains* innerhalb der Wendung `in die Hand geben`. Der Bestand
+außerhalb Jeremias steht dort **68 : 11 auf *main*** — das deutsche Wort ist
+Singular, nur die französische Wendung (*livrer entre les mains*) trägt den
+Plural; das Buch war abgedriftet, weil die Prompt-Vorgabe seit Paket 7 den
+Plural verlangte. 16 Einträge in acht Kapiteln angeglichen, `mehrwort.py` fällt
+von 13 auf 1. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
