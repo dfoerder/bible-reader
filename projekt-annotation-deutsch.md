@@ -126,6 +126,13 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
+Stand nach **Paket 2 (Kap. 4 · 5 · 6) am 03.09.2026: 6 von 52 Kapiteln**,
+173 Verse, 4370 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+`levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
+Die zweite Buchdublette ist entschieden: 5,9 = 5,29 tragen Feld für Feld
+dieselbe Reihe und gelten unverändert für 9,8; 6,15 ist die Vorlage für 8,12 —
+beide im nächsten Paket.
+
 Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
 - **`paketcheck.py`** vergleicht die gleichzeitig gebauten Kapitel
