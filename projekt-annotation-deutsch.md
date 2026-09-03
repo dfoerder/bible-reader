@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 9 (Kap. 25 · 26 · 27) am 03.09.2026: 27 von 52 Kapiteln**,
-672 Verse, 17 933 Einträge — mehr als die Hälfte des Buches. Paket 7 ist das erste des Buches, in dem
+Stand nach **Paket 10 (Kap. 28 · 29 · 30) am 03.09.2026: 30 von 52 Kapiteln**,
+745 Verse, 19 902 Einträge. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
