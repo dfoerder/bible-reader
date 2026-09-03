@@ -126,12 +126,21 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 2 (Kap. 4 · 5 · 6) am 03.09.2026: 6 von 52 Kapiteln**,
-173 Verse, 4370 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
+Stand nach **Paket 3 (Kap. 7 · 8 · 9) am 03.09.2026: 9 von 52 Kapiteln**,
+255 Verse, 6511 Einträge. `validate.py 24`, `qa.py 24`, `hilfsverb.py 24`,
 `levelcheck.py` und `mehrwort.py 24` laufen über das gebaute Buch ohne Befund.
-Die zweite Buchdublette ist entschieden: 5,9 = 5,29 tragen Feld für Feld
-dieselbe Reihe und gelten unverändert für 9,8; 6,15 ist die Vorlage für 8,12 —
-beide im nächsten Paket.
+
+Paket 3 hat die **einzige Verszählungsfalle des Buches** enthalten, und
+`ausgaben.py` hat sie selbst erzeugt: für Kapitel 8 meldet es Versatz −1 und
+schreibt daneben, dass +0 besser liegt. Die Warnung hat recht — die Rohausgabe
+ist um einen Vers verschoben und liest sich plausibel. Die Ausgabendatei für
+Kapitel 8 ist deshalb von Hand gebaut worden (8,1–22 aus Kapitel 8 der Ausgabe,
+8,23 aus deren 9,1), die Rohfassung im Prompt ausdrücklich verboten.
+
+Dazu der zweite `wackeln`-Fall, gefunden von `paketcheck.py` Abschnitt A:
+`Starrsinn` ist im Bestand unbelegt und stand in 7,24 und 9,13 verschieden,
+obwohl beide Verse dieselbe Buchformel tragen. Sieben Pflichtläufe melden dazu
+nichts — es gibt keine Zeile im Bestand, gegen die zu prüfen wäre.
 
 Die drei Werkzeuge, die in diesen 24 Paketen entstanden sind:
 
