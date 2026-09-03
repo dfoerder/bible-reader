@@ -126,8 +126,8 @@ Die Verszählung weicht in genau zwei Kapiteln ab, dieselbe Bauform wie
 Jesaja 8/9: de 8,23 = deren 9,1, ab 9 dann Versatz +1. Deshalb liegen 8 und 9
 im selben Paket.
 
-Stand nach **Paket 13 (Kap. 37 · 38 · 39) am 03.09.2026: 39 von 52 Kapiteln**,
-995 Verse, 27 045 Einträge. Paket 11 war mit 110 Versen das größte des Buches
+Stand nach **Paket 14 (Kap. 40 · 41 · 42) am 03.09.2026: 42 von 52 Kapiteln**,
+1051 Verse, 28 830 Einträge. Paket 11 war mit 110 Versen das größte des Buches
 und hatte **49 Dubletten mit fertiger Vorlage**; Paket 12 hat die Botenformel
 des Buches abgeschlossen — sieben Formelketten, jede Feld für Feld gegen ihre
 Vorlage nachgerechnet, null Abweichungen, und `34,12` und `35,12` kamen bei
@@ -153,7 +153,18 @@ nachgeprüft. Für Paket 18 (Kap. 52) heißt das: 2. Könige 25 zuerst
 aufschlagen. Die Lehre für die Vorbereitung ist allgemein — **eine einzelne
 Ähnlichkeitszahl aus `parallelen.py` trägt keine Negativaussage**; wo
 `PAKETE_JEREMIA.txt` eine fremde Parallele nennt, gehört sie in den Prompt,
-auch wenn das Werkzeug schweigt. Paket 7 ist das erste des Buches, in dem
+auch wenn das Werkzeug schweigt.
+
+In Paket 14 ist diese Lehre umgesetzt worden und hat getragen: 2. Könige 25
+stand von Anfang an im Prompt und deckt die ganze Gedalja-Erzählung ab. Das
+Paket hat dafür den bisher höchsten Stand an **widerlegten Prompt-Angaben** —
+darunter zwei echte Sachfehler von mir (`geritzt` ist über `ritzen` in
+Jer 16,6 belegt; bei `Königstöchter` zeigte ich auf die falsche
+Bestandsreihe). Umgekehrt hat ein Agent **sieben Vorlagen benutzt, die
+`vorbereitung.py` gar nicht meldet**, während vier der gemeldeten reines
+Rauschen waren. Beides zusammen ist das belastbarste Argument dafür, die
+Berichte der Agenten als Prüfinstanz für die Vorbereitung zu lesen und nicht
+umgekehrt. Paket 7 ist das erste des Buches, in dem
 `glosskollision.py` über **alle drei Kapitel null inhaltliche Paare** meldet.
 
 In Paket 8 sind **alle drei Agenten gleichzeitig an einem Serverfehler
