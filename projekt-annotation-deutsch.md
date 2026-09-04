@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **52 von 66 Büchern** annotiert. Es fehlen die Bücher 26–39.
+Damit sind **53 von 66 Büchern** annotiert. Es fehlen die Bücher 27–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -401,7 +401,12 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 16: 44 von 48 Kapiteln, 1166 Verse, 30 037 Einträge.**
+**Hesekiel ist fertig: 48 Kapitel, 1273 Verse, 32 783 Einträge, 1240
+Mehrwörter.** `paketcheck.py` Abschnitt A war in siebzehn Paketen **sechzehnmal
+leer**; der eine Treffer war keiner — zwei Agenten hatten dasselbe Wort
+unabhängig neu geprägt und dieselbe Reihe gewählt.
+
+Damit sind **53 von 66 Büchern** annotiert.
 `paketcheck.py` Abschnitt C ist **vierzehnmal in Folge leer** geblieben;
 Abschnitt A hatte in Paket 14 seinen ersten Treffer — und der ist ein Erfolg:
 **zwei Agenten haben dasselbe Wort unabhängig neu geprägt und dieselbe Reihe
