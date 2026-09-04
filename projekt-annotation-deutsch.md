@@ -401,6 +401,43 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
+**Stand nach Paket 8: 21 von 48 Kapiteln, 512 Verse, 13 143 Einträge.**
+`paketcheck.py` Abschnitt A und C sind **achtmal in Folge leer** geblieben.
+
+Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
+
+**Die Anerkennungsformel hat 71 Vorkommen, nicht 54.** Die Zahl ist zweimal
+nach oben korrigiert worden, beide Male von einem Agenten, beide Male aus
+demselben Grund: mein Suchmuster war am *Ende* festgemacht (`der HERR bin`)
+statt am Kern. Verdeckt wurde die Formel nacheinander durch die Wortstellung,
+durch eine eingeschobene Apposition (13,9) und durch ein anderes Prädikat
+(17,21 · 17,24). **Die Konstante ist `erkennen` + `dass ich`.** An allen 71
+Stellen steht die *recognize*-Familie — maschinell geprüft, null Abweichungen.
+Dieselbe Fehlerform ein viertes Mal in Paket 8: eine Botenformel in der
+`Gott`-losen Ausnahmefassung (21,14), die meine Paketvorbereitung nicht
+mitgezählt hatte, obwohl `PAKETE_HESEKIEL.txt` sie führte.
+
+**Die Lexikonfalle hat zwei Richtungen.** Bekannt war, dass eine erdrückende
+Bestandsmehrheit vollständig neutestamentlich sein kann und für ein
+Prophetenbuch nicht passt (`Menschensohn` 88 von 89, `Anstoß` 16 von 21,
+`aufnehmen` 24 von 40). Paket 8 zeigt die Gegenrichtung: bei `schärfen`
+**verdeckt die häufigste Lesart die passende**. Die vier NT-Belege stehen für
+*einschärfen*; darunter, ungelesen, acht AT-Belege für das Schleifen einer
+Klinge. Daraus die Regel: **bei mehrdeutigen Lemmata nie die erste Zeile von
+`fixgloss.py show` allein nehmen** — die Liste ist nach Häufigkeit sortiert,
+nicht nach Passung.
+
+**Ein Fehlertyp, den kein Werkzeug sah, hat jetzt ein eigenes:**
+`anno-tools/kongruenz.py` prüft italienische Possessiva gegen das folgende
+Nomen. `il suo Bund` statt `la sua alleanza` verletzt weder Struktur noch
+Bindung noch Level — `selfcheck`, `qa`, `glosskollision`, `levelcheck` und
+`konvention` schweigen alle. Ein Agent hatte zehn solche Stellen im eigenen
+Kapitel gefunden; der buchweite Lauf fand acht weitere, **vier davon in längst
+committeten Kapiteln**. Die Ursache ist durchweg dieselbe: das deutsche Genus
+schlägt durch, wo das italienische abweicht (`Hand`/`mano`, `Kopf`/`testa`,
+`Bund`/`alleanza`). Der Fehlertyp ist nicht hesekielspezifisch — ein Lauf
+gegen die 51 fertigen Bücher steht noch aus.
+
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |

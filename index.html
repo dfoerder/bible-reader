@@ -540,7 +540,7 @@ const I18N={
   nOfTotal:{de:'{n} von {t} richtig',en:'{n} of {t} correct'},
   levelSet:{de:'Dein Sprachniveau wurde auf {l} gesetzt.',en:'Your language level has been set to {l}.'},
   levelChangeHint:{de:'Du kannst es jederzeit in den Einstellungen ändern.',en:'You can change it anytime in the settings.'},
-  skipTest:{de:'Überspringen',en:'Skip test'},
+  skipTest:{de:'Einstufungstest überspringen',en:'Skip placement test'},
   skipTestHint:{de:'Dein Level wird auf B1 gesetzt. Du kannst den Test jederzeit in den Einstellungen nachholen.',en:'Your level will be set to B1. You can take the test anytime in settings.'},
 
   // Training
@@ -793,7 +793,7 @@ const I18N_ES = {
   nOfTotal: '{n} de {t} correctas',
   levelSet: 'Tu nivel de idioma se ha fijado en {l}.',
   levelChangeHint: 'Puedes cambiarlo en cualquier momento en los ajustes.',
-  skipTest: 'Omitir prueba',
+  skipTest: 'Omitir la prueba de nivel',
   skipTestHint: 'Tu nivel se fijará en B1. Puedes hacer la prueba en cualquier momento en los ajustes.',
 
   // Training
@@ -1033,7 +1033,7 @@ const I18N_IT = {
   nOfTotal: '{n} di {t} corrette',
   levelSet: 'Il tuo livello linguistico è stato impostato su {l}.',
   levelChangeHint: 'Puoi cambiarlo in qualsiasi momento nelle impostazioni.',
-  skipTest: 'Salta il test',
+  skipTest: 'Salta il test di livello',
   skipTestHint: 'Il tuo livello sarà impostato su B1. Puoi fare il test in qualsiasi momento nelle impostazioni.',
   training: 'Allenamento',
   trainFocus: 'Focus di apprendimento',
@@ -1280,7 +1280,7 @@ const I18N_FR = {
   nOfTotal: '{n} sur {t} corrects',
   levelSet: 'Ton niveau de langue a été réglé sur {l}.',
   levelChangeHint: 'Tu peux le modifier à tout moment dans les paramètres.',
-  skipTest: 'Passer',
+  skipTest: 'Passer le test de niveau',
   skipTestHint: 'Ton niveau sera réglé sur B1. Tu peux faire le test à tout moment dans les paramètres.',
 
   // Training
@@ -1492,7 +1492,7 @@ function LevelTest({onComplete, test}){
       })}
     </div>
     <div style={{textAlign:'center',marginTop:24}}>
-      <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{t('cancel')}</button>
+      <button onClick={()=>onComplete('B1')} style={{background:'none',border:'none',color:'var(--t-muted)',fontSize:14,fontFamily:sans,cursor:'pointer',padding:'4px 8px'}}>{t('skipTest')}</button>
     </div>
   </div>);
 }
@@ -4522,16 +4522,16 @@ function App({data}){
           ?<button onClick={()=>setChapPickerOpen(false)} style={{flex:1,fontSize:18,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',background:'none',border:'none',cursor:'pointer',padding:0,display:'inline-flex',alignItems:'center',justifyContent:'center',height:35}}>{currentBook.name} {chapNum} <span style={{fontSize:18,color:'var(--t-muted)',marginLeft:2}}>▴</span></button>
           :<>
         <button onClick={()=>{tts.stop();goToNav()}} style={{...barBtn,marginLeft:-8}} title={t('home')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg></button>
-        <button onClick={()=>{setSearchOpen(s=>!s);setChapPickerOpen(false)}} style={barBtn} title={t('search')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{display:'block'}}><circle cx="11" cy="11" r="6"/><line x1="16" y1="16" x2="21" y2="21"/></svg></button>
+        {tts.speaking
+          ?<button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
+          :<button onClick={()=>{const lv=tts.lastStoppedVerse.current;const startIdx=lv?verses.findIndex(v=>v.n===lv):0;tts.speakChapter(verses.slice(startIdx>=0?startIdx:0))}} style={barBtn} title={t('readAloud')} disabled={!tts.hasVoices}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><polygon points="6 4 20 12 6 20"/></svg></button>}
         <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',gap:0,overflow:'hidden'}}>
           <button onClick={()=>{if(tts.speaking)autoPlayRef.current=true;prevChapter()}} style={{...barBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.25}:{})}} disabled={bookIdx===0&&chapIdx===0} title={t('prevChapter')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
           <button onClick={()=>{setChapPickerOpen(true);setSearchOpen(false)}} style={{fontSize:18,color:'var(--t-title)',fontFamily:sans,fontWeight:600,textAlign:'center',overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis',background:'none',border:'none',cursor:'pointer',padding:0,display:'inline-flex',alignItems:'center',justifyContent:'center',height:35}}>{bookAbbr(currentBook.name)} {chapNum} <span style={{fontSize:18,color:'var(--t-muted)',marginLeft:2}}>▾</span></button>
           <button onClick={()=>{if(tts.speaking)autoPlayRef.current=true;nextChapter()}} style={{...barBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.25}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1} title={t('nextChapter')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
-        <div style={{width:37,flexShrink:0}}/>
-        {tts.speaking
-          ?<button onClick={tts.stop} style={{...barBtn,marginRight:-10,color:'var(--t-accent)'}} title={t('stopTTS')}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
-          :<button onClick={()=>{const lv=tts.lastStoppedVerse.current;const startIdx=lv?verses.findIndex(v=>v.n===lv):0;tts.speakChapter(verses.slice(startIdx>=0?startIdx:0))}} style={{...barBtn,marginRight:-10}} title={t('readAloud')} disabled={!tts.hasVoices}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><polygon points="6 4 20 12 6 20"/></svg></button>}
+        <div style={{width:35,flexShrink:0}}/>
+        <button onClick={()=>{setSearchOpen(s=>!s);setChapPickerOpen(false)}} style={{...barBtn,marginRight:-8}} title={t('search')}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{display:'block'}}><circle cx="11" cy="11" r="6"/><line x1="16" y1="16" x2="21" y2="21"/></svg></button>
           </>}
       </div>
       {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
@@ -4579,7 +4579,7 @@ function App({data}){
     </div>
 
 
-    {!tts.speaking&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
+    {!tts.speaking&&!chapPickerOpen&&<div style={{margin:'0 0 12px',border:'1px solid var(--t-border)',borderRadius:8,background:'var(--t-card-solid)',overflow:'hidden'}}>
       <div style={{display:'flex',alignItems:'stretch',borderBottom:chapTab?'1px solid var(--t-border)':'none'}}>
         {[...(trainingActive?[{k:'training',ic:null,lb:t('training')}]:[]),{k:'settings',ic:'⚙',lb:t('settings')}].map(tab=>{
           const active=chapTab===tab.k;
