@@ -401,7 +401,7 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 14: 38 von 48 Kapiteln, 984 Verse, 25 464 Einträge.**
+**Stand nach Paket 15: 41 von 48 Kapiteln, 1088 Verse, 28 010 Einträge.**
 `paketcheck.py` Abschnitt C ist **vierzehnmal in Folge leer** geblieben;
 Abschnitt A hatte in Paket 14 seinen ersten Treffer — und der ist ein Erfolg:
 **zwei Agenten haben dasselbe Wort unabhängig neu geprägt und dieselbe Reihe
