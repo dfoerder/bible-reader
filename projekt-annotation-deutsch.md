@@ -109,8 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **50 von 66 Büchern** annotiert: 1005 Kapitel, 26 973 Verse,
-588 313 Einträge. Es fehlen die Bücher 24–39.
+Damit sind **52 von 66 Büchern** annotiert. Es fehlen die Bücher 26–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -324,6 +323,48 @@ Paket). Die drei Funde mit Reichweite über das Buch hinaus:
   die zweite Auflage der Nachbarfalle), englisch `of` gegen `of the` dagegen ist
   eine offene Entscheidung über 62 Einträge in sieben Büchern und wurde
   ausdrücklich **nicht** angefasst.
+
+**Klagelieder (25) ist am 04.09.2026 fertig geworden** — 5 Kapitel, 154 Verse,
+3219 Einträge, 780 verschiedene Lemmata, 135 Mehrwörter, in 2 Paketen. Das Buch
+ist zugleich das erste, bei dem die **Modernisierung des l1912mod vor der
+Annotation** stand: Kapitel 2 war durchgehend altertümlich und ist ganz neu
+geschrieben worden, dazu fünf Verse in Kapitel 1 und einer in Kapitel 4.
+
+Daraus die wichtigste Lehre des Buches — **mein Archaismus-Maß war in beide
+Richtungen falsch geeicht.** Ich hatte `Schütte`, `Stehe`, `Hebe` (gewöhnliche
+Imperative) als Archaismen gezählt und dafür `richte…zurecht`, `zugerichtet`,
+`darniederliegt`, `großsprecherisch` übersehen. Folge: Kapitel 1 lief als
+„sauber" in die Annotation und war in Wahrheit das schlechteste Kapitel des
+Buches (7 harte Archaismen). Brauchbar ist nur die maschinelle Zählung —
+**Wörter mit 0–2 Belegen im fertigen Bestand, pro 1000 Tokens**. Und: eine
+Modernisierung kann eine **neue Kollision erzeugen**. In 2,5 standen nach
+meiner Überarbeitung `vernichtet` und `zerstört` im selben Vers auf derselben
+Bestandsreihe; ersetzt durch `verschlungen`, was WEB/LSG/RIV dort ohnehin lesen.
+
+`paketcheck.py` Abschnitt A ist über alle fünf Kapitel **leer** — kein neu
+geprägtes Lemma ist von zwei Agenten verschieden entschieden worden, und das
+bei fünf unabhängig gelaufenen Kapiteln. Die zentrale Buchentscheidung
+`schauen` (*look*) gegen `sehen` (*see*) steht an allen vier Kollisionsstellen
+(1,11 · 1,12 · 2,20 · 5,1) wortgleich, geschrieben von drei verschiedenen
+Agenten. Beim Einsammeln waren sechs Angleichungen fällig, alle in Abschnitt B
+oder in `ausreisser.py`: `Gegner` Plural auf die Bestandsreihe *opponents*
+(19 Belege), `achten` auf *esteemed*, `liegen` 5,18 auf die Buchreihe
+*yace · gît*, `aufdecken` 4,22 auf die Schuld-Reihe *expose* (wie 2,14),
+`lauern` 3,10 auf *lurks* und `daran` 5,1 auf it *ci*.
+
+Ein siebter Zug ist **zurückgenommen** worden und ist der lehrreichste: ich
+hatte `Ohr` in 3,56 von *oreja* auf die Bestandsmehrheit *oído* gelegt — und
+`glosskollision.py` meldete sofort ein neues Paar, weil `gehört` im selben Vers
+spanisch ebenfalls *oído* ist. Der Agent hatte *oreja* nicht aus Nachlässigkeit
+gewählt, sondern als Kollisionsauflösung. **Ein `ausreisser.py`-Treffer ist erst
+dann ein Auftrag, wenn im Kollisionsvers nichts dagegen steht.**
+
+Drei weitere Abweichungen sind nach Prüfung **stehen geblieben**: `Himmel`
+4,19 en *sky* (die Adler am Himmel — der Bestand führt *sky* 82-mal, darunter
+Jeremia 8,7 für dieselben Vögel), `Hilfe` 4,17 en *aid* (Kollision mit
+`helfen` im Vers) und `kein mehr` in 5,14 gegen 2,9 (nur in 5,14 steht
+`nicht mehr` im selben Vers). `Volk` trägt im Buch **vier** Reihen —
+*people* · *nations* · *peoples* · *nation* (4,17) —, jede am Vers entschieden.
 
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
