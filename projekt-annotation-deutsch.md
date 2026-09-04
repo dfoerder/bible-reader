@@ -366,6 +366,41 @@ Jeremia 8,7 für dieselben Vögel), `Hilfe` 4,17 en *aid* (Kollision mit
 `nicht mehr` im selben Vers). `Volk` trägt im Buch **vier** Reihen —
 *people* · *nations* · *peoples* · *nation* (4,17) —, jede am Vers entschieden.
 
+**Hesekiel (26) ist seit 04.09.2026 in Arbeit** — 48 Kapitel, 1273 Verse,
+18 Pakete nach `PAKETE_HESEKIEL.txt`, geschnitten nach Tokengewicht. Das Buch
+ist auf Formeln gebaut wie kein anderes: `dubletten.py` findet **979
+Verspaare**, fast das Vierfache von Jeremia, und der Grund ist eine einzige
+Wendung — die Wortereignisformel steht 34× zeichengleich da. Sie war schon
+entschieden, bevor das Buch anfing: Jeremia 1,4 = 2,1 = 16,1 ist derselbe
+Vers, und `ergehen an` ist nie ein Mehrwort.
+
+Paket 1 (Kap. 1 · 2 · 3) hat die drei Signaturformeln des Buches festgelegt.
+Die größte ist **`Menschensohn`** mit 93 Vorkommen: der Bestand führt 88
+Belege, **alle neutestamentlich**, mit dem messianischen Titel — in Hesekiel
+ist es die Anrede an den Propheten. Die Ausgaben trennen die beiden selbst, in
+drei von vier Sprachen (englisch über die Kleinschreibung von *man*, spanisch
+und italienisch über den fehlenden Artikel); **Französisch kann nicht
+trennen**, das bleibt eine echte Verschmelzung der Zielsprache.
+`paketcheck.py` Abschnitt A und C sind über alle drei Kapitel leer, und das
+Paket trifft mit 1447 Tokens die Planung auf den Token genau.
+
+**Ein Agent hat die Kollisionsanweisung der Vorbereitung widerlegt.** Ich
+hatte für 1,3 geschrieben, `kommen` solle vor `ergehen` auf eine Lesart
+ausweichen, „die der Bestand schon führt". Der Agent hat alle 40 `kam`-Lesarten
+ausgezählt: **jede einzelne** steht englisch in der *come*-Familie, und die
+idiomatisch nächste Stelle (1. Könige 18,46 und 2. Könige 3,15, „die Hand des
+HERRN kam über Elia/Elisa") trägt genau die kollidierende Reihe. Es gibt die
+Auflösung im Bestand nicht. Er ist deshalb den Ausgaben gefolgt — WEB, LSG und
+RIV lesen dort selbst die Kopula — und hat das ausdrücklich als Neuprägung in
+en/fr gemeldet, statt eine passende Bestandszeile zu behaupten.
+
+Zwei Befunde mit Reichweite über das Buch: der l1912mod liest an den
+`widerspenstig`-Stellen **`Volk`, wo alle vier Ausgaben „Haus" schreiben**
+(2,5 · 2,6 · 2,8) — annotiert wird das Deutsche, und die Wendung kehrt
+dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
+Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
+(*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
+
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
