@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.11.2b (04.09.2026)
+- **Aktuelle Version:** 1.11.3b (04.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -27,6 +27,7 @@
 - Eigennamen mit deutschen Entsprechungen annotiert (Christ→Christus, Moses→Mose, Egypt→Ägypten)
 - Automatische Lesezeichen (merkt sich Position pro Buch)
 - Volltextsuche über alle 66 Bücher
+- **Kopfleiste im Kapitel:** links Start und Vorlesen, in der Mitte Kapitel zurück/vor mit dem antippbaren Kapiteltitel, rechts die Suche. Ein Tipp auf den Titel klappt das Inhaltsverzeichnis des Buches auf; solange es offen ist, sind die Reiter „Training"/„Einstellungen" darunter ausgeblendet
 
 ### Multi-Wort-Ausdrücke
 
@@ -116,7 +117,7 @@ Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 - 30 Multiple-Choice-Fragen (6×5, A1–C2) zur Bestimmung des CEFR-Niveaus
 - Ergebnis: A1 bis C2; setzt auch die Trainingsstufen (`bible-train-step`, `bible-freq-step`)
 - Passt die Vokabelanzeige automatisch an
-- Jederzeit wiederholbar in den Einstellungen
+- Jederzeit wiederholbar in den Einstellungen; überspringbar über „Einstufungstest überspringen" (setzt B1)
 - Gilt pro Hauptbibel: wer die Hauptbibel wechselt und den Test für die neue Sprache noch nicht gemacht hat, bekommt ihn direkt beim Wechsel (`levelTestPending()` in `index.html`)
 
 ### Statistiken

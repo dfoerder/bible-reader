@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.3b (04.09.2026)
+
+- Kopfleiste: Suche rechts, Vorlesen links; Reiter bei offenem Inhaltsverzeichnis ausgeblendet; Einstufungstest überspringen statt Abbrechen
+
 ## v1.11.2b (04.09.2026)
 
 - Einstellungen: Hilfsbibel-Auswahl entfernt (steht auf der Startseite); Schriftgröße in 1-px-Schritten; Einstufungstest gilt pro Hauptbibel
