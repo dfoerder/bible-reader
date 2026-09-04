@@ -401,8 +401,9 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 11: 29 von 48 Kapiteln, 740 Verse, 18 809 Einträge.**
-`paketcheck.py` Abschnitt A und C sind **elfmal in Folge leer** geblieben.
+**Stand nach Paket 12: 32 von 48 Kapiteln, 816 Verse, 20 889 Einträge** — zwei
+Drittel des Buches. `paketcheck.py` Abschnitt A und C sind **zwölfmal in Folge
+leer** geblieben.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
