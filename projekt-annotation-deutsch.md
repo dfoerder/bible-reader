@@ -401,8 +401,8 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 9: 23 von 48 Kapiteln, 592 Verse, 15 039 Einträge.**
-`paketcheck.py` Abschnitt A und C sind **neunmal in Folge leer** geblieben.
+**Stand nach Paket 10: 26 von 48 Kapiteln, 657 Verse, 16 745 Einträge.**
+`paketcheck.py` Abschnitt A und C sind **zehnmal in Folge leer** geblieben.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
@@ -460,6 +460,34 @@ gesucht — „Bestechung" matcht in „Bestechungs**geld**", „Wucher" in
 „Wucher**zinsen**", „Jungfrau" in „jung**fräulichen**". Fünf Tabellenzeilen
 liefen deshalb ins Leere. **Ein Prüfmuster muss an beiden Enden gebunden
 sein:** zu eng übersieht es Vorkommen, zu weit behauptet es welche.
+
+In Paket 10 hat sich die erste Hälfte dieser Regel gleich noch einmal bestätigt,
+diesmal rechtzeitig: die **Wortereignisformel steht 50-mal im Buch, nicht 36**.
+Vierzehn Vorkommen sind umgestellt („Im elften Jahr … *erging das Wort des
+HERRN* an mich"), fast alle nach einer Datumsangabe. Sechs davon liegen in
+fertigen Kapiteln und sind **alle sechs zeichengleich** mit der Referenz — die
+Agenten hatten sie erkannt, obwohl mein Muster sie nie zeigte. Das ist der
+fünfte Formelfund dieser Art und der dritte ohne Schaden.
+
+Der praktische Schluss daraus ist nicht, bessere Muster zu schreiben, sondern
+**den Agenten die Quelle zu nennen statt der Zahl**. Seit Paket 10 werden die
+Glossenreihen der Signaturformeln maschinell aus den Kapiteldateien gezogen und
+als eigene Datei mitgegeben.
+
+Zwei Werkzeugbefunde kamen dazu. `belegt.py` meldete eine Form unter fremdem
+Lemma (`Morden` unter `Mord`) und **verschwieg dabei, dass das gesuchte Wort
+zugleich ein eigenes Lemma ist** (`morden`, belegt über `mordet` in Jeremia
+7,9) — der Hinweis stand bisher nur im Zweig „gar nicht belegt". Behoben, über
+acht Kontrollwörter null Fehlalarme. Und ein neuer buchweiter Lauf sucht
+Stellen, an denen ein im Buch verwendetes Mehrwort fehlt: **`durchs Schwert
+fallen` fehlte an drei Stellen** (11,10 · 23,25 · 24,21), alle nachgetragen.
+
+Schließlich ein Fallentyp, den kein Werkzeug finden kann: **`Kereter` hat im
+Bestand einen Zwilling unter anderer deutscher Schreibung** — `Kreter`, acht
+Belege, mit genau den Glossen, die alle vier Ausgaben schreiben. Zwei
+Schreibungen desselben Namens teilen weder Form noch Stamm. Bei Eigennamen
+lohnt deshalb der Blick auf die Ausgaben: schreiben alle vier dasselbe, steht
+der Name womöglich schon im Bestand.
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
