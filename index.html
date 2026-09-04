@@ -165,8 +165,8 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.1b';
-const APP_DATE = '01.09.2026';
+const APP_VERSION = '1.11.2b';
+const APP_DATE = '04.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -427,8 +427,8 @@ const I18N={
   statsProgress:{de:'Dein Fortschritt',en:'Your progress'},
   appLanguage:{de:'App-Sprache',en:'App language'},
   germanTranslation:{de:'Deutsche Übersetzung',en:'German translation'},
-  germanTranslationHint:{de:'Wird beim Aufklappen der Verse angezeigt.',en:'Shown when expanding verses.'},
-  showAllDeVerses:{de:'Alle deutschen Verse einblenden',en:'Show all German verses'},
+  germanTranslationHint:{de:'Sonst erscheint der Vers der Hilfsbibel erst beim Aufklappen.',en:'Otherwise the helper Bible verse appears only when you expand a verse.'},
+  showAllDeVerses:{de:'Verse der Hilfsbibel immer einblenden',en:'Always show helper Bible verses'},
   wordTranslations:{de:'Wortübersetzungen',en:'Word translations'},
   autoShowTranslations:{de:'Übersetzungen automatisch anzeigen',en:'Show translations automatically'},
   autoShowTranslationsHint:{de:'Aus: Übersetzungen erscheinen nur, wenn man ein Wort antippt.',en:'Off: translations appear only when you tap a word.'},
@@ -680,8 +680,8 @@ const I18N_ES = {
   statsProgress: 'Tu progreso',
   appLanguage: 'Idioma de la app',
   germanTranslation: 'Traducción alemana',
-  germanTranslationHint: 'Se muestra al desplegar los versículos.',
-  showAllDeVerses: 'Mostrar todos los versículos alemanes',
+  germanTranslationHint: 'Si no, el versículo de la Biblia auxiliar aparece solo al desplegarlo.',
+  showAllDeVerses: 'Mostrar siempre los versículos de la Biblia auxiliar',
   wordTranslations: 'Traducciones de palabras',
   autoShowTranslations: 'Mostrar traducciones automáticamente',
   autoShowTranslationsHint: 'Desactivado: las traducciones aparecen solo al tocar una palabra.',
@@ -928,8 +928,8 @@ const I18N_IT = {
   statsProgress: 'I tuoi progressi',
   appLanguage: 'Lingua dell\'app',
   germanTranslation: 'Traduzione tedesca',
-  germanTranslationHint: 'Mostrata quando si espandono i versetti.',
-  showAllDeVerses: 'Mostra tutti i versetti tedeschi',
+  germanTranslationHint: 'Altrimenti il versetto della Bibbia ausiliaria appare solo espandendolo.',
+  showAllDeVerses: 'Mostra sempre i versetti della Bibbia ausiliaria',
   wordTranslations: 'Traduzioni delle parole',
   autoShowTranslations: 'Mostra le traduzioni automaticamente',
   autoShowTranslationsHint: 'Off: le traduzioni appaiono solo quando tocchi una parola.',
@@ -1167,8 +1167,8 @@ const I18N_FR = {
   statsProgress: 'Ta progression',
   appLanguage: 'Langue de l\'application',
   germanTranslation: 'Traduction allemande',
-  germanTranslationHint: 'Affichée lors du déploiement des versets.',
-  showAllDeVerses: 'Afficher tous les versets allemands',
+  germanTranslationHint: 'Sinon, le verset de la Bible auxiliaire n\'apparaît qu\'au déploiement.',
+  showAllDeVerses: 'Toujours afficher les versets de la Bible auxiliaire',
   wordTranslations: 'Traductions des mots',
   autoShowTranslations: 'Afficher les traductions automatiquement',
   autoShowTranslationsHint: 'Désactivé : les traductions n\'apparaissent qu\'en touchant un mot.',
@@ -2954,8 +2954,20 @@ function App({data}){
   const onboarded=rawLSget('bible-onboarded')||levelTested||LS.get('bible-reader-state')||LS.get('nt-reader-state');
   const langChosen=rawLSget('bible-lang-chosen');
   const bibleChosen=rawLSget('bible-haupt')!=null;
+  // Der Einstufungstest gehört zur Hauptbibel (bible-level-tested liegt unter
+  // deren Instanz-Präfix). Nach einem Hauptbibelwechsel steht er deshalb erneut
+  // an, auch wenn das Onboarding global längst abgeschlossen ist.
+  const levelTestPending=()=>{
+    if(!INSTANCE.hasLevelTest||levelTested||!INSTANCE.hasAnno)return false;
+    const ag=INSTANCE.annoGlossLangs||[]; const glP=LS.get('bible-gloss-lang');
+    let gl;
+    if(glP==='none')gl=null;
+    else if(glP&&ag.includes(glP))gl=glP;
+    else gl=resolveGlossLang(ag,getLang());
+    return !!gl;
+  };
   const [phase,setPhase]=useState(()=>{
-    if(onboarded)return saved.phase||'nav';
+    if(onboarded)return levelTestPending()?'leveltest':(saved.phase||'nav');
     if(!langChosen)return 'langselect';
     if(!bibleChosen)return 'biblechoose';
     // Bibel gewählt, mitten im Onboarding → Hilfsbibel evtl. noch offen (mehrere
@@ -2965,13 +2977,7 @@ function App({data}){
       if(!resolved)return 'hilfschoose';
     }
     if(!INSTANCE.hasAnno)return 'nav';
-    // Hilfsbibel geklärt → Gloss-/Übungssprache nach Regel 5 bestimmen.
-    const ag=INSTANCE.annoGlossLangs||[]; const appL=getLang(); const glP=LS.get('bible-gloss-lang');
-    let gl;
-    if(glP==='none')gl=null;
-    else if(glP&&ag.includes(glP))gl=glP;
-    else gl=resolveGlossLang(ag,appL);
-    return (gl&&INSTANCE.hasLevelTest&&!levelTested)?'leveltest':'nav';
+    return levelTestPending()?'leveltest':'nav';
   });
   // Onboarding abschließen, wenn weder Hilfsbibel-Wahl noch Test ansteht.
   useEffect(()=>{
@@ -3716,11 +3722,11 @@ function App({data}){
   const changeFontSizePill=useCallback(v=>{setFontSizePill(v);FONT_LS.set('bible-font-size-pill',v)},[]);
 
   // Schriftgrößen: Auf beiden Einstellungsflächen steht nur noch ein Minus/Plus,
-  // das die vier Schriftgrößen proportional in 10-%-Schritten skaliert; die
+  // das alle vier Schriftgrößen gemeinsam um genau 1 px verstellt; die
   // Einzelwerte stehen unter „Details". Die Zeilenabstände sind Verhältniswerte
   // und wachsen mit der Schrift ohnehin mit — sie bleiben deshalb außen vor und
   // werden nur in den Details verstellt. Erreicht eine der Größen ihre Grenze,
-  // bleibt der ganze Schritt aus, sonst verschöben sich die Verhältnisse.
+  // bleibt der ganze Schritt aus, sonst verschöben sich die Abstände.
   const FONT_RANGE={size:[12,30],tr:[10,26],pill:[10,26],ex:[12,30],lh:[1.2,3]};
   const fontsAtLimit=up=>{
     const at=(v,r)=>up?v>=r[1]:v<=r[0];
@@ -3729,8 +3735,8 @@ function App({data}){
   };
   const scaleFonts=up=>{
     if(fontsAtLimit(up))return;
-    const f=up?1.1:1/1.1;
-    const px=(v,r)=>Math.min(r[1],Math.max(r[0],Math.round(v*f)));
+    const d=up?1:-1;
+    const px=(v,r)=>Math.min(r[1],Math.max(r[0],v+d));
     changeFontSize(px(fontSize,FONT_RANGE.size));
     changeFontSizeTr(px(fontSizeTr,FONT_RANGE.tr));
     changeFontSizePill(px(fontSizePill,FONT_RANGE.pill));
@@ -3752,9 +3758,9 @@ function App({data}){
       <div style={{marginTop:small?4:8}}>
         <span style={lab(0)}>{t('fsBibleText')}</span>
         <div style={{...S.fontSizeRow,marginTop:6}}>
-          <button onClick={()=>changeFontSize(Math.max(12,fontSize-2))} style={S.fontSizeBtn}>A−</button>
+          <button onClick={()=>changeFontSize(Math.max(12,fontSize-1))} style={S.fontSizeBtn}>A−</button>
           <span style={S.fontSizePreview}>{fontSize}px</span>
-          <button onClick={()=>changeFontSize(Math.min(30,fontSize+2))} style={S.fontSizeBtn}>A+</button>
+          <button onClick={()=>changeFontSize(Math.min(30,fontSize+1))} style={S.fontSizeBtn}>A+</button>
         </div>
         {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>}
         <span style={lab(sub)}>{t('lineSpacing')}</span>
@@ -3767,9 +3773,9 @@ function App({data}){
       <div style={{marginTop:gap}}>
         <span style={lab(0)}>{t('helperBible')}</span>
         <div style={{...S.fontSizeRow,marginTop:6}}>
-          <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-2))} style={S.fontSizeBtn}>A−</button>
+          <button onClick={()=>changeFontSizeTr(Math.max(10,fontSizeTr-1))} style={S.fontSizeBtn}>A−</button>
           <span style={S.fontSizePreview}>{fontSizeTr}px</span>
-          <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+2))} style={S.fontSizeBtn}>A+</button>
+          <button onClick={()=>changeFontSizeTr(Math.min(26,fontSizeTr+1))} style={S.fontSizeBtn}>A+</button>
         </div>
         {!small&&<p style={{fontFamily:sans,fontSize:fontSizeTr,fontStyle:'italic',lineHeight:lineHeightTr,color:'var(--t-muted)',marginTop:8}}>{t('fontPreview')}</p>}
         <span style={lab(sub)}>{t('lineSpacing')}</span>
@@ -3782,18 +3788,18 @@ function App({data}){
       <div style={{marginTop:gap}}>
         <span style={lab(0)}>{t('fsWordGloss')}</span>
         <div style={{...S.fontSizeRow,marginTop:6}}>
-          <button onClick={()=>changeFontSizePill(Math.max(10,fontSizePill-2))} style={S.fontSizeBtn}>A−</button>
+          <button onClick={()=>changeFontSizePill(Math.max(10,fontSizePill-1))} style={S.fontSizeBtn}>A−</button>
           <span style={S.fontSizePreview}>{fontSizePill}px</span>
-          <button onClick={()=>changeFontSizePill(Math.min(26,fontSizePill+2))} style={S.fontSizeBtn}>A+</button>
+          <button onClick={()=>changeFontSizePill(Math.min(26,fontSizePill+1))} style={S.fontSizeBtn}>A+</button>
         </div>
         {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>beginning <span style={{...S.tr,fontSize:fontSizePill}}>{t('fontPreviewTr')}</span></p>}
       </div>
       <div style={{marginTop:gap}}>
         <span style={lab(0)}>{t('fsExercises')}</span>
         <div style={{...S.fontSizeRow,marginTop:6}}>
-          <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-2))} style={S.fontSizeBtn}>A−</button>
+          <button onClick={()=>changeFontSizeEx(Math.max(12,fontSizeEx-1))} style={S.fontSizeBtn}>A−</button>
           <span style={S.fontSizePreview}>{fontSizeEx}px</span>
-          <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+2))} style={S.fontSizeBtn}>A+</button>
+          <button onClick={()=>changeFontSizeEx(Math.min(30,fontSizeEx+1))} style={S.fontSizeBtn}>A+</button>
         </div>
         {!small&&<p style={{fontFamily:'var(--t-serif)',fontSize:fontSizeEx,lineHeight:1.8,color:'var(--t-title)',marginTop:8}}>{t('fontPreview')}</p>}
       </div>
@@ -4231,13 +4237,12 @@ function App({data}){
           <div style={S.levelBtns}>{[{k:'classic',i:'layoutClassic'},{k:'icf-light',i:'layoutModernLight'},{k:'icf',i:'layoutModernDark'}].map(o=>(<button key={o.k} onClick={()=>changeLayout(o.k)} style={{...S.lvlBtn,...(layout===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('germanTranslation')}</span>
-          <div style={S.levelBtns}>{Object.values(BIBLES).filter(b=>b.id!==INSTANCE.id).map(b=>(<button key={b.id} onClick={()=>changeDeTrans(b.id)} style={{...S.lvlBtn,...(deTrans===b.id?S.lvlActive:{})}}>{b.label}</button>))}</div>
-          <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
-          <label style={{...S.toggleRow,marginTop:8}}>
+          <span style={S.settingsLabel}>{t('helperBible')}</span>
+          <label style={{...S.toggleRow,marginTop:6}}>
             <input type="checkbox" checked={showAllDe} onChange={()=>changeShowAllDe(!showAllDe)}/>
             <span style={S.toggleLabel}>{t('showAllDeVerses')}</span>
           </label>
+          <p style={S.settingsHint}>{t('germanTranslationHint')}</p>
         </div>
         {INSTANCE.hasAnno&&<div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('glossSetting')}</span>

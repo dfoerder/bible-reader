@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.11.1b (01.09.2026)
+- **Aktuelle Version:** 1.11.2b (04.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -117,6 +117,7 @@ Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 - Ergebnis: A1 bis C2; setzt auch die Trainingsstufen (`bible-train-step`, `bible-freq-step`)
 - Passt die Vokabelanzeige automatisch an
 - Jederzeit wiederholbar in den Einstellungen
+- Gilt pro Hauptbibel: wer die Hauptbibel wechselt und den Test für die neue Sprache noch nicht gemacht hat, bekommt ihn direkt beim Wechsel (`levelTestPending()` in `index.html`)
 
 ### Statistiken
 
@@ -232,7 +233,7 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-ui-lang` | UI-Sprache (de/en) |
 | `bible-view-mode` | Ansichtsmodus (phone/desktop) |
 | `bible-layout` | Theme/Layout (classic/icf/icf-light) |
-| `bible-de-trans` | Gewählte deutsche Übersetzung (l1912mod/web_deu) |
+| `bible-de-trans` | Gewählte Hilfsbibel (BIBLES-Registry-ID). Wird auf der Startseite unter „Hilfsbibel" gewählt — in den Einstellungen steht dort nur noch der Schalter, ob ihre Verse immer eingeblendet werden |
 | `bible-word-data` | Wortdaten pro Wort ({familiarity, lasttrained, numberoftrainings, learned, forgotten}) |
 | `bible-word-data-backups` | Liste zeitgestempelter Lernstand-Backups (Entwickler-Werkzeug „Test-Daten laden"; max. 12, ältestes wird bei Speicherüberlauf verworfen). Jedes Backup ist ein vollständiger Snapshot: Wortdaten, Lese-Level (`userStep`) samt Wortlisten, Trainingsstufen, Lernfokus, Übungsart, Trainingshistorie und Kapitel-Markierungen (`unk-*`/`rev-*`). Migriert den früheren Einzel-Slot `bible-word-data-backup` (nur Wortdaten). |
 | `bible-test-accel` | Beschleunigter Test-Modus (Entwickler-Einstellungen): alle Lern-Fristen ÷96 (unbekannt 15 min · gelernt 30 min · gefestigt 105 min · sicher 15 h) und nur ¼ des Wortpools (pro Level/Sublevel jedes 4. Wort — Level-Verhältnisse bleiben erhalten). Wirkt beim App-Laden; ⚡-Hinweis im Training. |
@@ -241,9 +242,9 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `bible-train-step` | Aktuelle Trainingsstufe CEFR-Modus (0–17) |
 | `bible-freq-step` | Aktuelle Trainingsstufe Häufigkeits-Modus (0–17) |
 | `bible-training-history` | Trainingshistorie (letzte 200) |
-| `bible-level-tested` | Einstufungstest absolviert |
+| `bible-level-tested` | Einstufungstest absolviert — pro Hauptbibel (Instanz-Präfix). Nach einem Hauptbibelwechsel erscheint der Test der neuen Bibel deshalb sofort, auch wenn das Onboarding global schon abgeschlossen ist |
 | `bible-bookmarks` | Lesezeichen pro Buch |
-| `bible-font-size` / `-tr` / `-pill` / `-ex` | Schriftgrößen (Bibeltext / Hilfsbibel / Wortübersetzung / Übungen). Das Minus/Plus in den Einstellungen skaliert alle vier proportional (10-%-Schritte, gesperrt sobald ein Wert seine Grenze erreicht); einzeln einstellbar unter „Details". **Ohne Instanz-Präfix gespeichert** — die Schriftgrößen gelten für alle Hauptbibeln gemeinsam (`FONT_LS` in `index.html`; alte, pro Instanz abgelegte Werte werden als Fallback gelesen). |
+| `bible-font-size` / `-tr` / `-pill` / `-ex` | Schriftgrößen (Bibeltext / Hilfsbibel / Wortübersetzung / Übungen). Das Minus/Plus in den Einstellungen verstellt alle vier gemeinsam um 1 px (gesperrt, sobald ein Wert seine Grenze erreicht); einzeln — ebenfalls in 1-px-Schritten — unter „Details". **Ohne Instanz-Präfix gespeichert** — die Schriftgrößen gelten für alle Hauptbibeln gemeinsam (`FONT_LS` in `index.html`; alte, pro Instanz abgelegte Werte werden als Fallback gelesen). |
 | `bible-line-height` / `-tr` | Zeilenabstände (Bibeltext / Hilfsbibel) — bewusst NICHT Teil der Sammelskalierung, da sie als Verhältniswerte mit der Schrift ohnehin mitwachsen; ebenfalls ohne Instanz-Präfix (gilt für alle Hauptbibeln) |
 | `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
