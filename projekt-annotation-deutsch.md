@@ -401,8 +401,11 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 13: 35 von 48 Kapiteln, 895 Verse, 23 001 Einträge.**
-`paketcheck.py` Abschnitt A und C sind **dreizehnmal in Folge leer** geblieben.
+**Stand nach Paket 14: 38 von 48 Kapiteln, 984 Verse, 25 464 Einträge.**
+`paketcheck.py` Abschnitt C ist **vierzehnmal in Folge leer** geblieben;
+Abschnitt A hatte in Paket 14 seinen ersten Treffer — und der ist ein Erfolg:
+**zwei Agenten haben dasselbe Wort unabhängig neu geprägt und dieselbe Reihe
+gewählt** (`besiedeln`, 36,33 und 38,12), der Unterschied ist reine Flexion.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
