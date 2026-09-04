@@ -401,9 +401,8 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 12: 32 von 48 Kapiteln, 816 Verse, 20 889 Einträge** — zwei
-Drittel des Buches. `paketcheck.py` Abschnitt A und C sind **zwölfmal in Folge
-leer** geblieben.
+**Stand nach Paket 13: 35 von 48 Kapiteln, 895 Verse, 23 001 Einträge.**
+`paketcheck.py` Abschnitt A und C sind **dreizehnmal in Folge leer** geblieben.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
@@ -503,6 +502,25 @@ zugleich ein Verb-Lemma ist. Meine Bedingung verglich kleingeschrieben, und
 `Flicken`/`flicken` sind kleingeschrieben identisch. **Gerade das ist die
 häufigste Bauform dieses Falltyps** (`morden`/`Morden`, `schichten`/`Schichten`).
 Jetzt case-sensitiv.
+
+In Paket 13 ist ein Befund aufgetaucht, der **größer ist als dieses Buch** und
+deshalb offen bleibt: die **Elision romanischer Artikel vor Vokal**. Ein Agent
+meldete, dass 18,21 · 18,23 · 18,24 französisch *le* und italienisch *il* vor
+*impie*/*empio* schreiben, während Kapitel 33 *l'* schreibt. Die Messung ergab
+194 nicht elidierte Stellen allein in Hesekiel und **2828 elidierte gegen 2091
+nicht elidierte im Gesamtbestand**. Das ist keine Mehrheit, die eine
+Entscheidung trägt, und die Frage ist grundsätzlich: Wort-für-Wort-Glossen
+sind kein Fließtext, *le* ist als Glosse für `der` korrekt, und die Elision
+ist eine Sandhi-Erscheinung des zusammenhängenden Textes. Eine Korrektur
+mitten im Buch hätte 194 Stellen hier gegen 4919 dort gestellt — sie ist
+zurückgenommen und der Befund als Bestandsfrage vorgemerkt.
+
+Ebenfalls aus Paket 13, zur Zuverlässigkeit von `hints.py`: das Werkzeug
+vergleicht **Bestands-Defaultformen**, nicht die Formen im Vers. Dadurch hat
+es in 32,25 eine Kollision *unter*gemeldet (nur Englisch statt vier Sprachen)
+und in 33,13 eine gemeldet, **die es nicht gibt** — dort stehen `Gerechter`
+und `gerecht` in verschiedenem Numerus und tragen deshalb von sich aus
+verschiedene Glossen. Beide Male hat erst die Prüfung am Vers das geklärt.
 
 Zwei Regeln haben sich in Paket 11 geschärft. Die erste: **eine Ausgabe kann
 nicht nur ein Wort, sondern eine ganze Liste anders zuordnen.** In der
