@@ -401,8 +401,8 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 10: 26 von 48 Kapiteln, 657 Verse, 16 745 Einträge.**
-`paketcheck.py` Abschnitt A und C sind **zehnmal in Folge leer** geblieben.
+**Stand nach Paket 11: 29 von 48 Kapiteln, 740 Verse, 18 809 Einträge.**
+`paketcheck.py` Abschnitt A und C sind **elfmal in Folge leer** geblieben.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
@@ -488,6 +488,34 @@ Belege, mit genau den Glossen, die alle vier Ausgaben schreiben. Zwei
 Schreibungen desselben Namens teilen weder Form noch Stamm. Bei Eigennamen
 lohnt deshalb der Blick auf die Ausgaben: schreiben alle vier dasselbe, steht
 der Name womöglich schon im Bestand.
+
+**Diese Prüfung hat im nächsten Paket dreimal getroffen**: `Minnit` = `Minnith`
+(Richter 11,33), `Elischa` = `Elisa` (1. Chronika 1,7), `Bet-Togarma` =
+`Thogarma`. Der `Elischa`-Fall zeigt zugleich die Grenze: `Elisa` trägt im
+Bestand auch 79× den **Propheten**, ein bloßes Übernehmen hätte Insel und
+Prophet verschmolzen. Es braucht also ein eigenes Lemma mit der übernommenen
+Reihe, nicht das fremde Lemma selbst.
+
+Der `belegt.py`-Fix aus Paket 10 hat dabei **nicht funktioniert** — ein Agent
+fand, dass `flicken` nur als Substantiv `Flicken` gemeldet wird, obwohl es
+zugleich ein Verb-Lemma ist. Meine Bedingung verglich kleingeschrieben, und
+`Flicken`/`flicken` sind kleingeschrieben identisch. **Gerade das ist die
+häufigste Bauform dieses Falltyps** (`morden`/`Morden`, `schichten`/`Schichten`).
+Jetzt case-sensitiv.
+
+Zwei Regeln haben sich in Paket 11 geschärft. Die erste: **eine Ausgabe kann
+nicht nur ein Wort, sondern eine ganze Liste anders zuordnen.** In der
+Edelsteinliste von 28,13 verschieben alle vier Ausgaben die Steinreihe so, dass
+ihnen zu folgen zwei Kollisionen im selben Vers erzeugt hätte. Der Test für
+„Bestand oder Ausgabe?" läuft deshalb über den Vers, nicht über das Wort:
+erzeugt die Ausgabenlesart eine Kollision, ist sie falsch.
+
+Die zweite betrifft `kongruenz.py`. Die in Paket 9 eingebaute Doppelprüfung
+gegen Adjektive war ein Rückschritt — sie hätte echte Treffer verschluckt.
+Ersetzt durch etwas, das im Deutschen umsonst zu haben ist: **die
+Großschreibung.** Der Lauf sucht das erste großgeschriebene Folgewort, weil
+Nomen groß und Adjektive klein sind. Zwölf Fehlalarme verschwanden, zwei
+verdeckte Treffer kamen ans Licht.
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
