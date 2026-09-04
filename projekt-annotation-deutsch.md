@@ -401,8 +401,8 @@ dutzendfach wieder. Und `Wesen` trägt im Buch **zwei** Bedeutungen: das
 Thronwagen-`Wesen` (*living creatures*) und in 3,19 den Lebenswandel
 (*nature*, nach Richter 2,19, wo wörtlich „ihr böses Wesen" steht).
 
-**Stand nach Paket 8: 21 von 48 Kapiteln, 512 Verse, 13 143 Einträge.**
-`paketcheck.py` Abschnitt A und C sind **achtmal in Folge leer** geblieben.
+**Stand nach Paket 9: 23 von 48 Kapiteln, 592 Verse, 15 039 Einträge.**
+`paketcheck.py` Abschnitt A und C sind **neunmal in Folge leer** geblieben.
 
 Drei Erkenntnisse aus den Paketen 5 bis 8, die über Hesekiel hinausreichen:
 
@@ -438,6 +438,28 @@ schlägt durch, wo das italienische abweicht (`Hand`/`mano`, `Kopf`/`testa`,
 `Bund`/`alleanza`). Der Fehlertyp ist nicht hesekielspezifisch — ein Lauf
 gegen die 51 fertigen Bücher steht noch aus.
 
+In Paket 9 kam **Französisch** dazu, nachdem ein Agent `sa règles` in 18,6
+fand — der italienische Lauf konnte das nicht sehen, weil `mestruazione` dort
+Singular ist. Geprüft wird französisch nur der Numerus; das Genus hängt am
+Nomen und steht vor Vokal auch bei Femininum auf `son`. Drei weitere echte
+Fehler (3,18 · 16,39 · 16,47), alle behoben.
+
+**Der vierte und schwerste Vorbereitungsfehler des Buches war meiner:** die
+Vorgabetabelle für Paket 9 gab **beide Signaturformeln falsch wieder** — die
+Wortereignisformel in vier Feldern, die Botenformel in dreien. Die fertigen
+Kapitel waren durchweg richtig; ich hatte die Reihen von Hand abgeschrieben
+statt sie aus einer Kapiteldatei zu ziehen. Beide Agenten haben es unabhängig
+gefunden und sind dem Bestand gefolgt. Daraus die Regel, die jetzt in
+`PAKETE_HESEKIEL.txt` steht: **eine Reihe, die im Bestand schon zwanzigmal
+steht, wird nie abgeschrieben.** Jede Vorgabetabelle nennt ab sofort die
+Kapiteldatei und den Vers, aus dem eine Formel stammt.
+
+Und die Lehre vom zu engen Suchmuster hat ihre Umkehrung gefunden. Beim Prüfen
+derselben Tabelle gegen den Quelltext habe ich mit ungebundenen Mustern
+gesucht — „Bestechung" matcht in „Bestechungs**geld**", „Wucher" in
+„Wucher**zinsen**", „Jungfrau" in „jung**fräulichen**". Fünf Tabellenzeilen
+liefen deshalb ins Leere. **Ein Prüfmuster muss an beiden Enden gebunden
+sein:** zu eng übersieht es Vorkommen, zu weit behauptet es welche.
 | Buch | Kapitel | Verse | Einträge |
 |---|---|---|---|
 | **1. Mose (1)** | **50** | **1533** | **33 781** |
