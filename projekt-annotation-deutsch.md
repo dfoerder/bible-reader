@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **54 von 66 Büchern** annotiert. Es fehlen die Bücher 28–39.
+Damit sind **55 von 66 Büchern** annotiert. Es fehlen die Bücher 29–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3296,3 +3296,91 @@ neutestamentlichen *mystery*, die **zweiundzwanzig neuen Lesarten unter
 vorhandenen Lemmata** (`Hof`, `Gericht`, `Gewalt`, `Klaue`, `Rat`, `Recht`,
 `Rind`, `Erscheinung`, `Bedrängnis`, `Lager`, `Menge`, `Susa`, `Schrift` …) und
 der Rest Numerus. Keine unerklärte Abweichung.
+
+## Hosea (28) — fertig am 05.09.2026
+
+**14 Kapitel, 197 Verse, 4731 Einträge, 231 Mehrwörter**, in vier Paketen.
+`validate.py 28`, `qa.py 28`, `hilfsverb.py 28` und `kongruenz.py 28` melden
+nichts; `validate.py alle` zählt jetzt **55 Bücher mit `[ok]`**. Es fehlen die
+Bücher 29–39, elf kleine Propheten.
+
+`paketcheck` Abschnitt A war in **allen vier Paketen leer**. Details in
+`anno-tools/WORTFELD_HOSEA.md` und `anno-tools/PAKETE_HOSEA.txt`.
+
+### Ein Buch ohne Dubletten — und drei Vorlagen, die trotzdem da waren
+
+`dubletten.py` findet in Hosea **null Paare**. Es gibt also keine
+Vorlagenkette und keine Formelentscheidung am Anfang; was zusammengehalten
+werden muss, ist der Wortschatz.
+
+Drei Überschneidungen liegen unter der Schwelle des Werkzeugs (60 % gemeinsame
+Wortformen, fünf Tokens) und waren trotzdem wichtig: **5,3 ↔ 6,10** (beim
+Einsammeln angeglichen), **6,4 ↔ 13,3** und **12,2 ↔ 13,15**. Die letzten
+beiden haben die Agenten selbst gefunden und über den Bericht abgestimmt.
+
+### Die vier Ausgaben zählen untereinander verschieden
+
+Das hat es in dieser Form noch nicht gegeben. **Französisch folgt der
+deutschen Zählung durch die Kapitel 1 bis 12**, während englisch, spanisch und
+italienisch in Kapitel 1/2 um zwei Verse versetzt sind; ab Kapitel 13 zählen
+alle vier gleich, aber anders als das Deutsche. **Spanisch zieht 12,14 und
+12,15 zu einem Vers zusammen** — 196 Verse gegen 197 im ganzen Buch.
+
+**`ausgaben.py` wählt in vier Kapiteln den falschen Versatz** (1 · 11 · 12
+spanisch · 13) und warnt jedes Mal selbst, dass +0 besser liegt. Die Warnung
+war jedes Mal richtig.
+
+### `parallelen.py` — dreimal gefragt, einmal getroffen
+
+Für die vermuteten NT-Zitate in Hosea 6,6 (Matthäus 9,13 / 12,7) und 11,1
+(Matthäus 2,15) meldet das Werkzeug **nichts, und das ist richtig**: der
+deutsche Wortlaut ist ein anderer, der längste gemeinsame Block liegt unter
+vier Tokens. Für **13,14 (1. Korinther 15,55)** meldet es fünf Tokens wörtlich
+— und dieser Fall ist der lehrreichste des Buches: **keine der vier Ausgaben
+liest dort „Stachel"** (WEB *your plagues*, LSG *ta peste*, RV *yo seré tu
+muerte*). Der deutsche Text folgt dem neutestamentlichen Zitat, also folgt die
+Glosse ihm auch — der Bestand entscheidet gegen alle vier Ausgaben, weil der
+deutsche Text es tut.
+
+### Vier Werkzeugverbesserungen
+
+1. **`promptcheck.py` liest deutsche Anführungszeichen.** Zwei falsche Wörter
+   standen in einem Verszitat statt in Backticks und rutschten durch.
+2. **`belegt.py` sagt, ob es die FORM oder das LEMMA zählt**, und meldet die
+   Lesarten des Lemmas mit. Der Fehler war mir viermal unterlaufen.
+3. **`kongruenz.py` prüft das Hilfsverb beim reflexiven Perfekt** — französisch
+   *être*, italienisch *essere*, nicht *avoir*/*avere*. Vier Stellen im Buch,
+   drei davon falsch. Der Lauf sucht auch **hinter** dem Partizip, weil im
+   Nebensatz dort das Hilfsverb steht.
+4. **Zwei Ausnahmelisten ergänzt**: italienische Feminina auf `-i` und
+   französische Unveränderliche auf `-s`.
+
+### Die Grenzen des RIV-Anlautdetektors sind jetzt vermessen
+
+Hosea hat **sechzehn RIV-Defekte** ergeben, elf davon fehlende
+Anfangsbuchstaben. Zwei bemessen den Detektor selbst:
+
+- **`de' oro` statt `de' loro`** (11,6) findet er nicht, weil `oro` selbst ein
+  häufiges Wort ist (Gold). Wo das verstümmelte Wort zufällig ein echtes ergibt,
+  hilft nur Lesen.
+- **`uardiano` statt `guardiano`** (12,12) fällt durch die Häufigkeitsschwelle:
+  der Lauf verlangt ein mindestens zwanzigmal häufigeres Gegenstück, `guardiano`
+  hat fünfzehn Belege.
+
+**Die in `RIV_ANLAUTFEHLER.md` gemessenen 440 verdächtigen Vorkommen sind damit
+doppelt eine Untergrenze, keine Zahl.**
+
+### Drei Namensbefunde, die Agenten selbst angewandt haben
+
+Die Befunddatei `BEFUNDE_RIV_ANLAUT_J.md` aus Daniel hat gewirkt, ohne dass ein
+Prompt darauf hinweisen musste. Der Agent für Hosea 1 hat nachgemessen, dass
+der Bestand `Jehu` italienisch 58× als *Iehu* führt, während **RIV 73× `Jehu`
+schreibt und kein einziges *Iehu***, und die richtige Form gesetzt. Der Agent
+für Hosea 11 fand denselben Fall bei **`Zeboim`**: Bestand *Seboim* (4 von 6
+Belegen), RIV **7× `Tseboim`, null `Seboim`** — die zweite Bestandslesart hat
+es bereits richtig.
+
+Dazu ein neues Lemma für dieselbe Stadt: **`Moph`** (9,6). Der Bestand führt
+Memphis mit fr *Noph* und it *Nof*; in Hosea schreiben der deutsche Text
+`Moph`, LSG „Moph" und RIV „Memfi". Damit läuft Memphis unter drei
+französisch-italienischen Schreibungen — gemeldet, nicht vereinheitlicht.
