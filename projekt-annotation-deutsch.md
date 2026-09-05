@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **55 von 66 Büchern** annotiert. Es fehlen die Bücher 29–39.
+Damit sind **56 von 66 Büchern** annotiert. Es fehlen die Bücher 30–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3384,3 +3384,101 @@ Dazu ein neues Lemma für dieselbe Stadt: **`Moph`** (9,6). Der Bestand führt
 Memphis mit fr *Noph* und it *Nof*; in Hosea schreiben der deutsche Text
 `Moph`, LSG „Moph" und RIV „Memfi". Damit läuft Memphis unter drei
 französisch-italienischen Schreibungen — gemeldet, nicht vereinheitlicht.
+
+## Joel (29) — fertig am 05.09.2026
+
+4 Kapitel, 73 Verse, **1662 Einzelwort- und 74 Mehrwort-Einträge**. Ein
+einziges Paket über das ganze Buch, vier Agenten, ein Kapitel je Agent.
+`validate.py 29` meldet 0 Befunde bei 1666 Tokens (4 Satzzeichen), `qa.py 29`
+0 Verdachtsfälle, `kongruenz.py` und `hilfsverb.py` 0, `dubletten.py` 0 Paare.
+**`paketcheck.py` Abschnitt A war leer** — jedes im Buch neu geprägte Lemma
+trägt in allen vier Kapiteln dieselbe Reihe. Vollständig in
+`anno-tools/WORTFELD_JOEL.md`.
+
+### Die Heuschreckenreihen — der Fall, in dem die Ausgaben unbrauchbar sind
+
+Joel nennt vier Heuschreckenarten in 1,4 und wiederholt sie in 2,25. **WEB und
+RV1909 ordnen 2,25 nach der Reihenfolge von 1,4 um, LSG und RIV folgen dem
+Hebräischen.** Dieselbe Tierbezeichnung steht in beiden Versen also an
+verschiedenen hebräischen Wörtern — eine positionsweise Übernahme aus einer
+Ausgabe wäre in einem der beiden Verse verschoben. LSG transliteriert drei der
+vier überhaupt nicht (*gazam*, *jélek*, *hasil*).
+
+Der Kapitel-2-Agent hat das erkannt und **die Reihen des schon fertigen
+Kapitels 1 übernommen statt einer Ausgabe zu folgen**. Beim Einsammeln standen
+sie in 1,4 und 2,25 zeichengleich — Wort für Wort, Level für Level. Zwei der
+vier Namen sind neu geprägt (`Nagerheuschrecke`, `Wanderheuschrecke`), `Larve`
+folgt Ps 105,34, und `Fresser` folgt der **AT**-Lesart Ri 14,14 (*devourer*)
+statt der NT-Mehrheit *glutton* — eine Lexikonfalle, in die zwei von drei
+Belegen geführt hätten.
+
+### Eine Angleichung, die eine Kollision baute — und was sie über Vorlagen lehrt
+
+Joel 3,1–5 ist in Apg 2,17–21 zitiert. Der Token-für-Token-Abgleich schien zu
+zeigen, dass Joel 3,1 `Menschen` falsch stehe: der Bestand hat in Apg 2,17
+*people · hombres · hommes · uomini*, Joel *human beings · seres humanos ·
+êtres humains · esseri umani*. Die Angleichung war geschrieben, als
+`glosskollision.py` meldete, was sie angerichtet hatte: **im selben Vers steht
+`Männer`**, und das trägt *hombres · hommes · uomini*.
+
+Der Blick zurück in die Vorlage zeigte, dass **Apg 2,17 die Verschmelzung
+selbst trägt** — dort stehen `Menschen` und `Männer` in drei Sprachen
+zeichengleich im selben Vers. Der Kapitel-3-Agent hatte den Fall gelöst, ohne
+ihn zu erwähnen; die Vorlage hatte ihn nicht. Zurückgenommen.
+
+Das ist derselbe Fehler wie in Daniel 3,18, mit einer schärferen Pointe: dort
+hatte ich eine Bestandslesart gegen eine andere getauscht, hier hätte ich mich
+auf ein **wörtliches Zitat derselben Stelle** berufen können. Eine Vorlage
+belegt nicht, dass sie richtig ist.
+
+### Eine Lücke im eigenen Prüfverfahren
+
+Die n-Gramm-Gegenrechnung des Koordinators (4- bis 9-Wort-Folgen gegen den
+gesamten Bestand und buchintern) indizierte bisher **nur Einzelwort-Einträge**.
+In Joel gingen dadurch `einberufen` in 1,14 (*convene*) und 2,15 (*summon*)
+auseinander, obwohl die beiden Verse wörtlich identisch sind
+(„ruft ein heiliges Fasten aus, beruft eine Versammlung ein"). Gefunden hat es
+erst eine neue Gegenrechnung: **welche Vier-Sprachen-Reihe trägt im Buch zwei
+verschiedene Inhaltslemmata?** Sieben Reihen, davon zwei im selben Vers.
+
+Dieselbe Rechnung fand `hören`/`zuhören` in 1,2 — beide fr *Écoutez*, während
+LSG an genau dieser Stelle *Prêtez l'oreille* liest. Und sie zeigte, dass die
+Bestandskonvention für Mehrwörter (5Mo 32,1, Neh 5,7) in Joel 1,2 verletzt war:
+**das Kopfwort trägt seine wörtliche Glosse, nicht die der Wendung.**
+
+Beide Läufe — n-Gramme über Einzelwörter *und* Mehrwörter, plus die
+Reihen-Gegenrechnung — gehören künftig zusammen.
+
+### Elf Angleichungen beim Einsammeln
+
+Neben den genannten: `verzehren` in 1,19/1,20 stand zeichengleich mit `fressen`
+in 2,25 und ging auf die consumir-Reihe (in Joel ist der Unterschied
+bedeutungstragend — Heuschrecken fressen, Feuer verzehrt); `Himmel` stand in
+2,10 als *sky* und in 4,16 als *heavens*, während der Bestand die Wendung
+„Himmel und Erde" 53× als *heaven* führt (gegen 3× *sky* und 3× *heavens*);
+`Weinstock` stand in 2,22 fr auf *vigne*, das im selben Buch schon `Weinberg`
+ist; `auf dem Zion` stand in 4,17 fr/it anders als in 2,1, obwohl WEB, RV und
+RIV beide Stellen gleich lesen. Vollständig in `WORTFELD_JOEL.md` Abschnitt 5.
+
+### Drei neue RIV-Defekte, jeder korpusweit einmalig
+
+`ecchi` → *secchi* (1,12), `alirà` → *salirà* (2,20) und ein **neuer
+Untertyp**: `Radunare` statt `Radunate` (2,16) — ein Imperativ, zum Infinitiv
+verlesen, im einzigen Vers des ganzen RIV-Korpus, der so beginnt, während
+derselbe Vers die richtige Form zweimal trägt. Die Gegenprobe über alle 66
+Bücher fand dabei **Josua 9,4** („de' **ecchi** otri" → *vecchi*), das bis
+dahin unbemerkt war. Nachgetragen in `RIV_ANLAUTFEHLER.md`.
+
+### Die offenen Bestandskorrekturen stehen jetzt an einem Ort
+
+Was die Agenten im fertigen Bestand finden, stand bisher verstreut in Berichten
+und Wortfeldern. `anno-tools/NACHLESE_BESTAND.md` sammelt es: die 672
+italienischen `I`/`J`-Namensglossen, die zehn AT-Stellen von `Michael` (Bestand
+*Michele*, RIV an allen zehn *Micael*), `Hananja` in Jeremia 36,12, Ps 65,13
+(Artikel im falschen Genus), Apg 2,17 und 2,21, dazu die Wortpaare, die sich im
+Bestand eine Reihe teilen. **Nichts davon ist beauftragt** — jede Zeile ist am
+Vers geprüft und mit der Zahl belegt, die eine Korrektur kosten würde.
+
+Eine Messung ist dabei ein sauberes Negativ: über alle **676 107** Einträge
+tragen **null** spanische Glossen französische Sonderzeichen. Apg 2,21
+(*invoque* statt *invoca*) ist ein Einzelstück, kein Muster.
