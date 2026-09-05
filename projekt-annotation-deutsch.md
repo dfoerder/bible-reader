@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **59 von 66 Büchern** annotiert. Es fehlen die Bücher 33–39.
+Damit sind **60 von 66 Büchern** annotiert. Es fehlen die Bücher 34–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3718,3 +3718,69 @@ trägt **beide Formen im selben Vers**. Die Gegenprobe führte zu **Matthäus
 Dazu ein Untertyp: in Jona 1,1 fällt nicht der Anlaut des Namens aus, sondern
 die **Präposition davor** („fu rivolta ∅ Giona"). Derselbe Ort im Satz, die
 entgegengesetzte Richtung des Verlusts.
+
+## Micha (33) — fertig am 05.09.2026
+
+7 Kapitel, 105 Verse, **2630 Einzelwort- und 128 Mehrwort-Einträge**, zwei
+Pakete. `validate`, `qa`, `kongruenz`, `hilfsverb`, `levelcheck`, `konvention`
+und `sweeplemma` alle 0; **`glosskollision` 0 inhaltliche Paare in allen sieben
+Kapiteln**; `paketcheck` Abschnitt A in beiden Paketen leer; die
+Wiederholungs-Gegenrechnung über das ganze Buch meldet **genau eine** Wortfolge,
+und die ist begründet. Vollständig in `anno-tools/WORTFELD_MICHA.md`.
+
+### Der Text, den wir glossieren, ist nicht der modernisierte Luther
+
+Der Agent für Kapitel 6 meldete, dass `l1912mod` in 6,9 und 6,16 **wörtlich der
+Schlachter 1951** folgt, nicht der Luther 1912. Nachgeprüft und gemessen: über
+alle 23 212 AT-Verse stehen **3960 näher an Luther, 3514 näher an Schlachter**,
+der Rest ist unentschieden. Der Text ist eklektisch; der Name ist irreführend.
+
+Das erklärt rückwirkend einen Befund, der in fast jedem Buch auftauchte: „alle
+vier Ausgaben lesen X, der deutsche Text liest Y". In Micha 6,16 lesen WEB, RV,
+LSG und RIV einstimmig „meines Volkes" — sie folgen derselben Vorlage wie
+Luther. Der deutsche Text folgt Schlachter. Das war keine Eigenheit der
+Modernisierung, sondern schlicht die andere Vorlage.
+
+An der Arbeitsregel ändert das nichts (der deutsche Text ist die Grundlage, die
+Ausgaben sind Zeugen), an der Erwartung schon. `anno-tools/BEFUND_TEXTGRUNDLAGE.md`.
+
+### Die Bindungstabelle führte den falschen Micha
+
+`BINDUNGEN_AT.md` gab für `Micha` die Mehrheitsreihe (32 von 60 Belegen) — das
+ist aber der Micha aus Richter 17 und der Michaja aus 1. Könige 22. Der
+**Prophet** steht im Bestand genau einmal, in Jeremia 26,18, und alle vier
+Ausgaben lesen ihn in Micha 1,1 genau so. Ein Homographenfall, den nur der Blick
+auf den Vers auflöst. Die Tabelle trägt jetzt die Warnung.
+
+### Dreimal lief eine n-Gramm-Bindung über eine Grenze
+
+Das Buch hat sechs wiederholte Wortfolgen — und **drei der gemeldeten Blöcke
+trugen nicht**. „Ihr reißt den Leuten die" (2,8 · 3,2) bricht am fünften Token,
+weil `die` einmal Relativpronomen und einmal Artikel ist; das haben die Agenten
+für Kapitel 2 und 3 **unabhängig voneinander** gefunden. Der Block für 5,1 aus
+Jesaja 51,9 läuft über eine Konstruktionsgrenze (Genitiv-`der` gegen Artikel).
+
+Zusammen mit Obadja 1,8 (Kommagrenze) sind das vier Fälle in drei Büchern. **Die
+n-Gramm-Gegenrechnung kennt weder Satz- noch Konstruktionsgrenzen** — sie liefert
+Verdachtsfälle, keine Vorlagen. Die Agenten fangen das inzwischen zuverlässig ab.
+
+### Sieben RIV-Defekte, drei Klassen — und nur eine ist maschinell findbar
+
+```
+Anlautverlust hinter kurzem Wort   1,1 · 1,9 · 1,13 · 4,1 · 4,6   → Häufigkeit
+ein ganzes Wort fehlt              4,11 `occhi`                    → Ausgabenvergleich
+ein falsches echtes Wort           1,10 „Gad" statt Gath           → Ausgabenvergleich
+                                   6,10 `c'è` statt `ch'è`         → Kontext
+```
+
+`Gad` ist korpusweit 80× ein echter Name, `c'è` 118× eine echte Form. Beide
+fallen keiner Häufigkeitsprobe auf — nur dem Vergleich mit den anderen Ausgaben
+oder dem Blick auf den Satzbau. Das ist die Grenze der bisherigen Methode.
+
+### Ein Prozessrisiko, das gutging
+
+Die parallel arbeitenden Agenten teilen sich das Scratchpad und haben einander
+Hilfsskripte überschrieben; einer hat versehentlich das Skript eines anderen
+ausgeführt. Beide haben es bemerkt, geprüft und die Dateien für unversehrt
+befunden. `anno-tools/PROMPT_BAUSTEIN.md` gibt jedem Agenten jetzt ein eigenes
+Arbeitsverzeichnis.
