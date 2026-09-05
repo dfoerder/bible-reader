@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **53 von 66 Büchern** annotiert. Es fehlen die Bücher 27–39.
+Damit sind **54 von 66 Büchern** annotiert. Es fehlen die Bücher 28–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3172,3 +3172,127 @@ Bindung von `Hüter` — das im **Folgevers 8,12** steht.
 - **RV1909mod benutzt im ganzen Buch *ustedes***, wo der Bestand die
   *vosotros*-Konvention führt — Bestand gehalten, sonst liefe das Buch gegen
   die übrigen 65.
+
+## Daniel (27) — fertig am 05.09.2026
+
+**12 Kapitel, 357 Verse, 10 084 Einträge, 356 Mehrwörter**, in vier Paketen zu
+je drei Kapiteln. `validate.py 27`, `qa.py 27` und `hilfsverb.py 27` melden
+nichts; `validate.py alle` zählt jetzt **54 Bücher mit `[ok]`**. Es fehlen die
+Bücher 28–39, die zwölf kleinen Propheten.
+
+Details in `anno-tools/WORTFELD_DANIEL.md` (vier Abschnitte) und
+`anno-tools/PAKETE_DANIEL.txt`.
+
+### Der Zählversatz läuft über Kapitelgrenzen — und `ausgaben.py` sieht ihn nicht
+
+Daniel hat den größten Versatz aller bisherigen Bücher. Deutsch 3,31–33 stehen
+in **allen vier** Ausgaben als 4,1–3, deutsch 6,1 als 5,31. `ausgaben.py` sucht
+je Kapitel *einen* Versatz und findet für Kapitel 3 und 5 einen **falschen** —
+es warnt zwar mit `UNSICHER`, wählt aber trotzdem den schlechteren.
+
+Dafür ist **`kapitelgrenzen.py`** entstanden. Es legt beide Bücher flach und
+sucht den Versatz über Kapitelgrenzen hinweg. Drei Sperren waren nötig, bis es
+nicht mehr log: Bezugspunkt ist die kanonische Ausrichtung (gleicher Kapitel-
+und Versname), nicht der flache Nullversatz; hat das gleichnamige Kapitel der
+Ausgabe gleich viele Verse, gilt +0 ohne Suche (sonst zeigte Hosea 3 auf Hosea
+5); und fehlender Vers und Kapitelversatz werden über die Gesamtverszahl
+getrennt gemeldet.
+
+Das Ergebnis liegt für **alle dreizehn** verbleibenden Bücher vor
+(`anno-tools/KAPITELGRENZEN_27_39.md`), zwölf Grenzverse am Text nachgelesen.
+Fünf Bücher — Amos, Obadja, Habakuk, Zefanja, Haggai — decken sich vollständig
+mit allen vier Ausgaben. Zwei Sonderfälle: in **Hosea 1–12 folgt allein die
+französische Ausgabe der deutschen Zählung**, den anderen dreien fehlen zwei
+Verse; und in **Jona fehlt der spanischen Ausgabe der Vers 2,11 ganz** (47 gegen
+48) — das ist keine Verschiebung, sondern eine Lücke.
+
+### Die größte Einzelentscheidung fiel gegen alle vier Ausgaben
+
+Der Weisenwortschatz. Die Ausgaben schreiben `Wahrsager` in **allen neun**
+Belegversen als *magicians · magos · magiciens · magi* — genau die
+Minderheitslesart des Bestands (1 von 18), die in allen vier Sprachen mit
+`Zauberer` zusammenfällt, und beide stehen in 2,2 und 5,11 im selben Vers. Mit
+der 17-von-18-Mehrheit sind alle sechs Bezeichnungen in beiden Listenversen
+unterscheidbar, mit der Ausgabenlesart nicht.
+
+Zwei Agenten haben den Fall unabhängig aufgeworfen; der eine hat die Auflösung
+vorgerechnet. Ich hatte nach dem ersten Bericht bereits auf die Ausgaben
+umgestellt und musste zurücknehmen.
+
+### Drei Korpusbefunde an Namensglossen
+
+Alle drei beim Annotieren von Daniel gefunden, alle korpusweit, keiner behoben
+— sie stehen gesammelt in `anno-tools/BEFUNDE_RIV_ANLAUT_J.md`.
+
+1. **521 italienische Namensglossen beginnen mit `I`, wo RIV `J` schreibt** —
+   124 Namen, `Iehu` allein 65×, `Ioiakim` 38×. Bei 321 davon existiert die
+   `J`-Form nachweislich in der RIV-Datei; die übrigen 200 schreibt RIV ganz
+   anders (*Jeshua* statt `Iesua`). Anders als beim bekannten Anlautfehler liegt
+   der Fehler hier **im Bestand, nicht in der Ausgabe**.
+2. **`Michael` trägt im Alten Testament die NT-Form.** LSG schreibt im AT
+   13× `Micaël`, RIV 12× `Micael`, RV 10× `Micael` — `Michel`/`Michele`/`Miguel`
+   stehen nur in Judas 1,9 und Offenbarung 12,7. Der Bestand legt die NT-Reihe
+   auf alle zehn AT-Stellen. Spanisch fällt aus der Reihe, und zwar **genau in
+   Daniel**: dort schreibt RV `Miguel`.
+3. **`Hananja` in Jeremia 36,12** — ein Einzelfehler; RV schreibt dort
+   `Ananías`, der Bestand `Hananías`. Sonst folgt der Bestand der Ausgabe
+   korrekt und trennt `Hananja`, `Ananja` und `Ananias`.
+
+Dazu ein Ausgabenbefund: **RIV verliert in elf Verbformen das Schluss-`o`**
+(`entraron` statt `entrarono`, 20 Vorkommen). Die naheliegende Vermutung, die
+Datei verliere Zeichen an beiden Wortenden, ist widerlegt — die umgedrehte
+Anlaut-Heuristik findet in RIV 97 Vorkommen gegen 78 im Deutschen, also keinen
+Überschuss, während RIV beim Wortanfang **vierzehnfach** über den anderen liegt.
+
+### Der Prompt ist jetzt geprüfte Ware
+
+In Paket 2 haben drei Agenten **neun** Vorgaben widerlegt, und acht waren
+derselbe Fehler: ich hatte Kapitelwortschatz aus der Bibelkenntnis in den Prompt
+geschrieben statt aus dem Quelltext. `Kalk`, `Gelenke`, `Fasten`, `Siegelring`,
+`Verklagten` und `Wildesel` stehen in den genannten Kapiteln nicht; `Löwe` galt
+als unbelegt und hat 105 Belege.
+
+`promptcheck.py` liegt seit Jesaja bereit und war nur auf die Buchvorbereitung
+angewandt worden, nie auf die Prompts. Seit Paket 3 wird jeder Prompt in eine
+Datei geschrieben, maschinell geprüft und erst dann abgeschickt; alle Zahlen
+kommen aus `wortzahl.py`. **Ergebnis: kein erfundenes Wort mehr**, und die
+Agenten haben die Zahlen nachgezählt und bestätigt. Was sie danach fanden, war
+eine Klasse feiner — Verteilungen, Numerus, Wortformen. Die Regel steht in
+`AUFTRAG_BUCH.md`.
+
+### Zwei Werkzeuge sind aus Befunden gewachsen
+
+**`belegt.py` meldet jetzt auch die Lesarten des Lemmas**, die der gesuchten
+Wortform fehlen. Anlass war `Klaue`: die Pluralform `Klauen` trägt elfmal
+*hooves* aus den Reinheitsgesetzen, der Singular daneben *paw · garra · griffe ·
+zampa* (1. Samuel 17,37) — und genau die war in 7,19 die gesuchte. Ein
+Flexionsfilter hält das Rauschen draußen. Der zweite Fall kam prompt aus Kapitel
+9: `Gesalbter` hat der Form nach einen Beleg, dem Lemma nach vierundzwanzig.
+
+**`buildbook.py` warnt, wenn `$ANNO_OUT` neuere Kapitel hält als die Quellen.**
+Der Abschlusslauf von `konsistenz.py` zeigte `Tier` in 4,13 noch als *beast*,
+obwohl das ganze Buch *animal* führt: drei Korrekturen in zwei Kapiteln waren
+verlorengegangen, weil ich nach dem Kopieren weitergearbeitet hatte. Das
+passiert bei jedem Kreuzvergleich.
+
+### Die Selbstabstimmung hat wieder eine Stufe genommen
+
+`paketcheck` Abschnitt A war in zwei von vier Paketen leer. Die beiden Treffer
+waren **keine Nachlässigkeit**: bei `außerordentlich` (7,7 gegen 8,8) und
+`entsetzlich` (11,31 gegen 12,11) hatten die Agenten unabhängig geprägt und
+verschieden entschieden, weil ihre Verse verschieden übersetzt sind — bei
+`entsetzlich` haben WEB und LSG an beiden Stellen überhaupt kein Adjektiv.
+
+Umgekehrt sind vier Reihen über Paketgrenzen zeichengleich angekommen, und eine
+davon **ohne Vorlage**: der `Mann in Leinen` aus 10,5 und aus 12,6/12,7,
+entschieden von zwei gleichzeitig laufenden Agenten. Dasselbe bei `Michael` —
+zwei Agenten und meine eigene Korrektur trafen dieselbe Reihe.
+
+### Was `konsistenz.py` über das fertige Buch sagt
+
+38 Abweichungen von der Bestandsmehrheit, und **jede einzelne ist eine
+dokumentierte Entscheidung**: die Lexikonfalle `Geheimnis` = *secret* statt des
+neutestamentlichen *mystery*, die **zweiundzwanzig neuen Lesarten unter
+vorhandenen Lemmata** (`Hof`, `Gericht`, `Gewalt`, `Klaue`, `Rat`, `Recht`,
+`Rind`, `Erscheinung`, `Bedrängnis`, `Lager`, `Menge`, `Susa`, `Schrift` …) und
+der Rest Numerus. Keine unerklärte Abweichung.
