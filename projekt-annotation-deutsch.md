@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **61 von 66 Büchern** annotiert. Es fehlen die Bücher 35–39.
+Damit sind **62 von 66 Büchern** annotiert. Es fehlen die Bücher 36–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3847,3 +3847,68 @@ Nahum und Habakuk `Last`.
 Ebenso gegen die Ausgaben entschieden: `Pracht` (2,3, Bestand 29:3), `Kusch`
 (3,9, Bestand 14:1) und `Ziegelform` (3,14, wo alle vier den Brennofen lesen und
 der deutsche Text die Form).
+
+## Habakuk (35) — fertig am 05.09.2026
+
+3 Kapitel, 56 Verse, **1303 Einzelwort- und 97 Mehrwort-Einträge**, ein Paket.
+`validate`, `qa`, `hilfsverb`, `levelcheck`, `konvention` alle 0;
+`glosskollision` 0 inhaltliche Paare in zwei von drei Kapiteln, in Kapitel 2
+genau eine (begründet); `paketcheck` Abschnitt A leer; beide Gegenrechnungen
+über das ganze Buch **ohne einen einzigen Befund**. Vollständig in
+`anno-tools/WORTFELD_HABAKUK.md`.
+
+### Ein NT-Zitat, das im deutschen Text nicht wörtlich ist
+
+Habakuk 2,4 ist in Römer 1,17, Galater 3,11 und Hebräer 10,38 zitiert — aber
+der modernisierte Text unterscheidet: Habakuk sagt „durch seine **Treue**", das
+Neue Testament „durch seinen **Glauben**". Der Vier-Token-Block aus Hebräer
+wurde übernommen, das entscheidende Wort gerade nicht.
+
+Derselbe Fall wie Joel 3,1 gegen Apostelgeschichte 2,17, wo die Angleichung an
+das Zitat sogar eine Kollision gebaut hätte: **eine Vorlage belegt nicht, dass
+sie hierher passt.**
+
+### Das Werkzeug, das seine eigenen Lücken zeigt
+
+`vorgabecheck.py` hat in diesem Buch dreimal nachgeschärft werden müssen, und
+jedes Mal fand die schärfere Fassung sofort einen echten Fehler:
+
+1. **Kursive Zitate wurden nicht geprüft.** Im Prompt stand „RIV *Abacuc* — RIV
+   lässt bei Namen häufig den Anlaut weg". Zwei der vier Ausgabenangaben waren
+   erfunden; RIV **und** LSG lesen „Habacuc". Nach der Erweiterung fand das
+   Werkzeug den Fehler — und gleich noch einen in `WORTFELD_JOEL.md`, einem seit
+   Tagen abgenommenen Buch: dort stand, RIV lese in 4,20 `abitata`; RIV liest
+   „sussisterà".
+2. **Reine Level-Zeilen wurden übersprungen.** `WORTFELD_NAHUM.md` führte
+   `schlottern` auf B2, der einzige Bestandsbeleg trägt C1 — die Zeile hatte
+   keine vollständige Vierer-Reihe und wurde deshalb gar nicht angesehen.
+   Gemeldet hatte es der Agent für Kapitel 3.
+3. **Korrekturnotizen mussten ausgenommen werden.** `WORTFELD_AMOS.md` führt
+   seine Fehlerliste als „Feuer A2 → A1"; ohne Ausnahme meldete das Werkzeug
+   genau die drei Fehler noch einmal, die dort abgehakt sind.
+
+Regressionstest über alle sechs fertigen Wortfelder: 0 Befunde.
+
+### Drei Erschütterungsverben in einem Vers
+
+Habakuk 3,16 häuft `erbebte` (Leib), `zitterten` (Lippen) und `schlotterten`
+(Knie). Nahum hatte `schlottern` gegen `zittern` schon aufgelöst — hier reicht
+das nicht, weil `erbeben` dazukommt und im Spanischen die *estremecer*-Familie
+besetzt. Die spanische Spalte von `schlottern` weicht deshalb **verslokal** von
+der Nahum-Reihe ab; das ist kein Widerspruch, sondern die Regel: eine Auflösung
+gilt im Kollisionsvers.
+
+### Ein Hapax in der Psalmenüberschrift
+
+Kapitel 3 ist ein Gebet mit Psalmenformeln — `Sela`, `Saitenspiel` und die
+Überschrift wurden wörtlich aus dem Psalter übernommen. **`Chorleiter` nicht:**
+der Psalter schreibt durchgehend `Vorsänger` (54 Belege), und `Chorleiter` steht
+im ganzen `l1912mod` genau einmal. Meine Prompt-Angabe „im Psalter prüfen!"
+führte ins Leere.
+
+### Ein RIV-Anlautfehler, der beide bisherigen Regeln bricht
+
+RIV 1,10 liest `mmontano` statt *ammontano*. Die Häufigkeitsprobe trägt nicht
+(beide Formen stehen genau einmal im Korpus), und vor dem Wort steht **kein
+kurzes Vorwort, sondern ein Semikolon**. Der Verlust trifft offenbar den
+Wortanfang nach jeder kurzen Unterbrechung.
