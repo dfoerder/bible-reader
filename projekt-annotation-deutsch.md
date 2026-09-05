@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **62 von 66 Büchern** annotiert. Es fehlen die Bücher 36–39.
+Damit sind **63 von 66 Büchern** annotiert. Es fehlen die Bücher 37–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3912,3 +3912,69 @@ RIV 1,10 liest `mmontano` statt *ammontano*. Die Häufigkeitsprobe trägt nicht
 (beide Formen stehen genau einmal im Korpus), und vor dem Wort steht **kein
 kurzes Vorwort, sondern ein Semikolon**. Der Verlust trifft offenbar den
 Wortanfang nach jeder kurzen Unterbrechung.
+
+
+## Zephanja (36) — 3 Kapitel, 53 Verse
+
+Ein Paket, drei Agenten. `paketcheck` Abschnitt A **leer**, `qa` 0,
+`kongruenz`/`artikel` 0, `validate` 0 Befunde.
+
+### Zwei Kapitel, sechs Tokens, unabhängig deckungsgleich
+
+`wiederholungen.py` fand sechs wiederkehrende Wortfolgen, zwei davon über
+Kapitelgrenzen. Die längste — „am Tag des Zorns des HERRN", 1,18 und 2,3 —
+mussten beide Agenten **unabhängig** setzen: die Datei des jeweils anderen lag
+nicht vor. Beide gingen auf Hesekiel 7,19 zurück, und alle sechs Einträge kamen
+Token für Token gleich heraus. Derselbe Vorgang wie der 10-Token-Block in Nahum.
+
+Die sechste Folge ging schief und wurde beim Einsammeln gefangen: Kapitel 2
+setzte in 2,5 das Mehrwort `niemand mehr` (24 Bestandsbelege, einstimmig) und
+schrieb ausdrücklich in seinen Bericht, Kapitel 3 müsse es mitsetzen — Kapitel 3
+hat es an beiden Stellen von 3,6 nicht gesetzt. Nachgetragen. **Der Hinweis des
+einen Agenten war die einzige Spur; das Werkzeug hätte die Lücke nicht gemeldet,
+weil beide Einzelglossen richtig waren.**
+
+Die übrigen Abweichungen waren zu Recht Abweichungen: `darin` heißt in 2,5
+`en ella` (die Meeresküste, f. Sg.) und in 3,6 `en ellas` (die Städte, f. Pl.).
+Der sechste Fall, in dem die n-Gramm-Gegenrechnung eine Kongruenzgrenze nicht
+kennt.
+
+### Drei erfundene Verszitate — und das Werkzeug dagegen
+
+Der Kapitel-3-Agent widerlegte vier Angaben meiner Vorgabe am Quelltext, drei
+davon erfundene Zitate: 3,3 zitiert als „Ihre Fürsten sind brüllende Löwen …
+die bis zum Morgen nichts übriglassen" (der Text hat „sind **in ihrer Mitte**
+brüllende Löwen" und „die nichts **für den Morgen** übriglassen"), 3,17 als „Er
+wird sich über dich freuen mit Jubel" (der Text: „und über dich **jubeln mit
+lautem Gesang**"), dazu drei Substantive — `Jubel`, `Freude`, `Jauchzen` —, die
+im Kapitel gar nicht vorkommen; es stehen dort nur Verben.
+
+Derselbe Fehlertyp wie in Amos Paket 2 und Habakuk 1, dreimal in Folge. Deshalb
+hat `vorgabecheck.py --buch` jetzt eine **Quelltextprobe**: jedes Verszitat ohne
+Ausgabennennung wird gegen den deutschen Buchtext gehalten, an `…` in Segmente
+geteilt. Sie findet alle drei Fälle und lässt die richtigen Zitate durch. Die
+Regressionsprobe an den sieben zuletzt abgenommenen Wortfeldern meldet zwei
+Stellen, beide erklärbar (eine Konventionsbeschreibung, ein Werkzeugzitat).
+
+Beim Bauen dieser Probe fiel ein Fehler auf, der schon länger in der
+**Ausgabenprobe** saß: die Normalisierung ersetzte `ß` durch ein Leerzeichen,
+`ließ` wurde zu `lie`. Jedes Zitat mit `ß` konnte deshalb nie gefunden werden.
+Behoben.
+
+### Ein Name gegen WEB
+
+`Kusch` (3,10): **WEB schreibt „Cush"**, der Bestand bindet 16:1 auf `Ethiopia`,
+und RV/LSG/RIV lesen Etiopía/Éthiopie/Etiopia. Der Bestand hat gewonnen — der
+einzige `Cush`-Beleg im Korpus (Psalm 7,1) ist eine Person, kein Land.
+
+Der Kapitel-2-Agent widerlegte außerdem drei Namen meiner Vorgabe: `Kereter`,
+`Aschdod`, `Maktesch` — der Text liest `Kreter`, `Asdod`, `Mühlenviertel`. Die
+Namenslisten der Prompts stehen als Fließtext mit `·` ohne Backticks und wurden
+bis dahin nie geprüft; seither liest `promptcheck.namensliste()` sie mit.
+
+### Die `spricht`-Regel, in beiden Richtungen bestätigt
+
+2,9 liest „spricht der HERR der Heerscharen, **der Gott Israels**" —
+nachgestellt, aber mit Apposition, also fr `parle`. Die fünf übrigen Stellen
+(1,2 · 1,3 · 1,10 · 3,8 · 3,20) sind nachgestellt ohne Apposition und lesen
+`dit`.
