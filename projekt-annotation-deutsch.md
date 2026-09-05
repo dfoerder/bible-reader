@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **57 von 66 Büchern** annotiert. Es fehlen die Bücher 31–39.
+Damit sind **58 von 66 Büchern** annotiert. Es fehlen die Bücher 32–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3579,3 +3579,64 @@ Konjunktiv II von `verbergen`. Alle vier Ausgaben lesen „verbergen/verstecken"
 und die Form steht im ganzen deutschen Korpus nur hier. **Nicht geändert** —
 eine Textkorrektur ist eine andere Entscheidung als eine Glossenkorrektur; die
 Glosse folgt dem Sinn, der Befund steht in `NACHLESE_BESTAND.md`.
+
+## Obadja (31) — fertig am 05.09.2026
+
+Ein Kapitel, 21 Verse, **563 Einzelwort- und 29 Mehrwort-Einträge** — das
+kürzeste Buch des Alten Testaments, von einem Agenten gemacht.
+`validate.py 31` meldet 0 Befunde, ebenso `qa`, `kongruenz`, `hilfsverb`,
+`levelcheck`, `konvention` und `sweeplemma`; `glosskollision` **0 inhaltliche
+Paare**; die Wiederholungs- und die Reihen-Gegenrechnung über das ganze Buch
+ohne Befund. Vollständig in `anno-tools/WORTFELD_OBADJA.md`.
+
+### Eine Parallelstelle, die zur Falle wird
+
+Obadja und Jeremia 49,7–22 gelten als Parallelüberlieferung. Im
+modernisierten Text ist davon fast nichts übrig — die Gegenrechnung über alle
+4- bis 9-Wort-Folgen findet **zwei** gemeinsame Stellen, und nur eine ist echt.
+
+Der zweite Treffer, `so spricht der HERR` (1,8 ← Jer 49,12), ist ein
+**Zufallstreffer über eine Kommagrenze**: Obadja liest „Ist es nicht **so,
+spricht** der HERR" — das `so` gehört zum vorangehenden Satz, `spricht` ist
+nachgestellt. Jeremia hat „Denn **so spricht** der HERR", vorangestellt. Wer
+dem Vier-Token-Block folgt, setzt den Vers auf französisch `parle` statt `dit`.
+Gefunden hat es der Agent, weil er die Stelle am Vers nachgelesen hat, statt
+dem Werkzeug zu glauben.
+
+**Das ist die Grenze der n-Gramm-Gegenrechnung**: sie kennt keine Satzgrenzen.
+Ein Block, der über ein Komma läuft, kann zwei verschiedene Konstruktionen
+verbinden.
+
+### Die Kollision, die fast entstanden wäre
+
+In 1,21 stehen `Berg` und `Gebirge` im selben Vers. **Alle vier Ausgaben lesen
+`Gebirge` als „mountain/monte/montagne/monte"** — wäre man ihnen gefolgt, hätte
+der Vers eine Kollision in allen vier Sprachen getragen. Der Bestand löst es
+eindeutig: `Gebirge` steht 107 von 109 Belegen auf *highlands · serranía ·
+massif · massiccio*, und die beiden Ausnahmen stehen im NT.
+
+Der Fall gehört zu den lehrreichsten des Projekts, weil hier der **Bestand
+gegen die einhellige Lesart aller vier Zeugen** recht behält.
+
+### Sieben Vorgabefehler
+
+Der Agent hat sieben Angaben meines Prompts widerlegt, darunter zwei, die
+Arbeit erzeugt hätten: `Wegkreuzungen` sollte neu geprägt werden, obwohl
+`Kreuzung` belegt ist (Spr 8,2), und für `Retter` in 1,21 nannte ich die
+Singularreihe, während der Vers Plural verlangt — den es im Bestand genau
+einmal gibt. Und `Gebirge`, das Leitwort des Buches, fehlte in meiner Liste
+ganz.
+
+Damit bleibt **`Sefarad` das einzige wirklich unbelegte Wort** des Kapitels.
+
+### Drei RIV-Anlautfehler in 21 Versen
+
+`igliuoli` (1,12), `erranno` (1,16) und `ossederanno` (1,19) — alle drei
+folgen der in Amos gefundenen Regel (Verlust hinter einem kurzen Wort), und
+**zwei stehen im selben Vers wie die richtige Form**. Das ist der sauberste
+Beweis, dass es ein Satzfehler ist und keine Variante.
+
+Die Gegenprobe führte zu einem noch offenen Buch: `erranno` steht im ganzen
+RIV-Korpus an genau zwei Stellen — Obadja 1,16 und **Micha 7,17** —, und keine
+davon ist eine echte Form von *errare*. In Obadja fehlt das `b` von *berranno*,
+in Micha das `v` von *verranno*.
