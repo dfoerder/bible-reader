@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **60 von 66 Büchern** annotiert. Es fehlen die Bücher 34–39.
+Damit sind **61 von 66 Büchern** annotiert. Es fehlen die Bücher 35–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3784,3 +3784,66 @@ Hilfsskripte überschrieben; einer hat versehentlich das Skript eines anderen
 ausgeführt. Beide haben es bemerkt, geprüft und die Dateien für unversehrt
 befunden. `anno-tools/PROMPT_BAUSTEIN.md` gibt jedem Agenten jetzt ein eigenes
 Arbeitsverzeichnis.
+
+## Nahum (34) — fertig am 05.09.2026
+
+3 Kapitel, 47 Verse, **1029 Einzelwort- und 50 Mehrwort-Einträge**, ein Paket.
+`validate`, `qa`, `artikel`, `hilfsverb`, `levelcheck`, `konvention` und
+`sweeplemma` alle 0; **`glosskollision` 0 inhaltliche Paare in allen drei
+Kapiteln**; die Wiederholungs- **und** die Reihen-Gegenrechnung über das ganze
+Buch **ohne einen einzigen Befund**. Vollständig in `anno-tools/WORTFELD_NAHUM.md`.
+
+### Zwei Agenten, dieselbe Entscheidung, ohne voneinander zu wissen
+
+Die einzige Wiederholung des Buches — „komme ich über dich, spricht der HERR
+der Heerscharen. Ich…", zehn Tokens in 2,14 und 3,5 — mussten beide Agenten
+**unabhängig** entscheiden, weil `ch2.json` noch nicht vorlag, als Kapitel 3 an
+die Stelle kam. Der Vergleich danach: **Token für Token identisch.**
+
+Das ist der bisher deutlichste Beleg dafür, dass die Vorgaben tragen: zwei
+Agenten, die dieselben Bestandsbindungen und dieselbe `spricht`-Regel anwenden,
+kommen bei zehn Tokens auf dasselbe Ergebnis.
+
+### Der Konstruktionsgrenzen-Fall zum vierten Mal
+
+2. Samuel 7,8 trägt dieselben sechs Tokens wie Nahum 2,14 — dort aber
+**vorangestellt**, also mit französisch `parle` statt `dit`. Der Agent hat alles
+außer `spricht` übernommen. Nach Obadja 1,8 (Kommagrenze), Micha 2,8/3,2
+(Relativpronomen gegen Artikel) und Micha 5,1 (Genitiv gegen Artikel) ist das
+der vierte Fall in vier Büchern.
+
+### `ausgaben.py` rechnete zum dritten Mal falsch — und warnte zum dritten Mal
+
+Wie in Jona 1 und Micha 4 wandte es Versatz +1 an, weil der Zusatzvers **hinten**
+hängt, und meldete selbst, dass +0 besser liegt. Der Code erklärt das Verhalten
+ausdrücklich: er tauscht den Versatz **nicht stillschweigend** aus, sondern
+meldet den Zweifel — eine frühere Fassung hatte genau das getan und lag
+danebengelegen. Die Prompt-Regel „die Warnung lesen, nicht die Zahl" hat bei
+allen drei Agenten gegriffen.
+
+**Und zum dritten Mal in Folge ist LSG die einzige deckungsgleiche Ausgabe** —
+nach Jona und Micha.
+
+### Ein Werkzeugfehler, den ein Agent im eigenen Kapitel fand
+
+`artikel.py` meldete in 2,6 nur die italienische Hälfte einer Kongruenzstelle:
+`zur Stadtmauer` trug `alla` **und** spanisch `a la`, beide vor einem maskulinen
+Nomen. Die Ursache war nicht, dass das Skript eine Sprache auslässt — es prüft
+alle drei —, sondern dass seine Artikeltabelle nur **einwortige** Formen kannte.
+`a la`, `à la`, `de la`, `aux`, `des`, `nel`, `sul` fehlten. Sie sind jetzt drin,
+gegen die alte Fassung getestet: keine Regression, keine neuen Fehlalarme.
+
+### Wo der Bestand gegen alle vier Ausgaben recht behält
+
+`Last` (1,1) heißt *burden*, nicht *oracle* — obwohl alle vier Ausgaben
+„Oracle/Profecía/Oracle/Oracolo" lesen. Der Bestand annotiert das prophetische
+*massa* an den vergleichbaren Stellen (Jeremia 23,33–38, Hesekiel 12,10) als
+`Last`. **Habakuk 1,1 hat denselben Satzbau und bekommt dieselbe Reihe.**
+
+Ein Randbefund dazu, der die eklektische Vorlage bestätigt: der `l1912mod`
+schreibt in Jesaja 13,1, Sacharja 9,1 und Maleachi 1,1 `Ausspruch` — nur in
+Nahum und Habakuk `Last`.
+
+Ebenso gegen die Ausgaben entschieden: `Pracht` (2,3, Bestand 29:3), `Kusch`
+(3,9, Bestand 14:1) und `Ziegelform` (3,14, wo alle vier den Brennofen lesen und
+der deutsche Text die Form).
