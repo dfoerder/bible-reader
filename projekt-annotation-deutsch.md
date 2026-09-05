@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **63 von 66 Büchern** annotiert. Es fehlen die Bücher 37–39.
+Damit sind **64 von 66 Büchern** annotiert. Es fehlen die Bücher 38–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3978,3 +3978,60 @@ bis dahin nie geprüft; seither liest `promptcheck.namensliste()` sie mit.
 nachgestellt, aber mit Apposition, also fr `parle`. Die fünf übrigen Stellen
 (1,2 · 1,3 · 1,10 · 3,8 · 3,20) sind nachgestellt ohne Apposition und lesen
 `dit`.
+
+
+## Haggai (37) — 2 Kapitel, 38 Verse
+
+Ein Paket, zwei Agenten. `paketcheck` Abschnitt A und C **leer**, `qa` 0,
+`kongruenz`/`artikel` 0, `validate` 0 Befunde. Alle zehn wiederkehrenden
+Wortfolgen zeichengleich; die zwei gemeldeten Abweichungen sind reine
+Satzposition (`am` am Versanfang groß, `so` nach „Nun," und „Denn" klein).
+
+### Beide Agenten haben dieselbe Prompt-Zahl widerlegt
+
+Ich hatte in beide Prompts geschrieben: „184 Vorkommen von ‚So spricht der
+HERR', **alle** mit `parle`". Beide haben unabhängig nachgemessen und beide
+Zahlen widerlegt — vorangestellt steht es 223 zu 4, nachgestellt 264 zu 46. Die
+Stellungsregel trägt, die Behauptung „alle" nicht.
+
+Der Fehler war meiner: ich hatte mir mit `most_common(2)` zwei von **sechs**
+Varianten ausgeben lassen und aus den zwei auf alle geschlossen — derselbe
+Fehler wie in Jona, wo ich ein Verszitat bei 95 Zeichen abgeschnitten und
+daraus einen Befund abgeleitet hatte. Dagegen steht jetzt `folgenreihe.py`: es
+misst die Glossen einer Wortfolge im Bestand und schneidet nichts ab, zeigt
+jede Variante mit Anteil und Belegstellen und zählt die Vorkommen mit einem
+Mehrwort an einer Position eigens — die fehlten in meiner Messung
+stillschweigend und erklären die Differenz.
+
+### Die Lehre aus Zefanja hat getragen
+
+Die drei Wortfolgen über die Kapitelgrenze standen diesmal **fest im Prompt**,
+am Bestand gemessen. Alle drei kamen zeichengleich heraus. Beide Agenten haben
+zusätzlich mit `kreuz.py` gegeneinander geprüft und dabei zwei Stellen
+gefunden, die der Prompt nicht abgedeckt hatte: `am` stand in Kapitel 1 als
+`al`, in Kapitel 2 als `el` (gemessen 83:45 für `el`, RV liest „el primer día")
+— Kapitel 1 hat seine eigenen Stellen gezogen; und der Formelblock „Achtet …
+wie es euch ergeht/erging" (1,5 · 1,7 ↔ 2,15), den Kapitel 2 nachgezogen hat.
+
+### Zwei blinde Flecken in den Werkzeugen
+
+**`hints.py` meldete für 2,12 null Kollisionen**, obwohl dort `Gewandzipfel`
+(im Bestand gar nicht belegt) und `Zipfel` (5 Belege, fest gebunden)
+zusammenstehen. Es konnte nicht anders: die Kollisionsprobe vergleicht
+Bestandsglossen, und ein unbelegtes Wort hat keine. Der Agent hat es selbst
+gesehen. `hints.py` hat jetzt einen Abschnitt, der ohne Glossen auskommt —
+unbelegtes Wort neben belegtem Bestandteil im selben Vers. Die Gegenprobe an
+vier abgenommenen Büchern findet acht Stellen, und alle sieben echten sind
+sauber getrennt: Vorsorge, kein Fund.
+
+**`kapitelgrenzen.py` hat seit seiner Entstehung für kein einziges Buch etwas
+gemeldet** — es suchte den Quelltext mit einem relativen Pfad, und jedes
+Werkzeug wird aus `anno-tools/` heraus aufgerufen. Aufgefallen an Sacharja.
+Repariert; der erste vollständige Lauf steht in `BEFUND_KAPITELGRENZEN.md`. Auf
+die Glossen wirkt sich nichts davon aus.
+
+### Drei RIV-Anlautfehler
+
+2,1 `ggeo` für *Aggeo*, 2,2 `ehotsadak` für *Jehotsadak*, 2,16 `uand'uno` für
+*quand'uno* — den dritten hat der Agent selbst gefunden und mit der
+Häufigkeitsprobe belegt (`uand` 2× im ganzen RIV gegen `quando` 1354×).
