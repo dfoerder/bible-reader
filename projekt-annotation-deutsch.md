@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **58 von 66 Büchern** annotiert. Es fehlen die Bücher 32–39.
+Damit sind **59 von 66 Büchern** annotiert. Es fehlen die Bücher 33–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3640,3 +3640,81 @@ Die Gegenprobe führte zu einem noch offenen Buch: `erranno` steht im ganzen
 RIV-Korpus an genau zwei Stellen — Obadja 1,16 und **Micha 7,17** —, und keine
 davon ist eine echte Form von *errare*. In Obadja fehlt das `b` von *berranno*,
 in Micha das `v` von *verranno*.
+
+## Jona (32) — fertig am 05.09.2026
+
+4 Kapitel, 48 Verse, **1136 Einzelwort- und 64 Mehrwort-Einträge**, ein Agent
+je Kapitel. `validate`, `qa`, `kongruenz`, `artikel`, `hilfsverb`, `levelcheck`,
+`konvention` und `sweeplemma` alle 0; `glosskollision` **0 inhaltliche Paare in
+allen vier Kapiteln**; `paketcheck` Abschnitt A leer; die
+Wiederholungs-Gegenrechnung über das ganze Buch **ohne einen einzigen Befund**.
+Vollständig in `anno-tools/WORTFELD_JONA.md`.
+
+### Das Buch, in dem die Agenten vor allem den Koordinator korrigiert haben
+
+Jona war der Durchgang mit den wenigsten Fehlern in den Kapiteln und den
+meisten in der Vorbereitung. Drei davon sind lehrreich:
+
+**Mein Verszählungsbefund war falsch.** Ich hatte gemessen, RV1909mod fehle
+Jona 2,11 — tatsächlich zieht RV die deutschen Verse 2,10 und 2,11 zusammen.
+Der Grund: meine Messung schnitt den RV-Vers bei 95 Zeichen ab und las den
+Schluss nicht. **Eine Zusammenziehung sieht am Anfang genauso aus wie eine
+Auslassung; der Unterschied steht am Ende.** `ausgaben.py` hatte es gewusst und
+von selbst gewarnt („Versatz +0 liegt BESSER") — ich hatte das Werkzeug nicht
+gefragt, sondern selbst gezählt.
+
+**Mein Prompt-Baustein richtete zwei Prüfläufe auf das falsche Buch.** Er
+verlangte `kongruenz.py 30` und `artikel.py 30` — einen Lauf über *Amos*. Der
+Fehler war per `sed` von Buch zu Buch gewandert, weil ich den Baustein jeweils
+aus dem Vorgängerbuch abgeleitet hatte. Der Kapitel-2-Agent hat es bemerkt und
+die Läufe zusätzlich auf 32 gerichtet; dort schlugen sie **zweimal zu Recht**
+an. Es gibt jetzt `anno-tools/PROMPT_BAUSTEIN.md` mit Platzhaltern statt fester
+Buchnummer — ein Baustein, der diesen Fehler nicht tragen kann.
+
+**Und `ausgaben.py` selbst stellt Jona 1 falsch dar:** es rechnet Versatz +1,
+weil es die 17 gegen 16 Verse aus dem *letzten* Vers hochrechnet — der
+Zusatzvers (der Fisch-Vers als 1,17) hängt aber hinten. Für Kapitel 1 ist +0
+richtig. Das Werkzeug warnt selbst; die Warnung ist zu lesen, nicht die Zahl.
+
+### Kapitel 2 ist ein Psalm — und der Psalter war schon fertig
+
+Jeder Vers des Gebets hat eine Vorlage im annotierten Bestand (Ps 120,1 · 42,8
+· 31,23 · 69,2 · 86,13 · 131,2, dazu Mt 12,40 und 2Chr 33,12). Sieben davon
+wurden Token für Token übernommen.
+
+Die schwerste Kollision des Buches — `Woge` und `Welle` im selben Vers, in
+allen vier Sprachen — musste deshalb **nicht neu entschieden werden**: Psalm
+42,8 trägt exakt dieselbe deutsche Wendung („alle deine Wogen und Wellen") und
+trennt sie bereits. Dass die richtige Lesart dann eine *zweite* Kollision
+erzeugt (`Woge` gegen `Flut` in fr/it), konnte `hints.py` nicht melden — sie
+entsteht erst durch die Wahl.
+
+### Zwei Lexikonfallen, die die Bestandsmehrheit stellt
+
+`aufziehen` hat im Bestand acht Belege, **alle** in der Bedeutung „ein Kind
+aufziehen". In Jona 4,7 zieht die *Morgenröte* auf. Und `groß` trägt in 3,3
+zwei Lesarten im selben Vers: attributiv („eine gewaltig große Stadt") und als
+Maß („drei Tagereisen groß").
+
+### Eine Abwägung zwischen zwei Projektregeln
+
+„Mach dich auf, geh **in** die große Stadt Ninive und" steht in 1,2 und 3,2 —
+zehn Tokens, die längste Bindung des Buches. Alle vier Ausgaben lesen dort die
+Richtungspräposition, und auch der Bestand neigt ihr zu (60 : 41). Aber in 1,2
+steht „bis **zu** mir" mit spanisch `a` — dort wäre das eine Kollision, in 3,2
+nicht.
+
+Hier stehen *Zeichengleichheit wiederholter Wortfolgen* und *Auflösung nur im
+Kollisionsvers* gegeneinander. Der Zehn-Token-Block hat den Vorrang bekommen,
+und die Abwägung steht im Wortfeld — samt dem Hinweis, dass eine Änderung beide
+Verse zugleich betreffen müsste.
+
+### Drei RIV-Anlautfehler und ein neuer Untertyp
+
+`iona` statt `Giona` in 4,6 und 4,8 — beide hinter einem kurzen Wort, und 4,6
+trägt **beide Formen im selben Vers**. Die Gegenprobe führte zu **Matthäus
+16,4**, einem fertigen Buch, mit demselben `di iona`.
+
+Dazu ein Untertyp: in Jona 1,1 fällt nicht der Anlaut des Namens aus, sondern
+die **Präposition davor** („fu rivolta ∅ Giona"). Derselbe Ort im Satz, die
+entgegengesetzte Richtung des Verlusts.
