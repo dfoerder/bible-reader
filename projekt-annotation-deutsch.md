@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **56 von 66 Büchern** annotiert. Es fehlen die Bücher 30–39.
+Damit sind **57 von 66 Büchern** annotiert. Es fehlen die Bücher 31–39.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -3482,3 +3482,100 @@ Vers geprüft und mit der Zahl belegt, die eine Korrektur kosten würde.
 Eine Messung ist dabei ein sauberes Negativ: über alle **676 107** Einträge
 tragen **null** spanische Glossen französische Sonderzeichen. Apg 2,21
 (*invoque* statt *invoca*) ist ein Einzelstück, kein Muster.
+
+## Amos (30) — fertig am 05.09.2026
+
+9 Kapitel, 146 Verse, **3525 Einzelwort- und 138 Mehrwort-Einträge**. Drei
+Pakete zu je drei Kapiteln. `validate.py 30` meldet 0 Befunde bei 3537 Tokens
+(12 Satzzeichen), `qa.py` 0, `kongruenz.py` und `hilfsverb.py` 0, `levelcheck`
+über alle neun Kapitel einheitlich. **`paketcheck.py` Abschnitt A war in allen
+drei Paketen leer.** Vollständig in `anno-tools/WORTFELD_AMOS.md`.
+
+### Zwei Formeln tragen das Buch — und keine Ausgabe taugt als Vorlage
+
+Die Gerichtsformel steht achtmal („So spricht der HERR: Wegen der vielfachen
+Verbrechen …"), die Feuerformel siebenmal („Ich sende Feuer …, das die Paläste
+verzehren wird"). Beide stehen maschinell geprüft zeichengleich.
+
+**Alle vier Ausgaben lesen die hebräische Zahlenformel wörtlich** („For three
+transgressions … and for four"), während der deutsche Text sie zu „die
+vielfachen Verbrechen" zusammenfasst. Es gibt in keiner Ausgabe ein Wort, das
+`vielfachen` entspräche; `vielfach` hat im Bestand einen einzigen, unpassenden
+Beleg. Die Reihe musste neu geprägt werden — derselbe Fall wie Joels
+Heuschreckenreihen, nur achtmal statt zweimal.
+
+### Der Vers, für den die Joel-Trennung gebaut war
+
+Amos 7,4 ist die einzige Stelle im Korpus, an der `verzehren` und `fressen` im
+selben Vers stehen: „das die große Flut **verzehrte** und das Ackerland zu
+**fressen** begann." **Der Bestand hätte hier den Fehler gebaut** — die einzige
+belegte Lesart der Form `verzehrte` (2. Mose 15,7, 15 Belege) trägt französisch
+*dévora* und italienisch *divorò*, also genau die devor-Reihe, die `fressen`
+gehört. Der Agent hat die Lexikonlesart verworfen.
+
+### Elf Vorgabefehler — die Vorbereitung war der schwächste Teil
+
+Die Agenten haben **elf** Angaben meiner Paketvorgabe am Bestand oder an den
+Ausgaben widerlegt, jede zu Recht. `Feuer` und `machen` hatte ich auf A2
+gesetzt (336 bzw. 1435 Belege stehen auf A1), `rückgängig machen` auf C1 (der
+einzige Beleg steht auf B2); meine `Wegen`-Reihe war in sich widersprüchlich;
+`Dreschschlitten` zitierte ich im Singular und `Usias` im Nominativ, während
+die Verse Plural und Genitiv haben.
+
+Der schwerste war die **`spricht`-Regel**: sie unterschied nach dem Wort „Gott"
+statt nach der **Stellung**. Gemessen: vorangestellt liest der Bestand `parle`
+220 : 4, nachgestellt `dit` 252 : 95, und LSG bestätigt es Vers für Vers mit
+„Ainsi parle l'Éternel". Alle acht Gerichtsformeln standen deshalb zunächst
+falsch. Neun Stellen korrigiert.
+
+Dazu zwei Fehler in Prompts, die schlimmer sind als Levelfehler: die vier
+Ausgabenlesarten zu 5,26 (`Sikkuth`/`Chiun`) waren **erfunden** — nur RV
+transliteriert überhaupt —, und die von mir vorgeschlagene `Verbürgen`-Glosse
+hätte in 9,3 mit `Versteckten` im selben Vers kollidiert. Beides fanden die
+Agenten, weil sie nachgelesen haben.
+
+### Drei neue Werkzeuge, alle aus Fehlern dieses Buches
+
+**`wiederholungen.py`** rechnet die n-Gramm-Gegenrechnung **vor** der Arbeit auf
+dem Quelltext. `dubletten.py` vergleicht ganze Verse ab 60 Prozent und findet
+deshalb den längsten wörtlichen Refrain des Buches nicht: „Doch ihr seid nicht
+zu mir umgekehrt, spricht der HERR" (4,6 · 4,8 · 4,9 · 4,10 · 4,11, zehn
+Tokens). Die Gegenprobe an Daniel, Hosea und Joel meldet 13 Verdachtsfälle und
+**keinen einzigen Fehler**.
+
+**`vorgabecheck.py`** hält Level und Reihen einer Vorgabedatei gegen den
+Bestand und jedes Ausgabenzitat gegen deren Buchtext. Es fand sofort drei
+Levelfehler und eine falsche Reihe in meinem eigenen `WORTFELD_JOEL.md` — die
+Joel-**Daten** sind korrekt, nur meine Zusammenfassung war es nicht, und genau
+von dort war `fressen C1` in die Amos-Vorgabe gewandert. Für Paket 3 lief es
+vorab: 0 Befunde.
+
+**`promptcheck.py`** erkennt jetzt das Partizip-`ge-` trennbarer Verben. Es
+hatte `umkehren` als im Quelltext fehlend gemeldet — während der Refrain oben
+es fünfmal trägt.
+
+### Der RIV-Anlautdefekt hat einen Mechanismus
+
+Aus einem Einzelfall (6,6 „la ruina di **iuseppe**") wurde die Messung: **145
+Vorkommen** mit verlorenem G-Anlaut über zwölf Namen, und sie stehen fast alle
+unmittelbar hinter einem kurzen Wort — 49× nach `di`, 30× nach `a`, 13× nach
+`in`, 7× nach `e`. Der sauberste Beleg ist 8,3: „grande sarà il **umero** dei
+cadaveri" — `umero` steht 1× im ganzen Korpus, `numero` 209×, und es steht
+hinter dem kurzen `il`. Das ist keine Zufallsverteilung, sondern eine Regel.
+
+### Eine Bestandskonvention, die niemand aufgeschrieben hatte
+
+Bei „…, spricht Gott, der HERR" liest LSG mehrheitlich `dit` (80 : 37), der
+Bestand glossiert aber durchgehend `parle` (100 Stellen, fast alle Hesekiel).
+Der Agent für Kapitel 8 hat den Widerspruch am Vers bemerkt und ist bewusst
+beim Bestand geblieben — richtig, denn Konsistenz über hundert Stellen wiegt
+schwerer als Treue zu einer Ausgabe an dreien. Notiert in
+`anno-tools/NACHLESE_BESTAND.md`, damit es nicht jedes Buch neu verhandelt wird.
+
+### Ein Fehler im deutschen Quelltext
+
+Amos 9,3 liest `Verbürgen` (= garantieren), gemeint ist `Verbärgen`, der
+Konjunktiv II von `verbergen`. Alle vier Ausgaben lesen „verbergen/verstecken",
+und die Form steht im ganzen deutschen Korpus nur hier. **Nicht geändert** —
+eine Textkorrektur ist eine andere Entscheidung als eine Glossenkorrektur; die
+Glosse folgt dem Sinn, der Befund steht in `NACHLESE_BESTAND.md`.
