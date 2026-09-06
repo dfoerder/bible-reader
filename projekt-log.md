@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.4b (06.09.2026)
+
+- Deutsche Annotation vollständig: Sacharja und Maleachi ergänzt — alle 66 Bücher haben jetzt Wort-für-Wort-Glossen in vier Sprachen; dazu rund 550 Korrekturen im Bestand (Namensschreibungen, Botenformel) und zwei Quelltextkorrekturen in Amos und Micha
+
 ## v1.11.3b (04.09.2026)
 
 - Kopfleiste: Suche rechts, Vorlesen links; Reiter bei offenem Inhaltsverzeichnis ausgeblendet; Einstufungstest überspringen statt Abbrechen
