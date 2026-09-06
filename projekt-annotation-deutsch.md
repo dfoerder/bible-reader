@@ -109,7 +109,7 @@ unabhängige Vollständigkeitsprobe über alle **31 193 Tokens** läuft ohne
 Befund durch; die 147 Satzzeichen-Tokens stimmen auf den Token genau.
 `validate.py 23`, `qa.py 23` und `hilfsverb.py 23` melden nichts.
 
-Damit sind **64 von 66 Büchern** annotiert. Es fehlen die Bücher 38–39.
+Damit sind **alle 66 Bücher** annotiert.
 
 **Jeremia (24) ist seit 03.09.2026 in Arbeit** — 52 Kapitel, 1364 Verse,
 18 Pakete nach `PAKETE_JEREMIA.txt`. Das Buch unterscheidet sich von Jesaja
@@ -4035,3 +4035,80 @@ die Glossen wirkt sich nichts davon aus.
 2,1 `ggeo` für *Aggeo*, 2,2 `ehotsadak` für *Jehotsadak*, 2,16 `uand'uno` für
 *quand'uno* — den dritten hat der Agent selbst gefunden und mit der
 Häufigkeitsprobe belegt (`uand` 2× im ganzen RIV gegen `quando` 1354×).
+
+
+## Sacharja (38) — 14 Kapitel, 211 Verse
+
+Fünf Pakete, vierzehn Agenten. `paketcheck` Abschnitt A und C in **allen fünf
+Paketen leer**: kein neu geprägtes Lemma wurde je verschieden entschieden, keine
+einzige Level-Divergenz. Der Paketschnitt folgte den Bindungen — die
+Visionskapitel 1–6 hängen untereinander am stärksten zusammen.
+
+### Sechzehn Formeln, neun Agenten, Token für Token gleich
+
+„So spricht der HERR der Heerscharen" steht in Sacharja sechzehnmal, verteilt
+über neun Kapitel, gesetzt von neun Agenten, die einander nie gesehen haben —
+und alle sechzehn sind zeichengleich. Die drei Abweichungen sind sämtlich
+richtig und wurden am Vers begründet: `dem` ist nach „mit" ein bloßer Artikel
+und sonst Dativ, `In` einmal lokal und einmal temporal, `so` satzintern klein.
+
+### Eine Regel, die es nie gab
+
+Seit Zefanja stand in jedem Prompt, die `spricht`-Formel trage bei **Apposition**
+französisch `parle`, auch nachgestellt. Der Agent für Maleachi 2 hat als erster
+alle Vorkommen mit ihrem **Vorfeld** gemessen — das hatte ich nie getan. Die 72
+`parle`-Fälle sind ausnahmslos vorangestellt; von den zwei angeblichen
+Gegenbeispielen ist Jeremia 32,36 in Wahrheit vorangestellt („ainsi parle"), und
+Zefanja 2,9 war **mein eigener Fehler**: LSG liest dort „Dit l'Éternel". Die
+Stelle ist korrigiert, die Regel gestrichen.
+
+Damit bleibt Jesaja 22,25 der einzige echte Ausreißer des Korpus — und auch er
+widerspricht seiner eigenen Ausgabe.
+
+### Zwei Werkzeuge, die jahrelang nichts gemeldet haben
+
+`kapitelgrenzen.py` suchte den Quelltext mit einem relativen Pfad und meldete
+deshalb für **kein einziges Buch** je etwas. Aufgefallen an Sacharja, dem ersten
+Buch seit Daniel mit einer echten Verschiebung: `l1912mod` hat in Kapitel 1
+siebzehn Verse, alle vier Ausgaben einundzwanzig. Der erste vollständige Lauf
+zeigt 23 der 66 Bücher mit Zählungsabweichung.
+
+`vorgabecheck.py` las die Datei zeilenweise, und das Zitatmuster erlaubt keinen
+Zeilenumbruch. Prompts sind auf 72 Zeichen gebrochen — also lief fast jedes
+Verszitat über einen Umbruch und wurde stillschweigend übersprungen, seit die
+Probe existiert. Behoben, mit besserer Regression als vorher.
+
+### Was die Agenten an meinen Prompts korrigiert haben
+
+Über vierzig Angaben. Drei Klassen wiederholen sich: falscher Numerus oder Modus
+(in Kapitel 12 sechs auf einmal), das falsche Lemma (`Zutritt` statt `Zugang`,
+`Efa` statt `Getreidemaß`, `Pest` statt `Plage`, zweimal sogar ein Kompositum
+mit eigenem Level), und die Liste der „unbelegten Wortformen", die formbasiert
+ist — in Kapitel 9 standen sieben von zwölf längst im Bestand.
+
+## Maleachi (39) — 3 Kapitel, 55 Verse
+
+Ein Paket, drei Agenten, `paketcheck` A und C leer. Die Zählungsfalle liegt in
+Kapitel 3: `l1912mod` hat 24 Verse, alle vier Ausgaben teilen sie und führen
+3,19–24 als eigenes Kapitel 4.
+
+Der Kapitel-1-Agent hat für die Kollision `HERR`/`Herr` in 1,6 alle vier
+Ausgaben befragt — drei von vieren trennen den Gottesnamen vom Appellativ
+**lexikalisch**, nur das Italienische über die Großschreibung. Entsprechend ist
+`Herr` dort auf `master · amo · maître · padrone` gesetzt.
+
+Meine Wiederholungsliste war unvollständig: `wiederholungen.py` findet 14
+Folgen, ich hatte zehn in den Prompt geschrieben, und ausgerechnet die häufigste
+fehlte. Der Grund war `tail -40` — die Gesamtzahl steht im Kopf der Ausgabe. Das
+ist in dieser Sitzung der dritte Fall desselben Fehlers, nach dem bei 95 Zeichen
+abgeschnittenen Jona-Zitat und den zwei von sechs Varianten in Haggai. **Die
+drei Agenten haben die fehlende Folge trotzdem Token für Token gleich gesetzt.**
+
+## Der Bestand ist vollständig
+
+Alle 66 Bücher validieren ohne Befund, kein Kapitel ist offen. Was die Sitzung
+darüber hinaus geändert hat, steht in `NACHLESE_BESTAND.md`: `Jozadak` war in
+zwei Spalten vertauscht (korpusweit korrigiert, zwölf Belege), Offenbarung 11,4
+trug zwei verschiedene italienische Artikel vor demselben Wort, Zefanja 2,9 und
+Haggai 2,15 sind angeglichen. Offen bleiben dort unter anderem die 672
+italienischen I/J-Namensglossen, `Jedaja`, `Sarezer` und `Kislev`.
