@@ -5,8 +5,8 @@
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
 - **Aktuelle Version:** 1.11.7b (07.09.2026)
-- **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
-- **Bibeltext:** World English Bible (WEB) — gemeinfrei
+- **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
+- **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
 - **Zielgruppe:** Sprachlernende ab A2 in der jeweils gewählten Lesesprache
 - **Hosting:** GitHub Pages
@@ -74,7 +74,9 @@ Jedes Wort hat einen numerischen `familiarity`-Wert (Leitner-Treppe, Wiederholun
 
 ### Vokabeltraining
 
-Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind auf die **wichtigsten mit Lernwert** kuratiert (englische Form ≠ deutsche): Bibelbuch-Autoren/Propheten, Erzväter, Könige, Apostel, Kernorte — obskure Namen (Genealogien) wurden entfernt (v1.9.53b: +710 Eigennamen ergänzt, später auf ~90 relevante reduziert):
+Jede Hauptbibel bringt ihren eigenen Wortpool mit (`train/words.json`): **Englisch 5.615**, **Spanisch 6.846**, **Deutsch 9.973** Wörter über A1–C2. Der deutsche Pool ist der grösste, weil das Deutsche Komposita produktiv bildet — ein Grossteil des Überhangs in B2/C1 sind Einmal-Bildungen, die durch die Sublevel-Sortierung nach Häufigkeit hinten stehen.
+
+Eigennamen sind aus den Übungen ausgenommen, bis auf die **wichtigsten mit Lernwert** (`train/keepnames.json`): Bibelbuch-Autoren/Propheten, Erzväter, Könige, Apostel, Kernorte — obskure Namen aus Genealogien nicht (englischer Pool v1.9.53b: +710 Eigennamen ergänzt, später auf ~90 relevante reduziert):
 
 **CEFR-Level-Quellen** (Priorität):
 1. Oxford 5000 (2.654 Wörter, handkuratiert)
@@ -141,7 +143,7 @@ Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 
 ```
 bible-reader/
-├── index.html                         Haupt-App (React + Babel, ~5.250 Zeilen)
+├── index.html                         Haupt-App (React + Babel, ~5.400 Zeilen)
 ├── sw.js                              Service Worker (Offline-Caching)
 ├── manifest.json                      PWA-Manifest
 ├── icon-192.png / icon-512.png        App-Icons
@@ -171,8 +173,8 @@ bible-reader/
 │   └── deu/l1912mod/                  Luther 1912 modernisiert — Lesen, Glossen (en/es/fr/it),
 │       │                              Training, Einstufungstest; auch Hilfsbibel für Deutsch
 │       ├── anno/{nr}_l1912mod_multi.json   Annotationen mit vier Glossen (66 Dateien)
-│       └── train/                     words.json (mehrsprachig, siehe unten, 9975 Wörter),
-│                                      examples.json, propnames.json (3228 Eigennamen),
+│       └── train/                     words.json (mehrsprachig, siehe unten, 9973 Wörter),
+│                                      examples.json, propnames.json (3223 Eigennamen),
 │                                      keepnames.json; lemmas_raw.json ist ein
 │                                      Build-Intermediate (gitignored)
 ├── generate_training_data.js          Generiert words.json aus Annotationen
@@ -266,7 +268,7 @@ Datei (die App leitet sie ab), und `trForm` entfällt, wenn es mit `tr`
 ### PWA und Offline-Fähigkeit
 
 - **Service Worker** (`sw.js`): Network-first für HTML, Cache-first für Daten
-- **Cache-Name:** `bible-full-vXXXX` (aktuell `bible-full-v2031`, wird bei jedem Deploy hochgezählt)
+- **Cache-Name:** `bible-full-vXXXX` (aktuell `bible-full-v2108`, wird bei jedem Deploy hochgezählt)
 - Vollständige Offline-Nutzung nach erstem Laden
 - Automatisches Update bei neuer Version
 
