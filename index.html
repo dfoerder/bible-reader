@@ -1389,9 +1389,17 @@ function activeGlossLang(){
 }
 
 // ─── Level Test ─────────────────────────────────────────
+// FESTLEGUNG: Der Einstufungstest gehört zur SPRACHE, die Trainingsdaten
+// (words.json/examples.json) gehören zur ÜBERSETZUNG. Deshalb ist LEVEL_TEST_DATA
+// nach Studiensprache geschlüsselt (en/es/de), während wordsPath je BIBLES-Eintrag
+// steht. Solange es je Sprache nur eine Übersetzung gibt, fällt der Unterschied
+// nicht auf; käme eine zweite dazu (z.B. eine weitere deutsche Bibel), teilte sie
+// sich die Test-Items — der Merker `bible-level-tested` liegt allerdings unter dem
+// Instanz-Präfix, der Test käme dort also noch einmal. Das wäre dann die Stelle.
 // Pro Studiensprache eigene Test-Items; `opt` enthält die Optionen je Gloss-Sprache.
 // `word` = angezeigtes Wort (Studiensprache); die Optionen erscheinen in der Sprache
-// der aktiven Hilfsbibel. Nur Editionen mit hasLevelTest (WEB=en, rv1909mod=es).
+// der aktiven Hilfsbibel. Nur Editionen mit hasLevelTest (derzeit WEB=en,
+// rv1909mod=es, l1912mod=de).
 // REGEL: Der Einstufungstest enthält AUSSCHLIESSLICH gewöhnliche Vokabeln — NIEMALS
 // Eigennamen (Personen/Orte/…), weder als abgefragtes `word` noch als Option. Beim
 // Ergänzen/Übersetzen neuer Test-Items strikt einhalten.

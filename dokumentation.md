@@ -120,7 +120,8 @@ Einheitlicher Wortpool mit 5.615 Wörtern (A1–C2). Eigennamen (Level A1) sind 
 - Ergebnis: A1 bis C2; setzt auch die Trainingsstufen (`bible-train-step`, `bible-freq-step`)
 - Passt die Vokabelanzeige automatisch an
 - Jederzeit wiederholbar in den Einstellungen; überspringbar über „Einstufungstest überspringen" (setzt B1)
-- Gilt pro Hauptbibel: wer die Hauptbibel wechselt und den Test für die neue Sprache noch nicht gemacht hat, bekommt ihn direkt beim Wechsel (`levelTestPending()` in `index.html`)
+- **Festlegung:** Der Test gehört zur **Sprache** (`LEVEL_TEST_DATA` ist nach Studiensprache geschlüsselt), die Trainingsdaten dagegen zur **Übersetzung** (`wordsPath` je `BIBLES`-Eintrag). Solange es je Sprache nur eine Übersetzung gibt, fällt der Unterschied nicht auf.
+- Wer die Hauptbibel wechselt und den Test für die neue Sprache noch nicht gemacht hat, bekommt ihn direkt beim Wechsel (`levelTestPending()` in `index.html`). Der Merker liegt unter dem Instanz-Präfix — bei einer zweiten Übersetzung derselben Sprache käme der Test dort erneut; das wäre die Stelle zum Nachziehen
 
 ### Statistiken
 
