@@ -46,23 +46,38 @@ def store(bugs):
 
 
 def merge(incoming):
-    """Neue Bugs anhängen; Rückgabe: Anzahl tatsächlich neuer Einträge."""
+    """Neue Bugs anhaengen, nachtraeglich bearbeitete aktualisieren.
+
+    Rueckgabe: (neu, aktualisiert). Wer einen Bug am Handy nachbearbeitet,
+    schickt ihn mit derselben id erneut — dann werden Text und Schwere
+    uebernommen. Der urspruenglich erfasste Kontext bleibt stehen, ein bereits
+    erledigter Eintrag wird nicht wieder geoeffnet.
+    """
     bugs = load()
-    known = {b.get('id') for b in bugs}
-    added = 0
+    by_id = {b.get('id'): b for b in bugs}
+    added = updated = 0
     for b in incoming:
-        if not isinstance(b, dict) or b.get('id') in known:
+        if not isinstance(b, dict):
             continue
         b.pop('synced', None)  # Handy-interner Übertragungsstatus, hier bedeutungslos
+        cur = by_id.get(b.get('id'))
+        if cur is not None:
+            changed = {k: b[k] for k in ('text', 'sev') if k in b and b[k] != cur.get(k)}
+            if not changed:
+                continue
+            cur.update(changed)
+            cur['edited'] = b.get('edited') or datetime.now().isoformat(timespec='seconds')
+            updated += 1
+            continue
         b.setdefault('status', 'open')
         b['received'] = datetime.now().isoformat(timespec='seconds')
         bugs.append(b)
-        known.add(b.get('id'))
+        by_id[b.get('id')] = b
         added += 1
-    if added:
+    if added or updated:
         bugs.sort(key=lambda b: b.get('ts', ''))
         store(bugs)
-    return added
+    return added, updated
 
 
 def describe(b):
@@ -126,11 +141,12 @@ class Handler(SimpleHTTPRequestHandler):
         if not isinstance(incoming, list):
             self._json(400, {'error': 'erwarte {"bugs": [...]}'})
             return
-        added = merge(incoming)
+        added, updated = merge(incoming)
         for b in incoming[-added:] if added else []:
             print('  ' + describe(b))
-        print('→ %d neue Bug(s), %d insgesamt in bugs/bugs.json' % (added, len(load())))
-        self._json(200, {'added': added, 'total': len(load())})
+        print('→ %d neue, %d geänderte Bug(s), %d insgesamt in bugs/bugs.json'
+              % (added, updated, len(load())))
+        self._json(200, {'added': added, 'updated': updated, 'total': len(load())})
 
     def log_message(self, fmt, *args):
         if self.path.startswith('/bugs'):
@@ -161,7 +177,8 @@ def main():
         with open(args.imp, encoding='utf-8') as f:
             data = json.load(f)
         incoming = data.get('bugs') if isinstance(data, dict) else data
-        print('%d neue Bug(s) übernommen' % merge(incoming))
+        added, updated = merge(incoming)
+        print('%d neue Bug(s) übernommen, %d geändert' % (added, updated))
         return
 
     if args.done:
