@@ -170,9 +170,10 @@ bible-reader/
 │   └── deu/l1912mod/                  Luther 1912 modernisiert — Lesen, Glossen (en/es/fr/it),
 │       │                              Training, Einstufungstest; auch Hilfsbibel für Deutsch
 │       ├── anno/{nr}_l1912mod_multi.json   Annotationen mit vier Glossen (66 Dateien)
-│       └── train/                     words.json (mehrsprachig, siehe unten), examples.json,
-│                                      propnames.json; enrich/ + lemmas_raw.json sind
-│                                      Build-Intermediates (gitignored)
+│       └── train/                     words.json (mehrsprachig, siehe unten, 9975 Wörter),
+│                                      examples.json, propnames.json (3228 Eigennamen),
+│                                      keepnames.json; lemmas_raw.json ist ein
+│                                      Build-Intermediate (gitignored)
 ├── generate_training_data.js          Generiert words.json aus Annotationen
 │                                      (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
 ├── build_training.py                  Trainingsdaten Schritt 1: Lemmata, Häufigkeit, bester
@@ -231,6 +232,8 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `de` | Deutsche Übersetzung (kontextbezogen) |
 | `phrase` | Position der zugehörigen Phrase-Annotation (nur bei Einzelwort-Annotationen innerhalb einer Phrase) |
 
+**Eigennamen im Übungsfilter:** Die Kapitelübungen lassen Eigennamen aus, außer den kuratierten aus `train/keepnames.json`. Erkannt werden sie normalerweise an der Großschreibung des Lemmas — im Deutschen ist das wertlos, weil jedes Substantiv groß geschrieben wird. Editionen können deshalb über `propNamesPath` eine echte Liste mitbringen (aus der Anreicherung, `pos == propn`); liegt eine vor, entscheidet sie statt der Schreibung.
+
 **Eigennamen:** Im **Bibeltext** sind alle Eigennamen (Personen, Orte) annotiert — immer Level A1. Deutsche Entsprechungen werden verwendet: Christ→Christus, Moses→Mose, Egypt→Ägypten, Isaiah→Jesaja. Namen ohne Änderung (Jesus, Abraham) erhalten die gleiche Form als `de`. Im **Lernwortpool** (`words.json`) steht dagegen nur eine kuratierte Auswahl der wichtigsten Namen mit Lernwert (en ≠ de) — obskure Namen aus Genealogien sind nicht enthalten.
 
 ### Trainingsdatenformat (`words.json`)
@@ -254,6 +257,10 @@ Nach CEFR-Stufe gebucketet, je Wort ein Eintrag; `VOCAB_POOL`, `FREQ_POOL` und
 Bibel). `applyGlossToWords()` füllt daraus `de`/`deForm` — beim Laden und erneut,
 wenn die Glossensprache im laufenden Betrieb gewechselt wird; alle Übungen lesen
 weiterhin nur `de`/`deForm`. Fehlt `tr`, bleibt es beim einsprachigen Bestand.
+
+Aus Platzgründen stehen `de`/`deForm` bei mehrsprachigen Editionen **nicht** in der
+Datei (die App leitet sie ab), und `trForm` entfällt, wenn es mit `tr`
+übereinstimmt — bei vier Sprachen spart das rund ein Sechstel der Dateigröße.
 
 ### PWA und Offline-Fähigkeit
 

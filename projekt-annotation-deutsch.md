@@ -4130,11 +4130,12 @@ Pipeline wirft jedes grossgeschriebene Lemma weg; im Deutschen wären das alle
 Substantive gewesen. Der Schalter `caps_are_names` steht für diese Edition auf
 `False`, das Aussortieren macht allein die Wortart aus der Anreicherung. Aus
 demselben Grund entsteht in Schritt 3 eine echte Eigennamen-Liste
-(`train/propnames.json`): der Laufzeit-Filter der Kapitelübungen erkennt
-Eigennamen bisher an der Schreibung und ist für Deutsch damit blind. Er bleibt
-für diese Edition aus, bis **alle** Lemmata angereichert sind — eine
-unvollständige Liste würde seltene echte Substantive aus den Kapitelübungen
-werfen.
+(`train/propnames.json`): der Laufzeit-Filter der Kapitelübungen erkannte
+Eigennamen bisher an der Schreibung und war für Deutsch damit blind. Seit die
+zweite Runde durch ist, entscheidet für diese Edition die Liste (3228 Namen);
+`train/keepnames.json` hält die 169 wichtigen Namen trotzdem in den Übungen.
+Wirkung: Matthäus 1 verliert 35 Geschlechtsregister-Namen (Perez, Hezron,
+Nahesson, Boas, Obed …), während David, Jesus und Abraham stehen bleiben.
 
 **Der Plural-Merge musste weg.** Die Regel „endet auf -s/-es und der Stamm steht
 schon im Pool" ist romanisch gedacht und hätte „Gottes" auf „Gott" gezogen.
@@ -4157,3 +4158,43 @@ Annotationen (`prelim_level`) klebt am Kontext und liegt regelmässig zu hoch:
 Alltagswörter wie `Monat`, `Zelt`, `Fenster`, `Salz`, `lachen` kamen als B1/B2
 an. Die Anreicherung stuft sie auf die Vokabelschwierigkeit zurück. Umgekehrt
 wandern kultische Fachwörter (`Gnadenstuhl`, `Halljahr`, `entsühnen`) nach oben.
+
+### Zweite Runde (07.09.2026)
+
+Die 6856 Lemmata mit ein bis zwei Vorkommen sind in 28 weiteren Paketen
+angereichert. Damit sind **alle 13 824 Lemmata** durch, `check_enrich.py` meldet
+über alle 56 Pakete null Beanstandungen. Der Pool wächst von 5363 auf **9975
+Wörter** (A1 221 · A2 544 · B1 1912 · B2 4067 · C1 2996 · C2 235), die
+Eigennamen-Liste von 1293 auf 3228 Einträge.
+
+Der Zuwachs sitzt fast vollständig in B2/C1: das Deutsche bildet Komposita
+produktiv, und ein Grossteil der seltenen Lemmata sind Einmal-Bildungen wie
+`Ziegenhaargeflecht` oder `Belagerungswall`. Für das Lese-Level ist das ein
+Gewinn (jedes Wort hat jetzt eine Stufe), für das Vokabeltraining eher Ballast —
+die Einheiten ziehen aber nach Sublevel und innerhalb dessen nach Häufigkeit,
+die seltenen Bildungen stehen also hinten.
+
+`words.json` wäre damit auf 3,8 MB gewachsen. Die einsprachigen Altfelder
+`de`/`deForm` stehen deshalb nicht mehr in der Datei, wenn `tr` vorhanden ist —
+die App füllt sie beim Laden aus dem Sprach-Dict —, und `trForm` entfällt, wo es
+mit `tr` übereinstimmt (der Normalfall beim Substantiv im Nominativ Singular).
+Das bringt 3,2 MB.
+
+**Wiederkehrende Befunde der Agenten in dieser Runde:**
+
+- Namensglossen kommen häufig im Genitiv oder mit Präposition herein („of Abda",
+  „de Abda", „d'Abda"); in der Grundform steht der Nominativ.
+- Der Text schreibt denselben Namen mehrfach verschieden: `Beerot`/`Beeroth`,
+  `Minnit`/`Minnith`, `Thorgama`/`Thogarma`/`Togarma`, `Elischua`/`Elisua`.
+  Das sind Uneinheitlichkeiten im modernisierten Text, keine Annotationsfehler.
+- Einzelne Lemmata bündeln zwei verschiedene Wörter: `Eber` (Name und Wildschwein),
+  `Schur` (Ort und das Scheren), `Peres` (Menetekel-Wort und Personenname),
+  `Lot` (Person und Gewichtsmass — hier überwiegt das Mass mit 57 von 97 Belegen).
+- `zetteln` ist ein Lemmatisierungsfehler: der Satz zeigt „zettelt … an",
+  das Lemma müsste `anzetteln` heissen.
+
+**Ein Fund im Bibeltext selbst:** Psalm 131,2 sagt zweimal „wie ein gestilltes
+Kind", während alle vier Glossen „weaned/destetado/sevré/svezzato" tragen.
+Luther 1912 hat „ein entwöhntes Kind", und das Hebräische meint dasselbe;
+„gestillt" heisst heute das Gegenteil und nimmt dem Vers sein Bild. Der
+massgebliche Text liegt in `../bibles-translations/` und ist hier nicht geändert.

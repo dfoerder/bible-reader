@@ -197,17 +197,29 @@ def main():
         third = max(1, -(-len(arr) // 3))
         for i, w in enumerate(arr):
             sub = 1 if i < third else 2 if i < 2 * third else 3
-            entry = {"en": w["en"], "de": w["de"], "sub": sub, "occ": w["occ"]}
-            if w.get("tr"):
-                entry["tr"] = w["tr"]
+            # Mehrsprachige Editionen: die einsprachigen Altfelder de/deForm werden in
+            # der App aus tr/trForm gefüllt und stehen deshalb nicht in der Datei —
+            # das spart bei vier Sprachen rund ein Drittel. trForm entfällt zusätzlich,
+            # wenn die flektierte Form der Grundform gleicht (der Normalfall bei
+            # Substantiven im Nominativ Singular).
+            tr = w.get("tr")
+            entry = {"en": w["en"], "sub": sub, "occ": w["occ"]}
+            if tr:
+                entry["tr"] = tr
+            else:
+                entry["de"] = w["de"]
             cz = w.get("_cloze")
             if cz:
                 entry.update({"text": cz["text"], "answer": cz["answer"],
                               "ref": f"{names.get(cz['ref_book'], 'Book')} {cz['ch']}:{cz['vn']}",
                               "book": cz["ref_book"]})
-            entry.update({"pos": w["pos"], "deForm": w["deForm"], "form": w["form"]})
-            if w.get("trForm"):
-                entry["trForm"] = w["trForm"]
+            entry.update({"pos": w["pos"], "form": w["form"]})
+            if tr:
+                tf = w.get("trForm")
+                if tf and tf != tr:
+                    entry["trForm"] = tf
+            else:
+                entry["deForm"] = w["deForm"]
             words[lvl].append(entry)
 
     out_path = os.path.join(cfg["bible_dir"], "train", "words.json")
