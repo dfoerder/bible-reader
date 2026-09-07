@@ -1,0 +1,2752 @@
+[
+ {
+  "lemma": "Gerät",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "utensil",
+   "es": "utensilio",
+   "fr": "ustensile",
+   "it": "utensile"
+  }
+ },
+ {
+  "lemma": "Hunger",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "hunger",
+   "es": "hambre",
+   "fr": "faim",
+   "it": "fame"
+  }
+ },
+ {
+  "lemma": "Magd",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "maid",
+   "es": "criada",
+   "fr": "servante",
+   "it": "serva"
+  }
+ },
+ {
+  "lemma": "dorthin",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "there",
+   "es": "allí",
+   "fr": "là-bas",
+   "it": "là"
+  }
+ },
+ {
+  "lemma": "ehren",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to honor",
+   "es": "honrar",
+   "fr": "honorer",
+   "it": "onorare"
+  }
+ },
+ {
+  "lemma": "fünfzig",
+  "level": "A1",
+  "pos": "num",
+  "base": {
+   "en": "fifty",
+   "es": "cincuenta",
+   "fr": "cinquante",
+   "it": "cinquanta"
+  }
+ },
+ {
+  "lemma": "herauf",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "up",
+   "es": "arriba",
+   "fr": "en haut",
+   "it": "su"
+  }
+ },
+ {
+  "lemma": "neben",
+  "level": "A2",
+  "pos": "prep",
+  "base": {
+   "en": "next to",
+   "es": "junto a",
+   "fr": "à côté de",
+   "it": "accanto a"
+  }
+ },
+ {
+  "lemma": "Apostel",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "apostle",
+   "es": "apóstol",
+   "fr": "apôtre",
+   "it": "apostolo"
+  }
+ },
+ {
+  "lemma": "Einsicht",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "insight",
+   "es": "discernimiento",
+   "fr": "discernement",
+   "it": "discernimento"
+  }
+ },
+ {
+  "lemma": "Lohn",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "wage",
+   "es": "salario",
+   "fr": "salaire",
+   "it": "salario"
+  }
+ },
+ {
+  "lemma": "Traum",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "dream",
+   "es": "sueño",
+   "fr": "rêve",
+   "it": "sogno"
+  }
+ },
+ {
+  "lemma": "ausziehen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to set out",
+   "es": "salir",
+   "fr": "sortir",
+   "it": "uscire"
+  }
+ },
+ {
+  "lemma": "grüßen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to greet",
+   "es": "saludar",
+   "fr": "saluer",
+   "it": "salutare"
+  }
+ },
+ {
+  "lemma": "klagen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to lament",
+   "es": "lamentarse",
+   "fr": "se lamenter",
+   "it": "lamentarsi"
+  }
+ },
+ {
+  "lemma": "Geschenk",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "gift",
+   "es": "regalo",
+   "fr": "cadeau",
+   "it": "regalo"
+  }
+ },
+ {
+  "lemma": "Herrschaft",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "rule",
+   "es": "dominio",
+   "fr": "règne",
+   "it": "dominio"
+  }
+ },
+ {
+  "lemma": "Schrift",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "Scripture",
+   "es": "Escritura",
+   "fr": "Écriture",
+   "it": "Scrittura"
+  }
+ },
+ {
+  "lemma": "antun",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to inflict",
+   "es": "infligir",
+   "fr": "infliger",
+   "it": "infliggere"
+  }
+ },
+ {
+  "lemma": "ausrotten",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to exterminate",
+   "es": "exterminar",
+   "fr": "exterminer",
+   "it": "sterminare"
+  }
+ },
+ {
+  "lemma": "fein",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "fine",
+   "es": "fino",
+   "fr": "fin",
+   "it": "fine"
+  }
+ },
+ {
+  "lemma": "Edom",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Edom",
+   "es": "Edom",
+   "fr": "Édom",
+   "it": "Edom"
+  }
+ },
+ {
+  "lemma": "Hügel",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hill",
+   "es": "colina",
+   "fr": "colline",
+   "it": "collina"
+  }
+ },
+ {
+  "lemma": "Los",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "lot",
+   "es": "suerte",
+   "fr": "sort",
+   "it": "sorte"
+  }
+ },
+ {
+  "lemma": "Schatz",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "treasure",
+   "es": "tesoro",
+   "fr": "trésor",
+   "it": "tesoro"
+  }
+ },
+ {
+  "lemma": "Simon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Simon",
+   "es": "Simón",
+   "fr": "Simon",
+   "it": "Simone"
+  }
+ },
+ {
+  "lemma": "annehmen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to accept",
+   "es": "aceptar",
+   "fr": "accepter",
+   "it": "accettare"
+  }
+ },
+ {
+  "lemma": "befreien",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to free",
+   "es": "liberar",
+   "fr": "libérer",
+   "it": "liberare"
+  }
+ },
+ {
+  "lemma": "bereit",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "ready",
+   "es": "listo",
+   "fr": "prêt",
+   "it": "pronto"
+  }
+ },
+ {
+  "lemma": "predigen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to preach",
+   "es": "predicar",
+   "fr": "prêcher",
+   "it": "predicare"
+  }
+ },
+ {
+  "lemma": "schweigen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to be silent",
+   "es": "callar",
+   "fr": "se taire",
+   "it": "tacere"
+  }
+ },
+ {
+  "lemma": "verstecken",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to hide",
+   "es": "esconder",
+   "fr": "cacher",
+   "it": "nascondere"
+  }
+ },
+ {
+  "lemma": "Chaldäer",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Chaldean",
+   "es": "caldeo",
+   "fr": "Chaldéen",
+   "it": "Caldeo"
+  }
+ },
+ {
+  "lemma": "Cherub",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "cherub",
+   "es": "querubín",
+   "fr": "chérubin",
+   "it": "cherubino"
+  }
+ },
+ {
+  "lemma": "Gefäß",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "vessel",
+   "es": "vasija",
+   "fr": "récipient",
+   "it": "vaso"
+  }
+ },
+ {
+  "lemma": "Lied",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "song",
+   "es": "canción",
+   "fr": "chanson",
+   "it": "canzone"
+  }
+ },
+ {
+  "lemma": "breit",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "wide",
+   "es": "ancho",
+   "fr": "large",
+   "it": "largo"
+  }
+ },
+ {
+  "lemma": "ebenfalls",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "as well",
+   "es": "también",
+   "fr": "également",
+   "it": "anche"
+  }
+ },
+ {
+  "lemma": "erhören",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to hear",
+   "es": "escuchar",
+   "fr": "exaucer",
+   "it": "esaudire"
+  }
+ },
+ {
+  "lemma": "gefangen",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "captive",
+   "es": "cautivo",
+   "fr": "prisonnier",
+   "it": "prigioniero"
+  }
+ },
+ {
+  "lemma": "heiraten",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to marry",
+   "es": "casarse",
+   "fr": "se marier",
+   "it": "sposarsi"
+  }
+ },
+ {
+  "lemma": "versichern",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to assure",
+   "es": "asegurar",
+   "fr": "assurer",
+   "it": "assicurare"
+  }
+ },
+ {
+  "lemma": "weise",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "wise",
+   "es": "sabio",
+   "fr": "sage",
+   "it": "saggio"
+  }
+ },
+ {
+  "lemma": "Einwohner",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "inhabitant",
+   "es": "habitante",
+   "fr": "habitant",
+   "it": "abitante"
+  }
+ },
+ {
+  "lemma": "Nahrung",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "food",
+   "es": "alimento",
+   "fr": "nourriture",
+   "it": "cibo"
+  }
+ },
+ {
+  "lemma": "Reiter",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "rider",
+   "es": "jinete",
+   "fr": "cavalier",
+   "it": "cavaliere"
+  }
+ },
+ {
+  "lemma": "ergreifen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to seize",
+   "es": "agarrar",
+   "fr": "saisir",
+   "it": "afferrare"
+  }
+ },
+ {
+  "lemma": "fehlen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to be missing",
+   "es": "faltar",
+   "fr": "manquer",
+   "it": "mancare"
+  }
+ },
+ {
+  "lemma": "königlich",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "royal",
+   "es": "real",
+   "fr": "royal",
+   "it": "reale"
+  }
+ },
+ {
+  "lemma": "Dan",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Dan",
+   "es": "Dan",
+   "fr": "Dan",
+   "it": "Dan"
+  }
+ },
+ {
+  "lemma": "Haar",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "hair",
+   "es": "cabello",
+   "fr": "cheveux",
+   "it": "capelli"
+  }
+ },
+ {
+  "lemma": "Hauptmann",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "captain",
+   "es": "capitán",
+   "fr": "capitaine",
+   "it": "capitano"
+  }
+ },
+ {
+  "lemma": "Strom",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "river",
+   "es": "río",
+   "fr": "fleuve",
+   "it": "fiume"
+  }
+ },
+ {
+  "lemma": "binden",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to tie",
+   "es": "atar",
+   "fr": "attacher",
+   "it": "legare"
+  }
+ },
+ {
+  "lemma": "reinigen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to cleanse",
+   "es": "purificar",
+   "fr": "purifier",
+   "it": "purificare"
+  }
+ },
+ {
+  "lemma": "satt",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "full",
+   "es": "saciado",
+   "fr": "rassasié",
+   "it": "sazio"
+  }
+ },
+ {
+  "lemma": "schenken",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to give",
+   "es": "regalar",
+   "fr": "offrir",
+   "it": "regalare"
+  }
+ },
+ {
+  "lemma": "säen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to sow",
+   "es": "sembrar",
+   "fr": "semer",
+   "it": "seminare"
+  }
+ },
+ {
+  "lemma": "Eleasar",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Eleazar",
+   "es": "Eleazar",
+   "fr": "Éléazar",
+   "it": "Eleazar"
+  }
+ },
+ {
+  "lemma": "Verderben",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "ruin",
+   "es": "perdición",
+   "fr": "perdition",
+   "it": "rovina"
+  }
+ },
+ {
+  "lemma": "befolgen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to obey",
+   "es": "cumplir",
+   "fr": "suivre",
+   "it": "seguire"
+  }
+ },
+ {
+  "lemma": "besitzen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to own",
+   "es": "poseer",
+   "fr": "posséder",
+   "it": "possedere"
+  }
+ },
+ {
+  "lemma": "fangen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to catch",
+   "es": "atrapar",
+   "fr": "attraper",
+   "it": "catturare"
+  }
+ },
+ {
+  "lemma": "gesund",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "healthy",
+   "es": "sano",
+   "fr": "sain",
+   "it": "sano"
+  }
+ },
+ {
+  "lemma": "gnädig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "gracious",
+   "es": "clemente",
+   "fr": "clément",
+   "it": "clemente"
+  }
+ },
+ {
+  "lemma": "ruhen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to rest",
+   "es": "descansar",
+   "fr": "reposer",
+   "it": "riposare"
+  }
+ },
+ {
+  "lemma": "taufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to baptize",
+   "es": "bautizar",
+   "fr": "baptiser",
+   "it": "battezzare"
+  }
+ },
+ {
+  "lemma": "wild",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "wild",
+   "es": "salvaje",
+   "fr": "sauvage",
+   "it": "selvaggio"
+  }
+ },
+ {
+  "lemma": "Baal",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Baal",
+   "es": "Baal",
+   "fr": "Baal",
+   "it": "Baal"
+  }
+ },
+ {
+  "lemma": "Gefängnis",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "prison",
+   "es": "cárcel",
+   "fr": "prison",
+   "it": "prigione"
+  }
+ },
+ {
+  "lemma": "Grimm",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "fury",
+   "es": "furor",
+   "fr": "fureur",
+   "it": "furore"
+  }
+ },
+ {
+  "lemma": "Krieger",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "warrior",
+   "es": "guerrero",
+   "fr": "guerrier",
+   "it": "guerriero"
+  }
+ },
+ {
+  "lemma": "Levi",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Levi",
+   "es": "Leví",
+   "fr": "Lévi",
+   "it": "Levi"
+  }
+ },
+ {
+  "lemma": "Statthalter",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "governor",
+   "es": "gobernador",
+   "fr": "gouverneur",
+   "it": "governatore"
+  }
+ },
+ {
+  "lemma": "dreißig",
+  "level": "A1",
+  "pos": "num",
+  "base": {
+   "en": "thirty",
+   "es": "treinta",
+   "fr": "trente",
+   "it": "trenta"
+  }
+ },
+ {
+  "lemma": "jenseits",
+  "level": "B2",
+  "pos": "prep",
+  "base": {
+   "en": "beyond",
+   "es": "más allá de",
+   "fr": "au-delà de",
+   "it": "al di là di"
+  }
+ },
+ {
+  "lemma": "lesen",
+  "level": "A1",
+  "pos": "verb",
+  "base": {
+   "en": "to read",
+   "es": "leer",
+   "fr": "lire",
+   "it": "leggere"
+  }
+ },
+ {
+  "lemma": "umkehren",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to turn back",
+   "es": "regresar",
+   "fr": "revenir",
+   "it": "tornare indietro"
+  }
+ },
+ {
+  "lemma": "Amen",
+  "level": "A1",
+  "pos": "intj",
+  "base": {
+   "en": "Amen",
+   "es": "Amén",
+   "fr": "Amen",
+   "it": "Amen"
+  }
+ },
+ {
+  "lemma": "Felsen",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "rock",
+   "es": "roca",
+   "fr": "rocher",
+   "it": "roccia"
+  }
+ },
+ {
+  "lemma": "ausliefern",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to deliver up",
+   "es": "entregar",
+   "fr": "livrer",
+   "it": "consegnare"
+  }
+ },
+ {
+  "lemma": "schuldig",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "guilty",
+   "es": "culpable",
+   "fr": "coupable",
+   "it": "colpevole"
+  }
+ },
+ {
+  "lemma": "verführen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to seduce",
+   "es": "seducir",
+   "fr": "séduire",
+   "it": "sedurre"
+  }
+ },
+ {
+  "lemma": "Bedrängnis",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "distress",
+   "es": "angustia",
+   "fr": "détresse",
+   "it": "angoscia"
+  }
+ },
+ {
+  "lemma": "Bild",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "image",
+   "es": "imagen",
+   "fr": "image",
+   "it": "immagine"
+  }
+ },
+ {
+  "lemma": "Brief",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "letter",
+   "es": "carta",
+   "fr": "lettre",
+   "it": "lettera"
+  }
+ },
+ {
+  "lemma": "durchs",
+  "level": "A1",
+  "pos": "prep",
+  "base": {
+   "en": "through the",
+   "es": "por el",
+   "fr": "par le",
+   "it": "per il"
+  }
+ },
+ {
+  "lemma": "erinnern",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to remember",
+   "es": "recordar",
+   "fr": "se souvenir",
+   "it": "ricordare"
+  }
+ },
+ {
+  "lemma": "silbern",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "silver",
+   "es": "de plata",
+   "fr": "en argent",
+   "it": "d'argento"
+  }
+ },
+ {
+  "lemma": "übergeben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to hand over",
+   "es": "entregar",
+   "fr": "remettre",
+   "it": "consegnare"
+  }
+ },
+ {
+  "lemma": "Grube",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "pit",
+   "es": "fosa",
+   "fr": "fosse",
+   "it": "fossa"
+  }
+ },
+ {
+  "lemma": "Hebron",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hebron",
+   "es": "Hebrón",
+   "fr": "Hébron",
+   "it": "Hebron"
+  }
+ },
+ {
+  "lemma": "brauchen",
+  "level": "A1",
+  "pos": "verb",
+  "base": {
+   "en": "to need",
+   "es": "necesitar",
+   "fr": "avoir besoin de",
+   "it": "avere bisogno di"
+  }
+ },
+ {
+  "lemma": "fließen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to flow",
+   "es": "fluir",
+   "fr": "couler",
+   "it": "scorrere"
+  }
+ },
+ {
+  "lemma": "gewinnen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to win",
+   "es": "ganar",
+   "fr": "gagner",
+   "it": "vincere"
+  }
+ },
+ {
+  "lemma": "gießen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to pour",
+   "es": "verter",
+   "fr": "verser",
+   "it": "versare"
+  }
+ },
+ {
+  "lemma": "herab",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "down",
+   "es": "abajo",
+   "fr": "en bas",
+   "it": "giù"
+  }
+ },
+ {
+  "lemma": "kümmern",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to take care of",
+   "es": "cuidar",
+   "fr": "s'occuper de",
+   "it": "occuparsi di"
+  }
+ },
+ {
+  "lemma": "messen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to measure",
+   "es": "medir",
+   "fr": "mesurer",
+   "it": "misurare"
+  }
+ },
+ {
+  "lemma": "nein",
+  "level": "A1",
+  "pos": "part",
+  "base": {
+   "en": "no",
+   "es": "no",
+   "fr": "non",
+   "it": "no"
+  }
+ },
+ {
+  "lemma": "trauern",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to mourn",
+   "es": "estar de luto",
+   "fr": "être en deuil",
+   "it": "essere in lutto"
+  }
+ },
+ {
+  "lemma": "wegnehmen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to take away",
+   "es": "quitar",
+   "fr": "enlever",
+   "it": "togliere"
+  }
+ },
+ {
+  "lemma": "zuerst",
+  "level": "A2",
+  "pos": "adv",
+  "base": {
+   "en": "first",
+   "es": "primero",
+   "fr": "d'abord",
+   "it": "prima"
+  }
+ },
+ {
+  "lemma": "Abgabe",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "contribution",
+   "es": "contribución",
+   "fr": "contribution",
+   "it": "contributo"
+  }
+ },
+ {
+  "lemma": "Erbarmen",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "mercy",
+   "es": "compasión",
+   "fr": "pitié",
+   "it": "pietà"
+  }
+ },
+ {
+  "lemma": "Gelübde",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "vow",
+   "es": "voto",
+   "fr": "vœu",
+   "it": "voto"
+  }
+ },
+ {
+  "lemma": "Regen",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "rain",
+   "es": "lluvia",
+   "fr": "pluie",
+   "it": "pioggia"
+  }
+ },
+ {
+  "lemma": "bereiten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to prepare",
+   "es": "preparar",
+   "fr": "préparer",
+   "it": "preparare"
+  }
+ },
+ {
+  "lemma": "feiern",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to celebrate",
+   "es": "celebrar",
+   "fr": "célébrer",
+   "it": "celebrare"
+  }
+ },
+ {
+  "lemma": "kurz",
+  "level": "A1",
+  "pos": "adj",
+  "base": {
+   "en": "short",
+   "es": "corto",
+   "fr": "court",
+   "it": "corto"
+  }
+ },
+ {
+  "lemma": "morgen",
+  "level": "A1",
+  "pos": "adv",
+  "base": {
+   "en": "tomorrow",
+   "es": "mañana",
+   "fr": "demain",
+   "it": "domani"
+  }
+ },
+ {
+  "lemma": "verlieren",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to lose",
+   "es": "perder",
+   "fr": "perdre",
+   "it": "perdere"
+  }
+ },
+ {
+  "lemma": "viert",
+  "level": "A1",
+  "pos": "num",
+  "base": {
+   "en": "fourth",
+   "es": "cuarto",
+   "fr": "quatrième",
+   "it": "quarto"
+  }
+ },
+ {
+  "lemma": "weichen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to give way",
+   "es": "apartarse",
+   "fr": "s'écarter",
+   "it": "allontanarsi"
+  }
+ },
+ {
+  "lemma": "Galiläa",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Galilee",
+   "es": "Galilea",
+   "fr": "Galilée",
+   "it": "Galilea"
+  }
+ },
+ {
+  "lemma": "Kanaaniter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Canaanite",
+   "es": "cananeo",
+   "fr": "Cananéen",
+   "it": "Cananeo"
+  }
+ },
+ {
+  "lemma": "aufrichtig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "sincere",
+   "es": "sincero",
+   "fr": "sincère",
+   "it": "sincero"
+  }
+ },
+ {
+  "lemma": "behandeln",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to treat",
+   "es": "tratar",
+   "fr": "traiter",
+   "it": "trattare"
+  }
+ },
+ {
+  "lemma": "errichten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to erect",
+   "es": "erigir",
+   "fr": "ériger",
+   "it": "erigere"
+  }
+ },
+ {
+  "lemma": "früh",
+  "level": "A2",
+  "pos": "adv",
+  "base": {
+   "en": "early",
+   "es": "temprano",
+   "fr": "tôt",
+   "it": "presto"
+  }
+ },
+ {
+  "lemma": "gewaltig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "mighty",
+   "es": "poderoso",
+   "fr": "puissant",
+   "it": "possente"
+  }
+ },
+ {
+  "lemma": "pflanzen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to plant",
+   "es": "plantar",
+   "fr": "planter",
+   "it": "piantare"
+  }
+ },
+ {
+  "lemma": "Lehre",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "teaching",
+   "es": "enseñanza",
+   "fr": "enseignement",
+   "it": "insegnamento"
+  }
+ },
+ {
+  "lemma": "Sklave",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "slave",
+   "es": "esclavo",
+   "fr": "esclave",
+   "it": "schiavo"
+  }
+ },
+ {
+  "lemma": "acht",
+  "level": "A1",
+  "pos": "num",
+  "base": {
+   "en": "eight",
+   "es": "ocho",
+   "fr": "huit",
+   "it": "otto"
+  }
+ },
+ {
+  "lemma": "besser",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "better",
+   "es": "mejor",
+   "fr": "meilleur",
+   "it": "migliore"
+  }
+ },
+ {
+  "lemma": "samt",
+  "level": "C1",
+  "pos": "prep",
+  "base": {
+   "en": "together with",
+   "es": "junto con",
+   "fr": "avec",
+   "it": "insieme a"
+  }
+ },
+ {
+  "lemma": "streiten",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to argue",
+   "es": "discutir",
+   "fr": "se disputer",
+   "it": "litigare"
+  }
+ },
+ {
+  "lemma": "trösten",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to comfort",
+   "es": "consolar",
+   "fr": "consoler",
+   "it": "consolare"
+  }
+ },
+ {
+  "lemma": "verstoßen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to cast out",
+   "es": "rechazar",
+   "fr": "rejeter",
+   "it": "ripudiare"
+  }
+ },
+ {
+  "lemma": "Acker",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "field",
+   "es": "campo",
+   "fr": "champ",
+   "it": "campo"
+  }
+ },
+ {
+  "lemma": "Dämon",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "demon",
+   "es": "demonio",
+   "fr": "démon",
+   "it": "demone"
+  }
+ },
+ {
+  "lemma": "Festung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "fortress",
+   "es": "fortaleza",
+   "fr": "forteresse",
+   "it": "fortezza"
+  }
+ },
+ {
+  "lemma": "Jehu",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Jehu",
+   "es": "Jehú",
+   "fr": "Jéhu",
+   "it": "Jehu"
+  }
+ },
+ {
+  "lemma": "Leinen",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "linen",
+   "es": "lino",
+   "fr": "lin",
+   "it": "lino"
+  }
+ },
+ {
+  "lemma": "Rabbi",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "rabbi",
+   "es": "rabino",
+   "fr": "rabbin",
+   "it": "rabbino"
+  }
+ },
+ {
+  "lemma": "Räucherwerk",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "incense",
+   "es": "incienso",
+   "fr": "encens",
+   "it": "incenso"
+  }
+ },
+ {
+  "lemma": "Segen",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "blessing",
+   "es": "bendición",
+   "fr": "bénédiction",
+   "it": "benedizione"
+  }
+ },
+ {
+  "lemma": "Teil",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "part",
+   "es": "parte",
+   "fr": "partie",
+   "it": "parte"
+  }
+ },
+ {
+  "lemma": "Trankopfer",
+  "level": "C2",
+  "pos": "noun",
+  "base": {
+   "en": "drink offering",
+   "es": "libación",
+   "fr": "libation",
+   "it": "libagione"
+  }
+ },
+ {
+  "lemma": "genug",
+  "level": "A2",
+  "pos": "adv",
+  "base": {
+   "en": "enough",
+   "es": "suficiente",
+   "fr": "assez",
+   "it": "abbastanza"
+  }
+ },
+ {
+  "lemma": "halb",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "half",
+   "es": "medio",
+   "fr": "demi",
+   "it": "mezzo"
+  }
+ },
+ {
+  "lemma": "klug",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "clever",
+   "es": "listo",
+   "fr": "intelligent",
+   "it": "intelligente"
+  }
+ },
+ {
+  "lemma": "trotzdem",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "nevertheless",
+   "es": "aun así",
+   "fr": "quand même",
+   "it": "comunque"
+  }
+ },
+ {
+  "lemma": "verwerfen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to reject",
+   "es": "rechazar",
+   "fr": "rejeter",
+   "it": "rigettare"
+  }
+ },
+ {
+  "lemma": "weiden",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to graze",
+   "es": "pacer",
+   "fr": "paître",
+   "it": "pascolare"
+  }
+ },
+ {
+  "lemma": "Abimelech",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Abimelech",
+   "es": "Abimelec",
+   "fr": "Abimélec",
+   "it": "Abimelec"
+  }
+ },
+ {
+  "lemma": "Gefangener",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "prisoner",
+   "es": "prisionero",
+   "fr": "prisonnier",
+   "it": "prigioniero"
+  }
+ },
+ {
+  "lemma": "Herrscher",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "ruler",
+   "es": "gobernante",
+   "fr": "souverain",
+   "it": "sovrano"
+  }
+ },
+ {
+  "lemma": "Joas",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Joash",
+   "es": "Joás",
+   "fr": "Joas",
+   "it": "Joas"
+  }
+ },
+ {
+  "lemma": "Last",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "burden",
+   "es": "carga",
+   "fr": "charge",
+   "it": "peso"
+  }
+ },
+ {
+  "lemma": "Libanon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Lebanon",
+   "es": "Líbano",
+   "fr": "Liban",
+   "it": "Libano"
+  }
+ },
+ {
+  "lemma": "Ruben",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Reuben",
+   "es": "Rubén",
+   "fr": "Ruben",
+   "it": "Ruben"
+  }
+ },
+ {
+  "lemma": "Sichem",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Shechem",
+   "es": "Siquem",
+   "fr": "Sichem",
+   "it": "Sichem"
+  }
+ },
+ {
+  "lemma": "Verstand",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "understanding",
+   "es": "entendimiento",
+   "fr": "intelligence",
+   "it": "intelletto"
+  }
+ },
+ {
+  "lemma": "bedeuten",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to mean",
+   "es": "significar",
+   "fr": "signifier",
+   "it": "significare"
+  }
+ },
+ {
+  "lemma": "entfernen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to remove",
+   "es": "quitar",
+   "fr": "enlever",
+   "it": "rimuovere"
+  }
+ },
+ {
+  "lemma": "gemeinsam",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "together",
+   "es": "juntos",
+   "fr": "ensemble",
+   "it": "insieme"
+  }
+ },
+ {
+  "lemma": "heben",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to lift",
+   "es": "levantar",
+   "fr": "lever",
+   "it": "alzare"
+  }
+ },
+ {
+  "lemma": "zuvor",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "before",
+   "es": "antes",
+   "fr": "auparavant",
+   "it": "prima"
+  }
+ },
+ {
+  "lemma": "Abram",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Abram",
+   "es": "Abram",
+   "fr": "Abram",
+   "it": "Abram"
+  }
+ },
+ {
+  "lemma": "Bogen",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "bow",
+   "es": "arco",
+   "fr": "arc",
+   "it": "arco"
+  }
+ },
+ {
+  "lemma": "Eid",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "oath",
+   "es": "juramento",
+   "fr": "serment",
+   "it": "giuramento"
+  }
+ },
+ {
+  "lemma": "Getreide",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "grain",
+   "es": "grano",
+   "fr": "céréales",
+   "it": "grano"
+  }
+ },
+ {
+  "lemma": "Hurerei",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "fornication",
+   "es": "fornicación",
+   "fr": "débauche",
+   "it": "fornicazione"
+  }
+ },
+ {
+  "lemma": "Jericho",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Jericho",
+   "es": "Jericó",
+   "fr": "Jéricho",
+   "it": "Gerico"
+  }
+ },
+ {
+  "lemma": "Speer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "spear",
+   "es": "lanza",
+   "fr": "lance",
+   "it": "lancia"
+  }
+ },
+ {
+  "lemma": "Streit",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "dispute",
+   "es": "disputa",
+   "fr": "dispute",
+   "it": "lite"
+  }
+ },
+ {
+  "lemma": "Zuflucht",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "refuge",
+   "es": "refugio",
+   "fr": "refuge",
+   "it": "rifugio"
+  }
+ },
+ {
+  "lemma": "auferstehen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to rise from the dead",
+   "es": "resucitar",
+   "fr": "ressusciter",
+   "it": "risorgere"
+  }
+ },
+ {
+  "lemma": "befragen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to consult",
+   "es": "consultar",
+   "fr": "consulter",
+   "it": "consultare"
+  }
+ },
+ {
+  "lemma": "bezeugen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to testify",
+   "es": "testificar",
+   "fr": "témoigner",
+   "it": "testimoniare"
+  }
+ },
+ {
+  "lemma": "daher",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "therefore",
+   "es": "por eso",
+   "fr": "donc",
+   "it": "perciò"
+  }
+ },
+ {
+  "lemma": "glücklich",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "happy",
+   "es": "feliz",
+   "fr": "heureux",
+   "it": "felice"
+  }
+ },
+ {
+  "lemma": "richtig",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "right",
+   "es": "correcto",
+   "fr": "juste",
+   "it": "giusto"
+  }
+ },
+ {
+  "lemma": "zerschlagen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to smash",
+   "es": "destrozar",
+   "fr": "briser",
+   "it": "frantumare"
+  }
+ },
+ {
+  "lemma": "Glied",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "limb",
+   "es": "miembro",
+   "fr": "membre",
+   "it": "membro"
+  }
+ },
+ {
+  "lemma": "Synagoge",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "synagogue",
+   "es": "sinagoga",
+   "fr": "synagogue",
+   "it": "sinagoga"
+  }
+ },
+ {
+  "lemma": "Zedekia",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Zedekiah",
+   "es": "Sedecías",
+   "fr": "Sédécias",
+   "it": "Sedecia"
+  }
+ },
+ {
+  "lemma": "berufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to call",
+   "es": "llamar",
+   "fr": "appeler",
+   "it": "chiamare"
+  }
+ },
+ {
+  "lemma": "reichlich",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "abundant",
+   "es": "abundante",
+   "fr": "abondant",
+   "it": "abbondante"
+  }
+ },
+ {
+  "lemma": "Gras",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "grass",
+   "es": "hierba",
+   "fr": "herbe",
+   "it": "erba"
+  }
+ },
+ {
+  "lemma": "Honig",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "honey",
+   "es": "miel",
+   "fr": "miel",
+   "it": "miele"
+  }
+ },
+ {
+  "lemma": "Netz",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "net",
+   "es": "red",
+   "fr": "filet",
+   "it": "rete"
+  }
+ },
+ {
+  "lemma": "Pfeil",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "arrow",
+   "es": "flecha",
+   "fr": "flèche",
+   "it": "freccia"
+  }
+ },
+ {
+  "lemma": "aufstehen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to get up",
+   "es": "levantarse",
+   "fr": "se lever",
+   "it": "alzarsi"
+  }
+ },
+ {
+  "lemma": "daraus",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "from it",
+   "es": "de ello",
+   "fr": "de cela",
+   "it": "da ciò"
+  }
+ },
+ {
+  "lemma": "erobern",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to conquer",
+   "es": "conquistar",
+   "fr": "conquérir",
+   "it": "conquistare"
+  }
+ },
+ {
+  "lemma": "genauso",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "just the same",
+   "es": "igualmente",
+   "fr": "de même",
+   "it": "allo stesso modo"
+  }
+ },
+ {
+  "lemma": "hüten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to guard",
+   "es": "guardar",
+   "fr": "garder",
+   "it": "custodire"
+  }
+ },
+ {
+  "lemma": "leer",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "empty",
+   "es": "vacío",
+   "fr": "vide",
+   "it": "vuoto"
+  }
+ },
+ {
+  "lemma": "missfallen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to displease",
+   "es": "desagradar",
+   "fr": "déplaire",
+   "it": "dispiacere"
+  }
+ },
+ {
+  "lemma": "schwanger",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "pregnant",
+   "es": "embarazada",
+   "fr": "enceinte",
+   "it": "incinta"
+  }
+ },
+ {
+  "lemma": "Brunnen",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "well",
+   "es": "pozo",
+   "fr": "puits",
+   "it": "pozzo"
+  }
+ },
+ {
+  "lemma": "Gad",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gad",
+   "es": "Gad",
+   "fr": "Gad",
+   "it": "Gad"
+  }
+ },
+ {
+  "lemma": "Grund",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "reason",
+   "es": "motivo",
+   "fr": "raison",
+   "it": "motivo"
+  }
+ },
+ {
+  "lemma": "Jesaja",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Isaiah",
+   "es": "Isaías",
+   "fr": "Ésaïe",
+   "it": "Isaia"
+  }
+ },
+ {
+  "lemma": "Micha",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Micah",
+   "es": "Micaías",
+   "fr": "Mica",
+   "it": "Mica"
+  }
+ },
+ {
+  "lemma": "Sprache",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "language",
+   "es": "idioma",
+   "fr": "langue",
+   "it": "lingua"
+  }
+ },
+ {
+  "lemma": "Sünder",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "sinner",
+   "es": "pecador",
+   "fr": "pécheur",
+   "it": "peccatore"
+  }
+ },
+ {
+  "lemma": "blasen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to blow",
+   "es": "soplar",
+   "fr": "souffler",
+   "it": "soffiare"
+  }
+ },
+ {
+  "lemma": "schwach",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "weak",
+   "es": "débil",
+   "fr": "faible",
+   "it": "debole"
+  }
+ },
+ {
+  "lemma": "siebzig",
+  "level": "A1",
+  "pos": "num",
+  "base": {
+   "en": "seventy",
+   "es": "setenta",
+   "fr": "soixante-dix",
+   "it": "settanta"
+  }
+ },
+ {
+  "lemma": "umbringen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to kill",
+   "es": "matar",
+   "fr": "tuer",
+   "it": "uccidere"
+  }
+ },
+ {
+  "lemma": "verschwinden",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to disappear",
+   "es": "desaparecer",
+   "fr": "disparaître",
+   "it": "sparire"
+  }
+ },
+ {
+  "lemma": "vollenden",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to complete",
+   "es": "completar",
+   "fr": "achever",
+   "it": "completare"
+  }
+ },
+ {
+  "lemma": "überall",
+  "level": "A2",
+  "pos": "adv",
+  "base": {
+   "en": "everywhere",
+   "es": "por todas partes",
+   "fr": "partout",
+   "it": "dappertutto"
+  }
+ },
+ {
+  "lemma": "Bileam",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Balaam",
+   "es": "Balaam",
+   "fr": "Balaam",
+   "it": "Balaam"
+  }
+ },
+ {
+  "lemma": "Bronze",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "bronze",
+   "es": "bronce",
+   "fr": "bronze",
+   "it": "bronzo"
+  }
+ },
+ {
+  "lemma": "Ebene",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "plain",
+   "es": "llanura",
+   "fr": "plaine",
+   "it": "pianura"
+  }
+ },
+ {
+  "lemma": "Hüfte",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hip",
+   "es": "cadera",
+   "fr": "hanche",
+   "it": "anca"
+  }
+ },
+ {
+  "lemma": "Nachricht",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "news",
+   "es": "noticia",
+   "fr": "nouvelle",
+   "it": "notizia"
+  }
+ },
+ {
+  "lemma": "Syrien",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Syria",
+   "es": "Siria",
+   "fr": "Syrie",
+   "it": "Siria"
+  }
+ },
+ {
+  "lemma": "ans",
+  "level": "A1",
+  "pos": "prep",
+  "base": {
+   "en": "to the",
+   "es": "a la",
+   "fr": "à la",
+   "it": "alla"
+  }
+ },
+ {
+  "lemma": "entstehen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to arise",
+   "es": "surgir",
+   "fr": "apparaître",
+   "it": "sorgere"
+  }
+ },
+ {
+  "lemma": "stecken",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to put",
+   "es": "meter",
+   "fr": "mettre",
+   "it": "mettere"
+  }
+ },
+ {
+  "lemma": "verfluchen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to curse",
+   "es": "maldecir",
+   "fr": "maudire",
+   "it": "maledire"
+  }
+ },
+ {
+  "lemma": "verunreinigen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to defile",
+   "es": "contaminar",
+   "fr": "souiller",
+   "it": "contaminare"
+  }
+ },
+ {
+  "lemma": "vielleicht",
+  "level": "A1",
+  "pos": "adv",
+  "base": {
+   "en": "maybe",
+   "es": "quizá",
+   "fr": "peut-être",
+   "it": "forse"
+  }
+ },
+ {
+  "lemma": "Essen",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "meal",
+   "es": "comida",
+   "fr": "repas",
+   "it": "pasto"
+  }
+ },
+ {
+  "lemma": "Fels",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "rock",
+   "es": "roca",
+   "fr": "rocher",
+   "it": "roccia"
+  }
+ },
+ {
+  "lemma": "Haut",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "skin",
+   "es": "piel",
+   "fr": "peau",
+   "it": "pelle"
+  }
+ },
+ {
+  "lemma": "Held",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hero",
+   "es": "héroe",
+   "fr": "héros",
+   "it": "eroe"
+  }
+ },
+ {
+  "lemma": "Hiob",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Job",
+   "es": "Job",
+   "fr": "Job",
+   "it": "Giobbe"
+  }
+ },
+ {
+  "lemma": "Jojada",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Jehoiada",
+   "es": "Joiada",
+   "fr": "Jehojada",
+   "it": "Ioiada"
+  }
+ },
+ {
+  "lemma": "Schatten",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "shadow",
+   "es": "sombra",
+   "fr": "ombre",
+   "it": "ombra"
+  }
+ },
+ {
+  "lemma": "Vorstadt",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "suburb",
+   "es": "suburbio",
+   "fr": "banlieue",
+   "it": "sobborgo"
+  }
+ },
+ {
+  "lemma": "aufbauen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to build",
+   "es": "construir",
+   "fr": "construire",
+   "it": "costruire"
+  }
+ },
+ {
+  "lemma": "beschneiden",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to circumcise",
+   "es": "circuncidar",
+   "fr": "circoncire",
+   "it": "circoncidere"
+  }
+ },
+ {
+  "lemma": "beschämt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "ashamed",
+   "es": "avergonzado",
+   "fr": "honteux",
+   "it": "vergognoso"
+  }
+ },
+ {
+  "lemma": "erreichen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to reach",
+   "es": "alcanzar",
+   "fr": "atteindre",
+   "it": "raggiungere"
+  }
+ },
+ {
+  "lemma": "fassen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to grab",
+   "es": "agarrar",
+   "fr": "empoigner",
+   "it": "prendere"
+  }
+ },
+ {
+  "lemma": "heran",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "closer",
+   "es": "cerca",
+   "fr": "près",
+   "it": "vicino"
+  }
+ },
+ {
+  "lemma": "hinausgehen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to go out",
+   "es": "salir",
+   "fr": "sortir",
+   "it": "uscire"
+  }
+ },
+ {
+  "lemma": "planen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to plan",
+   "es": "planear",
+   "fr": "planifier",
+   "it": "progettare"
+  }
+ },
+ {
+  "lemma": "stammen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to come from",
+   "es": "provenir",
+   "fr": "provenir",
+   "it": "provenire"
+  }
+ },
+ {
+  "lemma": "stärken",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to strengthen",
+   "es": "fortalecer",
+   "fr": "fortifier",
+   "it": "rafforzare"
+  }
+ },
+ {
+  "lemma": "überziehen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to cover",
+   "es": "recubrir",
+   "fr": "recouvrir",
+   "it": "ricoprire"
+  }
+ },
+ {
+  "lemma": "Abner",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Abner",
+   "es": "Abner",
+   "fr": "Abner",
+   "it": "Abner"
+  }
+ },
+ {
+  "lemma": "Asa",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Asa",
+   "es": "Asa",
+   "fr": "Asa",
+   "it": "Asa"
+  }
+ },
+ {
+  "lemma": "Damaskus",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Damascus",
+   "es": "Damasco",
+   "fr": "Damas",
+   "it": "Damasco"
+  }
+ },
+ {
+  "lemma": "Garten",
+  "level": "A1",
+  "pos": "noun",
+  "base": {
+   "en": "garden",
+   "es": "jardín",
+   "fr": "jardin",
+   "it": "giardino"
+  }
+ },
+ {
+  "lemma": "Joch",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "yoke",
+   "es": "yugo",
+   "fr": "joug",
+   "it": "giogo"
+  }
+ },
+ {
+  "lemma": "Mardochai",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Mordecai",
+   "es": "Mardoqueo",
+   "fr": "Mardochée",
+   "it": "Mardocheo"
+  }
+ },
+ {
+  "lemma": "Nation",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "nation",
+   "es": "nación",
+   "fr": "nation",
+   "it": "nazione"
+  }
+ },
+ {
+  "lemma": "Quelle",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "spring",
+   "es": "manantial",
+   "fr": "source",
+   "it": "sorgente"
+  }
+ },
+ {
+  "lemma": "Rechte",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "right hand",
+   "es": "derecha",
+   "fr": "droite",
+   "it": "destra"
+  }
+ },
+ {
+  "lemma": "Weinstock",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "vine",
+   "es": "vid",
+   "fr": "vigne",
+   "it": "vite"
+  }
+ },
+ {
+  "lemma": "umkommen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to perish",
+   "es": "perecer",
+   "fr": "périr",
+   "it": "perire"
+  }
+ },
+ {
+  "lemma": "versprechen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to promise",
+   "es": "prometer",
+   "fr": "promettre",
+   "it": "promettere"
+  }
+ }
+]
