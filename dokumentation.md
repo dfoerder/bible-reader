@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
 
-- **Aktuelle Version:** 1.11.4b (06.09.2026)
+- **Aktuelle Version:** 1.11.5b (07.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -39,11 +39,13 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 ### Text-to-Speech (TTS)
 
 - Kapitelweise Vorlesefunktion mit Wort-für-Wort-Hervorhebung
-- Einstellbare Geschwindigkeit (0.2x–1.0x)
+- Einstellbare Geschwindigkeit (0.2×–1.0×); die Voreinstellungen stehen als `SPEED_PRESETS` in `index.html` (🐌 0.2 · Langsam 0.3 · Normal 0.6 · Schnell 0.85 · Sehr schnell 1.0) und werden an allen drei Stellen daraus gespeist
 - Einzelvers-Vorleseoption
 - Übungsmodus für unbekannte Wörter
-- **Mitlaufender Text:** Der Vers wird unterhalb der Kopfleiste eingeblendet (die im Audiobetrieb höher ist), die Wortmarke wird zusätzlich nachgeführt, sobald sie den unteren Rand erreicht — inklusive unterer Safe-Area (Home-Indikator). Code: `scrollVerseIntoView()` und der Nachführ-Effekt in `App`.
-- **Kapitelwechsel im Audiobetrieb:** Die Pfeile in der Kopfleiste brechen das Vorlesen nicht ab — kurze Pause, dann liest das neue Kapitel weiter (`autoPlayRef`). Das aufgeklappte Audiomenü enthält deshalb nur noch Vers vor/zurück (mit Versnummer) und die Tempo-Einstellung.
+- **Audioleiste unten:** Während des Vorlesens klebt am unteren Bildschirmrand eine eigene Leiste (`#audio-bar`, `position:sticky`) mit Vers zurück/vor (samt Versnummer), Pause und Stopp sowie der Tempo-Einstellung — dort liegen die Knöpfe in Daumennähe, ohne dass die Hand über dem Text steht. Die Kopfleiste bleibt dadurch im Audiobetrieb genauso flach wie sonst.
+- **Pause:** hält die laufende Äußerung an und setzt genau dort fort (`speechSynthesis.pause()`/`resume()`); die Warteschlange bleibt stehen, die Leiste sichtbar. Jede neue Ausgabe (Kapitelstart, Verssprung, Tempowechsel) hebt eine Pause selbsttätig auf.
+- **Mitlaufender Text:** Der Vers wird unterhalb der Kopfleiste eingeblendet, die Wortmarke wird zusätzlich nachgeführt, sobald sie den unteren Rand erreicht — Unterkante ist die Audioleiste bzw., wenn keine läuft, die Safe-Area (Home-Indikator). Code: `readingViewBottom()`, `scrollVerseIntoView()` und der Nachführ-Effekt in `App`.
+- **Kapitelwechsel im Audiobetrieb:** Die Pfeile in der Kopfleiste brechen das Vorlesen nicht ab — kurze Pause, dann liest das neue Kapitel weiter (`autoPlayRef`). Genauso geht es am **Kapitelende** von selbst weiter (`tts.onChapterEnd`, in `App` gesetzt); erst am Ende der Bibel hört es auf.
 
 ### Schwierige Wörter (kapitelweise)
 
@@ -274,6 +276,11 @@ sind — für normale Nutzer ist der Knopf unsichtbar.
   „Exportieren / Teilen" nutzen (Teilen-Sheet, sonst Zwischenablage/Datei).
 - **Auf dem Mac:** `python3 bugserver.py` nimmt entgegen und schreibt nach `bugs/bugs.json`;
   `--list` zeigt die offenen, `--done <id>` hakt ab, `--import <datei>` liest eine geteilte Liste ein.
+- **Nachträglich bearbeiten:** In der Liste „Gemeldete Bugs" lassen sich Text und Schwere eines
+  Eintrags ändern (Knopf „Bearbeiten"). Der erfasste Kontext bleibt unangetastet, der Eintrag gilt
+  wieder als offen und geht beim nächsten Senden erneut mit. `merge()` in `bugserver.py` erkennt die
+  bekannte id und übernimmt die neue Fassung, statt sie zu verwerfen; ein bereits erledigter Eintrag
+  wird dabei nicht wieder geöffnet.
 
 Der Melder überlebt den kompletten Reset in den Entwickler-Einstellungen. Details zum Code und zum
 Arbeitsablauf stehen in `CLAUDE.md` → „Bug-Melder".
