@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.6b (07.09.2026)
+
+- Deutsche Bibel: Vokabeltraining und Einstufungstest freigeschaltet — 5363 Wörter mit Übungen in allen vier Glossensprachen
+
 ## v1.11.5b (07.09.2026)
 
 - Audioleiste unten mit Pause; Tempo Langsam 0.3 / Normal 0.6; Kapitelende liest weiter; Zurück zur Sprachwahl; Sprachknöpfe beschriftet; Bugs nachträglich bearbeitbar
