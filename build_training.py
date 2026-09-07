@@ -18,14 +18,23 @@ Aufruf:  python3 build_training.py spa-rv1909mod
 import json, os, sys, re, glob
 from collections import Counter, defaultdict
 
+# gloss_fields — alle Glossensprachen der Edition; die erste ist die Leitsprache
+# (Rückfallwert und Pivot der Anreicherung). caps_are_names: taugt Grossschreibung
+# als Eigennamen-Hinweis? Im Deutschen nicht — dort ist jedes Substantiv gross,
+# das Aussortieren übernimmt allein die Wortart aus der Anreicherung.
 LANGS = {
     "spa-rv1909mod": {
         "bible_dir": "bibles/spa/rv1909mod", "suffix": "_rv1909mod",
-        "anno_suffix": "_rv1909mod_eng", "gloss_field": "en",
+        "anno_suffix": "_rv1909mod_eng", "gloss_fields": ["en"],
     },
     "eng-web": {
         "bible_dir": "bibles/eng/web", "suffix": "_web",
-        "anno_suffix": "_web_deu", "gloss_field": "de",
+        "anno_suffix": "_web_deu", "gloss_fields": ["de", "es", "fr", "it"],
+    },
+    "deu-l1912mod": {
+        "bible_dir": "bibles/deu/l1912mod", "suffix": "_l1912mod",
+        "anno_suffix": "_l1912mod_multi", "gloss_fields": ["en", "es", "fr", "it"],
+        "caps_are_names": False,
     },
 }
 
@@ -101,9 +110,11 @@ def main():
         sys.exit(1)
     ed = sys.argv[1]
     cfg = LANGS[ed]
-    gf = cfg["gloss_field"]
+    gfs = cfg["gloss_fields"]
+    gf = gfs[0]
 
-    lemmas = defaultdict(lambda: {"level_counts": Counter(), "gloss_counts": Counter(),
+    lemmas = defaultdict(lambda: {"level_counts": Counter(),
+                                  "gloss_counts": defaultdict(Counter),
                                   "freq": 0, "occ": []})
     anno_files = sorted(glob.glob(os.path.join(cfg["bible_dir"], "anno", f"*{cfg['anno_suffix']}.json")),
                         key=lambda p: int(os.path.basename(p).split("_")[0]))
@@ -114,20 +125,22 @@ def main():
         for cn, verses in anno.get("chapters", {}).items():
             for vn, anns in verses.items():
                 for a in anns or []:
-                    if a.get("pos_end") is not None:   # Phrasen überspringen
+                    # Phrasen überspringen: zusammenhängend (pos_end) UND die
+                    # deutsche Satzklammer (parts), die kein pos_end trägt.
+                    if a.get("pos_end") is not None or a.get("parts"):
                         continue
                     lem = a.get("lemma")
                     lvl = a.get("level")
                     if not lem or lvl not in LEVELS:
                         continue
-                    g = a.get(gf)
+                    gl = {l: a.get(l) for l in gfs if a.get(l)}
                     d = lemmas[lem]
                     d["level_counts"][lvl] += 1
-                    if g:
-                        d["gloss_counts"][g] += 1
+                    for l, g in gl.items():
+                        d["gloss_counts"][l][g] += 1
                     d["freq"] += 1
                     d["occ"].append({"book": book_nr, "ch": cn, "vn": vn,
-                                     "pos": a.get("pos"), "form": a.get("form"), gf: g})
+                                     "pos": a.get("pos"), "form": a.get("form"), "gl": gl})
 
     # bester Cloze-Satz je Lemma (Ziel ~15 Wörter)
     results = {}
@@ -155,18 +168,23 @@ def main():
                 best_score, best = score, {
                     "text": cloze, "answer": strip_edge(o["form"] or ""),
                     "ref_book": o["book"], "ch": o["ch"], "vn": o["vn"],
-                    "form": o["form"], gf: o.get(gf),
+                    "form": o["form"],
+                    # Glossen GENAU dieser Fundstelle — kontextuell korrekt flektiert,
+                    # daraus wird später die Antwortanzeige des Lückentexts je Sprache.
+                    "gl": o.get("gl") or {},
                 }
             if score == 0:
                 break
         level = d["level_counts"].most_common(1)[0][0]
-        gloss = d["gloss_counts"].most_common(1)[0][0] if d["gloss_counts"] else None
+        # Mehrheitsglosse je Sprache: Rückfall, wenn die Anreicherung nichts liefert
+        gloss_by = {l: c.most_common(1)[0][0] for l, c in d["gloss_counts"].items() if c}
+        gloss = gloss_by.get(gf)
         if best is None:
             no_cloze += 1
         results[lem] = {
             "lemma": lem, "level": level, "freq": d["freq"],
-            "gloss_ctx": gloss, "cloze": best,
-            "is_cap": bool(lem[:1].isupper()),
+            "gloss_ctx": gloss, "gloss_by": gloss_by, "cloze": best,
+            "is_cap": bool(lem[:1].isupper()) if cfg.get("caps_are_names", True) else False,
         }
 
     out_dir = os.path.join(cfg["bible_dir"], "train")

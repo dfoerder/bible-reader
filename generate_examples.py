@@ -24,6 +24,8 @@ LANGS = {
                 "anno_suffix": "_web_deu", "normalize": False},
     "spa-rv1909mod": {"bible_dir": "bibles/spa/rv1909mod", "suffix": "_rv1909mod",
                       "anno_suffix": "_rv1909mod_eng", "normalize": True},
+    "deu-l1912mod": {"bible_dir": "bibles/deu/l1912mod", "suffix": "_l1912mod",
+                     "anno_suffix": "_l1912mod_multi", "normalize": False},
 }
 
 
@@ -81,7 +83,7 @@ def main():
                 ref = f"{name} {cn}:{vn}"
                 seen = set()
                 for a in anns:
-                    if a.get("pos_end") is not None:
+                    if a.get("pos_end") is not None or a.get("parts"):
                         continue
                     lem, pos = a.get("lemma"), a.get("pos")
                     if not lem or pos is None:

@@ -26,6 +26,7 @@ EDITIONS = {
     "spa-rv1909mod": ("bibles/spa/rv1909mod/anno", "es"),
     "fra-lsg1910mod": ("bibles/fra/lsg1910mod/anno", "fr"),
     "ita-riv1927mod": ("bibles/ita/riv1927mod/anno", "it"),
+    "deu-l1912mod": ("bibles/deu/l1912mod/anno", "de"),
     # eng-web annotiert keine Eigennamen → kein keepnames nötig
 }
 

@@ -1,10 +1,11 @@
 # Deutsche Annotation (l1912mod → en/es/fr/it)
 
 Wort-für-Wort-Annotation der deutschen Bibel mit Übersetzungen nach Englisch,
-Spanisch, Französisch und Italienisch. Begonnen 25.07.2026, **das Neue
-Testament (Bücher 40–66) ist seit 28.07.2026 vollständig**, **Jesaja seit
-03.09.2026**. Stand: **50 von 66 Büchern**, 1005 Kapitel, 26 973 Verse,
-588 313 Einträge — es fehlen die Bücher 24–39.
+Spanisch, Französisch und Italienisch. Begonnen 25.07.2026, **seit 07.09.2026
+vollständig**: alle **66 Bücher**, 1189 Kapitel, 31 171 Verse, 697 871 Einträge.
+
+Auf dieser Grundlage sind am 07.09.2026 die **Übungsdaten** entstanden
+(`bibles/deu/l1912mod/train/`) — siehe „Trainingsdaten" weiter unten.
 
 Das ist die **Gegenrichtung** zu den bestehenden Annotationen: Bisher war
 Deutsch immer Gloss-Sprache (WEB-Bibel mit `de`-Feld), hier ist Deutsch der
@@ -4112,3 +4113,47 @@ zwei Spalten vertauscht (korpusweit korrigiert, zwölf Belege), Offenbarung 11,4
 trug zwei verschiedene italienische Artikel vor demselben Wort, Zefanja 2,9 und
 Haggai 2,15 sind angeglichen. Offen bleiben dort unter anderem die 672
 italienischen I/J-Namensglossen, `Jedaja`, `Sarezer` und `Kislev`.
+
+## Trainingsdaten (07.09.2026)
+
+Aus den fertigen Annotationen sind die Übungsdaten der deutschen Edition
+entstanden. Die Pipeline ist dieselbe wie für Spanisch, an drei Stellen musste
+sie sprachlich aufgebohrt werden.
+
+**Die Satzklammer hätte den Pool verschmutzt.** `build_training.py` überspringt
+Mehrwort-Einträge an `pos_end`. Die deutsche Satzklammer (`parts`) trägt kein
+`pos_end` — „stand … auf" wäre als Einzelwort mit der Form „stand auf" in den
+Pool gelaufen. Derselbe Griff fehlte in `generate_examples.py`.
+
+**Grossschreibung sagt im Deutschen nichts über Eigennamen.** Die spanische
+Pipeline wirft jedes grossgeschriebene Lemma weg; im Deutschen wären das alle
+Substantive gewesen. Der Schalter `caps_are_names` steht für diese Edition auf
+`False`, das Aussortieren macht allein die Wortart aus der Anreicherung. Aus
+demselben Grund entsteht in Schritt 3 eine echte Eigennamen-Liste
+(`train/propnames.json`): der Laufzeit-Filter der Kapitelübungen erkennt
+Eigennamen bisher an der Schreibung und ist für Deutsch damit blind. Er bleibt
+für diese Edition aus, bis **alle** Lemmata angereichert sind — eine
+unvollständige Liste würde seltene echte Substantive aus den Kapitelübungen
+werfen.
+
+**Der Plural-Merge musste weg.** Die Regel „endet auf -s/-es und der Stamm steht
+schon im Pool" ist romanisch gedacht und hätte „Gottes" auf „Gott" gezogen.
+
+**Vier Sprachen statt einer.** `words.json` trägt je Wort ein Sprach-Dict `tr`
+(Grundform) und `trForm` (Form im Lückentext); die einsprachigen Altfelder
+`de`/`deForm` bleiben mit der Leitsprache gefüllt, damit die anderen Editionen
+unverändert laufen. Die App füllt sie über `applyGlossToWords()` aus dem Dict —
+auch wenn die Glossensprache im laufenden Betrieb gewechselt wird.
+
+**Was das Modell liefert und was nicht.** Angereichert werden nur CEFR-Level,
+Wortart und die vier Grundform-Übersetzungen. Die flektierten Formübersetzungen
+stehen bereits kontextuell korrekt in den Annotationen und werden direkt von der
+Lückentext-Fundstelle übernommen. Die Formkategorie (sg/pl/inf/pres/past/part),
+nach der die Ablenker gebündelt werden, leitet `finalize_training.py` über die
+englische Achse ab — dieselbe Regel wie `clozeFormOf()` in der App.
+
+**Wiederkehrender Befund der Agenten.** Die vorläufige Einstufung aus den
+Annotationen (`prelim_level`) klebt am Kontext und liegt regelmässig zu hoch:
+Alltagswörter wie `Monat`, `Zelt`, `Fenster`, `Salz`, `lachen` kamen als B1/B2
+an. Die Anreicherung stuft sie auf die Vokabelschwierigkeit zurück. Umgekehrt
+wandern kultische Fachwörter (`Gnadenstuhl`, `Halljahr`, `entsühnen`) nach oben.

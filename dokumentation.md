@@ -2,13 +2,13 @@
 
 ## Überblick
 
-**Bible Reader** ist eine Progressive Web App (PWA), die deutschsprachigen Christen hilft, die englische Bibel zu lesen und dabei ihren Wortschatz zu erweitern. Die App bietet wortgenaue deutsch-englische Annotationen, Vokabeltraining und Text-to-Speech.
+**Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
 - **Aktuelle Version:** 1.11.5b (07.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~3000 Zeilen), kein Build-Step
 - **Bibeltext:** World English Bible (WEB) — gemeinfrei
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
-- **Zielgruppe:** Deutschsprachige mit Englisch-Niveau ab A2
+- **Zielgruppe:** Sprachlernende ab A2 in der jeweils gewählten Lesesprache
 - **Hosting:** GitHub Pages
 
 ---
@@ -167,9 +167,21 @@ bible-reader/
 │   │       └── vocab_pool.json · context_exercises.json   Build-Intermediates (gitignored)
 │   ├── spa/rv1909mod/                 Español — wie eng/web mit anno/ (Glossen en) und train/
 │   ├── spa/rv1909 · fra/lsg1910mod · ita/riv1927mod   Nur Lesen (keine Annotationen/Training)
-│   └── deu/l1912mod/                  Luther 1912 modernisiert, mit anno/ als Hilfsbibel
+│   └── deu/l1912mod/                  Luther 1912 modernisiert — Lesen, Glossen (en/es/fr/it),
+│       │                              Training, Einstufungstest; auch Hilfsbibel für Deutsch
+│       ├── anno/{nr}_l1912mod_multi.json   Annotationen mit vier Glossen (66 Dateien)
+│       └── train/                     words.json (mehrsprachig, siehe unten), examples.json,
+│                                      propnames.json; enrich/ + lemmas_raw.json sind
+│                                      Build-Intermediates (gitignored)
 ├── generate_training_data.js          Generiert words.json aus Annotationen
 │                                      (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
+├── build_training.py                  Trainingsdaten Schritt 1: Lemmata, Häufigkeit, bester
+│                                      Lückentext und Mehrheitsglossen je Sprache → lemmas_raw.json
+├── prepare_enrich.py                  Schritt 2a: Anreicherungs-Pakete schnüren (wellenfähig,
+│                                      überspringt bereits Angereichertes)
+├── enrich_prompt.md                   Schritt 2b: Arbeitsanweisung der Anreicherungs-Agenten
+├── check_enrich.py                    Prüft die Agenten-Ausgaben gegen ihre Eingaben
+├── finalize_training.py               Schritt 3: → words.json + propnames.json
 ├── generate_pos.py / generate_deform.py / generate_examples.py
 │                                      Ergänzen pos / deForm+form / examples.json (Opus Batch)
 ├── oxford_5000.csv                    Oxford 5000 Referenzliste (extern)
@@ -220,6 +232,28 @@ Jedes Wort im Bibeltext erhält eine Annotation mit Position, Form, Lemma, CEFR-
 | `phrase` | Position der zugehörigen Phrase-Annotation (nur bei Einzelwort-Annotationen innerhalb einer Phrase) |
 
 **Eigennamen:** Im **Bibeltext** sind alle Eigennamen (Personen, Orte) annotiert — immer Level A1. Deutsche Entsprechungen werden verwendet: Christ→Christus, Moses→Mose, Egypt→Ägypten, Isaiah→Jesaja. Namen ohne Änderung (Jesus, Abraham) erhalten die gleiche Form als `de`. Im **Lernwortpool** (`words.json`) steht dagegen nur eine kuratierte Auswahl der wichtigsten Namen mit Lernwert (en ≠ de) — obskure Namen aus Genealogien sind nicht enthalten.
+
+### Trainingsdatenformat (`words.json`)
+
+Nach CEFR-Stufe gebucketet, je Wort ein Eintrag; `VOCAB_POOL`, `FREQ_POOL` und
+`CLOZE_EXERCISES` werden daraus abgeleitet.
+
+| Feld | Beschreibung |
+|------|-------------|
+| `en` | Lemma in der Studiensprache (historischer Feldname) |
+| `de` | Übersetzung in der aktiven Glossensprache (historischer Feldname) |
+| `tr` | **Mehrsprachig:** Grundform-Übersetzung je Glossensprache, z.B. `{"en":"to create","es":"crear",…}` |
+| `deForm` / `trForm` | dasselbe für die **flektierte Form** im Lückentext |
+| `sub` | Sublevel 1–3 innerhalb der CEFR-Stufe (nach Häufigkeit gedrittelt) |
+| `occ` | Vorkommen im Bibeltext |
+| `pos` | Wortart (nur noun/verb/adj/adv kommen in den Pool) |
+| `form` | Formkategorie sg/pl/inf/pres/past/part/base — bündelt die Lückentext-Ablenker |
+| `text` · `answer` · `ref` · `book` | Lückentext-Satz, Zielwort, Stellenangabe |
+
+`tr`/`trForm` stehen nur bei Editionen mit mehreren Glossensprachen (deutsche
+Bibel). `applyGlossToWords()` füllt daraus `de`/`deForm` — beim Laden und erneut,
+wenn die Glossensprache im laufenden Betrieb gewechselt wird; alle Übungen lesen
+weiterhin nur `de`/`deForm`. Fehlt `tr`, bleibt es beim einsprachigen Bestand.
 
 ### PWA und Offline-Fähigkeit
 
