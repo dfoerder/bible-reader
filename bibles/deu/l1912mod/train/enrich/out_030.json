@@ -1,0 +1,2752 @@
+[
+ {
+  "lemma": "Erzeugnis",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "product",
+   "es": "producto",
+   "fr": "produit",
+   "it": "prodotto"
+  }
+ },
+ {
+  "lemma": "Esbaal",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Eshbaal",
+   "es": "Es-baal",
+   "fr": "Eschbaal",
+   "it": "Eshbaal"
+  }
+ },
+ {
+  "lemma": "Esban",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Eshban",
+   "es": "Esbán",
+   "fr": "Eschban",
+   "it": "Esban"
+  }
+ },
+ {
+  "lemma": "Esek",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Esek",
+   "es": "Esek",
+   "fr": "Ések",
+   "it": "Esek"
+  }
+ },
+ {
+  "lemma": "Eselsfohlen",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "donkey colt",
+   "es": "pollino",
+   "fr": "ânon",
+   "it": "asinello"
+  }
+ },
+ {
+  "lemma": "Esthaol",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Eshtaol",
+   "es": "Estaol",
+   "fr": "Eschthaol",
+   "it": "Eshtaol"
+  }
+ },
+ {
+  "lemma": "Esthon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Eshton",
+   "es": "Estón",
+   "fr": "Eschthon",
+   "it": "Eshton"
+  }
+ },
+ {
+  "lemma": "Ether",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ether",
+   "es": "Eter",
+   "fr": "Éther",
+   "it": "Ether"
+  }
+ },
+ {
+  "lemma": "Eufrat",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Euphrates",
+   "es": "Éufrates",
+   "fr": "Euphrate",
+   "it": "Eufrate"
+  }
+ },
+ {
+  "lemma": "Evangelist",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "evangelist",
+   "es": "evangelista",
+   "fr": "évangéliste",
+   "it": "evangelista"
+  }
+ },
+ {
+  "lemma": "Evi",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Evi",
+   "es": "Evi",
+   "fr": "Évi",
+   "it": "Evi"
+  }
+ },
+ {
+  "lemma": "Ezbon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ezbon",
+   "es": "Ezbón",
+   "fr": "Etsbon",
+   "it": "Esbon"
+  }
+ },
+ {
+  "lemma": "Fallender",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "one who falls",
+   "es": "el que cae",
+   "fr": "celui qui tombe",
+   "it": "chi cade"
+  }
+ },
+ {
+  "lemma": "Fallstrick",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "snare",
+   "es": "trampa",
+   "fr": "piège",
+   "it": "laccio"
+  }
+ },
+ {
+  "lemma": "Falscher",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "crooked person",
+   "es": "perverso",
+   "fr": "pervers",
+   "it": "perverso"
+  }
+ },
+ {
+  "lemma": "Farre",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "bullock",
+   "es": "novillo",
+   "fr": "taurillon",
+   "it": "torello"
+  }
+ },
+ {
+  "lemma": "Fastentag",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "fast day",
+   "es": "día de ayuno",
+   "fr": "jour de jeûne",
+   "it": "giorno di digiuno"
+  }
+ },
+ {
+  "lemma": "Feindin",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "enemy",
+   "es": "enemiga",
+   "fr": "ennemie",
+   "it": "nemica"
+  }
+ },
+ {
+  "lemma": "Feldarbeit",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "field work",
+   "es": "trabajo del campo",
+   "fr": "travail des champs",
+   "it": "lavoro dei campi"
+  }
+ },
+ {
+  "lemma": "Felge",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "wheel rim",
+   "es": "llanta",
+   "fr": "jante",
+   "it": "cerchione"
+  }
+ },
+ {
+  "lemma": "Felsenkluft",
+  "level": "C2",
+  "pos": "noun",
+  "base": {
+   "en": "cleft of the rock",
+   "es": "hendidura de la roca",
+   "fr": "fente du rocher",
+   "it": "fenditura della roccia"
+  }
+ },
+ {
+  "lemma": "Festland",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "mainland",
+   "es": "tierra firme",
+   "fr": "terre ferme",
+   "it": "terraferma"
+  }
+ },
+ {
+  "lemma": "Festversammlung",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "solemn assembly",
+   "es": "asamblea solemne",
+   "fr": "assemblée solennelle",
+   "it": "assemblea solenne"
+  }
+ },
+ {
+  "lemma": "Festzeit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "festival season",
+   "es": "tiempo festivo",
+   "fr": "temps de fête",
+   "it": "tempo di festa"
+  }
+ },
+ {
+  "lemma": "Fettstück",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "fat piece",
+   "es": "trozo de grasa",
+   "fr": "morceau de graisse",
+   "it": "pezzo di grasso"
+  }
+ },
+ {
+  "lemma": "Feuchtigkeit",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "moisture",
+   "es": "humedad",
+   "fr": "humidité",
+   "it": "umidità"
+  }
+ },
+ {
+  "lemma": "Feuerfackel",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "torch of fire",
+   "es": "antorcha de fuego",
+   "fr": "torche de feu",
+   "it": "fiaccola di fuoco"
+  }
+ },
+ {
+  "lemma": "Fischernetz",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "fishing net",
+   "es": "red de pesca",
+   "fr": "filet de pêche",
+   "it": "rete da pesca"
+  }
+ },
+ {
+  "lemma": "Fleischstück",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "piece of meat",
+   "es": "trozo de carne",
+   "fr": "morceau de viande",
+   "it": "pezzo di carne"
+  }
+ },
+ {
+  "lemma": "Fliege",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "fly",
+   "es": "mosca",
+   "fr": "mouche",
+   "it": "mosca"
+  }
+ },
+ {
+  "lemma": "Fliegenschwarm",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "swarm of flies",
+   "es": "enjambre de moscas",
+   "fr": "essaim de mouches",
+   "it": "sciame di mosche"
+  }
+ },
+ {
+  "lemma": "Floh",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "flea",
+   "es": "pulga",
+   "fr": "puce",
+   "it": "pulce"
+  }
+ },
+ {
+  "lemma": "Floß",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "raft",
+   "es": "balsa",
+   "fr": "radeau",
+   "it": "zattera"
+  }
+ },
+ {
+  "lemma": "Flur",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "field",
+   "es": "campo",
+   "fr": "campagne",
+   "it": "campo"
+  }
+ },
+ {
+  "lemma": "Fläche",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "area",
+   "es": "superficie",
+   "fr": "surface",
+   "it": "superficie"
+  }
+ },
+ {
+  "lemma": "Flötenspiel",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "flute playing",
+   "es": "toque de flauta",
+   "fr": "jeu de flûte",
+   "it": "suono di flauto"
+  }
+ },
+ {
+  "lemma": "Flötenspieler",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "flute player",
+   "es": "flautista",
+   "fr": "joueur de flûte",
+   "it": "suonatore di flauto"
+  }
+ },
+ {
+  "lemma": "Forderung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "demand",
+   "es": "exigencia",
+   "fr": "exigence",
+   "it": "richiesta"
+  }
+ },
+ {
+  "lemma": "Freijahr",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "year of freedom",
+   "es": "año de libertad",
+   "fr": "année de liberté",
+   "it": "anno di libertà"
+  }
+ },
+ {
+  "lemma": "Freilassung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "release",
+   "es": "liberación",
+   "fr": "libération",
+   "it": "liberazione"
+  }
+ },
+ {
+  "lemma": "Fremdvolk",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "foreign people",
+   "es": "pueblo extranjero",
+   "fr": "peuple étranger",
+   "it": "popolo straniero"
+  }
+ },
+ {
+  "lemma": "Freudengesang",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "song of joy",
+   "es": "canto de alegría",
+   "fr": "chant de joie",
+   "it": "canto di gioia"
+  }
+ },
+ {
+  "lemma": "Frisur",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hairstyle",
+   "es": "peinado",
+   "fr": "coiffure",
+   "it": "acconciatura"
+  }
+ },
+ {
+  "lemma": "Fronarbeit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "forced labor",
+   "es": "trabajo forzado",
+   "fr": "travail forcé",
+   "it": "lavoro forzato"
+  }
+ },
+ {
+  "lemma": "Fruchtbaum",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "fruit tree",
+   "es": "árbol frutal",
+   "fr": "arbre fruitier",
+   "it": "albero da frutto"
+  }
+ },
+ {
+  "lemma": "Früherer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "earlier one",
+   "es": "el anterior",
+   "fr": "celui d'avant",
+   "it": "quello di prima"
+  }
+ },
+ {
+  "lemma": "Frühfeige",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "early fig",
+   "es": "higo temprano",
+   "fr": "figue hâtive",
+   "it": "fico primaticcio"
+  }
+ },
+ {
+  "lemma": "Futterkrippe",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "manger",
+   "es": "pesebre",
+   "fr": "mangeoire",
+   "it": "mangiatoia"
+  }
+ },
+ {
+  "lemma": "Fußboden",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "floor",
+   "es": "suelo",
+   "fr": "plancher",
+   "it": "pavimento"
+  }
+ },
+ {
+  "lemma": "Fußbreit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "foot of ground",
+   "es": "palmo de terreno",
+   "fr": "pied de terrain",
+   "it": "palmo di terra"
+  }
+ },
+ {
+  "lemma": "Fußspange",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "anklet",
+   "es": "ajorca",
+   "fr": "anneau de cheville",
+   "it": "cavigliera"
+  }
+ },
+ {
+  "lemma": "Förderung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "advancement",
+   "es": "progreso",
+   "fr": "progrès",
+   "it": "progresso"
+  }
+ },
+ {
+  "lemma": "Fürsprecher",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "advocate",
+   "es": "defensor",
+   "fr": "avocat",
+   "it": "avvocato"
+  }
+ },
+ {
+  "lemma": "Gaas",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gaash",
+   "es": "Gaas",
+   "fr": "Gaasch",
+   "it": "Gaash"
+  }
+ },
+ {
+  "lemma": "Gadi",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gadi",
+   "es": "Gadi",
+   "fr": "Gadi",
+   "it": "Gadi"
+  }
+ },
+ {
+  "lemma": "Gahar",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gahar",
+   "es": "Gahar",
+   "fr": "Gachar",
+   "it": "Gahar"
+  }
+ },
+ {
+  "lemma": "Gallim",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gallim",
+   "es": "Galim",
+   "fr": "Gallim",
+   "it": "Gallim"
+  }
+ },
+ {
+  "lemma": "Gamaliel",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gamaliel",
+   "es": "Gamaliel",
+   "fr": "Gamaliel",
+   "it": "Gamaliele"
+  }
+ },
+ {
+  "lemma": "Gang",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "gait",
+   "es": "paso",
+   "fr": "allure",
+   "it": "andatura"
+  }
+ },
+ {
+  "lemma": "Gartenpflanze",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "garden plant",
+   "es": "planta de huerto",
+   "fr": "plante du jardin",
+   "it": "pianta dell'orto"
+  }
+ },
+ {
+  "lemma": "Gases",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gazez",
+   "es": "Gazez",
+   "fr": "Gazez",
+   "it": "Gazez"
+  }
+ },
+ {
+  "lemma": "Gassam",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gazzam",
+   "es": "Gazam",
+   "fr": "Gazzam",
+   "it": "Gazzam"
+  }
+ },
+ {
+  "lemma": "Gebackenes",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "baked food",
+   "es": "alimento horneado",
+   "fr": "aliment cuit au four",
+   "it": "alimento al forno"
+  }
+ },
+ {
+  "lemma": "Gebrauch",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "use",
+   "es": "uso",
+   "fr": "usage",
+   "it": "uso"
+  }
+ },
+ {
+  "lemma": "Gebrüll",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "roar",
+   "es": "rugido",
+   "fr": "rugissement",
+   "it": "ruggito"
+  }
+ },
+ {
+  "lemma": "Gebundener",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "captive",
+   "es": "cautivo",
+   "fr": "captif",
+   "it": "prigioniero"
+  }
+ },
+ {
+  "lemma": "Geburtsregister",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "genealogical record",
+   "es": "registro genealógico",
+   "fr": "registre généalogique",
+   "it": "registro genealogico"
+  }
+ },
+ {
+  "lemma": "Gebäck",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "pastry",
+   "es": "repostería",
+   "fr": "pâtisserie",
+   "it": "dolce"
+  }
+ },
+ {
+  "lemma": "Gebälk",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "beamwork",
+   "es": "maderamen",
+   "fr": "charpente",
+   "it": "travatura"
+  }
+ },
+ {
+  "lemma": "Gebüsch",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "thicket",
+   "es": "matorral",
+   "fr": "buisson",
+   "it": "cespuglio"
+  }
+ },
+ {
+  "lemma": "Gedemütigter",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "humbled person",
+   "es": "humillado",
+   "fr": "humilié",
+   "it": "umiliato"
+  }
+ },
+ {
+  "lemma": "Gedera",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gederah",
+   "es": "Gedera",
+   "fr": "Guedéra",
+   "it": "Ghedera"
+  }
+ },
+ {
+  "lemma": "Gederoth",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gederoth",
+   "es": "Gederot",
+   "fr": "Guedéroth",
+   "it": "Ghederoth"
+  }
+ },
+ {
+  "lemma": "Gefangenengruppe",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "group of captives",
+   "es": "grupo de cautivos",
+   "fr": "groupe de captifs",
+   "it": "gruppo di prigionieri"
+  }
+ },
+ {
+  "lemma": "Gefieder",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "plumage",
+   "es": "plumaje",
+   "fr": "plumage",
+   "it": "piumaggio"
+  }
+ },
+ {
+  "lemma": "Gefilde",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "plain",
+   "es": "llanura",
+   "fr": "plaine",
+   "it": "pianura"
+  }
+ },
+ {
+  "lemma": "Gefährtin",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "companion",
+   "es": "compañera",
+   "fr": "compagne",
+   "it": "compagna"
+  }
+ },
+ {
+  "lemma": "Gefängnisaufseher",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "jailer",
+   "es": "carcelero",
+   "fr": "geôlier",
+   "it": "carceriere"
+  }
+ },
+ {
+  "lemma": "Gefängniskleidung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "prison clothing",
+   "es": "ropa de prisión",
+   "fr": "vêtement de prison",
+   "it": "veste da prigione"
+  }
+ },
+ {
+  "lemma": "Gefühl",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "feeling",
+   "es": "sentimiento",
+   "fr": "sentiment",
+   "it": "sentimento"
+  }
+ },
+ {
+  "lemma": "Geheilter",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "healed person",
+   "es": "sanado",
+   "fr": "guéri",
+   "it": "guarito"
+  }
+ },
+ {
+  "lemma": "Gehängter",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "hanged man",
+   "es": "ahorcado",
+   "fr": "pendu",
+   "it": "impiccato"
+  }
+ },
+ {
+  "lemma": "Geisel",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "hostage",
+   "es": "rehén",
+   "fr": "otage",
+   "it": "ostaggio"
+  }
+ },
+ {
+  "lemma": "Geladener",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "invited guest",
+   "es": "invitado",
+   "fr": "invité",
+   "it": "invitato"
+  }
+ },
+ {
+  "lemma": "Gelassenheit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "calmness",
+   "es": "calma",
+   "fr": "calme",
+   "it": "calma"
+  }
+ },
+ {
+  "lemma": "Geldbündel",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "bundle of money",
+   "es": "atado de dinero",
+   "fr": "paquet d'argent",
+   "it": "sacchetto di denaro"
+  }
+ },
+ {
+  "lemma": "Geländer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "railing",
+   "es": "barandilla",
+   "fr": "rambarde",
+   "it": "ringhiera"
+  }
+ },
+ {
+  "lemma": "Gemüsegarten",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "vegetable garden",
+   "es": "huerto",
+   "fr": "jardin potager",
+   "it": "orto"
+  }
+ },
+ {
+  "lemma": "Genezareth",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gennesaret",
+   "es": "Genesaret",
+   "fr": "Génésareth",
+   "it": "Gennesaret"
+  }
+ },
+ {
+  "lemma": "Genubath",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Genubath",
+   "es": "Genubat",
+   "fr": "Guenubath",
+   "it": "Ghenubat"
+  }
+ },
+ {
+  "lemma": "Genugtuung",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "satisfaction",
+   "es": "satisfacción",
+   "fr": "satisfaction",
+   "it": "soddisfazione"
+  }
+ },
+ {
+  "lemma": "Geratewohl",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "random chance",
+   "es": "azar",
+   "fr": "hasard",
+   "it": "caso"
+  }
+ },
+ {
+  "lemma": "Gersonit",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Gershonite",
+   "es": "gersonita",
+   "fr": "Guerschonite",
+   "it": "ghersonita"
+  }
+ },
+ {
+  "lemma": "Gerstenernte",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "barley harvest",
+   "es": "cosecha de cebada",
+   "fr": "moisson d'orge",
+   "it": "raccolto dell'orzo"
+  }
+ },
+ {
+  "lemma": "Gesamtmenge",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "total amount",
+   "es": "cantidad total",
+   "fr": "quantité totale",
+   "it": "quantità totale"
+  }
+ },
+ {
+  "lemma": "Geschlechtsregister",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "genealogical record",
+   "es": "registro genealógico",
+   "fr": "registre généalogique",
+   "it": "registro genealogico"
+  }
+ },
+ {
+  "lemma": "Geschmack",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "taste",
+   "es": "sabor",
+   "fr": "goût",
+   "it": "sapore"
+  }
+ },
+ {
+  "lemma": "Gesegnete",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "blessed woman",
+   "es": "bendita",
+   "fr": "bénie",
+   "it": "benedetta"
+  }
+ },
+ {
+  "lemma": "Gesegneter",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "blessed one",
+   "es": "bendito",
+   "fr": "béni",
+   "it": "benedetto"
+  }
+ },
+ {
+  "lemma": "Gesetzeslehrer",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "teacher of the law",
+   "es": "maestro de la ley",
+   "fr": "docteur de la loi",
+   "it": "dottore della legge"
+  }
+ },
+ {
+  "lemma": "Gesetzgeber",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "lawgiver",
+   "es": "legislador",
+   "fr": "législateur",
+   "it": "legislatore"
+  }
+ },
+ {
+  "lemma": "Gesichtshaut",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "facial skin",
+   "es": "piel del rostro",
+   "fr": "peau du visage",
+   "it": "pelle del viso"
+  }
+ },
+ {
+  "lemma": "Gesinnung",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "mindset",
+   "es": "mentalidad",
+   "fr": "état d'esprit",
+   "it": "mentalità"
+  }
+ },
+ {
+  "lemma": "Gespenst",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "ghost",
+   "es": "fantasma",
+   "fr": "fantôme",
+   "it": "fantasma"
+  }
+ },
+ {
+  "lemma": "Gespräch",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "conversation",
+   "es": "conversación",
+   "fr": "conversation",
+   "it": "conversazione"
+  }
+ },
+ {
+  "lemma": "Gether",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gether",
+   "es": "Geter",
+   "fr": "Guéter",
+   "it": "Gheter"
+  }
+ },
+ {
+  "lemma": "Gethsemane",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gethsemane",
+   "es": "Getsemaní",
+   "fr": "Gethsémané",
+   "it": "Getsemani"
+  }
+ },
+ {
+  "lemma": "Getöteter",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "killed person",
+   "es": "muerto",
+   "fr": "tué",
+   "it": "ucciso"
+  }
+ },
+ {
+  "lemma": "Gewaltherrscher",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "tyrant",
+   "es": "tirano",
+   "fr": "tyran",
+   "it": "tiranno"
+  }
+ },
+ {
+  "lemma": "Gewandzipfel",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "hem of a garment",
+   "es": "borde del vestido",
+   "fr": "pan du vêtement",
+   "it": "lembo della veste"
+  }
+ },
+ {
+  "lemma": "Gewerbe",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "trade",
+   "es": "oficio",
+   "fr": "métier",
+   "it": "mestiere"
+  }
+ },
+ {
+  "lemma": "Gewinnsucht",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "greed for gain",
+   "es": "afán de lucro",
+   "fr": "avidité du gain",
+   "it": "avidità di guadagno"
+  }
+ },
+ {
+  "lemma": "Gewächs",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "plant",
+   "es": "planta",
+   "fr": "plante",
+   "it": "pianta"
+  }
+ },
+ {
+  "lemma": "Giddalthi",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Giddalti",
+   "es": "Gidalti",
+   "fr": "Guiddalthi",
+   "it": "Ghiddalti"
+  }
+ },
+ {
+  "lemma": "Gideonis",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gideoni",
+   "es": "Gedeoni",
+   "fr": "Guideoni",
+   "it": "Ghideoni"
+  }
+ },
+ {
+  "lemma": "Gieriger",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "greedy person",
+   "es": "codicioso",
+   "fr": "avide",
+   "it": "avido"
+  }
+ },
+ {
+  "lemma": "Giftwasser",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "poisoned water",
+   "es": "agua envenenada",
+   "fr": "eau empoisonnée",
+   "it": "acqua avvelenata"
+  }
+ },
+ {
+  "lemma": "Gilo",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Giloh",
+   "es": "Gilo",
+   "fr": "Guilo",
+   "it": "Ghilo"
+  }
+ },
+ {
+  "lemma": "Giloniter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Gilonite",
+   "es": "gilonita",
+   "fr": "Guilonite",
+   "it": "ghilonita"
+  }
+ },
+ {
+  "lemma": "Ginath",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ginath",
+   "es": "Ginat",
+   "fr": "Guinath",
+   "it": "Ghinath"
+  }
+ },
+ {
+  "lemma": "Ginthon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ginnethon",
+   "es": "Ginetón",
+   "fr": "Guinnethon",
+   "it": "Ghinneton"
+  }
+ },
+ {
+  "lemma": "Gnadenjahr",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "year of grace",
+   "es": "año de gracia",
+   "fr": "année de grâce",
+   "it": "anno di grazia"
+  }
+ },
+ {
+  "lemma": "Gnadenthron",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "throne of grace",
+   "es": "trono de gracia",
+   "fr": "trône de grâce",
+   "it": "trono di grazia"
+  }
+ },
+ {
+  "lemma": "Gob",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gob",
+   "es": "Gob",
+   "fr": "Gob",
+   "it": "Gob"
+  }
+ },
+ {
+  "lemma": "Gottesdienstteilnehmer",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "worshiper",
+   "es": "participante en el culto",
+   "fr": "participant au culte",
+   "it": "partecipante al culto"
+  }
+ },
+ {
+  "lemma": "Gotteshaus",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "house of God",
+   "es": "casa de Dios",
+   "fr": "maison de Dieu",
+   "it": "casa di Dio"
+  }
+ },
+ {
+  "lemma": "Gottheit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "deity",
+   "es": "deidad",
+   "fr": "divinité",
+   "it": "divinità"
+  }
+ },
+ {
+  "lemma": "Gottlosigkeit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "ungodliness",
+   "es": "impiedad",
+   "fr": "impiété",
+   "it": "empietà"
+  }
+ },
+ {
+  "lemma": "Granatapfelbaum",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "pomegranate tree",
+   "es": "granado",
+   "fr": "grenadier",
+   "it": "melograno"
+  }
+ },
+ {
+  "lemma": "Grashüpfer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "grasshopper",
+   "es": "saltamontes",
+   "fr": "sauterelle",
+   "it": "cavalletta"
+  }
+ },
+ {
+  "lemma": "Grenzstein",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "boundary stone",
+   "es": "lindero",
+   "fr": "borne",
+   "it": "pietra di confine"
+  }
+ },
+ {
+  "lemma": "Greueltat",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "abomination",
+   "es": "abominación",
+   "fr": "abomination",
+   "it": "abominazione"
+  }
+ },
+ {
+  "lemma": "Grollen",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "rumbling",
+   "es": "estruendo",
+   "fr": "grondement",
+   "it": "rombo"
+  }
+ },
+ {
+  "lemma": "Groß-Sidon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Great Sidon",
+   "es": "gran Sidón",
+   "fr": "Sidon la Grande",
+   "it": "Sidone la Grande"
+  }
+ },
+ {
+  "lemma": "Grundlage",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "basis",
+   "es": "base",
+   "fr": "base",
+   "it": "base"
+  }
+ },
+ {
+  "lemma": "Grundmauer",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "foundation wall",
+   "es": "cimiento",
+   "fr": "fondation",
+   "it": "fondamento"
+  }
+ },
+ {
+  "lemma": "Größerer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "greater one",
+   "es": "mayor",
+   "fr": "plus grand",
+   "it": "maggiore"
+  }
+ },
+ {
+  "lemma": "Grübeln",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "brooding",
+   "es": "cavilación",
+   "fr": "rumination",
+   "it": "rimuginio"
+  }
+ },
+ {
+  "lemma": "Gudegoda",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Gudgodah",
+   "es": "Gudgoda",
+   "fr": "Gudgoda",
+   "it": "Gudgoda"
+  }
+ },
+ {
+  "lemma": "Gurkenfeld",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "cucumber field",
+   "es": "campo de pepinos",
+   "fr": "champ de concombres",
+   "it": "campo di cetrioli"
+  }
+ },
+ {
+  "lemma": "Gämse",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "chamois",
+   "es": "gamuza",
+   "fr": "chamois",
+   "it": "camoscio"
+  }
+ },
+ {
+  "lemma": "Götterbild",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "idol image",
+   "es": "imagen de un dios",
+   "fr": "image d'un dieu",
+   "it": "immagine di un dio"
+  }
+ },
+ {
+  "lemma": "Götzenpriester",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "idolatrous priest",
+   "es": "sacerdote idólatra",
+   "fr": "prêtre idolâtre",
+   "it": "sacerdote idolatra"
+  }
+ },
+ {
+  "lemma": "Habaja",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Habaiah",
+   "es": "Habaía",
+   "fr": "Habaja",
+   "it": "Habaia"
+  }
+ },
+ {
+  "lemma": "Habakuk",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Habakkuk",
+   "es": "Habacuc",
+   "fr": "Habacuc",
+   "it": "Abacuc"
+  }
+ },
+ {
+  "lemma": "Habgieriger",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "greedy person",
+   "es": "codicioso",
+   "fr": "cupide",
+   "it": "avido"
+  }
+ },
+ {
+  "lemma": "Hachalja",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hacaliah",
+   "es": "Hacalías",
+   "fr": "Hacalia",
+   "it": "Hacalia"
+  }
+ },
+ {
+  "lemma": "Hadar",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hadar",
+   "es": "Hadar",
+   "fr": "Hadar",
+   "it": "Hadar"
+  }
+ },
+ {
+  "lemma": "Hagab",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hagab",
+   "es": "Hagab",
+   "fr": "Hagab",
+   "it": "Hagab"
+  }
+ },
+ {
+  "lemma": "Hagaba",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hagabah",
+   "es": "Hagaba",
+   "fr": "Hagaba",
+   "it": "Hagaba"
+  }
+ },
+ {
+  "lemma": "Haggi",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Haggi",
+   "es": "Hagui",
+   "fr": "Haggi",
+   "it": "Aggi"
+  }
+ },
+ {
+  "lemma": "Hakupha",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hakupha",
+   "es": "Hacufa",
+   "fr": "Hakupha",
+   "it": "Hakufa"
+  }
+ },
+ {
+  "lemma": "Halach",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Halah",
+   "es": "Halah",
+   "fr": "Chalach",
+   "it": "Halah"
+  }
+ },
+ {
+  "lemma": "Halohes",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hallohesh",
+   "es": "Halohes",
+   "fr": "Halochesch",
+   "it": "Hallohes"
+  }
+ },
+ {
+  "lemma": "Halsschmuckkette",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "necklace",
+   "es": "collar",
+   "fr": "collier",
+   "it": "collana"
+  }
+ },
+ {
+  "lemma": "Hamathiter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Hamathite",
+   "es": "hamateo",
+   "fr": "Hamathien",
+   "it": "amateo"
+  }
+ },
+ {
+  "lemma": "Hammath",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hammath",
+   "es": "Hamat",
+   "fr": "Hammath",
+   "it": "Hammath"
+  }
+ },
+ {
+  "lemma": "Hammon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hammon",
+   "es": "Hamón",
+   "fr": "Hammon",
+   "it": "Hammon"
+  }
+ },
+ {
+  "lemma": "Handelsland",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "land of merchants",
+   "es": "tierra de mercaderes",
+   "fr": "pays de marchands",
+   "it": "paese di mercanti"
+  }
+ },
+ {
+  "lemma": "Handelspartner",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "trading partner",
+   "es": "socio comercial",
+   "fr": "partenaire commercial",
+   "it": "socio commerciale"
+  }
+ },
+ {
+  "lemma": "Handschlag",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "handshake",
+   "es": "apretón de manos",
+   "fr": "poignée de main",
+   "it": "stretta di mano"
+  }
+ },
+ {
+  "lemma": "Hanniel",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hanniel",
+   "es": "Haniel",
+   "fr": "Hanniel",
+   "it": "Hanniel"
+  }
+ },
+ {
+  "lemma": "Harada",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Haradah",
+   "es": "Harada",
+   "fr": "Harada",
+   "it": "Harada"
+  }
+ },
+ {
+  "lemma": "Harbona",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Harbona",
+   "es": "Harboná",
+   "fr": "Harbona",
+   "it": "Harbona"
+  }
+ },
+ {
+  "lemma": "Harhur",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Harhur",
+   "es": "Harhur",
+   "fr": "Harhur",
+   "it": "Harhur"
+  }
+ },
+ {
+  "lemma": "Hariph",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hariph",
+   "es": "Harif",
+   "fr": "Hariph",
+   "it": "Harif"
+  }
+ },
+ {
+  "lemma": "Haroditer",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Harodite",
+   "es": "harodita",
+   "fr": "Harodite",
+   "it": "harodita"
+  }
+ },
+ {
+  "lemma": "Harsa",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Harsha",
+   "es": "Harsa",
+   "fr": "Harscha",
+   "it": "Harsha"
+  }
+ },
+ {
+  "lemma": "Hasabneja",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hashabneiah",
+   "es": "Hasabnías",
+   "fr": "Haschabnia",
+   "it": "Hashabnia"
+  }
+ },
+ {
+  "lemma": "Hase",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "hare",
+   "es": "liebre",
+   "fr": "lièvre",
+   "it": "lepre"
+  }
+ },
+ {
+  "lemma": "Hasmona",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hashmonah",
+   "es": "Hasmona",
+   "fr": "Haschmona",
+   "it": "Asmona"
+  }
+ },
+ {
+  "lemma": "Hasnua",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hassenuah",
+   "es": "Asenúa",
+   "fr": "Hassenua",
+   "it": "Assenua"
+  }
+ },
+ {
+  "lemma": "Hasupha",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hasupha",
+   "es": "Hasufa",
+   "fr": "Hasupha",
+   "it": "Hasufa"
+  }
+ },
+ {
+  "lemma": "Hatipha",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hatipha",
+   "es": "Hatifa",
+   "fr": "Hathipha",
+   "it": "Hatifa"
+  }
+ },
+ {
+  "lemma": "Hatita",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hatita",
+   "es": "Hatita",
+   "fr": "Hathitha",
+   "it": "Hatita"
+  }
+ },
+ {
+  "lemma": "Hattil",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hattil",
+   "es": "Hatil",
+   "fr": "Hatthil",
+   "it": "Hattil"
+  }
+ },
+ {
+  "lemma": "Hauptstadt",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "capital",
+   "es": "capital",
+   "fr": "capitale",
+   "it": "capitale"
+  }
+ },
+ {
+  "lemma": "Hauran",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hauran",
+   "es": "Haurán",
+   "fr": "Havran",
+   "it": "Hauran"
+  }
+ },
+ {
+  "lemma": "Hausgottheit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "household deity",
+   "es": "deidad doméstica",
+   "fr": "divinité domestique",
+   "it": "divinità domestica"
+  }
+ },
+ {
+  "lemma": "Hauspersonal",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "household staff",
+   "es": "personal de la casa",
+   "fr": "personnel de la maison",
+   "it": "personale di casa"
+  }
+ },
+ {
+  "lemma": "Hazar-Enon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hazar Enon",
+   "es": "Hasar-enón",
+   "fr": "Hatsar-Énon",
+   "it": "Hatsar-Enon"
+  }
+ },
+ {
+  "lemma": "Hazarmaveth",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hazarmaveth",
+   "es": "Hazar-mavet",
+   "fr": "Hatsarmaveth",
+   "it": "Asarmavet"
+  }
+ },
+ {
+  "lemma": "Hazezon-Thamar",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hazazon Tamar",
+   "es": "Hazezon-tamar",
+   "fr": "Hatsatson-Thamar",
+   "it": "Hazazon-Tamar"
+  }
+ },
+ {
+  "lemma": "Heck",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "stern",
+   "es": "popa",
+   "fr": "poupe",
+   "it": "poppa"
+  }
+ },
+ {
+  "lemma": "Hefe",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "dregs",
+   "es": "heces",
+   "fr": "lie",
+   "it": "feccia"
+  }
+ },
+ {
+  "lemma": "Heimweg",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "way home",
+   "es": "camino de vuelta",
+   "fr": "chemin du retour",
+   "it": "via del ritorno"
+  }
+ },
+ {
+  "lemma": "Helam",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Helam",
+   "es": "Helam",
+   "fr": "Hélam",
+   "it": "Helam"
+  }
+ },
+ {
+  "lemma": "Heldai",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Heldai",
+   "es": "Heldai",
+   "fr": "Heldaï",
+   "it": "Heldai"
+  }
+ },
+ {
+  "lemma": "Helea",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Helah",
+   "es": "Hela",
+   "fr": "Héléa",
+   "it": "Helea"
+  }
+ },
+ {
+  "lemma": "Helek",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Helek",
+   "es": "Helec",
+   "fr": "Hélek",
+   "it": "Chelek"
+  }
+ },
+ {
+  "lemma": "Helem",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Helem",
+   "es": "Helem",
+   "fr": "Hélem",
+   "it": "Helem"
+  }
+ },
+ {
+  "lemma": "Helkath",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Helkath",
+   "es": "Helcat",
+   "fr": "Helkath",
+   "it": "Helkath"
+  }
+ },
+ {
+  "lemma": "Helligkeit",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "brightness",
+   "es": "claridad",
+   "fr": "clarté",
+   "it": "luminosità"
+  }
+ },
+ {
+  "lemma": "Hennablüte",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "henna blossom",
+   "es": "flor de alheña",
+   "fr": "fleur de henné",
+   "it": "fiore di henna"
+  }
+ },
+ {
+  "lemma": "Henne",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hen",
+   "es": "gallina",
+   "fr": "poule",
+   "it": "gallina"
+  }
+ },
+ {
+  "lemma": "Herausforderung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "challenge",
+   "es": "desafío",
+   "fr": "défi",
+   "it": "sfida"
+  }
+ },
+ {
+  "lemma": "Herd",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "hearth",
+   "es": "fogón",
+   "fr": "foyer",
+   "it": "focolare"
+  }
+ },
+ {
+  "lemma": "Heres",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Heres",
+   "es": "Heres",
+   "fr": "Hérès",
+   "it": "Heres"
+  }
+ },
+ {
+  "lemma": "Herrscherzepter",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "ruler's scepter",
+   "es": "cetro de gobernante",
+   "fr": "sceptre de souverain",
+   "it": "scettro di sovrano"
+  }
+ },
+ {
+  "lemma": "Hesekiel",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ezekiel",
+   "es": "Ezequiel",
+   "fr": "Ézéchiel",
+   "it": "Ezechiele"
+  }
+ },
+ {
+  "lemma": "Hetiterin",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Hittite woman",
+   "es": "hetea",
+   "fr": "Héthienne",
+   "it": "hittita"
+  }
+ },
+ {
+  "lemma": "Hetlon",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hethlon",
+   "es": "Hetlón",
+   "fr": "Hethlon",
+   "it": "Hethlon"
+  }
+ },
+ {
+  "lemma": "Heu",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "hay",
+   "es": "heno",
+   "fr": "foin",
+   "it": "fieno"
+  }
+ },
+ {
+  "lemma": "Heuschreckenschwarm",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "swarm of locusts",
+   "es": "enjambre de langostas",
+   "fr": "nuée de sauterelles",
+   "it": "sciame di locuste"
+  }
+ },
+ {
+  "lemma": "Hewiter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Hivite",
+   "es": "heveo",
+   "fr": "Hévien",
+   "it": "hivvita"
+  }
+ },
+ {
+  "lemma": "Hezroniter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Hezronite",
+   "es": "hezronita",
+   "fr": "Hetsronite",
+   "it": "hesronita"
+  }
+ },
+ {
+  "lemma": "Hinrichtung",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "execution",
+   "es": "ejecución",
+   "fr": "exécution",
+   "it": "esecuzione"
+  }
+ },
+ {
+  "lemma": "Hinterlistiger",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "deceitful person",
+   "es": "astuto",
+   "fr": "rusé",
+   "it": "astuto"
+  }
+ },
+ {
+  "lemma": "Hinterteil",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "hind part",
+   "es": "parte trasera",
+   "fr": "arrière-train",
+   "it": "parte posteriore"
+  }
+ },
+ {
+  "lemma": "Hira",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hirah",
+   "es": "Hira",
+   "fr": "Hira",
+   "it": "Chira"
+  }
+ },
+ {
+  "lemma": "Hirtenhaus",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "shepherds' house",
+   "es": "casa de pastores",
+   "fr": "maison des bergers",
+   "it": "casa dei pastori"
+  }
+ },
+ {
+  "lemma": "Hobab",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hobab",
+   "es": "Hobab",
+   "fr": "Hobab",
+   "it": "Hobab"
+  }
+ },
+ {
+  "lemma": "Hochgelobter",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "praised one",
+   "es": "alabado",
+   "fr": "loué",
+   "it": "lodato"
+  }
+ },
+ {
+  "lemma": "Hochzeitsgewand",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "wedding garment",
+   "es": "traje de boda",
+   "fr": "habit de noces",
+   "it": "abito nuziale"
+  }
+ },
+ {
+  "lemma": "Hoher",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "high-ranking man",
+   "es": "hombre de alto rango",
+   "fr": "homme haut placé",
+   "it": "uomo di alto rango"
+  }
+ },
+ {
+  "lemma": "Holzgefäß",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "wooden vessel",
+   "es": "recipiente de madera",
+   "fr": "récipient en bois",
+   "it": "recipiente di legno"
+  }
+ },
+ {
+  "lemma": "Holzscheit",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "log",
+   "es": "leño",
+   "fr": "bûche",
+   "it": "ceppo"
+  }
+ },
+ {
+  "lemma": "Holzstoß",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "woodpile",
+   "es": "pila de leña",
+   "fr": "tas de bois",
+   "it": "catasta di legna"
+  }
+ },
+ {
+  "lemma": "Horgidgad",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hor-gidgad",
+   "es": "Hor-gidgad",
+   "fr": "Hor-Guidgad",
+   "it": "Hor-Ghidgad"
+  }
+ },
+ {
+  "lemma": "Hoschaja",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hoshaiah",
+   "es": "Osaías",
+   "fr": "Hoschaïa",
+   "it": "Hosaia"
+  }
+ },
+ {
+  "lemma": "Hose",
+  "level": "A2",
+  "pos": "noun",
+  "base": {
+   "en": "trousers",
+   "es": "pantalón",
+   "fr": "pantalon",
+   "it": "pantaloni"
+  }
+ },
+ {
+  "lemma": "Hotham",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hotham",
+   "es": "Hotam",
+   "fr": "Hotham",
+   "it": "Hotham"
+  }
+ },
+ {
+  "lemma": "Hothir",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hothir",
+   "es": "Hotir",
+   "fr": "Hothir",
+   "it": "Hothir"
+  }
+ },
+ {
+  "lemma": "Hul",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hul",
+   "es": "Hul",
+   "fr": "Hul",
+   "it": "Hul"
+  }
+ },
+ {
+  "lemma": "Huld",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "favor",
+   "es": "gracia",
+   "fr": "faveur",
+   "it": "favore"
+  }
+ },
+ {
+  "lemma": "Hulda",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Huldah",
+   "es": "Hulda",
+   "fr": "Hulda",
+   "it": "Hulda"
+  }
+ },
+ {
+  "lemma": "Hungerjahr",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "year of famine",
+   "es": "año de hambre",
+   "fr": "année de famine",
+   "it": "anno di carestia"
+  }
+ },
+ {
+  "lemma": "Hurer",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "fornicator",
+   "es": "fornicario",
+   "fr": "débauché",
+   "it": "fornicatore"
+  }
+ },
+ {
+  "lemma": "Husai",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hushai",
+   "es": "Husai",
+   "fr": "Huschaï",
+   "it": "Hushai"
+  }
+ },
+ {
+  "lemma": "Huschatiter",
+  "level": "B2",
+  "pos": "propn",
+  "base": {
+   "en": "Hushathite",
+   "es": "husatita",
+   "fr": "Huschatite",
+   "it": "husatita"
+  }
+ },
+ {
+  "lemma": "Hymenäus",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Hymenaeus",
+   "es": "Himeneo",
+   "fr": "Hyménée",
+   "it": "Imeneo"
+  }
+ },
+ {
+  "lemma": "Häher",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "jay",
+   "es": "arrendajo",
+   "fr": "geai",
+   "it": "ghiandaia"
+  }
+ },
+ {
+  "lemma": "Höhepunkt",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "peak",
+   "es": "punto culminante",
+   "fr": "point culminant",
+   "it": "culmine"
+  }
+ },
+ {
+  "lemma": "Höherer",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "higher one",
+   "es": "superior",
+   "fr": "supérieur",
+   "it": "superiore"
+  }
+ },
+ {
+  "lemma": "Hörnerschall",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "blast of horns",
+   "es": "toque de cuernos",
+   "fr": "sonnerie de cors",
+   "it": "squillo di corni"
+  }
+ },
+ {
+  "lemma": "Hüftsehne",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "hip sinew",
+   "es": "tendón de la cadera",
+   "fr": "tendon de la hanche",
+   "it": "tendine dell'anca"
+  }
+ },
+ {
+  "lemma": "Hülle",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "covering",
+   "es": "cubierta",
+   "fr": "couverture",
+   "it": "copertura"
+  }
+ },
+ {
+  "lemma": "Hüterin",
+  "level": "C1",
+  "pos": "noun",
+  "base": {
+   "en": "guardian",
+   "es": "guardiana",
+   "fr": "gardienne",
+   "it": "custode"
+  }
+ },
+ {
+  "lemma": "Ije-Abarim",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Iye-Abarim",
+   "es": "Ije-abarim",
+   "fr": "Ijjé-Abarim",
+   "it": "Iie-Abarim"
+  }
+ },
+ {
+  "lemma": "Ijim",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Iyim",
+   "es": "Ijim",
+   "fr": "Ijjim",
+   "it": "Iim"
+  }
+ },
+ {
+  "lemma": "Ikabod",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ichabod",
+   "es": "Icabod",
+   "fr": "I-Kabod",
+   "it": "Icabod"
+  }
+ },
+ {
+  "lemma": "Ikkes",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ikkesh",
+   "es": "Iques",
+   "fr": "Ikkesch",
+   "it": "Ikkesh"
+  }
+ },
+ {
+  "lemma": "Imri",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Imri",
+   "es": "Imri",
+   "fr": "Imri",
+   "it": "Imri"
+  }
+ },
+ {
+  "lemma": "Indien",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "India",
+   "es": "India",
+   "fr": "Inde",
+   "it": "India"
+  }
+ },
+ {
+  "lemma": "Interesse",
+  "level": "B1",
+  "pos": "noun",
+  "base": {
+   "en": "interest",
+   "es": "interés",
+   "fr": "intérêt",
+   "it": "interesse"
+  }
+ },
+ {
+  "lemma": "Irad",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Irad",
+   "es": "Irad",
+   "fr": "Irad",
+   "it": "Irad"
+  }
+ },
+ {
+  "lemma": "Iram",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Iram",
+   "es": "Iram",
+   "fr": "Iram",
+   "it": "Iram"
+  }
+ },
+ {
+  "lemma": "Irdische",
+  "level": "B2",
+  "pos": "noun",
+  "base": {
+   "en": "earthly thing",
+   "es": "cosa terrenal",
+   "fr": "chose terrestre",
+   "it": "cosa terrena"
+  }
+ },
+ {
+  "lemma": "Ithiël",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Ithiel",
+   "es": "Itiel",
+   "fr": "Ithiel",
+   "it": "Itiel"
+  }
+ },
+ {
+  "lemma": "Jaala",
+  "level": "A1",
+  "pos": "propn",
+  "base": {
+   "en": "Jaalah",
+   "es": "Jaala",
+   "fr": "Jaala",
+   "it": "Jaala"
+  }
+ }
+]

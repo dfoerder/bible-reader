@@ -1,0 +1,2752 @@
+[
+ {
+  "lemma": "erschließen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to open up",
+   "es": "abrir",
+   "fr": "ouvrir",
+   "it": "aprire"
+  }
+ },
+ {
+  "lemma": "erschweren",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to make difficult",
+   "es": "dificultar",
+   "fr": "rendre difficile",
+   "it": "rendere difficile"
+  }
+ },
+ {
+  "lemma": "erstellen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to draw up",
+   "es": "elaborar",
+   "fr": "établir",
+   "it": "redigere"
+  }
+ },
+ {
+  "lemma": "erstens",
+  "level": "A2",
+  "pos": "adv",
+  "base": {
+   "en": "first",
+   "es": "primero",
+   "fr": "premièrement",
+   "it": "in primo luogo"
+  }
+ },
+ {
+  "lemma": "ertasten",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to feel for",
+   "es": "palpar",
+   "fr": "tâter",
+   "it": "tastare"
+  }
+ },
+ {
+  "lemma": "ertränken",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to drown",
+   "es": "ahogar",
+   "fr": "noyer",
+   "it": "annegare"
+  }
+ },
+ {
+  "lemma": "erwachend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "awakening",
+   "es": "que despierta",
+   "fr": "qui s'éveille",
+   "it": "che si desta"
+  }
+ },
+ {
+  "lemma": "erwägen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to consider",
+   "es": "considerar",
+   "fr": "envisager",
+   "it": "considerare"
+  }
+ },
+ {
+  "lemma": "erwürgen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to strangle",
+   "es": "estrangular",
+   "fr": "étrangler",
+   "it": "strangolare"
+  }
+ },
+ {
+  "lemma": "erzeugen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to produce",
+   "es": "producir",
+   "fr": "produire",
+   "it": "produrre"
+  }
+ },
+ {
+  "lemma": "essbar",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "edible",
+   "es": "comestible",
+   "fr": "comestible",
+   "it": "commestibile"
+  }
+ },
+ {
+  "lemma": "exakt",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "exact",
+   "es": "exacto",
+   "fr": "exact",
+   "it": "esatto"
+  }
+ },
+ {
+  "lemma": "fachen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to fan",
+   "es": "avivar",
+   "fr": "attiser",
+   "it": "attizzare"
+  }
+ },
+ {
+  "lemma": "fade",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "bland",
+   "es": "insípido",
+   "fr": "fade",
+   "it": "insipido"
+  }
+ },
+ {
+  "lemma": "fahl",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "pale",
+   "es": "pálido",
+   "fr": "blafard",
+   "it": "pallido"
+  }
+ },
+ {
+  "lemma": "fahrbar",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "movable",
+   "es": "móvil",
+   "fr": "mobile",
+   "it": "mobile"
+  }
+ },
+ {
+  "lemma": "fair",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "fair",
+   "es": "justo",
+   "fr": "équitable",
+   "it": "equo"
+  }
+ },
+ {
+  "lemma": "faulen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to rot",
+   "es": "pudrirse",
+   "fr": "pourrir",
+   "it": "marcire"
+  }
+ },
+ {
+  "lemma": "faulig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "rotten",
+   "es": "podrido",
+   "fr": "pourri",
+   "it": "marcio"
+  }
+ },
+ {
+  "lemma": "fehl",
+  "level": "C1",
+  "pos": "adv",
+  "base": {
+   "en": "wrongly",
+   "es": "en falso",
+   "fr": "à faux",
+   "it": "in fallo"
+  }
+ },
+ {
+  "lemma": "fehlerhaft",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "faulty",
+   "es": "defectuoso",
+   "fr": "défectueux",
+   "it": "difettoso"
+  }
+ },
+ {
+  "lemma": "feige",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "cowardly",
+   "es": "cobarde",
+   "fr": "lâche",
+   "it": "codardo"
+  }
+ },
+ {
+  "lemma": "feist",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "fat",
+   "es": "gordo",
+   "fr": "gras",
+   "it": "grasso"
+  }
+ },
+ {
+  "lemma": "fernab",
+  "level": "C1",
+  "pos": "adv",
+  "base": {
+   "en": "far away",
+   "es": "lejos",
+   "fr": "à l'écart",
+   "it": "lontano"
+  }
+ },
+ {
+  "lemma": "ferne",
+  "level": "C1",
+  "pos": "adv",
+  "base": {
+   "en": "far",
+   "es": "lejos",
+   "fr": "loin",
+   "it": "lontano"
+  }
+ },
+ {
+  "lemma": "fernliegend",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "distant",
+   "es": "remoto",
+   "fr": "lointain",
+   "it": "remoto"
+  }
+ },
+ {
+  "lemma": "fertigbauen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to finish building",
+   "es": "terminar de construir",
+   "fr": "achever de bâtir",
+   "it": "finire di costruire"
+  }
+ },
+ {
+  "lemma": "fertigbringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to manage",
+   "es": "lograr",
+   "fr": "réussir",
+   "it": "riuscire"
+  }
+ },
+ {
+  "lemma": "festschreiben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to record",
+   "es": "consignar",
+   "fr": "consigner",
+   "it": "fissare"
+  }
+ },
+ {
+  "lemma": "festtreten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to tread down",
+   "es": "pisotear",
+   "fr": "fouler",
+   "it": "calpestare"
+  }
+ },
+ {
+  "lemma": "feuerrot",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "fiery red",
+   "es": "rojo fuego",
+   "fr": "rouge feu",
+   "it": "rosso fuoco"
+  }
+ },
+ {
+  "lemma": "fischen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to fish",
+   "es": "pescar",
+   "fr": "pêcher",
+   "it": "pescare"
+  }
+ },
+ {
+  "lemma": "flammen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to blaze",
+   "es": "llamear",
+   "fr": "flamboyer",
+   "it": "fiammeggiare"
+  }
+ },
+ {
+  "lemma": "flammend",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "flaming",
+   "es": "llameante",
+   "fr": "flamboyant",
+   "it": "fiammeggiante"
+  }
+ },
+ {
+  "lemma": "flatternd",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "fluttering",
+   "es": "que revolotea",
+   "fr": "voltigeant",
+   "it": "svolazzante"
+  }
+ },
+ {
+  "lemma": "flehentlich",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "imploring",
+   "es": "suplicante",
+   "fr": "suppliant",
+   "it": "supplichevole"
+  }
+ },
+ {
+  "lemma": "fliehend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "fleeing",
+   "es": "que huye",
+   "fr": "fuyant",
+   "it": "fuggente"
+  }
+ },
+ {
+  "lemma": "fortbestehen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to continue",
+   "es": "perdurar",
+   "fr": "subsister",
+   "it": "perdurare"
+  }
+ },
+ {
+  "lemma": "fortbewegen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to move",
+   "es": "desplazarse",
+   "fr": "se déplacer",
+   "it": "spostarsi"
+  }
+ },
+ {
+  "lemma": "fortdauern",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to last",
+   "es": "durar",
+   "fr": "durer",
+   "it": "durare"
+  }
+ },
+ {
+  "lemma": "fortgeschritten",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "advanced",
+   "es": "avanzado",
+   "fr": "avancé",
+   "it": "avanzato"
+  }
+ },
+ {
+  "lemma": "fortjagen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to chase away",
+   "es": "echar",
+   "fr": "chasser",
+   "it": "cacciare via"
+  }
+ },
+ {
+  "lemma": "fortleben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to live on",
+   "es": "perdurar",
+   "fr": "survivre",
+   "it": "sopravvivere"
+  }
+ },
+ {
+  "lemma": "fortschleifen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to drag away",
+   "es": "arrastrar",
+   "fr": "traîner",
+   "it": "trascinare"
+  }
+ },
+ {
+  "lemma": "freigeben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to release",
+   "es": "liberar",
+   "fr": "libérer",
+   "it": "rilasciare"
+  }
+ },
+ {
+  "lemma": "freigiebig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "generous",
+   "es": "generoso",
+   "fr": "généreux",
+   "it": "generoso"
+  }
+ },
+ {
+  "lemma": "freikommen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to go free",
+   "es": "quedar libre",
+   "fr": "être libéré",
+   "it": "essere liberato"
+  }
+ },
+ {
+  "lemma": "fremdartig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "strange",
+   "es": "extraño",
+   "fr": "étrange",
+   "it": "strano"
+  }
+ },
+ {
+  "lemma": "freveln",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to act wickedly",
+   "es": "obrar impíamente",
+   "fr": "agir avec impiété",
+   "it": "agire empiamente"
+  }
+ },
+ {
+  "lemma": "friedliebend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "peace-loving",
+   "es": "pacífico",
+   "fr": "pacifique",
+   "it": "pacifico"
+  }
+ },
+ {
+  "lemma": "friedvoll",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "peaceful",
+   "es": "apacible",
+   "fr": "paisible",
+   "it": "pacifico"
+  }
+ },
+ {
+  "lemma": "frieren",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to freeze",
+   "es": "helarse",
+   "fr": "geler",
+   "it": "gelare"
+  }
+ },
+ {
+  "lemma": "fruchttragend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "fruit-bearing",
+   "es": "frutal",
+   "fr": "fruitier",
+   "it": "fruttifero"
+  }
+ },
+ {
+  "lemma": "funkeln",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to sparkle",
+   "es": "centellear",
+   "fr": "scintiller",
+   "it": "scintillare"
+  }
+ },
+ {
+  "lemma": "furchtsam",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "fearful",
+   "es": "miedoso",
+   "fr": "craintif",
+   "it": "timoroso"
+  }
+ },
+ {
+  "lemma": "fälschen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to falsify",
+   "es": "falsificar",
+   "fr": "falsifier",
+   "it": "falsificare"
+  }
+ },
+ {
+  "lemma": "fälschlich",
+  "level": "C1",
+  "pos": "adv",
+  "base": {
+   "en": "falsely",
+   "es": "falsamente",
+   "fr": "faussement",
+   "it": "falsamente"
+  }
+ },
+ {
+  "lemma": "fünfeckig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "five-sided",
+   "es": "pentagonal",
+   "fr": "pentagonal",
+   "it": "pentagonale"
+  }
+ },
+ {
+  "lemma": "fünfhundertdreißig",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "five hundred thirty",
+   "es": "quinientos treinta",
+   "fr": "cinq cent trente",
+   "it": "cinquecentotrenta"
+  }
+ },
+ {
+  "lemma": "fünfhundertfünfundneunzig",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "five hundred ninety-five",
+   "es": "quinientos noventa y cinco",
+   "fr": "cinq cent quatre-vingt-quinze",
+   "it": "cinquecentonovantacinque"
+  }
+ },
+ {
+  "lemma": "fünfhundertfünfzig",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "five hundred fifty",
+   "es": "quinientos cincuenta",
+   "fr": "cinq cent cinquante",
+   "it": "cinquecentocinquanta"
+  }
+ },
+ {
+  "lemma": "fünftausendvierhundert",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "five thousand four hundred",
+   "es": "cinco mil cuatrocientos",
+   "fr": "cinq mille quatre cents",
+   "it": "cinquemilaquattrocento"
+  }
+ },
+ {
+  "lemma": "fünfunddreißigst",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "thirty-fifth",
+   "es": "trigésimo quinto",
+   "fr": "trente-cinquième",
+   "it": "trentacinquesimo"
+  }
+ },
+ {
+  "lemma": "fünfundsiebzigtausend",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "seventy-five thousand",
+   "es": "setenta y cinco mil",
+   "fr": "soixante-quinze mille",
+   "it": "settantacinquemila"
+  }
+ },
+ {
+  "lemma": "fünfundzwanzigtausendeinhundert",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "twenty-five thousand one hundred",
+   "es": "veinticinco mil cien",
+   "fr": "vingt-cinq mille cent",
+   "it": "venticinquemilacento"
+  }
+ },
+ {
+  "lemma": "fünfzehntausend",
+  "level": "A2",
+  "pos": "num",
+  "base": {
+   "en": "fifteen thousand",
+   "es": "quince mil",
+   "fr": "quinze mille",
+   "it": "quindicimila"
+  }
+ },
+ {
+  "lemma": "fürs",
+  "level": "A1",
+  "pos": "prep",
+  "base": {
+   "en": "for the",
+   "es": "para el",
+   "fr": "pour le",
+   "it": "per il"
+  }
+ },
+ {
+  "lemma": "garkochen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to cook through",
+   "es": "cocer bien",
+   "fr": "cuire à point",
+   "it": "cuocere bene"
+  }
+ },
+ {
+  "lemma": "gebahnt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "paved",
+   "es": "allanado",
+   "fr": "aplani",
+   "it": "spianato"
+  }
+ },
+ {
+  "lemma": "gebeugt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "bowed",
+   "es": "encorvado",
+   "fr": "courbé",
+   "it": "curvo"
+  }
+ },
+ {
+  "lemma": "gebildet",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "educated",
+   "es": "instruido",
+   "fr": "instruit",
+   "it": "istruito"
+  }
+ },
+ {
+  "lemma": "geboren",
+  "level": "A2",
+  "pos": "adj",
+  "base": {
+   "en": "born",
+   "es": "nacido",
+   "fr": "né",
+   "it": "nato"
+  }
+ },
+ {
+  "lemma": "gebraten",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "roasted",
+   "es": "asado",
+   "fr": "grillé",
+   "it": "arrostito"
+  }
+ },
+ {
+  "lemma": "geflochten",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "braided",
+   "es": "trenzado",
+   "fr": "tressé",
+   "it": "intrecciato"
+  }
+ },
+ {
+  "lemma": "geflügelt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "winged",
+   "es": "alado",
+   "fr": "ailé",
+   "it": "alato"
+  }
+ },
+ {
+  "lemma": "gefragt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "in demand",
+   "es": "solicitado",
+   "fr": "demandé",
+   "it": "richiesto"
+  }
+ },
+ {
+  "lemma": "gefüllt",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "filled",
+   "es": "lleno",
+   "fr": "rempli",
+   "it": "pieno"
+  }
+ },
+ {
+  "lemma": "gegenüberlegen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to lay opposite",
+   "es": "poner enfrente",
+   "fr": "placer en face",
+   "it": "porre di fronte"
+  }
+ },
+ {
+  "lemma": "gegenüberstellen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to compare",
+   "es": "contraponer",
+   "fr": "confronter",
+   "it": "contrapporre"
+  }
+ },
+ {
+  "lemma": "gegenübertreten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to face",
+   "es": "afrontar",
+   "fr": "affronter",
+   "it": "affrontare"
+  }
+ },
+ {
+  "lemma": "gegürtet",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "girded",
+   "es": "ceñido",
+   "fr": "ceint",
+   "it": "cinto"
+  }
+ },
+ {
+  "lemma": "geheiligt",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "sanctified",
+   "es": "santificado",
+   "fr": "sanctifié",
+   "it": "santificato"
+  }
+ },
+ {
+  "lemma": "geheilt",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "healed",
+   "es": "sanado",
+   "fr": "guéri",
+   "it": "guarito"
+  }
+ },
+ {
+  "lemma": "gehoben",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "elevated",
+   "es": "elevado",
+   "fr": "élevé",
+   "it": "elevato"
+  }
+ },
+ {
+  "lemma": "gehämmert",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "hammered",
+   "es": "martillado",
+   "fr": "martelé",
+   "it": "martellato"
+  }
+ },
+ {
+  "lemma": "gehörig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "belonging",
+   "es": "perteneciente",
+   "fr": "appartenant",
+   "it": "appartenente"
+  }
+ },
+ {
+  "lemma": "geisterfüllt",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "spirit-filled",
+   "es": "lleno del Espíritu",
+   "fr": "rempli de l'Esprit",
+   "it": "pieno di Spirito"
+  }
+ },
+ {
+  "lemma": "geistig",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "spiritual",
+   "es": "espiritual",
+   "fr": "spirituel",
+   "it": "spirituale"
+  }
+ },
+ {
+  "lemma": "geißeln",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to scourge",
+   "es": "azotar",
+   "fr": "flageller",
+   "it": "flagellare"
+  }
+ },
+ {
+  "lemma": "gelassen",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "calm",
+   "es": "tranquilo",
+   "fr": "calme",
+   "it": "calmo"
+  }
+ },
+ {
+  "lemma": "gelb",
+  "level": "A1",
+  "pos": "adj",
+  "base": {
+   "en": "yellow",
+   "es": "amarillo",
+   "fr": "jaune",
+   "it": "giallo"
+  }
+ },
+ {
+  "lemma": "gelüsten",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to crave",
+   "es": "codiciar",
+   "fr": "convoiter",
+   "it": "bramare"
+  }
+ },
+ {
+  "lemma": "gemein",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "common",
+   "es": "común",
+   "fr": "commun",
+   "it": "comune"
+  }
+ },
+ {
+  "lemma": "genesen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to recover",
+   "es": "sanar",
+   "fr": "guérir",
+   "it": "guarire"
+  }
+ },
+ {
+  "lemma": "gepflastert",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "paved",
+   "es": "pavimentado",
+   "fr": "pavé",
+   "it": "lastricato"
+  }
+ },
+ {
+  "lemma": "gepfändet",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "pawned",
+   "es": "empeñado",
+   "fr": "mis en gage",
+   "it": "impegnato"
+  }
+ },
+ {
+  "lemma": "gepresst",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "pressed",
+   "es": "prensado",
+   "fr": "pressé",
+   "it": "spremuto"
+  }
+ },
+ {
+  "lemma": "geradlinig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "straightforward",
+   "es": "recto",
+   "fr": "droit",
+   "it": "retto"
+  }
+ },
+ {
+  "lemma": "gereckt",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "outstretched",
+   "es": "estirado",
+   "fr": "tendu",
+   "it": "teso"
+  }
+ },
+ {
+  "lemma": "geringschätzig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "contemptuous",
+   "es": "despectivo",
+   "fr": "méprisant",
+   "it": "sprezzante"
+  }
+ },
+ {
+  "lemma": "gerinnen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to curdle",
+   "es": "cuajarse",
+   "fr": "cailler",
+   "it": "rapprendersi"
+  }
+ },
+ {
+  "lemma": "gerissen",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "crafty",
+   "es": "astuto",
+   "fr": "rusé",
+   "it": "astuto"
+  }
+ },
+ {
+  "lemma": "gerötet",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "reddened",
+   "es": "enrojecido",
+   "fr": "rougi",
+   "it": "arrossato"
+  }
+ },
+ {
+  "lemma": "geschmiedet",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "forged",
+   "es": "forjado",
+   "fr": "forgé",
+   "it": "forgiato"
+  }
+ },
+ {
+  "lemma": "geschmolzen",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "melted",
+   "es": "derretido",
+   "fr": "fondu",
+   "it": "fuso"
+  }
+ },
+ {
+  "lemma": "geschwätzig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "talkative",
+   "es": "chismoso",
+   "fr": "bavard",
+   "it": "chiacchierone"
+  }
+ },
+ {
+  "lemma": "gesetzlos",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "lawless",
+   "es": "sin ley",
+   "fr": "sans loi",
+   "it": "senza legge"
+  }
+ },
+ {
+  "lemma": "gesondert",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "separate",
+   "es": "aparte",
+   "fr": "séparé",
+   "it": "separato"
+  }
+ },
+ {
+  "lemma": "gesprenkelt",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "speckled",
+   "es": "moteado",
+   "fr": "tacheté",
+   "it": "screziato"
+  }
+ },
+ {
+  "lemma": "getreu",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "faithful",
+   "es": "fiel",
+   "fr": "fidèle",
+   "it": "fedele"
+  }
+ },
+ {
+  "lemma": "getrübt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "clouded",
+   "es": "turbio",
+   "fr": "trouble",
+   "it": "torbido"
+  }
+ },
+ {
+  "lemma": "getäfelt",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "paneled",
+   "es": "revestido de madera",
+   "fr": "lambrissé",
+   "it": "rivestito di legno"
+  }
+ },
+ {
+  "lemma": "gewachsen",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "equal to",
+   "es": "a la altura",
+   "fr": "à la hauteur",
+   "it": "all'altezza"
+  }
+ },
+ {
+  "lemma": "gewaltbereit",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "violent",
+   "es": "violento",
+   "fr": "violent",
+   "it": "violento"
+  }
+ },
+ {
+  "lemma": "gewellt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "wavy",
+   "es": "ondulado",
+   "fr": "ondulé",
+   "it": "ondulato"
+  }
+ },
+ {
+  "lemma": "gewissermaßen",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "in a way",
+   "es": "en cierto modo",
+   "fr": "en quelque sorte",
+   "it": "in un certo senso"
+  }
+ },
+ {
+  "lemma": "gewunden",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "winding",
+   "es": "tortuoso",
+   "fr": "tortueux",
+   "it": "tortuoso"
+  }
+ },
+ {
+  "lemma": "geölt",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "oiled",
+   "es": "aceitado",
+   "fr": "huilé",
+   "it": "oliato"
+  }
+ },
+ {
+  "lemma": "giftig",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "poisonous",
+   "es": "venenoso",
+   "fr": "empoisonné",
+   "it": "velenoso"
+  }
+ },
+ {
+  "lemma": "gleichmachen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to level",
+   "es": "igualar",
+   "fr": "égaliser",
+   "it": "eguagliare"
+  }
+ },
+ {
+  "lemma": "gleichsetzen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to equate",
+   "es": "equiparar",
+   "fr": "assimiler",
+   "it": "equiparare"
+  }
+ },
+ {
+  "lemma": "glätten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to smooth",
+   "es": "alisar",
+   "fr": "lisser",
+   "it": "lisciare"
+  }
+ },
+ {
+  "lemma": "gotteslästerlich",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "blasphemous",
+   "es": "blasfemo",
+   "fr": "blasphématoire",
+   "it": "blasfemo"
+  }
+ },
+ {
+  "lemma": "gottgefällig",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "godly",
+   "es": "piadoso",
+   "fr": "pieux",
+   "it": "pio"
+  }
+ },
+ {
+  "lemma": "grasfressend",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "grass-eating",
+   "es": "que come hierba",
+   "fr": "qui mange l'herbe",
+   "it": "che mangia l'erba"
+  }
+ },
+ {
+  "lemma": "gratulieren",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to congratulate",
+   "es": "felicitar",
+   "fr": "féliciter",
+   "it": "congratularsi"
+  }
+ },
+ {
+  "lemma": "grenzenlos",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "boundless",
+   "es": "sin límites",
+   "fr": "sans limites",
+   "it": "sconfinato"
+  }
+ },
+ {
+  "lemma": "grob",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "coarse",
+   "es": "áspero",
+   "fr": "grossier",
+   "it": "ruvido"
+  }
+ },
+ {
+  "lemma": "großtun",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to boast",
+   "es": "jactarse",
+   "fr": "se vanter",
+   "it": "vantarsi"
+  }
+ },
+ {
+  "lemma": "grünend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "green",
+   "es": "verde",
+   "fr": "verdoyant",
+   "it": "verdeggiante"
+  }
+ },
+ {
+  "lemma": "gutaussehend",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "good-looking",
+   "es": "guapo",
+   "fr": "beau",
+   "it": "bello"
+  }
+ },
+ {
+  "lemma": "gutfinden",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to approve",
+   "es": "aprobar",
+   "fr": "approuver",
+   "it": "approvare"
+  }
+ },
+ {
+  "lemma": "guttun",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to do good",
+   "es": "hacer bien",
+   "fr": "faire du bien",
+   "it": "far bene"
+  }
+ },
+ {
+  "lemma": "gütlich",
+  "level": "C1",
+  "pos": "adv",
+  "base": {
+   "en": "indulgently",
+   "es": "a placer",
+   "fr": "à son aise",
+   "it": "lautamente"
+  }
+ },
+ {
+  "lemma": "handhaben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to handle",
+   "es": "manejar",
+   "fr": "manier",
+   "it": "gestire"
+  }
+ },
+ {
+  "lemma": "harmlos",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "harmless",
+   "es": "inofensivo",
+   "fr": "inoffensif",
+   "it": "innocuo"
+  }
+ },
+ {
+  "lemma": "heidnisch",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "pagan",
+   "es": "pagano",
+   "fr": "païen",
+   "it": "pagano"
+  }
+ },
+ {
+  "lemma": "heilend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "healing",
+   "es": "sanador",
+   "fr": "guérissant",
+   "it": "risanatore"
+  }
+ },
+ {
+  "lemma": "heillos",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "hopeless",
+   "es": "desesperado",
+   "fr": "désespéré",
+   "it": "disperato"
+  }
+ },
+ {
+  "lemma": "heimkehrend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "returning",
+   "es": "que regresa",
+   "fr": "qui revient",
+   "it": "che torna"
+  }
+ },
+ {
+  "lemma": "heimtückisch",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "insidious",
+   "es": "insidioso",
+   "fr": "sournois",
+   "it": "insidioso"
+  }
+ },
+ {
+  "lemma": "heiratsfähig",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "marriageable",
+   "es": "casadero",
+   "fr": "nubile",
+   "it": "da sposare"
+  }
+ },
+ {
+  "lemma": "heiser",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "hoarse",
+   "es": "ronco",
+   "fr": "enroué",
+   "it": "rauco"
+  }
+ },
+ {
+  "lemma": "helltönend",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "clear-sounding",
+   "es": "de sonido claro",
+   "fr": "au son clair",
+   "it": "dal suono chiaro"
+  }
+ },
+ {
+  "lemma": "herabbeugen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bend down",
+   "es": "inclinarse",
+   "fr": "se pencher",
+   "it": "chinarsi"
+  }
+ },
+ {
+  "lemma": "herabfließen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to flow down",
+   "es": "descender",
+   "fr": "descendre",
+   "it": "scendere"
+  }
+ },
+ {
+  "lemma": "herabhängend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "hanging down",
+   "es": "colgante",
+   "fr": "pendant",
+   "it": "pendente"
+  }
+ },
+ {
+  "lemma": "herabregnen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to rain down",
+   "es": "llover",
+   "fr": "pleuvoir",
+   "it": "piovere"
+  }
+ },
+ {
+  "lemma": "herabschütten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to pour down",
+   "es": "derramar",
+   "fr": "déverser",
+   "it": "riversare"
+  }
+ },
+ {
+  "lemma": "herabsenden",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to send down",
+   "es": "hacer descender",
+   "fr": "faire descendre",
+   "it": "far scendere"
+  }
+ },
+ {
+  "lemma": "herabströmen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to stream down",
+   "es": "fluir",
+   "fr": "couler",
+   "it": "scorrere"
+  }
+ },
+ {
+  "lemma": "herantragen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bring forward",
+   "es": "presentar",
+   "fr": "présenter",
+   "it": "presentare"
+  }
+ },
+ {
+  "lemma": "heraufkriechen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to crawl up",
+   "es": "subir arrastrándose",
+   "fr": "monter en rampant",
+   "it": "salire strisciando"
+  }
+ },
+ {
+  "lemma": "heraufrufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to call up",
+   "es": "hacer subir",
+   "fr": "faire monter",
+   "it": "far salire"
+  }
+ },
+ {
+  "lemma": "heraufschicken",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to send up",
+   "es": "hacer subir",
+   "fr": "faire monter",
+   "it": "far salire"
+  }
+ },
+ {
+  "lemma": "herauftreten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to come up",
+   "es": "subir",
+   "fr": "s'avancer",
+   "it": "farsi avanti"
+  }
+ },
+ {
+  "lemma": "herauslassen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to let out",
+   "es": "dejar salir",
+   "fr": "laisser sortir",
+   "it": "lasciare uscire"
+  }
+ },
+ {
+  "lemma": "herauslaufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to flow out",
+   "es": "brotar",
+   "fr": "jaillir",
+   "it": "sgorgare"
+  }
+ },
+ {
+  "lemma": "herausragend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "outstanding",
+   "es": "destacado",
+   "fr": "remarquable",
+   "it": "eccezionale"
+  }
+ },
+ {
+  "lemma": "herausreden",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to make excuses",
+   "es": "excusarse",
+   "fr": "se justifier",
+   "it": "giustificarsi"
+  }
+ },
+ {
+  "lemma": "heraustrennen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to cut out",
+   "es": "arrancar",
+   "fr": "arracher",
+   "it": "strappare"
+  }
+ },
+ {
+  "lemma": "heraustreten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to step out",
+   "es": "salir",
+   "fr": "sortir",
+   "it": "uscire"
+  }
+ },
+ {
+  "lemma": "herbeieilend",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "rushing up",
+   "es": "que acude corriendo",
+   "fr": "accourant",
+   "it": "accorrente"
+  }
+ },
+ {
+  "lemma": "herbeilaufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to come running",
+   "es": "venir corriendo",
+   "fr": "accourir",
+   "it": "accorrere"
+  }
+ },
+ {
+  "lemma": "herbeisehnen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to long for",
+   "es": "anhelar",
+   "fr": "aspirer à",
+   "it": "anelare"
+  }
+ },
+ {
+  "lemma": "herbeiströmen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to stream in",
+   "es": "acudir en masa",
+   "fr": "affluer",
+   "it": "affluire"
+  }
+ },
+ {
+  "lemma": "herbeitragen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to carry here",
+   "es": "traer",
+   "fr": "apporter",
+   "it": "portare"
+  }
+ },
+ {
+  "lemma": "herbeitreiben",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to drive here",
+   "es": "traer",
+   "fr": "amener",
+   "it": "sospingere"
+  }
+ },
+ {
+  "lemma": "herbeiziehen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to drag along",
+   "es": "arrastrar",
+   "fr": "tirer",
+   "it": "tirare"
+  }
+ },
+ {
+  "lemma": "hereinbringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bring in",
+   "es": "introducir",
+   "fr": "introduire",
+   "it": "introdurre"
+  }
+ },
+ {
+  "lemma": "hereinlassen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to let in",
+   "es": "dejar entrar",
+   "fr": "laisser entrer",
+   "it": "lasciare entrare"
+  }
+ },
+ {
+  "lemma": "herfahren",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to ride along",
+   "es": "cabalgar",
+   "fr": "chevaucher",
+   "it": "cavalcare"
+  }
+ },
+ {
+  "lemma": "herführen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bring here",
+   "es": "traer",
+   "fr": "amener",
+   "it": "condurre"
+  }
+ },
+ {
+  "lemma": "hermachen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to set upon",
+   "es": "abalanzarse",
+   "fr": "se jeter sur",
+   "it": "avventarsi"
+  }
+ },
+ {
+  "lemma": "herrufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to proclaim",
+   "es": "proclamar",
+   "fr": "proclamer",
+   "it": "proclamare"
+  }
+ },
+ {
+  "lemma": "herschicken",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to send here",
+   "es": "enviar acá",
+   "fr": "envoyer ici",
+   "it": "mandare qua"
+  }
+ },
+ {
+  "lemma": "herumgehen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to walk around",
+   "es": "andar alrededor",
+   "fr": "se promener",
+   "it": "andare in giro"
+  }
+ },
+ {
+  "lemma": "herumirren",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to wander around",
+   "es": "andar errante",
+   "fr": "errer",
+   "it": "vagare"
+  }
+ },
+ {
+  "lemma": "herumlaufen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to run around",
+   "es": "dar la vuelta",
+   "fr": "faire le tour",
+   "it": "girare intorno"
+  }
+ },
+ {
+  "lemma": "herumspringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to jump around",
+   "es": "saltar",
+   "fr": "sauter partout",
+   "it": "saltellare"
+  }
+ },
+ {
+  "lemma": "herumstehen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to stand around",
+   "es": "estar alrededor",
+   "fr": "se tenir autour",
+   "it": "stare intorno"
+  }
+ },
+ {
+  "lemma": "herunterfallen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to fall down",
+   "es": "caerse",
+   "fr": "tomber",
+   "it": "cadere"
+  }
+ },
+ {
+  "lemma": "herunterlaufen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to run down",
+   "es": "correr",
+   "fr": "couler",
+   "it": "colare"
+  }
+ },
+ {
+  "lemma": "herunternehmen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to take down",
+   "es": "bajar",
+   "fr": "descendre",
+   "it": "tirare giù"
+  }
+ },
+ {
+  "lemma": "herunterstoßen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to push down",
+   "es": "derribar",
+   "fr": "précipiter",
+   "it": "buttare giù"
+  }
+ },
+ {
+  "lemma": "herunterstürzen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to hurl down",
+   "es": "derribar",
+   "fr": "précipiter",
+   "it": "precipitare"
+  }
+ },
+ {
+  "lemma": "hervorfliehen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to flee out",
+   "es": "huir",
+   "fr": "fuir",
+   "it": "fuggire"
+  }
+ },
+ {
+  "lemma": "hervorleuchten",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to shine out",
+   "es": "resplandecer",
+   "fr": "resplendir",
+   "it": "risplendere"
+  }
+ },
+ {
+  "lemma": "hervorquellen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to well up",
+   "es": "manar",
+   "fr": "jaillir",
+   "it": "sgorgare"
+  }
+ },
+ {
+  "lemma": "hervorrufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to provoke",
+   "es": "provocar",
+   "fr": "provoquer",
+   "it": "provocare"
+  }
+ },
+ {
+  "lemma": "hervorspringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to leap out",
+   "es": "saltar",
+   "fr": "bondir",
+   "it": "balzare"
+  }
+ },
+ {
+  "lemma": "hervorsprossen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to sprout forth",
+   "es": "brotar",
+   "fr": "germer",
+   "it": "germogliare"
+  }
+ },
+ {
+  "lemma": "hervorwachsen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to grow out",
+   "es": "surgir",
+   "fr": "pousser",
+   "it": "spuntare"
+  }
+ },
+ {
+  "lemma": "herwerfen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to toss",
+   "es": "zarandear",
+   "fr": "ballotter",
+   "it": "sballottare"
+  }
+ },
+ {
+  "lemma": "herzukommen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to come forward",
+   "es": "acercarse",
+   "fr": "s'approcher",
+   "it": "avvicinarsi"
+  }
+ },
+ {
+  "lemma": "herüberkommen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to come over",
+   "es": "venir acá",
+   "fr": "venir de ce côté",
+   "it": "venire di qua"
+  }
+ },
+ {
+  "lemma": "hethitisch",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "Hittite",
+   "es": "heteo",
+   "fr": "hittite",
+   "it": "ittita"
+  }
+ },
+ {
+  "lemma": "heuchlerisch",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "hypocritical",
+   "es": "hipócrita",
+   "fr": "hypocrite",
+   "it": "ipocrita"
+  }
+ },
+ {
+  "lemma": "heutzutage",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "nowadays",
+   "es": "hoy en día",
+   "fr": "aujourd'hui",
+   "it": "oggigiorno"
+  }
+ },
+ {
+  "lemma": "hierhin",
+  "level": "B1",
+  "pos": "adv",
+  "base": {
+   "en": "here",
+   "es": "acá",
+   "fr": "par ici",
+   "it": "qua"
+  }
+ },
+ {
+  "lemma": "hierin",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "in this",
+   "es": "en esto",
+   "fr": "en cela",
+   "it": "in questo"
+  }
+ },
+ {
+  "lemma": "hiermit",
+  "level": "B2",
+  "pos": "adv",
+  "base": {
+   "en": "hereby",
+   "es": "por la presente",
+   "fr": "par la présente",
+   "it": "con la presente"
+  }
+ },
+ {
+  "lemma": "hilfsbereit",
+  "level": "B1",
+  "pos": "adj",
+  "base": {
+   "en": "helpful",
+   "es": "servicial",
+   "fr": "serviable",
+   "it": "servizievole"
+  }
+ },
+ {
+  "lemma": "hinabbringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bring down",
+   "es": "bajar",
+   "fr": "descendre",
+   "it": "portare giù"
+  }
+ },
+ {
+  "lemma": "hinabfliehen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to flee down",
+   "es": "huir cuesta abajo",
+   "fr": "fuir en descendant",
+   "it": "fuggire giù"
+  }
+ },
+ {
+  "lemma": "hinabreiten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to ride down",
+   "es": "bajar cabalgando",
+   "fr": "descendre à cheval",
+   "it": "scendere a cavallo"
+  }
+ },
+ {
+  "lemma": "hinaufbringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to bring up",
+   "es": "subir",
+   "fr": "monter",
+   "it": "portare su"
+  }
+ },
+ {
+  "lemma": "hinauflaufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to run up",
+   "es": "subir corriendo",
+   "fr": "monter en courant",
+   "it": "salire di corsa"
+  }
+ },
+ {
+  "lemma": "hinaufragen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to tower up",
+   "es": "sobresalir",
+   "fr": "dépasser",
+   "it": "sporgere"
+  }
+ },
+ {
+  "lemma": "hinausfliehen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to flee outside",
+   "es": "huir afuera",
+   "fr": "s'enfuir dehors",
+   "it": "fuggire fuori"
+  }
+ },
+ {
+  "lemma": "hinausgezögert",
+  "level": "C1",
+  "pos": "adj",
+  "base": {
+   "en": "deferred",
+   "es": "aplazado",
+   "fr": "différé",
+   "it": "differito"
+  }
+ },
+ {
+  "lemma": "hinauskommen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to come out",
+   "es": "salir",
+   "fr": "sortir",
+   "it": "uscire"
+  }
+ },
+ {
+  "lemma": "hinauslassen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to let out",
+   "es": "dejar salir",
+   "fr": "laisser sortir",
+   "it": "lasciare uscire"
+  }
+ },
+ {
+  "lemma": "hinausnehmen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to take out",
+   "es": "sacar",
+   "fr": "emporter",
+   "it": "portare fuori"
+  }
+ },
+ {
+  "lemma": "hinausragen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to project out",
+   "es": "sobresalir",
+   "fr": "dépasser",
+   "it": "sporgere"
+  }
+ },
+ {
+  "lemma": "hinausreichen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to extend beyond",
+   "es": "extenderse",
+   "fr": "s'étendre",
+   "it": "estendersi"
+  }
+ },
+ {
+  "lemma": "hinausschaffen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to carry out",
+   "es": "llevar fuera",
+   "fr": "emporter dehors",
+   "it": "portare fuori"
+  }
+ },
+ {
+  "lemma": "hinausschicken",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to send out",
+   "es": "echar fuera",
+   "fr": "envoyer dehors",
+   "it": "mandare fuori"
+  }
+ },
+ {
+  "lemma": "hinausschieben",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to extend",
+   "es": "extender",
+   "fr": "repousser",
+   "it": "estendere"
+  }
+ },
+ {
+  "lemma": "hinausstrecken",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to stretch out",
+   "es": "extender",
+   "fr": "étendre",
+   "it": "distendere"
+  }
+ },
+ {
+  "lemma": "hinaustreiben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to drive out",
+   "es": "echar fuera",
+   "fr": "chasser dehors",
+   "it": "cacciare fuori"
+  }
+ },
+ {
+  "lemma": "hinaustreten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to step out",
+   "es": "salir",
+   "fr": "s'avancer",
+   "it": "uscire"
+  }
+ },
+ {
+  "lemma": "hinbringen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to take there",
+   "es": "llevar",
+   "fr": "amener",
+   "it": "condurre"
+  }
+ },
+ {
+  "lemma": "hindeuten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to point to",
+   "es": "señalar",
+   "fr": "indiquer",
+   "it": "indicare"
+  }
+ },
+ {
+  "lemma": "hineinarbeiten",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to work in",
+   "es": "entretejer",
+   "fr": "tisser dedans",
+   "it": "intessere"
+  }
+ },
+ {
+  "lemma": "hineinfahren",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to enter",
+   "es": "entrar",
+   "fr": "entrer",
+   "it": "entrare"
+  }
+ },
+ {
+  "lemma": "hineinfinden",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to find a way in",
+   "es": "encontrar la entrada",
+   "fr": "trouver l'entrée",
+   "it": "trovare l'ingresso"
+  }
+ },
+ {
+  "lemma": "hineinführen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to lead in",
+   "es": "hacer entrar",
+   "fr": "faire entrer",
+   "it": "far entrare"
+  }
+ },
+ {
+  "lemma": "hineingeben",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to pour in",
+   "es": "echar dentro",
+   "fr": "verser dedans",
+   "it": "versare dentro"
+  }
+ },
+ {
+  "lemma": "hineinklettern",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to climb in",
+   "es": "trepar dentro",
+   "fr": "grimper dedans",
+   "it": "arrampicarsi dentro"
+  }
+ },
+ {
+  "lemma": "hineinlaufen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to plunge into",
+   "es": "lanzarse",
+   "fr": "se précipiter",
+   "it": "precipitarsi"
+  }
+ },
+ {
+  "lemma": "hineinpassen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to fit in",
+   "es": "caber",
+   "fr": "s'insérer",
+   "it": "entrare"
+  }
+ },
+ {
+  "lemma": "hineinstecken",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to put in",
+   "es": "meter",
+   "fr": "insérer",
+   "it": "inserire"
+  }
+ },
+ {
+  "lemma": "hineinsteigen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to step in",
+   "es": "entrar",
+   "fr": "entrer",
+   "it": "entrare"
+  }
+ },
+ {
+  "lemma": "hineinstellen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to put in",
+   "es": "poner dentro",
+   "fr": "mettre dedans",
+   "it": "mettere dentro"
+  }
+ },
+ {
+  "lemma": "hineinstoßen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to thrust in",
+   "es": "empujar dentro",
+   "fr": "pousser dedans",
+   "it": "spingere dentro"
+  }
+ },
+ {
+  "lemma": "hineinstürmen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to storm in",
+   "es": "irrumpir",
+   "fr": "se précipiter",
+   "it": "irrompere"
+  }
+ },
+ {
+  "lemma": "hineinwachsen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to grow into",
+   "es": "crecer en",
+   "fr": "grandir en",
+   "it": "crescere in"
+  }
+ },
+ {
+  "lemma": "hinfallen",
+  "level": "A2",
+  "pos": "verb",
+  "base": {
+   "en": "to fall down",
+   "es": "caerse",
+   "fr": "tomber",
+   "it": "cadere"
+  }
+ },
+ {
+  "lemma": "hinfliehen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to flee there",
+   "es": "refugiarse",
+   "fr": "se réfugier",
+   "it": "rifugiarsi"
+  }
+ },
+ {
+  "lemma": "hinfließen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to flow there",
+   "es": "fluir",
+   "fr": "couler",
+   "it": "scorrere"
+  }
+ },
+ {
+  "lemma": "hinhalten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to hold out",
+   "es": "ofrecer",
+   "fr": "tendre",
+   "it": "porgere"
+  }
+ },
+ {
+  "lemma": "hinhören",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to listen",
+   "es": "prestar atención",
+   "fr": "prêter l'oreille",
+   "it": "ascoltare"
+  }
+ },
+ {
+  "lemma": "hinkend",
+  "level": "B2",
+  "pos": "adj",
+  "base": {
+   "en": "lame",
+   "es": "cojo",
+   "fr": "boiteux",
+   "it": "zoppo"
+  }
+ },
+ {
+  "lemma": "hinnehmen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to accept",
+   "es": "aceptar",
+   "fr": "accepter",
+   "it": "accettare"
+  }
+ },
+ {
+  "lemma": "hinreißen",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to carry away",
+   "es": "arrastrar",
+   "fr": "emporter",
+   "it": "trascinare"
+  }
+ },
+ {
+  "lemma": "hinschauen",
+  "level": "B1",
+  "pos": "verb",
+  "base": {
+   "en": "to look",
+   "es": "mirar",
+   "fr": "regarder",
+   "it": "guardare"
+  }
+ },
+ {
+  "lemma": "hinschicken",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to send there",
+   "es": "mandar allá",
+   "fr": "envoyer là-bas",
+   "it": "mandare là"
+  }
+ },
+ {
+  "lemma": "hinschleppen",
+  "level": "C1",
+  "pos": "verb",
+  "base": {
+   "en": "to drag along",
+   "es": "arrastrarse",
+   "fr": "se traîner",
+   "it": "trascinarsi"
+  }
+ },
+ {
+  "lemma": "hinschütten",
+  "level": "B2",
+  "pos": "verb",
+  "base": {
+   "en": "to dump",
+   "es": "verter",
+   "fr": "déverser",
+   "it": "scaricare"
+  }
+ }
+]
