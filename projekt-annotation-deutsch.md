@@ -4193,8 +4193,30 @@ Das bringt 3,2 MB.
 - `zetteln` ist ein Lemmatisierungsfehler: der Satz zeigt „zettelt … an",
   das Lemma müsste `anzetteln` heissen.
 
-**Ein Fund im Bibeltext selbst:** Psalm 131,2 sagt zweimal „wie ein gestilltes
-Kind", während alle vier Glossen „weaned/destetado/sevré/svezzato" tragen.
-Luther 1912 hat „ein entwöhntes Kind", und das Hebräische meint dasselbe;
-„gestillt" heisst heute das Gegenteil und nimmt dem Vers sein Bild. Der
-massgebliche Text liegt in `../bibles-translations/` und ist hier nicht geändert.
+### Textkorrekturen aus den Befunden (07.09.2026)
+
+**Psalm 131,2** sagte zweimal „wie ein gestilltes Kind", während alle vier
+Glossen „weaned/destetado/sevré/svezzato" trugen. Luther 1912 hat „ein
+entwöhntes Kind", und das Hebräische meint dasselbe; „gestillt" heisst heute das
+Gegenteil und dreht das Bild des Verses um. Text korrigiert (hier und im
+massgeblichen `../bibles-translations`), Annotation auf das Bestandslemma
+`entwöhnen` gezogen — dieselbe Form steht schon in 1. Mose 21,8, 1. Samuel 1,22f.
+und Jesaja 11,8.
+
+**`zetteln`** war ein Lemmatisierungsfehler in Amos 7,10: der Satz lautet „Amos
+zettelt … eine Verschwörung an". Die Satzklammer war korrekt als `anzetteln`
+annotiert, der Einzelwort-Eintrag daneben trug aber `zetteln` — ein Wort, das es
+so nicht gibt. Jetzt trägt auch er `anzetteln`.
+
+**Vier Namen in mehreren Schreibungen** vereinheitlicht, nach der in
+`NAMENSANGLEICHUNG_11-39.md` begonnenen Linie (moderne Transkription, th → t):
+`Beeroth` → `Beerot` (4×), `Minnith` → `Minnit`, `Thorgama`/`Thogarma` →
+`Togarma`, `Elisua` → `Elischua`. Alle nur im Alten Testament belegt.
+
+**Was dabei aufgefallen ist und bewusst offen bleibt:** Der Abgleich über die
+englische Glosse findet **293 Namen mit mehreren deutschen Schreibungen**
+(607 Lemmata). Ein pauschales Zusammenführen wäre falsch — ein Teil davon ist
+Absicht: `Saul`/`Saulus`, `Isai`/`Jesse`, `Sacharja`/`Zacharias`, `Hiob`/`Job`
+trennen zwischen Altem und Neuem Testament, `Ammoniter`/`Ammoniterin` zwischen
+den Geschlechtern. Das braucht dieselbe Durchsicht wie die Bücher 11–39: erst
+eine Vorschlagsliste, dann die Änderung.

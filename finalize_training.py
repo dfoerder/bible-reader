@@ -229,7 +229,10 @@ def main():
     # sagt (Deutsch), braucht der Laufzeit-Filter der Kapitelübungen eine echte Liste
     # statt der Schreibungs-Heuristik. Erst vollständig, wenn ALLE Lemmata
     # angereichert sind — vorher nicht in der Registry verdrahten.
-    propn = sorted(l for l, e in enrich.items() if e.get("pos") == "propn")
+    # Nur Lemmata, die im Text auch wirklich vorkommen — die Anreicherung behält
+    # Einträge zurückgezogener Schreibweisen, die sonst als Karteileichen mitliefen.
+    propn = sorted(l for l, e in enrich.items()
+                   if e.get("pos") == "propn" and l in raw)
     pn_path = os.path.join(cfg["bible_dir"], "train", "propnames.json")
     json.dump(propn, open(pn_path, "w", encoding="utf-8"), ensure_ascii=False,
               separators=(",", ":"))
