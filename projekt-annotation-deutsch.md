@@ -4213,10 +4213,13 @@ so nicht gibt. Jetzt trägt auch er `anzetteln`.
 `Beeroth` → `Beerot` (4×), `Minnith` → `Minnit`, `Thorgama`/`Thogarma` →
 `Togarma`, `Elisua` → `Elischua`. Alle nur im Alten Testament belegt.
 
-**Was dabei aufgefallen ist und bewusst offen bleibt:** Der Abgleich über die
-englische Glosse findet **293 Namen mit mehreren deutschen Schreibungen**
-(607 Lemmata). Ein pauschales Zusammenführen wäre falsch — ein Teil davon ist
-Absicht: `Saul`/`Saulus`, `Isai`/`Jesse`, `Sacharja`/`Zacharias`, `Hiob`/`Job`
-trennen zwischen Altem und Neuem Testament, `Ammoniter`/`Ammoniterin` zwischen
-den Geschlechtern. Das braucht dieselbe Durchsicht wie die Bücher 11–39: erst
-eine Vorschlagsliste, dann die Änderung.
+**Uneinheitliche Namensschreibungen bleiben stehen — entschieden am
+07.09.2026.** Der Abgleich über die englische Glosse findet **293 Namen mit
+mehreren deutschen Schreibungen** (607 Lemmata). Ein pauschales Zusammenführen
+wäre ohnehin falsch, weil ein Teil davon Absicht ist: `Saul`/`Saulus`,
+`Isai`/`Jesse`, `Sacharja`/`Zacharias`, `Hiob`/`Job` trennen zwischen Altem und
+Neuem Testament, `Ammoniter`/`Ammoniterin` zwischen den Geschlechtern. Der Rest
+kostet mehr Durchsicht, als er bringt: die Dubletten stehen im Wortpool weit
+hinten (Einmal-Vorkommen), und im Lesetext ist die Schreibung ohnehin die des
+Verses. Die vier oben korrigierten Fälle bleiben die Ausnahme; **kein Anlass,
+das erneut als Fehler zu melden**.
