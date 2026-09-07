@@ -165,7 +165,7 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.6b';
+const APP_VERSION = '1.11.7b';
 const APP_DATE = '07.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -247,6 +247,10 @@ const BIBLES = {
     annoDir: 'bibles/deu/l1912mod/anno/', annoSuffix: '_l1912mod_multi.json',
     annoGlossLangs: ['en','es','fr','it'],
     wordsPath: 'bibles/deu/l1912mod/train/words.json', examplesPath: 'bibles/deu/l1912mod/train/examples.json',
+    // Eigennamen als Liste statt über die Schreibung — im Deutschen ist jedes
+    // Substantiv gross. keepnames hält die wichtigen Namen in den Kapitelübungen.
+    propNamesPath: 'bibles/deu/l1912mod/train/propnames.json',
+    keepNamesPath: 'bibles/deu/l1912mod/train/keepnames.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'eng-web',
     ttsLang: 'de-DE', ttsLangPrefix: 'de',
@@ -1539,6 +1543,10 @@ let FREQ_POOL=[];
 // übrigen großgeschriebenen Lemmata (Genealogie-/Nebennamen) werden gefiltert.
 // Leer = kein Filter (Editionen ohne Eigennamen-Annotation, z.B. eng-web).
 let KEEP_NAMES=new Set();
+// Echte Eigennamen-Liste der Edition (aus der Anreicherung, pos==propn). Nötig in
+// Sprachen, in denen Grossschreibung nichts über Eigennamen sagt — im Deutschen ist
+// jedes Substantiv gross. Leer = Erkennung läuft über die Schreibung.
+let PROP_NAMES=new Set();
 // Rohdaten von words.json. Editionen mit mehreren Glossensprachen führen je Wort
 // ein Sprach-Dict (`tr`/`trForm`); daraus werden die einsprachigen Felder de/deForm
 // für die aktive Glossensprache gefüllt — alle Übungen lesen weiterhin nur de/deForm.
@@ -2725,6 +2733,7 @@ async function loadData(){
     // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten.
     // Nur Hauptbibeln mit Wortpool (hasTraining); words.json ist EN-nativ (Felder en/de/deForm).
     try{if(INSTANCE.keepNamesPath){const kr=await fetch(INSTANCE.keepNamesPath+CB);if(kr.ok)KEEP_NAMES=new Set(await kr.json());}}catch(e){}
+    try{if(INSTANCE.propNamesPath){const pr=await fetch(INSTANCE.propNamesPath+CB);if(pr.ok)PROP_NAMES=new Set(await pr.json());}}catch(e){}
     const wr=INSTANCE.wordsPath?await fetch(INSTANCE.wordsPath+CB):null;
     if(wr&&wr.ok){
       const words=await wr.json();
@@ -2825,7 +2834,10 @@ function annoStep(level,lemma){
 }
 // Eigennamen-Erkennung: großgeschriebenes Lemma (Grundformen gewöhnlicher Wörter
 // sind kleingeschrieben; Eigennamen wie „David", „Jerusalén" beginnen groß).
+// Bringt die Edition eine Eigennamen-Liste mit, entscheidet die — im Deutschen ist
+// die Schreibung wertlos, dort ist jedes Substantiv groß.
 function isProperNounLemma(lemma){
+  if(PROP_NAMES.size)return PROP_NAMES.has(lemma);
   const c = lemma && lemma[0];
   return !!c && c === c.toUpperCase() && c !== c.toLowerCase();
 }
@@ -2842,7 +2854,7 @@ function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedW
       const isPhrase = annoIsMulti(a);
       // Eigennamen (großgeschriebenes Lemma) aus den Übungen nehmen, außer sie
       // stehen in KEEP_NAMES (wichtige Personen/Orte). KEEP_NAMES leer → kein Filter.
-      if (KEEP_NAMES.size && isProperNounLemma(a.lemma) && !KEEP_NAMES.has(a.lemma)) return;
+      if ((KEEP_NAMES.size||PROP_NAMES.size) && isProperNounLemma(a.lemma) && !KEEP_NAMES.has(a.lemma)) return;
       if ((annoStep(a.level,a.lemma) > userStep || (tappedWords && tappedWords.has(a.lemma))) && !seen.has(a.lemma)) {
         seen.add(a.lemma);
         result.push(a);
