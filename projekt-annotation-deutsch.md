@@ -4223,3 +4223,25 @@ kostet mehr Durchsicht, als er bringt: die Dubletten stehen im Wortpool weit
 hinten (Einmal-Vorkommen), und im Lesetext ist die Schreibung ohnehin die des
 Verses. Die vier oben korrigierten Fälle bleiben die Ausnahme; **kein Anlass,
 das erneut als Fehler zu melden**.
+
+### `herrufen` — Glosse auf die Grundbedeutung gezogen (10.09.2026)
+
+Beim Testen fiel auf, dass das Quiz für **`herrufen`** drei Übersetzungen
+anbietet, von denen keine passt: die richtige Antwort lautete „to proclaim".
+Das ist die freie Kontextübersetzung von Esther 6,9.11 („und rief vor ihm her:
+So wird man tun dem Mann …") — als Wörterbuch-Grundform des Lemmas aber falsch,
+denn `herrufen` heisst *rufen*, nicht *verkündigen*. Ein deutscher Muttersprachler
+erkennt in keiner der drei angebotenen Karten sein Wort wieder.
+
+Korrigiert in allen drei Ebenen — Anreicherungspaket `out_052.json` (Quelle der
+Grundform), Annotation `17_l1912mod_multi.json` (beide Vorkommen) und dem
+abgeleiteten `train/words.json`:
+
+| | vorher | jetzt |
+|---|---|---|
+| Grundform | to proclaim · proclamar · proclamer · proclamare | to call out · gritar · crier · gridare |
+| Esther 6,9 | proclaims · proclame | calls out · grite |
+| Esther 6,11 | proclaimed · proclamó | called out · gritó |
+
+Die Lemmatisierung selbst bleibt: `herrufen` ist als trennbares Verb mit
+Satzklammer („rief … her") richtig annotiert.
