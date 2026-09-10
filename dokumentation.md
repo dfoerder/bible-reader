@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
-- **Aktuelle Version:** 1.11.8b (10.09.2026)
+- **Aktuelle Version:** 1.11.9b (10.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
 - **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung

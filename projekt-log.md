@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.9b (10.09.2026)
+
+- Französische Glossen: 288 Verbesserungen — ceux/comme/ne-plus vereinheitlicht, Reflexiv-Mehrwörter ergänzt, Artikel- und Kongruenzfehler behoben
+
 ## v1.11.8b (10.09.2026)
 
 - Französische Bibel: Neues Testament mit Wort-für-Wort-Glossen in Deutsch, Englisch, Spanisch und Italienisch (alle 27 Bücher)
