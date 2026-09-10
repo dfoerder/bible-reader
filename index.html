@@ -222,8 +222,13 @@ const BIBLES = {
   'fra-lsg1910mod': {
     id: 'fra-lsg1910mod', label: 'Français (LSG 1910) – Actualisé par IA', langCode: 'fr', lsPrefix: 'fr:',
     bibleDir: 'bibles/fra/lsg1910mod/', bibleSuffix: '_lsg1910mod.json', credit: 'Louis Segond 1910',
-    annoDir: null, annoSuffix: null, wordsPath: null, examplesPath: null,
-    hasAnno: false, hasTraining: false,
+    annoDir: 'bibles/fra/lsg1910mod/anno/', annoSuffix: '_lsg1910mod_multi.json',
+    annoGlossLangs: ['de','en','es','it'],
+    wordsPath: null, examplesPath: null,
+    // Annotationen ja, Trainingsdaten nein: das Neue Testament ist glossiert
+    // (27 Buecher), words.json/examples.json gibt es fuer Franzoesisch noch
+    // nicht. Ohne hasLevelTest laeuft der Einstieg direkt auf 'nav'.
+    hasAnno: true, hasTraining: false,
     defaultHilfs: 'eng-web',
     ttsLang: 'fr-FR', ttsLangPrefix: 'fr',
     ttsVoiceNames: ['Thomas','Amelie','Aurelie','Audrey'],
