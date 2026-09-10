@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.8b (10.09.2026)
+
+- Französische Bibel: Neues Testament mit Wort-für-Wort-Glossen in Deutsch, Englisch, Spanisch und Italienisch (alle 27 Bücher)
+
 ## v1.11.7b (07.09.2026)
 
 - Deutsche Übungen vollständig: 9973 Wörter, Eigennamen-Filter für Kapitelübungen; Psalm 131,2 und vier Namensschreibungen korrigiert
