@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
-- **Aktuelle Version:** 1.11.9b (10.09.2026)
+- **Aktuelle Version:** 1.11.10b (10.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
 - **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -26,7 +26,7 @@
 - Wahl zwischen 2 deutschen Übersetzungen: Luther 1912 (modernisiert), Wörtlich (WEB→DE)
 - Eigennamen mit deutschen Entsprechungen annotiert (Christ→Christus, Moses→Mose, Egypt→Ägypten)
 - Automatische Lesezeichen (merkt sich Position pro Buch)
-- Volltextsuche über alle 66 Bücher
+- Volltextsuche mit wählbarem **Suchbereich** unter dem Suchfeld: Kapitel · Buch · AT · NT · AT+NT (Voreinstellung); die Wahl bleibt gespeichert (`bible-search-scope`). Ein enger Bereich lädt nur die betroffenen Bücher nach
 - **Kopfleiste im Kapitel:** links Start und Vorlesen, in der Mitte Kapitel zurück/vor mit dem antippbaren Kapiteltitel, rechts die Suche. Ein Tipp auf den Titel klappt das Inhaltsverzeichnis des Buches auf; solange es offen ist, sind die Reiter „Training"/„Einstellungen" darunter ausgeblendet
 
 ### Multi-Wort-Ausdrücke
@@ -35,6 +35,7 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 
 - **Erster Klick** auf ein Wort des Ausdrucks: zeigt die Phrase-Übersetzung (z.B. „give birth to" → „gebären")
 - **Zweiter Klick**: zeigt die wörtliche Einzelwort-Übersetzung (z.B. „give" → „geben", „birth" → „Geburt")
+- **Satzklammer:** Bei nicht zusammenhängenden Ausdrücken (`parts`, im Deutschen die Regel: „rief … her", „ließ … bringen") sind die Teile gepunktet unterstrichen und die Wörter dazwischen mit einer **gestrichelten** Linie verbunden (`S.phraseBridge`), damit das Auge die Klammer verfolgen kann
 
 ### Text-to-Speech (TTS)
 
@@ -42,14 +43,14 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 - Einstellbare Geschwindigkeit (0.2×–1.0×); die Voreinstellungen stehen als `SPEED_PRESETS` in `index.html` (🐌 0.2 · Langsam 0.3 · Normal 0.6 · Schnell 0.85 · Sehr schnell 1.0) und werden an allen drei Stellen daraus gespeist
 - Einzelvers-Vorleseoption
 - Übungsmodus für unbekannte Wörter
-- **Audioleiste unten:** Während des Vorlesens klebt am unteren Bildschirmrand eine eigene Leiste (`#audio-bar`, `position:sticky`) mit Vers zurück/vor (samt Versnummer), Pause und Stopp sowie der Tempo-Einstellung — dort liegen die Knöpfe in Daumennähe, ohne dass die Hand über dem Text steht. Die Kopfleiste bleibt dadurch im Audiobetrieb genauso flach wie sonst.
+- **Audioleiste unten:** Während des Vorlesens klebt am unteren Bildschirmrand eine eigene Leiste (`#audio-bar`, `position:sticky`) mit Vers zurück/vor (samt Versnummer), Pause sowie der Tempo-Einstellung — **Stopp steht nur oben** in der Kapitelleiste, damit es nicht doppelt erscheint — dort liegen die Knöpfe in Daumennähe, ohne dass die Hand über dem Text steht. Die Kopfleiste bleibt dadurch im Audiobetrieb genauso flach wie sonst.
 - **Pause:** hält die laufende Äußerung an und setzt genau dort fort (`speechSynthesis.pause()`/`resume()`); die Warteschlange bleibt stehen, die Leiste sichtbar. Jede neue Ausgabe (Kapitelstart, Verssprung, Tempowechsel) hebt eine Pause selbsttätig auf.
 - **Mitlaufender Text:** Der Vers wird unterhalb der Kopfleiste eingeblendet, die Wortmarke wird zusätzlich nachgeführt, sobald sie den unteren Rand erreicht — Unterkante ist die Audioleiste bzw., wenn keine läuft, die Safe-Area (Home-Indikator). Code: `readingViewBottom()`, `scrollVerseIntoView()` und der Nachführ-Effekt in `App`.
 - **Kapitelwechsel im Audiobetrieb:** Die Pfeile in der Kopfleiste brechen das Vorlesen nicht ab — kurze Pause, dann liest das neue Kapitel weiter (`autoPlayRef`). Genauso geht es am **Kapitelende** von selbst weiter (`tts.onChapterEnd`, in `App` gesetzt); erst am Ende der Bibel hört es auf.
 
 ### Schwierige Wörter (kapitelweise)
 
-- **Wörter anschauen:** Alle Wörter über dem Lese-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0. Das Lese-Level ist ein 18-Stufen-Wert (`userStep` 0–17); ein Wort gilt als „über Level", wenn seine Sublevel-Stufe (aus `words.json` level+sub; für Wörter ohne Pool-Eintrag Fallback auf das obere Band-Ende) größer als `userStep` ist. Dadurch verschwinden die schwierigen Wörter nicht mehr schlagartig beim Eintritt in ein grobes CEFR-Band, sondern feinstufig.
+- **Wörter anschauen:** Alle Wörter über dem Lese-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0. Das Lese-Level ist ein 18-Stufen-Wert (`userStep` 0–17); ein Wort gilt als „über Level", wenn seine Sublevel-Stufe (aus `words.json` level+sub; für Wörter ohne Pool-Eintrag Fallback auf das obere Band-Ende) größer als `userStep` ist. Dadurch verschwinden die schwierigen Wörter nicht mehr schlagartig beim Eintritt in ein grobes CEFR-Band, sondern feinstufig. Markiert man dabei durchgehend „bekannt" (≥ 85 % von mindestens 20 Wörtern), schlägt die App **einmal je Durchgang** vor, das Lese-Level anzuheben; nach Ja oder Nein kommt die Frage im selben Durchgang nicht wieder (`levelSuggestDone`, zurückgesetzt beim erneuten Aufklappen).
 - **Wörter üben:** Ein Übungsblock mit zwei umschaltbaren Übungsarten (Umschalter im Übungs-Header, geteilt mit dem allgemeinen Training via `bible-ex-mode`):
   - **Quiz:** Multiple-Choice, englisches Wort → deutsche Übersetzung.
   - **Im Kontext:** Lückentext, live aus den Versen des aktuellen Kapitels generiert — Position des Wortes im Vers, enthaltender Satz (oder ganzer Vers, per ⚙ umstellbar), Zielwort hervorgehoben; lange Sätze gekürzt, bei direkter Rede die Einleitung übersprungen, Phrasen als Ganzes.
@@ -110,10 +111,12 @@ Eigennamen sind aus den Übungen ausgenommen, bis auf die **wichtigsten mit Lern
 - Review als „Level 18": Auf der obersten Stufe (C2.3) gibt es keinen höheren Step. Wird dort eine Einheit **aufstiegswürdig** absolviert (>80% = normalerweise +1/+2), springt der Ergebnis-Screen direkt in die Review über („🎉 Oberste Stufe gemeistert!", Weiter-Button startet die erste Review-Einheit ab B2.2) — man muss also nicht erst ganz C2.3 durchüben. Bei Halten (70–80%) oder Abstieg (<70%) bleibt/sinkt das Level normal
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
 - Intervall-Guard zentral in `trainWord`: Erhöhen nur nach Ablauf des Stufen-Intervalls (24h / 2 Tage / 7 Tage), Erniedrigen immer erlaubt — gilt für alle Übungspfade inkl. Kapitel-Training
-- Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter dem Trainings-Button (passend zur gewählten Übungsart); dieselbe Zahl (gemeinsame Funktion `computeCounts`) erscheint auch auf dem Ergebnis-Screen nach jeder Einheit („Noch X Wörter auf dieser Stufe zu üben", bezogen auf die — nach evtl. Levelanpassung — aktuelle Stufe; bei 0 → „Alle Wörter dieser Stufe geübt!"). Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
+- Anzeige: „X Wörter zum Üben" + „Y Wiederholungen fällig" unter dem Trainings-Button (passend zur gewählten Übungsart); dieselbe Zahl (gemeinsame Funktion `computeCounts`) erscheint auch auf dem Ergebnis-Screen nach jeder Einheit („Noch X Wörter auf dieser Stufe zu üben", bezogen auf die — nach evtl. Levelanpassung — aktuelle Stufe; bei 0 → „Alle Wörter dieser Stufe geübt!"). Darunter steht, wie viele **Einheiten** das noch sind (`unitsLeftText`, Restwörter ÷ `UNIT_WORDS`=15, gerundet, „etwa"). Fortschritts-Panel schlüsselt Bekannt nach Stufen auf (gelernt/gefestigt/sicher)
+- **Stufenanzeige in jeder Übung:** unter den Antwortknöpfen steht durchgehend, auf welcher Stufe man gerade übt (`stepFooter` — in der Review die Review-Stufe, im Fokus „Häufigkeit" die Stufennummer, sonst das CEFR-Sublevel)
 - Abschluss (oberste Stufe C2.3 erreicht): **Review-Phase** über die restlichen ungeübten Wörter, geordnet nach **CEFR-Nützlichkeit** (nicht nach Häufigkeit) — Reihenfolge als Zickzack-Spirale um B2.2 (die nützlichsten Wörter zuerst): `B2.2, B2.3, B2.1, C1.1, B1.3, C1.2, B1.2, C1.3, B1.1, C2.1, A2.3, C2.2, A2.2, C2.3, A2.1, A1.3, A1.2, A1.1` (`REVIEW_ORDER`/`reviewNextStep`). Jedes CEFR-Sublevel wird in 15er-Einheiten vollständig durchgearbeitet, bevor zum nächsten gewechselt wird; gilt für beide Fokus-Modi, Anzeige als CEFR-Label. Fällige Wiederholungen (Slot A) laufen auch in der Review mit (wie im normalen Training), damit während der langen Review-Phase Gelerntes nicht verblasst. Sobald alle Wörter familiarity ≥ 1 haben → freqAllDone
   - **Nur heute offene Wörter je Sublevel:** ein Sublevel gilt als „für heute erledigt", wenn nur noch fam=0-Wörter übrig sind, die heute schon geübt wurden — der Intervall-Guard lässt sie am selben Tag ohnehin nicht auf fam≥1 steigen (sonst drehte sich dasselbe Wort endlos, `reviewCount`/`currentUnexercised` filtern fam=-1 ODER fam=0-mit-Frist-abgelaufen). Sind alle heutigen Wörter durch, aber noch nicht alles fam≥1 → Meldung „Für heute geschafft" (`freqDoneToday`), morgen geht es weiter
   - **Review-Phase ist persistent** (`bible-review-step` in localStorage, gesetzt/gelöscht via `setReviewStep`): sie überlebt „Beenden" und App-Neustart. Solange die Review läuft, setzt der Trainings-Button die Review fort (statt eine normale C2.3-Einheit zu starten, die per Levelanpassung wieder unter das Top-Level absenken könnte). Der Marker wird erst gelöscht, wenn alles fam≥1 ist (freqAllDone)
+  - **Rückfrage nur beim Stufenwechsel:** Nach einer Review-Einheit erscheint der normale Ergebnis-Screen (Stufe, Restwörter, Resteinheiten, Weiter/Beenden) — der Weiter-Knopf startet direkt die nächste Einheit derselben Stufe (`reviewNext`). Die Frage „Es gibt noch N ungeübte Wörter auf Level X. Möchtest du weitermachen?" (`freqComplete`) kommt erst, wenn die Stufe erschöpft ist und die Review auf ein **anderes** Sublevel wechselt — nicht mehr hinter jeder Einheit
   - **Review folgt der gewählten Übungsart** (`startReview`): im Quiz-Modus normale Vokabel-Einheit, im Kontext-Modus dieselbe Review-Wortauswahl als Lückentext dargestellt (Wörter ohne Kontextübung bleiben Quiz — gemischte Einheit). Die Auswahl bleibt identisch zur Quiz-Auswahl, damit `reviewCount` und tatsächliche Einheit übereinstimmen (sonst Endlosschleife). So bleibt „Im Kontext" auch über Einheiten-Grenzen hinweg erhalten
 
 ### Einstufungstest
@@ -297,6 +300,7 @@ Datei (die App leitet sie ab), und `trForm` entfällt, wenn es mit `tr`
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
 | `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel + Häufigkeitsstufe (1–18) |
 | `bible-stats-visible` | Sichtbare Statistik-Abschnitte |
+| `bible-search-scope` | Suchbereich der Volltextsuche ('chapter'/'book'/'ot'/'nt'/'all') |
 | `unk-{lang}-{buch}-{kapitel}` | Unbekannte Wörter pro Kapitel |
 | `tts-speed` | TTS-Geschwindigkeit |
 | `bible-bugs` / `bible-bugmode` / `bible-bug-endpoint` | Bug-Melder: gemeldete Bugs, Ein/Aus-Schalter, Empfänger-Adresse. Ohne LS-Präfix, damit die Liste bibelübergreifend ist; der komplette Reset lässt diese drei Schlüssel als einzige stehen. Siehe `CLAUDE.md` → „Bug-Melder". |

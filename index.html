@@ -165,7 +165,7 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.9b';
+const APP_VERSION = '1.11.10b';
 const APP_DATE = '10.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -571,6 +571,8 @@ const I18N={
   stillToPractice:{de:'Noch {n} Wörter auf dieser Stufe zu üben',en:'{n} more words to practice at this level'},
   stillToPractice1:{de:'Noch 1 Wort auf dieser Stufe zu üben',en:'1 more word to practice at this level'},
   stepAllPracticed:{de:'Alle Wörter dieser Stufe geübt!',en:'All words at this level practiced!'},
+  unitsLeft:{de:'Noch etwa {n} Einheiten auf dieser Stufe',en:'About {n} more units at this level'},
+  unitsLeft1:{de:'Noch etwa 1 Einheit auf dieser Stufe',en:'About 1 more unit at this level'},
   topLevelToReview:{de:'🎉 Oberste Stufe (C2.3) gemeistert! Weiter geht es mit der Wiederholung — den nützlichsten Wörtern zuerst.',en:'🎉 Top level (C2.3) mastered! Continue with review — the most useful words first.'},
   nOfMTotal:{de:'{n} Wörter zum Üben auf diesem Level',en:'{n} words to practice at this level'},
   nOfMClozeAvailable:{de:'{n} Wörter zum Üben auf deinem Level',en:'{n} words to practice at your level'},
@@ -612,6 +614,11 @@ const I18N={
   searching:{de:'Suche läuft…',en:'Searching…'},
   noResults:{de:'Keine Treffer',en:'No results'},
   nResults:{de:'{n} Treffer',en:'{n} results'},
+  scopeChapter:{de:'Kapitel',en:'Chapter'},
+  scopeBook:{de:'Buch',en:'Book'},
+  scopeOT:{de:'AT',en:'OT'},
+  scopeNT:{de:'NT',en:'NT'},
+  scopeAll:{de:'AT+NT',en:'OT+NT'},
   home:{de:'Start',en:'Home'},
   continueReading:{de:'Kap. {c}:{v}',en:'Ch. {c}:{v}'},
 
@@ -828,6 +835,8 @@ const I18N_ES = {
   stillToPractice: 'Quedan {n} palabras por practicar en este nivel',
   stillToPractice1: 'Queda 1 palabra por practicar en este nivel',
   stepAllPracticed: '¡Todas las palabras de este nivel practicadas!',
+  unitsLeft: 'Quedan unas {n} unidades en este nivel',
+  unitsLeft1: 'Queda 1 unidad en este nivel',
   topLevelToReview: '🎉 ¡Nivel máximo (C2.3) dominado! Sigue con el repaso: primero las palabras más útiles.',
   nOfMTotal: '{n} palabras para practicar en este nivel',
   nOfMClozeAvailable: '{n} palabras para practicar en tu nivel',
@@ -869,6 +878,11 @@ const I18N_ES = {
   searching: 'Buscando…',
   noResults: 'Sin resultados',
   nResults: '{n} resultados',
+  scopeChapter: 'Capítulo',
+  scopeBook: 'Libro',
+  scopeOT: 'AT',
+  scopeNT: 'NT',
+  scopeAll: 'AT+NT',
   home: 'Inicio',
   continueReading: 'Cap. {c}:{v}',
 
@@ -1070,6 +1084,8 @@ const I18N_IT = {
   stillToPractice: 'Ancora {n} parole da esercitare a questo livello',
   stillToPractice1: 'Ancora 1 parola da esercitare a questo livello',
   stepAllPracticed: 'Tutte le parole di questo livello esercitate!',
+  unitsLeft: 'Ancora circa {n} unità a questo livello',
+  unitsLeft1: 'Ancora 1 unità a questo livello',
   topLevelToReview: '🎉 Livello massimo (C2.3) padroneggiato! Continua con il ripasso — prima le parole più utili.',
   nOfMTotal: '{n} parole da esercitare a questo livello',
   nOfMClozeAvailable: '{n} parole da esercitare al tuo livello',
@@ -1109,6 +1125,11 @@ const I18N_IT = {
   searching: 'Ricerca in corso…',
   noResults: 'Nessun risultato',
   nResults: '{n} risultati',
+  scopeChapter: 'Capitolo',
+  scopeBook: 'Libro',
+  scopeOT: 'AT',
+  scopeNT: 'NT',
+  scopeAll: 'AT+NT',
   home: 'Inizio',
   continueReading: 'Cap. {c}:{v}',
   publicDomain: 'Pubblico dominio',
@@ -1323,6 +1344,8 @@ const I18N_FR = {
   stillToPractice: 'Encore {n} mots à exercer à ce niveau',
   stillToPractice1: 'Encore 1 mot à exercer à ce niveau',
   stepAllPracticed: 'Tous les mots de ce niveau exercés !',
+  unitsLeft: 'Encore environ {n} unités à ce niveau',
+  unitsLeft1: 'Encore 1 unité à ce niveau',
   topLevelToReview: '🎉 Niveau le plus élevé (C2.3) maîtrisé ! On continue avec la révision — les mots les plus utiles d\'abord.',
   nOfMTotal: '{n} mots à exercer à ce niveau',
   nOfMClozeAvailable: '{n} mots à exercer à ton niveau',
@@ -1364,6 +1387,11 @@ const I18N_FR = {
   searching: 'Recherche en cours…',
   noResults: 'Aucun résultat',
   nResults: '{n} résultats',
+  scopeChapter: 'Chapitre',
+  scopeBook: 'Livre',
+  scopeOT: 'AT',
+  scopeNT: 'NT',
+  scopeAll: 'AT+NT',
   home: 'Accueil',
   continueReading: 'Chap. {c}:{v}',
 
@@ -1723,6 +1751,9 @@ const levelDelta=pct=>pct>=1?2:pct>0.8?1:pct>=0.7?0:pct>=0.4?-1:-2;
 // bestehen Einheiten fast nur aus Wiederholungen/Beimischungen — auf 1–3 gewerteten
 // Wörtern wäre die Quote reines Rauschen (1 Fehler = Absturz). Darunter: Level halten.
 const MIN_LEVEL_ADJ_WORDS=5;
+const UNIT_WORDS=15; // Wörter je Übungseinheit (Slots A–E in selectUnitPure)
+// „Noch etwa N Einheiten": Restwörter der Stufe in Einheiten umgerechnet
+function unitsLeftText(n){const u=Math.max(1,Math.ceil(n/UNIT_WORDS));return u===1?t('unitsLeft1'):t('unitsLeft').replace('{n}',u);}
 // Familiarity-Übergang inkl. Intervall-Guard (Erhöhen nur nach Ablauf der Stufen-Frist,
 // Erniedrigen immer erlaubt); liefert den neuen Wortdaten-Eintrag
 function applyTrainWord(e,newFam,now){
@@ -1829,11 +1860,11 @@ function selectUnitPure(wd,step,focus,clozeOnly,allLevels,reviewMode,now){
   for(let i=0;i<3&&bi<unknown24h.length;i++)unit.push(unknown24h[bi++]);
   if(ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
   if(di<nextStepNew.length)unit.push(nextStepNew[di++]);
-  while(unit.length<15&&ei<currentUnexercised.length)unit.push(currentUnexercised[ei++]);
-  while(unit.length<15&&ai<dueReviews.length)unit.push(dueReviews[ai++]);
-  while(unit.length<15&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
-  while(unit.length<15&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
-  while(unit.length<15&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
+  while(unit.length<UNIT_WORDS&&ei<currentUnexercised.length)unit.push(currentUnexercised[ei++]);
+  while(unit.length<UNIT_WORDS&&ai<dueReviews.length)unit.push(dueReviews[ai++]);
+  while(unit.length<UNIT_WORDS&&bi<unknown24h.length)unit.push(unknown24h[bi++]);
+  while(unit.length<UNIT_WORDS&&ci<lowerUnexercised.length)unit.push(lowerUnexercised[ci++]);
+  while(unit.length<UNIT_WORDS&&di<nextStepNew.length)unit.push(nextStepNew[di++]);
   if(unit.length===0)return{status:'nowords'};
   // Von der Levelanpassung ausgenommen: Wiederholungen (A), tiefere (C), Step+1 (D)
   const excludeKeys=new Set([...lowerUnexercised,...dueReviews,...nextStepNew].map(w=>w.en));
@@ -1916,6 +1947,13 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   const [freqStep,setFreqStep]=useState(()=>{const s=LS.get('bible-freq-step');return s!=null?s:0;});
   const saveFreqStep=s=>{setFreqStep(s);LS.set('bible-freq-step',s);};
   const activeStep=trainFocus==='freq'?freqStep:trainStep;
+  // Stufenanzeige am Fuß jeder Übung: in der Review die Review-Stufe, sonst die eigene
+  // Trainingsstufe (Lernfokus „Häufigkeit" zählt Stufen 1–18 statt CEFR-Kürzel).
+  const stepFooter=()=>reviewModeRef.current&&freqReviewStepRef.current!=null
+    ?t('yourLevel').replace('{l}',stepLabel(freqReviewStepRef.current))
+    :trainFocus==='freq'
+      ?t('yourStep').replace('{s}',activeStep+1).replace('{t}',SUBSTEPS.length)
+      :t('yourLevel').replace('{l}',stepLabel(activeStep));
   const [exercises,setExercises]=useState([]);
   const [current,setCurrent]=useState(0);
   const [selected,setSelected]=useState(null);
@@ -2249,6 +2287,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   },[current,exercises,startRetry,score,exType]);
 
   const stepChangeRef=useRef(null);
+  // Läuft die Review auf derselben Stufe weiter, merkt sich der Ergebnis-Screen hier
+  // Stufe und Restwörter — der Weiter-Knopf startet damit direkt die nächste Einheit.
+  // State (kein Ref): der Screen muss nach dem Setzen neu rendern.
+  const [reviewNext,setReviewNext]=useState(null);
   const [reviewPending,setReviewPending]=useState(false);
 
   // useLayoutEffect: Levelanpassung + reviewPending synchron vor dem Paint setzen,
@@ -2265,9 +2307,18 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     LS.set('bible-training-history',hist);
     if(reviewModeRef.current){
       const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});
-      if(allDone)setReviewStep(null);
-      setDone(false);setMode(allDone?'freqAllDone':'freqComplete');return;
+      if(allDone){setReviewStep(null);setDone(false);setMode('freqAllDone');return;}
+      // Geht dieselbe Review-Stufe weiter, bleibt der normale Ergebnis-Screen stehen.
+      // Die Rückfrage „mit diesen weitermachen?" gehört an den Stufenwechsel — nicht
+      // hinter jede einzelne Einheit.
+      const {step:rns,count:rnc}=reviewNextStep(wordData,freqReviewStepRef.current);
+      if(rns>=0&&rns===freqReviewStepRef.current){
+        setReviewNext({step:rns,count:rnc});stepChangeRef.current=null;setReviewPending(false);return;
+      }
+      setReviewNext(null);
+      setDone(false);setMode('freqComplete');return;
     }
+    setReviewNext(null);
     // adjTotal===0: Einheit bestand nur aus Wiederholungen/Beimischungen → keine Levelanpassung
     let reviewPend=false;
     if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current&&adjTotal>=MIN_LEVEL_ADJ_WORDS){
@@ -2327,16 +2378,26 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         </p>}
         {reviewPending
           ?<p style={{fontSize:15,color:'var(--t-green)',fontWeight:600,fontFamily:sans,margin:'0 0 16px',padding:'0 12px'}}>{t('topLevelToReview')}</p>
+          :reviewNext
+          ?<>
+            <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('levelStay').replace('{l}',stepLabel(reviewNext.step))}</p>
+            <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{reviewNext.count===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',reviewNext.count)}</p>
+            <p style={{fontSize:13,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 16px'}}>{unitsLeftText(reviewNext.count)}</p>
+          </>
           :<>
             <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{stepChangeRef.current?t('levelNow').replace('{l}',stepChangeRef.current):t('levelStay').replace('{l}',trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep))}</p>
             <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
+            {remFresh>0&&<p style={{fontSize:13,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 4px'}}>{unitsLeftText(remFresh)}</p>}
             {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
           </>}
         <div style={{marginTop:remDue>0?0:12,display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>{setMode(null);setDone(false);setReviewPending(false);clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
+          <button onClick={()=>{setMode(null);setDone(false);setReviewPending(false);setReviewNext(null);reviewModeRef.current=false;clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
           {lastStart&&<button onClick={()=>{
             setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;
-            if(reviewPending){
+            if(reviewNext){
+              const rs=reviewNext.step;setReviewNext(null);
+              setReviewStep(rs);startReview(rs);
+            }else if(reviewPending){
               setReviewPending(false);
               const {step}=reviewNextStep(wordData,null);
               if(step>=0){setReviewStep(step);startReview(step);}
@@ -2429,7 +2490,8 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         <MoreExamples lemma={ex.lemma} word={ex.answer}/>
         <div style={{marginTop:12}}><button onClick={advance} style={S.startBtn}>{t('next')}</button></div>
       </div>}
-      <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
+      <p style={{textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontFamily:sans,margin:'24px 0 0'}}>{stepFooter()}</p>
+      <div style={{textAlign:'center',marginTop:8}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
     </div>);
   }
 
@@ -2484,7 +2546,8 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         <p style={{fontSize:16,fontWeight:600,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 12px'}}>{t('wrong')}</p>
         <button onClick={advance} style={S.startBtn}>{t('next')}</button>
       </div>}
-      <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
+      <p style={{textAlign:'center',fontSize:12,color:'var(--t-muted2)',fontFamily:sans,margin:'24px 0 0'}}>{stepFooter()}</p>
+      <div style={{textAlign:'center',marginTop:8}}><button onClick={()=>setMode(null)} style={S.navBtn}>{t('cancel')}</button></div>
     </div>);
   }
 
@@ -3353,6 +3416,7 @@ function App({data}){
   const [searchQuery,setSearchQuery]=useState('');
   const [searchResults,setSearchResults]=useState(null);
   const [searchLoading,setSearchLoading]=useState(false);
+  const [searchScope,setSearchScope]=useState(()=>LS.get('bible-search-scope')||'all');
 
   const autoPlayRef=useRef(false);
   const [chapTrain,setChapTrain]=useState(null);
@@ -3372,6 +3436,9 @@ function App({data}){
   const [reviewKnownCount,setReviewKnownCount]=useState(0);
   const [reviewCheckBase,setReviewCheckBase]=useState(0);
   const [levelSuggestion,setLevelSuggestion]=useState(null);
+  // Die Levelaufstiegs-Frage im Wörter-Durchgang wird pro Durchgang nur einmal gestellt:
+  // wer sie beantwortet hat, bekommt sie nicht nach je 20 weiteren Wörtern erneut.
+  const [levelSuggestDone,setLevelSuggestDone]=useState(false);
 
   useEffect(()=>{tts.setLang(INSTANCE.ttsLangPrefix)},[tts]);
 
@@ -3704,15 +3771,26 @@ function App({data}){
     };
   });
 
-  const doSearch=useCallback(async(q)=>{
+  // Suchbereich: aktuelles Kapitel · aktuelles Buch · AT · NT · ganze Bibel.
+  // Die Bücher werden einzeln nachgeladen; ein enger Bereich spart das Laden der übrigen.
+  const doSearch=useCallback(async(q,scope)=>{
     if(!q||q.length<2)return;
+    const sc=scope||'all';
     setSearchLoading(true);setSearchResults(null);
     const ql=q.toLowerCase();const results=[];
-    for(let bi=0;bi<books.length&&results.length<100;bi++){
+    const idxs=books.map((b,i)=>i).filter(i=>{
+      if(sc==='chapter'||sc==='book')return i===bookIdx;
+      if(sc==='ot')return books[i].nr<40;
+      if(sc==='nt')return books[i].nr>=40;
+      return true;
+    });
+    for(const bi of idxs){
+      if(results.length>=100)break;
       const nr=books[bi].nr;
       try{
         const bk=_bookCache[nr]||(await fetchBook(nr));
         for(const ch of bk.chapters){
+          if(sc==='chapter'&&ch.number!==chapNum)continue;
           for(const v of ch.verses){
             if(v.text.toLowerCase().includes(ql)){
               results.push({bookIdx:bi,bookName:books[bi].name,chapIdx:bk.chapters.indexOf(ch),chapNum:ch.number,verse:v.n,text:v.text});
@@ -3724,7 +3802,7 @@ function App({data}){
       }catch(e){}
     }
     setSearchResults(results);setSearchLoading(false);
-  },[books]);
+  },[books,bookIdx,chapNum]);
 
   const toggleUnknown=useCallback(w=>{setUnknownWords(p=>{const n=new Set(p);n.has(w)?n.delete(w):n.add(w);return n})},[]);
   const markLearned=useCallback(key=>{setLearnedWords(p=>new Set([...p,key]));setRevealedWords(p=>new Set([...p,key]))},[]);
@@ -4669,10 +4747,18 @@ function App({data}){
           </>}
       </div>
       {searchOpen&&<div style={{padding:'6px 0 8px'}} onClick={e=>e.stopPropagation()}>
-        <form onSubmit={e=>{e.preventDefault();doSearch(searchQuery)}} style={{display:'flex',gap:6}}>
-          <input value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} placeholder={t('searchPlaceholder')} style={{flex:1,padding:'6px 10px',border:'1px solid var(--t-border)',borderRadius:6,fontSize:14,fontFamily:sans,background:'var(--t-bg)',color:'var(--t-text)'}} autoFocus/>
+        <form onSubmit={e=>{e.preventDefault();doSearch(searchQuery,searchScope)}} style={{display:'flex',gap:6}}>
+          <input value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} placeholder={t('searchPlaceholder')} style={{flex:1,minWidth:0,padding:'6px 10px',border:'1px solid var(--t-border)',borderRadius:6,fontSize:16,fontFamily:sans,background:'var(--t-bg)',color:'var(--t-text)'}} autoFocus/>
           <button type="submit" style={{...S.navBtn,padding:'6px 12px',margin:0}}>{t('search')}</button>
         </form>
+        <div style={{display:'flex',gap:4,marginTop:6}}>
+          {[['chapter','scopeChapter'],['book','scopeBook'],['ot','scopeOT'],['nt','scopeNT'],['all','scopeAll']].map(([v,k])=>(
+            <button key={v} type="button" onClick={()=>{setSearchScope(v);LS.set('bible-search-scope',v);if(searchQuery)doSearch(searchQuery,v)}}
+              style={{flex:1,padding:'4px 2px',border:searchScope===v?'1.5px solid var(--t-accent)':'1px solid var(--t-border)',borderRadius:6,
+                background:searchScope===v?'var(--t-accent-bg)':'var(--t-card-solid)',color:searchScope===v?'var(--t-accent)':'var(--t-muted)',
+                fontSize:11,fontWeight:searchScope===v?700:500,fontFamily:sans,cursor:'pointer',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{t(k)}</button>
+          ))}
+        </div>
         {searchLoading&&<p style={{fontSize:13,color:'var(--t-muted)',textAlign:'center',margin:'8px 0 0'}}>{t('searching')}</p>}
         {searchResults&&!searchLoading&&<div style={{maxHeight:300,overflowY:'auto',marginTop:8}}>
           {searchResults.length===0&&<p style={{fontSize:13,color:'var(--t-muted)',textAlign:'center',margin:0}}>{t('noResults')}</p>}
@@ -4758,7 +4844,7 @@ function App({data}){
       </div>}
       {chapTab==='training'&&(quizWords.length>0?<div style={{padding:'12px'}}>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
-          <div onClick={()=>{setQuizExpanded(e=>!e);setVocabReviewIdx(0);setVocabSettingsOpen(false)}} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+          <div onClick={()=>{setQuizExpanded(e=>!e);setVocabReviewIdx(0);setLevelSuggestion(null);setLevelSuggestDone(false);setVocabSettingsOpen(false)}} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
             <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{quizExpanded?'▾':'▸'}</span> {t('whichWords')}</span>
             <button onClick={e=>{e.stopPropagation();setVocabSettingsOpen(s=>!s)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,color:vocabSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0,lineHeight:1}} title={t('settings')}>⚙</button>
           </div>
@@ -4788,14 +4874,14 @@ function App({data}){
                   {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
                 </div>
                 <div style={{display:'flex',gap:10,justifyContent:'center'}}>
-                  <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&nk/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
-                  <button onClick={()=>{trainWord(key,0);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&reviewKnownCount/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
+                  <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&!levelSuggestDone&&nk/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
+                  <button onClick={()=>{trainWord(key,0);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&!levelSuggestDone&&reviewKnownCount/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>new Set([...u,key]));setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
                 </div>
                 {levelSuggestion&&<div style={{margin:'12px 0',padding:'12px',background:'var(--t-green-bg)',border:'1.5px solid var(--t-green)',borderRadius:8,textAlign:'center'}}>
                   <p style={{fontSize:13,color:'var(--t-text)',fontFamily:sans,margin:'0 0 10px'}}>{t('levelUpSuggest').replace('{l}',stepLabel(levelSuggestion))}</p>
                   <div style={{display:'flex',gap:8,justifyContent:'center'}}>
-                    <button onClick={()=>{const reviewed=new Set(quizWords.slice(0,vocabReviewIdx).map(w=>w.lemma||w.word));const nl=hasAnno?getChapterAnnotations(annotations,bookName,chapNum,levelSuggestion,tappedWords):getChapterWordsOld(verses,vocab,levelSuggestion);const ni=nl.filter(w=>reviewed.has(w.lemma||w.word)).length;setUserStep(levelSuggestion);setLevelSuggestion(null);setReviewKnownCount(0);setReviewCheckBase(ni);setVocabReviewIdx(ni)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',stepLabel(levelSuggestion))}</button>
-                    <button onClick={()=>setLevelSuggestion(null)} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',stepLabel(userStep))}</button>
+                    <button onClick={()=>{const reviewed=new Set(quizWords.slice(0,vocabReviewIdx).map(w=>w.lemma||w.word));const nl=hasAnno?getChapterAnnotations(annotations,bookName,chapNum,levelSuggestion,tappedWords):getChapterWordsOld(verses,vocab,levelSuggestion);const ni=nl.filter(w=>reviewed.has(w.lemma||w.word)).length;setUserStep(levelSuggestion);setLevelSuggestion(null);setLevelSuggestDone(true);setReviewKnownCount(0);setReviewCheckBase(ni);setVocabReviewIdx(ni)}} style={{padding:'8px 14px',border:'none',borderRadius:6,background:'var(--t-green)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('levelUpYes').replace('{l}',stepLabel(levelSuggestion))}</button>
+                    <button onClick={()=>{setLevelSuggestion(null);setLevelSuggestDone(true)}} style={{padding:'8px 14px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('levelUpNo').replace('{l}',stepLabel(userStep))}</button>
                   </div>
                 </div>}
                 <div style={{textAlign:'center',marginTop:12}}>
@@ -4823,16 +4909,32 @@ function App({data}){
       const useAnno=hasAnno;
       const deText=deBook?.chapters?.[String(chapNum)]?.[String(verse.n)];
       const showDe=showAllDe||expandedVerses.has(verse.n);
+      // Satzklammer-Ausdrücke (`parts`) stehen im Deutschen oft weit auseinander:
+      // „rief … her". Die Wörter dazwischen bekommen eine gestrichelte Linie, damit
+      // das Auge die Klammer verfolgen kann — weiter gestrichelt als die gepunktete
+      // Unterstreichung der Teile selbst.
+      const bridgeSpan=new Set(),bridgeGap=new Set();
+      if(useAnno){
+        (annotations[bookName]?.[String(chapNum)]?.[String(verse.n)]||[]).forEach(a=>{
+          if(!a.parts||a.parts.length<2)return;
+          const key=a.lemma,above=annoStep(a.level,key)>userStep;
+          if(!(above||tappedWords.has(key)))return;
+          if(learnedWords.has(key))return;
+          if(!(unknownWords.has(key)||(!reviewDone&&above&&autoTranslate)))return;
+          const last=a.parts[a.parts.length-1];
+          for(let q=a.parts[0];q<=last;q++){bridgeSpan.add(q);if(!a.parts.includes(q))bridgeGap.add(q);}
+        });
+      }
 
       return(<div key={verse.n} style={{display:'inline'}}>
         <span id={`verse-${verse.n}`} className={isVA?'verse-playing':''}>
         <sup style={{...S.vNum,...(deText?{cursor:'pointer',textDecoration:'underline'}:{})}} onClick={deText?()=>setExpandedVerses(p=>{const n=new Set(p);n.has(verse.n)?n.delete(verse.n):n.add(verse.n);return n}):undefined}>{verse.n}</sup>
 
         {verse.text.split(/(\s+)/).map((token,i)=>{
-          if(/^\s+$/.test(token))return <span key={i}> </span>;
+          if(/^\s+$/.test(token))return <span key={i} style={bridgeSpan.has(wordIdx-1)&&bridgeSpan.has(wordIdx)?S.phraseBridge:undefined}> </span>;
           const pos=wordIdx++;
           const hl=isVA&&pos===tts.activeWordIdx?'tts-highlight':'';
-
+          const el=(()=>{
           if(useAnno){
             // Position-based annotation lookup (supports multi-word)
             const result=getAnnotation(annotations,bookName,chapNum,verse.n,pos);
@@ -4875,6 +4977,8 @@ function App({data}){
             if(!isR)return <span key={i} className={hl} style={S.known} onClick={()=>unlearn(clean)}>{token}</span>;
             return <span key={i} className={hl} style={{cursor:'pointer'}} onClick={()=>{setLearnedWords(p=>{const n=new Set(p);n.delete(clean);return n});setRevealedWords(p=>{const n=new Set(p);n.delete(clean);return n})}}>{token}</span>;
           }
+          })();
+          return bridgeGap.has(pos)?<span key={i} style={S.phraseBridge}>{el}</span>:el;
         })}{' '}
       </span>
       {showDe&&deText&&<div style={{...S.deVerse,fontSize:deSize,lineHeight:lineHeightTr,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
@@ -4892,10 +4996,10 @@ function App({data}){
         <button onClick={()=>tts.skipVerse(-1)} style={barBtn} title={t('prevVerse')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
         <span style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,minWidth:24,textAlign:'center'}}>{tts.activeVerse||''}</span>
         <button onClick={()=>tts.skipVerse(1)} style={barBtn} title={t('nextVerse')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
+        {/* Stopp steht nur oben in der Kapitelleiste — hier bleibt die Pause. */}
         <button onClick={tts.togglePause} style={{...barBtn,marginLeft:14,color:'var(--t-title)'}} title={tts.paused?t('resumeTTS'):t('pauseTTS')}>{tts.paused
           ?<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><polygon points="6 4 20 12 6 20"/></svg>
           :<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><rect x="5" y="4" width="5" height="16" rx="1.5"/><rect x="14" y="4" width="5" height="16" rx="1.5"/></svg>}</button>
-        <button onClick={tts.stop} style={{...barBtn,color:'var(--t-accent)'}} title={t('stopTTS')}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
       </div>
       <div style={S.speedControl}>
         <span style={S.speedLabel}>{t('speed')}</span>
@@ -5043,6 +5147,8 @@ const S={
   tr:{fontStyle:'italic',fontSize:13,color:'var(--t-accent)',cursor:'pointer',marginLeft:1,padding:'1px 4px',background:'var(--t-accent-bg)',borderRadius:3,transition:'all 0.3s',verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   trRev:{fontStyle:'italic',fontSize:13,color:'var(--t-green2)',marginLeft:1,padding:'1px 4px',background:'var(--t-green-bg)',borderRadius:3,verticalAlign:'baseline',position:'relative',top:-1,fontFamily:sans},
   phraseWord:{borderBottom:'1.5px dotted var(--t-accent)',paddingBottom:1},
+  // Verbindungslinie zwischen weit auseinanderliegenden Teilen eines Mehrwortausdrucks
+  phraseBridge:{borderBottom:'1.5px dashed var(--t-accent)',paddingBottom:1},
   known:{color:'var(--t-green)',cursor:'pointer',borderBottom:'1px dotted var(--t-green-bg)',transition:'all 0.2s'},
   chapNav:{display:'flex',justifyContent:'space-between',marginTop:4,paddingTop:0},
   chapNavBtn:{padding:0,border:'none',background:'transparent',color:'var(--t-muted)',cursor:'pointer',display:'inline-flex',alignItems:'center',justifyContent:'center',width:35,height:35},

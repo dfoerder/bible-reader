@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.10b (10.09.2026)
+
+- Suchbereich wählbar (Kapitel/Buch/AT/NT), Suchfeld ohne iOS-Zoom, gestrichelte Verbindung bei Satzklammern, Stopp nur oben, Stufenanzeige in jeder Übung und Resteinheiten im Ergebnis, Level-Rückfragen nur noch einmal
+
 ## v1.11.9b (10.09.2026)
 
 - Französische Glossen: 288 Verbesserungen — ceux/comme/ne-plus vereinheitlicht, Reflexiv-Mehrwörter ergänzt, Artikel- und Kongruenzfehler behoben
