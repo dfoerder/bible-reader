@@ -165,7 +165,7 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.11b';
+const APP_VERSION = '1.11.12b';
 const APP_DATE = '21.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -402,7 +402,8 @@ const I18N={
   showCefrLevel:{de:'Sprachlevel anzeigen',en:'Show CEFR level'},
   showExLevel:{de:'Stufen in Übungen anzeigen (CEFR + Häufigkeit)',en:'Show levels in exercises (CEFR + frequency)'},
   exercisesSection:{de:'Übungen',en:'Exercises'},
-  exLevelBoth:{de:'CEFR {c} · Häufigkeit {f}/18',en:'CEFR {c} · frequency {f}/18'},
+  exLevelBoth:{de:'CEFR {c} · {f}/18',en:'CEFR {c} · {f}/18'},
+  exLevelOcc:{de:'{n} × in der Bibel',en:'{n} × in the Bible',es:'{n} × en la Biblia',it:'{n} × nella Bibbia',fr:'{n} × dans la Bible'},
   retakeTest:{de:'Einstufungstest wiederholen',en:'Retake placement test'},
   readingSpeed:{de:'Lesegeschwindigkeit (Vorlesen)',en:'Reading speed (TTS)'},
   slow:{de:'Langsam',en:'Slow'},
@@ -597,6 +598,8 @@ const I18N={
   // Levelanpassung nach einer Einheit: erst fragen, dann ändern (Bug mu590qij)
   levelUpAsk:{de:'Sehr gut! Level auf {l} anheben?',en:'Well done! Raise your level to {l}?',es:'¡Muy bien! ¿Subir tu nivel a {l}?',it:'Ottimo! Alzare il tuo livello a {l}?',fr:'Très bien ! Monter ton niveau à {l} ?'},
   levelDownAsk:{de:'Level auf {l} senken?',en:'Lower your level to {l}?',es:'¿Bajar tu nivel a {l}?',it:'Abbassare il tuo livello a {l}?',fr:'Baisser ton niveau à {l} ?'},
+  autoLevel:{de:'Level nach Ergebnis automatisch anpassen (ohne Rückfrage)',en:'Adjust level automatically by results (no prompt)',es:'Ajustar el nivel automáticamente según los resultados (sin preguntar)',it:'Adatta il livello automaticamente in base ai risultati (senza chiedere)',fr:'Adapter le niveau automatiquement selon les résultats (sans demander)'},
+  autoLevelHint:{de:'Aus: nach jeder Einheit wird gefragt, ob das Level steigen oder sinken soll.',en:'Off: after each unit you are asked whether to raise or lower the level.',es:'Desactivado: tras cada unidad se pregunta si subir o bajar el nivel.',it:'Disattivato: dopo ogni unità viene chiesto se alzare o abbassare il livello.',fr:'Désactivé : après chaque unité, on demande si le niveau doit monter ou baisser.'},
   levelKept:{de:'Level bleibt {l}.',en:'Level stays {l}.',es:'El nivel sigue en {l}.',it:'Il livello resta {l}.',fr:'Le niveau reste {l}.'},
   // Lemma-Häufigkeit in der Wortkarte (Bug mu593c53)
   lemmaOcc:{de:'in der Bibel {b} × · in diesem Buch {k} ×',en:'in the Bible {b} × · in this book {k} ×',es:'en la Biblia {b} × · en este libro {k} ×',it:'nella Bibbia {b} × · in questo libro {k} ×',fr:'dans la Bible {b} × · dans ce livre {k} ×'},
@@ -672,7 +675,7 @@ const I18N_ES = {
   showCefrLevel: 'Mostrar nivel de idioma',
   showExLevel: 'Mostrar niveles en los ejercicios (CEFR + frecuencia)',
   exercisesSection: 'Ejercicios',
-  exLevelBoth: 'CEFR {c} · frecuencia {f}/18',
+  exLevelBoth: 'CEFR {c} · {f}/18',
   retakeTest: 'Repetir la prueba de nivel',
   readingSpeed: 'Velocidad de lectura (voz)',
   slow: 'Lenta',
@@ -931,7 +934,7 @@ const I18N_IT = {
   showCefrLevel: 'Mostra livello CEFR',
   showExLevel: 'Mostra i livelli negli esercizi (CEFR + frequenza)',
   exercisesSection: 'Esercizi',
-  exLevelBoth: 'CEFR {c} · frequenza {f}/18',
+  exLevelBoth: 'CEFR {c} · {f}/18',
   retakeTest: 'Ripeti il test di livello',
   readingSpeed: 'Velocità di lettura (TTS)',
   slow: 'Lenta',
@@ -1181,7 +1184,7 @@ const I18N_FR = {
   showCefrLevel: 'Afficher le niveau CECR',
   showExLevel: 'Afficher les niveaux dans les exercices (CECR + fréquence)',
   exercisesSection: 'Exercices',
-  exLevelBoth: 'CECR {c} · fréquence {f}/18',
+  exLevelBoth: 'CECR {c} · {f}/18',
   retakeTest: 'Refaire le test de niveau',
   readingSpeed: 'Vitesse de lecture (audio)',
   slow: 'Lent',
@@ -1662,11 +1665,17 @@ function exLevelInfo(en){
   return {cefr:cs!=null?SUBSTEPS[cs]:'—',freq:fs!=null?fs+1:'—'};
 }
 // Level-Zeile in Übungen (nur wenn Einstellung „Stufen in Übungen" aktiv)
+// Rechts daneben die absolute Häufigkeit (Bug mubne8mo): aus lemma_freq.json
+// (lazy, Lemma-Schreibung wie in den Annotationen), sonst occ aus words.json.
 function ExLevelTag({en}){
+  const [,tick]=useState(0);
+  useEffect(()=>{if(!LEMMA_FREQ&&INSTANCE.lemmaFreqPath)loadLemmaFreq().then(()=>tick(x=>x+1))},[]);
   if(LS.get('bible-show-ex-level')!==true)return null;
   const li=exLevelInfo(en);
   if(!li)return null;
-  return <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',margin:'6px 0 0'}}>{t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)}</p>;
+  const lf=LEMMA_FREQ||{};
+  const n=lf[en]??lf[en.charAt(0).toUpperCase()+en.slice(1)]??WORD_BY_EN.get(en)?.occ;
+  return <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',margin:'6px 0 0'}}>{t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)}{n!=null?' · '+t('exLevelOcc').replace('{n}',n):''}</p>;
 }
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
@@ -2346,9 +2355,15 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         // man muss nicht erst ganz C2.3 durchüben. Weiter-Button startet die erste Review-Einheit.
         reviewPend=true;stepChangeRef.current=null;
       } else if(ns!==curStep){
-        // Nur vorschlagen — übernommen wird erst per Ja-Knopf im Ergebnis-Screen
-        stepChangeRef.current=null;
-        setStepProposal({ns,label:trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns),up:delta>0});
+        const label=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
+        if(LS.get('bible-auto-level')===true){
+          // Einstellung „Level automatisch anpassen": ohne Rückfrage übernehmen
+          saveFn(ns);setUserStep(ns);stepChangeRef.current=label;
+        } else {
+          // Nur vorschlagen — übernommen wird erst per Ja-Knopf im Ergebnis-Screen
+          stepChangeRef.current=null;
+          setStepProposal({ns,label,up:delta>0});
+        }
       } else {
         stepChangeRef.current=null;
       }
@@ -3328,6 +3343,8 @@ function App({data}){
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [showExLevel,setShowExLevel]=useState(LS.get('bible-show-ex-level')===true);
+  // Levelanpassung nach Einheiten ohne Rückfrage (Bug mubn9e4x); aus = fragen
+  const [autoLevel,setAutoLevel]=useState(LS.get('bible-auto-level')===true);
   const [autoTranslate,setAutoTranslate]=useState(LS.get('bible-auto-translate')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
@@ -4414,6 +4431,11 @@ function App({data}){
               <input type="checkbox" checked={showExLevel} onChange={()=>{const v=!showExLevel;setShowExLevel(v);LS.set('bible-show-ex-level',v)}}/>
               <span style={S.toggleLabel}>{t('showExLevel')}</span>
             </label>
+            <label style={S.toggleRow}>
+              <input type="checkbox" checked={autoLevel} onChange={()=>{const v=!autoLevel;setAutoLevel(v);LS.set('bible-auto-level',v)}}/>
+              <span style={S.toggleLabel}>{t('autoLevel')}</span>
+            </label>
+            <p style={S.settingsHint}>{t('autoLevelHint')}</p>
           </div>
           <div style={{marginTop:16}}>
             <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('clozeContext')}</span>

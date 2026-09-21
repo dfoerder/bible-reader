@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
-- **Aktuelle Version:** 1.11.11b (21.09.2026)
+- **Aktuelle Version:** 1.11.12b (21.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
 - **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -107,7 +107,7 @@ Eigennamen sind aus den Übungen ausgenommen, bis auf die **wichtigsten mit Lern
   - **D**: 1 ungeübtes Wort aus Step+1
   - **E**: neue Wörter (fam=−1) des aktuellen Levels — füllt auf 15 auf; bei Knappheit Auffüllen aus A, dann B, dann C/D
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); eine Anpassung erfolgt erst ab **5 gewerteten Wörtern** — kurz vor Stufen-Erschöpfung bestehen Einheiten fast nur aus Wiederholungen, und auf 1–3 Wörtern wäre die Quote reines Rauschen (Level wird dann gehalten, bis der Erschöpfungs-Aufstieg greift). **Die Anpassung wird nie ungefragt übernommen:** der Ergebnis-Screen zeigt „Level auf X anheben/senken? Ja · Nein"; Fertig/Weiter erscheinen erst nach der Antwort. Ja → Level gespeichert („Dein Level ist jetzt X"), Nein → „Level bleibt X"
+- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); eine Anpassung erfolgt erst ab **5 gewerteten Wörtern** — kurz vor Stufen-Erschöpfung bestehen Einheiten fast nur aus Wiederholungen, und auf 1–3 Wörtern wäre die Quote reines Rauschen (Level wird dann gehalten, bis der Erschöpfungs-Aufstieg greift). **Die Anpassung wird nie ungefragt übernommen:** der Ergebnis-Screen zeigt „Level auf X anheben/senken? Ja · Nein"; Fertig/Weiter erscheinen erst nach der Antwort. Ja → Level gespeichert („Dein Level ist jetzt X"), Nein → „Level bleibt X". Einstellungen → Übungen → „Level nach Ergebnis automatisch anpassen" (`bible-auto-level`, Standard aus) übernimmt die Anpassung ohne Rückfrage
 - Level-Aufstieg bei Erschöpfung: hat der aktuelle Step keine neuen und keine fälligen unbekannten Wörter mehr → automatischer Step+1 mit 🎉-Gratulations-Screen; fällige Wiederholungen blockieren den Aufstieg nicht
 - Review als „Level 18": Auf der obersten Stufe (C2.3) gibt es keinen höheren Step. Wird dort eine Einheit **aufstiegswürdig** absolviert (>80% = normalerweise +1/+2), springt der Ergebnis-Screen direkt in die Review über („🎉 Oberste Stufe gemeistert!", Weiter-Button startet die erste Review-Einheit ab B2.2) — man muss also nicht erst ganz C2.3 durchüben. Bei Halten (70–80%) oder Abstieg (<70%) bleibt/sinkt das Level normal
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
@@ -303,7 +303,8 @@ Datei (die App leitet sie ab), und `trForm` entfällt, wenn es mit `tr`
 | `bible-line-height` / `-tr` | Zeilenabstände (Bibeltext / Hilfsbibel) — bewusst NICHT Teil der Sammelskalierung, da sie als Verhältniswerte mit der Schrift ohnehin mitwachsen; ebenfalls ohne Instanz-Präfix (gilt für alle Hauptbibeln) |
 | `bible-cloze-ctx` | Lückentext-Kontext (Satz / ganzer Vers) |
 | `bible-show-lemma` / `bible-show-cefr` | Anzeige-Optionen beim Lesen |
-| `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel + Häufigkeitsstufe (1–18) |
+| `bible-show-ex-level` | Zeigt in den Übungen neben dem Wort CEFR-Sublevel · Häufigkeitsstufe (1–18) · absolute Häufigkeit („N × in der Bibel", aus lemma_freq.json, sonst occ) |
+| `bible-auto-level` | Levelanpassung nach einer Einheit ohne Rückfrage übernehmen (Standard aus = fragen) |
 | `bible-stats-visible` | Sichtbare Statistik-Abschnitte |
 | `bible-search-scope` | Suchbereich der Volltextsuche ('chapter'/'book'/'ot'/'nt'/'all') |
 | `unk-{lang}-{buch}-{kapitel}` | Unbekannte Wörter pro Kapitel |

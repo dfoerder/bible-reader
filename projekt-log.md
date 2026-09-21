@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.12b (21.09.2026)
+
+- Einstellung „Level automatisch anpassen" (sonst Rückfrage); Übungs-Levelzeile ohne Wort „Häufigkeit", dafür absolute Häufigkeit des Wortes
+
 ## v1.11.11b (21.09.2026)
 
 - Audio läuft bei gesperrtem Bildschirm weiter (Keep-Alive + Media Session); Lemma-Häufigkeit in der Wortkarte; Levelwechsel nur nach Rückfrage
