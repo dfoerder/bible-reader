@@ -165,8 +165,8 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.10b';
-const APP_DATE = '10.09.2026';
+const APP_VERSION = '1.11.11b';
+const APP_DATE = '21.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -195,6 +195,7 @@ const BIBLES = {
     bibleDir: 'bibles/eng/web/', bibleSuffix: '_web.json', credit: 'World English Bible',
     annoDir: 'bibles/eng/web/anno/', annoSuffix: '_web_deu.json', annoGlossLangs: ['de','es','fr','it'],
     wordsPath: 'bibles/eng/web/train/words.json', examplesPath: 'bibles/eng/web/train/examples.json',
+    lemmaFreqPath: 'bibles/eng/web/train/lemma_freq.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'deu-l1912mod',
     ttsLang: 'en-US', ttsLangPrefix: 'en',
@@ -208,6 +209,7 @@ const BIBLES = {
     bibleDir: 'bibles/spa/rv1909mod/', bibleSuffix: '_rv1909mod.json', credit: 'Reina-Valera 1909',
     annoDir: 'bibles/spa/rv1909mod/anno/', annoSuffix: '_rv1909mod_eng.json', annoGlossLangs: ['en'],
     wordsPath: 'bibles/spa/rv1909mod/train/words.json', examplesPath: 'bibles/spa/rv1909mod/train/examples.json',
+    lemmaFreqPath: 'bibles/spa/rv1909mod/train/lemma_freq.json',
     keepNamesPath: 'bibles/spa/rv1909mod/train/keepnames.json',
     hasAnno: true, hasTraining: true, hasLevelTest: true,
     defaultHilfs: 'eng-web',
@@ -225,6 +227,7 @@ const BIBLES = {
     annoDir: 'bibles/fra/lsg1910mod/anno/', annoSuffix: '_lsg1910mod_multi.json',
     annoGlossLangs: ['de','en','es','it'],
     wordsPath: null, examplesPath: null,
+    lemmaFreqPath: 'bibles/fra/lsg1910mod/train/lemma_freq.json', // nur NT annotiert → zählt das NT
     // Annotationen ja, Trainingsdaten nein: das Neue Testament ist glossiert
     // (27 Buecher), words.json/examples.json gibt es fuer Franzoesisch noch
     // nicht. Ohne hasLevelTest laeuft der Einstieg direkt auf 'nav'.
@@ -252,6 +255,7 @@ const BIBLES = {
     annoDir: 'bibles/deu/l1912mod/anno/', annoSuffix: '_l1912mod_multi.json',
     annoGlossLangs: ['en','es','fr','it'],
     wordsPath: 'bibles/deu/l1912mod/train/words.json', examplesPath: 'bibles/deu/l1912mod/train/examples.json',
+    lemmaFreqPath: 'bibles/deu/l1912mod/train/lemma_freq.json',
     // Eigennamen als Liste statt über die Schreibung — im Deutschen ist jedes
     // Substantiv gross. keepnames hält die wichtigen Namen in den Kapitelübungen.
     propNamesPath: 'bibles/deu/l1912mod/train/propnames.json',
@@ -590,6 +594,12 @@ const I18N={
   errorPlural:{de:'Fehler — werden nun wiederholt',en:'errors — will be repeated now'},
   totalScore:{de:'Gesamt',en:'Total'},
   levelNow:{de:'Dein Level ist jetzt {l}.',en:'Your level is now {l}.'},
+  // Levelanpassung nach einer Einheit: erst fragen, dann ändern (Bug mu590qij)
+  levelUpAsk:{de:'Sehr gut! Level auf {l} anheben?',en:'Well done! Raise your level to {l}?',es:'¡Muy bien! ¿Subir tu nivel a {l}?',it:'Ottimo! Alzare il tuo livello a {l}?',fr:'Très bien ! Monter ton niveau à {l} ?'},
+  levelDownAsk:{de:'Level auf {l} senken?',en:'Lower your level to {l}?',es:'¿Bajar tu nivel a {l}?',it:'Abbassare il tuo livello a {l}?',fr:'Baisser ton niveau à {l} ?'},
+  levelKept:{de:'Level bleibt {l}.',en:'Level stays {l}.',es:'El nivel sigue en {l}.',it:'Il livello resta {l}.',fr:'Le niveau reste {l}.'},
+  // Lemma-Häufigkeit in der Wortkarte (Bug mu593c53)
+  lemmaOcc:{de:'in der Bibel {b} × · in diesem Buch {k} ×',en:'in the Bible {b} × · in this book {k} ×',es:'en la Biblia {b} × · en este libro {k} ×',it:'nella Bibbia {b} × · in questo libro {k} ×',fr:'dans la Bible {b} × · dans ce livre {k} ×'},
   levelStay:{de:'Level {l}',en:'Level {l}'},
   levelUpDone:{de:'Gratulation! Du hast alle Wörter dieser Stufe geübt.',en:'Congratulations! You have practiced all words of this level.'},
   reviewsDue:{de:'{n} Wiederholungen fällig',en:'{n} reviews due'},
@@ -2292,6 +2302,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   // State (kein Ref): der Screen muss nach dem Setzen neu rendern.
   const [reviewNext,setReviewNext]=useState(null);
   const [reviewPending,setReviewPending]=useState(false);
+  // Vorgeschlagene Levelanpassung nach einer Einheit — wird erst nach „Ja" des
+  // Nutzers übernommen (Bug mu590qij: nie ungefragt das Level ändern).
+  // {ns, label, up} · declined:true nach „Nein"
+  const [stepProposal,setStepProposal]=useState(null);
 
   // useLayoutEffect: Levelanpassung + reviewPending synchron vor dem Paint setzen,
   // damit der Ergebnis-Screen sofort korrekt rendert (kein Flackern der Level-/Review-Zeile)
@@ -2318,7 +2332,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       setReviewNext(null);
       setDone(false);setMode('freqComplete');return;
     }
-    setReviewNext(null);
+    setReviewNext(null);setStepProposal(null);
     // adjTotal===0: Einheit bestand nur aus Wiederholungen/Beimischungen → keine Levelanpassung
     let reviewPend=false;
     if((exType==='vocab'||exType==='cloze')&&!reviewModeRef.current&&adjTotal>=MIN_LEVEL_ADJ_WORDS){
@@ -2332,8 +2346,9 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         // man muss nicht erst ganz C2.3 durchüben. Weiter-Button startet die erste Review-Einheit.
         reviewPend=true;stepChangeRef.current=null;
       } else if(ns!==curStep){
-        saveFn(ns);setUserStep(ns);
-        stepChangeRef.current=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
+        // Nur vorschlagen — übernommen wird erst per Ja-Knopf im Ergebnis-Screen
+        stepChangeRef.current=null;
+        setStepProposal({ns,label:trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns),up:delta>0});
       } else {
         stepChangeRef.current=null;
       }
@@ -2384,16 +2399,25 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
             <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{reviewNext.count===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',reviewNext.count)}</p>
             <p style={{fontSize:13,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 16px'}}>{unitsLeftText(reviewNext.count)}</p>
           </>
+          :stepProposal&&!stepProposal.declined
+          ?<div style={{margin:'0 12px 16px',padding:'12px',background:stepProposal.up?'var(--t-green-bg)':'var(--t-accent-bg)',border:'1.5px solid '+(stepProposal.up?'var(--t-green)':'var(--t-accent)'),borderRadius:8}}>
+            <p style={{fontSize:14,color:'var(--t-text)',fontFamily:sans,fontWeight:600,margin:'0 0 10px'}}>{t(stepProposal.up?'levelUpAsk':'levelDownAsk').replace('{l}',stepProposal.label)}</p>
+            <div style={{display:'flex',gap:10,justifyContent:'center'}}>
+              <button onClick={()=>{const p=stepProposal;(trainFocus==='freq'?saveFreqStep:saveStep)(p.ns);setUserStep(p.ns);stepChangeRef.current=p.label;setStepProposal(null)}} style={{padding:'8px 16px',border:'none',borderRadius:6,background:stepProposal.up?'var(--t-green)':'var(--t-accent)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+              <button onClick={()=>setStepProposal(p=>({...p,declined:true}))} style={{padding:'8px 16px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
+            </div>
+          </div>
           :<>
-            <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{stepChangeRef.current?t('levelNow').replace('{l}',stepChangeRef.current):t('levelStay').replace('{l}',trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep))}</p>
+            <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{stepChangeRef.current?t('levelNow').replace('{l}',stepChangeRef.current):t(stepProposal?'levelKept':'levelStay').replace('{l}',trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep))}</p>
             <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>{remFresh===0?t('stepAllPracticed'):remFresh===1?t('stillToPractice1'):t('stillToPractice').replace('{n}',remFresh)}</p>
             {remFresh>0&&<p style={{fontSize:13,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 4px'}}>{unitsLeftText(remFresh)}</p>}
             {remDue>0&&<p style={{fontSize:13,color:'var(--t-accent)',fontFamily:sans,margin:'0 0 16px'}}>{remDue===1?t('reviewsDue1'):t('reviewsDue').replace('{n}',remDue)}</p>}
           </>}
-        <div style={{marginTop:remDue>0?0:12,display:'flex',gap:12,justifyContent:'center'}}>
-          <button onClick={()=>{setMode(null);setDone(false);setReviewPending(false);setReviewNext(null);reviewModeRef.current=false;clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
+        {/* Solange die Level-Rückfrage offen ist, bleiben Fertig/Weiter verborgen — die Antwort ist bewusst zu geben */}
+        {!(stepProposal&&!stepProposal.declined)&&<div style={{marginTop:remDue>0?0:12,display:'flex',gap:12,justifyContent:'center'}}>
+          <button onClick={()=>{setMode(null);setDone(false);setReviewPending(false);setReviewNext(null);setStepProposal(null);reviewModeRef.current=false;clozeUnitsRef.current=null;vocabUnitsRef.current=null}} style={S.navBtn}>{t('finish')}</button>
           {lastStart&&<button onClick={()=>{
-            setDone(false);stepChangeRef.current=null;clozeUnitsRef.current=null;vocabUnitsRef.current=null;
+            setDone(false);stepChangeRef.current=null;setStepProposal(null);clozeUnitsRef.current=null;vocabUnitsRef.current=null;
             if(reviewNext){
               const rs=reviewNext.step;setReviewNext(null);
               setReviewStep(rs);startReview(rs);
@@ -2404,7 +2428,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
               else{const allDone=FREQ_POOL.every(w=>{const d=wordData[w.en];return d&&d.familiarity>=1;});if(allDone)setReviewStep(null);setMode(allDone?'freqAllDone':'freqComplete');}
             }else if(lastStart==='vocab')startVocab(activeStep,trainFocus);else if(lastStart==='cloze')startCloze(activeStep,trainFocus);else if(lastStart.type==='book')startBookCloze(lastStart.bi);
           }} style={S.startBtn}>{t('next')}</button>}
-        </div>
+        </div>}
       </div>
     </div>);
   }
@@ -2709,6 +2733,22 @@ async function loadExamples(){
   return EXAMPLES;
 }
 
+// Lemma-Häufigkeit in der ganzen Bibel ({lemma: n}, aus generate_lemma_freq.py) —
+// lazy geladen; die Zahl fürs aktuelle Buch liefert countBookLemmas aus den
+// geladenen Buch-Annotationen (dieselbe Zählregel: jede Annotation zählt).
+let LEMMA_FREQ=null;
+async function loadLemmaFreq(){
+  if(LEMMA_FREQ)return LEMMA_FREQ;
+  try{if(INSTANCE.lemmaFreqPath){const r=await fetch(INSTANCE.lemmaFreqPath+CB);if(r.ok)LEMMA_FREQ=await r.json();}}catch(e){}
+  if(!LEMMA_FREQ)LEMMA_FREQ={};
+  return LEMMA_FREQ;
+}
+function countBookLemmas(chapters){
+  const cnt={};
+  for(const ch in chapters||{})for(const v in chapters[ch])for(const a of chapters[ch][v]){if(a.lemma)cnt[a.lemma]=(cnt[a.lemma]||0)+1;}
+  return cnt;
+}
+
 const _bookCache={};
 const _annoCache={};
 
@@ -2989,6 +3029,28 @@ const SPEED_PRESETS=[{l:'🐌',v:0.2},{k:'slow',v:0.3},{k:'normal',v:0.6},{k:'fa
 // Schmaler als der halbe Abstand zweier Presets — bei 0.05er-Schritten des
 // Reglers leuchtet so höchstens ein Knopf.
 const SPEED_MATCH=0.03;
+// iOS legt die Seite still, sobald der Bildschirm gesperrt wird: speechSynthesis liest die
+// laufende Äußerung noch zu Ende, aber die nächste wird nie eingereiht (JS steht) —
+// die Wiedergabe „bricht nach einer Weile ab" (Bug mu5e7odv). Eine stumme Endlosschleife
+// über ein <audio>-Element hält die Audio-Session der Seite offen; damit laufen Timer,
+// Vers-Wechsel und Kapitel-Nachladen auch bei gesperrtem Bildschirm weiter. Sie muss aus
+// einer Nutzergeste heraus starten (Play-Knopf) — später darf dasselbe Element ohne Geste
+// weiterspielen. Die 1 s Stille wird als WAV zur Laufzeit erzeugt (keine Datei nötig).
+const _keepAlive={el:null};
+function keepAliveEl(){
+  if(_keepAlive.el)return _keepAlive.el;
+  const rate=8000,bytes=rate*2,buf=new ArrayBuffer(44+bytes),dv=new DataView(buf);
+  const str=(o,t)=>{for(let i=0;i<t.length;i++)dv.setUint8(o+i,t.charCodeAt(i))};
+  str(0,'RIFF');dv.setUint32(4,36+bytes,true);str(8,'WAVE');str(12,'fmt ');dv.setUint32(16,16,true);
+  dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,rate,true);dv.setUint32(28,rate*2,true);
+  dv.setUint16(32,2,true);dv.setUint16(34,16,true);str(36,'data');dv.setUint32(40,bytes,true); // Samples bleiben 0 = Stille
+  const a=new Audio(URL.createObjectURL(new Blob([buf],{type:'audio/wav'})));
+  a.loop=true;a.preload='auto';a.setAttribute('playsinline','');
+  _keepAlive.el=a;return a;
+}
+function keepAliveStart(){try{const a=keepAliveEl();if(a.paused){const p=a.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}
+function keepAliveStop(){try{const a=_keepAlive.el;if(a&&!a.paused)a.pause()}catch(e){}}
+function mediaSessionState(st){try{if('mediaSession' in navigator)navigator.mediaSession.playbackState=st}catch(e){}}
 function useTTS(){
   const [speaking,setSpeaking]=useState(false);
   const [activeVerse,setActiveVerse]=useState(null);
@@ -3006,6 +3068,7 @@ function useTTS(){
     if(!pausedRef.current)return;
     pausedRef.current=false;setPaused(false);
     try{speechSynthesis.resume()}catch(e){}
+    mediaSessionState('playing');
   },[]);
   const lastSentenceRef=useRef({text:'',lang:INSTANCE.ttsLangPrefix});
   const currentVerseRef=useRef(null);const currentCallbackRef=useRef(null);const currentCharIdx=useRef(0);const currentWordIdx=useRef(0);const speedChangeRef=useRef(false);
@@ -3029,7 +3092,7 @@ function useTTS(){
       if(en.length)setVoices({[INSTANCE.ttsLangPrefix]:en});
     };
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
-    return()=>{speechSynthesis.cancel()};
+    return()=>{speechSynthesis.cancel();keepAliveStop()};
   },[]);
   const getVoice=useCallback((langOverride)=>{
     const ev=voices[INSTANCE.ttsLangPrefix]||[];
@@ -3065,18 +3128,20 @@ function useTTS(){
     speechSynthesis.speak(u);
   },[getVoice]);
   speakVerseRef.current=speakVerse;
-  const speakSingleVerse=useCallback((vN,text)=>{ensureResumed();speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=[];speakVerse(vN,text,()=>{setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1)})},[speakVerse,ensureResumed]);
+  const speakSingleVerse=useCallback((vN,text)=>{ensureResumed();keepAliveStart();speechSynthesis.cancel();stoppedRef.current=false;queueRef.current=[];speakVerse(vN,text,()=>{setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);keepAliveStop()})},[speakVerse,ensureResumed]);
   const allVersesRef=useRef([]);
   const nextCbRef=useRef(null);
   // Wird am Kapitelende aufgerufen (von App gesetzt): dort entscheidet sich, ob
-  // das nächste Kapitel weiterläuft. Ohne Callback endet die Wiedergabe wie bisher.
+  // das nächste Kapitel weiterläuft (Rückgabe true). Ohne Callback oder bei false
+  // endet die Wiedergabe wie bisher — dann darf auch die Stille-Schleife aufhören.
   const onChapterEnd=useRef(null);
   const buildNext=useCallback(()=>{
     const next=()=>{
       if(stoppedRef.current){setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);return}
       if(!queueRef.current.length){
         setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);
-        if(onChapterEnd.current)onChapterEnd.current();
+        const cont=onChapterEnd.current?onChapterEnd.current():false;
+        if(!cont)keepAliveStop();
         return;
       }
       setTimeout(()=>{if(stoppedRef.current)return;const n=queueRef.current.shift();scrollVerseIntoView(n.n);speakVerse(n.n,n.text,next,n.wordOffset||0)},300);
@@ -3085,7 +3150,7 @@ function useTTS(){
   },[speakVerse]);
   const speakChapter=useCallback(verses=>{
     allVersesRef.current=verses;
-    ensureResumed();
+    ensureResumed();keepAliveStart();mediaSessionState('playing');
     stoppedRef.current=true;speechSynthesis.cancel();
     stoppedRef.current=false;queueRef.current=verses.slice(1);setSpeaking(true);
     const next=buildNext();
@@ -3097,7 +3162,7 @@ function useTTS(){
     const curIdx=all.findIndex(v=>v.n===activeVerse);
     const newIdx=curIdx+dir;
     if(newIdx<0||newIdx>=all.length)return;
-    ensureResumed();
+    ensureResumed();keepAliveStart();
     stoppedRef.current=true;speechSynthesis.cancel();stoppedRef.current=false;
     queueRef.current=all.slice(newIdx+1);
     const next=buildNext();
@@ -3111,15 +3176,33 @@ function useTTS(){
     if(pausedRef.current){ensureResumed();return}
     pausedRef.current=true;setPaused(true);
     try{speechSynthesis.pause()}catch(e){}
+    mediaSessionState('paused');
   },[ensureResumed]);
   const stop=useCallback(()=>{
     lastStoppedVerse.current=activeVerse;stoppedRef.current=true;queueRef.current=[];
     pausedRef.current=false;setPaused(false);
     try{speechSynthesis.resume()}catch(e){} // eine Pause würde cancel() sonst aufschieben
     speechSynthesis.cancel();setSpeaking(false);setActiveVerse(null);setActiveWordIdx(-1);
+    keepAliveStop();mediaSessionState('none');
   },[activeVerse]);
+  // Sperrbildschirm-/Kopfhörer-Steuerung (Media Session): Play/Pause, Stopp,
+  // Vers vor/zurück. Die Handler greifen über einen Ref immer auf die aktuellen
+  // Funktionen zu; Titel (Buch + Kapitel) setzt App über setMediaInfo.
+  const msRef=useRef({});
+  msRef.current={togglePause,stop,skipVerse,ensureResumed};
+  useEffect(()=>{
+    if(!('mediaSession' in navigator))return;
+    const set=(a,f)=>{try{navigator.mediaSession.setActionHandler(a,f)}catch(e){}};
+    set('play',()=>msRef.current.ensureResumed());
+    set('pause',()=>{if(!pausedRef.current)msRef.current.togglePause()});
+    set('stop',()=>msRef.current.stop());
+    set('nexttrack',()=>msRef.current.skipVerse(1));
+    set('previoustrack',()=>msRef.current.skipVerse(-1));
+    return()=>{['play','pause','stop','nexttrack','previoustrack'].forEach(a=>set(a,null))};
+  },[]);
+  const setMediaInfo=useCallback((title,artist)=>{try{if('mediaSession' in navigator&&window.MediaMetadata)navigator.mediaSession.metadata=new MediaMetadata({title,artist})}catch(e){}},[]);
   const hasVoices=(voices[INSTANCE.ttsLangPrefix]||[]).length>0;
-  return{speaking,paused,togglePause,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang,lastStoppedVerse,skipVerse,onChapterEnd};
+  return{speaking,paused,togglePause,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang,lastStoppedVerse,skipVerse,onChapterEnd,setMediaInfo};
 }
 
 // ─── App ────────────────────────────────────────────────
@@ -3522,6 +3605,10 @@ function App({data}){
   // abgeleitet (deriveAnnoChapters). Gibt es dafür kein Gloss-Feld, ist das
   // Ergebnis leer → hasAnno=false → reines Lesen ohne Glossen/Quiz.
   const annotations=useMemo(()=>(bookAnnotations&&glossLang)?{[bookName]:deriveAnnoChapters(bookAnnotations.chapters,glossLang)}:{},[bookAnnotations,bookName,glossLang]);
+  // Lemma-Häufigkeit (Bug mu593c53): Bibel gesamt aus lemma_freq.json, Buch aus den rohen Annotationen
+  const [lemmaFreq,setLemmaFreq]=useState(LEMMA_FREQ);
+  useEffect(()=>{if(!lemmaFreq&&bookAnnotations&&INSTANCE.lemmaFreqPath)loadLemmaFreq().then(setLemmaFreq)},[bookAnnotations]);
+  const bookLemmaCounts=useMemo(()=>countBookLemmas(bookAnnotations?.chapters),[bookAnnotations]);
   const hasAnno=useMemo(()=>{const a=annotations[bookName];return !!(a&&Object.keys(a).length)},[annotations,bookName]);
   const hasAnnotations=hasAnno;
 
@@ -3766,10 +3853,12 @@ function App({data}){
   useEffect(()=>{
     tts.onChapterEnd.current=()=>{
       const hasNext=chapIdx<(currentBook?.numChapters||0)-1||bookIdx<books.length-1;
-      if(!hasNext)return;
-      autoPlayRef.current=true;nextChapter();
+      if(!hasNext)return false;
+      autoPlayRef.current=true;nextChapter();return true;
     };
   });
+  // Sperrbildschirm zeigt Buch + Kapitel, solange vorgelesen wird
+  useEffect(()=>{if(tts.speaking&&bookName)tts.setMediaInfo(`${bookName} ${chapNum||''}`.trim(),INSTANCE.label)},[tts.speaking,bookName,chapNum]);
 
   // Suchbereich: aktuelles Kapitel · aktuelles Buch · AT · NT · ganze Bibel.
   // Die Bücher werden einzeln nachgeladen; ein enger Bereich spart das Laden der übrigen.
@@ -4872,6 +4961,7 @@ function App({data}){
                   {showLemma&&item.form&&item.form!==item.lemma&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>({item.lemma||item.word})</p>}
                   <p style={{fontSize:17,color:'var(--t-text)',fontFamily:sans,margin:0}}>{item.de}</p>
                   {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
+                  {hasAnno&&item.lemma&&<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'4px 0 0'}}>{t('lemmaOcc').replace('{b}',lemmaFreq?.[item.lemma]??'–').replace('{k}',bookLemmaCounts[item.lemma]||0)}</p>}
                 </div>
                 <div style={{display:'flex',gap:10,justifyContent:'center'}}>
                   <button onClick={()=>{trainWord(key,1);const nk=reviewKnownCount+1;setReviewKnownCount(nk);const next=vocabReviewIdx+1;const sinceBase=next-reviewCheckBase;if(sinceBase>=20&&!levelSuggestion&&!levelSuggestDone&&nk/sinceBase>=0.85){if(userStep<SUBSTEPS.length-1)setLevelSuggestion(userStep+1)}setUnknownWords(u=>{const n=new Set(u);n.delete(key);return n});setVocabReviewIdx(next);setVocabSettingsOpen(false)}} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>

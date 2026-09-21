@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
-- **Aktuelle Version:** 1.11.10b (10.09.2026)
+- **Aktuelle Version:** 1.11.11b (21.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
 - **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -40,6 +40,7 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 ### Text-to-Speech (TTS)
 
 - Kapitelweise Vorlesefunktion mit Wort-für-Wort-Hervorhebung
+- Weiterlesen bei gesperrtem Bildschirm (iOS): beim Start läuft zusätzlich eine stumme 1-s-WAV-Schleife (`keepAliveStart`, zur Laufzeit erzeugt), die die Audio-Session der Seite offen hält — sonst friert iOS das JS ein und nach der laufenden Äußerung kommt kein nächster Vers mehr. Endet mit Stopp bzw. am Bibelende. Media Session liefert Sperrbildschirm-/Kopfhörer-Steuerung (Play/Pause/Stopp, Vers vor/zurück) und zeigt Buch + Kapitel
 - Einstellbare Geschwindigkeit (0.2×–1.0×); die Voreinstellungen stehen als `SPEED_PRESETS` in `index.html` (🐌 0.2 · Langsam 0.3 · Normal 0.6 · Schnell 0.85 · Sehr schnell 1.0) und werden an allen drei Stellen daraus gespeist
 - Einzelvers-Vorleseoption
 - Übungsmodus für unbekannte Wörter
@@ -106,7 +107,7 @@ Eigennamen sind aus den Übungen ausgenommen, bis auf die **wichtigsten mit Lern
   - **D**: 1 ungeübtes Wort aus Step+1
   - **E**: neue Wörter (fam=−1) des aktuellen Levels — füllt auf 15 auf; bei Knappheit Auffüllen aus A, dann B, dann C/D
 - Ablauf: 15 Fragen → Zwischenergebnis mit Score → Wiederholung der Fehler → Endergebnis (First-Pass-Score + „Alle Fehler korrigiert")
-- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); eine Anpassung erfolgt erst ab **5 gewerteten Wörtern** — kurz vor Stufen-Erschöpfung bestehen Einheiten fast nur aus Wiederholungen, und auf 1–3 Wörtern wäre die Quote reines Rauschen (Level wird dann gehalten, bis der Erschöpfungs-Aufstieg greift)
+- Adaptive Schwierigkeit (5-stufig): 100% = Doppelsprung (+2 Sublevels) · > 80% = +1 · 70–80% = Level halten (±0) · 40–69% = −1 · < 40% = −2. Zählt nur Wörter der Slots B/E des aktuellen Levels (A/C/D herausgerechnet); eine Anpassung erfolgt erst ab **5 gewerteten Wörtern** — kurz vor Stufen-Erschöpfung bestehen Einheiten fast nur aus Wiederholungen, und auf 1–3 Wörtern wäre die Quote reines Rauschen (Level wird dann gehalten, bis der Erschöpfungs-Aufstieg greift). **Die Anpassung wird nie ungefragt übernommen:** der Ergebnis-Screen zeigt „Level auf X anheben/senken? Ja · Nein"; Fertig/Weiter erscheinen erst nach der Antwort. Ja → Level gespeichert („Dein Level ist jetzt X"), Nein → „Level bleibt X"
 - Level-Aufstieg bei Erschöpfung: hat der aktuelle Step keine neuen und keine fälligen unbekannten Wörter mehr → automatischer Step+1 mit 🎉-Gratulations-Screen; fällige Wiederholungen blockieren den Aufstieg nicht
 - Review als „Level 18": Auf der obersten Stufe (C2.3) gibt es keinen höheren Step. Wird dort eine Einheit **aufstiegswürdig** absolviert (>80% = normalerweise +1/+2), springt der Ergebnis-Screen direkt in die Review über („🎉 Oberste Stufe gemeistert!", Weiter-Button startet die erste Review-Einheit ab B2.2) — man muss also nicht erst ganz C2.3 durchüben. Bei Halten (70–80%) oder Abstieg (<70%) bleibt/sinkt das Level normal
 - Nutzer-Feedback: „zu einfach" → familiarity=3, „nur geraten" → Wiederholung am Ende
@@ -170,6 +171,8 @@ bible-reader/
 │   │       │                          (5.615 Wörter über A1–C2; VOCAB_POOL + CLOZE_EXERCISES
 │   │       │                          werden daraus abgeleitet)
 │   │       ├── examples.json          Beispielsätze-Index (Lemma → Vers-Referenzen, 207 KB, lazy)
+│   │       ├── lemma_freq.json        Lemma → Vorkommen in der ganzen Bibel (148 KB, lazy;
+│   │       │                          Wortkarte „in der Bibel N × · in diesem Buch N ×")
 │   │       └── vocab_pool.json · context_exercises.json   Build-Intermediates (gitignored)
 │   ├── spa/rv1909mod/                 Español — wie eng/web mit anno/ (Glossen en) und train/
 │   ├── spa/rv1909 · fra/lsg1910mod · ita/riv1927mod   Nur Lesen (keine Annotationen/Training)
@@ -180,6 +183,8 @@ bible-reader/
 │                                      examples.json, propnames.json (3223 Eigennamen),
 │                                      keepnames.json; lemmas_raw.json ist ein
 │                                      Build-Intermediate (gitignored)
+├── generate_lemma_freq.py             Zählt je Edition alle Annotationen pro Lemma → train/lemma_freq.json
+│                                      (eng/web, spa/rv1909mod, deu/l1912mod, fra/lsg1910mod = nur NT)
 ├── generate_training_data.js          Generiert words.json aus Annotationen
 │                                      (Oxford 5000 + Kaggle + Opus CEFR-Abgleich, Filterung)
 ├── build_training.py                  Trainingsdaten Schritt 1: Lemmata, Häufigkeit, bester
