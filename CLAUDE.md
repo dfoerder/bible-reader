@@ -51,6 +51,7 @@ Code: früher Script-Block (Fehler-Ringpuffer `window.__bugLog`, `?bugs=`-Schalt
 **Daten-Laufzeit:** (Trainingsdaten gehören zur jeweiligen Bibel-Edition und liegen pro Edition unter `bibles/<edition>/train/`; die Pfade stehen in der `BIBLES`-Registry als `wordsPath`/`examplesPath`)
 - `bibles/eng/web/train/words.json` — Single Source of Truth der WEB-Bibel: Vokabel-Pool + Lückentext-Übungen (5615 Wörter, `VOCAB_POOL` + `CLOZE_EXERCISES` werden daraus abgeleitet)
 - `bibles/eng/web/train/examples.json` — Beispielsätze-Index (207 KB, lazy)
+- `bibles/<edition>/train/lemma_freq.json` — Lemma → Vorkommen in der ganzen Bibel (lazy, `lemmaFreqPath`); erzeugt mit `python3 generate_lemma_freq.py` — nach jeder Annotationsänderung neu laufen lassen
 - `bibles/` — Bibeltexte + Annotationen (`anno/`) + Trainingsdaten (`train/`) pro Buch/Edition (lazy geladen)
 - `localStorage` — Nutzerstand: `bible-word-data`, `bible-freq-step`, `bible-train-step`, `bible-train-focus`, `bible-reader-state`, u.a.
 
