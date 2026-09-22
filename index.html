@@ -165,8 +165,8 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.12b';
-const APP_DATE = '21.09.2026';
+const APP_VERSION = '1.11.13b';
+const APP_DATE = '22.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -599,7 +599,12 @@ const I18N={
   levelUpAsk:{de:'Sehr gut! Level auf {l} anheben?',en:'Well done! Raise your level to {l}?',es:'¡Muy bien! ¿Subir tu nivel a {l}?',it:'Ottimo! Alzare il tuo livello a {l}?',fr:'Très bien ! Monter ton niveau à {l} ?'},
   levelDownAsk:{de:'Level auf {l} senken?',en:'Lower your level to {l}?',es:'¿Bajar tu nivel a {l}?',it:'Abbassare il tuo livello a {l}?',fr:'Baisser ton niveau à {l} ?'},
   autoLevel:{de:'Level nach Ergebnis automatisch anpassen (ohne Rückfrage)',en:'Adjust level automatically by results (no prompt)',es:'Ajustar el nivel automáticamente según los resultados (sin preguntar)',it:'Adatta il livello automaticamente in base ai risultati (senza chiedere)',fr:'Adapter le niveau automatiquement selon les résultats (sans demander)'},
-  autoLevelHint:{de:'Aus: nach jeder Einheit wird gefragt, ob das Level steigen oder sinken soll.',en:'Off: after each unit you are asked whether to raise or lower the level.',es:'Desactivado: tras cada unidad se pregunta si subir o bajar el nivel.',it:'Disattivato: dopo ogni unità viene chiesto se alzare o abbassare il livello.',fr:'Désactivé : après chaque unité, on demande si le niveau doit monter ou baisser.'},
+  stayLevel:{de:'Auf dem Level bleiben (ohne Rückfrage)',en:'Stay at the current level (no prompt)',es:'Quedarse en el nivel actual (sin preguntar)',it:'Restare al livello attuale (senza chiedere)',fr:'Rester au niveau actuel (sans demander)'},
+  levelPolicyHint:{de:'Beide aus: nach jeder Einheit wird gefragt, ob das Level steigen oder sinken soll — die Antwort dort kann eine der beiden Einstellungen setzen.',en:'Both off: after each unit you are asked whether to raise or lower the level — your answer there can set one of these options.',es:'Ambas desactivadas: tras cada unidad se pregunta si subir o bajar el nivel; la respuesta puede activar una de estas opciones.',it:'Entrambe disattivate: dopo ogni unità viene chiesto se alzare o abbassare il livello; la risposta può attivare una di queste opzioni.',fr:'Les deux désactivées : après chaque unité, on demande si le niveau doit monter ou baisser ; la réponse peut activer l\'une de ces options.'},
+  rememberAnswer:{de:'Antwort merken – nicht mehr fragen',en:'Remember answer – don\'t ask again',es:'Recordar respuesta – no volver a preguntar',it:'Ricorda la risposta – non chiedere più',fr:'Mémoriser la réponse – ne plus demander'},
+  explain:{de:'Erklärung',en:'Explanation',es:'Explicación',it:'Spiegazione',fr:'Explication'},
+  trainingSettings:{de:'Trainings-Einstellungen',en:'Training settings',es:'Ajustes del entrenamiento',it:'Impostazioni allenamento',fr:'Réglages de l\'entraînement'},
+  exLevelExplain:{de:'CEFR {c}: Sprachniveau des Wortes nach dem Europäischen Referenzrahmen — A1 Anfänger, A2 Grundstufe, B1/B2 Mittelstufe, C1/C2 fortgeschritten. Jedes Level ist nach Häufigkeit in drei Stufen .1–.3 unterteilt.\n{f}/18: Häufigkeitsstufe — alle Lernwörter sind nach ihrer Häufigkeit in der Bibel in 18 gleich große Stufen geteilt; 1 = die häufigsten, 18 = die seltensten.\n{n} ×: so oft kommt das Wort (Grundform) in der ganzen Bibel vor.',en:'CEFR {c}: the word\'s level in the Common European Framework — A1 beginner, A2 elementary, B1/B2 intermediate, C1/C2 advanced. Each level is split by frequency into three steps .1–.3.\n{f}/18: frequency step — all vocabulary is divided by frequency in the Bible into 18 equal steps; 1 = most frequent, 18 = rarest.\n{n} ×: how often the word (base form) occurs in the whole Bible.',es:'CEFR {c}: nivel de la palabra según el Marco Común Europeo — A1 principiante, A2 elemental, B1/B2 intermedio, C1/C2 avanzado. Cada nivel se divide por frecuencia en tres grados .1–.3.\n{f}/18: grado de frecuencia — todo el vocabulario se divide por su frecuencia en la Biblia en 18 grados iguales; 1 = las más frecuentes, 18 = las más raras.\n{n} ×: cuántas veces aparece la palabra (forma base) en toda la Biblia.',it:'CEFR {c}: livello della parola secondo il Quadro Comune Europeo — A1 principiante, A2 elementare, B1/B2 intermedio, C1/C2 avanzato. Ogni livello è suddiviso per frequenza in tre gradi .1–.3.\n{f}/18: grado di frequenza — tutto il vocabolario è diviso per frequenza nella Bibbia in 18 gradi uguali; 1 = le più frequenti, 18 = le più rare.\n{n} ×: quante volte la parola (forma base) ricorre in tutta la Bibbia.',fr:'CECR {c} : niveau du mot selon le Cadre européen commun — A1 débutant, A2 élémentaire, B1/B2 intermédiaire, C1/C2 avancé. Chaque niveau est divisé par fréquence en trois paliers .1–.3.\n{f}/18 : palier de fréquence — tout le vocabulaire est réparti selon sa fréquence dans la Bible en 18 paliers égaux ; 1 = les plus fréquents, 18 = les plus rares.\n{n} × : nombre d\'occurrences du mot (forme de base) dans toute la Bible.'},
   levelKept:{de:'Level bleibt {l}.',en:'Level stays {l}.',es:'El nivel sigue en {l}.',it:'Il livello resta {l}.',fr:'Le niveau reste {l}.'},
   // Lemma-Häufigkeit in der Wortkarte (Bug mu593c53)
   lemmaOcc:{de:'in der Bibel {b} × · in diesem Buch {k} ×',en:'in the Bible {b} × · in this book {k} ×',es:'en la Biblia {b} × · en este libro {k} ×',it:'nella Bibbia {b} × · in questo libro {k} ×',fr:'dans la Bible {b} × · dans ce livre {k} ×'},
@@ -1675,7 +1680,15 @@ function ExLevelTag({en}){
   if(!li)return null;
   const lf=LEMMA_FREQ||{};
   const n=lf[en]??lf[en.charAt(0).toUpperCase()+en.slice(1)]??WORD_BY_EN.get(en)?.occ;
-  return <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,textAlign:'center',margin:'6px 0 0'}}>{t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)}{n!=null?' · '+t('exLevelOcc').replace('{n}',n):''}</p>;
+  // Tipp auf die Zeile klappt eine Erklärung der drei Angaben auf (Bug mucfkhbs)
+  return <ExLevelLine text={t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)+(n!=null?' · '+t('exLevelOcc').replace('{n}',n):'')} explain={t('exLevelExplain').replace('{c}',li.cefr).replace('{f}',li.freq).replace('{n}',n!=null?n:'–')}/>;
+}
+function ExLevelLine({text,explain}){
+  const [open,setOpen]=useState(false);
+  return(<div style={{textAlign:'center',margin:'6px 0 0'}}>
+    <p onClick={()=>setOpen(o=>!o)} style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:0,cursor:'pointer',textDecoration:'underline dotted',textUnderlineOffset:3}} title={t('explain')}>{text} ⓘ</p>
+    {open&&<div onClick={()=>setOpen(false)} style={{margin:'8px auto 0',maxWidth:340,padding:'10px 12px',background:'var(--t-bg)',border:'1px solid var(--t-border)',borderRadius:8,fontSize:12,lineHeight:1.5,color:'var(--t-text2)',fontFamily:sans,textAlign:'left',whiteSpace:'pre-line',cursor:'pointer'}}>{explain}</div>}
+  </div>);
 }
 function formWrong(target){
   const key=(target.pos||'')+'|'+(target.form||'base');
@@ -1955,7 +1968,7 @@ function runLearnerSim(cfg){
   return [...summary,'',...events,'',...lines].join('\n');
 }
 
-function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordData,trainWord,onShowProgress}){
+function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordData,trainWord,onShowProgress,onSettings,levelPolicy,setLevelPolicy}){
   const [mode,setMode]=useState(null);
   const [exType,setExType]=useState(null);
   const [selectedLevel,setSelectedLevel]=useState(userLevel);
@@ -2315,6 +2328,8 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
   // Nutzers übernommen (Bug mu590qij: nie ungefragt das Level ändern).
   // {ns, label, up} · declined:true nach „Nein"
   const [stepProposal,setStepProposal]=useState(null);
+  // „Antwort merken": Ja → Einstellung auto, Nein → stay (Bug mucjvi72); Standard an
+  const [rememberPolicy,setRememberPolicy]=useState(true);
 
   // useLayoutEffect: Levelanpassung + reviewPending synchron vor dem Paint setzen,
   // damit der Ergebnis-Screen sofort korrekt rendert (kein Flackern der Level-/Review-Zeile)
@@ -2356,9 +2371,12 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
         reviewPend=true;stepChangeRef.current=null;
       } else if(ns!==curStep){
         const label=trainFocus==='freq'?(ns+1)+'/'+SUBSTEPS.length:stepLabel(ns);
-        if(LS.get('bible-auto-level')===true){
+        if(levelPolicy==='auto'){
           // Einstellung „Level automatisch anpassen": ohne Rückfrage übernehmen
           saveFn(ns);setUserStep(ns);stepChangeRef.current=label;
+        } else if(levelPolicy==='stay'){
+          // Einstellung „Auf dem Level bleiben": weder ändern noch fragen
+          stepChangeRef.current=null;
         } else {
           // Nur vorschlagen — übernommen wird erst per Ja-Knopf im Ergebnis-Screen
           stepChangeRef.current=null;
@@ -2418,9 +2436,12 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
           ?<div style={{margin:'0 12px 16px',padding:'12px',background:stepProposal.up?'var(--t-green-bg)':'var(--t-accent-bg)',border:'1.5px solid '+(stepProposal.up?'var(--t-green)':'var(--t-accent)'),borderRadius:8}}>
             <p style={{fontSize:14,color:'var(--t-text)',fontFamily:sans,fontWeight:600,margin:'0 0 10px'}}>{t(stepProposal.up?'levelUpAsk':'levelDownAsk').replace('{l}',stepProposal.label)}</p>
             <div style={{display:'flex',gap:10,justifyContent:'center'}}>
-              <button onClick={()=>{const p=stepProposal;(trainFocus==='freq'?saveFreqStep:saveStep)(p.ns);setUserStep(p.ns);stepChangeRef.current=p.label;setStepProposal(null)}} style={{padding:'8px 16px',border:'none',borderRadius:6,background:stepProposal.up?'var(--t-green)':'var(--t-accent)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
-              <button onClick={()=>setStepProposal(p=>({...p,declined:true}))} style={{padding:'8px 16px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
+              <button onClick={()=>{const p=stepProposal;(trainFocus==='freq'?saveFreqStep:saveStep)(p.ns);setUserStep(p.ns);stepChangeRef.current=p.label;setStepProposal(null);if(rememberPolicy&&setLevelPolicy)setLevelPolicy('auto')}} style={{padding:'8px 16px',border:'none',borderRadius:6,background:stepProposal.up?'var(--t-green)':'var(--t-accent)',color:'#fff',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:sans}}>{t('yes')}</button>
+              <button onClick={()=>{setStepProposal(p=>({...p,declined:true}));if(rememberPolicy&&setLevelPolicy)setLevelPolicy('stay')}} style={{padding:'8px 16px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-card-solid)',color:'var(--t-text2)',fontSize:13,cursor:'pointer',fontFamily:sans}}>{t('no')}</button>
             </div>
+            <label style={{display:'flex',alignItems:'center',justifyContent:'center',gap:6,marginTop:10,fontSize:12,color:'var(--t-muted)',fontFamily:sans,cursor:'pointer'}}>
+              <input type="checkbox" checked={rememberPolicy} onChange={()=>setRememberPolicy(v=>!v)}/>{t('rememberAnswer')}
+            </label>
           </div>
           :<>
             <p style={{fontSize:14,color:stepChangeRef.current?(displayScore>=totalRef.current*0.85?'var(--t-green)':'var(--t-accent)'):'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{stepChangeRef.current?t('levelNow').replace('{l}',stepChangeRef.current):t(stepProposal?'levelKept':'levelStay').replace('{l}',trainFocus==='freq'?(activeStep+1)+'/'+SUBSTEPS.length:stepLabel(activeStep))}</p>
@@ -2497,7 +2518,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     const cu=clozeUnitsRef.current;
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>{t('cloze')}</h1>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
+          <h1 style={{...S.title,margin:0}}>{t('cloze')}</h1>
+          {onSettings&&<button onClick={onSettings} style={{fontSize:20,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:0}} title={t('trainingSettings')}>⚙</button>}
+        </div>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{cu&&cu.units.length>1?' — '+t('unitProgress').replace('{c}',cu.unitIdx+1).replace('{t}',cu.units.length):''}</p>
         {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,justifyContent:'center',marginTop:6}}>
           <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
@@ -2551,7 +2575,10 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
     const ex=exercises[current];const opts=shuffledOpts[current];const vu=vocabUnitsRef.current;
     return(<div>
       <header style={S.header}>
-        <h1 style={S.title}>{t('vocab')}</h1>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
+          <h1 style={{...S.title,margin:0}}>{t('vocab')}</h1>
+          {onSettings&&<button onClick={onSettings} style={{fontSize:20,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:0}} title={t('trainingSettings')}>⚙</button>}
+        </div>
         <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{current+1} / {exercises.length}{vu&&vu.units.length>1?' — '+t('unitProgress').replace('{c}',vu.unitIdx+1).replace('{t}',vu.units.length):''}</p>
         {(lastStart==='vocab'||lastStart==='cloze')&&<div style={{...S.levelBtns,justifyContent:'center',marginTop:6}}>
           <button onClick={()=>switchExercise('quiz')} style={{...S.lvlBtn,...(exType==='vocab'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
@@ -2702,6 +2729,7 @@ function Training({userLevel,userStep,setUserStep,onBack,books,openChapter,wordD
       <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,margin:'0 0 4px'}}>
         <h1 style={{...S.title,margin:0}}>{t('training')}</h1>
         {onShowProgress&&<button onClick={onShowProgress} style={{fontSize:20,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:0}} title={t('progress')}>📊</button>}
+        {onSettings&&<button onClick={onSettings} style={{fontSize:20,lineHeight:1,background:'none',border:'none',cursor:'pointer',color:'var(--t-muted)',padding:0}} title={t('trainingSettings')}>⚙</button>}
       </div>
     </header>
     <div style={S.navRow}><button onClick={onBack} style={S.navBtn}>{t('back')}</button></div>
@@ -3343,8 +3371,11 @@ function App({data}){
   const [showLemma,setShowLemma]=useState(LS.get('bible-show-lemma')!==false);
   const [showCefrLevel,setShowCefrLevel]=useState(LS.get('bible-show-cefr')!==false);
   const [showExLevel,setShowExLevel]=useState(LS.get('bible-show-ex-level')===true);
-  // Levelanpassung nach Einheiten ohne Rückfrage (Bug mubn9e4x); aus = fragen
-  const [autoLevel,setAutoLevel]=useState(LS.get('bible-auto-level')===true);
+  // Levelanpassung nach Einheiten: 'ask' (Standard) · 'auto' (ohne Rückfrage anpassen)
+  // · 'stay' (ohne Rückfrage auf dem Level bleiben). Migration vom alten Schalter bible-auto-level.
+  const [levelPolicy,setLevelPolicyState]=useState(()=>LS.get('bible-level-policy')||(LS.get('bible-auto-level')===true?'auto':'ask'));
+  const setLevelPolicy=useCallback(v=>{setLevelPolicyState(v);LS.set('bible-level-policy',v);LS.remove('bible-auto-level')},[]);
+  const [showTrainSettings,setShowTrainSettings]=useState(false);
   const [autoTranslate,setAutoTranslate]=useState(LS.get('bible-auto-translate')!==false);
   const [layout,setLayoutState]=useState(LS.get('bible-layout')||'classic');
   const changeLayout=useCallback(v=>{setLayoutState(v);LS.set('bible-layout',v)},[]);
@@ -3485,6 +3516,42 @@ function App({data}){
   const switchHaupt=useCallback(id=>{if(id===INSTANCE.id||!BIBLES[id])return;tts.stop();rawLSset('bible-haupt',id);location.reload()},[tts]);
   const [clozeCtx,setClozeCtxState]=useState(LS.get('bible-cloze-ctx')||'sentence');
   const changeClozeCtx=useCallback(v=>{setClozeCtxState(v);LS.set('bible-cloze-ctx',v)},[]);
+  // Die trainingsbezogenen Einstellungen stehen an zwei Stellen: auf der Einstellungsseite
+  // und im ⚙-Fenster der Trainingsumgebung (Bug mucfazbl/mucfill4) — daher einmal definiert.
+  const trainingSettingsBody=(<>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('reviewSettings')}</span>
+            <label style={{...S.toggleRow,marginTop:6}}>
+              <input type="checkbox" checked={showLemma} onChange={()=>{const v=!showLemma;setShowLemma(v);LS.set('bible-show-lemma',v)}}/>
+              <span style={S.toggleLabel}>{t('showLemma')}</span>
+            </label>
+            <label style={S.toggleRow}>
+              <input type="checkbox" checked={showCefrLevel} onChange={()=>{const v=!showCefrLevel;setShowCefrLevel(v);LS.set('bible-show-cefr',v)}}/>
+              <span style={S.toggleLabel}>{t('showCefrLevel')}</span>
+            </label>
+          </div>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('exercisesSection')}</span>
+            <label style={{...S.toggleRow,marginTop:6}}>
+              <input type="checkbox" checked={showExLevel} onChange={()=>{const v=!showExLevel;setShowExLevel(v);LS.set('bible-show-ex-level',v)}}/>
+              <span style={S.toggleLabel}>{t('showExLevel')}</span>
+            </label>
+            <label style={S.toggleRow}>
+              <input type="checkbox" checked={levelPolicy==='auto'} onChange={()=>setLevelPolicy(levelPolicy==='auto'?'ask':'auto')}/>
+              <span style={S.toggleLabel}>{t('autoLevel')}</span>
+            </label>
+            <label style={S.toggleRow}>
+              <input type="checkbox" checked={levelPolicy==='stay'} onChange={()=>setLevelPolicy(levelPolicy==='stay'?'ask':'stay')}/>
+              <span style={S.toggleLabel}>{t('stayLevel')}</span>
+            </label>
+            <p style={S.settingsHint}>{t('levelPolicyHint')}</p>
+          </div>
+          <div style={{marginTop:16}}>
+            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('clozeContext')}</span>
+            <div style={{...S.levelBtns,marginTop:6}}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
+          </div>
+  </>);
   useEffect(()=>{const b=document.body;b.classList.toggle('theme-icf',layout==='icf');b.classList.toggle('theme-icf-light',layout==='icf-light');const tc=layout==='icf'?'#0f0f0f':layout==='icf-light'?'#f5f5f5':'#5a4a32';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',tc)},[layout]);
   const defaultStatsVisible={text:true,vocabulary:true,progress:true};
   const [statsVisible,setStatsVisible]=useState(()=>({...defaultStatsVisible,...(LS.get('bible-stats-visible')||{})}));
@@ -4197,7 +4264,14 @@ function App({data}){
   // ── TRAINING ──
   if(phase==='training'){
     return(<div style={{height:'100%'}}>
-      <Training userLevel={userLevel} userStep={userStep} setUserStep={setUserStep} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)}/>
+      <Training userLevel={userLevel} userStep={userStep} setUserStep={setUserStep} onBack={()=>setPhase(prevPhaseRef.current||'nav')} books={books} openChapter={openChapter} wordData={wordData} trainWord={trainWord} onShowProgress={()=>setShowProgressPanel(true)} onSettings={()=>setShowTrainSettings(true)} levelPolicy={levelPolicy} setLevelPolicy={setLevelPolicy}/>
+      {showTrainSettings&&<div onClick={()=>setShowTrainSettings(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9998,padding:16}}>
+        <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'18px 20px',maxWidth:380,width:'100%',maxHeight:'80vh',overflowY:'auto',fontFamily:sans}}>
+          <h2 style={{fontSize:17,fontWeight:600,color:'var(--t-title)',margin:'0 0 4px'}}>{t('trainingSettings')}</h2>
+          {trainingSettingsBody}
+          <div style={{marginTop:18,textAlign:'right'}}><button onClick={()=>setShowTrainSettings(false)} style={S.navBtn}>{t('close')}</button></div>
+        </div>
+      </div>}
       {showProgressPanel&&<div onClick={()=>setShowProgressPanel(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9998}}>
         <div onClick={e=>e.stopPropagation()} style={{background:'var(--t-card-solid)',borderRadius:12,padding:'20px 24px',maxWidth:340,width:'90%',fontFamily:sans}}>
           <h2 style={{fontSize:17,fontWeight:600,color:'var(--t-title)',margin:'0 0 14px'}}>{t('progress')} Wörter lernen</h2>
@@ -4414,34 +4488,7 @@ function App({data}){
           {INSTANCE.hasLevelTest&&glossLang&&<div style={{marginTop:8}}>
             <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
           </div>}
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('reviewSettings')}</span>
-            <label style={{...S.toggleRow,marginTop:6}}>
-              <input type="checkbox" checked={showLemma} onChange={()=>{const v=!showLemma;setShowLemma(v);LS.set('bible-show-lemma',v)}}/>
-              <span style={S.toggleLabel}>{t('showLemma')}</span>
-            </label>
-            <label style={S.toggleRow}>
-              <input type="checkbox" checked={showCefrLevel} onChange={()=>{const v=!showCefrLevel;setShowCefrLevel(v);LS.set('bible-show-cefr',v)}}/>
-              <span style={S.toggleLabel}>{t('showCefrLevel')}</span>
-            </label>
-          </div>
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('exercisesSection')}</span>
-            <label style={{...S.toggleRow,marginTop:6}}>
-              <input type="checkbox" checked={showExLevel} onChange={()=>{const v=!showExLevel;setShowExLevel(v);LS.set('bible-show-ex-level',v)}}/>
-              <span style={S.toggleLabel}>{t('showExLevel')}</span>
-            </label>
-            <label style={S.toggleRow}>
-              <input type="checkbox" checked={autoLevel} onChange={()=>{const v=!autoLevel;setAutoLevel(v);LS.set('bible-auto-level',v)}}/>
-              <span style={S.toggleLabel}>{t('autoLevel')}</span>
-            </label>
-            <p style={S.settingsHint}>{t('autoLevelHint')}</p>
-          </div>
-          <div style={{marginTop:16}}>
-            <span style={{fontSize:14,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}>{t('clozeContext')}</span>
-            <div style={{...S.levelBtns,marginTop:6}}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>changeClozeCtx(o.k)} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
-            <p style={S.settingsHint}>{t('clozeContextHint')}</p>
-          </div>
+          {trainingSettingsBody}
           <div style={{marginTop:16}}>
             <button onClick={()=>setShowResetDialog(true)} style={S.resetBtn}>{t('resetProgress')}</button>
           </div>

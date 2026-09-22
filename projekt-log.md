@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.13b (22.09.2026)
+
+- Trainings-Einstellungen per ⚙ aus Training und Übungen erreichbar; zweiter Schalter „Auf dem Level bleiben" samt „Antwort merken" in der Rückfrage; Stufenzeile in Übungen erklärt sich auf Tipp
+
 ## v1.11.12b (21.09.2026)
 
 - Einstellung „Level automatisch anpassen" (sonst Rückfrage); Übungs-Levelzeile ohne Wort „Häufigkeit", dafür absolute Häufigkeit des Wortes
