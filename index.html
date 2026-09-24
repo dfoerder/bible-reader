@@ -165,8 +165,8 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.13b';
-const APP_DATE = '22.09.2026';
+const APP_VERSION = '1.11.14b';
+const APP_DATE = '24.09.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // ─── Bibel-Registry ─────────────────────────────────────
@@ -188,6 +188,13 @@ const BOOK_NAMES_ES=["Génesis","Éxodo","Levítico","Números","Deuteronomio","
 const BOOK_NAMES_DE=["1. Mose","2. Mose","3. Mose","4. Mose","5. Mose","Josua","Richter","Rut","1. Samuel","2. Samuel","1. Könige","2. Könige","1. Chronik","2. Chronik","Esra","Nehemia","Ester","Hiob","Psalmen","Sprüche","Prediger","Hohes Lied","Jesaja","Jeremia","Klagelieder","Hesekiel","Daniel","Hosea","Joel","Amos","Obadja","Jona","Micha","Nahum","Habakuk","Zefanja","Haggai","Sacharja","Maleachi","Matthäus","Markus","Lukas","Johannes","Apostelgeschichte","Römer","1. Korinther","2. Korinther","Galater","Epheser","Philipper","Kolosser","1. Thessalonicher","2. Thessalonicher","1. Timotheus","2. Timotheus","Titus","Philemon","Hebräer","Jakobus","1. Petrus","2. Petrus","1. Johannes","2. Johannes","3. Johannes","Judas","Offenbarung"];
 const BOOK_NAMES_FR=["Genèse","Exode","Lévitique","Nombres","Deutéronome","Josué","Juges","Ruth","1 Samuel","2 Samuel","1 Rois","2 Rois","1 Chroniques","2 Chroniques","Esdras","Néhémie","Esther","Job","Psaumes","Proverbes","Ecclésiaste","Cantique des cantiques","Ésaïe","Jérémie","Lamentations","Ézéchiel","Daniel","Osée","Joël","Amos","Abdias","Jonas","Michée","Nahum","Habacuc","Sophonie","Aggée","Zacharie","Malachie","Matthieu","Marc","Luc","Jean","Actes","Romains","1 Corinthiens","2 Corinthiens","Galates","Éphésiens","Philippiens","Colossiens","1 Thessaloniciens","2 Thessaloniciens","1 Timothée","2 Timothée","Tite","Philémon","Hébreux","Jacques","1 Pierre","2 Pierre","1 Jean","2 Jean","3 Jean","Jude","Apocalypse"];
 const BOOK_NAMES_IT=["Genesi","Esodo","Levitico","Numeri","Deuteronomio","Giosuè","Giudici","Rut","1 Samuele","2 Samuele","1 Re","2 Re","1 Cronache","2 Cronache","Esdra","Neemia","Ester","Giobbe","Salmi","Proverbi","Ecclesiaste","Cantico dei Cantici","Isaia","Geremia","Lamentazioni","Ezechiele","Daniele","Osea","Gioele","Amos","Abdia","Giona","Michea","Nahum","Abacuc","Sofonia","Aggeo","Zaccaria","Malachia","Matteo","Marco","Luca","Giovanni","Atti","Romani","1 Corinzi","2 Corinzi","Galati","Efesini","Filippesi","Colossesi","1 Tessalonicesi","2 Tessalonicesi","1 Timoteo","2 Timoteo","Tito","Filemone","Ebrei","Giacomo","1 Pietro","2 Pietro","1 Giovanni","2 Giovanni","3 Giovanni","Giuda","Apocalisse"];
+// Buchnamen-Kürzel je Sprache, in Buchreihenfolge (0–65) wie BOOK_NAMES_* — die vollen
+// Namen passen nicht in die Kapitelleiste (Bug mufvl1yq, z.B. „1 Tesalonicenses“).
+// Englisch nutzt das namensbasierte BOOK_ABBR weiter unten.
+const BOOK_ABBR_ES=["Gén","Éx","Lev","Núm","Deut","Jos","Jue","Rut","1 Sam","2 Sam","1 Re","2 Re","1 Cró","2 Cró","Esd","Neh","Est","Job","Sal","Prov","Ecl","Cant","Isa","Jer","Lam","Ezeq","Dan","Os","Joel","Am","Abd","Jon","Miq","Nah","Hab","Sof","Hag","Zac","Mal","Mat","Mar","Luc","Juan","Hech","Rom","1 Cor","2 Cor","Gál","Ef","Fil","Col","1 Tes","2 Tes","1 Tim","2 Tim","Tit","Flm","Heb","Sant","1 Ped","2 Ped","1 Jn","2 Jn","3 Jn","Jud","Apoc"];
+const BOOK_ABBR_DE=["1. Mo","2. Mo","3. Mo","4. Mo","5. Mo","Jos","Ri","Rut","1. Sam","2. Sam","1. Kön","2. Kön","1. Chr","2. Chr","Esra","Neh","Est","Hiob","Ps","Spr","Pred","Hld","Jes","Jer","Klgl","Hes","Dan","Hos","Joel","Am","Obd","Jona","Mi","Nah","Hab","Zef","Hag","Sach","Mal","Matth","Mark","Luk","Joh","Apg","Röm","1. Kor","2. Kor","Gal","Eph","Phil","Kol","1. Thess","2. Thess","1. Tim","2. Tim","Tit","Phlm","Hebr","Jak","1. Petr","2. Petr","1. Joh","2. Joh","3. Joh","Jud","Offb"];
+const BOOK_ABBR_FR=["Gen","Ex","Lév","Nomb","Deut","Jos","Jug","Ruth","1 Sam","2 Sam","1 Rois","2 Rois","1 Chr","2 Chr","Esd","Néh","Esth","Job","Ps","Prov","Eccl","Cant","Ésa","Jér","Lam","Ézéch","Dan","Osée","Joël","Amos","Abd","Jon","Mich","Nah","Hab","Soph","Agg","Zach","Mal","Matt","Marc","Luc","Jean","Act","Rom","1 Cor","2 Cor","Gal","Éph","Phil","Col","1 Thess","2 Thess","1 Tim","2 Tim","Tite","Philém","Héb","Jacq","1 Pi","2 Pi","1 Jean","2 Jean","3 Jean","Jude","Apoc"];
+const BOOK_ABBR_IT=["Gen","Es","Lev","Num","Deut","Gios","Giud","Rut","1 Sam","2 Sam","1 Re","2 Re","1 Cron","2 Cron","Esd","Neem","Est","Giob","Sal","Prov","Eccl","Cant","Is","Ger","Lam","Ez","Dan","Os","Gioe","Am","Abd","Gion","Mic","Nah","Ab","Sof","Ag","Zac","Mal","Mt","Mc","Lc","Gv","At","Rom","1 Cor","2 Cor","Gal","Ef","Fil","Col","1 Tess","2 Tess","1 Tim","2 Tim","Tit","Filem","Eb","Giac","1 Piet","2 Piet","1 Gv","2 Gv","3 Gv","Giuda","Ap"];
 /* INSTANCE-CONFIG-START */
 const BIBLES = {
   'eng-web': {
@@ -201,7 +208,7 @@ const BIBLES = {
     ttsLang: 'en-US', ttsLangPrefix: 'en',
     ttsVoiceNames: ['Samantha','Alex','Daniel','Karen','Moira'],
     names: null, // aus bibles/index.json (englisch)
-    bookAbbr: null, // null = Standard-BOOK_ABBR (unten) verwenden
+    bookAbbr: null, // null = Standard-BOOK_ABBR (unten, nach englischem Namen) verwenden
     i18nOverrides: {}, defaultUiLang: 'de',
   },
   'spa-rv1909mod': {
@@ -215,7 +222,7 @@ const BIBLES = {
     defaultHilfs: 'eng-web',
     ttsLang: 'es-ES', ttsLangPrefix: 'es',
     ttsVoiceNames: ['Monica','Paulina','Jorge'],
-    names: BOOK_NAMES_ES, bookAbbr: null,
+    names: BOOK_NAMES_ES, bookAbbr: BOOK_ABBR_ES,
     i18nOverrides: {
       navTitle:{de:'Spanisch mit der Bibel',en:'Spanish with the Bible',es:'Español con la Biblia',it:'Lo spagnolo con la Bibbia',fr:'L\'espagnol avec la Bible'},
       navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Spanisch.',en:'Deepen your faith and improve your Spanish through God\'s Word.',es:'Profundiza tu fe y mejora tu español con la Palabra de Dios.',it:'Approfondisci la tua fede e migliora il tuo spagnolo con la Parola di Dio.',fr:'Approfondis ta foi et améliore ton espagnol avec la Parole de Dieu.'},
@@ -235,7 +242,7 @@ const BIBLES = {
     defaultHilfs: 'eng-web',
     ttsLang: 'fr-FR', ttsLangPrefix: 'fr',
     ttsVoiceNames: ['Thomas','Amelie','Aurelie','Audrey'],
-    names: BOOK_NAMES_FR, bookAbbr: null,
+    names: BOOK_NAMES_FR, bookAbbr: BOOK_ABBR_FR,
     i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible',es:'Leer la Biblia',it:'Leggere la Bibbia',fr:'Lire la Bible'}}, defaultUiLang: 'fr',
   },
   'ita-riv1927mod': {
@@ -246,7 +253,7 @@ const BIBLES = {
     defaultHilfs: 'eng-web',
     ttsLang: 'it-IT', ttsLangPrefix: 'it',
     ttsVoiceNames: ['Alice','Luca','Federica'],
-    names: BOOK_NAMES_IT, bookAbbr: null,
+    names: BOOK_NAMES_IT, bookAbbr: BOOK_ABBR_IT,
     i18nOverrides: {navTitle:{de:'Bibel lesen',en:'Read the Bible',es:'Leer la Biblia',it:'Leggere la Bibbia',fr:'Lire la Bible'}}, defaultUiLang: 'it',
   },
   'deu-l1912mod': {
@@ -264,7 +271,7 @@ const BIBLES = {
     defaultHilfs: 'eng-web',
     ttsLang: 'de-DE', ttsLangPrefix: 'de',
     ttsVoiceNames: ['Anna','Petra','Markus'],
-    names: BOOK_NAMES_DE, bookAbbr: null,
+    names: BOOK_NAMES_DE, bookAbbr: BOOK_ABBR_DE,
     i18nOverrides: {
       navTitle:{de:'Deutsch mit der Bibel',en:'German with the Bible',es:'Alemán con la Biblia',it:'Il tedesco con la Bibbia',fr:'L\'allemand avec la Bible'},
       navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Deutsch.',en:'Deepen your faith and improve your German through God\'s Word.',es:'Profundiza tu fe y mejora tu alemán con la Palabra de Dios.',it:'Approfondisci la tua fede e migliora il tuo tedesco con la Parola di Dio.',fr:'Approfondis ta foi et améliore ton allemand avec la Parole de Dieu.'},
@@ -513,6 +520,12 @@ const I18N={
   trainDifficultAgain:{de:'Wörter üben',en:'Practice words'},
   trainDifficultHint:{de:'Multiple-Choice-Übungen zu den Wörtern dieses Kapitels.',en:'Multiple choice exercises for this chapter\'s words.'},
   chapPractice:{de:'Wörter üben',en:'Practice words'},
+  // Zeilen im Kapitel-Training mit Stellenangabe (Bug mufvryp4) und Buch-Training (Bug mufvxqb7)
+  whichWordsRef:{de:'Wörter {r} anschauen',en:'Review words in {r}',es:'Repasar palabras de {r}',it:'Rivedi le parole di {r}',fr:'Revoir les mots de {r}'},
+  practiceWordsRef:{de:'Wörter {r} üben',en:'Practice words in {r}',es:'Practicar palabras de {r}',it:'Esercita le parole di {r}',fr:'Exercer les mots de {r}'},
+  bookTrainAll:{de:'Alle Wörter in {b} trainieren',en:'Train all words in {b}',es:'Entrenar todas las palabras de {b}',it:'Allena tutte le parole di {b}',fr:'Entraîner tous les mots de {b}'},
+  bookPracticeHint:{de:'Übe die schwierigen Wörter des ganzen Buchs — in Einheiten zu 15 Wörtern. Hast du die Wörter vorher angeschaut, kommen nur die mit ? markierten dran.',en:'Practice the difficult words of the whole book — in units of 15 words. If you reviewed them first, only those marked ? are included.',es:'Practica las palabras difíciles de todo el libro, en unidades de 15 palabras. Si las repasaste antes, solo entran las marcadas con ?.',it:'Esercita le parole difficili di tutto il libro, in unità da 15 parole. Se le hai riviste prima, entrano solo quelle segnate con ?.',fr:'Exerce les mots difficiles de tout le livre, par unités de 15 mots. Si tu les as revus avant, seuls ceux marqués ? sont repris.'},
+  bookNoDifficult:{de:'Keine Wörter über deinem Level in diesem Buch.',en:'No words above your level in this book.',es:'No hay palabras por encima de tu nivel en este libro.',it:'Nessuna parola sopra il tuo livello in questo libro.',fr:'Aucun mot au-dessus de ton niveau dans ce livre.'},
   chapPracticeHint:{de:'Übe die schwierigen Wörter dieses Kapitels — als Quiz oder im Kontext (in der Übung umschaltbar).',en:'Practice this chapter\'s difficult words — as a quiz or in context (switchable during the exercise).'},
   chapClozeTitle:{de:'Wörter im Kontext üben',en:'Practice words in context'},
   chapClozeHint:{de:'Die Wörter dieses Kapitels im Satzzusammenhang üben.',en:'Practice this chapter\'s words in sentence context.'},
@@ -602,9 +615,21 @@ const I18N={
   stayLevel:{de:'Auf dem Level bleiben (ohne Rückfrage)',en:'Stay at the current level (no prompt)',es:'Quedarse en el nivel actual (sin preguntar)',it:'Restare al livello attuale (senza chiedere)',fr:'Rester au niveau actuel (sans demander)'},
   levelPolicyHint:{de:'Beide aus: nach jeder Einheit wird gefragt, ob das Level steigen oder sinken soll — die Antwort dort kann eine der beiden Einstellungen setzen.',en:'Both off: after each unit you are asked whether to raise or lower the level — your answer there can set one of these options.',es:'Ambas desactivadas: tras cada unidad se pregunta si subir o bajar el nivel; la respuesta puede activar una de estas opciones.',it:'Entrambe disattivate: dopo ogni unità viene chiesto se alzare o abbassare il livello; la risposta può attivare una di queste opzioni.',fr:'Les deux désactivées : après chaque unité, on demande si le niveau doit monter ou baisser ; la réponse peut activer l\'une de ces options.'},
   rememberAnswer:{de:'Antwort merken – nicht mehr fragen',en:'Remember answer – don\'t ask again',es:'Recordar respuesta – no volver a preguntar',it:'Ricorda la risposta – non chiedere più',fr:'Mémoriser la réponse – ne plus demander'},
-  explain:{de:'Erklärung',en:'Explanation',es:'Explicación',it:'Spiegazione',fr:'Explication'},
   trainingSettings:{de:'Trainings-Einstellungen',en:'Training settings',es:'Ajustes del entrenamiento',it:'Impostazioni allenamento',fr:'Réglages de l\'entraînement'},
-  exLevelExplain:{de:'CEFR {c}: Sprachniveau des Wortes nach dem Europäischen Referenzrahmen — A1 Anfänger, A2 Grundstufe, B1/B2 Mittelstufe, C1/C2 fortgeschritten. Jedes Level ist nach Häufigkeit in drei Stufen .1–.3 unterteilt.\n{f}/18: Häufigkeitsstufe — alle Lernwörter sind nach ihrer Häufigkeit in der Bibel in 18 gleich große Stufen geteilt; 1 = die häufigsten, 18 = die seltensten.\n{n} ×: so oft kommt das Wort (Grundform) in der ganzen Bibel vor.',en:'CEFR {c}: the word\'s level in the Common European Framework — A1 beginner, A2 elementary, B1/B2 intermediate, C1/C2 advanced. Each level is split by frequency into three steps .1–.3.\n{f}/18: frequency step — all vocabulary is divided by frequency in the Bible into 18 equal steps; 1 = most frequent, 18 = rarest.\n{n} ×: how often the word (base form) occurs in the whole Bible.',es:'CEFR {c}: nivel de la palabra según el Marco Común Europeo — A1 principiante, A2 elemental, B1/B2 intermedio, C1/C2 avanzado. Cada nivel se divide por frecuencia en tres grados .1–.3.\n{f}/18: grado de frecuencia — todo el vocabulario se divide por su frecuencia en la Biblia en 18 grados iguales; 1 = las más frecuentes, 18 = las más raras.\n{n} ×: cuántas veces aparece la palabra (forma base) en toda la Biblia.',it:'CEFR {c}: livello della parola secondo il Quadro Comune Europeo — A1 principiante, A2 elementare, B1/B2 intermedio, C1/C2 avanzato. Ogni livello è suddiviso per frequenza in tre gradi .1–.3.\n{f}/18: grado di frequenza — tutto il vocabolario è diviso per frequenza nella Bibbia in 18 gradi uguali; 1 = le più frequenti, 18 = le più rare.\n{n} ×: quante volte la parola (forma base) ricorre in tutta la Bibbia.',fr:'CECR {c} : niveau du mot selon le Cadre européen commun — A1 débutant, A2 élémentaire, B1/B2 intermédiaire, C1/C2 avancé. Chaque niveau est divisé par fréquence en trois paliers .1–.3.\n{f}/18 : palier de fréquence — tout le vocabulaire est réparti selon sa fréquence dans la Bible en 18 paliers égaux ; 1 = les plus fréquents, 18 = les plus rares.\n{n} × : nombre d\'occurrences du mot (forme de base) dans toute la Bible.'},
+  // Einzel-Erklärungen der Stufenzeile, je als eigene Seite (Bug mufei5nk)
+  exInfoCefrTitle:{de: "CEFR-Level {c}", en: "CEFR level {c}", es: "Nivel CEFR {c}", it: "Livello CEFR {c}", fr: "Niveau CECR {c}"},
+  exInfoCefrBody:{de: "Der Gemeinsame Europäische Referenzrahmen (CEFR) teilt Sprachkenntnisse in sechs Niveaus ein. Jedes Lernwort ist dem Niveau zugeordnet, auf dem man es typischerweise lernt. Die App teilt jedes Niveau zusätzlich nach Häufigkeit in drei Stufen (.1 = häufiger, .3 = seltener) — so entstehen 18 Stufen von A1.1 bis C2.3. Im Lernfokus „CEFR-Level (A1→C2)“ übst du Stufe für Stufe in dieser Reihenfolge.", en: "The Common European Framework of Reference (CEFR) divides language proficiency into six levels. Each vocabulary word is assigned to the level at which it is typically learned. The app further splits each level by frequency into three steps (.1 = more frequent, .3 = less frequent) — giving 18 steps from A1.1 to C2.3. With the “CEFR level (A1→C2)” learning focus you practice step by step in this order.", es: "El Marco Común Europeo de Referencia (CEFR) divide el dominio de una lengua en seis niveles. Cada palabra del vocabulario está asignada al nivel en el que se suele aprender. La app divide además cada nivel por frecuencia en tres grados (.1 = más frecuente, .3 = menos frecuente), lo que da 18 grados de A1.1 a C2.3. Con el enfoque «Nivel CEFR (A1→C2)» practicas grado a grado en este orden.", it: "Il Quadro Comune Europeo di Riferimento (CEFR) suddivide la competenza linguistica in sei livelli. Ogni parola del vocabolario è assegnata al livello in cui di solito si impara. L’app divide inoltre ogni livello per frequenza in tre gradi (.1 = più frequente, .3 = meno frequente): si ottengono 18 gradi da A1.1 a C2.3. Con il focus «Livello CEFR (A1→C2)» ti eserciti grado per grado in quest’ordine.", fr: "Le Cadre européen commun de référence (CECR) répartit la maîtrise d’une langue en six niveaux. Chaque mot de vocabulaire est rattaché au niveau où on l’apprend habituellement. L’app divise en outre chaque niveau selon la fréquence en trois paliers (.1 = plus fréquent, .3 = moins fréquent), soit 18 paliers de A1.1 à C2.3. Avec l’objectif « Niveau CECR (A1→C2) », tu t’exerces palier par palier dans cet ordre."},
+  cefrDescA1:{de: "Anfänger — elementarste Grundlagen", en: "Beginner — the most basic fundamentals", es: "Principiante — lo más básico", it: "Principiante — le basi più elementari", fr: "Débutant — les bases les plus élémentaires"},
+  cefrDescA2:{de: "Grundstufe — einfache Alltagskommunikation", en: "Elementary — simple everyday communication", es: "Elemental — comunicación cotidiana sencilla", it: "Elementare — comunicazione quotidiana semplice", fr: "Élémentaire — communication simple au quotidien"},
+  cefrDescB1:{de: "Mittelstufe — selbstständige Alltagsbewältigung", en: "Intermediate — independent everyday use", es: "Intermedio — desenvolverse con autonomía", it: "Intermedio — autonomia nella vita quotidiana", fr: "Intermédiaire — autonomie au quotidien"},
+  cefrDescB2:{de: "Gute Mittelstufe — fließende Verständigung", en: "Upper intermediate — fluent interaction", es: "Intermedio alto — comunicación fluida", it: "Intermedio superiore — comunicazione scorrevole", fr: "Intermédiaire avancé — échanges fluides"},
+  cefrDescC1:{de: "Fortgeschritten — kompetente Sprachverwendung", en: "Advanced — proficient use", es: "Avanzado — uso competente", it: "Avanzato — uso competente", fr: "Avancé — utilisation compétente"},
+  cefrDescC2:{de: "Annähernd muttersprachlich", en: "Near-native mastery", es: "Dominio casi nativo", it: "Padronanza quasi madrelingua", fr: "Maîtrise quasi native"},
+  exInfoFreqTitle:{de: "Häufigkeitsstufe {f} von 18", en: "Frequency step {f} of 18", es: "Grado de frecuencia {f} de 18", it: "Grado di frequenza {f} di 18", fr: "Palier de fréquence {f} sur 18"},
+  exInfoFreqBody:{de: "Alle Lernwörter sind danach sortiert, wie oft sie in der Bibel vorkommen, und in 18 gleich große Gruppen geteilt: Stufe 1 enthält die häufigsten Wörter, Stufe 18 die seltensten. Im Lernfokus „Häufigkeit in der Bibel“ übst du in dieser Reihenfolge — so lernst du zuerst die Wörter, denen du beim Lesen am meisten begegnest.", en: "All vocabulary words are sorted by how often they occur in the Bible and divided into 18 equal groups: step 1 holds the most frequent words, step 18 the rarest. With the “Frequency in Bible” learning focus you practice in this order — so you first learn the words you meet most often while reading.", es: "Todas las palabras del vocabulario están ordenadas según la frecuencia con que aparecen en la Biblia y divididas en 18 grupos iguales: el grado 1 contiene las más frecuentes y el 18 las más raras. Con el enfoque «Frecuencia en la Biblia» practicas en este orden; así aprendes primero las palabras que más encuentras al leer.", it: "Tutte le parole del vocabolario sono ordinate in base a quanto spesso ricorrono nella Bibbia e divise in 18 gruppi uguali: il grado 1 contiene le più frequenti, il 18 le più rare. Con il focus «Frequenza nella Bibbia» ti eserciti in quest’ordine, così impari prima le parole che incontri più spesso leggendo.", fr: "Tous les mots de vocabulaire sont classés selon leur fréquence dans la Bible et répartis en 18 groupes égaux : le palier 1 contient les plus fréquents, le 18 les plus rares. Avec l’objectif « Fréquence dans la Bible », tu t’exerces dans cet ordre — tu apprends ainsi d’abord les mots que tu rencontres le plus souvent en lisant."},
+  exInfoOccTitle:{de: "{n} × in der Bibel", en: "{n} × in the Bible", es: "{n} × en la Biblia", it: "{n} × nella Bibbia", fr: "{n} × dans la Bible"},
+  exInfoOccBody:{de: "So oft kommt die Grundform dieses Wortes im ganzen Bibeltext vor — alle gebeugten Formen zusammengezählt (Einzahl/Mehrzahl, alle Zeitformen). Gezählt wird aus den Wortannotationen der App.", en: "This is how often the base form of this word occurs in the whole Bible text — all inflected forms counted together (singular/plural, all tenses). The count comes from the app’s word annotations.", es: "Es la cantidad de veces que aparece la forma base de esta palabra en todo el texto bíblico, sumando todas sus formas (singular/plural, todos los tiempos). El recuento procede de las anotaciones de palabras de la app.", it: "Indica quante volte la forma base di questa parola ricorre in tutto il testo biblico, sommando tutte le forme (singolare/plurale, tutti i tempi). Il conteggio deriva dalle annotazioni delle parole dell’app.", fr: "C’est le nombre de fois où la forme de base de ce mot apparaît dans tout le texte biblique, toutes formes confondues (singulier/pluriel, tous les temps). Le décompte provient des annotations de mots de l’app."},
+  exInfoThisWord:{de: "Dieses Wort", en: "This word", es: "Esta palabra", it: "Questa parola", fr: "Ce mot"},
   levelKept:{de:'Level bleibt {l}.',en:'Level stays {l}.',es:'El nivel sigue en {l}.',it:'Il livello resta {l}.',fr:'Le niveau reste {l}.'},
   // Lemma-Häufigkeit in der Wortkarte (Bug mu593c53)
   lemmaOcc:{de:'in der Bibel {b} × · in diesem Buch {k} ×',en:'in the Bible {b} × · in this book {k} ×',es:'en la Biblia {b} × · en este libro {k} ×',it:'nella Bibbia {b} × · in questo libro {k} ×',fr:'dans la Bible {b} × · dans ce livre {k} ×'},
@@ -1680,14 +1705,54 @@ function ExLevelTag({en}){
   if(!li)return null;
   const lf=LEMMA_FREQ||{};
   const n=lf[en]??lf[en.charAt(0).toUpperCase()+en.slice(1)]??WORD_BY_EN.get(en)?.occ;
-  // Tipp auf die Zeile klappt eine Erklärung der drei Angaben auf (Bug mucfkhbs)
-  return <ExLevelLine text={t('exLevelBoth').replace('{c}',li.cefr).replace('{f}',li.freq)+(n!=null?' · '+t('exLevelOcc').replace('{n}',n):'')} explain={t('exLevelExplain').replace('{c}',li.cefr).replace('{f}',li.freq).replace('{n}',n!=null?n:'–')}/>;
+  // Jede der drei Angaben ist einzeln antippbar und öffnet ihre eigene Erklärseite (Bug mufei5nk)
+  return <ExLevelLine cefr={li.cefr} freq={li.freq} occ={n}/>;
 }
-function ExLevelLine({text,explain}){
-  const [open,setOpen]=useState(false);
+// Ganzseitige Unterseite mit Zurück-Knopf. In der Desktop-Handy-Vorschau (mode-phone)
+// gehört sie in den Handy-Rahmen, sonst deckt position:fixed das ganze Fenster ab.
+function FullScreenPage({onBack,children}){
+  const sim=document.body.classList.contains('mode-phone');
+  const host=(sim&&document.querySelector('.phone-frame'))||document.body;
+  return ReactDOM.createPortal(<div style={{position:sim?'absolute':'fixed',top:0,left:0,right:0,bottom:0,zIndex:10000,overflowY:'auto',background:'linear-gradient(180deg,var(--t-bg1),var(--t-bg2))',color:'var(--t-text)',textAlign:'left',fontFamily:sans}}>
+    <div style={{maxWidth:520,margin:'0 auto',padding:(sim?'40px':'max(16px, env(safe-area-inset-top))')+' 16px 32px'}}>
+      <button onClick={onBack} style={S.navBtn}>{t('back')}</button>
+      {children}
+    </div>
+  </div>,host);
+}
+function ExLevelLine({cefr,freq,occ}){
+  const [info,setInfo]=useState(null); // null | 'cefr' | 'freq' | 'occ'
+  const seg=(k,label)=>(<span onClick={e=>{e.stopPropagation();setInfo(k)}} style={{cursor:'pointer',textDecoration:'underline dotted',textUnderlineOffset:3,padding:'4px 2px'}}>{label}</span>);
+  const [cefrBase,cefrSub]=String(cefr).split('.');
+  const hasFreq=typeof freq==='number';
   return(<div style={{textAlign:'center',margin:'6px 0 0'}}>
-    <p onClick={()=>setOpen(o=>!o)} style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:0,cursor:'pointer',textDecoration:'underline dotted',textUnderlineOffset:3}} title={t('explain')}>{text} ⓘ</p>
-    {open&&<div onClick={()=>setOpen(false)} style={{margin:'8px auto 0',maxWidth:340,padding:'10px 12px',background:'var(--t-bg)',border:'1px solid var(--t-border)',borderRadius:8,fontSize:12,lineHeight:1.5,color:'var(--t-text2)',fontFamily:sans,textAlign:'left',whiteSpace:'pre-line',cursor:'pointer'}}>{explain}</div>}
+    <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:0}}>
+      {seg('cefr',t('exLevelBoth').split(' · ')[0].replace('{c}',cefr))}
+      {' · '}{seg('freq',freq+'/18')}
+      {occ!=null&&<>{' · '}{seg('occ',t('exLevelOcc').replace('{n}',occ))}</>}
+    </p>
+    {info&&<FullScreenPage onBack={()=>setInfo(null)}>
+        {info==='cefr'&&<>
+          <h2 style={{fontSize:22,fontWeight:600,color:'var(--t-title)',margin:'20px 0 12px'}}>{t('exInfoCefrTitle').replace('{c}',cefr)}</h2>
+          <p style={{fontSize:15,lineHeight:1.6,color:'var(--t-text2)',margin:'0 0 16px'}}>{t('exInfoCefrBody')}</p>
+          <div style={{display:'flex',flexDirection:'column',gap:6}}>
+            {LEVELS.map(l=>{const on=l===cefrBase;return(<div key={l} style={{display:'flex',gap:10,alignItems:'baseline',padding:'8px 10px',borderRadius:8,border:'1.5px solid '+(on?'var(--t-accent)':'var(--t-border)'),background:on?'var(--t-accent-bg)':'var(--t-card-solid)'}}>
+              <span style={{fontWeight:700,color:on?'var(--t-accent)':'var(--t-title)',minWidth:28}}>{l}</span>
+              <span style={{fontSize:14,color:'var(--t-text2)',flex:1}}>{t('cefrDesc'+l)}</span>
+              {on&&<span style={{fontSize:12,fontWeight:600,color:'var(--t-accent)',whiteSpace:'nowrap'}}>{t('exInfoThisWord')}: {cefrBase}.{cefrSub}</span>}
+            </div>)})}
+          </div>
+        </>}
+        {info==='freq'&&<>
+          <h2 style={{fontSize:22,fontWeight:600,color:'var(--t-title)',margin:'20px 0 12px'}}>{t('exInfoFreqTitle').replace('{f}',freq)}</h2>
+          <p style={{fontSize:15,lineHeight:1.6,color:'var(--t-text2)',margin:'0 0 16px'}}>{t('exInfoFreqBody')}</p>
+          {hasFreq&&<div style={{display:'flex',gap:3}}>{Array.from({length:18},(_,i)=>(<div key={i} style={{flex:1,height:28,borderRadius:3,background:i+1===freq?'var(--t-accent)':'var(--t-border)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,color:i+1===freq?'#fff':'var(--t-muted)'}}>{i+1}</div>))}</div>}
+        </>}
+        {info==='occ'&&<>
+          <h2 style={{fontSize:22,fontWeight:600,color:'var(--t-title)',margin:'20px 0 12px'}}>{t('exInfoOccTitle').replace('{n}',occ)}</h2>
+          <p style={{fontSize:15,lineHeight:1.6,color:'var(--t-text2)',margin:0}}>{t('exInfoOccBody')}</p>
+        </>}
+    </FullScreenPage>}
   </div>);
 }
 function formWrong(target){
@@ -2939,7 +3004,10 @@ const BOOK_ABBR={
   'Hebrews':'Heb','James':'Jas','1 Peter':'1 Pet','2 Peter':'2 Pet',
   '1 John':'1 John','2 John':'2 John','3 John':'3 John','Jude':'Jude','Revelation':'Rev'
 };
-const bookAbbr=name=>(INSTANCE.bookAbbr&&INSTANCE.bookAbbr[name])||BOOK_ABBR[name]||name;
+// INSTANCE.bookAbbr ist ein Array in Buchreihenfolge passend zu INSTANCE.names;
+// daraus einmal eine Name→Kürzel-Tabelle, sonst das englische BOOK_ABBR.
+const _ABBR_BY_NAME=(INSTANCE.names&&Array.isArray(INSTANCE.bookAbbr))?Object.fromEntries(INSTANCE.names.map((n,i)=>[n,INSTANCE.bookAbbr[i]])):{};
+const bookAbbr=name=>_ABBR_BY_NAME[name]||BOOK_ABBR[name]||name;
 
 function normalize(w){
   return w.toLowerCase().replace(/^[''"\-(]/,'').replace(/[''"\-),;:.!?…]$/,'');
@@ -3005,10 +3073,20 @@ function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedW
   if (!book) return [];
   const chap = book[String(chapNum)];
   if (!chap) return [];
-
+  return collectHardWords([chap], userStep, tappedWords);
+}
+// Dasselbe für das ganze Buch (Buch-Training, Bug mufvxqb7): jedes Lemma einmal,
+// in der Form seines ersten Vorkommens
+function getBookAnnotations(annotations, bookName, userStep, tappedWords) {
+  const book = annotations[bookName];
+  if (!book) return [];
+  const chaps = Object.keys(book).sort((a,b)=>(+a)-(+b)).map(k=>book[k]);
+  return collectHardWords(chaps, userStep, tappedWords);
+}
+function collectHardWords(chaps, userStep, tappedWords) {
   const seen = new Set();
   const result = [];
-  Object.values(chap).forEach(verseAnns => {
+  chaps.forEach(chap => Object.values(chap).forEach(verseAnns => {
     (verseAnns||[]).forEach(a => {
       const isPhrase = annoIsMulti(a);
       // Eigennamen (großgeschriebenes Lemma) aus den Übungen nehmen, außer sie
@@ -3019,7 +3097,7 @@ function getChapterAnnotations(annotations, bookName, chapNum, userStep, tappedW
         result.push(a);
       }
     });
-  });
+  }));
   result.sort((a,b) => a.lemma.localeCompare(b.lemma));
   return result;
 }
@@ -3590,6 +3668,13 @@ function App({data}){
   const [quizExpanded,setQuizExpanded]=useState(false);
   const [vocabReviewIdx,setVocabReviewIdx]=useState(0);
   const [trainExpanded,setTrainExpanded]=useState(false);
+  // Buch-Training (Bug mufvxqb7): dritte Zeile klappt „anschauen" + „üben" fürs ganze Buch auf.
+  // Eigener Durchgangs-Zähler, damit der Kapitel-Durchgang (reviewDone) unberührt bleibt.
+  const [bookTrainOpen,setBookTrainOpen]=useState(false);
+  const [bookReviewOpen,setBookReviewOpen]=useState(false);
+  const [bookPracticeOpen,setBookPracticeOpen]=useState(false);
+  const [bookReviewIdx,setBookReviewIdx]=useState(0);
+  const [bookUnknown,setBookUnknown]=useState(()=>new Set()); // im Buch-Durchgang mit ? markiert
   // Übungsart im Kapitel-Training (geteilt mit dem allgemeinen Training via bible-ex-mode)
   const [exMode,setExMode]=useState(()=>LS.get('bible-ex-mode')||'quiz');
   const changeExMode=useCallback(m=>{setExMode(m);LS.set('bible-ex-mode',m);},[]);
@@ -3735,6 +3820,13 @@ function App({data}){
     return getChapterWordsOld(verses,vocab,userStep);
   },[currentChapter,hasAnno,annotations,bookName,chapNum,userStep,tappedWords,verses,vocab]);
 
+  const bookQuizWords=useMemo(()=>(hasAnno&&loadedBook)?getBookAnnotations(annotations,bookName,userStep,tappedWords):[],[hasAnno,loadedBook,annotations,bookName,userStep,tappedWords]);
+  const chapLemmaSet=useMemo(()=>new Set(quizWords.map(w=>w.lemma||w.word)),[quizWords]);
+  const bookReviewDone=bookQuizWords.length>0&&bookReviewIdx>=bookQuizWords.length;
+  // Buchwechsel: Buch-Durchgang zurücksetzen (Kapitelwechsel im selben Buch behält ihn)
+  useEffect(()=>{setBookTrainOpen(false);setBookReviewOpen(false);setBookPracticeOpen(false);setBookReviewIdx(0);setBookUnknown(new Set())},[bookIdx]);
+  // Kapitel-Stelle kurz („Matth 1") und Buchname für die Zeilen im Training-Tab
+  const chapRef=`${bookAbbr(bookName)} ${chapNum||''}`.trim();
   const chapterKey=useCallback((bi,ci)=>`unk-${lang}-${bi}-${ci}`,[lang]);
   const saveChapterWords=useCallback((bi,ci,words)=>{LS.set(chapterKey(bi,ci),[...words])},[chapterKey]);
   const loadChapterWords=useCallback((bi,ci)=>{const w=LS.get(chapterKey(bi,ci));return w?new Set(w):new Set()},[chapterKey]);
@@ -3789,11 +3881,13 @@ function App({data}){
 
   // Lückentext-Übung pro Lemma aus den Versen des aktuellen Kapitels generieren.
   // Liefert Map(lemma → Cloze-Übung); Wörter ohne brauchbare Position fehlen (Fallback: Quiz).
-  const buildChapClozeMap=useCallback((targetLemmas,ctx)=>{
+  // chapList: [{num,verses}] — Standard ist das aktuelle Kapitel, das Buch-Training gibt alle mit
+  const buildChapClozeMap=useCallback((targetLemmas,ctx,chapList)=>{
     const map=new Map();
-    const chap=annotations[bookName]?.[String(chapNum)];
-    if(!chap)return map;
-    for(const v of verses){
+    for(const {num,verses:cvs} of (chapList||[{num:chapNum,verses}])){
+    const chap=annotations[bookName]?.[String(num)];
+    if(!chap)continue;
+    for(const v of cvs){
       const va=chap[String(v.n)];if(!va)continue;
       const wds=v.text.split(/\s+/);
       for(const a of va){
@@ -3820,22 +3914,29 @@ function App({data}){
         }
         const rep=[...sw];for(let p=lsp;p<=lep&&p<rep.length;p++)rep[p]=p===lsp?'___':null;
         const ipos=EN_POS[a.lemma]||null;
-        map.set(a.lemma,{text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${chapNum}:${v.n}`,level:a.level,lemma:a.lemma,pos:ipos,form:clozeFormOf(a.lemma,a.form,ipos)});
+        map.set(a.lemma,{text:rep.filter(w=>w!==null).join(' ')+sfx,answer:a.form,de:a.de,ref:`${bookName} ${num}:${v.n}`,level:a.level,lemma:a.lemma,pos:ipos,form:clozeFormOf(a.lemma,a.form,ipos)});
       }
+    }
     }
     return map;
   },[annotations,bookName,chapNum,verses]);
 
   // Einheitliches Kapitel-Training: eine Wortauswahl, zwei Darstellungen (Quiz / Im Kontext).
   // Ein Item ist entweder ein Quiz-Wort (Annotation, kein .text) oder eine Cloze-Übung (.text).
-  const startChapExercise=useCallback((mode,ctxOverride)=>{
-    if(quizWords.length===0)return;
+  const startChapExercise=useCallback((mode,ctxOverride,scope='chap')=>{
+    const isBook=scope==='book';
+    const src=isBook?bookQuizWords:quizWords;
+    if(src.length===0)return;
     const ctx=(ctxOverride==='sentence'||ctxOverride==='verse')?ctxOverride:clozeCtx;
     setClozeSettingsOpen(false);
-    const wordsToUse=reviewDone?quizWords.filter(w=>unknownWords.has(w.lemma||w.word)):quizWords;
+    // Nach einem vollständigen Durchgang nur noch die mit ? markierten Wörter
+    const wordsToUse=isBook
+      ?(bookReviewDone?src.filter(w=>bookUnknown.has(w.lemma||w.word)):src)
+      :(reviewDone?src.filter(w=>unknownWords.has(w.lemma||w.word)):src);
     if(wordsToUse.length===0)return;
     const quizMap=new Map(wordsToUse.map(w=>[w.lemma||w.word,w]));
-    const clozeMap=hasAnno?buildChapClozeMap(new Set(quizMap.keys()),ctx):new Map();
+    const chapList=isBook&&loadedBook?loadedBook.chapters.map(c=>({num:c.number,verses:c.verses})):null;
+    const clozeMap=hasAnno?buildChapClozeMap(new Set(quizMap.keys()),ctx,chapList):new Map();
     const useCloze=mode==='cloze'&&hasAnno;
     const fam=k=>{const d=wordData[k];return d?d.familiarity:-1;};
     // fam=0 (bekannte Schwächen) vor fam=-1 (neue Wörter), innerhalb gemischt
@@ -3846,8 +3947,8 @@ function App({data}){
     const unitsLemmas=[];for(let i=0;i<ordered.length;i+=15)unitsLemmas.push(ordered.slice(i,i+15));
     const units=unitsLemmas.map(ul=>ul.map(toItem));
     const words=units[0];const opts=genOpts(words);
-    setChapTrain({mode,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitsLemmas,quizMap,clozeMap,unitIdx:0,unitDone:false,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:ordered.length,preFam});
-  },[quizWords,hasAnno,clozeCtx,reviewDone,unknownWords,wordData,buildChapClozeMap,genOpts]);
+    setChapTrain({scope,mode,words,opts,current:0,selected:null,score:0,total:words.length,done:false,wrong:[],everWrong:[],units,unitsLemmas,quizMap,clozeMap,unitIdx:0,unitDone:false,isRetry:false,retryPending:null,firstPassScore:null,globalScore:0,globalTotal:ordered.length,preFam});
+  },[quizWords,bookQuizWords,bookReviewDone,bookUnknown,loadedBook,hasAnno,clozeCtx,reviewDone,unknownWords,wordData,buildChapClozeMap,genOpts]);
 
   // Übungsart mitten in der Kapitel-Übung wechseln: aktuelle Einheit + Einheitenliste in
   // die andere Darstellung konvertieren (Wörter ohne Kontextübung bleiben Quiz). Fortschritt
@@ -4806,8 +4907,8 @@ function App({data}){
             {chapPracticed>0&&<span>{t('practicedN').replace('{n}',chapPracticed)}</span>}
           </p>}
           <div style={{display:'flex',gap:12,justifyContent:'center'}}>
-            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.startBtn}>{t('finish')}</button>
-            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:()=>startChapExercise(chapTrain.mode)} style={S.navBtn}>{t('repeat')}</button>
+            <button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0){const ew=chapTrain.scope==='book'?chapTrain.everWrong.filter(k=>chapLemmaSet.has(k)):chapTrain.everWrong;if(chapTrain.scope==='book')setBookUnknown(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});if(ew.length)setUnknownWords(u=>{const n=new Set(u);ew.forEach(k=>n.add(k));return n})}setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.startBtn}>{t('finish')}</button>
+            <button onClick={chapTrain.units&&chapTrain.units.length>1?repeatUnit:()=>startChapExercise(chapTrain.mode,null,chapTrain.scope)} style={S.navBtn}>{t('repeat')}</button>
           </div>
         </div>
       </div>);
@@ -4825,12 +4926,13 @@ function App({data}){
             <button onClick={()=>switchChapExercise('quiz')} style={{...S.lvlBtn,...(chapTrain.mode==='quiz'?S.lvlActive:{})}}>{t('exModeQuiz')}</button>
             <button onClick={()=>switchChapExercise('cloze')} style={{...S.lvlBtn,...(chapTrain.mode==='cloze'?S.lvlActive:{})}}>{t('exModeContext')}</button>
           </div>}
+          <p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'2px 0 4px'}}>{chapTrain.scope==='book'?bookName:chapRef}</p>
           {chapTrain.units&&chapTrain.units.length>1&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 2px'}}>{t('unitProgress').replace('{c}',chapTrain.unitIdx+1).replace('{t}',chapTrain.units.length)}</p>}
           <p style={{fontSize:14,color:'var(--t-muted)',fontFamily:sans}}>{chapTrain.current+1} / {chapTrain.words.length}</p>
         </header>
         {isCloze&&clozeSettingsOpen&&<div style={{maxWidth:400,margin:'0 auto 12px',padding:'8px 10px',border:'1px solid var(--t-border)',borderRadius:6,background:'var(--t-bg)'}}>
           <span style={{fontSize:12,fontWeight:600,color:'var(--t-title)',fontFamily:sans,display:'block',marginBottom:6}}>{t('clozeContext')}</span>
-          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapExercise('cloze',o.k);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
+          <div style={S.levelBtns}>{[{k:'sentence',i:'clozeCtxSentence'},{k:'verse',i:'clozeCtxVerse'}].map(o=>(<button key={o.k} onClick={()=>{if(o.k!==clozeCtx){changeClozeCtx(o.k);startChapExercise('cloze',o.k,chapTrain.scope);}else setClozeSettingsOpen(false);}} style={{...S.lvlBtn,...(clozeCtx===o.k?S.lvlActive:{})}}>{t(o.i)}</button>))}</div>
           <p style={S.settingsHint}>{t('clozeContextHint')}</p>
         </div>}
         <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 20px',overflow:'hidden'}}>
@@ -4866,7 +4968,7 @@ function App({data}){
           {isCloze&&<MoreExamples lemma={ex.lemma} word={ex.answer}/>}
           <div style={{marginTop:12}}><button onClick={chapTrainAdvance} style={S.startBtn}>{t('next')}</button></div>
         </div>}
-        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0)setUnknownWords(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('cancel')}</button></div>
+        <div style={{textAlign:'center',marginTop:24}}><button onClick={()=>{if(chapTrain.everWrong&&chapTrain.everWrong.length>0){const ew=chapTrain.scope==='book'?chapTrain.everWrong.filter(k=>chapLemmaSet.has(k)):chapTrain.everWrong;if(chapTrain.scope==='book')setBookUnknown(u=>{const n=new Set(u);chapTrain.everWrong.forEach(k=>n.add(k));return n});if(ew.length)setUnknownWords(u=>{const n=new Set(u);ew.forEach(k=>n.add(k));return n})}setChapTrain(null);setPhase('reading');if(chapTrainFromBottom.current)setTimeout(()=>{const el=document.querySelector('.phone-screen');const target=el||window;target.scrollTo({top:el?el.scrollHeight:document.body.scrollHeight,behavior:'smooth'})},100)}} style={S.navBtn}>{t('cancel')}</button></div>
       </div>);
     }
     setPhase('reading');
@@ -5000,10 +5102,11 @@ function App({data}){
         </div>
         </>}
       </div>}
-      {chapTab==='training'&&(quizWords.length>0?<div style={{padding:'12px'}}>
+      {chapTab==='training'&&<div style={{padding:'12px'}}>
+      {quizWords.length>0?<>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
           <div onClick={()=>{setQuizExpanded(e=>!e);setVocabReviewIdx(0);setLevelSuggestion(null);setLevelSuggestDone(false);setVocabSettingsOpen(false)}} style={{padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{quizExpanded?'▾':'▸'}</span> {t('whichWords')}</span>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{quizExpanded?'▾':'▸'}</span> {t('whichWordsRef').replace('{r}',chapRef)}</span>
             <button onClick={e=>{e.stopPropagation();setVocabSettingsOpen(s=>!s)}} style={{background:'none',border:'none',cursor:'pointer',fontSize:16,color:vocabSettingsOpen?'var(--t-accent)':'var(--t-muted)',padding:0,lineHeight:1}} title={t('settings')}>⚙</button>
           </div>
           {vocabSettingsOpen&&<div style={{padding:'8px 10px',borderBottom:'1px solid var(--t-border)',background:'var(--t-bg)'}}>
@@ -5052,14 +5155,73 @@ function App({data}){
         </div>
         <div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden'}}>
           <div onClick={()=>setTrainExpanded(e=>!e)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
-            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{trainExpanded?'▾':'▸'}</span> {t('chapPractice')}</span>
+            <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{trainExpanded?'▾':'▸'}</span> {t('practiceWordsRef').replace('{r}',chapRef)}</span>
           </div>
           {trainExpanded&&<div style={{padding:'8px 10px'}}>
             <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('chapPracticeHint')}</p>
             <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapExercise(exMode);setPhase('quiz')}} style={S.navBtn}>{t('startTraining')}</button>
           </div>}
         </div>
-      </div>:<div style={{padding:'16px 12px',textAlign:'center'}}><p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:0}}>{t('chapNoDifficult')}</p></div>)}
+      </>:<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0',textAlign:'center'}}>{t('chapNoDifficult')}</p>}
+      {/* Dritte Zeile: ganzes Buch (Bug mufvxqb7) — klappt „anschauen" + „üben" auf */}
+      {hasAnno&&<div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden',marginTop:8}}>
+        <div onClick={()=>setBookTrainOpen(o=>!o)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+          <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{bookTrainOpen?'▾':'▸'}</span> {t('bookTrainAll').replace('{b}',bookName)}</span>
+        </div>
+        {bookTrainOpen&&(bookQuizWords.length===0
+          ?<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:0,padding:'10px',textAlign:'center'}}>{t('bookNoDifficult')}</p>
+          :<div style={{padding:'8px 10px'}}>
+          <div style={{border:'1px solid var(--t-border)',borderRadius:6,marginBottom:8,overflow:'hidden'}}>
+            <div onClick={()=>setBookReviewOpen(o=>!o)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+              <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{bookReviewOpen?'▾':'▸'}</span> {t('whichWordsRef').replace('{r}',bookName)}</span>
+            </div>
+            {bookReviewOpen&&<div style={{padding:'8px 10px'}}>
+              {bookReviewIdx<bookQuizWords.length?(()=>{
+                const item=bookQuizWords[bookReviewIdx];
+                const key=item.lemma||item.word;
+                const mark=known=>{
+                  trainWord(key,known?1:0);
+                  setBookUnknown(u=>{const n=new Set(u);known?n.delete(key):n.add(key);return n});
+                  // Kommt das Wort auch im offenen Kapitel vor, dort genauso markieren
+                  if(chapLemmaSet.has(key))setUnknownWords(u=>{const n=new Set(u);known?n.delete(key):n.add(key);return n});
+                  setBookReviewIdx(i=>i+1);
+                };
+                return(<div>
+                  {bookReviewIdx===0&&<p style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 10px',textAlign:'center'}}>{t('nWordsAbove').replace('{n}',bookQuizWords.length).replace('{l}',stepLabel(userStep))} &#x2713;={t('vocabKnown')}, ?={t('vocabUnknown')}</p>}
+                  <div style={{background:'var(--t-border)',borderRadius:4,height:6,margin:'0 0 12px',overflow:'hidden'}}>
+                    <div style={{height:'100%',background:'var(--t-primary)',borderRadius:4,transition:'width 0.3s',width:`${((bookReviewIdx+1)/bookQuizWords.length)*100}%`}}/>
+                  </div>
+                  <p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'0 0 6px',textAlign:'center'}}>{bookReviewIdx+1} / {bookQuizWords.length}</p>
+                  <div style={{textAlign:'center',margin:'0 0 16px'}}>
+                    <p style={{fontSize:24,fontWeight:700,color:'var(--t-title)',fontFamily:'var(--t-serif)',margin:'0 0 4px'}}>{item.form&&item.form!==item.lemma?item.form:(item.lemma||item.word)}</p>
+                    {showLemma&&item.form&&item.form!==item.lemma&&<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 4px'}}>({item.lemma||item.word})</p>}
+                    <p style={{fontSize:17,color:'var(--t-text)',fontFamily:sans,margin:0}}>{item.de}</p>
+                    {showCefrLevel&&item.level&&<span style={{fontSize:11,color:'var(--t-muted)',fontFamily:sans}}>{item.level}</span>}
+                    {item.lemma&&<p style={{fontSize:11,color:'var(--t-muted2)',fontFamily:sans,margin:'4px 0 0'}}>{t('lemmaOcc').replace('{b}',lemmaFreq?.[item.lemma]??'–').replace('{k}',bookLemmaCounts[item.lemma]||0)}</p>}
+                  </div>
+                  <div style={{display:'flex',gap:10,justifyContent:'center'}}>
+                    <button onClick={()=>mark(true)} style={{padding:'10px 20px',border:'1.5px solid var(--t-green)',borderRadius:8,background:'var(--t-green-bg)',color:'var(--t-green)',fontSize:24,cursor:'pointer',lineHeight:1}}>&#x2713;</button>
+                    <button onClick={()=>mark(false)} style={{padding:'10px 20px',border:'1.5px solid var(--t-accent)',borderRadius:8,background:'var(--t-accent-bg)',color:'var(--t-accent)',fontSize:24,cursor:'pointer',lineHeight:1}}>?</button>
+                  </div>
+                  <div style={{textAlign:'center',marginTop:12}}>
+                    <button onClick={()=>setBookReviewOpen(false)} style={{background:'none',border:'none',cursor:'pointer',fontSize:13,color:'var(--t-muted)',fontFamily:sans}}>{t('cancel')}</button>
+                  </div>
+                </div>);
+              })():<p style={{fontSize:13,color:'var(--t-muted)',fontFamily:sans,textAlign:'center',margin:0}}>{t('vocabDone').replace('{n}',bookQuizWords.length)}</p>}
+            </div>}
+          </div>
+          <div style={{border:'1px solid var(--t-border)',borderRadius:6,overflow:'hidden'}}>
+            <div onClick={()=>setBookPracticeOpen(o=>!o)} style={{display:'flex',alignItems:'center',padding:'8px 10px',cursor:'pointer',background:'var(--t-bg)'}}>
+              <span style={{fontSize:13,fontWeight:600,color:'var(--t-title)',fontFamily:sans}}><span style={{fontSize:18}}>{bookPracticeOpen?'▾':'▸'}</span> {t('practiceWordsRef').replace('{r}',bookName)}</span>
+            </div>
+            {bookPracticeOpen&&<div style={{padding:'8px 10px'}}>
+              <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'0 0 8px'}}>{t('bookPracticeHint')}</p>
+              <button onClick={()=>{prevPhaseRef.current='reading';chapTrainFromBottom.current=false;startChapExercise(exMode,null,'book');setPhase('quiz')}} disabled={bookReviewDone&&bookUnknown.size===0} style={{...S.navBtn,...(bookReviewDone&&bookUnknown.size===0?{opacity:0.4}:{})}}>{t('startTraining')}</button>
+            </div>}
+          </div>
+        </div>)}
+      </div>}
+      </div>}
     </div>}
 
     <div style={{...S.text,fontSize,lineHeight}}>{(()=>{const deSize=fontSizeTr,pillSize=fontSizePill;return verses.map(verse=>{

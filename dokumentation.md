@@ -4,7 +4,7 @@
 
 **Bible Reader** ist eine Progressive Web App (PWA), die beim Bibellesen zugleich die Sprache lernen lässt: wortgenaue Annotationen, Vokabeltraining und Text-to-Speech. Als Hauptbibel — also als Lese- und Lernsprache — stehen drei Editionen mit vollem Ausbau zur Verfügung: **Englisch** (WEB, Glossen in de/es/fr/it), **Spanisch** (RV1909, Glossen in en) und **Deutsch** (Luther 1912 modernisiert, Glossen in en/es/fr/it). Französisch und Italienisch sind bisher nur zum Lesen und als Hilfsbibel da.
 
-- **Aktuelle Version:** 1.11.13b (22.09.2026)
+- **Aktuelle Version:** 1.11.14b (24.09.2026)
 - **Architektur:** Single-File React-App (`index.html`, ~5.400 Zeilen), kein Build-Step
 - **Bibeltexte:** WEB (en), Reina-Valera 1909 (es), Luther 1912 (de), Segond 1910 (fr), Riveduta 1927 (it) — alle gemeinfrei, die nicht-englischen KI-modernisiert
 - **Deutsche Übersetzungen:** Luther 1912 (modernisiert), Wörtliche WEB→DE-Übersetzung
@@ -27,7 +27,7 @@
 - Eigennamen mit deutschen Entsprechungen annotiert (Christ→Christus, Moses→Mose, Egypt→Ägypten)
 - Automatische Lesezeichen (merkt sich Position pro Buch)
 - Volltextsuche mit wählbarem **Suchbereich** unter dem Suchfeld: Kapitel · Buch · AT · NT · AT+NT (Voreinstellung); die Wahl bleibt gespeichert (`bible-search-scope`). Ein enger Bereich lädt nur die betroffenen Bücher nach
-- **Kopfleiste im Kapitel:** links Start und Vorlesen, in der Mitte Kapitel zurück/vor mit dem antippbaren Kapiteltitel, rechts die Suche. Ein Tipp auf den Titel klappt das Inhaltsverzeichnis des Buches auf; solange es offen ist, sind die Reiter „Training"/„Einstellungen" darunter ausgeblendet
+- **Kopfleiste im Kapitel:** links Start und Vorlesen, in der Mitte Kapitel zurück/vor mit dem antippbaren Kapiteltitel, rechts die Suche. Der Titel zeigt das **Buchkürzel** statt des vollen Namens („1 Tes 1" statt „1 Tesalonicenses 1"): Englisch nach Namen aus `BOOK_ABBR`, die übrigen Editionen über `BOOK_ABBR_ES/_DE/_FR/_IT` (Arrays in Buchreihenfolge passend zu `BOOK_NAMES_*`, Registry-Feld `bookAbbr`). Ein Tipp auf den Titel klappt das Inhaltsverzeichnis des Buches auf; solange es offen ist, sind die Reiter „Training"/„Einstellungen" darunter ausgeblendet
 
 ### Multi-Wort-Ausdrücke
 
@@ -51,6 +51,7 @@ Idiome, Phrasal Verbs und feste Wendungen werden als Mehrwortausdrücke annotier
 
 ### Schwierige Wörter (kapitelweise)
 
+- **Zeilen im Training-Tab** tragen die Stelle: „Wörter Matth 1 anschauen", „Wörter Matth 1 üben" (Buchkürzel + Kapitel). Darunter klappt eine dritte Zeile „Alle Wörter in Matthäus trainieren" dieselben zwei Zeilen fürs **ganze Buch** auf (`getBookAnnotations`, `startChapExercise(mode,ctx,'book')`): anschauen mit eigenem Durchgangszähler (berührt das Kapitel-`reviewDone` nicht; Wörter, die auch im offenen Kapitel stehen, werden dort mitmarkiert), üben in Einheiten zu 15, Lückentexte aus allen Kapiteln des Buchs. Nach einem vollständigen Buch-Durchgang kommen nur die mit ? markierten Wörter dran. Der Buch-Durchgang gilt bis zum Buchwechsel
 - **Wörter anschauen:** Alle Wörter über dem Lese-Level werden einzeln angezeigt. Der Nutzer markiert jedes als bekannt (✓) oder unbekannt (?). Nur Wörter mit familiarity ≤ 0 werden angezeigt. ✓ setzt familiarity=1, ? setzt familiarity=0. Das Lese-Level ist ein 18-Stufen-Wert (`userStep` 0–17); ein Wort gilt als „über Level", wenn seine Sublevel-Stufe (aus `words.json` level+sub; für Wörter ohne Pool-Eintrag Fallback auf das obere Band-Ende) größer als `userStep` ist. Dadurch verschwinden die schwierigen Wörter nicht mehr schlagartig beim Eintritt in ein grobes CEFR-Band, sondern feinstufig. Markiert man dabei durchgehend „bekannt" (≥ 85 % von mindestens 20 Wörtern), schlägt die App **einmal je Durchgang** vor, das Lese-Level anzuheben; nach Ja oder Nein kommt die Frage im selben Durchgang nicht wieder (`levelSuggestDone`, zurückgesetzt beim erneuten Aufklappen).
 - **Wörter üben:** Ein Übungsblock mit zwei umschaltbaren Übungsarten (Umschalter im Übungs-Header, geteilt mit dem allgemeinen Training via `bible-ex-mode`):
   - **Quiz:** Multiple-Choice, englisches Wort → deutsche Übersetzung.
@@ -96,7 +97,7 @@ Eigennamen sind aus den Übungen ausgenommen, bis auf die **wichtigsten mit Lern
 **Training-Mechanik (Spaced Repetition, Konzept siehe `projekt-training-konzept.md`):**
 - Ein Trainings-Button mit zwei **Übungsarten** (localStorage `bible-ex-mode`): **Quiz** (englisches Wort → deutsche Übersetzung) oder **Im Kontext** (Lückentext mit Bibelvers). Beide nutzen dieselbe Wortauswahl und denselben Lernstand
 - Kopfzeile der Trainingsumgebung und jeder laufenden Übung tragen ein ⚙, das die **Trainings-Einstellungen** als Fenster öffnet (nur die trainingsbezogenen Abschnitte; derselbe Block wie auf der Einstellungsseite, in `App` als `trainingSettingsBody` einmal definiert)
-- Die Stufenzeile unter dem Übungswort („CEFR A2.1 · 3/18 · 56 × in der Bibel", nur bei aktiver Einstellung) ist antippbar und klappt eine Erklärung der drei Angaben auf (`ExLevelLine`)
+- Die Stufenzeile unter dem Übungswort („CEFR A2.1 · 3/18 · 56 × in der Bibel", nur bei aktiver Einstellung) besteht aus drei einzeln antippbaren Angaben; jede öffnet eine eigene ganzseitige Erklärseite mit Zurück-Knopf (`ExLevelLine` → `FullScreenPage`, per Portal im Handy-Rahmen der Desktop-Vorschau): CEFR mit hervorgehobenem Niveau, Häufigkeitsstufe mit 18er-Balken, absolute Häufigkeit
 - Der Übungsart-Umschalter erscheint **in der laufenden Übung** (Header) — Wechsel jederzeit mitten in der Einheit: die restlichen Fragen werden in die andere Darstellungsform konvertiert; Score, Fortschritt, Fehlerliste und Levelanpassung bleiben erhalten. Die zuletzt gewählte Übungsart wird für den nächsten Start gemerkt
 - Wörter ohne Kontextübung (13 Stück) bleiben im Kontextmodus als Quiz-Frage in der Einheit (gemischte Darstellung); startet man im Kontextmodus und es sind auf einer Stufe *nur noch* solche Wörter übrig, erscheint ein Hinweis mit Wechsel-Button zum Quiz-Modus (der Level-Aufstieg misst sich immer am vollen Pool)
 - 18 Schwierigkeitsstufen, zwei Lernfokus-Modi (CEFR-Level / Häufigkeit)
