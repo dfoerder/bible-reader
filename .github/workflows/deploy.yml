@@ -1,0 +1,58 @@
+name: Deploy (dev → main)
+# Ersatz für ./deploy.sh, startbar vom iPhone: GitHub-App → Actions → „Deploy (dev → main)" → Run workflow.
+# Bumpt APP_VERSION/APP_DATE (index.html) und Cache (sw.js), schreibt projekt-log.md und den
+# Versionskopf in dokumentation.md, committet auf dev, merged dev → main und veröffentlicht.
+on:
+  workflow_dispatch:
+    inputs:
+      changelog:
+        description: "Changelog-Zeile (was wurde geändert)"
+        required: true
+        type: string
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: dev, fetch-depth: 0 }
+      - name: Version, Cache und Log hochzählen
+        env:
+          CHANGELOG: ${{ inputs.changelog }}
+        run: |
+          set -e
+          CUR_CACHE=$(grep -o 'bible-full-v[0-9]*' sw.js | grep -o '[0-9]*$')
+          CUR_VER=$(grep -o "APP_VERSION = '[^']*'" index.html | grep -o "'[^']*'" | tr -d "'")
+          NEW_CACHE=$((CUR_CACHE + 1))
+          BASE=${CUR_VER%b}
+          MAJOR=$(echo "$BASE" | cut -d. -f1); MID=$(echo "$BASE" | cut -d. -f2); MINOR=$(echo "$BASE" | cut -d. -f3)
+          NEW_MID=$MID; NEW_MINOR=$((MINOR + 1))
+          if [ "$NEW_MINOR" -ge 100 ]; then NEW_MID=$((MID + 1)); NEW_MINOR=0; fi
+          NEW_VER="${MAJOR}.${NEW_MID}.${NEW_MINOR}b"
+          TODAY=$(TZ=Europe/Zurich date +"%d.%m.%Y")
+          echo "Cache bible-full-v$CUR_CACHE → v$NEW_CACHE · Version $CUR_VER → $NEW_VER · $TODAY"
+          sed -i "s/bible-full-v${CUR_CACHE}/bible-full-v${NEW_CACHE}/" sw.js
+          sed -i "s/APP_VERSION = '${CUR_VER}'/APP_VERSION = '${NEW_VER}'/" index.html
+          sed -i "s/APP_DATE = '[^']*'/APP_DATE = '${TODAY}'/" index.html
+          sed -i "s/^- \*\*Aktuelle Version:\*\* .*/- **Aktuelle Version:** ${NEW_VER} (${TODAY})/" dokumentation.md
+          awk -v ver="$NEW_VER" -v today="$TODAY" -v msg="$CHANGELOG" '
+            !done && /^## v/ { print "## v" ver " (" today ")\n\n- " msg "\n"; done=1 }
+            { print }' projekt-log.md > projekt-log.md.tmp && mv projekt-log.md.tmp projekt-log.md
+          git config user.name "Daniel"
+          git config user.email "dfoerder@users.noreply.github.com"
+          git add sw.js index.html dokumentation.md projekt-log.md
+          git commit -m "Deploy ${NEW_VER} — ${CHANGELOG}"
+          git push origin dev
+          git checkout main
+          git merge --no-edit dev
+          git push origin main
+  pages:
+    needs: release
+    # Pushes mit dem Action-Token starten pages.yml nicht von selbst – darum hier aufrufen.
+    uses: ./.github/workflows/pages.yml

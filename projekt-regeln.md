@@ -1,8 +1,9 @@
 # Projektregeln
 
 ## Deployment
-- Entwickelt wird auf dem Branch `dev`; `dev` wird nie direkt gepusht
-- Deploy: `./deploy.sh "Changelog-Zeile"` — bumpt `APP_VERSION`/`APP_DATE` (index.html) und Cache-Name (sw.js), schreibt den Changelog-Eintrag nach `projekt-log.md`, aktualisiert den Versionskopf in `dokumentation.md`, committet, merged `dev` → `main` und pusht (GitHub Pages)
+- Entwickelt wird auf dem Branch `dev`; `dev` liegt auch auf GitHub (Arbeiten vom iPhone/Claude möglich). Jeder Push auf `dev` erscheint als Vorschau unter `…/bible-reader/dev/` (eigene Daten, rote „DEV-Vorschau“-Markierung, siehe `.github/dev-shim.html`)
+- Deploy vom iPhone: GitHub → Actions → „Deploy (dev → main)“ → Run workflow (Changelog-Zeile eingeben) — macht dasselbe wie `deploy.sh`
+- Deploy vom Mac: `./deploy.sh "Changelog-Zeile"` — bumpt `APP_VERSION`/`APP_DATE` (index.html) und Cache-Name (sw.js), schreibt den Changelog-Eintrag nach `projekt-log.md`, aktualisiert den Versionskopf in `dokumentation.md`, committet, merged `dev` → `main` und pusht (GitHub Pages)
 - Die Changelog-Zeile ist Pflicht — sie wird Commit-Message und Log-Eintrag
 - `APP_VERSION` trägt bis auf Weiteres den Suffix `b` (Beta)
 - Die letzte Stelle rollt bei 99 über (`1.11.99b` → `1.12.0b`), damit sie zweistellig bleibt und Versionen auch als Text richtig sortieren
