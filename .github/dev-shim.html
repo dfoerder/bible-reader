@@ -1,0 +1,25 @@
+<script>
+/* Nur in der Vorschau unter /dev/ (eingefügt von pages.yml, nie im Repo-index.html):
+   Vorschau und echte App liegen auf derselben Adresse (dfoerder.github.io) und
+   würden sich sonst localStorage, Caches und Service Worker teilen. Hier bekommt
+   die Vorschau eigene, mit "dev:" bzw. "dev-" getrennte Daten. */
+(function(){
+  var P='dev:',S=Storage.prototype,g=S.getItem,s=S.setItem,r=S.removeItem,k=S.key;
+  var len=Object.getOwnPropertyDescriptor(S,'length').get;
+  function mine(st){var a=[],n=len.call(st);for(var i=0;i<n;i++){var x=k.call(st,i);if(x&&x.indexOf(P)===0)a.push(x)}return a}
+  S.getItem=function(x){return g.call(this,P+x)};
+  S.setItem=function(x,v){return s.call(this,P+x,v)};
+  S.removeItem=function(x){return r.call(this,P+x)};
+  S.key=function(i){var a=mine(this);return i<a.length?a[i].slice(P.length):null};
+  S.clear=function(){var self=this;mine(this).forEach(function(x){r.call(self,x)})};
+  Object.defineProperty(S,'length',{configurable:true,get:function(){return mine(this).length}});
+  if(window.caches){var ck=caches.keys.bind(caches);
+    caches.keys=function(){return ck().then(function(a){return a.filter(function(n){return n.indexOf('dev-')===0})})}}
+  if(navigator.serviceWorker){var gr=navigator.serviceWorker.getRegistrations.bind(navigator.serviceWorker);
+    navigator.serviceWorker.getRegistrations=function(){return gr().then(function(a){return a.filter(function(x){return /\/dev\/$/.test(x.scope)})})}}
+  document.addEventListener('DOMContentLoaded',function(){
+    var b=document.createElement('div');b.textContent='DEV-Vorschau';
+    b.style.cssText='position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:99999;background:#d33;color:#fff;font:600 10px system-ui;padding:1px 8px;border-radius:0 0 6px 6px;pointer-events:none';
+    document.body.appendChild(b);document.title='DEV · '+document.title});
+})();
+</script>
