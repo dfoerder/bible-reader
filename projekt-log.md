@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.15b (17.11.2026)
+
+- Italienisch: Lukas komplett und Johannes 1–10 annotiert; Bug-Melder sendet als GitHub-Issue; Nutzungsstatistik (GoatCounter)
+
 ## v1.11.14b (24.09.2026)
 
 - Buchkürzel für alle Sprachen; Kapitel-Training mit Stellenangabe und Buch-Training; Stufenzeile mit drei Erklärseiten
