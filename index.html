@@ -166,7 +166,7 @@ window.addEventListener('unhandledrejection',function(e){__bugPush('reject',(e.r
 </script>
 <script type="text/babel">
 const {useState,useEffect,useLayoutEffect,useCallback,useMemo,useRef} = React;
-const APP_VERSION = '1.11.15b';
+const APP_VERSION = '1.11.16b';
 const APP_DATE = '17.11.2026';
 const sans = "system-ui,-apple-system,'Segoe UI',sans-serif";
 
@@ -278,6 +278,25 @@ const BIBLES = {
       navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Deutsch.',en:'Deepen your faith and improve your German through God\'s Word.',es:'Profundiza tu fe y mejora tu alemán con la Palabra de Dios.',it:'Approfondisci la tua fede e migliora il tuo tedesco con la Parola di Dio.',fr:'Approfondis ta foi et améliore ton allemand avec la Parole de Dieu.'},
     }, defaultUiLang: 'de',
   },
+  'grc-n1904': {
+    id: 'grc-n1904', label: 'Ἑλληνική (Nestle 1904) – Urtext NT', langCode: 'grc', lsPrefix: 'grc:',
+    bibleDir: 'bibles/grc/n1904/', bibleSuffix: '_n1904.json', credit: 'Nestle 1904 · MACULA Greek (Biblica, CC BY 4.0) · Glossen: Berean Interlinear Bible',
+    annoDir: 'bibles/grc/n1904/anno/', annoSuffix: '_n1904_multi.json',
+    // Bisher nur englische Glossen (Berean Interlinear, über MACULA); jedes Wort
+    // hat zusätzlich strong (G…) und morph. Kein CEFR-level (→ annoStep 0).
+    annoGlossLangs: ['en'],
+    wordsPath: null, examplesPath: null,
+    // Nur das Neue Testament: loadData blendet das AT aus, damit keine
+    // fehlenden AT-Bücher geladen werden.
+    ntOnly: true,
+    hasAnno: true, hasTraining: false,
+    defaultHilfs: 'eng-web',
+    // Neugriechische Stimme als Behelf (Koine-Aussprache gibt es nicht).
+    ttsLang: 'el-GR', ttsLangPrefix: 'el',
+    ttsVoiceNames: ['Melina','Nikos'],
+    names: null, bookAbbr: null,
+    i18nOverrides: {navTitle:{de:'Griechisches NT',en:'Greek New Testament',es:'Nuevo Testamento griego',it:'Nuovo Testamento greco',fr:'Nouveau Testament grec'}}, defaultUiLang: 'de',
+  },
 };
 const DEFAULT_BIBLE_ID = 'eng-web';
 /* INSTANCE-CONFIG-END */
@@ -301,7 +320,7 @@ const APP_LANGS=[
   {code:'it',label:'Italiano'},
   {code:'fr',label:'Français'},
 ];
-const LANG_LABELS={en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français'};
+const LANG_LABELS={en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français',grc:'Ἑλληνική'};
 // Beschriftung für eine Gloss-Sprachoption: zeigt die volle Sprachkombination
 // (Hauptbibel-Sprache → Gloss-Sprache), z.B. "English-Español", nicht nur das Ziel.
 function glossPairLabel(l){
@@ -1487,7 +1506,9 @@ const LEVEL_TEST_DATA={"en":[{"word":"water","level":"A1","opt":{"de":["Wasser",
 function buildLevelTest(studyLang,glossLang){
   const items=LEVEL_TEST_DATA[studyLang]||LEVEL_TEST_DATA.en;
   const fb=studyLang==='en'?'de':'en';
-  return items.map(it=>{const o=it.opt[glossLang]||it.opt[fb];return {en:it.word,de:o[0],wrong:o.slice(1),level:it.level};});
+  // Ohne Optionen in Gloss- und Ersatzsprache (z.B. Griechisch mit en-Glossen
+  // auf den englischen Testwörtern) entfällt das Item statt abzustürzen.
+  return items.map(it=>{const o=it.opt[glossLang]||it.opt[fb];return o?{en:it.word,de:o[0],wrong:o.slice(1),level:it.level}:null;}).filter(Boolean);
 }
 
 function scoreLevelTest(answers, test){
@@ -2942,7 +2963,7 @@ async function loadData(){
     const r=await fetch('bibles/index.json'+CB);
     if(!r.ok)throw new Error('not found');
     const idx=await r.json();
-    const otBooks=idx.books.filter(b=>b.testament==='ot');
+    const otBooks=INSTANCE.ntOnly?[]:idx.books.filter(b=>b.testament==='ot'); // ntOnly: Edition ohne AT
     const ntBooks=idx.books.filter(b=>b.testament==='nt');
     const books=[...otBooks,...ntBooks];
     // Buchnamen der aktiven Hauptbibel (null = englische Namen aus index.json).

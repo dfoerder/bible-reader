@@ -7,6 +7,10 @@
 - **automodus** — Auto-Modus Feature ausgelagert (von dev abgezweigt)
 - **french** — Französische Version (Segond), separat aufbewahrt
 
+## v1.11.16b (17.11.2026)
+
+- Griechisches NT (Nestle 1904) als Hauptbibel mit Lemma, Strong-Nummer und englischer Glosse pro Wort
+
 ## v1.11.15b (17.11.2026)
 
 - Italienisch: Lukas komplett und Johannes 1–10 annotiert; Bug-Melder sendet als GitHub-Issue; Nutzungsstatistik (GoatCounter)
