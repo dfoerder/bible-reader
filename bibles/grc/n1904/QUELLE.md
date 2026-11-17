@@ -13,4 +13,4 @@ Lizenzen / Namensnennung (Pflicht bei Veröffentlichung):
 - Englische Glossen (`en`): Berean Interlinear Bible, gemeinfrei seit 30.4.2023.
 - Nicht übernommen: MARBLE-Wortbedeutungen (nur mit Erlaubnis), Cherith-Glossen.
 
-Noch offen für die App: `de`/`es`/`fr`-Glossen, CEFR-`level`, Eintrag in der `BIBLES`-Registry (`index.html`).
+In der App als `grc-n1904` (BIBLES-Registry, `ntOnly: true` blendet das AT aus). Noch offen: `de`/`es`/`fr`/`it`-Glossen, CEFR-`level`, griechische Buchnamen.
