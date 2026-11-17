@@ -14,7 +14,7 @@ Immer alle sechs verlinkten Dateien lesen wenn `projekt.md` geöffnet wird:
 
 ## Deployment
 
-Deploy mit `./deploy.sh "Changelog-Zeile"` — bumpt Version/Cache, schreibt den Log-Eintrag, merged `dev` → `main` und pusht. `dev` wird nie direkt gepusht. Details: `projekt-regeln.md`.
+Entwickelt wird auf `dev` (liegt auch auf GitHub; Push auf `dev` → Vorschau unter `/bible-reader/dev/`). Deploy mit `./deploy.sh "Changelog-Zeile"` (Mac) oder der Action „Deploy (dev → main)“ (`.github/workflows/deploy.yml`, auch vom iPhone) — bumpt Version/Cache, schreibt den Log-Eintrag, merged `dev` → `main` und pusht. Details: `projekt-regeln.md`.
 
 Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacitor). `www/` und `ios/` nie manuell bearbeiten.
 
@@ -22,7 +22,7 @@ Für iOS-Build: `./sync_www.sh` (spiegelt root → `www/` → `ios/` via Capacit
 
 Beim Testen kann auf jeder Ansicht ein 🐞-Knopf eingeblendet werden: Bug tippen,
 Ansicht/Buch/Kapitel/Version/letzte JS-Fehler werden automatisch mitgespeichert.
-Die Bugs liegen in `localStorage['bible-bugs']` und gehen per POST an `/bugs`.
+Die Bugs liegen in `localStorage['bible-bugs']`. Ohne eingetragenen Empfänger gehen sie als vorausgefülltes GitHub-Issue raus (geht vom iPhone ohne Mac), sonst per POST an `/bugs` (bugserver.py).
 
 - **Einschalten am Gerät:** App-URL einmal mit `?bugs=1` öffnen (bleibt an), `?bugs=0` schaltet aus.
   In einer vom Homescreen gestarteten PWA geht das nicht (eigener localStorage) — dort fünfmal auf

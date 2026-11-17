@@ -95,6 +95,7 @@
     .theme-icf .phone-frame{border-color:#000;background:#000;box-shadow:0 20px 60px rgba(0,0,0,0.6),inset 0 0 0 2px #222}
     .theme-icf .phone-notch{background:#000}
   </style>
+  <script data-goatcounter="https://dfoerder.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body class="mode-phone">
 <button class="view-toggle" onclick="toggleViewMode()">Desktop</button>
@@ -5522,8 +5523,9 @@ const S={
    Automatisch mitgeschrieben werden Ansicht/Buch/Kapitel/Bibel-Edition, Level,
    App-Version, Viewport, PWA-Modus und die letzten JS-Fehler (__bugLog).
    Speicher: localStorage['bible-bugs'] (bibelübergreifend, ohne LS-Präfix).
-   Übertragung: POST an {endpoint}/bugs (bugserver.py auf dem Mac) oder Export
-   per Teilen-Sheet/Zwischenablage.
+   Übertragung: ohne eingetragenen Empfänger als vorausgefülltes GitHub-Issue
+   (geht vom iPhone ohne Mac), sonst POST an {endpoint}/bugs (bugserver.py);
+   ausserdem Export per Teilen-Sheet/Zwischenablage.
    Ein-/ausschalten: URL-Parameter ?bugs=1 bzw. ?bugs=0 (siehe früher Script-
    Block); der Melder ist damit für normale Nutzer unsichtbar.
 */
@@ -5560,6 +5562,9 @@ const BUG_KEEP_KEYS=[BUGS_KEY,BUG_EP_KEY,'bible-bugmode'];
 // Auslieferung braucht eine eingetragene Adresse.
 const BUG_STANDALONE=!!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone);
 const BUG_SAME_ORIGIN=!/(^|\.)github\.io$/i.test(location.hostname);
+// Ohne Mac: Bugs als vorausgefülltes GitHub-Issue (Nutzer tippt nur noch „Submit").
+// Kein Token im Code — die App ist öffentlich.
+const BUG_ISSUE_URL='https://github.com/dfoerder/bible-reader/issues/new';
 const BUG_SEVS=[{id:'blocker',dot:'🔴',label:'Blockiert'},{id:'major',dot:'🟠',label:'Stört'},{id:'minor',dot:'🟡',label:'Kosmetik'}];
 
 function bugLoad(){try{return JSON.parse(localStorage.getItem(BUGS_KEY)||'[]')}catch(e){return[]}}
@@ -5618,12 +5623,33 @@ function BugReporter(){
 
   const saveEndpoint=v=>{setEndpoint(v);try{v?localStorage.setItem(BUG_EP_KEY,v):localStorage.removeItem(BUG_EP_KEY)}catch(e){}};
 
+  // GitHub-Issue mit allen offenen Bugs öffnen (synchron im Tipp, sonst blockt
+  // Safari das neue Fenster). Danach gelten sie als übertragen.
+  const sendIssue=(arr)=>{
+    const pending=arr.filter(b=>!b.synced);
+    if(!pending.length){setMsg('Alles schon übertragen.');return arr}
+    const sevOf=id=>(BUG_SEVS.find(s=>s.id===id)||{}).label||id;
+    const parts=pending.map(b=>{const c=b.ctx||{};
+      return '### '+sevOf(b.sev)+' — '+b.text.split('\n')[0].slice(0,80)+'\n\n'+b.text+'\n\n'
+        +'- Ansicht: '+bugCtxLine(c)+'\n- URL: '+(c.url||'')+'\n- Gerät: '+(c.viewport||'')+(c.standalone?' · PWA':'')+' · '+(c.ua||'')+'\n- Zeit: '+b.ts
+        +((c.errors&&c.errors.length)?'\n- JS-Fehler:\n```\n'+c.errors.map(x=>typeof x==='string'?x:JSON.stringify(x)).join('\n').slice(0,1500)+'\n```':'');});
+    let body=parts.join('\n\n---\n\n');
+    if(body.length>6000)body=body.slice(0,6000)+'\n\n… (gekürzt, vollständige Liste über „Exportieren / Teilen")';
+    const title=pending.length===1?'Bug: '+pending[0].text.split('\n')[0].slice(0,70):pending.length+' Bugs ('+APP_VERSION+')';
+    window.open(BUG_ISSUE_URL+'?labels=bug&title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body),'_blank');
+    const ids=new Set(pending.map(b=>b.id));
+    const next=arr.map(b=>ids.has(b.id)?{...b,synced:true}:b);
+    persist(next);
+    setMsg('✓ GitHub-Issue geöffnet — dort noch „Submit new issue" tippen.');
+    return next;
+  };
+
   const send=async(arr)=>{
     // Wird die App von bugserver.py ausgeliefert (direkt im WLAN oder über den
     // cloudflared-Tunnel), ist der Empfänger dieselbe Adresse — dann braucht es
     // gar keinen Eintrag. Nur die GitHub-Pages-Auslieferung kann das nicht.
     const ep=(endpoint||'').trim()||(BUG_SAME_ORIGIN?location.origin:'');
-    if(!ep){setShowList(true);setMsg('Kein Empfänger eingetragen — unten eintragen, z. B. http://192.168.1.42:8765 (oder die App gleich von bugserver.py laden).');return arr}
+    if(!ep)return sendIssue(arr);
     const pending=arr.filter(b=>!b.synced);
     if(!pending.length){setMsg('Alles schon übertragen.');return arr}
     setBusy(true);setMsg('Übertrage '+pending.length+' …');
@@ -5798,11 +5824,12 @@ function BugReporter(){
               ?'Ziel: '+endpoint.trim().replace(/\/+$/,'')+'/bugs'
               :(BUG_SAME_ORIGIN
                 ?'Leer lassen genügt — die App kam von '+location.origin+', dorthin gehen auch die Bugs.'
-                :'Nötig, solange die App von GitHub Pages kommt: Tunnel-Adresse eintragen (bugtunnel.sh) oder unten exportieren.')}
+                :'Leer lassen: Die Bugs gehen dann als GitHub-Issue raus. Nur für bugserver.py auf dem Mac eine Adresse eintragen.')}
           </div>
 
           <div style={{...B.row,flexWrap:'wrap',marginTop:12}}>
             <button onClick={exportBugs} style={B.ghost}>Exportieren / Teilen</button>
+            <button onClick={()=>sendIssue(list)} style={B.ghost}>Als GitHub-Issue</button>
             {confirm==='clear'
               ?<span style={{fontSize:13}}>Übertragene löschen?
                  <button onClick={()=>{persist(list.filter(b=>!b.synced));setConfirm(null)}} style={{...B.ghost,padding:'2px 10px',marginLeft:8}}>Ja</button>
