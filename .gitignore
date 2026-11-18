@@ -47,3 +47,7 @@ purge_paths.txt
 
 # Lokale Bug-Meldungen vom Test-iPhone (bugserver.py)
 bugs/
+
+# Bibeldaten liegen in dfoerder/free-bible-translations; lokal ist bibles/ ein Symlink
+# auf ../free-bible-translations (Skripte schreiben dorthin, Test mit ?data=local).
+bibles

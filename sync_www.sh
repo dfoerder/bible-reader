@@ -10,8 +10,10 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Runtime-Assets, die die Web-App braucht (vgl. www/-Top-Level)
-FILES=(index.html sw.js manifest.json icon-192.png icon-512.png)
-DIRS=(bibles lib)
+FILES=(index.html sw.js manifest.json icon-192.png icon-512.png books-index.json)
+# Bibeldaten gehören NICHT ins Bundle: die App lädt sie aus free-bible-translations
+# (bibles/ ist lokal nur ein Symlink auf ../free-bible-translations).
+DIRS=(lib)
 
 # Build-Intermediates, die NICHT ins Bundle gehören (Single Source ist words.json)
 EXCLUDES=(--exclude=vocab_pool.json --exclude=context_exercises.json --exclude='*_backup.json')

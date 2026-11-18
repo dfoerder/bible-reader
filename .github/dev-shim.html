@@ -4,6 +4,7 @@
    würden sich sonst localStorage, Caches und Service Worker teilen. Hier bekommt
    die Vorschau eigene, mit "dev:" bzw. "dev-" getrennte Daten. */
 (function(){
+  window.__BD_PREFIX='dev-bd-'; // eigene Bibeldaten-Caches der Vorschau
   var P='dev:',S=Storage.prototype,g=S.getItem,s=S.setItem,r=S.removeItem,k=S.key;
   var len=Object.getOwnPropertyDescriptor(S,'length').get;
   function mine(st){var a=[],n=len.call(st);for(var i=0;i<n;i++){var x=k.call(st,i);if(x&&x.indexOf(P)===0)a.push(x)}return a}

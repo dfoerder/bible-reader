@@ -30,8 +30,8 @@ jobs:
           rsync -a --exclude .git --exclude ios --exclude www --exclude node_modules devsrc/ site/dev/
           # eigener Cache, und alte Caches nur unter "dev-" aufräumen (nicht die der echten App)
           sed -i "s/const CACHE_NAME = '/const CACHE_NAME = 'dev-/" site/dev/sw.js
-          sed -i "s/keys.filter(k => k !== CACHE_NAME)/keys.filter(k => k.startsWith('dev-') \&\& k !== CACHE_NAME)/" site/dev/sw.js
-          grep -q "startsWith('dev-')" site/dev/sw.js || { echo "sw.js-Anpassung fehlgeschlagen"; exit 1; }
+          sed -i "s/k.startsWith('bible-full-')/k.startsWith('dev-bible-full-')/" site/dev/sw.js
+          grep -q "startsWith('dev-bible-full-')" site/dev/sw.js || { echo "sw.js-Anpassung fehlgeschlagen"; exit 1; }
           # Datentrennung + DEV-Markierung direkt nach <head> einfügen
           python3 - <<'PY'
           p='site/dev/index.html'; t=open(p,encoding='utf-8').read()

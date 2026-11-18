@@ -428,6 +428,27 @@ const I18N={
 
   // Settings
   settings:{de:'Einstellungen',en:'Settings'},
+  dlTitle:{de:'Übersetzungen herunterladen',en:'Download translations',es:'Descargar traducciones',it:'Scarica traduzioni',fr:'Télécharger des traductions'},
+  dlHint:{de:'Heruntergeladene Bibeln funktionieren auch ohne Internet. Am besten im WLAN laden.',en:'Downloaded Bibles also work offline. Best downloaded over Wi-Fi.',es:'Las Biblias descargadas funcionan también sin internet. Mejor descargar con wifi.',it:'Le Bibbie scaricate funzionano anche offline. Meglio scaricare via Wi-Fi.',fr:'Les Bibles téléchargées fonctionnent aussi hors ligne. De préférence en Wi-Fi.'},
+  dlButton:{de:'Herunterladen',en:'Download',es:'Descargar',it:'Scarica',fr:'Télécharger'},
+  dlUpdate:{de:'Aktualisieren',en:'Update',es:'Actualizar',it:'Aggiorna',fr:'Mettre à jour'},
+  dlDelete:{de:'Löschen',en:'Delete',es:'Eliminar',it:'Elimina',fr:'Supprimer'},
+  dlDeleteAsk:{de:'Offline-Daten löschen? Lesen geht dann nur noch mit Internet.',en:'Delete offline data? Reading will then need internet.',es:'¿Eliminar los datos sin conexión? Leer requerirá internet.',it:'Eliminare i dati offline? Per leggere servirà internet.',fr:'Supprimer les données hors ligne ? La lecture nécessitera internet.'},
+  dlInstalled:{de:'offline verfügbar',en:'available offline',es:'disponible sin conexión',it:'disponibile offline',fr:'disponible hors ligne'},
+  dlHasUpdate:{de:'Update verfügbar',en:'update available',es:'actualización disponible',it:'aggiornamento disponibile',fr:'mise à jour disponible'},
+  dlMissing:{de:'nur online',en:'online only',es:'solo en línea',it:'solo online',fr:'en ligne seulement'},
+  dlReading:{de:'zum Lesen',en:'for reading',es:'para leer',it:'da leggere',fr:'à lire'},
+  dlHelper:{de:'Hilfsbibel',en:'helper Bible',es:'Biblia de ayuda',it:'Bibbia di aiuto',fr:'Bible d’aide'},
+  dlSkip:{de:'Ohne Download weiter (nur online lesen)',en:'Continue without download (online only)',es:'Continuar sin descargar (solo en línea)',it:'Continua senza scaricare (solo online)',fr:'Continuer sans télécharger (en ligne seulement)'},
+  dlContinue:{de:'Weiter',en:'Continue',es:'Continuar',it:'Continua',fr:'Continuer'},
+  dlOffline:{de:'Die Liste der Übersetzungen konnte nicht geladen werden. Bitte Internetverbindung prüfen.',en:'Could not load the list of translations. Please check your internet connection.',es:'No se pudo cargar la lista de traducciones. Comprueba la conexión.',it:'Impossibile caricare l’elenco delle traduzioni. Controlla la connessione.',fr:'Impossible de charger la liste des traductions. Vérifie la connexion.'},
+  dlRetry:{de:'Nochmals versuchen',en:'Try again',es:'Reintentar',it:'Riprova',fr:'Réessayer'},
+  dlFailed:{de:'Download abgebrochen',en:'Download failed',es:'Descarga fallida',it:'Download non riuscito',fr:'Échec du téléchargement'},
+  dlStorage:{de:'Belegter Speicher',en:'Storage used',es:'Almacenamiento usado',it:'Spazio usato',fr:'Stockage utilisé'},
+  dlManage:{de:'Bibeln offline',en:'Offline Bibles',es:'Biblias sin conexión',it:'Bibbie offline',fr:'Bibles hors ligne'},
+  dlTotal:{de:'Zusammen',en:'Total',es:'Total',it:'Totale',fr:'Total'},
+  dlYes:{de:'Ja',en:'Yes',es:'Sí',it:'Sì',fr:'Oui'},
+  dlNo:{de:'Nein',en:'No',es:'No',it:'No',fr:'Non'},
   menu:{de:'Menü',en:'Menu'},
   trainingSection:{de:'Training',en:'Training'},
   vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
@@ -2866,7 +2887,7 @@ const CB=isPWA?'':'?v='+Date.now(); // cache-buster (disabled in PWA for offline
 let EXAMPLES=null;
 async function loadExamples(){
   if(EXAMPLES)return EXAMPLES;
-  try{if(INSTANCE.examplesPath){const r=await fetch(INSTANCE.examplesPath+CB);if(r.ok)EXAMPLES=await r.json();}}catch(e){}
+  try{if(INSTANCE.examplesPath){const r=await dataFetch(INSTANCE.examplesPath);if(r.ok)EXAMPLES=await r.json();}}catch(e){}
   if(!EXAMPLES)EXAMPLES={};
   return EXAMPLES;
 }
@@ -2877,7 +2898,7 @@ async function loadExamples(){
 let LEMMA_FREQ=null;
 async function loadLemmaFreq(){
   if(LEMMA_FREQ)return LEMMA_FREQ;
-  try{if(INSTANCE.lemmaFreqPath){const r=await fetch(INSTANCE.lemmaFreqPath+CB);if(r.ok)LEMMA_FREQ=await r.json();}}catch(e){}
+  try{if(INSTANCE.lemmaFreqPath){const r=await dataFetch(INSTANCE.lemmaFreqPath);if(r.ok)LEMMA_FREQ=await r.json();}}catch(e){}
   if(!LEMMA_FREQ)LEMMA_FREQ={};
   return LEMMA_FREQ;
 }
@@ -2900,6 +2921,86 @@ function normalizeDictBook(d,nr){
   }));
   return {nr,name:d.name,chapters};
 }
+// ─── Bibeldaten aus dem Repo free-bible-translations ──────────────────────
+// Texte, Wort-Daten (anno/) und Trainingsdaten (train/) liegen nicht in der App,
+// sondern unter DATA_BASE (GitHub Pages von dfoerder/free-bible-translations);
+// die Registry-Pfade 'bibles/…' entsprechen dort '…'. Für Tests: ?data=local
+// (lädt aus ./bibles/, z.B. Symlink auf das Daten-Repo), ?data=remote zurück.
+// catalog.json listet je Übersetzung Dateien, Grösse und Version (Hash).
+// Heruntergeladene Übersetzungen liegen im Cache 'bd-<id>-<version>', beim Lesen
+// geholte Einzeldateien in 'bd-ondemand' — beide übersteht ein App-Deploy (sw.js
+// räumt nur 'bible-full-*' auf). dataFetch: erst Cache, dann Netz (+ merken).
+(function(){try{const q=new URLSearchParams(location.search).get('data');
+  if(q==='local')rawLSset('bible-data-base','bibles/');else if(q==='remote')localStorage.removeItem('bible-data-base');}catch(e){}})();
+const DATA_BASE=rawLSget('bible-data-base')||'https://dfoerder.github.io/free-bible-translations/';
+const dataUrl=p=>p.startsWith('bibles/')?DATA_BASE+p.slice(7):p;
+const HAS_CACHES=typeof caches!=='undefined';
+const BD=window.__BD_PREFIX||'bd-'; // Präfix der Daten-Caches (DEV-Vorschau: 'dev-bd-', siehe .github/dev-shim.html)
+async function dataFetch(path){
+  const url=dataUrl(path);
+  if(HAS_CACHES){try{const hit=await caches.match(url);if(hit)return hit;}catch(e){}}
+  const r=await fetch(url);
+  if(r.ok&&HAS_CACHES){try{const c=await caches.open(BD+'ondemand');await c.put(url,r.clone());}catch(e){}}
+  return r;
+}
+const CATALOG_KEY='bible-data-catalog',INSTALLED_KEY='bible-data-installed';
+let CATALOG=rawLSget(CATALOG_KEY);
+const getInstalled=()=>rawLSget(INSTALLED_KEY)||{};
+async function purgeOnDemand(files){
+  if(!HAS_CACHES||!files)return;
+  try{const c=await caches.open(BD+'ondemand');await Promise.all(files.map(f=>c.delete(DATA_BASE+f)));}catch(e){}
+}
+// Katalog holen (sonst letzter bekannter). Hat sich die Version einer Übersetzung
+// geändert, fliegen ihre beim Lesen gemerkten Einzeldateien raus (sonst veraltet).
+async function loadCatalog(){
+  try{
+    const r=await fetch(DATA_BASE+'catalog.json',{cache:'no-store'});
+    if(r.ok){
+      const c=await r.json(),old=CATALOG;
+      CATALOG=c;rawLSset(CATALOG_KEY,c);
+      if(old?.translations)for(const id in c.translations){const o=old.translations[id];if(o&&o.version!==c.translations[id].version)await purgeOnDemand(o.files);}
+    }
+  }catch(e){}
+  return CATALOG;
+}
+// Ganze Übersetzung offline speichern (6 parallele Downloads). Abgebrochene
+// Downloads setzen beim nächsten Versuch fort (schon gespeicherte Dateien werden
+// übersprungen). Erst nach Erfolg werden ältere Versionen gelöscht.
+async function downloadTranslation(id,onProgress){
+  const tr=CATALOG?.translations?.[id];
+  if(!tr)throw new Error('Nicht im Katalog: '+id);
+  if(!HAS_CACHES)throw new Error('Offline-Speicher wird von diesem Browser nicht unterstützt');
+  const name=BD+id+'-'+tr.version,cache=await caches.open(name);
+  let next=0,done=0;
+  const worker=async()=>{
+    while(next<tr.files.length){
+      const url=DATA_BASE+tr.files[next++];
+      if(!(await cache.match(url))){
+        const r=await fetch(url,{cache:'no-store'});
+        if(!r.ok)throw new Error(url.slice(DATA_BASE.length)+': HTTP '+r.status);
+        await cache.put(url,r);
+      }
+      onProgress&&onProgress(++done/tr.files.length);
+    }
+  };
+  await Promise.all(Array.from({length:6},worker));
+  for(const k of await caches.keys())if(k.startsWith(BD+id+'-')&&k!==name)await caches.delete(k);
+  await purgeOnDemand(tr.files);
+  const inst=getInstalled();inst[id]=tr.version;rawLSset(INSTALLED_KEY,inst);
+  try{navigator.storage?.persist?.()}catch(e){}
+}
+async function removeTranslation(id){
+  if(HAS_CACHES)for(const k of await caches.keys())if(k.startsWith(BD+id+'-'))await caches.delete(k);
+  const inst=getInstalled();delete inst[id];rawLSset(INSTALLED_KEY,inst);
+  await purgeOnDemand(CATALOG?.translations?.[id]?.files);
+}
+// Status einer Übersetzung: 'installed' | 'update' | 'missing'
+function translationState(id,inst=getInstalled()){
+  const v=inst[id];if(!v)return 'missing';
+  const cv=CATALOG?.translations?.[id]?.version;
+  return cv&&cv!==v?'update':'installed';
+}
+
 // Pfade eines Buchs: Editionen mit ot*-Feldern (Urtext) laden das AT aus eigenem Verzeichnis.
 function bookSrc(b,nr){
   const ot=nr<40&&b.otBibleDir;
@@ -2910,7 +3011,7 @@ const isRtlBook=nr=>!!(INSTANCE.otRtl&&nr<40);
 async function fetchBook(nr){
   if(_bookCache[nr])return _bookCache[nr];
   const src=bookSrc(INSTANCE,nr);
-  const r=await fetch(src.dir+nr+src.suffix+CB);
+  const r=await dataFetch(src.dir+nr+src.suffix);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
   const book=normalizeDictBook(d,nr);
@@ -2926,7 +3027,7 @@ async function fetchAnno(nr){
   if(_annoCache[nr])return _annoCache[nr];
   try{
     const src=bookSrc(INSTANCE,nr);
-    const r=await fetch(src.annoDir+nr+src.annoSuffix+CB);
+    const r=await dataFetch(src.annoDir+nr+src.annoSuffix);
     if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
   }catch(e){}
   return null;
@@ -2964,7 +3065,7 @@ async function fetchDe(nr,hilfsId){
   if(_deCache[key])return _deCache[key];
   try{
     const src=bookSrc(b,nr);
-    const r=await fetch(src.dir+nr+src.suffix+CB);
+    const r=await dataFetch(src.dir+nr+src.suffix);
     if(r.ok){
       const d=await r.json();
       const result={name:d.name,chapters:d.chapters};
@@ -2978,7 +3079,7 @@ async function fetchDe(nr,hilfsId){
 async function loadData(){
   const en={};
   try{
-    const r=await fetch('bibles/index.json'+CB);
+    const r=await fetch('books-index.json'+CB); // Buchliste bleibt in der App (offline beim ersten Start)
     if(!r.ok)throw new Error('not found');
     const idx=await r.json();
     const otBooks=INSTANCE.ntOnly?[]:idx.books.filter(b=>b.testament==='ot'); // ntOnly: Edition ohne AT
@@ -2996,9 +3097,9 @@ async function loadData(){
   try{
     // Single Source of Truth: words.json (1 Eintrag/Wort) → Vokabel-Pool + Lückentext-Views ableiten.
     // Nur Hauptbibeln mit Wortpool (hasTraining); words.json ist EN-nativ (Felder en/de/deForm).
-    try{if(INSTANCE.keepNamesPath){const kr=await fetch(INSTANCE.keepNamesPath+CB);if(kr.ok)KEEP_NAMES=new Set(await kr.json());}}catch(e){}
-    try{if(INSTANCE.propNamesPath){const pr=await fetch(INSTANCE.propNamesPath+CB);if(pr.ok)PROP_NAMES=new Set(await pr.json());}}catch(e){}
-    const wr=INSTANCE.wordsPath?await fetch(INSTANCE.wordsPath+CB):null;
+    try{if(INSTANCE.keepNamesPath){const kr=await dataFetch(INSTANCE.keepNamesPath);if(kr.ok)KEEP_NAMES=new Set(await kr.json());}}catch(e){}
+    try{if(INSTANCE.propNamesPath){const pr=await dataFetch(INSTANCE.propNamesPath);if(pr.ok)PROP_NAMES=new Set(await pr.json());}}catch(e){}
+    const wr=INSTANCE.wordsPath?await dataFetch(INSTANCE.wordsPath):null;
     if(wr&&wr.ok){
       const words=await wr.json();
       if(TEST_ACCEL){
@@ -3405,6 +3506,85 @@ function useTTS(){
 }
 
 // ─── App ────────────────────────────────────────────────
+// Übersetzungen herunterladen/aktualisieren/löschen. mode='onboarding': Auswahl mit
+// Häkchen (required = gesperrt angehakt, preselect = vorgewählt), ein Knopf lädt alles
+// und ruft onDone. mode='settings': je Übersetzung Status + Knopf. Keine Browser-Dialoge.
+function TranslationManager({mode='settings',required=[],preselect=[],tags={},onDone,onSkip}){
+  const [cat,setCat]=useState(CATALOG);
+  const [loading,setLoading]=useState(true);
+  const [inst,setInst]=useState(getInstalled);
+  const [sel,setSel]=useState(()=>new Set([...required,...preselect]));
+  const [busy,setBusy]=useState(null); // {id,p}
+  const [err,setErr]=useState(null);
+  const [ask,setAsk]=useState(null); // id, dessen Löschen bestätigt werden soll
+  const [usage,setUsage]=useState(null);
+  const reload=useCallback(()=>{setLoading(true);loadCatalog().then(c=>{setCat(c);setInst(getInstalled());setLoading(false)})},[]);
+  useEffect(reload,[]);// eslint-disable-line
+  useEffect(()=>{try{navigator.storage?.estimate?.().then(e=>setUsage(e.usage)).catch(()=>{})}catch(e){}},[inst]);
+  const ids=Object.keys(BIBLES).filter(id=>cat?.translations?.[id]);
+  const mb=b=>b>=1e6?Math.round(b/1e6)+' MB':(b/1e3).toFixed(0)+' kB';
+  const run=async list=>{
+    setErr(null);
+    for(const id of list){
+      setBusy({id,p:0});
+      try{await downloadTranslation(id,p=>setBusy({id,p}))}
+      catch(e){setBusy(null);setErr(t('dlFailed')+': '+(e.message||e));setInst(getInstalled());return false}
+      setInst(getInstalled());
+    }
+    setBusy(null);return true;
+  };
+  const del=async id=>{setAsk(null);await removeTranslation(id);setInst(getInstalled())};
+  const box={border:'1px solid var(--t-border)',borderRadius:10,padding:'10px 12px',background:'var(--t-card-solid)',display:'flex',alignItems:'center',gap:10,fontFamily:sans};
+  const bar=p=><div style={{height:6,borderRadius:3,background:'var(--t-border)',overflow:'hidden',marginTop:6}}><div style={{height:'100%',width:Math.round(p*100)+'%',background:'var(--t-primary)',transition:'width .2s'}}/></div>;
+  if(!cat){
+    return(<div style={{textAlign:'center',fontFamily:sans}}>
+      {loading?<p style={{color:'var(--t-muted)'}}>…</p>:<>
+        <p style={{color:'var(--t-text2)',fontSize:14,lineHeight:1.5}}>{t('dlOffline')}</p>
+        <button onClick={reload} style={S.navBtn}>{t('dlRetry')}</button>
+        {onSkip&&<div style={{marginTop:14}}><button onClick={onSkip} style={S.navBtn}>{t('dlSkip')}</button></div>}
+      </>}
+    </div>);
+  }
+  if(mode==='onboarding'){
+    const todo=[...sel].filter(id=>translationState(id,inst)!=='installed');
+    const total=todo.reduce((s,id)=>s+(cat.translations[id]?.bytes||0),0);
+    return(<div style={{display:'flex',flexDirection:'column',gap:10,maxWidth:420,margin:'0 auto'}}>
+      {ids.map(id=>{const on=sel.has(id),locked=required.includes(id),st=translationState(id,inst);
+        return(<label key={id} style={{...box,cursor:locked||busy?'default':'pointer',opacity:busy&&busy.id!==id&&!on?.6:1}}>
+          <input type="checkbox" checked={on} disabled={locked||!!busy} onChange={()=>setSel(s=>{const n=new Set(s);n.has(id)?n.delete(id):n.add(id);return n})} style={{width:20,height:20}}/>
+          <div style={{flex:1,minWidth:0}}>
+            <div style={{fontWeight:600,color:'var(--t-title)',fontSize:15}}>{BIBLES[id].label}</div>
+            <div style={{fontSize:12,color:'var(--t-muted)'}}>{mb(cat.translations[id].bytes)}{tags[id]?' · '+tags[id]:''}{st==='installed'?' · ✓ '+t('dlInstalled'):''}</div>
+            {busy?.id===id&&bar(busy.p)}
+          </div>
+        </label>);})}
+      {err&&<p style={{color:'var(--t-error,#c33)',fontSize:13,fontFamily:sans,margin:0}}>{err}</p>}
+      <button disabled={!!busy} onClick={async()=>{if(await run(todo))onDone&&onDone()}} style={{...S.startBtn,marginTop:6,opacity:busy?.6:1}}>
+        {busy?Math.round((busy.p||0)*100)+' %':todo.length?t('dlButton')+' ('+mb(total)+')':t('dlContinue')}
+      </button>
+      {onSkip&&!busy&&<button onClick={onSkip} style={{...S.navBtn,alignSelf:'center'}}>{t('dlSkip')}</button>}
+    </div>);
+  }
+  return(<div style={{display:'flex',flexDirection:'column',gap:8}}>
+    {ids.map(id=>{const st=translationState(id,inst),b=cat.translations[id].bytes,isBusy=busy?.id===id;
+      return(<div key={id} style={box}>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{fontWeight:600,color:'var(--t-title)',fontSize:14}}>{BIBLES[id].label}</div>
+          <div style={{fontSize:12,color:st==='update'?'var(--t-accent)':'var(--t-muted)'}}>{mb(b)} · {st==='installed'?'✓ '+t('dlInstalled'):st==='update'?t('dlHasUpdate'):t('dlMissing')}</div>
+          {isBusy&&bar(busy.p)}
+          {ask===id&&<div style={{marginTop:8,fontSize:13,color:'var(--t-text2)'}}>{t('dlDeleteAsk')}
+            <div style={{display:'flex',gap:8,marginTop:6}}><button onClick={()=>del(id)} style={S.navBtn}>{t('dlYes')}</button><button onClick={()=>setAsk(null)} style={S.navBtn}>{t('dlNo')}</button></div></div>}
+        </div>
+        {!isBusy&&ask!==id&&<div style={{display:'flex',flexDirection:'column',gap:6}}>
+          {st!=='installed'&&<button disabled={!!busy} onClick={()=>run([id])} style={S.navBtn}>{st==='update'?t('dlUpdate'):t('dlButton')}</button>}
+          {st!=='missing'&&<button disabled={!!busy} onClick={()=>setAsk(id)} style={S.navBtn}>{t('dlDelete')}</button>}
+        </div>}
+      </div>);})}
+    {err&&<p style={{color:'var(--t-error,#c33)',fontSize:13,fontFamily:sans,margin:0}}>{err}</p>}
+    {usage!=null&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('dlStorage')}: {mb(usage)}</p>}
+  </div>);
+}
+
 function App({data}){
   const saved=LS.get('bible-reader-state')||LS.get('nt-reader-state')||{};
   const ntStartIndex=data.en.ntStartIndex||0;
@@ -3646,7 +3826,11 @@ function App({data}){
   // Regel 2–4 auflösen (eindeutig → übernehmen, mehrdeutig → hilfschoose-Phase).
   // Bibelwechsel braucht Reload (INSTANCE wird beim Laden festgelegt); danach
   // führt die phase-Init den Flow fort (Hilfswahl bzw. Test bzw. Startseite).
-  const onBibleChoose=useCallback(id=>{
+  // Nach der Bibelwahl kommt der Download-Schritt (phase 'download'); erst danach
+  // geht es mit finishBibleChoose wie bisher weiter (Hilfsbibel, Reload).
+  const [dlChoice,setDlChoice]=useState(null);
+  const onBibleChoose=useCallback(id=>{if(!BIBLES[id])return;setDlChoice(id);setPhase('download');},[]);
+  const finishBibleChoose=useCallback(id=>{
     if(!BIBLES[id])return;
     const{resolved}=resolveHilfsbibel(id,getLang());
     if(id===INSTANCE.id){ // schon die aktive (Default-)Bibel → kein Reload nötig
@@ -4420,6 +4604,23 @@ function App({data}){
       </div>
     </div>);
   }
+  if(phase==='download'&&dlChoice){
+    const{resolved}=resolveHilfsbibel(dlChoice,getLang());
+    const helper=resolved||BIBLES[dlChoice]?.defaultHilfs;
+    const tags={[dlChoice]:t('dlReading')};if(helper&&helper!==dlChoice)tags[helper]=t('dlHelper');
+    return(<div>
+      <header style={S.header}>
+        <div style={{fontSize:44,marginBottom:8}}>⬇️</div>
+        <h1 style={{...S.title,margin:0}}>{t('dlTitle')}</h1>
+      </header>
+      <p style={{textAlign:'center',fontSize:14,color:'var(--t-med)',fontFamily:sans,margin:'0 0 20px',lineHeight:1.6}}>{t('dlHint')}</p>
+      <TranslationManager mode="onboarding" required={[dlChoice]} preselect={helper&&helper!==dlChoice?[helper]:[]} tags={tags}
+        onDone={()=>finishBibleChoose(dlChoice)} onSkip={()=>finishBibleChoose(dlChoice)}/>
+      <div style={{textAlign:'center',marginTop:20}}>
+        <button onClick={()=>setPhase('biblechoose')} style={S.navBtn}>← {t('chooseBible')}</button>
+      </div>
+    </div>);
+  }
   if(phase==='hilfschoose'){
     const{candidates}=resolveHilfsbibel(INSTANCE.id,getLang());
     return(<div>
@@ -4659,6 +4860,10 @@ function App({data}){
       </header>
       <div style={S.navRow}><button onClick={()=>setPhase(prevPhaseRef.current||'nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
+        <div style={S.settingsGroup}>
+          <span style={S.settingsLabel}>{t('dlManage')}</span>
+          <TranslationManager mode="settings"/>
+        </div>
         <div style={S.settingsGroup}>
           <span style={S.settingsLabel}>{t('appLanguage')}</span>
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>{APP_LANGS.map(o=>(<button key={o.code} onClick={()=>changeUiLang(o.code)} style={{...S.lvlBtn,...(uiLang===o.code?S.lvlActive:{})}}>{o.label}</button>))}</div>

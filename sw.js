@@ -2,8 +2,7 @@ const CACHE_NAME = 'bible-full-v2117';
 const ASSETS = [
   './',
   './index.html',
-  './bibles/index.json',
-  './bibles/eng/web/train/words.json',
+  './books-index.json',
   'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js'
@@ -20,13 +19,16 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      // Nur alte App-Caches löschen — Bibeldaten ('bd-…', siehe index.html) bleiben über Deploys erhalten
+      Promise.all(keys.filter(k => k.startsWith('bible-full-') && k !== CACHE_NAME).map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
+  // Bibeldaten (free-bible-translations) verwaltet die App selbst (dataFetch, Caches 'bd-…')
+  if (url.pathname.includes('/free-bible-translations/')) return;
   const isHTML = url.pathname.endsWith('.html') || url.pathname.endsWith('/');
 
   if (isHTML) {
