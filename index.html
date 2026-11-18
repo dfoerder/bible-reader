@@ -278,24 +278,29 @@ const BIBLES = {
       navSubtitle1:{de:'Vertiefe deinen Glauben und verbessere dein Deutsch.',en:'Deepen your faith and improve your German through God\'s Word.',es:'Profundiza tu fe y mejora tu alemán con la Palabra de Dios.',it:'Approfondisci la tua fede e migliora il tuo tedesco con la Parola di Dio.',fr:'Approfondis ta foi et améliore ton allemand avec la Parole de Dieu.'},
     }, defaultUiLang: 'de',
   },
-  'grc-n1904': {
-    id: 'grc-n1904', label: 'Ἑλληνική (Nestle 1904) – Urtext NT', langCode: 'grc', lsPrefix: 'grc:',
-    bibleDir: 'bibles/grc/n1904/', bibleSuffix: '_n1904.json', credit: 'Nestle 1904 · MACULA Greek (Biblica, CC BY 4.0) · Glossen: Berean Interlinear Bible',
+  'urtext': {
+    id: 'urtext', label: 'Urtext – AT hebräisch, NT griechisch', langCode: 'grc', lsPrefix: 'grc:',
+    // NT: Nestle 1904 (MACULA Greek); AT: Westminster Leningrad Codex (STEPBible TAHOT).
+    // Pro Testament eigenes Verzeichnis: ot* gilt für Bücher 1–39 (bookSrc).
+    bibleDir: 'bibles/grc/n1904/', bibleSuffix: '_n1904.json',
     annoDir: 'bibles/grc/n1904/anno/', annoSuffix: '_n1904_multi.json',
-    // Bisher nur englische Glossen (Berean Interlinear, über MACULA); jedes Wort
-    // hat zusätzlich strong (G…) und morph. Kein CEFR-level (→ annoStep 0).
+    otBibleDir: 'bibles/hbo/wlc/', otBibleSuffix: '_wlc.json',
+    otAnnoDir: 'bibles/hbo/wlc/anno/', otAnnoSuffix: '_wlc_multi.json',
+    otRtl: true, // Hebräisch von rechts nach links
+    license: 'CC BY 4.0', // statt „Public Domain“ in der Fusszeile
+    credit: 'AT: Westminster Leningrad Codex · STEPBible TAHOT (Tyndale House/STEPBible.org, CC BY 4.0) · NT: Nestle 1904 · MACULA Greek (Biblica, CC BY 4.0) · Glossen: STEPBible, Berean Interlinear Bible',
+    // Bisher nur englische Glossen; jedes Wort hat zusätzlich strong (H…/G…) und morph.
+    // Kein CEFR-level (→ annoStep 0).
     annoGlossLangs: ['en'],
     wordsPath: null, examplesPath: null,
-    // Nur das Neue Testament: loadData blendet das AT aus, damit keine
-    // fehlenden AT-Bücher geladen werden.
-    ntOnly: true,
     hasAnno: true, hasTraining: false,
     defaultHilfs: 'eng-web',
-    // Neugriechische Stimme als Behelf (Koine-Aussprache gibt es nicht).
+    // Neugriechische Stimme als Behelf (Koine-Aussprache gibt es nicht); fürs AT
+    // gibt es keine passende Stimme.
     ttsLang: 'el-GR', ttsLangPrefix: 'el',
     ttsVoiceNames: ['Melina','Nikos'],
     names: null, bookAbbr: null,
-    i18nOverrides: {navTitle:{de:'Griechisches NT',en:'Greek New Testament',es:'Nuevo Testamento griego',it:'Nuovo Testamento greco',fr:'Nouveau Testament grec'}}, defaultUiLang: 'de',
+    i18nOverrides: {navTitle:{de:'Urtext',en:'Original Languages',es:'Textos originales',it:'Testi originali',fr:'Textes originaux'}}, defaultUiLang: 'de',
   },
 };
 const DEFAULT_BIBLE_ID = 'eng-web';
@@ -308,7 +313,8 @@ function rawLSset(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 // Aktive Hauptbibel: einmal auf Modulebene festgelegt (vor dem ersten Render,
 // damit die präfixierten useState-Initializer den richtigen Nutzerstand lesen).
 // Ein Hauptbibel-Wechsel persistiert + lädt die Seite neu (siehe switchHaupt).
-let INSTANCE = BIBLES[rawLSget('bible-haupt')] || BIBLES[DEFAULT_BIBLE_ID];
+const BIBLE_ID_ALIASES = {'grc-n1904':'urtext'}; // frühere IDs → aktuelle
+let INSTANCE = BIBLES[BIBLE_ID_ALIASES[rawLSget('bible-haupt')]||rawLSget('bible-haupt')] || BIBLES[DEFAULT_BIBLE_ID];
 
 // ─── App-Sprachen (Onboarding) ──────────────────────────
 // Auswahl beim ersten Start. Die App-Sprache setzt die UI-Sprache UND wählt eine
@@ -320,7 +326,7 @@ const APP_LANGS=[
   {code:'it',label:'Italiano'},
   {code:'fr',label:'Français'},
 ];
-const LANG_LABELS={en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français',grc:'Ἑλληνική'};
+const LANG_LABELS={en:'English',de:'Deutsch',es:'Español',it:'Italiano',fr:'Français',grc:'Urtext'};
 // Beschriftung für eine Gloss-Sprachoption: zeigt die volle Sprachkombination
 // (Hauptbibel-Sprache → Gloss-Sprache), z.B. "English-Español", nicht nur das Ziel.
 function glossPairLabel(l){
@@ -2892,9 +2898,17 @@ function normalizeDictBook(d,nr){
   }));
   return {nr,name:d.name,chapters};
 }
+// Pfade eines Buchs: Editionen mit ot*-Feldern (Urtext) laden das AT aus eigenem Verzeichnis.
+function bookSrc(b,nr){
+  const ot=nr<40&&b.otBibleDir;
+  return {dir:ot?b.otBibleDir:b.bibleDir,suffix:ot?b.otBibleSuffix:b.bibleSuffix,
+    annoDir:ot?b.otAnnoDir:b.annoDir,annoSuffix:ot?b.otAnnoSuffix:b.annoSuffix};
+}
+const isRtlBook=nr=>!!(INSTANCE.otRtl&&nr<40);
 async function fetchBook(nr){
   if(_bookCache[nr])return _bookCache[nr];
-  const r=await fetch(INSTANCE.bibleDir+nr+INSTANCE.bibleSuffix+CB);
+  const src=bookSrc(INSTANCE,nr);
+  const r=await fetch(src.dir+nr+src.suffix+CB);
   if(!r.ok)throw new Error('book not found');
   const d=await r.json();
   const book=normalizeDictBook(d,nr);
@@ -2909,7 +2923,8 @@ async function fetchAnno(nr){
   if(!INSTANCE.annoDir)return null;
   if(_annoCache[nr])return _annoCache[nr];
   try{
-    const r=await fetch(INSTANCE.annoDir+nr+INSTANCE.annoSuffix+CB);
+    const src=bookSrc(INSTANCE,nr);
+    const r=await fetch(src.annoDir+nr+src.annoSuffix+CB);
     if(r.ok){const d=await r.json();_annoCache[nr]=d;return d;}
   }catch(e){}
   return null;
@@ -2946,7 +2961,8 @@ async function fetchDe(nr,hilfsId){
   const key=nr+'_'+hilfsId;
   if(_deCache[key])return _deCache[key];
   try{
-    const r=await fetch(b.bibleDir+nr+b.bibleSuffix+CB);
+    const src=bookSrc(b,nr);
+    const r=await fetch(src.dir+nr+src.suffix+CB);
     if(r.ok){
       const d=await r.json();
       const result={name:d.name,chapters:d.chapters};
@@ -3000,7 +3016,7 @@ async function loadData(){
 
 // Split trailing punctuation from a word token: "diffamer," → ["diffamer", ","]
 function splitPunct(token){
-  const m=token.match(/^(.+?)([,;:.!?…»"'\-)]+)$/);
+  const m=token.match(/^(.+?)([,;:.!?…»"'\-)·\u05BE\u05C3\u05C0]+)$/); // inkl. Maqaf, Sof Pasuq, Paseq, griech. Hochpunkt
   return m?[m[1],m[2]]:[token,''];
 }
 
@@ -5246,7 +5262,7 @@ function App({data}){
       </div>}
     </div>}
 
-    <div style={{...S.text,fontSize,lineHeight}}>{(()=>{const deSize=fontSizeTr,pillSize=fontSizePill;return verses.map(verse=>{
+    <div dir={isRtlBook(books[bookIdx]?.nr)?'rtl':undefined} style={{...S.text,fontSize,lineHeight}}>{(()=>{const deSize=fontSizeTr,pillSize=fontSizePill;return verses.map(verse=>{
       const isVA=tts.activeVerse===verse.n;
       let wordIdx=0;
       const useAnno=hasAnno;
@@ -5324,7 +5340,7 @@ function App({data}){
           return bridgeGap.has(pos)?<span key={i} style={S.phraseBridge}>{el}</span>:el;
         })}{' '}
       </span>
-      {showDe&&deText&&<div style={{...S.deVerse,fontSize:deSize,lineHeight:lineHeightTr,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
+      {showDe&&deText&&<div dir="auto" style={{...S.deVerse,fontSize:deSize,lineHeight:lineHeightTr,cursor:'pointer'}} onClick={()=>setDePrompt(showAllDe?'hide':'show')}>{deText}</div>}
       </div>);
     })})()}</div>
 
@@ -5332,7 +5348,7 @@ function App({data}){
       <button onClick={prevChapter} style={{...S.chapNavBtn,...(bookIdx===0&&chapIdx===0?{opacity:0.3}:{})}} disabled={bookIdx===0&&chapIdx===0}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="15 18 9 12 15 6"/></svg></button>
       <button onClick={nextChapter} style={{...S.chapNavBtn,...(bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1?{opacity:0.3}:{})}} disabled={bookIdx===books.length-1&&chapIdx===(currentBook.numChapters||0)-1}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{display:'block'}}><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
-    <footer style={S.footer}>{langFooter} · {t('publicDomain')}</footer>
+    <footer style={S.footer}>{langFooter} · {INSTANCE.license||t('publicDomain')}</footer>
 
     {tts.speaking&&<div id="audio-bar" style={audioBarBase} onClick={e=>e.stopPropagation()}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:4}}>
