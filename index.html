@@ -295,10 +295,12 @@ const BIBLES = {
     wordsPath: null, examplesPath: null,
     hasAnno: true, hasTraining: false,
     defaultHilfs: 'eng-web',
-    // Neugriechische Stimme als Behelf (Koine-Aussprache gibt es nicht); fürs AT
-    // gibt es keine passende Stimme.
+    // NT: neugriechische Stimme als Behelf (Koine-Aussprache gibt es nicht).
     ttsLang: 'el-GR', ttsLangPrefix: 'el',
     ttsVoiceNames: ['Melina','Nikos'],
+    // AT: moderne israelische Aussprache (iPhone-Stimme „Carmit“), ohne Akzentzeichen,
+    // Gottesname als „Adonai“ (ttsSpeakText).
+    otTtsLang: 'he-IL', otTtsLangPrefix: 'he', otTtsVoiceNames: ['Carmit'],
     names: null, bookAbbr: null,
     i18nOverrides: {navTitle:{de:'Urtext',en:'Original Languages',es:'Textos originales',it:'Testi originali',fr:'Textes originaux'}}, defaultUiLang: 'de',
   },
@@ -3210,12 +3212,39 @@ function keepAliveEl(){
 function keepAliveStart(){try{const a=keepAliveEl();if(a.paused){const p=a.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}
 function keepAliveStop(){try{const a=_keepAlive.el;if(a&&!a.paused)a.pause()}catch(e){}}
 function mediaSessionState(st){try{if('mediaSession' in navigator)navigator.mediaSession.playbackState=st}catch(e){}}
+// Vorlese-Sprache hängt beim Urtext vom Testament ab: TTS_BOOK_NR setzt App beim
+// Rendern auf das offene Buch; ttsCfg() liefert Sprache/Stimmen dafür.
+let TTS_BOOK_NR=null;
+function ttsCfg(){
+  if(INSTANCE.otTtsLang&&TTS_BOOK_NR!=null&&TTS_BOOK_NR<40)
+    return {lang:INSTANCE.otTtsLang,prefix:INSTANCE.otTtsLangPrefix,names:INSTANCE.otTtsVoiceNames||[]};
+  return {lang:INSTANCE.ttsLang,prefix:INSTANCE.ttsLangPrefix,names:INSTANCE.ttsVoiceNames||[]};
+}
+const TTS_PREFIXES=[...new Set([INSTANCE.ttsLangPrefix,INSTANCE.otTtsLangPrefix].filter(Boolean))];
+// Hebräisch für die (moderne) Sprachausgabe: Akzentzeichen, Maqaf, Paseq, Sof Pasuq
+// weg (Vokale bleiben); Gottesname יהוה → אֲדֹנָי (mit Hiriq-Punktierung → אֱלֹהִים),
+// wie heute üblich gelesen. Wortanzahl bleibt gleich (Wort-Hervorhebung).
+function hebrewForSpeech(text){
+  return text.split(/(\s+)/).map(w=>{
+    if(/^\s+$/.test(w))return w;
+    let x=w.replace(/[\u0591-\u05AF\u05BD\u05BE\u05C0\u05C3\u05C6]/g,'');
+    const cons=x.replace(/[\u05B0-\u05C7]/g,'');
+    const m=cons.match(/^([ובלכמה]{0,2})יהוה$/);
+    if(m){
+      const yi=m[1]?x.indexOf('י',1):0;           // Beginn des Gottesnamens nach Präfix
+      const elohim=/\u05B4/.test(x.slice(yi));      // Hiriq → als Elohim gelesen
+      x=x.slice(0,yi)+(elohim?'אֱלֹהִים':'אֲדֹנָי');
+    }
+    return x||w;
+  }).join('');
+}
+const ttsSpeakText=text=>ttsCfg().prefix==='he'?hebrewForSpeech(text):text;
 function useTTS(){
   const [speaking,setSpeaking]=useState(false);
   const [activeVerse,setActiveVerse]=useState(null);
   const [activeWordIdx,setActiveWordIdx]=useState(-1);
   const [speed,setSpeedState]=useState(parseFloat(LS.get('tts-speed'))||0.6);
-  const [voices,setVoices]=useState({[INSTANCE.ttsLangPrefix]:[]});
+  const [voices,setVoices]=useState({});
   const langRef=useRef(INSTANCE.ttsLangPrefix);
   const setLang=useCallback(l=>{langRef.current=l},[]);
   const [paused,setPaused]=useState(false);
@@ -3247,22 +3276,22 @@ function useTTS(){
   useEffect(()=>{
     const lv=()=>{
       const all=speechSynthesis.getVoices();
-      const en=all.filter(v=>v.lang.startsWith(INSTANCE.ttsLangPrefix));
-      if(en.length)setVoices({[INSTANCE.ttsLangPrefix]:en});
+      const vs={};for(const p of TTS_PREFIXES){const l=all.filter(v=>v.lang.startsWith(p));if(l.length)vs[p]=l;}
+      if(Object.keys(vs).length)setVoices(vs);
     };
     lv();speechSynthesis.onvoiceschanged=lv;setTimeout(lv,100);setTimeout(lv,500);
     return()=>{speechSynthesis.cancel();keepAliveStop()};
   },[]);
   const getVoice=useCallback((langOverride)=>{
-    const ev=voices[INSTANCE.ttsLangPrefix]||[];
-    for(const n of INSTANCE.ttsVoiceNames){const v=ev.find(v=>v.name.includes(n));if(v)return v}
+    const c=ttsCfg();const ev=voices[c.prefix]||[];
+    for(const n of c.names){const v=ev.find(v=>v.name.includes(n));if(v)return v}
     return ev[0]||null;
   },[voices]);
   const speakText=useCallback((text,langOverride,rate)=>{
     return new Promise(resolve=>{
       speechSynthesis.cancel(); // iOS fix: prevent repeat bug
-      const u=new SpeechSynthesisUtterance(text);
-      u.lang=INSTANCE.ttsLang;
+      const u=new SpeechSynthesisUtterance(ttsSpeakText(text));
+      u.lang=ttsCfg().lang;
       u.rate=rate??speedRef.current;
       const v=getVoice(langOverride);if(v)u.voice=v;
       let done=false;
@@ -3275,9 +3304,10 @@ function useTTS(){
     });
   },[getVoice]);
   const speakVerseRef=useRef(null);
-  const speakVerse=useCallback((vN,text,onDone,wordOffset=0)=>{
+  const speakVerse=useCallback((vN,rawText,onDone,wordOffset=0)=>{
+    const text=ttsSpeakText(rawText);
     const words=text.split(/\s+/),ws=[];let p=0;words.forEach(w=>{ws.push(p);p+=w.length+1});
-    const u=new SpeechSynthesisUtterance(text);u.lang=INSTANCE.ttsLang;u.rate=speedRef.current;
+    const u=new SpeechSynthesisUtterance(text);u.lang=ttsCfg().lang;u.rate=speedRef.current;
     const v=getVoice();if(v)u.voice=v;
     currentVerseRef.current={vN,text};currentCallbackRef.current=onDone;currentCharIdx.current=0;currentWordIdx.current=wordOffset;
     setActiveVerse(vN);setActiveWordIdx(wordOffset);setSpeaking(true);
@@ -3360,7 +3390,7 @@ function useTTS(){
     return()=>{['play','pause','stop','nexttrack','previoustrack'].forEach(a=>set(a,null))};
   },[]);
   const setMediaInfo=useCallback((title,artist)=>{try{if('mediaSession' in navigator&&window.MediaMetadata)navigator.mediaSession.metadata=new MediaMetadata({title,artist})}catch(e){}},[]);
-  const hasVoices=(voices[INSTANCE.ttsLangPrefix]||[]).length>0;
+  const hasVoices=(voices[ttsCfg().prefix]||[]).length>0;
   return{speaking,paused,togglePause,activeVerse,activeWordIdx,speed,setSpeed,speakSingleVerse,speakChapter,speakText,lastSentenceRef,stop,hasVoices,setLang,lastStoppedVerse,skipVerse,onChapterEnd,setMediaInfo};
 }
 
@@ -3796,6 +3826,7 @@ function App({data}){
 
   const books=bible.books;
   const currentBook=books[bookIdx];
+  TTS_BOOK_NR=currentBook?.nr??null; // Vorlese-Sprache pro Testament (ttsCfg)
   const bookName=currentBook?.name||'';
   const bookNr=currentBook?.nr;
   // Kontext für den Bug-Melder: welche Ansicht war offen, als der Bug auftrat.
