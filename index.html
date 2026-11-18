@@ -449,6 +449,13 @@ const I18N={
   dlTotal:{de:'Zusammen',en:'Total',es:'Total',it:'Totale',fr:'Total'},
   dlYes:{de:'Ja',en:'Yes',es:'Sí',it:'Sì',fr:'Oui'},
   dlNo:{de:'Nein',en:'No',es:'No',it:'No',fr:'Non'},
+  dlBackup:{de:'Sichern',en:'Back up',es:'Copia',it:'Backup',fr:'Sauvegarder'},
+  dlBackupReady:{de:'Sicherung bereit',en:'Backup ready',es:'Copia lista',it:'Backup pronto',fr:'Sauvegarde prête'},
+  dlShare:{de:'Teilen / Sichern',en:'Share / Save',es:'Compartir / Guardar',it:'Condividi / Salva',fr:'Partager / Enregistrer'},
+  dlRestore:{de:'Sicherung laden',en:'Restore backup',es:'Restaurar copia',it:'Ripristina backup',fr:'Restaurer une sauvegarde'},
+  dlRestored:{de:'Sicherung eingelesen',en:'Backup restored',es:'Copia restaurada',it:'Backup ripristinato',fr:'Sauvegarde restaurée'},
+  dlBackupHint:{de:'Notfall-Sicherung: Datei z.B. in „Dateien“ ablegen; „Sicherung laden“ liest sie ohne Internet wieder ein.',en:'Emergency backup: save the file e.g. in “Files”; “Restore backup” reads it back without internet.',es:'Copia de emergencia: guarda el archivo p. ej. en «Archivos»; «Restaurar copia» lo vuelve a leer sin internet.',it:'Backup di emergenza: salva il file ad es. in «File»; «Ripristina backup» lo rilegge senza internet.',fr:'Sauvegarde de secours : enregistre le fichier p. ex. dans « Fichiers » ; « Restaurer » le relit sans internet.'},
+  dlClose:{de:'Schliessen',en:'Close',es:'Cerrar',it:'Chiudi',fr:'Fermer'},
   menu:{de:'Menü',en:'Menu'},
   trainingSection:{de:'Training',en:'Training'},
   vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
@@ -2994,6 +3001,62 @@ async function removeTranslation(id){
   const inst=getInstalled();delete inst[id];rawLSset(INSTALLED_KEY,inst);
   await purgeOnDemand(CATALOG?.translations?.[id]?.files);
 }
+// ── Manuelle Sicherung (Notfall-Backup ohne Internet) ──
+// Datei: gzip-komprimiertes NDJSON — 1. Zeile Kopf {type,format,id,version,files},
+// danach je Datei {p:Pfad,d:Inhalt}. Zeilenweise geschrieben/gelesen, damit auch
+// 100 MB-Übersetzungen auf dem iPhone nicht als ein riesiges Objekt im Speicher liegen.
+const DATA_ABS=new URL(DATA_BASE,location.href).href;
+async function backupTranslation(id,onProgress){
+  const ver=getInstalled()[id];
+  if(!ver||!HAS_CACHES)throw new Error('Nicht heruntergeladen');
+  const cache=await caches.open(BD+id+'-'+ver),reqs=await cache.keys();
+  const parts=[JSON.stringify({type:'bible-data-backup',format:1,id,version:ver,files:reqs.length,created:new Date().toISOString()})+'\n'];
+  let i=0;
+  for(const rq of reqs){
+    const r=await cache.match(rq);
+    const path=rq.url.startsWith(DATA_ABS)?rq.url.slice(DATA_ABS.length):rq.url;
+    parts.push(JSON.stringify({p:path,d:await r.text()})+'\n');
+    onProgress&&onProgress(++i/reqs.length);
+  }
+  let blob=new Blob(parts,{type:'application/x-ndjson'}),ext='.ndjson';
+  if(typeof CompressionStream!=='undefined'){
+    blob=await new Response(blob.stream().pipeThrough(new CompressionStream('gzip'))).blob();ext='.ndjson.gz';
+  }
+  return new File([blob],'bibel-'+id+'-'+ver+ext,{type:ext.endsWith('.gz')?'application/gzip':'application/x-ndjson'});
+}
+async function restoreBackup(file,onProgress){
+  if(!HAS_CACHES)throw new Error('Offline-Speicher wird von diesem Browser nicht unterstützt');
+  let stream=file.stream();
+  const head=new Uint8Array(await file.slice(0,2).arrayBuffer());
+  if(head[0]===0x1f&&head[1]===0x8b){
+    if(typeof DecompressionStream==='undefined')throw new Error('Dieser Browser kann gepackte Sicherungen nicht lesen');
+    stream=stream.pipeThrough(new DecompressionStream('gzip'));
+  }
+  const reader=stream.pipeThrough(new TextDecoderStream()).getReader();
+  let buf='',meta=null,cache=null,n=0;
+  const line=async s=>{
+    if(!s.trim())return;
+    const o=JSON.parse(s);
+    if(!meta){
+      if(o.type!=='bible-data-backup'||!BIBLES[o.id])throw new Error('Keine Sicherung einer Bibel dieser App');
+      meta=o;cache=await caches.open(BD+o.id+'-'+o.version);return;
+    }
+    await cache.put(DATA_ABS+o.p,new Response(o.d,{headers:{'Content-Type':'application/json'}}));
+    onProgress&&onProgress(++n/meta.files);
+  };
+  for(;;){
+    const {done,value}=await reader.read();
+    if(done)break;
+    buf+=value;let k;
+    while((k=buf.indexOf('\n'))>=0){const s=buf.slice(0,k);buf=buf.slice(k+1);await line(s);}
+  }
+  await line(buf);
+  if(!meta||n!==meta.files)throw new Error('Sicherung unvollständig ('+n+' von '+(meta?.files??'?')+' Dateien)');
+  for(const k of await caches.keys())if(k.startsWith(BD+meta.id+'-')&&k!==BD+meta.id+'-'+meta.version)await caches.delete(k);
+  const inst=getInstalled();inst[meta.id]=meta.version;rawLSset(INSTALLED_KEY,inst);
+  return meta.id;
+}
+
 // Status einer Übersetzung: 'installed' | 'update' | 'missing'
 function translationState(id,inst=getInstalled()){
   const v=inst[id];if(!v)return 'missing';
@@ -3518,6 +3581,9 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
   const [err,setErr]=useState(null);
   const [ask,setAsk]=useState(null); // id, dessen Löschen bestätigt werden soll
   const [usage,setUsage]=useState(null);
+  const [bk,setBk]=useState(null);       // Sicherung in Arbeit {id,p} bzw. fertig {id,file}
+  const [msg,setMsg]=useState(null);
+  const fileRef=useRef(null);
   const reload=useCallback(()=>{setLoading(true);loadCatalog().then(c=>{setCat(c);setInst(getInstalled());setLoading(false)})},[]);
   useEffect(reload,[]);// eslint-disable-line
   useEffect(()=>{try{navigator.storage?.estimate?.().then(e=>setUsage(e.usage)).catch(()=>{})}catch(e){}},[inst]);
@@ -3534,6 +3600,26 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
     setBusy(null);return true;
   };
   const del=async id=>{setAsk(null);await removeTranslation(id);setInst(getInstalled())};
+  // Sichern in zwei Tipps: erst Datei bauen, dann teilen (navigator.share braucht einen frischen Tipp)
+  const doBackup=async id=>{
+    setErr(null);setMsg(null);setBk({id,p:0});
+    try{const file=await backupTranslation(id,p=>setBk({id,p}));setBk({id,file});}
+    catch(e){setBk(null);setErr(t('dlFailed')+': '+(e.message||e));}
+  };
+  const shareBackup=async()=>{
+    const file=bk?.file;if(!file)return;
+    try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});setBk(null);return;}}
+    catch(e){if(e&&e.name==='AbortError')return;}
+    const url=URL.createObjectURL(file),a=document.createElement('a');
+    a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),10000);setBk(null);
+  };
+  const doRestore=async file=>{
+    if(!file)return;setErr(null);setMsg(null);setBusy({id:'_restore',p:0});
+    try{const id=await restoreBackup(file,p=>setBusy({id:'_restore',p}));setMsg('✓ '+t('dlRestored')+': '+(BIBLES[id]?.label||id));}
+    catch(e){setErr(t('dlFailed')+': '+(e.message||e));}
+    setBusy(null);setInst(getInstalled());
+  };
   const box={border:'1px solid var(--t-border)',borderRadius:10,padding:'10px 12px',background:'var(--t-card-solid)',display:'flex',alignItems:'center',gap:10,fontFamily:sans};
   const bar=p=><div style={{height:6,borderRadius:3,background:'var(--t-border)',overflow:'hidden',marginTop:6}}><div style={{height:'100%',width:Math.round(p*100)+'%',background:'var(--t-primary)',transition:'width .2s'}}/></div>;
   if(!cat){
@@ -3572,15 +3658,26 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
           <div style={{fontWeight:600,color:'var(--t-title)',fontSize:14}}>{BIBLES[id].label}</div>
           <div style={{fontSize:12,color:st==='update'?'var(--t-accent)':'var(--t-muted)'}}>{mb(b)} · {st==='installed'?'✓ '+t('dlInstalled'):st==='update'?t('dlHasUpdate'):t('dlMissing')}</div>
           {isBusy&&bar(busy.p)}
+          {bk?.id===id&&!bk.file&&bar(bk.p)}
+          {bk?.id===id&&bk.file&&<div style={{marginTop:8,fontSize:13,color:'var(--t-text2)'}}>{t('dlBackupReady')} ({mb(bk.file.size)})
+            <div style={{display:'flex',gap:8,marginTop:6}}><button onClick={shareBackup} style={S.navBtn}>{t('dlShare')}</button><button onClick={()=>setBk(null)} style={S.navBtn}>{t('dlClose')}</button></div></div>}
           {ask===id&&<div style={{marginTop:8,fontSize:13,color:'var(--t-text2)'}}>{t('dlDeleteAsk')}
             <div style={{display:'flex',gap:8,marginTop:6}}><button onClick={()=>del(id)} style={S.navBtn}>{t('dlYes')}</button><button onClick={()=>setAsk(null)} style={S.navBtn}>{t('dlNo')}</button></div></div>}
         </div>
         {!isBusy&&ask!==id&&<div style={{display:'flex',flexDirection:'column',gap:6}}>
           {st!=='installed'&&<button disabled={!!busy} onClick={()=>run([id])} style={S.navBtn}>{st==='update'?t('dlUpdate'):t('dlButton')}</button>}
+          {st!=='missing'&&<button disabled={!!busy||!!bk} onClick={()=>doBackup(id)} style={S.navBtn}>{t('dlBackup')}</button>}
           {st!=='missing'&&<button disabled={!!busy} onClick={()=>setAsk(id)} style={S.navBtn}>{t('dlDelete')}</button>}
         </div>}
       </div>);})}
     {err&&<p style={{color:'var(--t-error,#c33)',fontSize:13,fontFamily:sans,margin:0}}>{err}</p>}
+    {msg&&<p style={{color:'var(--t-text2)',fontSize:13,fontFamily:sans,margin:0}}>{msg}</p>}
+    <div style={{display:'flex',alignItems:'center',gap:10,marginTop:4}}>
+      <button disabled={!!busy} onClick={()=>fileRef.current&&fileRef.current.click()} style={S.navBtn}>{t('dlRestore')}</button>
+      {busy?.id==='_restore'&&<div style={{flex:1}}>{bar(busy.p)}</div>}
+      <input ref={fileRef} type="file" style={{display:'none'}} onChange={e=>{const f=e.target.files&&e.target.files[0];e.target.value='';doRestore(f)}}/>
+    </div>
+    <p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'2px 0 0',lineHeight:1.4}}>{t('dlBackupHint')}</p>
     {usage!=null&&<p style={{fontSize:12,color:'var(--t-muted)',fontFamily:sans,margin:'4px 0 0'}}>{t('dlStorage')}: {mb(usage)}</p>}
   </div>);
 }
