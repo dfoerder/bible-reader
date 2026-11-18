@@ -3238,7 +3238,17 @@ function hebrewForSpeech(text){
     return x||w;
   }).join('');
 }
-const ttsSpeakText=text=>ttsCfg().prefix==='he'?hebrewForSpeech(text):text;
+// Polytonisches Griechisch (Nestle) → monotonisch für die neugriechische Stimme: Hauchzeichen,
+// Iota subscriptum und Zirkumflex/Gravis kennt sie nicht und überspringt sonst Wörter wie ὁ.
+// Gravis/Zirkumflex → Akut (Tonos); Wortanzahl bleibt gleich.
+function greekForSpeech(text){
+  return text.normalize('NFD')
+    .replace(/[\u0313\u0314\u0345]/g,'')        // Psili, Dasia, Iota subscriptum
+    .replace(/[\u0300\u0342]/g,'\u0301')        // Gravis, Perispomeni → Akut
+    .replace(/\u0301(?=[^\s]*\u0301)/g,'')      // nur ein Akzent pro Wort (Enklitika)
+    .normalize('NFC');
+}
+const ttsSpeakText=text=>{const p=ttsCfg().prefix;return p==='he'?hebrewForSpeech(text):p==='el'?greekForSpeech(text):text;};
 function useTTS(){
   const [speaking,setSpeaking]=useState(false);
   const [activeVerse,setActiveVerse]=useState(null);
