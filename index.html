@@ -3012,31 +3012,52 @@ async function backupTranslation(id,onProgress){
   if(!ver||!HAS_CACHES)throw new Error('Nicht heruntergeladen');
   const cache=await caches.open(BD+id+'-'+ver),reqs=await cache.keys();
   if(!reqs.length)throw new Error('Keine Offline-Daten gefunden');
-  // Datei für Datei in den Packer streamen: im Speicher liegt nur das gepackte Ergebnis
-  // (eine 90-MB-Bibel am Stück sprengt sonst auf dem iPhone den Arbeitsspeicher).
-  const enc=new TextEncoder();let i=-1;
-  const src=new ReadableStream({async pull(ctl){
-    if(i<0){ctl.enqueue(enc.encode(JSON.stringify({type:'bible-data-backup',format:1,id,version:ver,files:reqs.length,created:new Date().toISOString()})+'\n'));i=0;return;}
-    if(i>=reqs.length){ctl.close();return;}
-    const rq=reqs[i++],r=await cache.match(rq);
+  const enc=new TextEncoder(),parts=[];
+  parts.push(enc.encode(JSON.stringify({type:'bible-data-backup',format:1,id,version:ver,files:reqs.length,created:new Date().toISOString()})+'\n'));
+  // 1) Dateien lesen. WebKit (Safari, Chrome auf iOS) meldet bei manchen Cache-Einträgen
+  //    „The I/O read operation failed“ — dann dieselbe Datei aus dem Netz holen.
+  let i=0,refetched=0;
+  for(const rq of reqs){
     const path=rq.url.startsWith(DATA_ABS)?rq.url.slice(DATA_ABS.length):rq.url;
-    ctl.enqueue(enc.encode(JSON.stringify({p:path,d:await r.text()})+'\n'));
-    onProgress&&onProgress(i/reqs.length);
-  }});
-  let blob,ext;
-  if(typeof CompressionStream!=='undefined'){blob=await new Response(src.pipeThrough(new CompressionStream('gzip'))).blob();ext='.ndjson.gz';}
-  else{blob=await new Response(src).blob();ext='.ndjson';}
+    let txt;
+    try{txt=await (await cache.match(rq)).text();}
+    catch(e){
+      try{const r=await fetch(rq.url,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);txt=await r.text();refetched++;
+        try{await cache.put(rq,new Response(txt,{headers:{'Content-Type':'application/json'}}));}catch(e2){}}
+      catch(e2){throw new Error('Lesen von '+path+': '+(e.message||e)+' (auch aus dem Netz nicht: '+(e2.message||e2)+')');}
+    }
+    parts.push(enc.encode(JSON.stringify({p:path,d:txt})+'\n'));
+    onProgress&&onProgress(++i/reqs.length*0.9);
+  }
+  // 2) Packen (gzip). Klappt das nicht, ungepackt sichern statt abbrechen.
+  const raw=new Blob(parts,{type:'application/x-ndjson'});
+  let blob=raw,ext='.ndjson';
+  if(typeof CompressionStream!=='undefined'){
+    try{
+      const cs=new CompressionStream('gzip'),w=cs.writable.getWriter();
+      const out=new Response(cs.readable).arrayBuffer();
+      for(const p of parts)await w.write(p);
+      await w.close();
+      blob=new Blob([await out],{type:'application/gzip'});ext='.ndjson.gz';
+    }catch(e){console.warn('Packen fehlgeschlagen, sichere ungepackt:',e);blob=raw;ext='.ndjson';}
+  }
+  onProgress&&onProgress(1);
+  if(refetched)console.info('Sicherung: '+refetched+' Dateien neu aus dem Netz gelesen');
   return new File([blob],'bibel-'+id+'-'+ver+ext,{type:ext.endsWith('.gz')?'application/gzip':'application/x-ndjson'});
 }
 async function restoreBackup(file,onProgress){
   if(!HAS_CACHES)throw new Error('Offline-Speicher wird von diesem Browser nicht unterstützt');
-  let stream=file.stream();
-  const head=new Uint8Array(await file.slice(0,2).arrayBuffer());
-  if(head[0]===0x1f&&head[1]===0x8b){
+  // Datei ganz lesen (file.stream() scheitert in WebKit teils mit „I/O read operation
+  // failed“), dann gepackt Stück für Stück entpacken und zeilenweise verarbeiten.
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  let reader;
+  if(bytes[0]===0x1f&&bytes[1]===0x8b){
     if(typeof DecompressionStream==='undefined')throw new Error('Dieser Browser kann gepackte Sicherungen nicht lesen');
-    stream=stream.pipeThrough(new DecompressionStream('gzip'));
-  }
-  const reader=stream.pipeThrough(new TextDecoderStream()).getReader();
+    const ds=new DecompressionStream('gzip'),w=ds.writable.getWriter();
+    w.write(bytes).then(()=>w.close()).catch(()=>{});
+    reader=ds.readable.getReader();
+  }else{let sent=false;reader={read:async()=>sent?{done:true}:(sent=true,{done:false,value:bytes})};}
+  const dec=new TextDecoder();
   let buf='',meta=null,cache=null,n=0;
   const line=async s=>{
     if(!s.trim())return;
@@ -3050,8 +3071,8 @@ async function restoreBackup(file,onProgress){
   };
   for(;;){
     const {done,value}=await reader.read();
-    if(done)break;
-    buf+=value;let k;
+    if(done){buf+=dec.decode();break;}
+    buf+=dec.decode(value,{stream:true});let k;
     while((k=buf.indexOf('\n'))>=0){const s=buf.slice(0,k);buf=buf.slice(k+1);await line(s);}
   }
   await line(buf);
