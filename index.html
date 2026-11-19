@@ -456,6 +456,7 @@ const I18N={
   dlRestored:{de:'Sicherung eingelesen',en:'Backup restored',es:'Copia restaurada',it:'Backup ripristinato',fr:'Sauvegarde restaurée'},
   dlBackupHint:{de:'Notfall-Sicherung: Datei z.B. in „Dateien“ ablegen; „Sicherung laden“ liest sie ohne Internet wieder ein.',en:'Emergency backup: save the file e.g. in “Files”; “Restore backup” reads it back without internet.',es:'Copia de emergencia: guarda el archivo p. ej. en «Archivos»; «Restaurar copia» lo vuelve a leer sin internet.',it:'Backup di emergenza: salva il file ad es. in «File»; «Ripristina backup» lo rilegge senza internet.',fr:'Sauvegarde de secours : enregistre le fichier p. ex. dans « Fichiers » ; « Restaurer » le relit sans internet.'},
   dlClose:{de:'Schliessen',en:'Close',es:'Cerrar',it:'Chiudi',fr:'Fermer'},
+  dlPacking:{de:'Wird gepackt …',en:'Packing …',es:'Empaquetando …',it:'Compressione …',fr:'Compression …'},
   menu:{de:'Menü',en:'Menu'},
   trainingSection:{de:'Training',en:'Training'},
   vocabLevel:{de:'Wörter-Level',en:'Vocabulary level'},
@@ -3010,18 +3011,21 @@ async function backupTranslation(id,onProgress){
   const ver=getInstalled()[id];
   if(!ver||!HAS_CACHES)throw new Error('Nicht heruntergeladen');
   const cache=await caches.open(BD+id+'-'+ver),reqs=await cache.keys();
-  const parts=[JSON.stringify({type:'bible-data-backup',format:1,id,version:ver,files:reqs.length,created:new Date().toISOString()})+'\n'];
-  let i=0;
-  for(const rq of reqs){
-    const r=await cache.match(rq);
+  if(!reqs.length)throw new Error('Keine Offline-Daten gefunden');
+  // Datei für Datei in den Packer streamen: im Speicher liegt nur das gepackte Ergebnis
+  // (eine 90-MB-Bibel am Stück sprengt sonst auf dem iPhone den Arbeitsspeicher).
+  const enc=new TextEncoder();let i=-1;
+  const src=new ReadableStream({async pull(ctl){
+    if(i<0){ctl.enqueue(enc.encode(JSON.stringify({type:'bible-data-backup',format:1,id,version:ver,files:reqs.length,created:new Date().toISOString()})+'\n'));i=0;return;}
+    if(i>=reqs.length){ctl.close();return;}
+    const rq=reqs[i++],r=await cache.match(rq);
     const path=rq.url.startsWith(DATA_ABS)?rq.url.slice(DATA_ABS.length):rq.url;
-    parts.push(JSON.stringify({p:path,d:await r.text()})+'\n');
-    onProgress&&onProgress(++i/reqs.length);
-  }
-  let blob=new Blob(parts,{type:'application/x-ndjson'}),ext='.ndjson';
-  if(typeof CompressionStream!=='undefined'){
-    blob=await new Response(blob.stream().pipeThrough(new CompressionStream('gzip'))).blob();ext='.ndjson.gz';
-  }
+    ctl.enqueue(enc.encode(JSON.stringify({p:path,d:await r.text()})+'\n'));
+    onProgress&&onProgress(i/reqs.length);
+  }});
+  let blob,ext;
+  if(typeof CompressionStream!=='undefined'){blob=await new Response(src.pipeThrough(new CompressionStream('gzip'))).blob();ext='.ndjson.gz';}
+  else{blob=await new Response(src).blob();ext='.ndjson';}
   return new File([blob],'bibel-'+id+'-'+ver+ext,{type:ext.endsWith('.gz')?'application/gzip':'application/x-ndjson'});
 }
 async function restoreBackup(file,onProgress){
@@ -3604,7 +3608,7 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
   const doBackup=async id=>{
     setErr(null);setMsg(null);setBk({id,p:0});
     try{const file=await backupTranslation(id,p=>setBk({id,p}));setBk({id,file});}
-    catch(e){setBk(null);setErr(t('dlFailed')+': '+(e.message||e));}
+    catch(e){setBk({id,error:(e&&e.message)||String(e)});}
   };
   const shareBackup=async()=>{
     const file=bk?.file;if(!file)return;
@@ -3658,7 +3662,9 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
           <div style={{fontWeight:600,color:'var(--t-title)',fontSize:14}}>{BIBLES[id].label}</div>
           <div style={{fontSize:12,color:st==='update'?'var(--t-accent)':'var(--t-muted)'}}>{mb(b)} · {st==='installed'?'✓ '+t('dlInstalled'):st==='update'?t('dlHasUpdate'):t('dlMissing')}</div>
           {isBusy&&bar(busy.p)}
-          {bk?.id===id&&!bk.file&&bar(bk.p)}
+          {bk?.id===id&&!bk.file&&!bk.error&&<div style={{fontSize:12,color:'var(--t-muted)',marginTop:4}}>{t('dlPacking')} {Math.round((bk.p||0)*100)} %{bar(bk.p||0)}</div>}
+          {bk?.id===id&&bk.error&&<div style={{marginTop:6,fontSize:13,color:'var(--t-error,#c33)'}}>{t('dlFailed')}: {bk.error}
+            <div style={{marginTop:6}}><button onClick={()=>setBk(null)} style={S.navBtn}>{t('dlClose')}</button></div></div>}
           {bk?.id===id&&bk.file&&<div style={{marginTop:8,fontSize:13,color:'var(--t-text2)'}}>{t('dlBackupReady')} ({mb(bk.file.size)})
             <div style={{display:'flex',gap:8,marginTop:6}}><button onClick={shareBackup} style={S.navBtn}>{t('dlShare')}</button><button onClick={()=>setBk(null)} style={S.navBtn}>{t('dlClose')}</button></div></div>}
           {ask===id&&<div style={{marginTop:8,fontSize:13,color:'var(--t-text2)'}}>{t('dlDeleteAsk')}
@@ -3666,7 +3672,7 @@ function TranslationManager({mode='settings',required=[],preselect=[],tags={},on
         </div>
         {!isBusy&&ask!==id&&<div style={{display:'flex',flexDirection:'column',gap:6}}>
           {st!=='installed'&&<button disabled={!!busy} onClick={()=>run([id])} style={S.navBtn}>{st==='update'?t('dlUpdate'):t('dlButton')}</button>}
-          {st!=='missing'&&<button disabled={!!busy||!!bk} onClick={()=>doBackup(id)} style={S.navBtn}>{t('dlBackup')}</button>}
+          {st!=='missing'&&<button disabled={!!busy||(!!bk&&!bk.error)} onClick={()=>doBackup(id)} style={S.navBtn}>{t('dlBackup')}</button>}
           {st!=='missing'&&<button disabled={!!busy} onClick={()=>setAsk(id)} style={S.navBtn}>{t('dlDelete')}</button>}
         </div>}
       </div>);})}
