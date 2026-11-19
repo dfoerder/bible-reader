@@ -77,7 +77,14 @@ Die verbindliche Beschreibung der Trainingslogik (Familiarity-System, Wortauswah
 
 Begriffe, die nicht alle verstehen, mit `<HelpText help={t('helpXyz')}>…</HelpText>` umschliessen: gepunktet
 unterstrichen + ⓘ, Antippen klappt die Erklärung darunter auf. Texte als I18N-Schlüssel `help…` in allen fünf
-App-Sprachen (de/en/es/it/fr). Bisher: „Bibeln offline“ (Status offline/online/Update, Sicherung).
+App-Sprachen (de/en/es/it/fr). `<HelpText help=…/>` ohne Inhalt zeigt nur ein ⓘ (neben Knöpfen). Eingesetzt:
+Startseite (Haupt-/Hilfsbibel inkl. „KI“/Urtext, Inline-Übersetzungen), Leseansicht Training-Reiter (Zähler,
+Wort antippen, Glossen nach Level), Einstellungen (Bibeln offline, Einstufungstest, Grundform, Sprachlevel/CEFR,
+Stufen in Übungen, Level-Anpassung, Lückentext, Fortschritt zurücksetzen, Hilfsbibel-Verse, Übersetzungen
+automatisch). Früher feste Hinweistexte (`levelPolicyHint`, `germanTranslationHint`, …) sind jetzt aufklappbar.
+
+Der Bereich „Entwickler“ in den Einstellungen erscheint nur im Test-Modus (`DEV_TOOLS` = `bible-bugmode`,
+also `?bugs=1` oder fünfmal auf die Versionszeile tippen).
 
 ## Keine Browser-Dialoge
 
