@@ -73,6 +73,12 @@ Code: früher Script-Block (Fehler-Ringpuffer `window.__bugLog`, `?bugs=`-Schalt
 
 Die verbindliche Beschreibung der Trainingslogik (Familiarity-System, Wortauswahl, Levelanpassung, Session-Ablauf, Lernfokus-Modi, Abschluss-Flows) steht in `dokumentation.md` → Abschnitte „Lernfortschritt (Familiarity-System)" und „Vokabeltraining". Dort pflegen — hier nicht duplizieren.
 
+## Hilfetexte
+
+Begriffe, die nicht alle verstehen, mit `<HelpText help={t('helpXyz')}>…</HelpText>` umschliessen: gepunktet
+unterstrichen + ⓘ, Antippen klappt die Erklärung darunter auf. Texte als I18N-Schlüssel `help…` in allen fünf
+App-Sprachen (de/en/es/it/fr). Bisher: „Bibeln offline“ (Status offline/online/Update, Sicherung).
+
 ## Keine Browser-Dialoge
 
 Nie `alert()`, `confirm()`, `prompt()` verwenden — immer Custom-Dialoge mit Ja/Nein-Buttons.
