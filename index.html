@@ -94,6 +94,9 @@
     #safe-bottom-probe{position:fixed;left:0;bottom:0;width:0;height:env(safe-area-inset-bottom,0px);pointer-events:none;visibility:hidden}
     .theme-icf .phone-frame{border-color:#000;background:#000;box-shadow:0 20px 60px rgba(0,0,0,0.6),inset 0 0 0 2px #222}
     .theme-icf .phone-notch{background:#000}
+  /* Hilfe-Stellen (HelpText): unsichtbar, nur beim ?-Knopf kurz hervorgehoben */
+  [data-help]{border-radius:4px;transition:background-color .4s,box-shadow .4s}
+  body.help-highlight [data-help]{background-color:rgba(255,196,0,.32);box-shadow:0 0 0 3px rgba(255,196,0,.32)}
   </style>
   <script data-goatcounter="https://dfoerder.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -467,6 +470,8 @@ const I18N={
   helpCloze:{de:'Ein Lückentext ist eine Übung, bei der im Bibeltext ein Wort fehlt und du das passende einsetzt. Hier wählst du, wie viel Text um die Lücke gezeigt wird: nur der Satz oder der ganze Vers.',en:'A cloze is an exercise where a word is missing from the Bible text and you fill in the right one. Here you choose how much text is shown around the gap: just the sentence or the whole verse.',es:'Un ejercicio de huecos es aquel en el que falta una palabra del texto bíblico y tú pones la correcta. Aquí eliges cuánto texto se muestra alrededor del hueco: solo la frase o el versículo entero.',it:'Un esercizio a completamento è quello in cui manca una parola nel testo biblico e tu inserisci quella giusta. Qui scegli quanto testo mostrare intorno allo spazio: solo la frase o l’intero versetto.',fr:'Un texte à trous est un exercice où il manque un mot dans le texte biblique et où tu mets le bon. Ici, tu choisis combien de texte est affiché autour du trou : seulement la phrase ou tout le verset.'},
   helpReset:{de:'Löscht deinen Lernstand: angetippte und gelernte Wörter, Trainingsfortschritt und Statistik. Danach beginnst du beim Training von vorn. Erhalten bleiben deine Einstellungen, die gewählten Bibeln und die heruntergeladenen Offline-Bibeln.',en:'Deletes your learning progress: tapped and learned words, training progress and statistics. Afterwards training starts from scratch. Your settings, chosen Bibles and downloaded offline Bibles are kept.',es:'Borra tu progreso de aprendizaje: palabras tocadas y aprendidas, avance del entrenamiento y estadísticas. Después el entrenamiento empieza de cero. Se conservan tus ajustes, las Biblias elegidas y las Biblias descargadas.',it:'Cancella i tuoi progressi: parole toccate e imparate, avanzamento dell’allenamento e statistiche. Poi l’allenamento ricomincia da capo. Restano le impostazioni, le Bibbie scelte e quelle scaricate offline.',fr:'Efface ta progression : mots touchés et appris, avancement de l’entraînement et statistiques. Ensuite, l’entraînement recommence à zéro. Tes réglages, les Bibles choisies et les Bibles téléchargées sont conservés.'},
   helpTrainingLink:{de:'Was bedeuten die Zahlen und Übersetzungen?',en:'What do the numbers and translations mean?',es:'¿Qué significan los números y las traducciones?',it:'Cosa significano i numeri e le traduzioni?',fr:'Que signifient les chiffres et les traductions ?'},
+  helpTipFirst:{de:'Tipp: Tippe auf einen Begriff, wenn du wissen willst, was er bedeutet – zu fast allem gibt es eine kurze Erklärung. In den Einstellungen zeigt dir der ?‑Knopf, wo.',en:'Tip: tap a term to find out what it means – almost everything has a short explanation. In Settings, the ? button shows you where.',es:'Consejo: toca un término para saber qué significa; casi todo tiene una breve explicación. En Ajustes, el botón ? te muestra dónde.',it:'Suggerimento: tocca un termine per sapere cosa significa; quasi tutto ha una breve spiegazione. Nelle Impostazioni il pulsante ? ti mostra dove.',fr:'Astuce : touche un terme pour savoir ce qu’il signifie ; presque tout a une courte explication. Dans les réglages, le bouton ? te montre où.'},
+  helpWhere:{de:'Wo gibt es Erklärungen?',en:'Where are explanations?',es:'¿Dónde hay explicaciones?',it:'Dove ci sono spiegazioni?',fr:'Où trouver des explications ?'},
   helpOffline:{de:'Diese Bibel ist vollständig auf diesem Gerät gespeichert – du kannst sie überall lesen, auch ohne Internet. Sie liegt im Speicher der App. Löschst du die App oder den Website-Speicher (bei sehr wenig freiem Speicher kann das iPhone ihn auch selbst leeren), ist sie weg und muss neu heruntergeladen werden. Dagegen hilft „Sichern“.',
     en:'This Bible is fully stored on this device – you can read it anywhere, even without internet. It lives in the app’s storage. If you delete the app or its website data (the iPhone may also clear it when storage is very low), it is gone and has to be downloaded again. “Back up” protects against that.',
     es:'Esta Biblia está guardada por completo en este dispositivo: puedes leerla en cualquier lugar, también sin internet. Está en el almacenamiento de la app. Si borras la app o los datos del sitio web (con muy poco espacio el iPhone también puede vaciarlo), desaparece y hay que descargarla de nuevo. Para eso sirve «Copia».',
@@ -3631,12 +3636,21 @@ function useTTS(){
 // Antippbarer Text mit Erklärung: gepunktet unterstrichen + ⓘ; ein Tipp klappt den
 // Hilfetext darunter auf, ein zweiter wieder zu. Für Begriffe, die nicht alle verstehen.
 function HelpText({help,children,style}){
+  // Philosophie: Begriffe, die Fragen wecken, haben eine Hilfe — ohne sichtbare
+  // Kennzeichnung. Ein Tipp auf den Text klappt die Erklärung auf (in <label>
+  // ohne den Schalter umzuschalten). Auffinden: einmaliger Tipp auf der Startseite
+  // und der ?-Knopf in den Einstellungen (hebt alle [data-help] kurz hervor).
   const [open,setOpen]=useState(false);
   return(<span style={style}>
-    <span role="button" tabIndex={0} aria-expanded={open} onClick={e=>{e.stopPropagation();e.preventDefault();setOpen(o=>!o)}}
-      style={{textDecoration:children?'underline dotted':'none',textUnderlineOffset:3,cursor:'pointer'}}>{children}{children?' ':''}<span aria-hidden style={{fontSize:'.85em',opacity:.7}}>ⓘ</span></span>
-    {open&&<span style={{display:'block',marginTop:6,padding:'8px 10px',borderRadius:8,background:'var(--t-bg2,rgba(127,127,127,.1))',color:'var(--t-text2)',fontSize:13,lineHeight:1.45,fontWeight:400,whiteSpace:'normal'}}>{help}</span>}
+    <span role="button" tabIndex={0} data-help="" aria-expanded={open} onClick={e=>{e.stopPropagation();e.preventDefault();setOpen(o=>!o)}}
+      style={{cursor:'pointer'}}>{children||<span aria-hidden style={{fontSize:'.85em',opacity:.7}}>ⓘ</span>}</span>
+    {open&&<span style={{display:'block',marginTop:6,padding:'8px 10px',borderRadius:8,background:'var(--t-bg2,rgba(127,127,127,.1))',color:'var(--t-text2)',fontSize:13,lineHeight:1.45,fontWeight:400,whiteSpace:'normal',textTransform:'none',letterSpacing:'normal'}}>{help}</span>}
   </span>);
+}
+// Hebt alle Stellen mit Hilfe für ein paar Sekunden hervor (?-Knopf).
+function flashHelpSpots(){
+  try{document.body.classList.add('help-highlight');clearTimeout(window.__helpFlashT);
+    window.__helpFlashT=setTimeout(()=>document.body.classList.remove('help-highlight'),3500);}catch(e){}
 }
 
 // Übersetzungen herunterladen/aktualisieren/löschen. mode='onboarding': Auswahl mit
@@ -3998,6 +4012,7 @@ function App({data}){
   // Nach der Bibelwahl kommt der Download-Schritt (phase 'download'); erst danach
   // geht es mit finishBibleChoose wie bisher weiter (Hilfsbibel, Reload).
   const [dlChoice,setDlChoice]=useState(null);
+  const [helpTipSeen,setHelpTipSeen]=useState(()=>!!LS.get('bible-help-tip-seen'));
   const onBibleChoose=useCallback(id=>{if(!BIBLES[id])return;setDlChoice(id);setPhase('download');},[]);
   const finishBibleChoose=useCallback(id=>{
     if(!BIBLES[id])return;
@@ -5022,8 +5037,10 @@ function App({data}){
       </div>
     </div>);
     return(<div>
-      <header style={S.header}>
+      <header style={{...S.header,position:'relative'}}>
         <h1 style={S.title}>{t('settings')}</h1>
+        <button onClick={flashHelpSpots} title={t('helpWhere')} aria-label={t('helpWhere')}
+          style={{position:'absolute',right:0,top:'50%',transform:'translateY(-50%)',width:34,height:34,borderRadius:17,border:'1px solid var(--t-border)',background:'var(--t-card-solid)',color:'var(--t-muted)',fontSize:17,fontWeight:700,cursor:'pointer',fontFamily:sans}}>?</button>
       </header>
       <div style={S.navRow}><button onClick={()=>setPhase(prevPhaseRef.current||'nav')} style={S.navBtn}>{t('back')}</button></div>
       <div style={S.settingsSection}>
@@ -5036,13 +5053,13 @@ function App({data}){
           <div style={{...S.levelBtns,flexWrap:'wrap'}}>{APP_LANGS.map(o=>(<button key={o.code} onClick={()=>changeUiLang(o.code)} style={{...S.lvlBtn,...(uiLang===o.code?S.lvlActive:{})}}>{o.label}</button>))}</div>
         </div>
         <div style={S.settingsGroup}>
-          <span style={S.settingsLabel}>{t('trainingSection')}</span>
+          <span style={S.settingsLabel}><HelpText help={<>{INSTANCE.hasLevelTest&&<><b>{t('retakeTest')}:</b> {t('helpLevelTest')}<br/><br/></>}<b>{t('resetProgress')}:</b> {t('helpReset')}</>}>{t('trainingSection')}</HelpText></span>
           {INSTANCE.hasLevelTest&&glossLang&&<div style={{marginTop:8}}>
-            <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button> <HelpText help={t('helpLevelTest')}/>
+            <button onClick={()=>setPhase('leveltest')} style={{...S.navBtn,marginTop:8}}>{t('retakeTest')}</button>
           </div>}
           {trainingSettingsBody}
           <div style={{marginTop:16}}>
-            <button onClick={()=>setShowResetDialog(true)} style={S.resetBtn}>{t('resetProgress')}</button> <HelpText help={t('helpReset')}/>
+            <button onClick={()=>setShowResetDialog(true)} style={S.resetBtn}>{t('resetProgress')}</button>
           </div>
           {DEV_TOOLS&&<div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--t-border)'}}>
             <span style={{...S.settingsLabel,color:'var(--t-muted)',fontSize:11}}>ENTWICKLER</span>
@@ -5212,6 +5229,11 @@ function App({data}){
           {!fromReading&&<button onClick={()=>{prevPhaseRef.current='nav';setPhase('settings')}} style={{...S.gearBtn,fontSize:32}} title={t('settings')}>⚙</button>}
         </div>
       </header>
+      {!fromReading&&!helpTipSeen&&<div style={{display:'flex',alignItems:'center',gap:10,margin:'0 0 12px',padding:'10px 12px',borderRadius:10,border:'1px solid var(--t-border)',background:'var(--t-card-solid)',fontFamily:sans}}>
+        <span style={{fontSize:20}}>💡</span>
+        <span style={{flex:1,fontSize:13,color:'var(--t-text2)',lineHeight:1.45}}>{t('helpTipFirst')}</span>
+        <button onClick={()=>{setHelpTipSeen(true);LS.set('bible-help-tip-seen',true)}} style={S.navBtn}>OK</button>
+      </div>}
       {!fromReading&&<div style={{display:'flex',gap:10,justifyContent:'center',flexWrap:'wrap',margin:'4px 0 14px'}}>
         <label style={{display:'flex',flexDirection:'column',gap:3,fontFamily:sans}}>
           <span style={{fontSize:11,color:'var(--t-muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:.4}}><HelpText help={t('helpMainBible')}>{t('mainBible')}</HelpText></span>

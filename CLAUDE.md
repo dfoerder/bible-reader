@@ -75,9 +75,12 @@ Die verbindliche Beschreibung der Trainingslogik (Familiarity-System, Wortauswah
 
 ## Hilfetexte
 
-Begriffe, die nicht alle verstehen, mit `<HelpText help={t('helpXyz')}>…</HelpText>` umschliessen: gepunktet
-unterstrichen + ⓘ, Antippen klappt die Erklärung darunter auf. Texte als I18N-Schlüssel `help…` in allen fünf
-App-Sprachen (de/en/es/it/fr). `<HelpText help=…/>` ohne Inhalt zeigt nur ein ⓘ (neben Knöpfen). Eingesetzt:
+Philosophie: Alles, was Fragen wecken könnte, hat eine Hilfe — **ohne sichtbare Kennzeichnung**. Begriff mit
+`<HelpText help={t('helpXyz')}>…</HelpText>` umschliessen; Antippen klappt die Erklärung darunter auf (in einem
+`<label>` ohne den Schalter umzuschalten). Auffinden: einmaliger Tipp auf der Startseite (`bible-help-tip-seen`)
+und der ?-Knopf im Kopf der Einstellungen (`flashHelpSpots` hebt alle `[data-help]` 3,5 s gelb hervor).
+Lücken vermeiden: Wer gelernt hat, dass Antippen hilft, erwartet es überall. Texte als I18N-Schlüssel `help…` in allen fünf
+App-Sprachen (de/en/es/it/fr). Hilfen zu Knöpfen kommen an die Abschnittsüberschrift (z.B. „Training“: Einstufungstest + Zurücksetzen). Eingesetzt:
 Startseite (Haupt-/Hilfsbibel inkl. „KI“/Urtext, Inline-Übersetzungen), Leseansicht Training-Reiter (Zähler,
 Wort antippen, Glossen nach Level), Einstellungen (Bibeln offline, Einstufungstest, Grundform, Sprachlevel/CEFR,
 Stufen in Übungen, Level-Anpassung, Lückentext, Fortschritt zurücksetzen, Hilfsbibel-Verse, Übersetzungen
