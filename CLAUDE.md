@@ -79,7 +79,16 @@ Philosophie: Alles, was Fragen wecken könnte, hat eine Hilfe — **ohne sichtba
 `<HelpText help={t('helpXyz')}>…</HelpText>` umschliessen; Antippen klappt die Erklärung darunter auf (in einem
 `<label>` ohne den Schalter umzuschalten). Auffinden: einmaliger Tipp auf der Startseite (`bible-help-tip-seen`)
 und der ?-Knopf im Kopf der Einstellungen (`flashHelpSpots` hebt alle `[data-help]` 3,5 s gelb hervor).
-Lücken vermeiden: Wer gelernt hat, dass Antippen hilft, erwartet es überall. Texte als I18N-Schlüssel `help…` in allen fünf
+Lücken vermeiden: Wer gelernt hat, dass Antippen hilft, erwartet es überall.
+
+**Begriffs-Register `TERM_HELP`** (I18N-Schlüssel des Begriffs → Hilfe-Schlüssel) und **`tl(key[, text])`**:
+Begriffe, die an mehreren Stellen vorkommen, immer mit `{tl('yourLevel', stepInfo)}` statt `{t('yourLevel')…}`
+ausgeben — so hat derselbe Begriff überall dieselbe Hilfe. Neuer Begriff: Eintrag in `TERM_HELP` + Hilfetext
+`help…` in allen fünf Sprachen. Nie in `<button>`/`<option>`/Attributen oder in Elementen mit eigener
+`onClick`-Aktion (die Hilfe würde den Tipp abfangen). Abgedeckt: Training, Level/Stufe, Lernfokus,
+Übungsarten (Quiz/Im Kontext), Wiederholungen, Lernzustände (geübt/gelernt/gefestigt/sicher/vergessen/
+bekannt/unbekannt/ungeübt), Antwort-Knöpfe („zu einfach“/„ich rate“), Einheiten, Vorkommen, Annotationen,
+Einstufungstest, Haupt-/Hilfsbibel, Wortübersetzungen. Texte als I18N-Schlüssel `help…` in allen fünf
 App-Sprachen (de/en/es/it/fr). Hilfen zu Knöpfen kommen an die Abschnittsüberschrift (z.B. „Training“: Einstufungstest + Zurücksetzen). Eingesetzt:
 Startseite (Haupt-/Hilfsbibel inkl. „KI“/Urtext, Inline-Übersetzungen), Leseansicht Training-Reiter (Zähler,
 Wort antippen, Glossen nach Level), Einstellungen (Bibeln offline, Einstufungstest, Grundform, Sprachlevel/CEFR,
